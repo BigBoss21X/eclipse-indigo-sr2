@@ -1,0 +1,94 @@
+Manifest-Version: 1.0
+Bundle-ClassPath: lib/guava-11.0.jar,lib/MVEL-fork.jar,lib/commons-lan
+ g-2.5.jar,lib/commons-primitives-1.0.jar,lib/commons-collections-3.2.
+ 1.jar,lib/commons-io-2.0.1.jar,lib/commons-beanutils-1.8.0.jar,lib/co
+ mmons-logging-1.1.1.jar,lib/commons-digester-2.0.jar,lib/asm-all-3.3.
+ 1.jar,lib/nebula-cdatetime.jar,lib/nebula-cwt.jar
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.eclipse.wb.core.lib;singleton:=true
+Require-Bundle: org.eclipse.ui
+Bundle-Version: 1.3.0.r37x201202052311
+Export-Package: com.google.common.annotations,com.google.common.base,c
+ om.google.common.base.internal,com.google.common.collect,com.google.c
+ ommon.io,com.google.common.net,com.google.common.primitives,com.googl
+ e.common.util.concurrent,org.apache.commons.beanutils,org.apache.comm
+ ons.beanutils.converters,org.apache.commons.beanutils.expression,org.
+ apache.commons.beanutils.locale,org.apache.commons.beanutils.locale.c
+ onverters,org.apache.commons.collections,org.apache.commons.collectio
+ ns.bag,org.apache.commons.collections.bidimap,org.apache.commons.coll
+ ections.buffer,org.apache.commons.collections.collection,org.apache.c
+ ommons.collections.comparators,org.apache.commons.collections.functor
+ s,org.apache.commons.collections.iterators,org.apache.commons.collect
+ ions.keyvalue,org.apache.commons.collections.list,org.apache.commons.
+ collections.map,org.apache.commons.collections.primitives,org.apache.
+ commons.collections.primitives.adapters,org.apache.commons.collection
+ s.primitives.adapters.io,org.apache.commons.collections.primitives.de
+ corators,org.apache.commons.collections.set,org.apache.commons.digest
+ er,org.apache.commons.digester.parser,org.apache.commons.digester.plu
+ gins,org.apache.commons.digester.plugins.strategies,org.apache.common
+ s.digester.substitution,org.apache.commons.digester.xmlrules,org.apac
+ he.commons.io,org.apache.commons.io.comparator,org.apache.commons.io.
+ filefilter,org.apache.commons.io.input,org.apache.commons.io.monitor,
+ org.apache.commons.io.output,org.apache.commons.lang,org.apache.commo
+ ns.lang.builder,org.apache.commons.lang.enums,org.apache.commons.lang
+ .exception,org.apache.commons.lang.math,org.apache.commons.lang.mutab
+ le,org.apache.commons.lang.reflect,org.apache.commons.lang.text,org.a
+ pache.commons.lang.time,org.apache.commons.logging,org.apache.commons
+ .logging.impl,org.eclipse.nebula.cwt.base,org.eclipse.nebula.widgets.
+ cdatetime,org.mvel2,org.mvel2.compiler,org.mvel2.optimizers,org.mvel2
+ .util,org.objectweb.asm,org.objectweb.asm.commons,org.objectweb.asm.s
+ ignature,org.objectweb.asm.util
+Bundle-ManifestVersion: 2
+
+Name: lib/asm-all-3.3.1.jar
+SHA1-Digest: +kCo8Yy2m5S1S1bx1P6ep+IWUEw=
+
+Name: lib/commons-collections-3.2.1.jar
+SHA1-Digest: OtfJWXnIYYpG5l1WBRvGYO3c8Yc=
+
+Name: lib/MVEL-fork.jar
+SHA1-Digest: sFdo/z/YDIzGtAiVgG3711EGQiY=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: 09gN05tobgS/MdtqyTNQhOhB73M=
+
+Name: lib/commons-logging-1.1.1.jar
+SHA1-Digest: B3fXyt52ddmQ6/X5lW08qgS5JDY=
+
+Name: lib/nebula-cdatetime.jar
+SHA1-Digest: 4G0H4jbt90bYZLgemdspCCfUQ7M=
+
+Name: lib/guava-11.0.jar
+SHA1-Digest: 2xRgRvx6qZ4JJT0ODE/9ngzOPEE=
+
+Name: lib/nebula-cwt.jar
+SHA1-Digest: kfJ53HjjmDtbWEx64dgP3nhiP/0=
+
+Name: about.html
+SHA1-Digest: YKoZ7+NZ4vvd9pokWnzCicauI4g=
+
+Name: lib/commons-io-2.0.1.jar
+SHA1-Digest: fsF5rIhYUGDOVfgPcus7wgM6lQA=
+
+Name: plugin.properties
+SHA1-Digest: T2PXTvfRhDPtqD+LO2xMHdd+S4o=
+
+Name: lib/commons-primitives-1.0.jar
+SHA1-Digest: 6oBoNanoUDB3CHNK0Zz/MAbdVLk=
+
+Name: lib/commons-beanutils-1.8.0.jar
+SHA1-Digest: Y6vSUmiWLb98Uv4rBbcP039VF0M=
+
+Name: target.properties
+SHA1-Digest: ZK/ILivMPLcA9p60NerreoybAtU=
+
+Name: lib/commons-digester-2.0.jar
+SHA1-Digest: 4XuYIvtsvrbqL3mtytONK5rlYwE=
+
+Name: lib/commons-lang-2.5.jar
+SHA1-Digest: Y9gsH2wE7I9wDFcVw1zhPT3r9LI=
+
