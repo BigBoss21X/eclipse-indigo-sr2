@@ -2,6 +2,7 @@
 ch.qos.logback.classic,0.9.27.v20110224-1110,plugins/ch.qos.logback.classic_0.9.27.v20110224-1110.jar,4,false
 ch.qos.logback.core,0.9.27.v20110224-1110,plugins/ch.qos.logback.core_0.9.27.v20110224-1110.jar,4,false
 ch.qos.logback.slf4j,0.9.27.v20110224-1110,plugins/ch.qos.logback.slf4j_0.9.27.v20110224-1110.jar,4,false
+com.bandlem.eclipse.fullscreen.ui,1.0.4.201108061054,plugins/com.bandlem.eclipse.fullscreen.ui_1.0.4.201108061054.jar,4,false
 com.collabnet.subversion.merge,3.0.7,plugins/com.collabnet.subversion.merge_3.0.7.jar,4,false
 com.ibm.icu,4.4.2.v20110823,plugins/com.ibm.icu_4.4.2.v20110823.jar,4,false
 com.jcraft.jsch,0.1.44.v201101211721,plugins/com.jcraft.jsch_0.1.44.v201101211721.jar,4,false
