@@ -1,0 +1,232 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>perlbug</B> [ <B>-v</B> ] [ <B>-a</B> <I>address</I> ] [ <B>-s</B> <I>subject</I> ]
+       [ <B>-b</B> <I>body</I> | <B>-f</B> <I>inputfile</I> ] [ <B>-F</B> <I>outputfile</I> ] [ <B>-r</B> <I>retur­</I>
+       <I>naddress</I> ] [ <B>-e</B> <I>editor</I> ] [ <B>-c</B> <I>adminaddress</I> | <B>-C</B> ] [ <B>-S</B> ]
+       [ <B>-t</B> ]  [ <B>-d</B> ]  [ <B>-A</B> ]  [ <B>-h</B> ]
+
+       <B>perlbug</B> [ <B>-v</B> ] [ <B>-r</B> <I>returnaddress</I> ]
+        [ <B>-A</B> ] [ <B>-ok</B> | <B>-okay</B> | <B>-nok</B> | <B>-nokay</B> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       A program to help generate bug reports about perl or the
+       modules that come with it, and mail them.
+
+       If you have found a bug with a non-standard port (one that
+       was not part of the <I>standard</I> <I>distribution</I>), a binary dis­
+       tribution, or a non-standard module (such as Tk, CGI,
+       etc), then please see the documentation that came with
+       that distribution to determine the correct place to report
+       bugs.
+
+       "perlbug" is designed to be used interactively. Normally
+       no arguments will be needed.  Simply run it, and follow
+       the prompts.
+
+       If you are unable to run <B>perlbug</B> (most likely because you
+       don't have a working setup to send mail that perlbug rec­
+       ognizes), you may have to compose your own report, and
+       email it to <B>perlbug@perl.org</B>.  You might find the <B>-d</B>
+       option useful to get summary information in that case.
+
+       In any case, when reporting a bug, please make sure you
+       have run through this checklist:
+
+       What version of Perl you are running?
+           Type "perl -v" at the command line to find out.
+
+       Are you running the latest released version of perl?
+           Look at http://www.perl.com/ to find out.  If it is
+           not the latest released version, get that one and see
+           whether your bug has been fixed.  Note that bug
+           reports about old versions of Perl, especially those
+           prior to the 5.0 release, are likely to fall upon deaf
+           ears.  You are on your own if you continue to use
+           perl1 .. perl4.
+
+       Are you sure what you have is a bug?
+           A significant number of the bug reports we get turn
+           out to be documented features in Perl.  Make sure the
+           behavior you are witnessing doesn't fall under that
+           category, by glancing through the documentation that
+           comes with Perl (we'll admit this is no mean task,
+           given the sheer volume of it all, but at least have a
+           Try to study the problem under the Perl debugger, if
+           necessary.  See perldebug.
+
+       Do you have a proper test case?
+           The easier it is to reproduce your bug, the more
+           likely it will be fixed, because if no one can dupli­
+           cate the problem, no one can fix it.  A good test case
+           has most of these attributes: fewest possible number
+           of lines; few dependencies on external commands, mod­
+           ules, or libraries; runs on most platforms unimpeded;
+           and is self-documenting.
+
+           A good test case is almost always a good candidate to
+           be on the perl test suite.  If you have the time, con­
+           sider making your test case so that it will readily
+           fit into the standard test suite.
+
+           Remember also to include the <B>exact</B> error messages, if
+           any.  "Perl complained something" is not an exact
+           error message.
+
+           If you get a core dump (or equivalent), you may use a
+           debugger (<B>dbx</B>, <B>gdb</B>, etc) to produce a stack trace to
+           include in the bug report.  NOTE: unless your Perl has
+           been compiled with debug info (often <B>-g</B>), the stack
+           trace is likely to be somewhat hard to use because it
+           will most probably contain only the function names and
+           not their arguments.  If possible, recompile your Perl
+           with debug info and reproduce the dump and the stack
+           trace.
+
+       Can you describe the bug in plain English?
+           The easier it is to understand a reproducible bug, the
+           more likely it will be fixed.  Anything you can pro­
+           vide by way of insight into the problem helps a great
+           deal.  In other words, try to analyze the problem (to
+           the extent you can) and report your discoveries.
+
+       Can you fix the bug yourself?
+           A bug report which <I>includes</I> <I>a</I> <I>patch</I> <I>to</I> <I>fix</I> <I>it</I> will
+           almost definitely be fixed.  Use the "diff" program to
+           generate your patches ("diff" is being maintained by
+           the GNU folks as part of the <B>diffutils</B> package, so you
+           should be able to get it from any of the GNU software
+           repositories).  If you do submit a patch, the cool-
+           dude counter at perlbug@perl.org will register you as
+           a savior of the world.  Your patch may be returned
+           with requests for changes, or requests for more
+           detailed explanations about your fix.
+
+           Here are some clues for creating quality patches: Use
+           the <B>-c</B> or <B>-u</B> switches to the diff program (to create a
+           after you have typed it in, you may have to compose
+           the message yourself, add the output produced by
+           "perlbug -d" and email it to <B>perlbug@perl.org</B>.  If,
+           for some reason, you cannot run "perlbug" at all on
+           your system, be sure to include the entire output pro­
+           duced by running "perl -V" (note the uppercase V).
+
+           Whether you use "perlbug" or send the email manually,
+           please make your Subject line informative.  "a bug"
+           not informative.  Neither is "perl crashes" nor
+           "HELP!!!".  These don't help.  A compact description
+           of what's wrong is fine.
+
+       Having done your bit, please be prepared to wait, to be
+       told the bug is in your code, or even to get no reply at
+       all.  The Perl maintainers are busy folks, so if your
+       problem is a small one or if it is difficult to understand
+       or already known, they may not respond with a personal
+       reply.  If it is important to you that your bug be fixed,
+       do monitor the "Changes" file in any development releases
+       since the time you submitted the bug, and encourage the
+       maintainers with kind words (but never any flames!).  Feel
+       free to resend your bug report if the next released ver­
+       sion of perl comes out and your bug is still present.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-a</B>      Address to send the report to.  Defaults to <B>perl­</B>
+               <B>bug@perl.org</B>.
+
+       <B>-A</B>      Don't send a bug received acknowledgement to the
+               reply address.  Generally it is only a sensible to
+               use this option if you are a perl maintainer
+               actively watching perl porters for your message to
+               arrive.
+
+       <B>-b</B>      Body of the report.  If not included on the com­
+               mand line, or in a file with <B>-f</B>, you will get a
+               chance to edit the message.
+
+       <B>-C</B>      Don't send copy to administrator.
+
+       <B>-c</B>      Address to send copy of report to.  Defaults to
+               the address of the local perl administrator
+               (recorded when perl was built).
+
+       <B>-d</B>      Data mode (the default if you redirect or pipe
+               output).  This prints out your configuration data,
+               without mailing anything.  You can use this with
+               <B>-v</B> to get more complete data.
+
+       <B>-e</B>      Editor to use.
+
+               Honors return address specified with <B>-r</B>.  You can
+               use this with <B>-v</B> to get more complete data.   Only
+               makes a report if this system is less than 60 days
+               old.
+
+       <B>-okay</B>   As <B>-ok</B> except it will report on older systems.
+
+       <B>-nok</B>    Report unsuccessful build on this system.  Forces
+               <B>-C</B>.  Forces and supplies a value for <B>-s</B>, then
+               requires you to edit the report and say what went
+               wrong.  Alternatively, a prepared report may be
+               supplied using <B>-f</B>.  Only prompts for a return
+               address if it cannot guess it (for use with <B>make</B>).
+               Honors return address specified with <B>-r</B>.  You can
+               use this with <B>-v</B> to get more complete data.  Only
+               makes a report if this system is less than 60 days
+               old.
+
+       <B>-nokay</B>  As <B>-nok</B> except it will report on older systems.
+
+       <B>-r</B>      Your return address.  The program will ask you to
+               confirm its default if you don't use this option.
+
+       <B>-S</B>      Send without asking for confirmation.
+
+       <B>-s</B>      Subject to include with the message.  You will be
+               prompted if you don't supply one on the command
+               line.
+
+       <B>-t</B>      Test mode.  The target address defaults to <B>perl­</B>
+               <B>bug-test@perl.org</B>.
+
+       <B>-v</B>      Include verbose configuration data in the report.
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Kenneth Albanowski (&lt;kjahds@kjahds.com&gt;), subsequently
+       <I>doc</I>tored by Gurusamy Sarathy (&lt;gsar@activestate.com&gt;), Tom
+       Christiansen (&lt;tchrist@perl.com&gt;), Nathan Torkington
+       (&lt;gnat@frii.com&gt;), Charles F. Randall (&lt;cfr@pobox.com&gt;),
+       Mike Guy (&lt;mjtg@cam.a.uk&gt;), Dominic Dunlop (&lt;domo@com­
+       puter.org&gt;), Hugo van der Sanden (&lt;hv@crypt.org&lt;gt&gt;),
+       Jarkko Hietaniemi (&lt;jhi@iki.fi&gt;), Chris Nandor
+       (&lt;pudge@pobox.com&gt;), Jon Orwant (&lt;orwant@media.mit.edu&gt;,
+       and Richard Foley (&lt;richard@rfi.net&gt;).
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>perl(1)</B>, <B>perldebug(1)</B>, <B>perldiag(1)</B>, <B>perlport(1)</B>, <I>perl­</I>
+       <B>trap(1)</B>, <B>diff(1)</B>, <B>patch(1)</B>, <B>dbx(1)</B>, <B>gdb(1)</B>
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       None known (guess what must have been used to report
+       them?)
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

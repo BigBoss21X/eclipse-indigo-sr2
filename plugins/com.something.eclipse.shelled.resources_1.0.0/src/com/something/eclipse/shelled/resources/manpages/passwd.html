@@ -1,0 +1,124 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>passwd</B> [<B>-f</B>|<B>-g</B>|<B>-s</B>|<B>-k</B>[<B>-q</B>]] [<I>name</I>]
+       <B>passwd</B> [<B>-D</B> <I>binddn</I>][<B>-n</B> <I>min</I>][<B>-x</B> <I>max</I>][<B>-w</B> <I>warn</I>][<B>-i</B> <I>inact</I>] <I>user</I>
+       <B>passwd</B> [<B>-D</B> <I>binddn</I>] {<B>-l</B>|<B>-u</B>|<B>-d</B>|<B>-S</B>[<B>-a</B>]|<B>-e</B>|<B>-h</B>} <I>name</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>passwd</B> changes passwords  for  user  and  group  accounts.
+       While  an  administrator  may  change the password for any
+       account or group, a normal user is only allowed to  change
+       the  password  for their own account.  <B>passwd</B> also changes
+       account information, such as the full name  of  the  user,
+       their  login shell, password expiry dates and intervals or
+       disable an account.
+
+   <B>Password</B> <B>Changes</B>
+       If an old password is present, the user is  first  promted
+       for  it  and  the  password is compared agaisnt the stored
+       one. This can be changed, depending which PAM modules  are
+       used.   An  administrator is permitted to bypass this step
+       so that forgotten passwords may be changed.
+
+       After the user is authenticated, password  aging  informa­
+       tion are checked to see if the user is permitted to change
+       their password at this time. Else <B>passwd</B> refuses to change
+       the password.
+
+       The  user  is  then  prompted  for a replacement password.
+       Care must be taken to not include special control  charac­
+       ters  or  characters,  which are not available on all key­
+       boards.
+
+       If the password is accepted, <B>passwd</B> will prompt again  and
+       compare  the second entry against the first.  Both entries
+       are require to match in  order  for  the  password  to  be
+       changed.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-f</B>     Change the finger (gecos) information. This are the
+              users fullname, office room  number,  office  phone
+              number  and  home phone number. This information is
+              stored  in  the  <I>/etc/passwd</I>  file  and   typically
+              printed by <B>finger</B><I>(1)</I> and similiar programs.
+
+       <B>-g</B>     With  this option, the password for the named group
+              will be changed.  The user must be a group adminis­
+              trator for the named group or the super user.
+
+       <B>-s</B>     This option is used to change the user login shell.
+              A normal user may only change the login  shell  for
+              their  own  account,  the super user may change the
+              login shell for any account.
+
+
+       <B>-x</B> <I>max</I> With  this option the maximum number of days during
+              which a password is valid is changed. When  <I>maxdays</I>
+              plus <I>lastday</I> is less than the current day, the user
+              will be required  to  change  his  password  before
+              being able to use the account.
+
+       <B>-w</B> <I>warn</I>
+              With  this  option  the  number  of days of warning
+              before  a  password  change  is  required  can   be
+              changed. This option is the number of days prior to
+              the password expiring that a user  will  be  warned
+              the password is about to expire.
+
+       <B>-i</B> <I>inact</I>
+              This  option  is  used to set the number of days of
+              inactivity after a password has expired before  the
+              account  is  locked. A user whose account is locked
+              must contact the system  administrator before being
+              able  to  use the account again.  A value of 0 dis­
+              ables this feature.
+
+
+   <B>Account</B> <B>maintenance</B>
+       <B>-l</B>     A system administrator can lock the account of  the
+              specified user.
+
+       <B>-u</B>     A  system  administrator  can  unlock the specified
+              account.
+
+       <B>-d</B>     The password of the given account can be deleted by
+              the system administrator.
+
+       <B>-S</B>     Report  password  status  on the named account. The
+              first part indicates if the user account is  locked
+              (L), has no password (NP), or has a usable password
+              (P). The second part gives the  date  of  the  last
+              password  change.  The  next  parts are the minimum
+              age, maximum age, warning  period,  and  inactivity
+              period for the password.
+
+       <B>-a</B>     Report  the  password  status for all accounts. Can
+              only be used in conjunction with <B>-S</B>.
+
+       <B>-e</B>     The user will be forced to change the  password  at
+              next login.
+
+       <B>-h</B>     Change  the  home directory of the named user (only
+              by a system administrator).
+
+   <B>Name</B> <B>service</B> <B>switch</B> <B>options</B>
+       <B>-D</B> <I>binddn</I>
+
+pwdutils                   January 2003                 <B>passwd(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

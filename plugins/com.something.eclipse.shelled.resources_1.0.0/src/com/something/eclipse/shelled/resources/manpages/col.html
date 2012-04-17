@@ -1,0 +1,68 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+     <B>Col</B> filters out reverse (and half reverse) line feeds so the output is in
+     the correct order with only forward and half forward line feeds, and
+     replaces white-space characters with tabs where possible.  This can be
+     useful in processing the output of <B>nroff(1)</B> and <B>tbl(1)</B>.
+
+     <B>Col</B> reads from standard input and writes to standard output.
+
+     The options are as follows:
+
+     <B>-b</B>     Do not output any backspaces, printing only the last character
+            written to each column position.
+
+     <B>-f</B>     Forward half line feeds are permitted (``fine'' mode).  Normally
+            characters printed on a half line boundary are printed on the fol­
+            lowing line.
+
+     <B>-p</B>     Force unknown control sequences to be passed through unchanged.
+            Normally, <B>col</B> will filter out any control sequences from the input
+            other than those recognized and interpreted by itself, which are
+            listed below.
+
+     <B>-x</B>     Output multiple spaces instead of tabs.
+
+     <B>-l</B><I>num</I>  Buffer at least <I>num</I> lines in memory.  By default, 128 lines are
+            buffered.
+
+     The control sequences for carriage motion that <B>col</B> understands and their
+     decimal values are listed in the following table:
+
+     ESC-7            reverse line feed (escape then 7)
+     ESC-8            half reverse line feed (escape then 8)
+     ESC-9            half forward line feed (escape then 9)
+     backspace        moves back one column (8); ignored in the first column
+     carriage return  (13)
+     newline          forward line feed (10); also does carriage return
+     shift in         shift to normal character set (15)
+     shift out        shift to alternate character set (14)
+     space            moves forward one column (32)
+     tab              moves forward to next tab stop (9)
+     vertical tab     reverse line feed (11)
+
+     All unrecognized control characters and escape sequences are discarded.
+
+     <B>Col</B> keeps track of the character set as characters are read and makes
+     sure the character set is correct when they are output.
+
+     If the input attempts to back up to the last flushed line, <B>col</B> will dis­
+     play a warning message.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

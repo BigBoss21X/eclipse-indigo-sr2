@@ -1,0 +1,67 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+     <B>Colcrt</B> provides virtual half-line and reverse line feed sequences for
+     terminals without such capability, and on which overstriking is destruc­
+     tive.  Half-line characters and underlining (changed to dashing `-') are
+     placed on new lines in between the normal output lines.
+
+     Available options:
+
+     <B>-</B>       Suppress all underlining.  This option is especially useful for
+             previewing <I>allboxed</I> tables from <B>tbl(1)</B>.
+
+     <B>-2</B>      Causes all half-lines to be printed, effectively double spacing
+             the output.  Normally, a minimal space output format is used
+             which will suppress empty lines.  The program never suppresses
+             two consecutive empty lines, however.  The <B>-2</B> option is useful
+             for sending output to the line printer when the output contains
+             superscripts and subscripts which would otherwise be invisible.
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+     A typical use of <B>colcrt</B> would be
+
+     tbl exum2.n | nroff -ms | colcrt - | more
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+     <B>nroff(1)</B>, <B>troff(1)</B>, <B>col(1)</B>, <B>more(1)</B>, <B>ul(1)</B>
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+     Should fold underlines onto blanks even with the `<B>-</B>' option so that a
+     true underline character would show.
+
+     Can't back up more than 102 lines.
+
+     General overstriking is lost; as a special case `|' overstruck with `-'
+     or underline becomes `+'.
+
+     Lines are trimmed to 132 characters.
+
+     Some provision should be made for processing superscripts and subscripts
+     in documents which are already double-spaced.
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+     The <B>colcrt</B> command appeared in 3.0BSD.
+
+3rd Berkeley Distribution        June 30, 1993       3rd Berkeley Distribution
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

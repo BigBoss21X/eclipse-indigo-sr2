@@ -1,0 +1,81 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>catman</B> [<B>-dhV</B>] [<B>-M</B> <I>path</I>] [<I>section</I>] ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>catman</B>  is used to create an up to date set of pre-format­
+       ted manual pages known as cat pages.  Cat pages are gener­
+       ally  much  faster  to  display  than  the original manual
+       pages, but require extra storage space.  The  decision  to
+       support  cat pages is that of the local administrator, who
+       must provide suitable directories to contain them.
+
+       The options available to <B>catman</B> are the manual page  hier­
+       archies  and  sections to pre-format.  The default hierar­
+       chies are those specified as  system  hierarchies  in  the
+       man_db  configuration  file,  and the default sections are
+       either the colon-delimited  contents  of  the  environment
+       variable $<B>MANSECT</B> or the standard set compiled into <B>man</B> if
+       $<B>MANSECT</B> is undefined.  Supplying <B>catman</B>  with  a  set  of
+       whitespace-delimited  section  names will override both of
+       the above.
+
+       <B>catman</B> makes use of the <B>index</B>  database  cache  associated
+       with  each  hierarchy  to determine which files need to be
+       formatted.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-d,</B> <B>--debug</B>
+              Print debugging information.
+
+       <B>-M</B> <I>path</I><B>,</B> <B>--manpath=</B><I>path</I>
+              Specify an alternate  colon-delimited  manual  page
+              hierarchy  search  path.   By  default, this is all
+              paths indicated as system hierarchies in the man_db
+              configuration file.
+
+       <B>-h,</B> <B>--help</B>
+              Print a help message and exit.
+
+       <B>-V,</B> <B>--version</B>
+              Display version information.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>MANSECT</B>
+              If  $<B>MANSECT</B> is set, its value is a colon-delimited
+              list of sections and it is used to determine  which
+              manual sections to search and in what order.
+
+       <B>MANPATH</B>
+              If $<B>MANPATH</B> is set, its value is interpreted as the
+              colon-delimited manual page hierarchy  search  path
+              to use.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Wilf. (G.Wilford@ee.surrey.ac.uk).
+       Fabrizio Polacco (fpolacco@debian.org).
+
+
+
+2.3.19                     14 May 2001                  <B>catman(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,78 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>namei</B> <I>[-mx]</I> <I>pathname</I> <I>[</I> <I>pathname</I> <I>...</I> <I>]</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>Namei</I>  uses its arguments as pathnames to any type of Unix
+       file (symlinks, files, directories, and so forth).   <I>Namei</I>
+       then follows each pathname until a terminal point is found
+       (a file, directory, char device, etc).  If it finds a sym­
+       bolic  link,  we  show  the  link, and start following it,
+       indenting the output to show the context.
+
+       This program is useful for finding a "too many  levels  of
+       symbolic links" problems.
+
+       For  each line output, <I>namei</I> outputs a the following char­
+       acters to identify the file types found:
+
+          f: = the pathname we are currently trying to resolve
+           d = directory
+           l = symbolic link (both the link and it's contents are output)
+           s = socket
+           b = block device
+           c = character device
+           - = regular file
+           ? = an error of some kind
+
+       <I>Namei</I> prints an informative message when the maximum  num­
+       ber  of  symbolic  links  this  system  can  have has been
+       exceeded.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-x</B>      Show mount point directories with  a  'D',  rather
+               than a 'd'.
+
+       <B>-m</B>      Show  the mode bits of each file type in the style
+               of <B>ls(1)</B>, for example 'rwxr-xr-x'.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Roger Southwick  (rogers@amadeus.wr.tek.com)
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       To be discovered.
+
+
+</PRE>
+<H2>CAVEATS</H2><PRE>
+       <I>Namei</I> will follow an infinite loop of symbolic links  for­
+       ever.  To escape, use SIGINT (usually ^C).
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ls(1)</B>, <B>stat(1)</B>
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

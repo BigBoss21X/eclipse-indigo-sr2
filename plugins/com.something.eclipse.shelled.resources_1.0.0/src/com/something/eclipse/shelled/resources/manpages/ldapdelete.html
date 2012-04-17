@@ -1,0 +1,151 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ldapdelete</B>  [<B>-n</B>]  [<B>-v</B>]  [<B>-k</B>]  [<B>-K</B>]  [<B>-c</B>] [<B>-M[M]</B>] [<B>-d</B> <I>debu­</I>
+       <I>glevel</I>] [<B>-f</B> <I>file</I>] [<B>-D</B> <I>binddn</I>] [<B>-W</B>] [<B>-w</B> <I>passwd</I>] [<B>-y</B> <I>passwd­</I>
+       <I>file</I>]  [<B>-H</B> <I>ldapuri</I>]  [<B>-h</B> <I>ldaphost</I>]  [<B>-P</B> <I>2</I>|<I>3</I>] [<B>-p</B> <I>ldapport</I>]
+       [<B>-O</B> security-properties<B>]</B> [<B>-U</B> <I>authcid</I>] [<B>-R</B> <I>realm</I>] [<B>-x</B>] [<B>-I</B>]
+       [<B>-Q</B>] [<B>-X</B> <I>authzid</I>] [<B>-Y</B> <I>mech</I>] [<B>-Z[Z]</B>] [<I>dn</I>]...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>ldapdelete</I>   is   a   shell-accessible  interface  to  the
+       <B>ldap_delete(3)</B> library call.
+
+       <B>ldapdelete</B> opens a connection to an  LDAP  server,  binds,
+       and  deletes one or more entries.  If one or more <I>DN</I> argu­
+       ments are provided, entries with those Distinguished Names
+       are  deleted.  Each <I>DN</I> should be provided using the LDAPv3
+       string representation as defined in RFC 2253.   If  no  <I>dn</I>
+       arguments  are  provided, a list of DNs is read from stan­
+       dard input (or from <I>file</I> if the -f flag is used).
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-n</B>     Show what would be done, but don't actually  delete
+              entries.   Useful for debugging in conjunction with
+              -v.
+
+       <B>-v</B>     Use verbose mode, with many diagnostics written  to
+              standard output.
+
+       <B>-k</B>     Use  Kerberos  IV  authentication instead of simple
+              authentication.  It is  assumed  that  you  already
+              have  a  valid  ticket granting ticket. This option
+              only has effect if <B>ldapdelete</B> is compiled with Ker­
+              beros support.
+
+       <B>-K</B>     Same as -k, but only does step 1 of the Kerberos IV
+              bind.  This is useful when connecting  to  a  slapd
+              and  there  is no x500dsa.hostname principal regis­
+              tered with your Kerberos Domain Controller(s).
+
+       <B>-c</B>     Continuous operation mode.  Errors  are   reported,
+              but  <B>ldapdelete</B>  will   continue   with  deletions.
+              The default is to exit after reporting an error.
+
+       <B>-M[M]</B>  Enable manage DSA IT control.   <B>-MM</B>  makes  control
+              critical.
+
+       <B>-d</B> <I>debuglevel</I>
+              Set   the   LDAP  debugging  level  to  <I>debuglevel</I>.
+              <B>ldapdelete</B> must be compiled with LDAP_DEBUG defined
+              for this option to have any effect.
+
+       <B>-f</B> <I>file</I>
+              Read  a series of DNs from <I>file</I>, one per line, per­
+              tion.
+
+       <B>-y</B> <I>passwdfile</I>
+              Use complete contents of <I>passwdfile</I> as the password
+              for simple authentication.
+
+       <B>-H</B> <I>ldapuri</I>
+              Specify URI(s) referring to the ldap server(s).
+
+       <B>-h</B> <I>ldaphost</I>
+              Specify  an alternate host on which the ldap server
+              is running.  Deprecated in favor of -H.
+
+       <B>-p</B> <I>ldapport</I>
+              Specify an alternate TCP port where the ldap server
+              is listening.  Deprecated in favor of -H.
+
+       <B>-P</B> <I>2</I>|<I>3</I> Specify the LDAP protocol version to use.
+
+       <B>-r</B>     Do a recursive delete.  If the DN specified isn't a
+              leaf, its children,  and  all  their  children  are
+              deleted down the tree.  No verification is done, so
+              if you add this  switch,  ldapdelete  will  happily
+              delete large portions of your tree.  Use with care.
+
+       <B>-O</B> <I>security-properties</I>
+              Specify SASL security properties.
+
+       <B>-I</B>     Enable  SASL  Interactive  mode.   Always   prompt.
+              Default is to prompt only as needed.
+
+       <B>-Q</B>     Enable SASL Quiet mode.  Never prompt.
+
+       <B>-U</B> <I>authcid</I>
+              Specify  the  authentication  ID for SASL bind. The
+              form of the identity depends  on  the  actual  SASL
+              mechanism used.
+
+       <B>-R</B> <I>realm</I>
+              Specify  the  realm  of  authentication ID for SASL
+              bind. The form of the realm depends on  the  actual
+              SASL mechanism used.
+
+       <B>-X</B> <I>authzid</I>
+              Specify  the  proxy authorization ID for SASL bind.
+              <I>authzid</I> must  be  one  of  the  following  formats:
+              <B>dn:</B><I>&lt;distinguished</I> <I>name&gt;</I> or <B>u:</B><I>&lt;username&gt;</I>
+
+       <B>-Y</B> <I>mech</I>
+              Specify the SASL mechanism to be used for authenti­
+              cation. If it's not  specified,  the  program  will
+              choose the best mechanism the server knows.
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       Exit  status  is 0 if no errors occur.  Errors result in a
+       non-zero exit status and a diagnostic message being  writ­
+       ten to standard error.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ldap.conf(5)</B>,  <B>ldapadd(1)</B>,  <B>ldapmodify(1)</B>,  <B>ldapmodrdn(1)</B>,
+       <B>ldapsearch(1)</B>, <B>ldap(3)</B>, <B>ldap_delete(3)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       The OpenLDAP Project &lt;http://www.openldap.org/&gt;
+
+
+</PRE>
+<H2>ACKNOWLEDGEMENTS</H2><PRE>
+       <B>OpenLDAP</B> is developed and maintained by The OpenLDAP  Pro­
+       ject (http://www.openldap.org/).  <B>OpenLDAP</B> is derived from
+       University of Michigan LDAP 3.3 Release.
+
+
+
+OpenLDAP 2.1.12                                     <B>LDAPDELETE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

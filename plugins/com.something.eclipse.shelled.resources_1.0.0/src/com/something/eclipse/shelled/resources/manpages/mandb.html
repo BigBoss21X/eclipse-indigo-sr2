@@ -1,0 +1,182 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>mandb</B> [<B>-dqsuc</B>|<B>-h</B>|<B>-V</B>] [<I>manpath</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>mandb</B>  is  used  to  initialise  or  manually update <B>index</B>
+       database caches that are usually maintained by  <B>man</B>.   The
+       caches  contain  information relevant to the current state
+       of the manual  page  system  and  the  information  stored
+       within  them  is  used  by the man_db utilities to enhance
+       their speed and functionality.
+
+       When creating or updating an <B>index</B>, <B>mandb</B> will warn of bad
+       ROFF  .so requests, bogus manual page filenames and manual
+       pages from which the <B>whatis</B> cannot be parsed.
+
+       Supplying <B>mandb</B> with an optional colon-delimited path will
+       override  the internal system manual page hierarchy search
+       path, determined from information found within the  man_db
+       configuration file.
+
+
+</PRE>
+<H2>DATABASE CACHES</H2><PRE>
+       <B>mandb</B> can be compiled with support for any one of the fol­
+       lowing database types.
+
+       Name                Type          Async   Filename
+       ----------------------------------------------------------
+       Berkeley db         Binary tree   Yes     <I>index.bt</I>
+       GNU gdbm v &gt;= 1.6   Hashed        Yes     <I>index.db</I>
+       GNU gdbm v &lt;  1.6   Hashed        No      <I>index.db</I>
+       UNIX ndbm           Hashed        No      <I>index.(dir|pag)</I>
+
+       Those database types  that  support  asynchronous  updates
+       provide  enhanced speed at the cost of possible corruption
+       in the event of unusual termination.  In an  unusual  case
+       where this has occured, it may be necessary to rerun <B>mandb</B>
+       with  the  <B>-c</B>  option  to  re-create  the  databases  from
+       scratch.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-d,</B> <B>--debug</B>
+              Produce debugging information.
+
+       <B>-q,</B> <B>--quiet</B>
+              Produce no warnings.
+
+       <B>-s,</B> <B>--no-straycats</B>
+              Do not spend time looking for or adding information
+              to the databases regarding stray cats.
+
+       <B>-p,</B> <B>--no-purge</B>
+              Do not spend time checking for deleted manual pages
+              and purging them from the databases.
+
+       <B>-t,</B> <B>--test</B>
+              Perform correctness checks on manual pages  in  the
+              hierarchy  search  path.   With  this option, <B>mandb</B>
+              will not alter existing databases.
+
+       <B>-h,</B> <B>--help</B>
+              Show the usage message, then exit.
+
+       <B>-V,</B> <B>--version</B>
+              Show the version, then exit.
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       The following  warning  messages  can  be  emitted  during
+       database building.
+
+       <B>&lt;filename&gt;:</B> <B>whatis</B> <B>parse</B> <B>for</B> <B>page(sec)</B> <B>failed</B>
+              An attempt to extract whatis line(s) from the given
+              &lt;filename&gt; failed.  This is usually due to a poorly
+              written  manual page, but if many such messages are
+              emitted it is likely that the system contains  non-
+              standard  manual  pages which are incompatible with
+              the man_db whatis parser.  See the  <B>WHATIS</B>  <B>PARSING</B>
+              section for more information.
+
+       <B>&lt;filename&gt;:</B> <B>is</B> <B>a</B> <B>dangling</B> <B>symlink</B>
+              &lt;filename&gt;  does  not  exist but is referenced by a
+              symbolic link.   Further  diagnostics  are  usually
+              emitted to identify the &lt;filename&gt; of the offending
+              link.
+
+       <B>&lt;filename&gt;:</B> <B>bad</B> <B>symlink</B> <B>or</B> <B>ROFF</B> <B>`.so'</B> <B>request</B>
+              &lt;filename&gt; is either a symbolic link  to,  or  con­
+              tains  a  ROFF  include  request to, a non existent
+              file.
+
+       <B>&lt;filename&gt;:</B> <B>ignoring</B> <B>bogus</B> <B>filename</B>
+              The &lt;filename&gt; may or may not  be  a  valid  manual
+              page  but its name is invalid.  This is usually due
+              to a manual page with sectional extension &lt;x&gt; being
+              put in manual page section &lt;y&gt;.
+
+       <B>&lt;filename_mask&gt;:</B> <B>competing</B> <B>extensions</B>
+              The  wildcard  &lt;filename_mask&gt; is not unique.  This
+              is usually caused by the existence of both  a  com­
+              pressed and uncompressed version of the same manual
+              page.  All but the most recent are ignored.
+
+
+</PRE>
+<H2>WHATIS PARSING</H2><PRE>
+       <B>mandb</B> parses the <B>NAME</B> section at the top  of  each  manual
+       page  looking  for  names and descriptions of the features
+       documented in each.  While the parser is  quite  tolerant,
+       as  it  has  to cope with a number of different forms that
+       rated by commas.  The text on the right-hand side is free-
+       form, and may be spread over multiple lines.   If  several
+       features  with different descriptions are being documented
+       in the same manual page, the following form  is  therefore
+       used:
+
+              .SH NAME
+              foo, bar \- programs to do something
+              .br
+              baz \- program to do nothing
+
+       (A  macro  which  starts a new paragraph, like .PP, may be
+       used instead of the break macro .br.)
+
+       There are several common reasons why whatis parsing fails.
+       Sometimes  authors of manual pages replace `.SH NAME' with
+       `.SH MYPROGRAM', and then mandb cannot  find  the  section
+       from which to extract the information it needs.  Sometimes
+       authors include a NAME section, but place  free-form  text
+       there  rather  than  `name  \- description'.  However, any
+       syntax resembling the above should be accepted.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/etc/manpath.config</I>
+              man_db configuration file.
+
+       <I>/usr/man/index.(bt|db|dir|pag)</I>
+              A traditional global <I>index</I> database cache.
+
+       <I>/var/catman/index.(bt|db|dir|pag)</I>
+              An  alternate  or  FSSTND  compliant  global  <I>index</I>
+              database cache.
+
+       <I>/var/cache/man/index.(bt|db|dir|pag)</I>
+              An FHS compliant global <I>index</I> database cache.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>man(1)</B>, <B>manpath(5)</B>, <B>catman(8)</B>.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Wilf. (G.Wilford@ee.surrey.ac.uk).
+       Fabrizio Polacco (fpolacco@debian.org).
+       Colin Watson (cjwatson@debian.org).
+
+
+
+2.3.19                     14 May 2001                   <B>mandb(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

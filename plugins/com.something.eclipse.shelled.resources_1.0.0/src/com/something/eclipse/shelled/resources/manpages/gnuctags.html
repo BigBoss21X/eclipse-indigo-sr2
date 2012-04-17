@@ -1,0 +1,231 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>etags</B> [-aCDGImRVh] [-i <I>file</I>] [-l <I>language</I>]
+       [-o <I>tagfile</I>] [-r <I>regexp</I>]
+       [--append] [--no-defines] [--no-globals] [--include=<I>file</I>]
+       [--ignore-indentation] [--language=<I>language</I>] [--members]
+       [--output=<I>tagfile</I>] [--regex=<I>regexp</I>] [--no-regex]
+       [--ignore-case-regex=<I>regexp</I>] [--help] [--version] <I>file</I> ...
+
+       <B>gnuctags</B> [-aCdgImRVh] [-BtTuvwx] [-l <I>language</I>]
+       [-o <I>tagfile</I>] [-r <I>regexp</I>]
+       [--append] [--backward-search] [--cxref] [--defines]
+       [--forward-search] [--globals] [--ignore-indentation]
+       [--language=<I>language</I>] [--members] [--output=<I>tagfile</I>]
+       [--regex=<I>regexp</I>] [--ignore-case-regex=<I>regexp</I>] [--typedefs]
+       [--typedefs-and-c++] [--update] [--no-warn] [--help]
+       [--version] <I>file</I> ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The <B>etags</B> program is used to create a tag table file, in a
+       format  understood  by  <B>emacs(1)</B>;  the <B>gnuctags</B> program is
+       used to create a similar table in a format  understood  by
+       <B>vi(1)</B>.  Both forms of the program understand the syntax of
+       C, Objective C, C++, Java, Fortran,  Ada,  Cobol,  Erlang,
+       LaTeX,  Emacs  Lisp/Common  Lisp, makefiles, Pascal, Perl,
+       Postscript, Python, Prolog, Scheme and most assembler-like
+       syntaxes.  Both forms read the files specified on the com­
+       mand line, and write  a  tag  table  (defaults:  <B>TAGS</B>  for
+       <B>etags</B>,  <B>tags</B> for <B>gnuctags</B>) in the current working directo­
+       ry.  Files specified with  relative  file  names  will  be
+       recorded  in the tag table with file names relative to the
+       directory where the tag table  resides.   Files  specified
+       with  absolute  file  names will be recorded with absolute
+       file names.  The programs recognize the language  used  in
+       an  input  file  based on its file name and contents.  The
+       <B>--language</B> switch can be used to force parsing of the file
+       names  following  the  switch  according to the given lan­
+       guage, overriding guesses based on filename extensions.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Some options make sense only for the <B>vi</B>  style  tag  files
+       produced  by gnuctags; <B>etags</B> does not recognize them.  The
+       programs accept unambiguous abbreviations for long  option
+       names.
+
+       <B>-a,</B> <B>--append</B>
+              Append  to  existing  tag file.  (For <B>vi</B>-format tag
+              files, see also <B>--update</B>.)
+
+       <B>-B,</B> <B>--backward-search</B>
+              Tag files written in the format expected by <B>vi</B> con­
+              tain regular expression search instructions; the <B>-B</B>
+              option writes them  using  the  delimiter  `<B>?</B>',  to
+
+       <B>-D,</B> <B>--no-defines</B>
+              Do  not  create tag entries for C preprocessor con­
+              stant definitions and  enum  constants.   This  may
+              make  the  tags  file  much  smaller if many header
+              files are tagged.  This is the default behavior for
+              <B>gnuctags</B>.
+
+       <B>-g,</B> <B>--globals</B>
+              Create  tag entries for global variables in C, C++,
+              Objective C, Java, and Perl.  This is  the  default
+              behavior for <B>etags</B>.
+
+       <B>-G,</B> <B>--no-globals</B>
+              Do  not  tag  global variables.  Typically this re­
+              duces the file size by one fourth.  This is the de­
+              fault behavior for <B>gnuctags</B>.
+
+       <B>-i</B> <I>file</I>, <B>--include=</B><I>file</I>
+              Include  a  note  in  the tag file indicating that,
+              when searching for a tag, one should  also  consult
+              the tags file <I>file</I> after checking the current file.
+              This options is only accepted by <B>etags</B>.
+
+       <B>-I,</B> <B>--ignore-indentation</B>
+              Don't rely on indentation as much  as  we  normally
+              do.   Currently,  this  means  not to assume that a
+              closing brace in the  first  column  is  the  final
+              brace  of  a  function or structure definition in C
+              and C++.
+
+       <B>-l</B> <I>language</I>, <B>--language=</B><I>language</I>
+              Parse the following files according  to  the  given
+              language.  More than one such options may be inter­
+              mixed with filenames.  Use <B>--help</B> to get a list  of
+              the  available languages and their default filename
+              extensions.  The `auto' language can be used to re­
+              store  automatic detection of language based on the
+              file name.  The `none' language may be used to dis­
+              able   language  parsing  altogether;  only  regexp
+              matching is done in this case (see the <B>--regex</B>  op­
+              tion).
+
+       <B>-m,</B> <B>--members</B>
+              Create  tag  entries for variables that are members
+              of structure-like constructs in C++,  Objective  C,
+              Java.
+
+       <B>-M,</B> <B>--no-members</B>
+              Do  not  tag member variables.  This is the default
+              behavior.
+
+       <B>--packages-only</B>
+              freely intermixed with filenames and the <B>-R</B> option.
+              The regexps are cumulative, i.e. each  option  will
+              add  to  the previous ones.  The regexps are of the
+              form:
+                   <B>/</B><I>tagregexp</I>[<B>/</B><I>nameregexp</I>]<B>/</B>
+
+              where <I>tagregexp</I> is used to  match  the  lines  that
+              must  be tagged.  It should not match useless char­
+              acters.  If the match is such that more  characters
+              than  needed  are unavoidably matched by <I>tagregexp</I>,
+              it may be useful to add  a  <I>nameregexp</I>,  to  narrow
+              down the tag scope.  <B>gnuctags</B> ignores regexps with­
+              out a <I>nameregexp</I>.  The syntax  of  regexps  is  the
+              same as in emacs.
+              Here are some examples.  All the regexps are quoted
+              to protect them from shell interpretation.
+
+              Tag the DEFVAR macros in the emacs source files:
+              <I>--regex='/[</I> <I>\t]*DEFVAR</I><B>_</B><I>[A-Z</I><B>_</B> <I>\t(]+"\([^"]+\)"'</I>
+
+              Tag VHDL files (this example is a single long line,
+              broken here for formatting reasons):
+              <I>--language=none</I> <I>--regex='/[</I> <I>\t]*\(ARCHITECTURE\|\</I>
+              <I>CONFIGURATION\)</I> <I>+[^</I> <I>]*</I> <I>+OF/'</I> <I>--regex='/[</I> <I>\t]*\</I>
+              <I>\(ATTRIBUTE\|ENTITY\|FUNCTION\|PACKAGE\(</I> <I>BODY\)?\</I>
+              <I>\|PROCEDURE\|PROCESS\|TYPE\)[</I> <I>\t]+\([^</I> <I>\t(]+\)/\3/'</I>
+
+              Tag TCL files (this last example shows the usage of
+              a <I>tagregexp</I>):
+              <I>--lang=none</I> <I>--regex='/proc[</I> <I>\t]+\([^</I> <I>\t]+\)/\1/'</I>
+
+              A regexp can be preceded by {<I>lang</I>}, thus  restrict­
+              ing  it  to  match  lines of files of the specified
+              language.  Use <B>etags</B> <B>--help</B> to obtain a list of the
+              recognised languages.  This feature is particularly
+              useful inside <B>regex</B> <B>files</B>.  A regex  file  contains
+              one  regex  per line.  Empty lines, and those lines
+              beginning with space or tab are ignored.  Lines be­
+              ginning  with @ are references to regex files whose
+              name follows the @ sign.  Other lines  are  consid­
+              ered   regular  expressions  like  those  following
+              <B>--regex</B>.
+              For example, the command
+              <I>etags</I> <I>--regex=@regex.file</I> <I>*.c</I>
+              reads the regexes contained in the file regex.file.
+
+       <B>-R,</B> <B>--no-regex</B>
+              Don't  do any more regexp matching on the following
+              files.  May be freely intermixed with filenames and
+              the <B>--regex</B> option.
+
+       <B>-t,</B> <B>--typedefs</B>
+              isting entries for the given files and then rewrit­
+              ing the new entries at the end of  the  tags  file.
+              It is often faster to simply rebuild the entire tag
+              file than to use this.  Only <B>gnuctags</B> accepts  this
+              option.
+
+       <B>-v,</B> <B>--vgrind</B>
+              Instead  of  generating a tag file, write index (in
+              <B>vgrind</B> format) to standard output.   Only  <B>gnuctags</B>
+              accepts this option.
+
+       <B>-w,</B> <B>--no-warn</B>
+              Suppress  warning messages about duplicate entries.
+              The <B>etags</B> program does not check for duplicate  en­
+              tries, so this option is not allowed with it.
+
+       <B>-x,</B> <B>--cxref</B>
+              Instead  of  generating  a  tag file, write a cross
+              reference (in <B>cxref</B>  format)  to  standard  output.
+              Only <B>gnuctags</B> accepts this option.
+
+       <B>-h,</B> <B>-H,</B> <B>--help</B>
+              Print usage information.
+
+       <B>-V,</B> <B>--version</B>
+              Print  the  current version of the program (same as
+              the version of the emacs <B>etags</B> is shipped with).
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       `<B>emacs</B>' entry in <B>info</B>; <I>GNU</I> <I>Emacs</I> <I>Manual</I>, Richard Stallman.
+       <B>ctags(1)</B>, <B>cxref(1)</B>, <B>emacs(1)</B>, <B>gctags(1)</B>, <B>vgrind(1)</B>, <B>vi(1)</B>.
+
+
+
+</PRE>
+<H2>COPYING</H2><PRE>
+       Copyright (c) 1999, 2001 Free Software Foundation, Inc.
+
+       Permission is granted  to  make  and  distribute  verbatim
+       copies  of this document provided the copyright notice and
+       this permission notice are preserved on all copies.
+
+       Permission is granted to copy and distribute modified ver­
+       sions  of  this document under the conditions for verbatim
+       copying, provided that the entire resulting  derived  work
+       is  distributed  under  the  terms  of a permission notice
+       identical to this one.
+
+       Permission is granted to copy and distribute  translations
+       of  this  document  into another language, under the above
+       conditions for modified versions, except that this permis­
+       sion notice may be stated in a translation approved by the
+       Free Software Foundation.
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

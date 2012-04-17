@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>grotty</B> [ <B>-hfbuodBUv</B> ] [ <B>-F</B><I>dir</I> ] [ <I>files</I>...  ]
+
+       It  is  possible  to have whitespace between the <B>-F</B> option
+       and its parameter.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>grotty</B> translates the output of  GNU  <B>troff</B>  into  a  form
+       suitable  for  typewriter-like  devices.   Normally <B>grotty</B>
+       should be invoked  by  using  the  <B>groff</B>  command  with  a
+       <B>-Tascii</B>,  <B>-Tascii8</B>, <B>-Tlatin1</B>, <B>-Tnippon</B> or <B>-Tutf8</B> option on
+       ASCII based systems, and with  <B>-Tcp1047</B>  on  EBCDIC  based
+       hosts.   If no files are given, <B>grotty</B> will read the stan­
+       dard input.  A filename of <B>-</B> will  also  cause  <B>grotty</B>  to
+       read  the  standard input.  Output is written to the stan­
+       dard output.
+
+       Normally <B>grotty</B>  prints  a  bold  character  <I>c</I>  using  the
+       sequence  `<I>c</I>  BACKSPACE <I>c</I>' and a italic character <I>c</I> by the
+       sequence `<B>_</B> BACKSPACE <I>c</I>'.  These  sequences  can  be  dis­
+       played on a terminal by piping through <B>ul(1)</B>.  Pagers such
+       as <B>more(1)</B> or <B>less(1)</B>  are  also  able  to  display  these
+       sequences.   Use either <B>-B</B> or <B>-U</B> when piping into <B>less(1)</B>;
+       use <B>-b</B> when piping into <B>more(1)</B>.  There is no need to fil­
+       ter  the  output through <B>col(1)</B> since <B>grotty</B> never outputs
+       reverse line feeds.
+
+       The font description file may contain a command
+
+              <B>internalname</B> <I>n</I>
+
+       where <I>n</I> is a decimal integer.  If the 01 bit in <I>n</I> is  set,
+       then the font will be treated as an italic font; if the 02
+       bit is set, then it will be treated as a bold  font.   The
+       code  field  in  the font description field gives the code
+       which will be used to output the character.  This code can
+       also be used in the <B>\N</B> escape sequence in <B>troff</B>.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-F</B><I>dir</I>  Prepend  directory  <I>dir</I><B>/dev</B><I>name</I>  to the search path
+              for font and device description files; <I>name</I> is  the
+              name  of the device, usually <B>ascii</B>, <B>ascii8</B>, <B>latin1</B>,
+              <B>utf8</B>, <B>nippon</B> or <B>cp1047</B>.
+
+       <B>-h</B>     Use  horizontal  tabs  in  the  output.   Tabs  are
+              assumed to be set every 8 columns.
+
+       <B>-f</B>     Use  form feeds in the output.  A form feed will be
+              output at the end of each page that has  no  output
+              on its last line.
+
+       <B>-b</B>     Suppress  the  use of overstriking for bold charac­
+              least one zero argument (and so are either horizon­
+              tal or vertical) using <B>-</B>, <B>|</B> and <B>+</B> characters.
+
+       <B>-v</B>     Print the version number.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/usr/share/groff/1.17.2/font/devascii/DESC</B>
+              Device description file for <B>ascii</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devascii/</B><I>F</I>
+              Font description file for font <I>F</I> of <B>ascii</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devascii8/DESC</B>
+              Device description file for <B>ascii8</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devlatin1/DESC</B>
+              Device description file for <B>latin1</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devnippon/DESC</B>
+              Device description file for <B>nippon</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devlatin1/</B><I>F</I>
+              Font  description file for font <I>F</I> of <B>latin1</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devutf8/DESC</B>
+              Device description file for <B>utf8</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devutf8/</B><I>F</I>
+              Font description file for font <I>F</I> of <B>utf8</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devcp1047/DESC</B>
+              Device description file for <B>cp1047</B> device.
+
+       <B>/usr/share/groff/1.17.2/font/devcp1047/</B><I>F</I>
+              Font description file for font <I>F</I> of <B>cp1047</B>  device.
+
+       <B>/usr/share/groff/1.17.2/tmac/tty.tmac</B>
+              Macros for use with <B>grotty</B>.
+
+       <B>/usr/share/groff/1.17.2/tmac/tty-char.tmac</B>
+              Additional  klugdey  character  definitions for use
+              with <B>grotty</B>.
+
+       Note that on EBCDIC  hosts,  only  files  for  the  <B>cp1047</B>
+       device will be installed.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       <B>grotty</B> is intended only for simple documents.
+
+       There  is no support for fractional horizontal or vertical
+       motions.
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

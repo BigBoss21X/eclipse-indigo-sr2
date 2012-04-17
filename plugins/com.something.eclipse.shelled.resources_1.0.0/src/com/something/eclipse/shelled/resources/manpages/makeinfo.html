@@ -1,0 +1,177 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>makeinfo</B> [<I>OPTION</I>]... <I>TEXINFO-FILE</I>...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Translate  Texinfo  source  documentation to various other
+       formats, by default Info files suitable for reading online
+       with Emacs or standalone GNU Info.
+
+   <B>General</B> <B>options:</B>
+       <B>--error-limit</B>=<I>NUM</I>
+              quit after NUM errors (default 100).
+
+       <B>--force</B>
+              preserve output even if errors.
+
+       <B>--help</B> display this help and exit.
+
+       <B>--no-validate</B>
+              suppress node cross-reference validation.
+
+       <B>--no-warn</B>
+              suppress warnings (but not errors).
+
+       <B>--reference-limit</B>=<I>NUM</I>
+              warn about at most NUM references (default 1000).
+
+       <B>-v</B>, <B>--verbose</B>
+              explain what is being done.
+
+       <B>--version</B>
+              display version information and exit.
+
+   <B>Output</B> <B>format</B> <B>selection</B> <B>(default</B> <B>is</B> <B>to</B> <B>produce</B> <B>Info):</B>
+       <B>--docbook</B>
+              output DocBook XML rather than Info.
+
+       <B>--html</B> output HTML rather than Info.
+
+       <B>--xml</B>  output Texinfo XML rather than Info.
+
+   <B>General</B> <B>output</B> <B>options:</B>
+       <B>-E</B>, <B>--macro-expand</B> FILE
+              output macro-expanded source to FILE.  ignoring any
+              @setfilename.
+
+       <B>--no-headers</B>
+              suppress node separators, Node:  lines,  and  menus
+              from  Info  output  (thus  producing plain text) or
+              from HTML (thus producing  shorter  output);  also,
+              write to standard output by default.
+
+       <B>--no-split</B>
+       <B>--fill-column</B>=<I>NUM</I>
+              break Info lines at NUM characters (default 72).
+
+       <B>--footnote-style</B>=<I>STYLE</I>
+              output footnotes in Info according to STYLE: `sepa­
+              rate' to put them in their own node; `end'  to  put
+              them at the end of the node
+
+              in which they are defined (default).
+
+       <B>--paragraph-indent</B>=<I>VAL</I>
+              indent  Info  paragraphs by VAL spaces (default 3).
+              If VAL is `none', do not indent; if VAL is  `asis',
+              preserve existing indentation.
+
+       <B>--split-size</B>=<I>NUM</I>
+              split Info files at size NUM (default 50000).
+
+   <B>Input</B> <B>file</B> <B>options:</B>
+       <B>--commands-in-node-names</B>
+              allow @ commands in node names.
+
+       <B>-D</B> VAR define the variable VAR, as with @set.
+
+       <B>-I</B> DIR append DIR to the @include search path.
+
+       <B>-P</B> DIR prepend DIR to the @include search path.
+
+       <B>-U</B> VAR undefine the variable VAR, as with @clear.
+
+   <B>Conditional</B> <B>processing</B> <B>in</B> <B>input:</B>
+       <B>--ifhtml</B>
+              process  @ifhtml  and  @html even if not generating
+              HTML.
+
+       <B>--ifinfo</B>
+              process @ifinfo even if not generating Info.
+
+       <B>--ifplaintext</B>
+              process @ifplaintext even if not  generating  plain
+              text.
+
+       <B>--iftex</B>
+              process @iftex and @tex; implies <B>--no-split</B>.
+
+       <B>--ifxml</B>
+              process @ifxml and @xml.
+
+       <B>--no-ifhtml</B>
+              do not process @ifhtml and @html text.
+
+       <B>--no-ifinfo</B>
+              <B>--ifinfo</B> is on and the others are off; if  generat­
+              ing  plain text, <B>--ifplaintext</B> is on and the others
+              are off;
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+       makeinfo foo.texi
+              write Info to foo's @setfilename
+
+       makeinfo <B>--html</B> foo.texi
+              write HTML to @setfilename
+
+       makeinfo <B>--xml</B> foo.texi
+              write Texinfo XML to @setfilename
+
+       makeinfo <B>--docbook</B> foo.texi
+              write DocBook XML to @setfilename
+
+       makeinfo <B>--no-headers</B> foo.texi
+              write plain text to standard output
+
+              makeinfo <B>--html</B> <B>--no-headers</B>  foo.texi  write  html
+              without  node  lines,  menus makeinfo <B>--number-sec­</B>
+              <B>tions</B> foo.texi   write Info with numbered  sections
+              makeinfo  <B>--no-split</B>  foo.texi           write  one
+              Info file however big
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Email bug reports to  bug-texinfo@gnu.org,  general  ques­
+       tions  and  discussion  to  help-texinfo@gnu.org.  Texinfo
+       home page: http://www.gnu.org/software/texinfo/
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2003 Free Software Foundation, Inc.  There  is
+       NO warranty.  You may redistribute this software under the
+       terms of the GNU General Public License.  For more  infor­
+       mation about these matters, see the files named COPYING.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  full  documentation  for  <B>makeinfo</B> is maintained as a
+       Texinfo manual.  If the <B>info</B>  and  <B>makeinfo</B>  programs  are
+       properly installed at your site, the command
+
+              <B>info</B> <B>makeinfo</B>
+
+       should give you access to the complete manual.
+
+
+
+makeinfo 4.4              February 2003               <B>MAKEINFO(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

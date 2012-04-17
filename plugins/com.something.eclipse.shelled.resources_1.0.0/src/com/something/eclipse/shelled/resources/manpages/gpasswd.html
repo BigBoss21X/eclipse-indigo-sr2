@@ -1,0 +1,63 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>gpasswd</B> <I>group</I>
+       <B>gpasswd</B> <B>-a</B> <I>user</I> <I>group</I>
+       <B>gpasswd</B> <B>-d</B> <I>user</I> <I>group</I>
+       <B>gpasswd</B> <B>-R</B> <I>group</I>
+       <B>gpasswd</B> <B>-r</B> <I>group</I>
+       <B>gpasswd</B> [<B>-A</B> <I>user</I>,...] [<B>-M</B> <I>user</I>,...] <I>group</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>gpasswd</B>  is  used  to  administer the /etc/group file (and
+       /etc/gshadow file if  compiled  with  SHADOWGRP  defined).
+       Every  group  can have administrators, members and a pass­
+       word. System administrator can use  <B>-A</B>  option  to  define
+       group administrator(s) and <B>-M</B> option to define members and
+       has all rights of group administrators and members.
+
+       Group administrator can add and delete users using <B>-a</B>  and
+       <B>-d</B>  options respectively. Administrators can use <B>-r</B> option
+       to remove group password. When no  password  is  set  only
+       group  members can use <B>newgrp(1)</B> to join the group. Option
+       <B>-R</B> disables access to the group through <B>newgrp(1)</B> command.
+
+       <B>gpasswd</B>  called  by  a group administrator with group name
+       only prompts for the group password. If  password  is  set
+       the  members  can still <B>newgrp(1)</B> without a password, non-
+       members must supply the password.
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /etc/group - group information
+       /etc/gshadow - shadow group information
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>newgrp(1)</B>, <B>groupadd(8)</B>, <B>groupdel(8)</B>, <B>groupmod(8)</B>, <B>grpck(8)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Rafal Maszkowski &lt;rzm@pdi.net&gt;
+
+
+
+                                                       <B>GPASSWD(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

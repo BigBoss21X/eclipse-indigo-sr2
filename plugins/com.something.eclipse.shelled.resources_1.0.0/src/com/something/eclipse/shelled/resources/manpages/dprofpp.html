@@ -1,0 +1,203 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       dprofpp [<B>-a</B>|<B>-z</B>|<B>-l</B>|<B>-v</B>|<B>-U</B>] [<B>-d</B>] [<B>-s</B>|<B>-r</B>|<B>-u</B>] [<B>-q</B>] [<B>-F</B>] [<B>-I|-E</B>]
+       [<B>-O</B> <B>cnt</B>] [<B>-A</B>] [<B>-R</B>] [<B>-S</B>] [<B>-g</B> <B>subroutine</B>] [<B>-G</B> &lt;regexp&gt; [<B>-P</B>]]
+       [<B>-f</B> &lt;regexp&gt;] [profile]
+
+       dprofpp <B>-T</B> [<B>-F</B>] [<B>-g</B> <B>subroutine</B>] [profile]
+
+       dprofpp <B>-t</B> [<B>-F</B>] [<B>-g</B> <B>subroutine</B>] [profile]
+
+       dprofpp <B>-G</B> &lt;regexp&gt; [<B>-P</B>] [profile]
+
+       dprofpp <B>-p</B> <B>script</B> [<B>-Q</B>] [other opts]
+
+       dprofpp <B>-V</B> [profile]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The <I>dprofpp</I> command interprets profile data produced by a
+       profiler, such as the Devel::DProf profiler.  Dprofpp will
+       read the file <I>tmon.out</I> and will display the 15 subroutines
+       which are using the most time.  By default the times for
+       each subroutine are given exclusive of the times of their
+       child subroutines.
+
+       To profile a Perl script run the perl interpreter with the
+       <B>-d</B> switch.  So to profile script <I>test.pl</I> with Devel::DProf
+       the following command should be used.
+
+               $ perl5 -d:DProf test.pl
+
+       Then run dprofpp to analyze the profile.  The output of
+       dprofpp depends on the flags to the program and the ver­
+       sion of Perl you're using.
+
+               $ dprofpp -u
+               Total Elapsed Time =    1.67 Seconds
+                        User Time =    0.61 Seconds
+               Exclusive Times
+               %Time Seconds     #Calls sec/call Name
+                52.4   0.320          2   0.1600 main::foo
+                45.9   0.280        200   0.0014 main::bar
+                0.00   0.000          1   0.0000 DynaLoader::import
+                0.00   0.000          1   0.0000 main::baz
+
+       The dprofpp tool can also run the profiler before analyz­
+       ing the profile data.  The above two commands can be exe­
+       cuted with one dprofpp command.
+
+               $ dprofpp -u -p test.pl
+
+       Consult "PROFILE FORMAT" in Devel::DProf for a description
+       of the raw profile.
+
+
+       CumulS
+           Time (in seconds) spent in this routine and routines
+           called from it.
+
+       ExclSec
+           Time (in seconds) spent in this routine (not including
+           those called from it).
+
+       Csec/c
+           Average time (in seconds) spent in each call of this
+           routine (including those called from it).
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-a</B>   Sort alphabetically by subroutine names.
+
+       <B>-d</B>   Reverse whatever sort is used
+
+       <B>-A</B>   Count timing for autoloaded subroutine as timing for
+            *::AUTOLOAD.  Otherwise the time to autoload it is
+            counted as time of the subroutine itself (there is no
+            way to separate autoload time from run time).
+
+            This is going to be irrelevant with newer Perls.
+            They will inform "Devel::DProf" <I>when</I> the "AUTOLOAD"
+            switches to actual subroutine, so a separate statis­
+            tics for "AUTOLOAD" will be collected no matter
+            whether this option is set.
+
+       <B>-R</B>   Count anonymous subroutines defined in the same pack­
+            age separately.
+
+       <B>-E</B>   (default)  Display all subroutine times exclusive of
+            child subroutine times.
+
+       <B>-F</B>   Force the generation of fake exit timestamps if
+            dprofpp reports that the profile is garbled.  This is
+            only useful if dprofpp determines that the profile is
+            garbled due to missing exit timestamps.  You're on
+            your own if you do this.  Consult the BUGS section.
+
+       <B>-I</B>   Display all subroutine times inclusive of child sub­
+            routine times.
+
+       <B>-l</B>   Sort by number of calls to the subroutines.  This may
+            help identify candidates for inlining.
+
+       <B>-O</B> <B>cnt</B>
+            Show only <I>cnt</I> subroutines.  The default is 15.
+
+       <B>-p</B> <B>script</B>
+            Tells dprofpp that it should profile the given script
+
+       <B>-t</B>   Display subroutine call tree to stdout.  Subroutine
+            statistics are not displayed.  When a function is
+            called multiple consecutive times at the same calling
+            level then it is displayed once with a repeat count.
+
+       <B>-S</B>   Display <I>merged</I> subroutine call tree to stdout.
+            Statistics is displayed for each branch of the tree.
+
+            When a function is called multiple (<I>not</I> <I>necessarily</I>
+            <I>consecutive</I>) times in the same branch then all these
+            calls go into one branch of the next level.  A repeat
+            count is output together with combined inclusive,
+            exclusive and kids time.
+
+            Branches are sorted w.r.t. inclusive time.
+
+       <B>-U</B>   Do not sort.  Display in the order found in the raw
+            profile.
+
+       <B>-u</B>   Display user times rather than user+system times.
+
+       <B>-V</B>   Print dprofpp's version number and exit.  If a raw
+            profile is found then its XS_VERSION variable will be
+            displayed, too.
+
+       <B>-v</B>   Sort by average time spent in subroutines during each
+            call.  This may help identify candidates for inlin­
+            ing.
+
+       <B>-z</B>   (default) Sort by amount of user+system time used.
+            The first few lines should show you which subroutines
+            are using the most time.
+
+       <B>-g</B> "subroutine"
+            Ignore subroutines except "subroutine" and whatever
+            is called from it.
+
+       <B>-G</B> &lt;regexp&gt;
+            Aggregate "Group" all calls matching the pattern
+            together.  For example this can be used to group all
+            calls of a set of packages
+
+              -G "(package1::)|(package2::)|(package3::)"
+
+            or to group subroutines by name:
+
+              -G "getNum"
+
+       <B>-P</B>   Used with -G to aggregate "Pull"  together all calls
+            that did not match -G.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Applications which call <B>_</B><I>exit()</I> or <I>exec()</I> from within a
+       subroutine will leave an incomplete profile.  See the <B>-F</B>
+       option.
+
+       Any bugs in Devel::DProf, or any profiler generating the
+       profile data, could be visible here.  See "BUGS" in
+       Devel::DProf.
+
+       Mail bug reports and feature requests to the perl5-porters
+       mailing list at <I>&lt;perl5-porters@perl.org&gt;</I>.  Bug reports
+       should include the output of the <B>-V</B> option.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+               dprofpp         - profile processor
+               tmon.out        - raw profile
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       perl, Devel::DProf, <B>times(2)</B>
+
+
+
+perl v5.8.0                 2003-03-13                 <B>DPROFPP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,219 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>openssl</B> <I>command</I> [ <I>command</I><B>_</B><I>opts</I> ] [ <I>command</I><B>_</B><I>args</I> ]
+
+       <B>openssl</B> [ <B>list-standard-commands</B> | <B>list-message-digest-</B>
+       <B>commands</B> | <B>list-cipher-commands</B> ]
+
+       <B>openssl</B> <B>no-</B><I>XXX</I> [ <I>arbitrary</I> <I>options</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       OpenSSL is a cryptography toolkit implementing the Secure
+       Sockets Layer (SSL v2/v3) and Transport Layer Security
+       (TLS v1) network protocols and related cryptography stan­
+       dards required by them.
+
+       The <B>openssl</B> program is a command line tool for using the
+       various cryptography functions of OpenSSL's <B>crypto</B> library
+       from the shell.  It can be used for
+
+        o  Creation of RSA, DH and DSA key parameters
+        o  Creation of X.509 certificates, CSRs and CRLs
+        o  Calculation of Message Digests
+        o  Encryption and Decryption with Ciphers
+        o  SSL/TLS Client and Server Tests
+        o  Handling of S/MIME signed or encrypted mail
+
+
+</PRE>
+<H2>COMMAND SUMMARY</H2><PRE>
+       The <B>openssl</B> program provides a rich variety of commands
+       (<I>command</I> in the SYNOPSIS above), each of which often has a
+       wealth of options and arguments (<I>command</I><B>_</B><I>opts</I> and <I>com­</I>
+       <I>mand</I><B>_</B><I>args</I> in the SYNOPSIS).
+
+       The pseudo-commands <B>list-standard-commands</B>, <B>list-message-</B>
+       <B>digest-commands</B>, and <B>list-cipher-commands</B> output a list
+       (one entry per line) of the names of all standard com­
+       mands, message digest commands, or cipher commands,
+       respectively, that are available in the present <B>openssl</B>
+       utility.
+
+       The pseudo-command <B>no-</B><I>XXX</I> tests whether a command of the
+       specified name is available.  If no command named <I>XXX</I>
+       exists, it returns 0 (success) and prints <B>no-</B><I>XXX</I>; other­
+       wise it returns 1 and prints <I>XXX</I>.  In both cases, the out­
+       put goes to <B>stdout</B> and nothing is printed to <B>stderr</B>.
+       Additional command line arguments are always ignored.
+       Since for each cipher there is a command of the same name,
+       this provides an easy way for shell scripts to test for
+       the availability of ciphers in the <B>openssl</B> program.
+       (<B>no-</B><I>XXX</I> is not able to detect pseudo-commands such as
+       <B>quit</B>, <B>list-</B><I>...</I><B>-commands</B>, or <B>no-</B><I>XXX</I> itself.)
+
+       <B>STANDARD</B> <B>COMMANDS</B>
+
+                 by <B>dhparam</B>.
+
+       <B>dsa</B>       DSA Data Management.
+
+       <B>dsaparam</B>  DSA Parameter Generation.
+
+       <B>enc</B>       Encoding with Ciphers.
+
+       <B>errstr</B>    Error Number to Error String Conversion.
+
+       <B>dhparam</B>   Generation and Management of Diffie-Hellman
+                 Parameters.
+
+       <B>gendh</B>     Generation of Diffie-Hellman Parameters.  Obso­
+                 leted by <B>dhparam</B>.
+
+       <B>gendsa</B>    Generation of DSA Parameters.
+
+       <B>genrsa</B>    Generation of RSA Parameters.
+
+       <B>passwd</B>    Generation of hashed passwords.
+
+       <B>pkcs12</B>    PKCS#12 Data Management.
+
+       <B>pkcs7</B>     PKCS#7 Data Management.
+
+       <B>rand</B>      Generate pseudo-random bytes.
+
+       <B>req</B>       X.509 Certificate Signing Request (CSR) Manage­
+                 ment.
+
+       <B>rsa</B>       RSA Data Management.
+
+       <B>rsautl</B>    RSA utility for signing, verification, encryp­
+                 tion, and decryption.
+
+       <B>s_client</B>  This implements a generic SSL/TLS client which
+                 can establish a transparent connection to a
+                 remote server speaking SSL/TLS. It's intended
+                 for testing purposes only and provides only
+                 rudimentary interface functionality but inter­
+                 nally uses mostly all functionality of the
+                 OpenSSL <B>ssl</B> library.
+
+       <B>s_server</B>  This implements a generic SSL/TLS server which
+                 accepts connections from remote clients speaking
+                 SSL/TLS. It's intended for testing purposes only
+                 and provides only rudimentary interface func­
+                 tionality but internally uses mostly all func­
+                 tionality of the OpenSSL <B>ssl</B> library.  It pro­
+                 vides both an own command line oriented protocol
+                 for testing SSL functions and a simple HTTP
+
+       <B>x509</B>      X.509 Certificate Data Management.
+
+       <B>MESSAGE</B> <B>DIGEST</B> <B>COMMANDS</B>
+
+
+       <B>md2</B>       MD2 Digest
+
+       <B>md5</B>       MD5 Digest
+
+       <B>mdc2</B>      MDC2 Digest
+
+       <B>rmd160</B>    RMD-160 Digest
+
+       <B>sha</B>       SHA Digest
+
+       <B>sha1</B>      SHA-1 Digest
+
+       <B>ENCODING</B> <B>AND</B> <B>CIPHER</B> <B>COMMANDS</B>
+
+
+       <B>base64</B>    Base64 Encoding
+
+       <B>bf</B> <B>bf-cbc</B> <B>bf-cfb</B> <B>bf-ecb</B> <B>bf-ofb</B>
+                 Blowfish Cipher
+
+       <B>cast</B> <B>cast-cbc</B>
+                 CAST Cipher
+
+       <B>cast5-cbc</B> <B>cast5-cfb</B> <B>cast5-ecb</B> <B>cast5-ofb</B>
+                 CAST5 Cipher
+
+       <B>des</B> <B>des-cbc</B> <B>des-cfb</B> <B>des-ecb</B> <B>des-ede</B> <B>des-ede-cbc</B> <B>des-ede-</B>
+       <B>cfb</B> <B>des-ede-ofb</B> <B>des-ofb</B>
+                 DES Cipher
+
+       <B>des3</B> <B>desx</B> <B>des-ede3</B> <B>des-ede3-cbc</B> <B>des-ede3-cfb</B> <B>des-ede3-ofb</B>
+                 Triple-DES Cipher
+
+       <B>idea</B> <B>idea-cbc</B> <B>idea-cfb</B> <B>idea-ecb</B> <B>idea-ofb</B>
+                 IDEA Cipher
+
+       <B>rc2</B> <B>rc2-cbc</B> <B>rc2-cfb</B> <B>rc2-ecb</B> <B>rc2-ofb</B>
+                 RC2 Cipher
+
+       <B>rc4</B>       RC4 Cipher
+
+       <B>rc5</B> <B>rc5-cbc</B> <B>rc5-cfb</B> <B>rc5-ecb</B> <B>rc5-ofb</B>
+                 RC5 Cipher
+
+
+</PRE>
+<H2>PASS PHRASE ARGUMENTS</H2><PRE>
+       Several commands accept password arguments, typically
+       <B>env:var</B>   obtain the password from the environment vari­
+                 able <B>var</B>. Since the environment of other pro­
+                 cesses is visible on certain platforms (e.g. ps
+                 under certain Unix OSes) this option should be
+                 used with caution.
+
+       <B>file:pathname</B>
+                 the first line of <B>pathname</B> is the password. If
+                 the same <B>pathname</B> argument is supplied to
+                 <B>-passin</B> and <B>-passout</B> arguments then the first
+                 line will be used for the input password and the
+                 next line for the output password. <B>pathname</B> need
+                 not refer to a regular file: it could for exam­
+                 ple refer to a device or named pipe.
+
+       <B>fd:number</B> read the password from the file descriptor <B>num­</B>
+                 <B>ber</B>. This can be used to send the data via a
+                 pipe for example.
+
+       <B>stdin</B>     read the password from standard input.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>asn1parse(1)</B>, <B>ca(1)</B>, <B>config(5)</B>, <B>crl(1)</B>, <B>crl2pkcs7(1)</B>,
+       <B>dgst(1)</B>, <B>dhparam(1)</B>, <B>dsa(1)</B>, <B>dsaparam(1)</B>, <B>enc(1)</B>,
+       <B>gendsa(1)</B>, <B>genrsa(1)</B>, <B>nseq(1)</B>, <B>openssl(1)</B>, <B>passwd(1)</B>,
+       <B>pkcs12(1)</B>, <B>pkcs7(1)</B>, <B>pkcs8(1)</B>, <B>rand(1)</B>, <B>req(1)</B>, <B>rsa(1)</B>,
+       <B>rsautl(1)</B>, <B>s_client(1)</B>, <B>s_server(1)</B>, <B>smime(1)</B>, <B>spkac(1)</B>,
+       <B>verify(1)</B>, <B>version(1)</B>, <B>x509(1)</B>, <B>crypto(3)</B>, <B>ssl(3)</B>
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+       The <B>openssl(1)</B> document appeared in OpenSSL 0.9.2.  The
+       <B>list-</B><I>XXX</I><B>-commands</B> pseudo-commands were added in OpenSSL
+       0.9.3; the <B>no-</B><I>XXX</I> pseudo-commands were added in OpenSSL
+       0.9.5a.  For notes on the availability of other commands,
+       see their individual manual pages.
+
+
+
+0.9.6i                      2001-11-12                 <B>OPENSSL(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,230 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+         enc2xs -[options]
+         enc2xs -M ModName mapfiles...
+         enc2xs -C
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>enc2xs</I> builds a Perl extension for use by Encode from
+       either Unicode Character Mapping files (.ucm) or Tcl
+       Encoding Files (.enc).  Besides being used internally dur­
+       ing the build process of the Encode module, you can use
+       <I>enc2xs</I> to add your own encoding to perl.  No knowledge of
+       XS is necessary.
+
+
+</PRE>
+<H2>Quick Guide</H2><PRE>
+       If you want to know as little about Perl as possible but
+       need to add a new encoding, just read this chapter and
+       forget the rest.
+
+       0.  Have a .ucm file ready.  You can get it from somewhere
+           or you can write your own from scratch or you can grab
+           one from the Encode distribution and customize it.
+           For the UCM format, see the next Chapter.  In the
+           example below, I'll call my theoretical encoding
+           myascii, defined in <I>my.ucm</I>.  "$" is a shell prompt.
+
+             $ ls -F
+             my.ucm
+
+       1.  Issue a command as follows;
+
+             $ enc2xs -M My my.ucm
+             generating Makefile.PL
+             generating My.pm
+             generating README
+             generating Changes
+
+           Now take a look at your current directory.  It should
+           look like this.
+
+             $ ls -F
+             Makefile.PL   My.pm         my.ucm        t/
+
+           The following files were created.
+
+             Makefile.PL - MakeMaker script
+             My.pm       - Encode submodule
+             t/My.t      - test file
+
+           1.1.
+               If you want *.ucm installed together with the mod­
+               ules, do as follows;
+
+       4.  Now all you have to do is make.
+
+             $ make
+             cp My.pm blib/lib/Encode/My.pm
+             /usr/local/bin/perl /usr/local/bin/enc2xs -Q -O \
+               -o encode_t.c -f encode_t.fnm
+             Reading myascii (myascii)
+             Writing compiled form
+             128 bytes in string tables
+             384 bytes (25%) saved spotting duplicates
+             1 bytes (99.2%) saved using substrings
+             ....
+             chmod 644 blib/arch/auto/Encode/My/My.bs
+             $
+
+           The time it takes varies depending on how fast your
+           machine is and how large your encoding is.  Unless you
+           are working on something big like euc-tw, it won't
+           take too long.
+
+       5.  You can "make install" already but you should test
+           first.
+
+             $ make test
+             PERL_DL_NONLAZY=1 /usr/local/bin/perl -Iblib/arch -Iblib/lib \
+               -e 'use Test::Harness  qw(&amp;runtests $verbose); \
+               $verbose=0; runtests @ARGV;' t/*.t
+             t/My....ok
+             All tests successful.
+             Files=1, Tests=2,  0 wallclock secs
+              ( 0.09 cusr + 0.01 csys = 0.09 CPU)
+
+       6.  If you are content with the test result, just "make
+           install"
+
+       7.  If you want to add your encoding to Encode's demand-
+           loading list (so you don't have to "use
+           Encode::YourEncoding"), run
+
+             enc2xs -C
+
+           to update Encode::ConfigLocal, a module that controls
+           local settings.  After that, "use Encode;" is enough
+           to load your encodings on demand.
+
+
+</PRE>
+<H2>The Unicode Character Map</H2><PRE>
+       Encode uses the Unicode Character Map (UCM) format for
+       source character mappings.  This format is used by IBM's
+       ICU package and was adopted by Nick Ing-Simmons for use
+       with the Encode module.  Since UCM is more flexible than
+       Tcl's Encoding Map and far more user-friendly, this is the
+       recommended formet for Encode now.
+         &lt;subchar&gt; \x3F             # Substitution char
+         #
+         CHARMAP
+         &lt;U0000&gt; \x00 |0 # &lt;control&gt;
+         &lt;U0001&gt; \x01 |0 # &lt;control&gt;
+         &lt;U0002&gt; \x02 |0 # &lt;control&gt;
+         ....
+         &lt;U007C&gt; \x7C |0 # VERTICAL LINE
+         &lt;U007D&gt; \x7D |0 # RIGHT CURLY BRACKET
+         &lt;U007E&gt; \x7E |0 # TILDE
+         &lt;U007F&gt; \x7F |0 # &lt;control&gt;
+         END CHARMAP
+
+       ·   Anything that follows "#" is treated as a comment.
+
+       ·   The header section continues until a line containing
+           the word CHARMAP. This section has a form of <I>&lt;keyword&gt;</I>
+           <I>value</I>, one pair per line.  Strings used as values must
+           be quoted. Barewords are treated as numbers.  <I>\xXX</I>
+           represents a byte.
+
+           Most of the keywords are self-explanatory. <I>subchar</I>
+           means substitution character, not subcharacter.  When
+           you decode a Unicode sequence to this encoding but no
+           matching character is found, the byte sequence defined
+           here will be used.  For most cases, the value here is
+           \x3F; in ASCII, this is a question mark.
+
+       ·   CHARMAP starts the character map section.  Each line
+           has a form as follows:
+
+             &lt;UXXXX&gt; \xXX.. |0 # comment
+               ^     ^      ^
+               |     |      +- Fallback flag
+               |     +-------- Encoded byte sequence
+               +-------------- Unicode Character ID in hex
+
+           The format is roughly the same as a header section
+           except for the fallback flag: | followed by 0..3.
+           The meaning of the possible values is as follows:
+
+           |0  Round trip safe.  A character decoded to Unicode
+               encodes back to the same byte sequence.  Most
+               characters have this flag.
+
+           |1  Fallback for unicode -&gt; encoding.  When seen,
+               enc2xs adds this character for the encode map
+               only.
+
+           |2  Skip sub-char mapping should there be no code
+               point.
+
+       example, icu:state is not used.  Because of that, you need
+       to write a perl module if you want to support algorithmi­
+       cal encodings, notably the ISO-2022 series.  Such modules
+       include Encode::JP::2022_JP, Encode::KR::2022_KR, and
+       Encode::TW::HZ.
+
+       <B>Coping</B> <B>with</B> <B>duplicate</B> <B>mappings</B>
+
+       When you create a map, you SHOULD make your mappings
+       round-trip safe.  That is, "encode('your-encoding',
+       decode('your-encoding', $data)) eq $data" stands for all
+       characters that are marked as "|0".  Here is how to make
+       sure:
+
+       ·   Sort your map in Unicode order.
+
+       ·   When you have a duplicate entry, mark either one with
+           '|1' or '|3'.
+
+       ·   And make sure the '|1' or '|3' entry FOLLOWS the '|0'
+           entry.
+
+       Here is an example from big5-eten.
+
+         &lt;U2550&gt; \xF9\xF9 |0
+         &lt;U2550&gt; \xA2\xA4 |3
+
+       Internally Encoding -&gt; Unicode and Unicode -&gt; Encoding Map
+       looks like this;
+
+         E to U               U to E
+         --------------------------------------
+         \xF9\xF9 =&gt; U2550    U2550 =&gt; \xF9\xF9
+         \xA2\xA4 =&gt; U2550
+
+       So it is round-trip safe for \xF9\xF9.  But if the line
+       above is upside down, here is what happens.
+
+         E to U               U to E
+         --------------------------------------
+         \xA2\xA4 =&gt; U2550    U2550 =&gt; \xF9\xF9
+         (\xF9\xF9 =&gt; U2550 is now overwritten!)
+
+       The Encode package comes with <I>ucmlint</I>, a crude but suffi­
+       cient utility to check the integrity of a UCM file.  Check
+       under the Encode/bin directory for this.
+
+
+</PRE>
+<H2>Bookmarks</H2><PRE>
+       ·   ICU Home Page &lt;http://oss.software.ibm.com/icu/&gt;
+
+       ·   ICU Character Mapping Tables &lt;http://oss.soft­
+           ware.ibm.com/icu/charset/&gt;
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

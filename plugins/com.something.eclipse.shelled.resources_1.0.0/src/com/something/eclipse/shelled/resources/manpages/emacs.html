@@ -1,0 +1,342 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>emacs</B> [ <I>command-line</I> <I>switches</I> ] [ <I>files</I> <I>...</I>  ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>GNU</I>  <I>Emacs</I> is a version of <I>Emacs,</I> written by the author of
+       the original (PDP-10) <I>Emacs,</I> Richard Stallman.
+       The primary documentation of GNU Emacs is in the GNU Emacs
+       Manual, which you can read on line using Info, a subsystem
+       of Emacs.  Please look there for complete  and  up-to-date
+       documentation.  This man page is updated only when someone
+       volunteers to do so; the Emacs maintainers' priority  goal
+       is to minimize the amount of time this man page takes away
+       from other more useful projects.
+       The user functionality of GNU Emacs encompasses everything
+       other  <I>Emacs</I> editors do, and it is easily extensible since
+       its editing commands are written in Lisp.
+
+       <I>Emacs</I> has an extensive interactive help facility, but  the
+       facility  assumes  that  you  know how to manipulate <I>Emacs</I>
+       windows and buffers.  CTRL-h (backspace or CTRL-h)  enters
+       the  Help  facility.  Help Tutorial (CTRL-h t) requests an
+       interactive tutorial which can teach beginners the  funda­
+       mentals  of  <I>Emacs</I> in a few minutes.  Help Apropos (CTRL-h
+       a) helps you find a command given its functionality,  Help
+       Character (CTRL-h c) describes a given character's effect,
+       and Help Function (CTRL-h f) describes a given Lisp  func­
+       tion specified by name.
+
+       <I>Emacs's</I>  Undo  can  undo  several steps of modification to
+       your buffers, so it is easy to recover from  editing  mis­
+       takes.
+
+       <I>GNU</I>  <I>Emacs's</I>  many  special  packages  handle mail reading
+       (RMail) and sending  (Mail),  outline  editing  (Outline),
+       compiling  (Compile),  running subshells within <I>Emacs</I> win­
+       dows (Shell), running a Lisp read-eval-print  loop  (Lisp-
+       Interaction-Mode), and automated psychotherapy (Doctor).
+
+       There is an extensive reference manual, but users of other
+       Emacses should have little trouble adapting even without a
+       copy.   Users  new to <I>Emacs</I> will be able to use basic fea­
+       tures fairly rapidly by studying the  tutorial  and  using
+       the self-documentation features.
+
+       Emacs Options
+
+       The following options are of general interest:
+
+       <I>file</I>    Edit <I>file.</I>
+
+       <B>+</B><I>number</I> Go  to the line specified by <I>number</I> (do not insert
+               a space between the "+" sign and the number).
+
+       <B>-l</B> <I>file</I> Load the lisp code in the file <I>file.</I>
+
+       The  following  options are useful when running <I>Emacs</I> as a
+       batch editor:
+
+       <B>-batch</B>  Edit in batch mode.  The editor will send messages
+               to  stderr.   This option must be the first in the
+               argument list.  You must use -l and -f options  to
+               specify files to execute and functions to call.
+
+       <B>-kill</B>   Exit <I>Emacs</I> while in batch mode.
+
+       Using Emacs with X
+
+       <I>Emacs</I>  has  been  tailored  to work well with the X window
+       system.  If you run <I>Emacs</I> from under X  windows,  it  will
+       create  its own X window to display in.  You will probably
+       want to start the editor as a background process  so  that
+       you can continue using your original window.
+
+       <I>Emacs</I> can be started with the following X switches:
+
+       <B>-name</B> <I>name</I>
+               Specifies the name which should be assigned to the
+               initial <I>Emacs</I> window.  This controls looking up  X
+               resources as well as the window title.
+
+       <B>-title</B> <I>name</I>
+               Specifies the title for the initial X window.
+
+       <B>-r</B>      Display the <I>Emacs</I> window in reverse video.
+
+       <B>-i</B>      Use the "kitchen sink" bitmap icon when iconifying
+               the <I>Emacs</I> window.
+
+       <B>-font</B> <I>font,</I> <B>-fn</B> <I>font</I>
+               Set the <I>Emacs</I> window's font to that  specified  by
+               <I>font.</I>   You  will  find the various <I>X</I> fonts in the
+               <I>/usr/lib/X11/fonts</I>  directory.   Note  that  <I>Emacs</I>
+               will only accept fixed width fonts.  Under the X11
+               Release 4 font-naming conventions, any  font  with
+               the  value "m" or "c" in the eleventh field of the
+               font name is a  fixed  width  font.   Furthermore,
+               fonts  whose name are of the form <I>width</I>x<I>height</I> are
+               generally fixed width, as is the font <I>fixed</I>.   See
+               <B>xlsfonts(1)</B> for more information.
+
+               When  you  specify  a font, be sure to put a space
+               between the switch and the font name.
+
+       <B>-bw</B> <I>pixels</I>
+               tion.  The width and height are specified in char­
+               acters; the default is 80 by 24.
+
+
+       <B>-fg</B> <I>color</I>
+               On color displays, sets the color of the text.
+
+               See the file <I>/usr/lib/X11/rgb.txt</I> for  a  list  of
+               valid color names.
+
+       <B>-bg</B> <I>color</I>
+               On  color displays, sets the color of the window's
+               background.
+
+       <B>-bd</B> <I>color</I>
+               On color displays, sets the color of the  window's
+               border.
+
+       <B>-cr</B> <I>color</I>
+               On  color displays, sets the color of the window's
+               text cursor.
+
+       <B>-ms</B> <I>color</I>
+               On color displays, sets the color of the  window's
+               mouse cursor.
+
+       <B>-d</B> <I>displayname,</I> <B>-display</B> <I>displayname</I>
+               Create  the  <I>Emacs</I> window on the display specified
+               by <I>displayname</I>.  Must be the first  option  speci­
+               fied in the command line.
+
+       <B>-nw</B>     Tells <I>Emacs</I> not to use its special interface to X.
+               If you use this switch when invoking <I>Emacs</I> from an
+               <B>xterm(1)</B>  window,  display is done in that window.
+               This must be the first  option  specified  in  the
+               command line.
+
+       You  can  set  <I>X</I>  default values for your <I>Emacs</I> windows in
+       your <I>.Xresources</I> file (see <B>xrdb(1)</B>).   Use  the  following
+       format:
+
+              emacs.keyword:value
+
+       where <I>value</I> specifies the default value of <I>keyword.</I>  <I>Emacs</I>
+       lets you set default values for the following keywords:
+
+       <B>font</B> <B>(</B>class <B>Font)</B>
+               Sets the window's text font.
+
+       <B>reverseVideo</B> <B>(</B>class <B>ReverseVideo)</B>
+               If <I>reverseVideo's</I> value is set to <I>on,</I>  the  window
+               will be displayed in reverse video.
+
+       <B>background</B> <B>(</B>class <B>Background)</B>
+               For color displays, sets the  window's  background
+               color.
+
+       <B>borderColor</B> <B>(</B>class <B>BorderColor)</B>
+               For color displays, sets the color of the window's
+               border.
+
+       <B>cursorColor</B> <B>(</B>class <B>Foreground)</B>
+               For color displays, sets the color of the window's
+               text cursor.
+
+       <B>pointerColor</B> <B>(</B>class <B>Foreground)</B>
+               For color displays, sets the color of the window's
+               mouse cursor.
+
+       <B>geometry</B> <B>(</B>class <B>Geometry)</B>
+               Sets  the  geometry  of  the  <I>Emacs</I>   window   (as
+               described above).
+
+       <B>title</B> <B>(</B>class <B>Title)</B>
+               Sets the title of the <I>Emacs</I> window.
+
+       <B>iconName</B> <B>(</B>class <B>Title)</B>
+               Sets the icon name for the <I>Emacs</I> window icon.
+
+       If  you  try  to  set color values while using a black and
+       white display, the window's characteristics  will  default
+       as follows: the foreground color will be set to black, the
+       background color will be set to white,  the  border  color
+       will  be  set to grey, and the text and mouse cursors will
+       be set to black.
+
+       Using the Mouse
+
+       The following lists the  mouse  button  bindings  for  the
+       <I>Emacs</I> window under X11.
+
+       MOUSE BUTTON         FUNCTION
+       left                 Set point.
+       middle               Paste text.
+       right                Cut text into X cut buffer.
+       SHIFT-middle         Cut text into X cut buffer.
+       SHIFT-right          Paste text.
+       CTRL-middle          Cut  text  into X cut buffer and kill
+                            it.
+       CTRL-right           Select this  window,  then  split  it
+                            into  two  windows.   Same  as typing
+                            CTRL-x 2.
+       CTRL-SHIFT-left      X buffer menu--hold the  buttons  and
+                            keys  down,  wait for menu to appear,
+                            select  buffer,  and  release.   Move
+
+       able.  As with all software  and  publications  from  FSF,
+       everyone is permitted to make and distribute copies of the
+       Emacs manual.  The  TeX  source  to  the  manual  is  also
+       included in the Emacs source distribution.
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /usr/local/info - files for the Info documentation browser
+       (a subsystem of Emacs) to refer to.  Currently not much of
+       Unix  is  documented  here,  but  the complete text of the
+       Emacs reference manual is included in  a  convenient  tree
+       structured form.
+
+       /usr/local/share/emacs/$VERSION/src  -  C source files and
+       object files
+
+       /usr/local/share/emacs/$VERSION/lisp - Lisp  source  files
+       and  compiled  files  that  define  most editing commands.
+       Some are preloaded; others are autoloaded from this direc­
+       tory when used.
+
+       /usr/local/share/emacs/$VERSION/etc   -  various  programs
+       that are used with GNU Emacs, and some files  of  informa­
+       tion.
+
+       /usr/local/share/emacs/$VERSION/etc/DOC.*  -  contains the
+       documentation  strings  for  the   Lisp   primitives   and
+       preloaded  Lisp  functions  of GNU Emacs.  They are stored
+       here to reduce the size of Emacs proper.
+
+       /usr/local/share/emacs/$VERSION/etc/OTHER.EMACSES     dis­
+       cusses GNU Emacs vs. other versions of Emacs.
+       /usr/local/share/emacs/$VERSION/etc/SERVICE  lists  people
+       offering various services to assist users  of  GNU  Emacs,
+       including  education,  troubleshooting,  porting  and cus­
+       tomization.
+       These files also have information useful to anyone wishing
+       to  write  programs  in the Emacs Lisp extension language,
+       which has not yet been fully documented.
+
+       /usr/local/com/emacs/lock - holds lock files that are made
+       for all files being modified in Emacs, to prevent simulta­
+       neous modification of one file by two users.
+
+       /usr/lib/X11/rgb.txt - list of valid X color names.
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       There is a mailing list, bug-gnu-emacs@prep.ai.mit.edu  on
+       the   internet   (ucbvax!prep.ai.mit.edu!bug-gnu-emacs  on
+       UUCPnet), for reporting Emacs bugs and fixes.  But  before
+       reporting  something  as a bug, please try to be sure that
+       ing list.  Send requests to be added to mailing  lists  to
+       the  special  list  info-gnu-emacs-request@prep.ai.mit.edu
+       (or the corresponding UUCP address).  For more information
+       about     Emacs    mailing    lists,    see    the    file
+       /usr/local/emacs/etc/MAILINGLISTS.  Bugs tend actually  to
+       be  fixed if they can be isolated, so it is in your inter­
+       est to report them in such a way that they can  be  easily
+       reproduced.
+
+       Bugs  that I know about are: shell will not work with pro­
+       grams running in Raw mode on some Unix versions.
+
+
+</PRE>
+<H2>UNRESTRICTIONS</H2><PRE>
+       <I>Emacs</I> is free; anyone may redistribute copies of <I>Emacs</I>  to
+       anyone  under the terms stated in the <I>Emacs</I> General Public
+       License, a copy of which accompanies each  copy  of  <I>Emacs</I>
+       and which also appears in the reference manual.
+
+       Copies  of  <I>Emacs</I>  may sometimes be received packaged with
+       distributions of Unix systems, but it is never included in
+       the  scope  of  any  license covering those systems.  Such
+       inclusion violates the terms on which distribution is per­
+       mitted.   In fact, the primary purpose of the General Pub­
+       lic License is to prohibit anyone from attaching any other
+       restrictions to redistribution of <I>Emacs.</I>
+
+       Richard  Stallman  encourages  you  to  improve and extend
+       <I>Emacs,</I> and urges that you contribute  your  extensions  to
+       the  GNU library.  Eventually GNU (Gnu's Not Unix) will be
+       a complete replacement for Berkeley Unix.   Everyone  will
+       be free to use, copy, study and change the GNU system.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>X(1)</B>, <B>xlsfonts(1)</B>, <B>xterm(1)</B>, <B>xrdb(1)</B>
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       <I>Emacs</I>  was  written by Richard Stallman and the Free Soft­
+       ware Foundation.   Joachim  Martillo  and  Robert  Krawitz
+       added the X features.
+
+
+</PRE>
+<H2>COPYING</H2><PRE>
+       Copyright (c) 1995, 1999, 2000, 2001 Free Software Founda­
+       tion, Inc.
+
+       Permission is granted to copy,  distribute  and/or  modify
+       this  document  under the terms of the GNU Free Documenta­
+       tion License, Version 1.1 or any later  version  published
+       by  the  Free  Software Foundation; with no Invariant Sec­
+       tions, with no Front-Cover Texts, and no Back-Cover Texts.
+
+       This  document  is  part of a collection distributed under
+       the GNU Free Documentation License.  If you want  to  dis­
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

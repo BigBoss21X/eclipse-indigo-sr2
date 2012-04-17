@@ -1,0 +1,82 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>cut</B> [<I>OPTION</I>]... [<I>FILE</I>]...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Print  selected  parts of lines from each FILE to standard
+       output.
+
+       Mandatory arguments to  long  options  are  mandatory  for
+       short options too.
+
+       <B>-b</B>, <B>--bytes</B>=<I>LIST</I>
+              output only these bytes
+
+       <B>-c</B>, <B>--characters</B>=<I>LIST</I>
+              output only these characters
+
+       <B>-d</B>, <B>--delimiter</B>=<I>DELIM</I>
+              use DELIM instead of TAB for field delimiter
+
+       <B>-f</B>, <B>--fields</B>=<I>LIST</I>
+              output only these fields;  also print any line that
+              contains no  delimiter  character,  unless  the  <B>-s</B>
+              option is specified
+
+       <B>-n</B>     (ignored)
+
+       <B>-s</B>, <B>--only-delimited</B>
+              do not print lines not containing delimiters
+
+       <B>--output-delimiter</B>=<I>STRING</I>
+              use  STRING  as the output delimiter the default is
+              to use the input delimiter
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+       Use one, and only one of <B>-b</B>, <B>-c</B> or <B>-f</B>.  Each LIST is  made
+       up of one range, or many ranges separated by commas.  Each
+       range is one of:
+
+       N      N'th byte, character or field, counted from 1
+
+       N-     from N'th byte, character or field, to end of line
+
+       N-M    from N'th to M'th  (included)  byte,  character  or
+              field
+
+       <B>-M</B>     from  first  to  M'th (included) byte, character or
+              field
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  full documentation for <B>cut</B> is maintained as a Texinfo
+       manual.   If  the  <B>info</B>  and  <B>cut</B>  programs  are  properly
+       installed at your site, the command
+
+              <B>info</B> <B>cut</B>
+
+       should give you access to the complete manual.
+
+
+
+cut (coreutils) 4.5.8     February 2003                    <B>CUT(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

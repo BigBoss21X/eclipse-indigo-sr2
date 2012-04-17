@@ -1,0 +1,60 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>lookbib</B> [ <B>-v</B> ] [ <B>-i</B><I>string</I> ] [ <B>-t</B><I>n</I> ] <I>filename</I>...
+
+       It  is  possible to have whitespace between a command line
+       option and its parameter.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       lookbib prints a prompt on the standard error (unless  the
+       standard input is not a terminal), reads from the standard
+       input a line containing a set of  keywords,  searches  the
+       bibliographic  databases  <I>filename</I>...  for references con­
+       taining those keywords, prints any references found on the
+       standard output, and repeats this process until the end of
+       input.  For each database <I>filename</I> to be searched,  if  an
+       index  <I>filename</I><B>.i</B>  created  by  <B>indxbib(1)</B> exists, then it
+       will be searched instead; each index  can  cover  multiple
+       databases.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-v</B>     Print the version number.
+
+       <B>-i</B><I>string</I>
+              When  searching  files  for  which no index exists,
+              ignore the contents of fields whose  names  are  in
+              <I>string</I>.
+
+       <B>-t</B><I>n</I>    Only  require  the first <I>n</I> characters of keys to be
+              given.  Initially <I>n</I> is 6.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>filename</I><B>.i</B>  Index files.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>refer(1)</B>, <B>lkbib(1)</B>, <B>indxbib(1)</B>
+
+
+
+Groff Version 1.17.2       27 June 2001                <B>LOOKBIB(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

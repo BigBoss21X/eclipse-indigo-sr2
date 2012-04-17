@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="com.something.eclipse.shelled.resources"
+   name="ShellEd Resources"
+   version="1.0.0"
+   provider-name="Something Software">
+
+   <runtime>
+      <library name="resources.jar" type="resource">
+         <export name="com.something.eclipse.shelled.resources.*"/>
+         <export name="com.something.eclipse.shelled.resources.manpages.*"/>
+      </library>
+   </runtime>
+
+   <requires>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.runtime"/>
+   </requires>
+
+</plugin>

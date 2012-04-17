@@ -1,0 +1,82 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>rm</B> [<I>OPTION</I>]... <I>FILE</I>...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This  manual  page  documents  the  GNU version of <B>rm</B>.  <B>rm</B>
+       removes each specified file.   By  default,  it  does  not
+       remove directories.
+
+       If  a file is unwritable, the standard input is a tty, and
+       the <I>-f</I> or <I>--force</I> option is not given, <B>rm</B> prompts the user
+       for  whether to remove the file.  If the response does not
+       begin with `y' or `Y', the file is skipped.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Remove (unlink) the FILE(s).
+
+       <B>-d</B>, <B>--directory</B>
+              unlink FILE, even if it is  a  non-empty  directory
+              (super-user only)
+
+       <B>-f</B>, <B>--force</B>
+              ignore nonexistent files, never prompt
+
+       <B>-i</B>, <B>--interactive</B>
+              prompt before any removal
+
+       <B>-r</B>, <B>-R</B>, <B>--recursive</B>
+              remove the contents of directories recursively
+
+       <B>-v</B>, <B>--verbose</B>
+              explain what is being done
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+       To remove a file whose name starts with a `-', for example
+       `-foo', use one of these commands:
+
+              rm.td/rm <B>--</B> <B>-foo</B>
+
+              rm.td/rm ./-foo
+
+       Note that if you use rm to remove a file,  it  is  usually
+       possible  to  recover  the  contents of that file.  If you
+       want more assurance that the contents are truly unrecover­
+       able, consider using shred.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written  by Paul Rubin, David MacKenzie, Richard Stallman,
+       and Jim Meyering.
+       manual.    If  the  <B>info</B>  and  <B>rm</B>  programs  are  properly
+       installed at your site, the command
+
+              <B>info</B> <B>rm</B>
+
+       should give you access to the complete manual.
+
+
+
+rm (coreutils) 4.5.8      February 2003                     <B>RM(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

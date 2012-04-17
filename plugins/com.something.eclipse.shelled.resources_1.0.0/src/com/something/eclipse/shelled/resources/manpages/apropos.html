@@ -1,0 +1,131 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>apropos</B> [<B>-dhV</B>] [<B>-e</B>|<B>-w</B>|<B>-r</B>] [<B>-m</B> <I>system</I>[,...]] [<B>-M</B> <I>path</I>] <I>key­</I>
+       <I>word</I> ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Each manual page has a short description available  within
+       it.   <B>apropos</B>  searches  the descriptions for instances of
+       <I>keyword</I>.
+
+       <I>keyword</I> is usually a regular expression, as  if  (<B>-r</B>)  was
+       used,  or  may contain wildcards (<B>-w</B>) <B>,</B> or match the exact
+       keyword (<B>-e</B>) <B>.</B>  Using these options, it may  be  necessary
+       to  quote the <I>keyword</I> or escape (\) the special characters
+       to stop the shell from interpreting them.
+
+       The standard matching  rules  allow  matches  to  be  made
+       against  the page name and word boundaries in the descrip­
+       tion.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-d,</B> <B>--debug</B>
+              Print debugging information.
+
+       <B>-r,</B> <B>--regex</B>
+              Interpret each keyword  as  a  regular  expression.
+              This  is  the default behaviour.  Each keyword will
+              be matched against the page names and the  descrip­
+              tions  independently.   It  can  match  any part of
+              either.  The match is not limited  to  word  bound­
+              aries.
+
+       <B>-w,</B> <B>--wildcard</B>
+              Interpret  each  keyword  as  a  pattern containing
+              shell  style  wildcards.   Each  keyword  will   be
+              matched against the page names and the descriptions
+              independently.  A match will only be  found  if  an
+              expanded  keyword  matches an entire description or
+              page name.
+
+       <B>-e,</B> <B>--exact</B>
+              Each keyword will be exactly  matched  against  the
+              page names and the descriptions.
+
+       <B>-m</B> <I>system</I>[,...]<B>,</B> <B>--systems=</B><I>system</I>[,...]
+              If  this  system has access to other operating sys­
+              tem's  manual  page  descriptions,  they   can   be
+              searched using this option.  To search NewOS's man­
+              ual page descriptions, use the option <B>-m</B> <B>NewOS</B>.
+
+              The <I>system</I> specified can be a combination of comma-
+              delimited  operating  system  names.   To include a
+              search of  the  native  operating  system's  <B>whatis</B>
+              Print a help message and exit.
+
+       <B>-V,</B> <B>--version</B>
+              Display version and author information.
+
+
+</PRE>
+<H2>EXIT STATUS</H2><PRE>
+       <B>0</B>      Successful program execution.
+
+       <B>1</B>      Usage, syntax or configuration file error.
+
+       <B>2</B>      Operational error.
+
+       <B>16</B>     Nothing  was found that matched the criteria speci­
+              fied.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>SYSTEM</B> If $<B>SYSTEM</B> is set, it will have the same effect  as
+              if  it had been specified as the argument to the <B>-m</B>
+              option.
+
+       <B>MANPATH</B>
+              If $<B>MANPATH</B> is set, its value is interpreted as the
+              colon-delimited  manual  page hierarchy search path
+              to use.
+
+       <B>POSIXLY_CORRECT</B>
+              If $<B>POSIXLY_CORRECT</B> is set, even to a  null  value,
+              the  default  <B>apropos</B> search will be as an extended
+              regex (<B>-r</B>) <B>.</B>  This is anyway the default behaviour.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/usr/share/man/index.(bt|db|dir|pag)</I>
+              A traditional global <I>index</I> database cache.
+
+       <I>/var/cache/man/index.(bt|db|dir|pag)</I>
+              An alternate or FHS compliant global <I>index</I> database
+              cache.
+
+       <I>/usr/share/man/.../whatis</I>
+              A traditional <B>whatis</B> text database.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>whatis(1)</B>, <B>man(1)</B>.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Wilf. (G.Wilford@ee.surrey.ac.uk).
+       Fabrizio Polacco (fpolacco@debian.org).
+
+
+
+2.3.19                     14 May 2001                 <B>apropos(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

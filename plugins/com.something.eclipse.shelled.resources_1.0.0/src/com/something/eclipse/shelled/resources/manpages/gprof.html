@@ -1,0 +1,387 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       gprof [ -[abcDhilLsTvwxyz] ] [ -[ACeEfFJnNOpPqQZ][<I>name</I>] ]
+        [ -I <I>dirs</I> ] [ -d[<I>num</I>] ] [ -k <I>from/to</I> ]
+        [ -m <I>min-count</I> ] [ -t <I>table-length</I> ]
+        [ --[no-]annotated-source[=<I>name</I>] ]
+        [ --[no-]exec-counts[=<I>name</I>] ]
+        [ --[no-]flat-profile[=<I>name</I>] ] [ --[no-]graph[=<I>name</I>] ]
+        [ --[no-]time=<I>name</I>] [ --all-lines ] [ --brief ]
+        [ --debug[=<I>level</I>] ] [ --function-ordering ]
+        [ --file-ordering ] [ --directory-path=<I>dirs</I> ]
+        [ --display-unused-functions ] [ --file-format=<I>name</I> ]
+        [ --file-info ] [ --help ] [ --line ] [ --min-count=<I>n</I> ]
+        [ --no-static ] [ --print-path ] [ --separate-files ]
+        [ --static-call-graph ] [ --sum ] [ --table-length=<I>len</I> ]
+        [ --traditional ] [ --version ] [ --width=<I>n</I> ]
+        [ --ignore-non-functions ] [ --demangle[=<I>STYLE</I>] ]
+        [ --no-demangle ] [ <I>image-file</I> ] [ <I>profile-file</I> ... ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       "gprof"  produces  an  execution  profile of C, Pascal, or
+       Fortran77 programs.  The  effect  of  called  routines  is
+       incorporated  in  the profile of each caller.  The profile
+       data is taken from the call graph profile  file  (<I>gmon.out</I>
+       default)  which  is  created by programs that are compiled
+       with the <B>-pg</B> option of "cc", "pc",  and  "f77".   The  <B>-pg</B>
+       option also links in versions of the library routines that
+       are compiled  for  profiling.   "Gprof"  reads  the  given
+       object  file  (the default is "a.out") and establishes the
+       relation between its symbol table and the call graph  pro­
+       file  from  <I>gmon.out</I>.   If  more  than one profile file is
+       specified, the "gprof" output shows the sum of the profile
+       information in the given profile files.
+
+       "Gprof"  calculates  the amount of time spent in each rou­
+       tine.  Next, these times are propagated along the edges of
+       the  call  graph.  Cycles are discovered, and calls into a
+       cycle are made to share the time of the cycle.
+
+       Several forms of output are available from the analysis.
+
+       The <I>flat</I> <I>profile</I> shows how much time your program spent in
+       each  function,  and  how  many  times  that  function was
+       called.  If you simply want to know which  functions  burn
+       most of the cycles, it is stated concisely here.
+
+       The  <I>call</I>  <I>graph</I> shows, for each function, which functions
+       called it, which other functions it called, and  how  many
+       times.   There  is  also  an estimate of how much time was
+       spent in the subroutines of each function.  This can  sug­
+       gest  places  where  you  might  try to eliminate function
+       calls that use a lot of time.
+
+       <B>-q</B>),  which  prints a flat profile and call graph analysis
+       for all functions.
+
+       "-A[symspec]"
+       "--annotated-source[=symspec]"
+           The <B>-A</B> option causes "gprof" to print annotated source
+           code.   If <I>symspec</I> is specified, print output only for
+           matching symbols.
+
+       "-b"
+       "--brief"
+           If the <B>-b</B> option is given, "gprof" doesn't  print  the
+           verbose  blurbs that try to explain the meaning of all
+           of the fields in the tables.  This is  useful  if  you
+           intend to print out the output, or are tired of seeing
+           the blurbs.
+
+       "-C[symspec]"
+       "--exec-counts[=symspec]"
+           The <B>-C</B> option causes "gprof" to print a tally of func­
+           tions  and  the  number  of times each was called.  If
+           <I>symspec</I> is specified, print tally  only  for  matching
+           symbols.
+
+           If  the  profile  data file contains basic-block count
+           records, specifying the <B>-l</B> option, along with <B>-C</B>, will
+           cause  basic-block  execution counts to be tallied and
+           displayed.
+
+       "-i"
+       "--file-info"
+           The <B>-i</B> option causes "gprof" to display summary infor­
+           mation  about  the profile data file(s) and then exit.
+           The number of histogram, call graph,  and  basic-block
+           count records is displayed.
+
+       "-I dirs"
+       "--directory-path=dirs"
+           The  <B>-I</B>  option specifies a list of search directories
+           in which to find source files.   Environment  variable
+           <I>GPROF</I><B>_</B><I>PATH</I>  can  also  be used to convey this informa­
+           tion.  Used mostly for annotated source output.
+
+       "-J[symspec]"
+       "--no-annotated-source[=symspec]"
+           The <B>-J</B> option causes "gprof" not  to  print  annotated
+           source  code.  If <I>symspec</I> is specified, "gprof" prints
+           annotated source, but excludes matching symbols.
+
+       "-L"
+       "--print-path"
+           Normally, source filenames are printed with  the  path
+           The  <B>-P</B>  option  causes "gprof" to suppress printing a
+           flat profile.  If <I>symspec</I> is specified, "gprof" prints
+           a flat profile, but excludes matching symbols.
+
+       "-q[symspec]"
+       "--graph[=symspec]"
+           The  <B>-q</B>  option causes "gprof" to print the call graph
+           analysis.  If <I>symspec</I> is specified, print  call  graph
+           only for matching symbols and their children.
+
+       "-Q[symspec]"
+       "--no-graph[=symspec]"
+           The  <B>-Q</B> option causes "gprof" to suppress printing the
+           call graph.  If <I>symspec</I> is specified, "gprof" prints a
+           call graph, but excludes matching symbols.
+
+       "-y"
+       "--separate-files"
+           This  option  affects  annotated  source  output only.
+           Normally, "gprof" prints  annotated  source  files  to
+           standard-output.   If  this option is specified, anno­
+           tated source for a file named <I>path/filename</I> is  gener­
+           ated  in  the  file  <I>filename-ann</I>.   If the underlying
+           filesystem would  truncate  <I>filename-ann</I>  so  that  it
+           overwrites  the  original  <I>filename</I>, "gprof" generates
+           annotated source in the file <I>filename.ann</I> instead  (if
+           the  original  file name has an extension, that exten­
+           sion is <I>replaced</I> with <I>.ann</I>).
+
+       "-Z[symspec]"
+       "--no-exec-counts[=symspec]"
+           The <B>-Z</B> option causes "gprof" not to print a  tally  of
+           functions and the number of times each was called.  If
+           <I>symspec</I> is specified, print tally, but exclude  match­
+           ing symbols.
+
+       "--function-ordering"
+           The <B>--function-ordering</B> option causes "gprof" to print
+           a suggested function ordering for the program based on
+           profiling  data.   This  option  suggests  an ordering
+           which may improve paging, tlb and cache  behavior  for
+           the  program on systems which support arbitrary order­
+           ing of functions in an executable.
+
+           The exact details of how to force the linker to  place
+           functions  in  a  particular order is system dependent
+           and out of the scope of this manual.
+
+       "--file-ordering map_file"
+           The <B>--file-ordering</B> option causes "gprof" to  print  a
+           suggested  .o link line ordering for the program based
+           on profiling data.  This option suggests  an  ordering
+                   c-lang.o:00000000 T maybe_objc_method_name
+                   c-lang.o:00000000 T print_lang_statistics
+                   c-lang.o:00000000 T recognize_objc_keyword
+                   c-decl.o:00000000 T print_lang_identifier
+                   c-decl.o:00000000 T print_lang_type
+                   ...
+
+           To  create  a  <I>map</I><B>_</B><I>file</I>  with GNU "nm", type a command
+           like    "nm    --extern-only     --defined-only     -v
+           --print-file-name program-name".
+
+       "-T"
+       "--traditional"
+           The  <B>-T</B>  option  causes "gprof" to print its output in
+           ``traditional'' BSD style.
+
+       "-w width"
+       "--width=width"
+           Sets width of output lines to <I>width</I>.   Currently  only
+           used when printing the function index at the bottom of
+           the call graph.
+
+       "-x"
+       "--all-lines"
+           This option affects annotated source output only.   By
+           default,  only  the lines at the beginning of a basic-
+           block are annotated.  If  this  option  is  specified,
+           every  line in a basic-block is annotated by repeating
+           the annotation for the first line.  This  behavior  is
+           similar to "tcov"'s <B>-a</B>.
+
+       "--demangle[=style]"
+       "--no-demangle"
+           These  options control whether C++ symbol names should
+           be demangled when printing output.  The default is  to
+           demangle  symbols.   The "--no-demangle" option may be
+           used to turn off demangling. Different compilers  have
+           different  mangling  styles.   The optional demangling
+           style argument can be used to  choose  an  appropriate
+           demangling style for your compiler.
+
+       <B>Analysis</B> <B>Options</B>
+
+
+       "-a"
+       "--no-static"
+           The  <B>-a</B> option causes "gprof" to suppress the printing
+           of statically declared  (private)  functions.   (These
+           are  functions  whose  names are not listed as global,
+           and which  are  not  visible  outside  the  file/func­
+           tion/block  where  they  were defined.)  Time spent in
+           these functions, calls to/from them, etc, will all  be
+           fied, but only if symbol table entries are present for
+           them.  Calls to dynamic library routines are typically
+           <I>not</I> found by this option.  Parents or children identi­
+           fied via this heuristic  are  indicated  in  the  call
+           graph with call counts of <B>0</B>.
+
+       "-D"
+       "--ignore-non-functions"
+           The  <B>-D</B>  option causes "gprof" to ignore symbols which
+           are not known to be functions.  This option will  give
+           more accurate profile data on systems where it is sup­
+           ported (Solaris and HPUX for example).
+
+       "-k from/to"
+           The <B>-k</B> option allows you to delete from the call graph
+           any  arcs  from symbols matching symspec <I>from</I> to those
+           matching symspec <I>to</I>.
+
+       "-l"
+       "--line"
+           The <B>-l</B> option enables  line-by-line  profiling,  which
+           causes  histogram  hits  to  be  charged to individual
+           source code lines, instead of functions.  If the  pro­
+           gram  was  compiled with basic-block counting enabled,
+           this option will also identify  how  many  times  each
+           line of code was executed.  While line-by-line profil­
+           ing can help isolate where in a large function a  pro­
+           gram  is  spending  its  time,  it  also significantly
+           increases the running time of "gprof",  and  magnifies
+           statistical inaccuracies.
+
+       "-m num"
+       "--min-count=num"
+           This option affects execution count output only.  Sym­
+           bols that are executed less than <I>num</I>  times  are  sup­
+           pressed.
+
+       "-n[symspec]"
+       "--time[=symspec]"
+           The <B>-n</B> option causes "gprof", in its call graph analy­
+           sis, to only propagate times for symbols matching <I>sym­</I>
+           <I>spec</I>.
+
+       "-N[symspec]"
+       "--no-time[=symspec]"
+           The <B>-n</B> option causes "gprof", in its call graph analy­
+           sis, not to propagate times for symbols matching  <I>sym­</I>
+           <I>spec</I>.
+
+       "-z"
+       "--display-unused-functions"
+           If  you  give  the <B>-z</B> option, "gprof" will mention all
+           is not specified, enable all debugging.
+
+       "-Oname"
+       "--file-format=name"
+           Selects the format of the profile data files.   Recog­
+           nized  formats  are  <B>auto</B>  (the default), <B>bsd</B>, <B>4.4bsd</B>,
+           <B>magic</B>, and <B>prof</B> (not yet supported).
+
+       "-s"
+       "--sum"
+           The <B>-s</B> option causes "gprof" to summarize the informa­
+           tion  in  the profile data files it read in, and write
+           out a profile data file called  <I>gmon.sum</I>,  which  con­
+           tains  all the information from the profile data files
+           that "gprof" read in.  The file <I>gmon.sum</I> may be one of
+           the  specified  input  files; the effect of this is to
+           merge the data in the other input files into <I>gmon.sum</I>.
+
+           Eventually  you  can  run  "gprof" again without <B>-s</B> to
+           analyze the cumulative data in the file <I>gmon.sum</I>.
+
+       "-v"
+       "--version"
+           The <B>-v</B> flag causes "gprof" to print the  current  ver­
+           sion number, and then exit.
+
+       <B>Deprecated</B> <B>Options</B>
+
+           These  options  have been replaced with newer versions
+           that use symspecs.
+
+       "-e function_name"
+           The <B>-e</B> <I>function</I> option  tells  "gprof"  to  not  print
+           information  about the function <I>function</I><B>_</B><I>name</I> (and its
+           children...) in the call  graph.   The  function  will
+           still  be listed as a child of any functions that call
+           it, but  its  index  number  will  be  shown  as  <B>[not</B>
+           <B>printed]</B>.   More than one <B>-e</B> option may be given; only
+           one  <I>function</I><B>_</B><I>name</I>  may  be  indicated  with  each  <B>-e</B>
+           option.
+
+       "-E function_name"
+           The  "-E  function" option works like the "-e" option,
+           but time spent in the function (and children who  were
+           not  called  from  anywhere else), will not be used to
+           compute the percentages-of-time for  the  call  graph.
+           More  than  one <B>-E</B> option may be given; only one <I>func­</I>
+           <I>tion</I><B>_</B><I>name</I> may be indicated with each <B>-E</B> option.
+
+       "-f function_name"
+           The <B>-f</B> <I>function</I> option causes  "gprof"  to  limit  the
+           call graph to the function <I>function</I><B>_</B><I>name</I> and its chil­
+
+       "a.out"
+           the namelist and text space.
+
+       "gmon.out"
+           dynamic call graph and profile.
+
+       "gmon.sum"
+           summarized dynamic call graph and profile.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       The granularity of the sampling is shown, but remains sta­
+       tistical at best.  We assume that the time for each execu­
+       tion of a function can be expressed by the total time  for
+       the  function  divided by the number of times the function
+       is called.  Thus the time propagated along the call  graph
+       arcs to the function's parents is directly proportional to
+       the number of times that arc is traversed.
+
+       Parents that are not themselves  profiled  will  have  the
+       time  of  their  profiled children propagated to them, but
+       they will appear to be spontaneously invoked in  the  call
+       graph  listing,  and  will  not have their time propagated
+       further.  Similarly, signal  catchers,  even  though  pro­
+       filed,  will  appear  to be spontaneous (although for more
+       obscure reasons).  Any profiled children of signal  catch­
+       ers  should  have  their times propagated properly, unless
+       the signal catcher was invoked during the execution of the
+       profiling routine, in which case all is lost.
+
+       The  profiled  program  must call "exit"(2) or return nor­
+       mally for the profiling information to  be  saved  in  the
+       <I>gmon.out</I> file.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>monitor(3)</B>,  <B>profil(2)</B>, <B>cc(1)</B>, <B>prof(1)</B>, and the Info entry
+       for <I>gprof</I>.
+
+       ``An Execution Profiler for Modular Programs'', by S. Gra­
+       ham,  P.  Kessler,  M.  McKusick;  Software - Practice and
+       Experience, Vol. 13, pp. 671-685, 1983.
+
+       ``gprof: A Call Graph Execution Profiler'', by S.  Graham,
+       P.  Kessler,  M.  McKusick; Proceedings of the SIGPLAN '82
+       Symposium on Compiler Construction, SIGPLAN Notices,  Vol.
+       17, No  6, pp. 120-126, June 1982.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright  (C) 1988, 92, 97, 98, 99, 2000, 2001 Free Soft­
+       ware Foundation, Inc.
+
+       Permission is granted to copy,  distribute  and/or  modify
+       this  document  under the terms of the GNU Free Documenta­
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

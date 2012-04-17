@@ -1,0 +1,89 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>grolj4</B> [ <B>-lv</B> ] [ <B>-d</B>[<I>n</I>] ] [ <B>-c</B><I>n</I> ] [ <B>-p</B><I>paper</I><B>_</B><I>size</I> ] [ <B>-w</B><I>n</I> ]
+              [ <B>-F</B><I>dir</I> ] [ <I>files...</I> ]
+
+       It is possible to have whitespace between a  command  line
+       option and its parameter.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>grolj4</B>  is a driver for <B>groff</B> that produces output in PCL5
+       format suitable for an HP Laserjet 4 printer.
+
+       There is an additional drawing command available:
+
+       <B>\D'R</B> <I>dh</I> <I>dv</I><B>'</B>
+              Draw a rule (solid black rectangle), with one  cor­
+              ner  at  the  current  position, and the diagonally
+              opposite corner at the current  position  +(<I>dh</I>,<I>dv</I>).
+              Afterwards  the  current  position  will  be at the
+              opposite corner.  This generates a PCL fill rectan­
+              gle  command,  and so will work on printers that do
+              not support HPGL/2 unlike the other <B>\D</B> commands.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-c</B><I>n</I>    Print <I>n</I> copies of each page.
+
+       <B>-l</B>     Print the document with a landscape orientation.
+
+       <B>-d</B> <B>[</B><I>n</I><B>]</B> Use duplex mode <I>n</I>:  1 is  long-side  binding;  2 is
+              short-side binding; default is 1.
+
+       <B>-p</B><I>size</I> Set  the  paper  size to <I>size</I>, which must be one of
+              letter, legal, executive, a4, com10,  monarch,  c5,
+              b5, dl.
+
+       <B>-v</B>     Print the version number.
+
+       <B>-w</B><I>n</I>    Set  the default line thickness to <I>n</I> thousandths of
+              an em.
+
+       <B>-F</B><I>dir</I>  Prepend directory <I>dir</I><B>/devlj4</B> to the search path for
+              font and device description files.
+
+       The  following four commands are available additionally in
+       the <B>DESC</B> file:
+
+       <B>pclweight</B> <I>N</I>
+              The integer value <I>N</I> must be in the range -7 to  +7;
+              default is 0.
+
+       <B>pclstyle</B> <I>N</I>
+              The  integer  value  <I>N</I>  must  be  in the range 0 to
+              32767; default is 0.
+              Font description file for font <I>F</I>.
+
+       <B>/usr/share/groff/1.17.2/tmac/lj4.tmac</B>
+              Macros for use with <B>grolj4</B>.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Small dots.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>groff(1)</B>,    <B>troff(1)</B>,    <B>groff_out(5)</B>,     <B>groff_font(5)</B>,
+       <B>groff_char(7)</B>
+
+
+
+Groff Version 1.17.2       27 June 2001                 <B>GROLJ4(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

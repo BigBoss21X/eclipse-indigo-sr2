@@ -1,0 +1,141 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       dnsdomainname - show the system's DNS domain name
+       nodename - show or set the system's DECnet node name
+
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>hostname</B> [<B>-v</B>] [<B>-a</B>] [<B>--alias</B>] [<B>-d</B>] [<B>--domain</B>] [<B>-f</B>] [<B>--fqdn</B>]
+       [<B>-i</B>] [<B>--ip-address</B>]  [<B>--long</B>]  [<B>-s</B>]  [<B>--short</B>]  [<B>-y</B>]  [<B>-n</B>]
+       [<B>--node</B>]
+
+
+       <B>hostname</B> [<B>-v</B>] [<B>-F</B> <B>filename</B>] [<B>--file</B> <B>filename</B>] [<B>hostname</B>]
+
+
+       <B>domainname</B> [<B>-v</B>] [<B>-F</B> <B>filename</B>] [<B>--file</B> <B>filename</B>] [<B>name</B>]
+
+
+       <B>nodename</B> [<B>-v</B>] [<B>-F</B> <B>filename</B>] [<B>--file</B> <B>filename</B>] [<B>name</B>]
+
+
+       <B>hostname</B> [<B>-v</B>] [<B>-h</B>] [<B>--help</B>] [<B>-V</B>] [<B>--version</B>]
+
+
+       <B>dnsdomainname</B> [<B>-v</B>]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Hostname</B> is the program that is used to either set or dis­
+       play the current host, domain or node name of the  system.
+       These names are used by many of the networking programs to
+       identify the machine. The domain  name  is  also  used  by
+       NIS/YP.
+
+
+   <B>GET</B> <B>NAME</B>
+       When  called  without  any arguments, the program displays
+       the current names:
+
+
+       <B>hostname</B> will print the name of the system as returned  by
+       the <B>gethostname(2)</B> function.
+
+
+       <B>nodename</B>  will print the DECnet node name of the system as
+       returned by the <B>getnodename(2)</B> function.
+
+
+       <B>dnsdomainname</B> will print  the  domain  part  of  the  FQDN
+       (Fully  Qualified  Domain  Name). The complete FQDN of the
+       system is returned with <B>hostname</B> <B>--fqdn</B>.
+
+
+   <B>SET</B> <B>NAME</B>
+       ing  the  contents of a file which contains the host name,
+       e.g.  <I>/etc/hostname</I>).
+
+
+   <B>THE</B> <B>FQDN</B>
+       You can't change the FQDN (as returned by <B>hostname</B> <B>--fqdn</B>)
+       or the DNS domain name (as returned by <B>dnsdomainname</B>) with
+       this command. The FQDN of the system is the name that  the
+       <B>resolver(3)</B> returns for the host name.
+
+
+       Technically: The FQDN is the name <B>gethostbyname(2)</B> returns
+       for the host name returned  by  <B>gethostname(2)</B>.   The  DNS
+       domain name is the part after the first dot.
+
+       Therefore  it  depends  on  the  configuration (usually in
+       <I>/etc/host.conf</I>) how you can change  it.  Usually  (if  the
+       hosts  file is parsed before DNS or NIS) you can change it
+       in <I>/etc/hosts</I>.
+
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <I>-a,</I> <I>--alias</I>
+              Display the alias name of the host (if used).
+
+       <I>-d,</I> <I>--domain</I>
+              Display the name of the DNS domain. Don't  use  the
+              command  <B>domainname</B>  to  get  the  DNS  domain name
+              because it will show the NIS domain  name  and  not
+              the DNS domain name. Use <B>dnsdomainname</B> instead.
+
+       <I>-F,</I> <I>--file</I> <I>filename</I>
+              Read  the  host  name from the specified file. Com­
+              ments (lines starting with a `#') are ignored.
+
+       <I>-f,</I> <I>--fqdn,</I> <I>--long</I>
+              Display the FQDN (Fully Qualified Domain  Name).  A
+              FQDN  consists  of  a  short  host name and the DNS
+              domain name. Unless you are using bind or  NIS  for
+              host  lookups  you  can change the FQDN and the DNS
+              domain name (which is part  of  the  FQDN)  in  the
+              <I>/etc/hosts</I> file.
+
+       <I>-h,</I> <I>--help</I>
+              Print a usage message and exit.
+
+       <I>-i,</I> <I>--ip-address</I>
+              Display the IP address(es) of the host.
+
+       <I>-n,</I> <I>--node</I>
+              Display  the  DECnet  node  name. If a parameter is
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/etc/hosts</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Peter Tobias, &lt;tobias@et-inf.fho-emden.de&gt;
+       Bernd  Eckenfels,  &lt;net-tools@lina.inka.de&gt;  (NIS and man­
+       page).
+       Steve Whitehouse,  &lt;SteveW@ACM.org&gt;  (DECnet  support  and
+       manpage).
+
+
+
+
+net-tools                  28 Jan 1996                <B>HOSTNAME(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

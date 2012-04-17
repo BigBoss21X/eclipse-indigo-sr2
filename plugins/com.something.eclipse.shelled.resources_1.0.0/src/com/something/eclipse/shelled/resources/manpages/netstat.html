@@ -1,0 +1,340 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       cast memberships
+
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>netstat</B>   [<I>address</I><B>_</B><I>family</I><B>_</B><I>options</I>]  [<B>--tcp</B>|<B>-t</B>]  [<B>--udp</B>|<B>-u</B>]
+       [<B>--raw</B>|<B>-w</B>]  [<B>--listening</B>|<B>-l</B>]   [<B>--all</B>|<B>-a</B>]   [<B>--numeric</B>|<B>-n</B>]
+       [<B>--numeric-hosts</B>]<B>[</B>--numeric-ports<B>]</B>[<B>--numeric-ports</B>]
+       [<B>--symbolic</B>|<B>-N</B>]  [<B>--extend</B>|<B>-e</B>[<B>--extend</B>|<B>-e]</B>]  [<B>--timers</B>|<B>-o</B>]
+       [<B>--program</B>|<B>-p</B>] [<B>--verbose</B>|<B>-v</B>] [<B>--continuous</B>|<B>-c]</B>
+
+       <B>netstat</B>        {<B>--route</B>|<B>-r</B>}       [<I>address</I><B>_</B><I>family</I><B>_</B><I>options</I>]
+       [<B>--extend</B>|<B>-e</B>[<B>--extend</B>|<B>-e]</B>]  [<B>--verbose</B>|<B>-v</B>]  [<B>--numeric</B>|<B>-n</B>]
+       [<B>--numeric-hosts</B>]<B>[</B>--numeric-ports<B>]</B>[<B>--numeric-ports</B>]
+       [<B>--continuous</B>|<B>-c]</B>
+
+       <B>netstat</B>     {<B>--interfaces</B>|<B>-i</B>}      [<I>iface</I>]      [<B>--all</B>|<B>-a</B>]
+       [<B>--extend</B>|<B>-e</B>[<B>--extend</B>|<B>-e]</B>]  [<B>--verbose</B>|<B>-v</B>]  [<B>--program</B>|<B>-p</B>]
+       [<B>--numeric</B>|<B>-n</B>]                [<B>--numeric-hosts</B>]<B>[</B>--numeric-
+       ports<B>]</B>[<B>--numeric-ports</B>] [<B>--continuous</B>|<B>-c]</B>
+
+       <B>netstat</B>     {<B>--groups</B>|<B>-g</B>}    [<B>--numeric</B>|<B>-n</B>]    [<B>--numeric-</B>
+       <B>hosts</B>]<B>[</B>--numeric-ports<B>]</B>[<B>--numeric-ports</B>] [<B>--continuous</B>|<B>-c]</B>
+
+       <B>netstat</B>   {<B>--masquerade</B>|<B>-M</B>}  [<B>--extend</B>|<B>-e</B>]  [<B>--numeric</B>|<B>-n</B>]
+       [<B>--numeric-hosts</B>]<B>[</B>--numeric-ports<B>]</B>[<B>--numeric-ports</B>]
+       [<B>--continuous</B>|<B>-c]</B>
+
+       <B>netstat</B> {<B>--statistics</B>|<B>-s</B>} [<B>--tcp</B>|<B>-t</B>] [<B>--udp</B>|<B>-u</B>] [<B>--raw</B>|<B>-w</B>]
+
+       <B>netstat</B> {<B>--version</B>|<B>-V</B>}
+
+       <B>netstat</B> {<B>--help</B>|<B>-h</B>}
+
+       <I>address</I><B>_</B><I>family</I><B>_</B><I>options</I>:
+
+       [<B>--protocol=</B>{<B>inet</B>,<B>unix</B>,<B>ipx</B>,<B>ax25</B>,<B>netrom</B>,<B>ddp</B>}[,<B>...]</B>]
+       [<B>--unix</B>|<B>-x</B>]   [<B>--inet</B>|<B>--ip</B>]  [<B>--ax25</B>]  [<B>--ipx</B>]  [<B>--netrom</B>]
+       [<B>--ddp</B>]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Netstat</B> prints information about the Linux networking sub­
+       system.   The type of information printed is controlled by
+       the first argument, as follows:
+
+   <B>(none)</B>
+       By default, <B>netstat</B> displays a list of open  sockets.   If
+       you  don't  specify  any address families, then the active
+       sockets  of  all  configured  address  families  will   be
+       printed.
+
+   <B>--route</B> <B>,</B> <B>-r</B>
+       Display summary statistics for each protocol.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+   <B>--verbose</B> <B>,</B> <B>-v</B>
+       Tell  the  user  what  is going on by being verbose. Espe­
+       cially print some useful  information  about  unconfigured
+       address families.
+
+   <B>--numeric</B> <B>,</B> <B>-n</B>
+       Show  numerical  addresses  instead of trying to determine
+       symbolic host, port or user names.
+
+   <B>--numeric-hosts</B>
+       shows numerical host addresses but  does  not  affect  the
+       resolution of port or user names.
+
+   <B>--numeric-ports</B>
+       shows numerical port numbers but does not affect the reso­
+       lution of host or user names.
+
+   <B>--numeric-users</B>
+       shows numerical user IDs but does not affect  the  resolu­
+       tion of host or port names.
+
+
+   <B>--protocol=</B><I>family</I> , <B>-A</B>
+       Specifies  the  address families (perhaps better described
+       as low level protocols) for which connections  are  to  be
+       shown.   <I>family</I> is a comma (',') separated list of address
+       family keywords like <B>inet</B>, <B>unix</B>, <B>ipx</B>,  <B>ax25</B>,  <B>netrom</B>,  and
+       <B>ddp</B>.  This has the same effect as using the <B>--inet</B>, <B>--unix</B>
+       (<B>-x</B>), <B>--ipx</B>, <B>--ax25</B>, <B>--netrom</B>, and <B>--ddp</B> options.
+
+       The address family <B>inet</B> includes raw, udp and tcp protocol
+       sockets.
+
+   <B>-c,</B> <B>--continuous</B>
+       This  will cause <B>netstat</B> to print the selected information
+       every second continuously.
+
+   <B>-e,</B> <B>--extend</B>
+       Display additional information.  Use this option twice for
+       maximum detail.
+
+   <B>-o,</B> <B>--timers</B>
+       Include information related to networking timers.
+
+   <B>-p,</B> <B>--program</B>
+       Show  the PID and name of the program to which each socket
+       belongs.
+
+   <B>-l,</B> <B>--listening</B>
+
+
+</PRE>
+<H2>OUTPUT</H2><PRE>
+   <B>Active</B> <B>Internet</B> <B>connections</B> (TCP, UDP, raw)
+   <B>Proto</B>
+       The protocol (tcp, udp, raw) used by the socket.
+
+   <B>Recv-Q</B>
+       The  count  of  bytes  not copied by the user program con­
+       nected to this socket.
+
+   <B>Send-Q</B>
+       The count of bytes not acknowledged by the remote host.
+
+   <B>Local</B> <B>Address</B>
+       Address and port number of the local end  of  the  socket.
+       Unless  the <B>--numeric</B> (<B>-n</B>) option is specified, the socket
+       address is resolved to its canonical host name (FQDN), and
+       the  port number is translated into the corresponding ser­
+       vice name.
+
+   <B>Foreign</B> <B>Address</B>
+       Address and port number of the remote end of  the  socket.
+       Analogous to "Local Address."
+
+   <B>State</B>
+       The  state of the socket. Since there are no states in raw
+       mode and usually no states used in UDP, this column may be
+       left blank. Normally this can be one of several values:
+
+       <I>ESTABLISHED</I>
+              The socket has an established connection.
+
+       <I>SYN</I><B>_</B><I>SENT</I>
+              The  socket  is  actively attempting to establish a
+              connection.
+
+       <I>SYN</I><B>_</B><I>RECV</I>
+              A connection request has  been  received  from  the
+              network.
+
+       <I>FIN</I><B>_</B><I>WAIT1</I>
+              The  socket  is closed, and the connection is shut­
+              ting down.
+
+       <I>FIN</I><B>_</B><I>WAIT2</I>
+              Connection is closed, and the socket is waiting for
+              a shutdown from the remote end.
+
+       <I>TIME</I><B>_</B><I>WAIT</I>
+              The socket is waiting after close to handle packets
+              still in the network.
+
+
+       <I>CLOSING</I>
+              Both  sockets are shut down but we still don't have
+              all our data sent.
+
+       <I>UNKNOWN</I>
+              The state of the socket is unknown.
+
+   <B>User</B>
+       The username or the user id (UID)  of  the  owner  of  the
+       socket.
+
+   <B>PID/Program</B> <B>name</B>
+       Slash-separated  pair  of the process id (PID) and process
+       name of the  process  that  owns  the  socket.   <B>--program</B>
+       causes  this  column  to  be included.  You will also need
+       <I>superuser</I> privileges to see this  information  on  sockets
+       you don't own.  This identification information is not yet
+       available for IPX sockets.
+
+   <B>Timer</B>
+       (this needs to be written)
+
+
+   <B>Active</B> <B>UNIX</B> <B>domain</B> <B>Sockets</B>
+   <B>Proto</B>
+       The protocol (usually unix) used by the socket.
+
+   <B>RefCnt</B>
+       The reference count  (i.e.  attached  processes  via  this
+       socket).
+
+   <B>Flags</B>
+       The  flags  displayed  is  SO_ACCEPTON (displayed as <B>ACC</B>),
+       SO_WAITDATA (<B>W</B>) or SO_NOSPACE (<B>N</B>).  SO_ACCECPTON  is  used
+       on  unconnected  sockets  if their corresponding processes
+       are waiting for a connect request. The other flags are not
+       of normal interest.
+
+   <B>Type</B>
+       There are several types of socket access:
+
+       <I>SOCK</I><B>_</B><I>DGRAM</I>
+              The  socket  is  used  in Datagram (connectionless)
+              mode.
+
+       <I>SOCK</I><B>_</B><I>STREAM</I>
+              This is a stream (connection) socket.
+
+       <I>SOCK</I><B>_</B><I>RAW</I>
+              The socket is used as a raw socket.
+
+   <B>State</B>
+       This field will contain one of the following Keywords:
+
+       <I>FREE</I>   The socket is not allocated
+
+       <I>LISTENING</I>
+              The  socket  is listening for a connection request.
+              Such sockets are only included in the output if you
+              specify  the <B>--listening</B> (<B>-l</B>) or <B>--all</B> (<B>-a</B>) option.
+
+       <I>CONNECTING</I>
+              The socket is about to establish a connection.
+
+       <I>CONNECTED</I>
+              The socket is connected.
+
+       <I>DISCONNECTING</I>
+              The socket is disconnecting.
+
+       <I>(empty)</I>
+              The socket is not connected to another one.
+
+       <I>UNKNOWN</I>
+              This state should never happen.
+
+   <B>PID/Program</B> <B>name</B>
+       Process ID (PID) and process name of the process that  has
+       the  socket  open.  More info available in <B>Active</B> <B>Internet</B>
+       <B>connections</B> section written above.
+
+   <B>Path</B>
+       This is the path name as which the corresponding processes
+       attached to the socket.
+
+
+   <B>Active</B> <B>IPX</B> <B>sockets</B>
+       (this needs to be done by somebody who knows it)
+
+
+   <B>Active</B> <B>NET/ROM</B> <B>sockets</B>
+       (this needs to be done by somebody who knows it)
+
+
+   <B>Active</B> <B>AX.25</B> <B>sockets</B>
+       (this needs to be done by somebody who knows it)
+
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       Starting  with  Linux release 2.2 <B>netstat</B> <B>-i</B> does not show
+       interface statistics for  alias  interfaces.  To  get  per
+       alias  interface counters you need to setup explicit rules
+       using the <B>ipchains(8)</B> command.
+
+       <I>/proc/net/udp</I> -- UDP socket information
+
+       <I>/proc/net/igmp</I> -- IGMP multicast information
+
+       <I>/proc/net/unix</I> -- Unix domain socket information
+
+       <I>/proc/net/ipx</I> -- IPX socket information
+
+       <I>/proc/net/ax25</I> -- AX25 socket information
+
+       <I>/proc/net/appletalk</I> -- DDP (appletalk) socket information
+
+       <I>/proc/net/nr</I> -- NET/ROM socket information
+
+       <I>/proc/net/route</I> -- IP routing information
+
+       <I>/proc/net/ax25</I><B>_</B><I>route</I> -- AX25 routing information
+
+       <I>/proc/net/ipx</I><B>_</B><I>route</I> -- IPX routing information
+
+       <I>/proc/net/nr</I><B>_</B><I>nodes</I> -- NET/ROM nodelist
+
+       <I>/proc/net/nr</I><B>_</B><I>neigh</I> -- NET/ROM neighbours
+
+       <I>/proc/net/ip</I><B>_</B><I>masquerade</I> -- masqueraded connections
+
+       <I>/proc/net/snmp</I> -- statistics
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>route(8)</B>, <B>ifconfig(8)</B>, <B>ipchains(8)</B>, <B>iptables(8)</B>, <B>proc(5)</B>
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Occasionally strange information may appear  if  a  socket
+       changes as it is viewed. This is unlikely to occur.
+
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       The  netstat user interface was written by Fred Baumgarten
+       &lt;dc6iq@insu1.etec.uni-karlsruhe.de&gt; the man page basically
+       by Matt Welsh &lt;mdw@tc.cornell.edu&gt;. It was updated by Alan
+       Cox &lt;Alan.Cox@linux.org&gt; but could  do  with  a  bit  more
+       work.   It  was  updated again by Tuan Hoang &lt;tqhoang@big­
+       foot.com&gt;.
+       The man page and the command  included  in  the  net-tools
+       package   is   totally   rewritten   by   Bernd  Eckenfels
+       &lt;ecki@linux.de&gt;.
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

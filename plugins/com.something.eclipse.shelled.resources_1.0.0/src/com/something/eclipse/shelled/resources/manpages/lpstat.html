@@ -1,0 +1,105 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>lpstat</B> [ -E ] [ -a [ <I>destination(s)</I> ] ] [ -c [ <I>class(es)</I> ]
+       [ -d ] [ -h <I>server</I> ] [ -l ] [ -o [ <I>destination(s)</I> ] ] [ -p
+       [  <I>printer(s)</I>  ]  ]  [  -r  ]  [ -R ] [ -s ] [ -t ] [ -u [
+       <I>user(s)</I> ] ] [ -v [ <I>printer(s)</I> ] [ -W [ <I>which-jobs</I> ] ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>lpstat</B>  displays  status  information  about  the  current
+       classes,  jobs,  and printers. When run with no arguments,
+       <B>lpstat</B> will list jobs queued by the  user.  Other  options
+       include:
+
+       -E
+            Forces encryption when connecting to the server.
+
+       -a [<I>printer(s)</I>]
+            Shows  the  accepting  state of printer queues. If no
+            printers are specified then all printers are  listed.
+
+       -c [<I>class(es)</I>]
+            Shows  the  printer  classes  and  the  printers that
+            belong to them. If no classes are specified then  all
+            classes are listed.
+
+       -d
+            Shows the current default destination.
+
+       -h <I>server</I>
+            Specifies the CUPS server to communicate with.
+
+       -l
+            Shows a long listing of printers, classes, or jobs.
+
+       -o [<I>destination(s)</I>]
+            Shows  the  jobs queue on the specified destinations.
+            If no destinations are specified all jobs are  shown.
+
+       -p [<I>printer(s)</I>]
+            Shows  the  printers  and  whether  or  not  they are
+            enabled for printing. If no  printers  are  specified
+            then all printers are listed.
+
+       -r
+            Shows whether or not the CUPS server is running.
+
+       -R
+            Shows the ranking of print jobs.
+
+       -s
+            Shows  a status summary, including the default desti­
+            nation, a list of classes and their member  printers,
+            and  a list of printers and their associated devices.
+            Shows  the printers and what device they are attached
+            to. If no printers are specified  then  all  printers
+            are listed.
+
+       -W [<I>which-jobs</I>]
+            Specifies  which  jobs to show, <I>completed</I> or <I>not-com­</I>
+            <I>pleted</I> (the default).
+
+
+</PRE>
+<H2>COMPATIBILITY</H2><PRE>
+       Unlike the System V printing system, CUPS  allows  printer
+       names  to contain any printable character except SPACE and
+       TAB. Also, printer and class names are <B>not</B> case-sensitive.
+
+       The "-h" option is not a standard System V option.
+
+       The  Solaris  "-f",  "-P",  and  "-S" options are silently
+       ignored.
+
+       The "-W" option is unique to CUPS.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>cancel(1)</B>,   <B>lp(1)</B>,   CUPS    Software    Users    Manual,
+       http://localhost:631/documentation.html
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright  1993-2003 by Easy Software Products, All Rights
+       Reserved.
+
+
+
+2 October 2002     Common UNIX Printing System          <B>lpstat(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

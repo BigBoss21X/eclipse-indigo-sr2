@@ -1,0 +1,179 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>irxevent</B> [<I>config</I> <I>file</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Irxevent  is  a program that I wrote to send button clicks
+       and key presses to X  applications  triggered  by  a  LIRC
+       driven  remote  control.  You  can  control  your favorite
+       CD/MP3 player or your TV tuner  program  or  any  other  X
+       application  that  responds to keyboard or mouse input. If
+       you like to you can send emacs ^X^S from your armchair.
+
+       Irxevent is a complement to irexec and irpty.
+
+       <B>-h</B> <B>--help</B>
+              display usage summary
+
+       <B>-V</B> <B>--version</B>
+              display version
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       Irxevent works with the same config  file  as  irexec  and
+       irpty  (~/.lircrc).  For a complete sample .lircrc look at
+       examples/lircrc.
+
+       <B>Part</B> <B>of</B> <B>your</B> <B>.lircrc</B> <B>could</B> <B>look</B> <B>like</B> <B>this:</B>
+
+          begin
+                  prog = irxevent
+                  button = VIDEO_UP
+                  config = Key SHIFT-KP_Add CurrentWindow
+          end
+          begin
+                  prog = irxevent
+                  button = VIDEO_DOWN
+                  config = Key SHIFT-KP_Subtract CurrentWindow
+          end
+          begin
+                  prog = irxevent
+                  button = STOP
+                  config = Key ctrl-c CurrentWindow
+          end
+          begin
+                  prog = irxevent
+                  button = 0
+                  config = Key f xawtv
+                  config = Key f xawtv
+          end
+          begin
+                  prog = irxevent
+                  button = POWER
+                  config = Key q xawtv
+          end
+          end
+
+       <B>Simply</B> <B>said</B> <I>config</I> <B>=</B> <B>lines</B> <B>may</B> <B>look</B> <B>like</B> <B>this:</B>
+
+          config = Key [shift-][ctrl-][alt-]&lt;key&gt; &lt;windowname&gt; | WindowID id
+               | CurrentWindow | RootWindow
+          config = Button &lt;button&gt; &lt;x&gt; &lt;y&gt; &lt;windowname&gt; | CurrentWindow
+          config = xy_Key &lt;x&gt; &lt;y&gt; [shift-][ctrl-][alt-]&lt;key&gt; &lt;windowname&gt;
+               | WindowID id | CurrentWindow | RootWindow
+
+       <B>some</B> <B>more</B> <B>examples:</B>
+
+          config = Key Up xawtv
+          config = Key Down xawtv
+          config = Button 1 50 110 xclickme
+          config = Key q xawtv
+          config = Key ctrl-c mpg123
+          config = Key shift-Page_Up rxvt
+
+       <B>In</B> <B>BNF</B> <B>this</B> <B>looks</B> <B>like:</B>
+
+          LINE    = "config =" &lt;KEY|BUTTON|XYKEY&gt; &lt;TARGET&gt;
+          XYKEY   = "xy_Key" &lt;x_position&gt; &lt;y_position&gt; &lt;MOD&gt;Keyname
+          KEY     = "Key" &lt;MOD&gt;Keyname
+          MOD     = ["shift-"]["numlock-"]["ctrl-"]["alt-"]["meta-"]
+                    ["numlock-"]["mod3-"]["mod4-"]["scrlock-"]
+          BUTTON  = "Button" &lt;1..5&gt; &lt;x_position&gt; &lt;y_position&gt;
+          TARGET  = Windowname | "WindowID" id | "CurrentWindow" | "RootWindow"
+
+          <I>Keyname:</I>
+            is the key symbol that is declared in X windows. E.g.
+            "Up" refers to the cursor arrow pointing up. "KP_Add"
+            is the plus sign on the key pad. Just take a look  at
+            irxevent.keys (in the documentation directory) if you
+            are not sure about a symbol's name.
+          <I>Windowname:</I>
+            can be the first characters of the window  name  dis­
+            played by the window manager or the name that is dis­
+            played below the icon. Some  programs  use  the  name
+            displayed by the window manager to show a lot of sta­
+            tus information but don't change the icon name  (like
+            xawtv).  Others append information to the window name
+            ("GQmpeg - kill_windooz.mp3"). If neither window name
+            nor  icon name match the given Windowname information
+            from <B>XClassHint(3x)</B> will be checked.
+          <I>CurrentWindow:</I>
+            refers to the active window as returned by XGetInput­
+            <B>Focus(3x)</B>.  Most  times  this is the window with your
+            mouse pointer in it.
+          <I>RootWindow:</I>
+            refers to the <I>root</I> window  as  returned  by  RootWin­
+            <B>dow(3x)</B>. You may need this to send events to the win­
+
+       on your keypad).
+
+       There  are  programs  that  do not accept any synthetic X-
+       events by default because they can  cause  security  prob­
+       lems.  Currently  xterm  and  xemacs  are  known to ignore
+       events simulated by irxevent.
+
+       You can however  make  xterm  accept  external  events  by
+       enabling  "Allow  SendEvents"  in the "Main Options" (hold
+       down the Ctrl button  and  press  the  left  mouse  button
+       inside  the xterm window). You can as well place this line
+       into your .Xresources file to change this permanently:
+
+          XTerm.vt100.allowSendEvents: true
+
+       Yet another possibility is to start xterm like this:
+
+          xterm -xrm "XTerm.vt100.allowSendEvents: true"
+
+       xemacs will accept events if you set a built-in  variable.
+       The following was taken from the online help:
+
+          `x-allow-sendevents' is a built-in boolean variable.
+
+          Value: t
+
+          Documentation:
+
+          *Non-nil  means  to  allow synthetic events.  Nil means
+          they are ignored.
+
+          Beware: allowing emacs to process  SendEvents  opens  a
+          big security hole.
+
+          In order to allow events you have to evaluate this lisp
+          code (press Meta-x and enter the following expression):
+
+                (setq x-allow-sendevents t)
+
+          Placing this line into your .xemacs-options file should
+          have the same result.
+
+       If you have problems sending  events  please  drop  me  an
+       email.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Heinrich Langos &lt;heinrich@mad.scientist.com&gt;.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  documentation  for  <B>lirc</B> is maintained as html pages.
+       They are located under html/ in the  documentation  direc­
+       tory.
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

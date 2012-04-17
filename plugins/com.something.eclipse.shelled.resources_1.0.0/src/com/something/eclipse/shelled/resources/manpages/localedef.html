@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>localedef</B>   [<B>-f</B>   <I>charmapfile</I>]  [<B>-i</B>  <I>inputfile</I>]  [<B>--force</B>]
+       [<B>--verbose</B>] [<B>--posix</B>] [<B>--quiet</B>] <I>outputpath</I>
+       <B>localedef</B> <B>--version</B>
+       <B>localedef</B> <B>--help</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The <B>localedef</B> program  reads  the  indicated  <I>charmap</I>  and
+       <I>input</I>  files,  compiles  them  to  a  form  usable  by the
+       <B>locale(7)</B> functions in the C library, and places  the  six
+       output  files  in  the  <I>outputpath</I>  directory  or  in  one
+       archive.
+
+       If no <I>charmapfile</I> is given, <I>POSIX</I> is used by default.   If
+       no  <I>inputfile</I>  is given, or if it is given as <B>-</B>, <B>localedef</B>
+       reads from standard input.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Most options can have either short or long forms.  If mul­
+       tiple  short options are used, they can be combined in one
+       word (e.g.  <B>-cv</B>).  If an option  takes  an  argument,  the
+       argument  can  be given separately as the next word, or it
+       can be written as option=argument.
+
+       <B>-f</B> <I>charmapfile</I><B>,</B> <B>--charmap=</B><I>charmapfile</I>
+              Specify the file that defines the symbolic  charac­
+              ter  names that are used by the input file.  If the
+              file is in  the  default  directory  for  character
+              maps, it is not necessary to specify the full path­
+              name.   This  default  directory  is   printed   by
+              <B>localedef</B> <B>--help</B>.
+
+       <B>-i</B> <I>inputfile</I><B>,</B> <B>--inputfile=</B><I>inputfile</I>
+              Specify  the locale definition file to compile.  If
+              <I>inputfile</I> is not absolute, <B>localedef</B> will also look
+              in the directory specified by the environment vari­
+              able <B>I18NPATH</B> and  in  the  default  directory  for
+              locale definition files.  This default directory is
+              printed by <B>localedef</B> <B>--help</B>.
+
+       <B>-c,</B> <B>--force</B>
+              Write the output files even if warnings were gener­
+              ated about the input file.
+
+       <B>-v,</B> <B>--verbose</B>
+              Generate  extra warnings about errors that are nor­
+              mally ignored.
+
+       <B>--quiet</B>
+              Suppress all notifications and warnings, and report
+              only fatal errors.
+
+              Print  the  version number, license, and disclaimer
+              of warranty for <B>localedef</B>.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>POSIXLY_CORRECT</B>
+              The <B>--posix</B> flag is  assumed  if  this  environment
+              variable is set.
+
+       <B>I18NPATH</B>
+              The  default directory for locale definition files.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/usr/share/i18n/charmaps</B>
+              Usual default charmap path.
+
+       <B>/usr/share/locale</B>
+              Usual default output path.   See  the  output  from
+              <B>localedef</B>  <B>--help</B>  for  the paths used in your ver­
+              sion.
+
+       <I>outputpath/</I><B>LC_COLLATE</B>
+              One of the output files.  It  describes  the  rules
+              for comparing strings in the locale's alphabet.
+
+       <I>outputpath/</I><B>LC_CTYPE</B>
+              One  of  the output files.  It contains information
+              about character cases and case conversions for  the
+              locale.
+
+       <I>outputpath/</I><B>LC_MONETARY</B>
+              One of the output files.  It describes the way mon­
+              etary values should be formatted in the locale.
+
+       <I>outputpath/</I><B>LC_MESSAGES/SYS_LC_MESSAGES</B>
+              One of the output files.  It  contains  information
+              about  the  language messages should be printed in,
+              and what an affirmative or  negative  answer  looks
+              like.
+
+       <I>outputpath/</I><B>LC_NUMERIC</B>
+              One  of  the  output files.  It describes the rules
+              for formatting numbers in the locale.
+
+       <I>outputpath/</I><B>LC_TIME</B>
+              One of the output files.  It  describes  the  rules
+              for formatting times and dates in the locale.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>locale(5)</B>, <B>locale(7)</B>, <B>locale(1)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       The program was written by Ulrich Drepper.
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

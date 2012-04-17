@@ -1,0 +1,63 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>gzexe</B> [ name ...  ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  <I>gzexe</I>  utility  allows you to compress executables in
+       place and have them automatically uncompress  and  execute
+       when  you  run  them  (at  a penalty in performance).  For
+       example if you execute ``gzexe /bin/cat'' it  will  create
+       the following two files:
+           -r-xr-xr-x  1 root  bin   9644 Feb 11 11:16 /bin/cat
+           -r-xr-xr-x  1 bin   bin  24576 Nov 23 13:21 /bin/cat~
+       /bin/cat~  is  the original file and /bin/cat is the self-
+       uncompressing executable file.  You can  remove  /bin/cat~
+       once you are sure that /bin/cat works properly.
+
+       This  utility  is  most  useful on systems with very small
+       disks.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-d</B>     Decompress the given executables  instead  of  com­
+              pressing them.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>gzip(1)</B>, <B>znew(1)</B>, <B>zmore(1)</B>, <B>zcmp(1)</B>, <B>zforce(1)</B>
+
+
+</PRE>
+<H2>CAVEATS</H2><PRE>
+       The compressed executable is a shell script. This may cre­
+       ate some security holes.  In  particular,  the  compressed
+       executable relies on the PATH environment variable to find
+       <I>gzip</I> and some other utilities <I>(tail,</I> <I>chmod,</I> <I>ln,</I> <I>sleep).</I>
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       <I>gzexe</I> attempts to retain the original file  attributes  on
+       the  compressed  executable,  but you may have to fix them
+       manually in some cases, using <I>chmod</I> or <I>chown.</I>
+
+
+
+                                                         <B>GZEXE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

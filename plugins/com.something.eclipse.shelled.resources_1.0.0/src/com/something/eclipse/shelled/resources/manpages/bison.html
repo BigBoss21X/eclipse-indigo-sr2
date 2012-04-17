@@ -1,0 +1,180 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>bison</B>  [  <B>-b</B> <I>file-prefix</I> ] [ <B>--file-prefix=</B><I>file-prefix</I> ] [
+       <B>-d</B> ] [ <B>--defines=</B><I>defines-file</I> ] [ <B>-g</B>  ]  [  <B>--graph=</B><I>graph-</I>
+       <I>file</I> ] [ <B>-k</B> ] [ <B>--token-table</B> ] [ <B>-l</B> ] [ <B>--no-lines</B> ] [ <B>-n</B>
+       ] [ <B>--no-parser</B> ] [ <B>-o</B> <I>outfile</I> ] [ <B>--output-file=</B><I>outfile</I> ]
+       [  <B>-p</B> <I>prefix</I> ] [ <B>--name-prefix=</B><I>prefix</I> ] [ <B>-t</B> ] [ <B>--debug</B> ]
+       [ <B>-v</B> ] [ <B>--verbose</B> ] [ <B>-V</B> ] [ <B>--version</B> ] [ <B>-y</B> ] [  <B>--yacc</B>
+       ] [ <B>-h</B> ] [ <B>--help</B> ] [ <B>--fixed-output-files</B> ] file
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>Bison</I>  is  a parser generator in the style of <B>yacc(1)</B>.  It
+       should be upwardly compatible with  input  files  designed
+       for <I>yacc</I>.
+
+       Input files should follow the <I>yacc</I> convention of ending in
+       <B>.y</B>.  Unlike <I>yacc</I>, the generated files do  not  have  fixed
+       names,  but  instead  use  the  prefix  of the input file.
+       Moreover, if you need to put <I>C++</I> code in the  input  file,
+       you  can  end  his  name  by a C++-like extension (.ypp or
+       .y++), then bison will follow your extension to  name  the
+       output  file  (.cpp  or  .c++).   For  instance, a grammar
+       description file named <B>parse.yxx</B> would produce the  gener­
+       ated  parser  in  a  file  named <B>parse.tab.cxx</B>, instead of
+       <I>yacc</I>'s <B>y.tab.c</B> or old <I>Bison</I> versions <B>parse.tab.c</B>.
+
+       This description of the options that can be given to <I>bison</I>
+       is  adapted  from the node <B>Invocation</B> in the <B>bison.texinfo</B>
+       manual, which should be taken as authoritative.
+
+       <I>Bison</I> supports both traditional single-letter options  and
+       mnemonic  long  option names.  Long option names are indi­
+       cated with <B>--</B> instead  of  <B>-</B>.   Abbreviations  for  option
+       names are allowed as long as they are unique.  When a long
+       option takes an argument, like <B>--file-prefix</B>, connect  the
+       option name and the argument with <B>=</B>.
+
+   <B>OPTIONS</B>
+       <B>-b</B> <I>file-prefix</I>
+       <B>--file-prefix=</B><I>file-prefix</I>
+              Specify  a  prefix to use for all <I>bison</I> output file
+              names.  The names are chosen as if the  input  file
+              were named <I>file-prefix</I><B>.c</B>.
+
+       <B>-d</B>
+              Write an extra output file containing macro defini­
+              tions for the token type names defined in the gram­
+              mar and the semantic value type <B>YYSTYPE</B>, as well as
+              a few <B>extern</B> variable declarations.
+
+              If the parser output file is named <I>name</I><B>.c</B> then this
+              file is named <I>name</I><B>.h</B>.
+
+              <B>foo.y</B> , the VCG output file will be <B>foo.vcg</B>.
+
+       <B>--graph=</B><I>graph-file</I>
+              The  behaviour  of  <B>--graph</B>  is  the  same  than <B>-g</B>
+              option. The only  difference  is  that  it  has  an
+              optionnal  argument which is the name of the output
+              graph filename.
+
+       <B>-k</B>
+       <B>--token-table</B>
+              This switch causes the <I>name</I><B>.tab.c</B> output to include
+              a  list of token names in order by their token num­
+              bers;  this is defined in the array <I>yytname</I>.   Also
+              generated  are #defines for <I>YYNTOKENS</I>, <I>YYNNTS</I>, <I>YYN­</I>
+              <I>RULES</I>, and <I>YYNSTATES</I>.
+
+       <B>-l</B>
+       <B>--no-lines</B>
+              Don't put any <B>#line</B> preprocessor  commands  in  the
+              parser  file.   Ordinarily  <I>bison</I>  puts them in the
+              parser file so that the C  compiler  and  debuggers
+              will  associate  errors  with your source file, the
+              grammar file.  This option causes them to associate
+              errors  with  the parser file, treating it an inde­
+              pendent source file in its own right.
+
+       <B>-n</B>
+       <B>--no-parser</B>
+              Do not generate the parser code  into  the  output;
+              generate    only   declarations.    The   generated
+              <I>name</I><B>.tab.c</B> file will have  only  constant  declara­
+              tions.   In  addition, a <I>name</I><B>.act</B> file is generated
+              containing a switch statement body  containing  all
+              the translated actions.
+
+       <B>-o</B> <I>outfile</I>
+       <B>--output-file=</B><I>outfile</I>
+              Specify the name <I>outfile</I> for the parser file.
+
+              The  other output files' names are constructed from
+              <I>outfile</I> as described under the <B>-v</B> and <B>-d</B>  switches.
+
+       <B>-p</B> <I>prefix</I>
+       <B>--name-prefix=</B><I>prefix</I>
+              Rename  the  external symbols used in the parser so
+              that they start with <I>prefix</I>  instead  of  <B>yy</B>.   The
+              precise  list of symbols renamed is <B>yyparse</B>, <B>yylex</B>,
+              <B>yyerror</B>, <B>yylval</B>, <B>yychar</B>, and <B>yydebug</B>.
+
+              For example, if you use  <B>-p</B>  <B>c</B>,  the  names  become
+              <B>cparse</B>, <B>clex</B>, and so on.
+
+              solved ones.
+
+              The  file's  name  is made by removing <B>.tab.c</B> or <B>.c</B>
+              from the parser output file name, and adding  <B>.out­</B>
+              <B>put</B> instead.
+
+              Therefore,  if  the  input  file is <B>foo.y</B>, then the
+              parser file is called <B>foo.tab.c</B> by default.   As  a
+              consequence,  the  verbose  output  file  is called
+              <B>foo.output</B>.
+
+       <B>-V</B>
+       <B>--version</B>
+              Print the version number of <I>bison</I> and exit.
+
+       <B>-h</B>
+       <B>--help</B> Print a summary of the options to <I>bison</I> and exit.
+
+       <B>-y</B>
+       <B>--yacc</B>
+       <B>--fixed-output-files</B>
+              Equivalent to <B>-o</B> <B>y.tab.c</B>; the parser output file is
+              called  <B>y.tab.c</B>,  and  the other outputs are called
+              <B>y.output</B> and <B>y.tab.h</B>.  The purpose of  this  switch
+              is  to imitate <I>yacc</I>'s output file name conventions.
+              Thus, the following shell script can substitute for
+              <I>yacc</I>:
+
+              <B>bison</B> <B>-y</B> <B>$*</B>
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /usr/local/share/bison/bison.simple     simple parser
+       /usr/local/share/bison/bison.hairy complicated parser
+
+
+</PRE>
+<H2>ENVIRONMENT VARIABLES</H2><PRE>
+       BISON_SIMPLE
+              If  this is set, it specifies the location in which
+              the <B>bison.simple</B> parser can be found.
+
+       BISON_HAIRY
+              If this is set, it specifies the location in  which
+              the <B>bison.hairy</B> parser can be found.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>yacc(1)</B>
+       The   <I>Bison</I>   <I>Reference</I>   <I>Manual</I>,  included  as  the  file
+       <B>bison.texinfo</B> in the <I>bison</I> source distribution.
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       Self explanatory.
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

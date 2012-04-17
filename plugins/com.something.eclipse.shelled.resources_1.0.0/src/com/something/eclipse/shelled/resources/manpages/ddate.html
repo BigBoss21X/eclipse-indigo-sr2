@@ -1,0 +1,122 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ddate</B> <B>[+format]</B> <B>[date]</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>ddate</B> prints the date in Discordian date format.
+
+       If  called  with  no arguments, <B>ddate</B> will get the current
+       system date, convert this to the  Discordian  date  format
+       and  print  this  on the standard output. Alternatively, a
+       Gregorian date may be specified on the  command  line,  in
+       the form of a numerical day, month and year.
+
+       If  a format string is specified, the Discordian date will
+       be printed in a format specified by the string. This mech­
+       anism  works  similarly  to the format string mechanism of
+       <B>date(1),</B> only almost completely  differently.  The  fields
+       are:
+
+       %A     Full name of the day of the week (i.e., Sweetmorn)
+
+       %a     Abbreviated name of the day of the week (i.e., SM)
+
+       %B     Full name of the season (i.e., Chaos)
+
+       %b     Abbreviated name of the season (i.e., Chs)
+
+       %d     Ordinal number of day in season (i.e., 23)
+
+       %e     Cardinal number of day in season (i.e., 23rd)
+
+       %H     Name of current Holyday, if any
+
+       %N     Magic  code  to  prevent  rest of format from being
+              printed unless today is a Holyday.
+
+       %n     Newline
+
+       %t     Tab
+
+       %X     Number of days remaining until X-Day. (Not valid if
+              the SubGenius options are not compiled in.)
+
+       %{
+
+       %}     Used  to enclose the part of the string which is to
+              be replaced with the words "St. Tib's Day"  if  the
+              current day is St. Tib's Day.
+
+       %.     Try it and see.
+
+
+
+
+       % ddate +"It's %{%A, the %e of %B%}, %Y. %N%nCelebrate %H" 26 9 1995
+       It's Prickle-Prickle, the 50th of Bureaucracy, 3161.
+       Celebrate Bureflux
+
+       % ddate +'Today's %{%A, the %e of %B%}, %Y. %N%nCelebrate %H' 29 2 1996
+       Today's St. Tib's Day, 3162.
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       <B>ddate(1)</B> will produce undefined behaviour if asked to pro­
+       duce the date for St. Tib's day and its format string does
+       not contain the St. Tib's Day delimiters %{ and %}.
+
+
+
+</PRE>
+<H2>NOTE</H2><PRE>
+       After  `X-Day'  passed without incident, the Church of the
+       SubGenius declared that it had got the year upside down  -
+       X-Day  is  actually in 8661 AD rather than 1998 AD.  Thus,
+       the True X-Day is Cfn 40, 9827.
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Original program by Druel the Chaotic aka  Jeremy  Johnson
+       (mpython@gnu.ai.mit.edu)
+       Major  rewrite  by  Lee  H:.  O:.  Smith, KYTP, aka Andrew
+       Bulhak (acb@dev.null.org)
+       Five tons of flax.
+
+
+
+</PRE>
+<H2>DISTRIBUTION POLICY</H2><PRE>
+       Public domain. All rites reversed.
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>date(1)</B>,
+       http://www.subgenius.com/
+       Malaclypse the Younger,  <I>Principia</I>  <I>Discordia,</I>  <I>Or</I>  <I>How</I>  <I>I</I>
+       <I>Found</I> <I>Goddess</I> <I>And</I> <I>What</I> <I>I</I> <I>Did</I> <I>To</I> <I>Her</I> <I>When</I> <I>I</I> <I>Found</I> <I>Her</I>
+
+
+
+
+                       59 Bureaucracy 3161               <B>DDATE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

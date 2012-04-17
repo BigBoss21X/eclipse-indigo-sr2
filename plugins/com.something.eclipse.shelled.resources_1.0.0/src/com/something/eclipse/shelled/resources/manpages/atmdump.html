@@ -1,0 +1,70 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>atmdump</B> [<B>-i</B>] [ <B>-t</B> <I>type</I> [<B>-g</B> <I>gfc</I>] [<B>-c</B>] ] [<I>itf</I>.]<I>vpi</I>.<I>vci</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>atmdump</B>  captures  or generates single ATM cells ("AAL0").
+       When capturing cells, a time stamp, the cell  header  con­
+       tents,  and a hex dump of the cell payload are shown. When
+       sending cells, the payload type, the generic flow  control
+       (GFC), and the cell loss priority (CLP) can be set.
+
+       In both modes of operation, the interface number, the VPI,
+       and the VCI have to be specified.
+
+       When sending, <B>atmdump</B> expects the cell payload on standard
+       input.   If  only  less  than  48  bytes  can be read, the
+       remaining space is padded with zero bytes.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-i</B>     displays timestamps as the interval since the  last
+              cell  reception.  By  default, the absolute time is
+              displayed. This  options  is  ignored  in  transmit
+              mode.
+
+       <B>-t</B> <I>type</I>
+              selects  transmit  mode  and  specifies the payload
+              type. A list of valid payload type numbers  can  be
+              obtained by invoking <B>atmdump</B> without any arguments.
+
+       <B>-g</B> <I>gfc</I> specifies the value of the GFC field. <I>gfc</I> has to be
+              in the range from 0 to 15, default is zero.
+
+       <B>-c</B>     sets  the  cell  loss priority flag, indicating low
+              priority. By default, CLP is not set.
+
+
+</PRE>
+<H2>RESTRICTIONS</H2><PRE>
+       Some device drivers may not pass OAM cells  transparently.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Werner Almesberger, EPFL ICA &lt;Werner.Almesberger@epfl.ch&gt;
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>atmdiag(8)</B>, <B>clip(8)</B>, <B>sonetdiag(8)</B>
+
+
+
+Linux                     April 26, 2000               <B>ATMDUMP(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

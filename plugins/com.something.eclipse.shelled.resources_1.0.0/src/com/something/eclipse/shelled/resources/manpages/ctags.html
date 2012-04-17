@@ -1,0 +1,1186 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ctags</B> [<B>options</B>] [<I>file(s)</I>]
+
+       <B>ctags</B> <B>-e</B> [<B>options</B>] [<I>file(s)</I>]
+
+
+
+</PRE>
+<H2>NOTE</H2><PRE>
+       There are three different versions of the <B>ctags</B> program on
+       SuSE Linux.  Besides this one you might want to use either
+       <B>gnuctags(1)</B>,  supporting  wide variety of programming lan­
+       guages and originaly distributed with emacs, or <B>gctags(1)</B>,
+       which  comes with <B>global(1)</B> and supports for example Yacc.
+
+       For use with <B>emacs(1)</B> the best choice is perhaps <B>etags(1)</B>,
+       but  it's  also  possible  to  use  <B>ctags</B> <B>-e</B>, as described
+       herein, since it supports for example Eiffel.
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The <B>ctags</B> program generates an index (or "tag") file for a
+       variety  of  language  objects found in <I>file(s)</I>.  This tag
+       file allows these items to be quickly and  easily  located
+       by  a  text  editor  or other utility. A "tag" signifies a
+       language object for which an index entry is available (or,
+       alternatively, the index entry created for that object).
+
+       Alternatively,  <B>ctags</B>  can generate a cross reference file
+       which lists, in human readable form, information about the
+       various source objects found in a set of language files.
+
+       Tag  index  files are supported by numerous editors, which
+       allow the user to locate the object associated with a name
+       appearing  in  a source file and jump to the file and line
+       which defines the name. Those known about at the  time  of
+       this release are:
+
+           <B>Vi(1)</B>  and  its  derivatives  (e.g.  Elvis, Vim, Vile,
+           Lemmy), <B>CRiSP</B>, <B>Emacs</B>, <B>FTE</B> (Folding Text Editor),  <B>JED</B>,
+           <B>NEdit</B>  (Nirvana  Edit),  <B>TSE</B> (The SemWare Editor), <B>X2</B>,
+           <B>Zeus</B>
+
+       <B>Ctags</B> is capable of generating different kinds of tags for
+       each  of  many different languages. For a complete list of
+       supported languages, the names by which  they  are  recog­
+       nized, and the kinds of tags which are generated for each,
+       see <B>TAG</B> <B>KINDS</B>, below.
+
+
+
+
+</PRE>
+<H2>SOURCE FILES</H2><PRE>
+           <B>Awk</B>      *.awk
+           <B>C</B>        *.c
+           <B>C++</B>      *.C *.c++ *.cc *.cpp *.cxx *.h *.H *.hh *.hpp
+                    *.hxx *.h++
+           <B>BETA</B>     *.bet
+           <B>COBOL</B>    *.cob *.COB
+           <B>Eiffel</B>   *.e
+           <B>Fortran</B>  *.f *.for *.ftn *.f77 *.f90 *.f95  *.F  *.FOR
+                    *.FTN *.F77 *.F90 *.F95
+           <B>Java</B>     *.java
+           <B>Lisp</B>     *.cl *.clisp *.el *.l *.lisp *.lsp *.ml
+           <B>Lua</B>      *.lua
+           <B>Make</B>     *.mak [Mm]akefile*
+           <B>Pascal</B>   *.p *.pas
+           <B>Perl</B>     *.pl *.pm *.perl
+           <B>PHP</B>      *.php *.php3 *.phtml
+           <B>Python</B>   *.py *.python
+           <B>REXX</B>     *.cmd *.rexx *.rx
+           <B>Ruby</B>     *.rb
+           <B>Scheme</B>   *.sch *.scheme *.scm *.sm *.SCM *.SM
+           <B>Shell</B> <B>scripts</B> <B>(Bourne/Korn/Z)</B>
+                    *.sh *.SH *.bsh *.bash *.ksh *.zsh
+           <B>S-Lang</B>   *.sl
+           <B>Tcl</B>      *.tcl *.wish
+           <B>Verilog</B>  *.v
+           <B>Vim</B>      *.vim
+           <B>YACC/Bison</B>
+                    *.y
+
+       By  default,  all other files names are ignored. This per­
+       mits running <B>ctags</B> on all files in either a single  direc­
+       tory  (e.g.  "ctags  *"), or all files in an entire source
+       directory tree (e.g. "ctags -R"), since only  those  files
+       whose names are mapped to languages will be scanned.
+
+       The  reason  that  .h  extensions  are mapped to C++ files
+       rather than C files is because it  is  common  to  use  .h
+       extensions in C++, and no harm results in treating them as
+       C++ files.
+
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Despite the wealth of available options, defaults are  set
+       so  that  <B>ctags</B>  is  most  commonly  executed  without any
+       options (e.g. "ctags *", or "ctags -R"), which will create
+       a  tag  file  in  the current directory for all recognized
+       source files. The options  described  below  are  provided
+       merely to allow custom tailoring to meet special needs.
+
+       Note that spaces separating the single-letter options from
+       their parameters are optional.
+       affecting  only those files which follow the option. A few
+       options, however, must appear before the first  file  name
+       and will be noted as such.
+
+       Options  taking  language names will accept those names in
+       either upper or lower case. See <B>TAG</B> <B>KINDS</B> for  a  complete
+       list of the built-in language names.
+
+
+       <B>-a</B>   Equivalent to <B>--append</B>.
+
+
+       <B>-B</B>   Use  backward  searching  patterns  (e.g. ?pattern?).
+            [Ignored in etags mode]
+
+
+       <B>-e</B>   Enable etags mode, which will create a tag  file  for
+            use  with  the Emacs editor.  Alternatively, if <B>ctags</B>
+            is invoked by a name containing  the  string  "etags"
+            (either  by renaming, or creating a link to, the exe­
+            cutable), etags mode will  be  enabled.  This  option
+            must appear before the first file name.
+
+
+       <B>-f</B> <I>tagfile</I>
+            Use  the  name  specified by <I>tagfile</I> for the tag file
+            (default is "tags", or "TAGS" when running  in  etags
+            mode).  If  <I>tagfile</I> is specified as "-", then the tag
+            file is written to  standard  output  instead.  <B>Ctags</B>
+            will  stubbornly  refuse  to  take  orders if <I>tagfile</I>
+            exists and its first line  contains  something  other
+            than  a  valid tags line. This will save your neck if
+            you mistakenly type "ctags -f *.c", which would  oth­
+            erwise overwrite your first C file with the tags gen­
+            erated by the rest! It will also refuse to  accept  a
+            multicharacter  file  name  which  begins  with a '-'
+            (dash) character, since this most likely  means  that
+            you  left out the tag file name and this option tried
+            to grab the next option as  the  file  name.  If  you
+            really  want  to  name  your output tag file "-ugly",
+            specify it as  "./-ugly".  This  option  must  appear
+            before  the first file name. If this option is speci­
+            fied more than once, only the last will apply.
+
+
+       <B>-F</B>   Use  forward  searching  patterns  (e.g.   /pattern/)
+            (default).  [Ignored in etags mode]
+
+
+       <B>-h</B> <I>list</I>
+            Specifies  a  list  of  file extensions, separated by
+            periods, which are to be interpreted as  include  (or
+            list will be appended to the current list; otherwise,
+            the list will replace the current  list.  See,  also,
+            the   <B>--file-scope</B>   option.   The  default  list  is
+            ".h.H.hh.hpp.hxx.h++.inc.def". To restore the default
+            list,  specify  <B>-h</B> <I>default</I>. Note that if an extension
+            supplied to this option is not already  mapped  to  a
+            particular  language  (see  <B>SOURCE</B> <B>FILES</B>, above), you
+            will also need to use either the <B>--langmap</B> or  <B>--lan­</B>
+            <B>guage-force</B> option.
+
+
+       <B>-I</B> <I>tokenlist</I>
+            Specifies  a list of tokens which are to be specially
+            handled while parsing C and C++  source  files.  This
+            option  is  specifically  provided  to handle special
+            cases arising through the use of preprocessor macros.
+            When  the  tokens  listed  are  simple  tokens, these
+            tokens will be ignored during parsing of  the  source
+            files.  If  a token is suffixed with a '+' character,
+            <B>ctags</B> will also ignore any parenthesis-enclosed argu­
+            ment  list  which may immediately follow the token in
+            the source files. If two tokens  are  separated  with
+            the '=' character, the first token is replaced by the
+            second token for parsing purposes. The list of tokens
+            may  be supplied directly on the command line or read
+            in from a separate file. If the  first  character  of
+            <I>tokenlist</I> is '@', '.' or a pathname separator ('/' or
+            '\'), or the first two  characters  specify  a  drive
+            letter  (e.g.  "C:"), the parameter <I>tokenlist</I> will be
+            interpreted as a filename from which to read  a  list
+            of  tokens, one per input line.  Otherwise, <I>tokenlist</I>
+            is a list of tokens (or token pairs) to be  specially
+            handled,  each  delimited  by  a either a comma or by
+            white space (in which case the list should be  quoted
+            to  keep  the  entire  list as one command line argu­
+            ment). Multiple <B>-I</B> options may be supplied. To  clear
+            the list of ignore tokens, supply a single dash ("-")
+            for <I>tokenlist</I>.
+
+            This feature is useful when preprocessor  macros  are
+            used  in  such a way that they cause syntactic confu­
+            sion due to their presence. Indeed, this is the  best
+            way  of working around a number of problems caused by
+            the presence of syntax-busting macros in source files
+            (see <B>BUGS</B>, below). Some examples will illustrate this
+            point.
+
+               int foo ARGDECL4(void *, ptr, long int, nbytes)
+
+
+            In the above example, the macro "ARGDECL4"  would  be
+            mistakenly interpreted to be the name of the function
+            skipped over while trying to complete the definition.
+            Specifying  <B>-I</B>  <I>MODULE</I><B>_</B><I>VERSION+</I>  would  avoid  such a
+            problem.
+
+               CLASS Example {
+                   // your content here
+               };
+
+
+            The example above  uses  "CLASS"  as  a  preprocessor
+            macro  which  expands to something different for each
+            platform. For instance CLASS may be defined as "class
+            __declspec(dllexport)"  on Win32 platforms and simply
+            "class" on UNIX.  Normally, the absence  of  the  C++
+            keyword  "class"  would  cause  the source file to be
+            incorrectly parsed. Correct behavior can be  restored
+            by specifying <B>-I</B> <I>CLASS=class</I>.
+
+
+       <B>-L</B> <I>file</I>
+            Read  from  <I>file</I>  a list of file names for which tags
+            should be generated.  If <I>file</I> is  specified  as  "-",
+            then  file  names  are read from standard input. File
+            names read using this option are processed  following
+            file names appearing on the command line. Options all
+            also accepted in this input. If this option is speci­
+            fied  more than once, only the last will apply. <B>Note:</B>
+            <I>file</I> is read in line-oriented mode, where a new  line
+            is  the only delimiter and spaces are considered sig­
+            nificant, in order that file names containing  spaces
+            may  be  supplied;  this  can  affect how options are
+            parsed if included in the input.
+
+
+       <B>-n</B>   Equivalent to <B>--excmd</B>=<I>number</I>.
+
+
+       <B>-N</B>   Equivalent to <B>--excmd</B>=<I>pattern</I>.
+
+
+       <B>-o</B> <I>tagfile</I>
+            Equivalent to <B>-f</B> <I>tagfile</I>.
+
+
+       <B>-R</B>   Equivalent to <B>--recurse</B>.
+
+
+       <B>-u</B>   Equivalent to <B>--sort</B>=<I>no</I> (i.e. "unsorted").
+
+
+       <B>-V</B>   Equivalent to <B>--verbose</B>.
+
+            tions located in a source file (e.g.  <B>ctags</B>  <B>-x</B>  <B>--c-</B>
+            <B>types</B>=<I>f</I> <I>file</I>), or generating a list of all externally
+            visible global variables located  in  a  source  file
+            (e.g.  <B>ctags</B>  <B>-x</B>  <B>--c-types</B>=<I>v</I>  <B>--file-scope</B>=<I>no</I> <I>file</I>).
+            This option must appear before the first file name.
+
+
+       <B>--append</B>[=<I>yes</I>|<I>no</I>]
+            Indicates whether tags generated from  the  specified
+            files  should be appended to those already present in
+            the tag file or should replace them. This  option  is
+            off  by  default.  This option must appear before the
+            first file name.
+
+
+       <B>--etags-include</B>=<I>file</I>
+            Include a reference to <I>file</I> in  the  tag  file.  This
+            option  may  be  specified  as many times as desired.
+            This supports Emacs' capability to  use  a  tag  file
+            which  "includes" other tag files. [Available only in
+            etags mode]
+
+
+       <B>--exclude</B>=[<I>pattern</I>]
+            Add <I>pattern</I> to a list of excluded files and  directo­
+            ries.  This  option may be specified as many times as
+            desired. For each file name considered by <B>ctags</B>, each
+            <I>pattern</I>  specified using this option will be compared
+            against    both    the    complete     path     (e.g.
+            some/path/base.ext) and the base name (e.g. base.ext)
+            of the file, thus allowing  patterns  which  match  a
+            given  file  name  irrespective of its path, or match
+            only a  specific  path.  If  appropriate  support  is
+            available  from  the  runtime  library of your C com­
+            piler, then <I>pattern</I> may contain the usual shell wild­
+            cards  (not  regular  expressions) common on Unix (be
+            sure to quote the option  parameter  to  protect  the
+            wildcards  from  being  expanded  by the shell before
+            being passed to <B>ctags</B>; also be aware  that  wildcards
+            can  match  the slash character, '/'). You can deter­
+            mine if shell wildcards are available on your platfom
+            by  examining  the  output  of  the <B>--version</B> option,
+            which will include "+wildcards" in the compiled  fea­
+            ture list; otherwise, <I>pattern</I> is matched against file
+            names using a simple textual comparison.
+
+            If <I>pattern</I> begins with the character  '@',  then  the
+            rest of the string is interpreted as a file name from
+            which to read exclusion patterns, one  per  line.  If
+            <I>pattern</I>  is  empty,  the list of excluded patterns is
+            cleared.  Note that at program startup,  the  default
+            exclude  list  contains  "EIFGEN", "SCCS", "RCS", and
+                     locating tags. This has four advantages:
+                     1.  Significantly  reduces  the  size of the
+                         resulting tag file.
+                     2.  Eliminates failures to find tags because
+                         the  line  defining the tag has changed,
+                         causing the pattern match to fail  (note
+                         that some editors, such as <B>vim</B>, are able
+                         to recover in many such instances).
+                     3.  Eliminates finding  identical  matching,
+                         but  incorrect,  source lines (see <B>BUGS</B>,
+                         below).
+                     4.  Retains separate entries in the tag file
+                         for  lines  which  are identical in con­
+                         tent. In <I>pattern</I> mode, duplicate entries
+                         are  dropped because the search patterns
+                         they generate are identical, making  the
+                         duplicate entries useless.
+
+
+                     However,  this  option  has  one significant
+                     drawback: changes to the  source  files  can
+                     cause  the  line numbers recorded in the tag
+                     file to no longer correspond to the lines in
+                     the  source file, causing jumps to some tags
+                     to miss the target definition by one or more
+                     lines.  Basically,  this option is best used
+                     when the source code to which it is  applied
+                     is  not  subject  to  change. Selecting this
+                     option type causes the following options  to
+                     be ignored: <B>-BF</B>.
+
+
+            <I>pattern</I>  Use  only  search  patterns  for  all  tags,
+                     rather than the line  numbers  usually  used
+                     for  macro  definitions. This has the advan­
+                     tage of not referencing obsolete  line  num­
+                     bers  when  lines have been added or removed
+                     since the tag file was generated.
+
+
+            <I>mixed</I>    In this mode, patterns  are  generally  used
+                     with  a  few exceptions. For C, line numbers
+                     are used for macro definition tags. This was
+                     the default format generated by the original
+                     <B>ctags</B> and is,  therefore,  retained  as  the
+                     default  for  this option. For Fortran, line
+                     numbers are used for common  blocks  because
+                     their  corresponding source lines are gener­
+                     ally identical, making pattern searches use­
+                     less for finding all matches.
+
+
+                   every source file (e.g.   "example.c"),  which
+                   addresses the first line of the file.
+
+               <I>q</I>   Include an extra class-qualified tag entry for
+                   each tag which is a member  of  a  class  (for
+                   languages   for   which  this  information  is
+                   extracted; currently C++, Eiffel,  and  Java).
+                   The  actual  form of the qualified tag depends
+                   upon the  language  from  which  the  tag  was
+                   derived (using a form that is most natural for
+                   how qualified calls are specified in the  lan­
+                   guage).   For   C++,   it   is   in  the  form
+                   "class::member"; for Eiffel and Java, it is in
+                   the form "class.member". This may allow easier
+                   location of  a  specific  tags  when  multiple
+                   occurrances  of  a  tag  name occur in the tag
+                   file. Note, however, that  this  could  poten­
+                   tially  more  than  double the size of the tag
+                   file.
+
+
+       <B>--fields</B>=<I>[+|-]flags</I>
+            Specifies the available extension fields which are to
+            be  included  in the entries of the tag file (see <B>TAG</B>
+            <B>FILE</B> <B>FORMAT</B>, below, for more information). The param­
+            eter  <I>flags</I> is a set of one-letter flags, each repre­
+            senting one type of extension field to include,  with
+            the  following  meanings  (disabled by default unless
+            indicated):
+
+
+               <I>a</I>   Access (or export) of class members
+               <I>f</I>   File-restricted scoping [enabled]
+               <I>i</I>   Inheritance information
+               <I>k</I>   Kind of tag as a single letter [enabled]
+               <I>K</I>   Kind of tag as full name
+               <I>l</I>   Language of source file containing tag
+               <I>m</I>   Implementation information
+               <I>n</I>   Line number of tag definintion
+               <I>s</I>   Scope of tag definition [enabled]
+               <I>z</I>   Include the "kind:" key in kind field
+
+            Each letter or group of letters may  be  preceded  by
+            either  '+'  to  add it to the default set, or '-' to
+            exclude it. In the absence of any  preceding  '+'  or
+            '-' sign, only those kinds explicitly listed in <I>flags</I>
+            will be included in the output (i.e.  overriding  the
+            default  set).  This  option is ignored if the option
+            <B>--format</B>=<I>1</I> has been specified.
+
+
+       <B>--file-scope</B>[=<I>yes</I>|<I>no</I>]
+            (see note for <B>-L</B> option) and only  after  file  names
+            listed  on the command line or from any file supplied
+            using the <B>-L</B> option. When this option is enabled, the
+            options <B>-f</B>, <B>-o</B>, and <B>--totals</B> are ignored. This option
+            is quite esoteric and is disabled  by  default.  This
+            option must appear before the first file name.
+
+
+       <B>--filter-terminator</B>=<I>string</I>
+            Specifies  a  string to print to standard output fol­
+            lowing the tags for each file name  parsed  when  the
+            <B>--filter</B> option is enabled. This may permit an appli­
+            cation reading the output of ctags to determine  when
+            the  output  for  each file is finished. Note that if
+            the file name read is a directory  and  <B>--recurse</B>  is
+            enabled, this string will be printed only one once at
+            the end of all  tags  found  for  by  descending  the
+            directory.  This string will always be separated from
+            the last tag line for the  file  by  its  terminating
+            newline.   This option is quite esoteric and is empty
+            by default. This option must appear before the  first
+            file name.
+
+
+       <B>--format</B>=<I>level</I>
+            Change  the  format of the output tag file. Currently
+            the only valid values for <I>level</I> are <I>1</I> or <I>2</I>.  Level  1
+            specifies  the  original  tag file format and level 2
+            specifies a new extended format containing  extension
+            fields  (but  in a manner which retains backward com­
+            patibility with original <B>vi(1)</B> implementations).  The
+            default  level  is  2. This option must appear before
+            the first file name. [Ignored in etags mode]
+
+
+       <B>--help</B>
+            Prints to standard output a detailed  usage  descrip­
+            tion.
+
+
+       <B>--if0</B>[=<I>yes</I>|<I>no</I>]
+            Indicates  a  preference as to whether code within an
+            "#if 0" branch of a preprocessor  conditional  should
+            be examined for non-macro tags (macro tags are always
+            included). Because the intent of this construct is to
+            disable  code,  the  default value of this options is
+            <I>no</I>. Note that this indicates a  preference  only  and
+            does  not  guarantee  skipping code within an "#if 0"
+            branch, since the fall-back algorithm used to  gener­
+            ate  tags when preprocessor conditionals are too com­
+            plex follows all  branches  of  a  conditional.  This
+            option is disabled by default.
+            set, or '-' to exclude it. In the absence of any pre­
+            ceding  '+'  or '-' sign, only those kinds explicitly
+            listed in <I>kinds</I> will be included in the output  (i.e.
+            overriding the default for the specified language).
+
+            As  an  example  for  the C language, in order to add
+            prototypes and external variable declarations to  the
+            default  set  of  tag  kinds, but exclude macros, use
+            <B>--c-types</B>=<I>+px-d</I>; to include only tags for  functions,
+            use <B>--c-types</B>=<I>f</I>.
+
+
+       <B>--langdef</B>=<I>name</I>
+            Defines  a  new  user-defined  language,  <I>name</I>, to be
+            parsed with regular expressions. Once  defined,  <I>name</I>
+            may  be  used in other options taking language names.
+            The typical use of this option is to first define the
+            language,  then map file names to it using <I>--langmap</I>,
+            then specify regular expressions using <I>--regex-&lt;LANG&gt;</I>
+            to define how its tags are found.
+
+
+       <B>--langmap</B>=<I>map[,map[...]]</I>
+            Controls  how file names are mapped to languages (see
+            <B>SOURCE</B> <B>FILES</B>, above). Each comma-separated  <I>map</I>  con­
+            sists  of  the  language  name  (either a built-in or
+            user-defined language), a colon, and a list  of  file
+            extensions  and/or  file name patterns. A file exten­
+            sion is specified by preceding the extension  with  a
+            period  (e.g. ".c"). A file name pattern is specified
+            by  enclosing  the  pattern  in   parentheses   (e.g.
+            "([Mm]akefile)"). If appropriate support is available
+            from the runtime library of your C compiler, then the
+            file  name  pattern may contain the usual shell wild­
+            cards common on Unix (be sure  to  quote  the  option
+            parameter   to   protect  the  wildcards  from  being
+            expanded by the shell before being passed to  <B>ctags</B>).
+            You can determine if shell wildcards are available on
+            your platfom by examining the output of the <B>--version</B>
+            option,  which  will include "+wildcards" in the com­
+            piled feature list; otherwise, the file name patterns
+            are matched against file names using a simple textual
+            comparison.
+
+            If the first character in a map is a plus sign,  then
+            the  extensions  and  file  name patterns in that map
+            will be appended to the current  map  for  that  lan­
+            guage;  otherwise,  the  map will replace the current
+            map. For example, to specify  that  only  files  with
+            extensions  of  .c and .x are to be treated as C lan­
+            guage files,  use  "<B>--langmap</B>=<I>c:.c.x</I>";  to  also  add
+            files  with  extensions of .j as Java language files,
+            file extensions are tested before file name  patterns
+            when inferring the language of a file.
+
+
+       <B>--language-force</B>=<I>language</I>
+            By  default, <B>ctags</B> automatically selects the language
+            of a source file, ignoring those files whose language
+            cannot  be determined (see <B>SOURCE</B> <B>FILES</B>, above). This
+            option forces the specified <I>language</I> (either built-in
+            or  user-defined)  to be used for every supplied file
+            instead of automatically selecting the language based
+            upon  its  extension.  In addition, the special value
+            <I>auto</I> indicates that the language should be  automati­
+            cally   selected  (which  effectively  disables  this
+            option).
+
+
+       <B>--languages</B>=<I>[+|-]list</I>
+            Specifies the languages for which tag  generation  is
+            enabled,  with <I>list</I> containing a comma-separated list
+            of language names (either built-in or  user-defined).
+            If  the  first  language  of  <I>list</I> is not preceded by
+            either a languages in <I>list</I>. Until a  '-'  is  encoun­
+            tered, each language in the list will be added to the
+            current list. As either the '+' or '-' is encountered
+            in  the list, the languages following it are added or
+            removed from the current list, respectively. Thus, it
+            becomes simple to replace the current list with a new
+            one, or to add or remove languages from  the  current
+            list. The actual list of files for which tags will be
+            generated depends upon the language extension mapping
+            in  effect  (see the <B>--langmap</B> option). Note that all
+            languages,  including  user-defined   languages   are
+            enabled unless explicitly disabled using this option.
+            Language names included in <I>list</I> may be  any  built-in
+            language  or  one  previously defined with <B>--langdef</B>.
+            The default is "all", which is  also  accepted  as  a
+            valid  argument. See <B>TAG</B> <B>KINDS</B> for a complete list of
+            the built-in language names.
+
+
+       <B>--license</B>
+            Prints a summary of the software license to  standard
+            output.
+
+
+       <B>--line-directives</B>[=<I>yes</I>|<I>no</I>]
+            Specifies whether "#line" directives should be recog­
+            nized. These are present in the output of  preproces­
+            sors  and  contain  the line number, and possibly the
+            file name, of the original source file(s) from  which
+            the  preprocessor  output  file  was  generated. When
+            the extension of the preprocessor output file is  not
+            known to <B>ctags</B>.
+
+
+       <B>--links</B>[=<I>yes</I>|<I>no</I>]
+            Indicates   whether  symbolic  links  (if  supported)
+            should be followed. When disabled, symbolic links are
+            ignored. This option is on by default.
+
+
+       <B>--options</B>=<I>file</I>
+            Read additional options from <I>file</I>.
+
+
+       <B>--recurse</B>[=<I>yes</I>|<I>no</I>]
+            Recurse  into  directories encountered in the list of
+            supplied files. If the  list  of  supplied  files  is
+            empty  and  no  file  list  is  specified with the <B>-L</B>
+            option, then the  current  directory  (i.e.  ".")  is
+            assumed.  Symbolic  links  are followed. If you don't
+            like these behaviors, either explicitly  specify  the
+            files  or  pipe  the output of <B>find(1)</B> into <B>ctags</B> <B>-L-</B>
+            instead. <B>Note:</B> This option is not  supported  on  all
+            platforms  at present.  It is available if the output
+            of the <B>--help</B>  option  includes  this  option.   See,
+            also, the <B>--exclude</B> to limit recursion.
+
+
+       <B>--regex-&lt;LANG&gt;</B>=<I>/regexp/replacement/[kind-spec/][flags]</I>
+            The   <I>/regexp/replacement/</I>   pair  define  a  regular
+            expression replacement pattern, similar in  style  to
+            <B>sed</B>  substitution  commands,  with  which to generate
+            tags from source files mapped to the named  language,
+            <B>&lt;LANG&gt;</B>, (either a built-in or user-defined language).
+            The regular expression, <I>regexp</I>, defines  an  extended
+            regular  expression  (roughly that used by <B>egrep(1)</B>),
+            which is used to locate a single source line contain­
+            ing  a  tag  and may specify tab characters using \t.
+            When a matching line is found, a tag will  be  gener­
+            ated  for the name defined by <I>replacement</I>, which gen­
+            erally will contain the  special  back-references  \1
+            through \9 to refer to matching sub-expression groups
+            within <I>regexp</I>. The '/' separator characters shown  in
+            the  parameter to the option can actually be replaced
+            by any character. Note that whichever separator char­
+            acter  is  used  will have to be escaped with a back­
+            slash ('\') character wherever  it  is  used  in  the
+            parameter  as  something  other than a separator. The
+            regular expression defined by this option is added to
+            the current list of regular expressions for the spec­
+            ified language unless the parameter  is  omitted,  in
+            which case the current list is cleared.
+            letter characters having the  following  effect  upon
+            the interpretation of <I>regexp</I>:
+
+
+
+               <I>b</I>   The  pattern  is  interpreted as a Posix basic
+                   regular expression.
+
+               <I>e</I>   The pattern is interpreted as a Posix extended
+                   regular expression (default).
+
+               <I>i</I>   The  regular  expression is to be applied in a
+                   case-insensitive manner.
+
+            Note that this option is available only if <B>ctags</B>  was
+            compiled  with support for regular expressions, which
+            depends upon your platform. You can determine if sup­
+            port  for regular expressions is compiled in by exam­
+            ining the output of the <B>--version</B> option, which  will
+            include "+regex" in the compiled feature list.
+
+            For more information on the regular expressionss used
+            by <B>ctags</B>, see either the <B>regex(5,7)</B> man page, or  the
+            GNU info documentation for regex (e.g. "info regex").
+
+
+       <B>--sort</B>[=<I>yes</I>|<I>no</I>|<I>foldcase</I>]
+            Indicates whether the tag file should  be  sorted  on
+            the tag name (default is <I>yes</I>). Note that the original
+            <B>vi(1)</B> required sorted tags.  The <I>foldcase</I> value spec­
+            ifies  case  insensitive  (or  case-folded)  sorting.
+            Fast binary searches of tag files sorted  with  case-
+            folding will require special support from tools using
+            tag files, such as that found in the  ctags  readtags
+            library,  or  Vim  version  6.2 or higher (using "set
+            ignorecase"). This  option  must  appear  before  the
+            first file name. [Ignored in etags mode]
+
+
+       <B>--tag-relative</B>[=<I>yes</I>|<I>no</I>]
+            Indicates  that  the  file  paths recorded in the tag
+            file should be relative to the  directory  containing
+            the  tag  file,  rather  than relative to the current
+            directory, unless the files supplied on  the  command
+            line  are  specified with absolute paths. This option
+            must appear before the first file name.  The  default
+            is  <I>yes</I>  when  running  in  etags  mode  (see  the <B>-e</B>
+            option), <I>no</I> otherwise.
+
+
+       <B>--totals</B>[=<I>yes</I>|<I>no</I>]
+            Prints statistics about the source files read and the
+            effect   before  any  options  are  read  from  these
+            sources. The default is <I>no</I>.
+
+
+       <B>--version</B>
+            Prints a version identifier  for  <B>ctags</B>  to  standard
+            output.  This  is  guaranteed  to  always contain the
+            string "Exuberant Ctags".
+
+
+
+
+</PRE>
+<H2>TAG KINDS</H2><PRE>
+       Each type (or kind) of tag recorded in  the  tag  file  is
+       indicated by a one-letter flag, which is also used to fil­
+       ter the tags placed into the output  through  use  of  the
+       <B>--&lt;LANG&gt;-type</B>  option. The flags corresponding to each tag
+       kind for each langauge are described below. Note that some
+       languages  and/or tag kinds may be implemented using regu­
+       lar expressions and may not be available if regex  support
+       is   not  compiled  into  <B>ctags</B>  (see  the  <B>--regex-&lt;LANG&gt;</B>
+       option). Kinds are enabled by default except  where  noted
+       (with "[off]").
+
+
+       Asm
+            <I>d</I>   defines
+            <I>l</I>   labels
+            <I>m</I>   macros
+            <I>t</I>   types (structs and records)
+
+
+       ASP
+            <I>f</I>   functions
+            <I>s</I>   subroutines
+
+
+       Awk
+            <I>f</I>   functions
+
+
+       BETA
+            <I>f</I>   fragment definitions
+            <I>p</I>   all patterns [off]
+            <I>s</I>   slots (fragment uses)
+            <I>v</I>   patterns  (only  virtual  or rebound patterns are
+                recorded)
+
+
+       C and C++
+            <I>c</I>   classes
+            <I>d</I>   macro definitions (and #undef names)
+            <I>e</I>   enumerators
+
+
+       Eiffel
+            <I>c</I>   classes
+            <I>f</I>   features
+            <I>l</I>   local entities [off]
+
+
+       Fortran
+            <I>b</I>   block data
+            <I>c</I>   common blocks
+            <I>e</I>   entry points
+            <I>f</I>   functions
+            <I>i</I>   interfaces
+            <I>k</I>   type components
+            <I>l</I>   labels
+            <I>L</I>   local and common block variables [off]
+            <I>m</I>   modules
+            <I>n</I>   namelists
+            <I>p</I>   programs
+            <I>s</I>   subroutines
+            <I>t</I>   derived types
+            <I>v</I>   module variables
+
+
+       Java
+            <I>c</I>   classes
+            <I>f</I>   fields
+            <I>i</I>   interfaces
+            <I>m</I>   methods
+            <I>p</I>   packages
+
+
+       Lisp
+            <I>f</I>   functions
+
+
+       Lua
+            <I>f</I>   functions
+
+
+       Make
+            <I>m</I>   macros
+
+
+       Pascal
+            <I>f</I>   functions
+            <I>p</I>   procedures
+
+
+       Perl
+            <I>p</I>   packages
+            <I>s</I>   subroutines
+
+
+       Ruby
+            <I>c</I>   classes
+            <I>f</I>   functions
+            <I>m</I>   mixins
+
+
+       Scheme
+            <I>f</I>   functions
+            <I>s</I>   sets
+
+
+       Sh (Bourne, Korn, Z)
+            <I>f</I>   functions
+
+
+       SLang
+            <I>f</I>   functions
+            <I>n</I>   namespaces
+
+
+       Tcl
+            <I>p</I>   procedures
+
+
+       Verilog
+            <I>f</I>   functions
+            <I>m</I>   modules
+            <I>P</I>   parameters
+            <I>p</I>   ports
+            <I>r</I>   registers
+            <I>t</I>   tasks
+            <I>v</I>   variables
+            <I>w</I>   wires
+
+
+       Vim
+            <I>f</I>   functions
+
+
+       YACC
+            <I>l</I>   labels
+
+
+
+
+</PRE>
+<H2>OPERATIONAL DETAILS</H2><PRE>
+       As <B>ctags</B> considers each file name in  turn,  it  tries  to
+       determine the language of the file by applying the follow­
+       ing three tests in order: if the file extension  has  been
+       mapped  to  a  language,  if the file name matches a shell
+       dilemmas caused by preprocessor conditionals.
+
+       In general, <B>ctags</B> tries to be smart about conditional pre­
+       processor  directives.  If  a  preprocessor conditional is
+       encountered within a statement which defines a tag,  <B>ctags</B>
+       follows  only the first branch of that conditional (except
+       in the special case of "#if 0", in which case  it  follows
+       only the last branch). The reason for this is that failing
+       to pursue only one branch can result in ambiguous  syntax,
+       as in the following example:
+
+              #ifdef TWO_ALTERNATIVES
+              struct {
+              #else
+              union {
+              #endif
+                  short a;
+                  long b;
+              }
+
+       Both  branches cannot be followed, or braces become unbal­
+       anced and <B>ctags</B> would be unable to make sense of the  syn­
+       tax.
+
+       If  the  application  of  this heuristic fails to properly
+       parse a file, generally due to complicated  and  inconsis­
+       tent pairing within the conditionals, <B>ctags</B> will retry the
+       file using a different heuristic  which  does  not  selec­
+       tively   follow  conditional  preprocessor  branches,  but
+       instead falls back to relying upon a closing  brace  ("}")
+       in  column  1  as  indicating  the end of a block once any
+       brace imbalance results from following a  #if  conditional
+       branch.
+
+       <B>Ctags</B>  will  also  try to specially handle arguments lists
+       enclosed in double sets of parentheses in order to  accept
+       the following conditional construct:
+
+              extern void foo __ARGS((int one, char two));
+
+       Any  name immediately preceding the "((" will be automati­
+       cally ignored and the previous name will be used.
+
+       C++ operator definitions are specially handled.  In  order
+       for  consistency  with  all types of operators (overloaded
+       and conversion), the operator name in the  tag  file  will
+       always be preceded by the string "operator " (i.e. even if
+       the actual operator  definition  was  written  as  "opera­
+       tor&lt;&lt;").
+
+       After  creating or appending to the tag file, it is sorted
+       by the tag name, removing identical tag lines.
+           2.  single tab character
+           3.  name  of  the  file in which the object associated
+               with the tag is located
+           4.  single tab character
+           5.  EX command used to locate the tag within the file;
+               generally  a  search  pattern (either /pattern/ or
+               ?pattern?) or line number (see <B>--excmd</B>). Tag  file
+               format  2  (see  <B>--format</B>) extends this EX command
+               under certain circumstances to include  a  set  of
+               extension  fields (described below) embedded in an
+               EX comment immediately appended to the EX command,
+               which leaves it backwards compatible with original
+               <B>vi(1)</B> implementations.
+
+       A few special tags are  written  into  the  tag  file  for
+       internal  purposes.  These tags are composed in such a way
+       that they always sort to the top of the file.   Therefore,
+       the  first  two  characters of these tags are used a magic
+       number to detect a tag file for  purposes  of  determining
+       whether  a valid tag file is being overwritten rather than
+       a source file.
+
+       Note that the name of each source file will be recorded in
+       the  tag  file  exactly as it appears on the command line.
+       Therefore, if the path you specified on the  command  line
+       was  relative  to  the  current directory, then it will be
+       recorded in that same manner in the tag  file.  See,  how­
+       ever,  the <B>--tag-relative</B> option for how this behavior can
+       be modified.
+
+       Extension  fields  are   tab-separated   key-value   pairs
+       appended  to  the  end  of the EX command as a comment, as
+       described above. These key value pairs appear in the  gen­
+       eral  form "<I>key</I>:<I>value</I>". Their presence in the lines of the
+       tag file are controlled by the <B>--fields</B> option. The possi­
+       ble keys and the meaning of their values are as follows:
+
+
+       <I>access</I>      Indicates the visibility of this class member,
+                   where <I>value</I> is specific to the language.
+
+
+       <I>file</I>        Indicates that the tag has file-limited  visi­
+                   bility. This key has no corresponding value.
+
+
+       <I>kind</I>        Indicates the type, or kind, of tag. Its value
+                   is either one of the corresponding  one-letter
+                   flags     described    under    the    various
+                   <B>--&lt;LANG&gt;-types</B> options above, or a full  name.
+                   It is permitted (and is, in fact, the default)
+                   for the key portion of this field to be  omit­
+                   (i.e. inherits from).
+
+
+       In addition, information on the scope of the  tag  defini­
+       tion  may be available, with the key portion equal to some
+       language-dependent construct name and its value  the  name
+       declared  for  that  construct  in the program. This scope
+       entry indicates the scope in which the tag was found.  For
+       example,  a  tag  generated for a C structure member would
+       have a scope looking like "struct:myStruct".
+
+
+
+
+</PRE>
+<H2>HOW TO USE WITH VI</H2><PRE>
+       Vi will, by default, expect a tag file by the name  "tags"
+       in  the current directory. Once the tag file is built, the
+       following commands exercise the tag indexing feature:
+
+       <B>vi</B> <B>-t</B> <B>tag</B>   Start vi and position the cursor at  the  file
+                   and line where "tag" is defined.
+
+       <B>:ta</B> <B>tag</B>     Find a tag.
+
+       <B>Ctrl-]</B>      Find the tag under the cursor.
+
+       <B>Ctrl-T</B>      Return to previous location before jump to tag
+                   (not widely implemented).
+
+
+
+
+</PRE>
+<H2>HOW TO USE WITH GNU EMACS</H2><PRE>
+       Emacs will, by default, expect a  tag  file  by  the  name
+       "TAGS"  in  the  current  directory.  Once the tag file is
+       built, the following commands exercise  the  tag  indexing
+       feature:
+
+       <B>M-x</B> <B>visit-tags-table</B> <B>&lt;RET&gt;</B> <B>FILE</B> <B>&lt;RET&gt;</B>
+                 Select the tag file, "FILE", to use.
+
+       <B>M-.</B> <B>[TAG]</B> <B>&lt;RET&gt;</B>
+                 Find  the  first  definition of TAG. The default
+                 tag is the identifier under the cursor.
+
+       <B>M-*</B>       Pop back to where you previously invoked  "M-.".
+
+       <B>C-u</B> <B>M-.</B>   Find the next definition for the last tag.
+
+
+       For  more  commands,  see the <I>Tags</I> topic in the Emacs info
+       document.
+
+
+       Because  <B>ctags</B>  is  neither a preprocessor nor a compiler,
+       use of preprocessor macros  can  fool  <B>ctags</B>  into  either
+       missing  tags or improperly generating inappropriate tags.
+       Although <B>ctags</B> has been designed to handle certain  common
+       cases,  this is the single biggest cause of reported prob­
+       lems. In particular, the use  of  preprocessor  constructs
+       which  alter  the  textual syntax of C can fool <B>ctags</B>. You
+       can work around many such problems by using the <B>-I</B> option.
+
+       White  space  is treated as a separator for file names and
+       options read from  list  files,  specified  using  the  <B>-L</B>
+       option,  and  in filter mode (specified using the <B>--filter</B>
+       option). Therefore, it is not currently possible to supply
+       file  names  or  other  options  containing embedded white
+       space (spaces, etc.) through these options.
+
+       Note that when <B>ctags</B> generates uses patterns for  locating
+       tags  (see  the  <B>--excmd</B>  option), it is entirely possible
+       that the wrong line may be found by your editor  if  there
+       exists  another source line which is identical to the line
+       containing the tag.  The  following  example  demonstrates
+       this condition:
+
+              int variable;
+
+              /* ... */
+              void foo(variable)
+              int variable;
+              {
+                  /* ... */
+              }
+
+       Depending  upon which editor you use and where in the code
+       you happen to be, it is possible that the  search  pattern
+       may locate the local parameter declaration in foo() before
+       it finds the actual global variable definition, since  the
+       lines (and therefore their search patterns are identical).
+       This can be avoided by use of the <B>--excmd</B>=<I>n</I> option.
+
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       <B>Ctags</B> has more options than <B>ls(1)</B>.
+
+       When  parsing  a  C++  member  function  definition  (e.g.
+       "className::function"), <B>ctags</B> cannot determine whether the
+       scope specifier is a class name or a  namespace  specifier
+       and  always  lists it as a class name in the scope portion
+       of the extension fields. Also, if the  function  defintion
+       is located in a separate file from than where the class is
+       defined (the usual case), the access  specification  (i.e.
+       public,  protected, or private) that the function had when
+               options  specified  in this variable. Only options
+               will be read from this  variable.  Note  that  all
+               white space in this variable in considered a sepa­
+               rator, making it  impossible  to  pass  an  option
+               parameter containing an embedded space. If this is
+               a problem, use a configuration file instead.
+
+
+       <B>ETAGS</B>   Similar to the <B>CTAGS</B> variable  above,  this  vari­
+               able, if found, will be read when <B>ctags</B> <B>-e</B> starts.
+               If this variable is not found, <B>ctags</B> <B>-e</B>  will  try
+               to use <B>CTAGS</B> instead.
+
+
+       <B>TMPDIR</B>  On  Unix-like  hosts where mkstemp() is available,
+               the value of this variable specifies the directory
+               in  which  to  place  temporary files. This can be
+               useful if the size of a temporary file becomes too
+               large  to fit on the partition holding the default
+               temporary directory defined at  compilation  time.
+               <B>ctags</B>  creates  temporary files only if either (1)
+               an emacs-style tag file is  being  generated,  (2)
+               the  tag file is being sent to standard output, or
+               (3) the program was compiled to  use  an  internal
+               sort  algorithm  to  sort the tag files instead of
+               the the sort utility of the operating  system.  If
+               the  sort utility of the operating system is being
+               used, it  will  generally  observe  this  variable
+               also.  Note  that if <B>ctags</B> is setuid, the value of
+               TMPDIR will be ignored.
+
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/ctags.cnf</I> <I>(on</I> <I>MSDOS,</I> <I>MSWindows</I> <I>only)</I>
+       <I>/etc/ctags.conf</I>
+       <I>/usr/local/etc/ctags.conf</I>
+       <I>$HOME/.ctags</I> <I>($HOME/ctags.cnf</I> <I>on</I> <I>MSDOS,</I> <I>MSWindows)</I>
+       <I>.ctags</I> <I>(ctags.cnf</I> <I>on</I> <I>MSDOS,</I> <I>MSWindows)</I>
+              If any of these  configuration  files  exist,  each
+              will  be  expected  to  contain  a  set  of default
+              options which are read in  the  order  listed  when
+              <B>ctags</B>  starts,  but  before  the  <B>CTAGS</B> environment
+              variable is read or any command  line  options  are
+              read.  This  makes it possible to set up site-wide,
+              personal or project-level defaults. It is  possible
+              to  compile  <B>ctags</B> to read an additional configura­
+              tion file before any of those  shown  above,  which
+              will  be  indicated  if  the output produced by the
+              <B>--version</B> option lists the  "custom-conf"  feature.
+              Options appearing in the <B>CTAGS</B> environment variable
+              or on the command line will override options speci­
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>etags(1)</B>, <B>gctags(1)</B>, <B>global(1)</B>, <B>gnuctags(1)</B>.
+
+
+       The official Exuberant Ctags web site at:
+
+              http://ctags.sourceforge.net
+
+       Also <B>ex(1)</B>, <B>vi(1)</B>, <B>elvis</B>, or, better yet, <B>vim</B>,  the  offi­
+       cial editor of <B>ctags</B>. For more information on <B>vim</B>, see the
+       VIM Pages web site at:
+
+              http://www.vim.org/
+
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Darren Hiebert &lt;dhiebert@users.sourceforge.net&gt;
+       http://DarrenHiebert.com/
+
+
+
+
+</PRE>
+<H2>MOTIVATION</H2><PRE>
+       "Think ye at all times of rendering some service to  every
+       member of the human race."
+
+       "All  effort  and exertion put forth by man from the full­
+       ness of his heart is worship, if it  is  prompted  by  the
+       highest motives and the will to do service to humanity."
+
+              -- From the Baha'i Writings
+
+
+
+
+</PRE>
+<H2>CREDITS</H2><PRE>
+       This  version  of  <B>ctags</B>  was  originally derived from and
+       inspired by the ctags program by Steve  Kirkendall  &lt;kirk­
+       enda@cs.pdx.edu&gt;  that  comes  with  the  Elvis  vi  clone
+       (though virtually none of the original code remains).
+
+       Credit is also  due  Bram  Moolenaar  &lt;Bram@vim.org&gt;,  the
+       author  of  <B>vim</B>,  who  has devoted so much of his time and
+       energy both to developing the editor as a service to  oth­
+       ers, and to helping the orphans of Uganda.
+
+       The  section  entitled  "HOW  TO  USE  WITH GNU EMACS" was
+       shamelessly stolen from the info page for GNU <B>etags</B>.
+
+
+
+Darren Hiebert            Version 5.3.1                  <B>CTAGS(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

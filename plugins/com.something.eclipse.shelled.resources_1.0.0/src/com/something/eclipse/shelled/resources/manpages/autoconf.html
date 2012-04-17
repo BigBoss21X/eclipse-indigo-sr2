@@ -1,0 +1,104 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>autoconf</B> [<I>OPTION</I>] ... [<I>TEMPLATE-FILE</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Generate  a  configuration  script from a TEMPLATE-FILE if
+       given, or `configure.ac'  if  present,  or  else  `config­
+       ure.in'.   Output  is  sent to the standard output if TEM­
+       PLATE-FILE is given, else into `configure'.
+
+   <B>Operation</B> <B>modes:</B>
+       <B>-h</B>, <B>--help</B>
+              print this help, then exit
+
+       <B>-V</B>, <B>--version</B>
+              print version number, then exit
+
+       <B>-v</B>, <B>--verbose</B>
+              verbosely report processing
+
+       <B>-d</B>, <B>--debug</B>
+              don't remove temporary files
+
+       <B>-f</B>, <B>--force</B>
+              consider all files obsolete
+
+       <B>-o</B>, <B>--output</B>=<I>FILE</I>
+              save output in FILE (stdout is the default)
+
+       <B>-W</B>, <B>--warnings</B>=<I>CATEGORY</I>
+              report the warnings falling in CATEGORY [syntax]
+
+   <B>Warning</B> <B>categories</B> <B>include:</B>
+       `cross'
+              cross compilation issues
+
+       `obsolete'
+              obsolete constructs
+
+       `syntax'
+              dubious syntactic constructs
+
+       `all'  all the warnings
+
+       `no-CATEGORY'
+              turn off the warnings on CATEGORY
+
+       `none' turn off all the warnings
+
+       `error'
+              warnings are error
+
+       The environment variable `WARNINGS' is honored.
+
+       In tracing mode, no configuration script is created.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by David J. MacKenzie and Akim Demaille.
+
+       Copyright 2002 Free Software  Foundation,  Inc.   This  is
+       free  software;  see  the  source  for copying conditions.
+       There is NO warranty; not even for MERCHANTABILITY or FIT­
+       NESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-autoconf@gnu.org&gt;.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>autoconf(1)</B>,  <B>automake(1)</B>,  <B>autoreconf(1)</B>,  <B>autoupdate(1)</B>,
+       <B>autoheader(1)</B>,    <B>autoscan(1)</B>,    <B>config.guess(1)</B>,    <B>con­</B>
+       <B>fig.sub(1)</B>, <B>ifnames(1)</B>, <B>libtool(1)</B>.
+
+       The  full  documentation  for  <B>autoconf</B> is maintained as a
+       Texinfo manual.  If the <B>info</B>  and  <B>autoconf</B>  programs  are
+       properly installed at your site, the command
+
+              <B>info</B> <B>autoconf</B>
+
+       should give you access to the complete manual.
+
+
+
+autoconf 2.57             December 2002               <B>AUTOCONF(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,173 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>a2p</B> <B>[options]</B> <B>filename</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>A2p</I> takes an awk script specified on the command line (or
+       from standard input) and produces a comparable <I>perl</I> script
+       on the standard output.
+
+       <B>Options</B>
+
+       Options include:
+
+       <B>-D&lt;number&gt;</B>
+            sets debugging flags.
+
+       <B>-F&lt;character&gt;</B>
+            tells a2p that this awk script is always invoked with
+            this <B>-F</B> switch.
+
+       <B>-n&lt;fieldlist&gt;</B>
+            specifies the names of the input fields if input does
+            not have to be split into an array.  If you were
+            translating an awk script that processes the password
+            file, you might say:
+
+                    a2p -7 -nlogin.password.uid.gid.gcos.shell.home
+
+            Any delimiter can be used to separate the field
+            names.
+
+       <B>-&lt;number&gt;</B>
+            causes a2p to assume that input will always have that
+            many fields.
+
+       <B>-o</B>   tells a2p to use old awk behavior.  The only current
+            differences are:
+
+            ·    Old awk always has a line loop, even if there
+                 are no line actions, whereas new awk does not.
+
+            ·    In old awk, sprintf is extremely greedy about
+                 its arguments.  For example, given the statement
+
+                         print sprintf(some_args), extra_args;
+
+                 old awk considers <I>extra</I><B>_</B><I>args</I> to be arguments to
+                 "sprintf"; new awk considers them arguments to
+                 "print".
+
+       <B>"Considerations"</B>
+
+       A2p cannot do as good a job translating as a human would,
+       time which comparison to do.  A2p does not try to do a
+       complete job of awk emulation at this point.  Instead it
+       guesses which one you want.  It's almost always right, but
+       it can be spoofed.  All such guesses are marked with the
+       comment ""#???"".  You should go through and check them.
+       You might want to run at least once with the <B>-w</B> switch to
+       perl, which will warn you if you use == where you should
+       have used eq.
+
+       Perl does not attempt to emulate the behavior of awk in
+       which nonexistent array elements spring into existence
+       simply by being referenced.  If somehow you are relying on
+       this mechanism to create null entries for a subsequent
+       for...in, they won't be there in perl.
+
+       If a2p makes a split line that assigns to a list of vari­
+       ables that looks like (Fld1, Fld2, Fld3...) you may want
+       to rerun a2p using the <B>-n</B> option mentioned above.  This
+       will let you name the fields throughout the script.  If it
+       splits to an array instead, the script is probably refer­
+       ring to the number of fields somewhere.
+
+       The exit statement in awk doesn't necessarily exit; it
+       goes to the END block if there is one.  Awk scripts that
+       do contortions within the END block to bypass the block
+       under such circumstances can be simplified by removing the
+       conditional in the END block and just exiting directly
+       from the perl script.
+
+       Perl has two kinds of array, numerically-indexed and asso­
+       ciative.  Perl associative arrays are called "hashes".
+       Awk arrays are usually translated to hashes, but if you
+       happen to know that the index is always going to be
+       numeric you could change the {...} to [...].  Iteration
+       over a hash is done using the <I>keys()</I> function, but itera­
+       tion over an array is NOT.  You might need to modify any
+       loop that iterates over such an array.
+
+       Awk starts by assuming OFMT has the value %.6g.  Perl
+       starts by assuming its equivalent, $#, to have the value
+       %.20g.  You'll want to set $# explicitly if you use the
+       default value of OFMT.
+
+       Near the top of the line loop will be the split operation
+       that is implicit in the awk script.  There are times when
+       you can move this down past some conditionals that test
+       the entire record so that the split is not done as often.
+
+       For aesthetic reasons you may wish to change the array
+       base $[ from 1 back to perl's default of 0, but remember
+       to change all array subscripts AND all <I>substr()</I> and
+       <I>index()</I> operations to match.
+
+       The produced perl script may have subroutines defined to
+       deal with awk's semantics regarding getline and print.
+       Since a2p usually picks correctness over efficiency.  it
+       is almost always possible to rewrite such code to be more
+       efficient by discarding the semantic sugar.
+
+       For efficiency, you may wish to remove the keyword from
+       any return statement that is the last statement executed
+       in a subroutine.  A2p catches the most common case, but
+       doesn't analyze embedded blocks for subtler cases.
+
+       ARGV[0] translates to $ARGV0, but ARGV[n] translates to
+       $ARGV[$n].  A loop that tries to iterate over ARGV[0]
+       won't find it.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       A2p uses no environment variables.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Larry Wall &lt;<I>larry@wall.org</I>&gt;
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+        perl   The perl compiler/interpreter
+
+        s2p    sed to perl translator
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       It would be possible to emulate awk's behavior in select­
+       ing string versus numeric operations at run time by
+       inspection of the operands, but it would be gross and
+       inefficient.  Besides, a2p almost always guesses right.
+
+       Storage for the awk syntax tree is currently static, and
+       can run out.
+
+
+
+perl v5.8.0                 2002-06-01                     <B>A2P(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

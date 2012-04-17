@@ -1,0 +1,71 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>fdformat</B> <B>[</B> <B>-n</B> <B>]</B> device
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>fdformat</B> does a low level format on a floppy disk.  <I>device</I>
+       is usually one of the following (for floppy  devices,  the
+       major  =  2, and the minor is shown for informational pur­
+       poses only):
+
+              /dev/fd0d360  (minor = 4)
+              /dev/fd0h1200 (minor = 8)
+              /dev/fd0D360  (minor = 12)
+              /dev/fd0H360  (minor = 12)
+              /dev/fd0D720  (minor = 16)
+              /dev/fd0H720  (minor = 16)
+              /dev/fd0h360  (minor = 20)
+              /dev/fd0h720  (minor = 24)
+              /dev/fd0H1440 (minor = 28)
+
+              /dev/fd1d360  (minor = 5)
+              /dev/fd1h1200 (minor = 9)
+              /dev/fd1D360  (minor = 13)
+              /dev/fd1H360  (minor = 13)
+              /dev/fd1D720  (minor = 17)
+              /dev/fd1H720  (minor = 17)
+              /dev/fd1h360  (minor = 21)
+              /dev/fd1h720  (minor = 25)
+              /dev/fd1H1440 (minor = 29)
+
+       The generic floppy devices, /dev/fd0  and  /dev/fd1,  will
+       fail  to  work with <B>fdformat</B> when a non-standard format is
+       being used, or if the format  has  not  been  autodetected
+       earlier.   In  this case, use <B>setfdprm(8)</B> to load the disk
+       parameters.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-n</B>     No verify.  This option will disable the  verifica­
+              tion that is performed after the format.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>fd(4)</B>, <B>setfdprm(8)</B>, <B>mkfs(8)</B>, <B>emkfs(8)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Werner Almesberger (almesber@nessie.cs.id.ethz.ch)
+
+
+
+Linux 0.99               1 February 1993              <B>FDFORMAT(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

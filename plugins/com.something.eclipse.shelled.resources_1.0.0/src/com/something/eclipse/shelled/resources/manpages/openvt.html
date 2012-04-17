@@ -1,0 +1,81 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>openvt</B> [-c vtnumber] [-s] [-u] [-l] [-v] [--] command com­
+       mand_options
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>openvt</B> will find the first available VT, and run on it the
+       given  <B>command</B>  with  the  given <B>command</B> <B>options</B>, standard
+       input, output and error are directed to that terminal. The
+       current  search path ($PATH) is used to find the requested
+       command. If no command is specified then  the  environment
+       variable $SHELL is used.
+
+   <B>OPTIONS</B>
+       <I>-c</I> <I>vtnumber</I>
+              Use  the  given  VT number and not the first avail­
+              able. Note you must have write access to  the  sup­
+              plied VT for this to work.
+
+       <I>-s</I>     Switch to the new VT when starting the command. The
+              VT of the new command will be made the new  current
+              VT.
+
+       <I>-u</I>     Figure  out  the  owner  of the current VT, and run
+              login as that user.  Suitable to be called by init.
+              Shouldn't be used with -c or -l.
+
+       <I>-l</I>     Make the command a login shell. A - is prepended to
+              the name of the command to be executed.
+
+       <I>-v</I>     Be a bit more verbose.
+
+       <I>-w</I>     wait for command to complete. If -w and -s are used
+              together  then  <B>openvt</B> will switch back to the con­
+              trolling terminal when the command completes.
+
+       <I>--</I>     end of options to <B>openvt</B>.
+
+
+</PRE>
+<H2>NOTE</H2><PRE>
+       If <B>openvt</B> is compiled with a POSIX (GNU) getopt() and  you
+       wish  to  set  options  to the command to be run, then you
+       must supply the end of options -- flag before the command.
+
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+       <B>openvt</B>  can  be used to start a shell on the next free VT,
+       by using the command:
+
+       <I>openvt</I> <I>bash</I>
+
+
+       To start the shell as a login shell, use:
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>chvt(1)</B>, <B>doshell(8)</B>, <B>login(1)</B>
+
+
+
+19 Jul 1996                    V1.4                     <B>OPENVT(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

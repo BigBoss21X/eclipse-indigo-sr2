@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>mknod</B> [<I>OPTION</I>]... <I>NAME</I> <I>TYPE</I> [<I>MAJOR</I> <I>MINOR</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Create the special file NAME of the given TYPE.
+
+       Mandatory  arguments  to  long  options  are mandatory for
+       short options too.
+
+       <B>-m</B>, <B>--mode</B>=<I>MODE</I>
+              set permission mode (as in chmod), not a=rw - umask
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+       Both  MAJOR and MINOR must be specified when TYPE is b, c,
+       or u, and they must be omitted when TYPE is p.   If  MAJOR
+       or  MINOR  begins with 0x or 0X, it is interpreted as hex­
+       adecimal; otherwise, if it begins with 0, as octal; other­
+       wise, as decimal.  TYPE may be:
+
+       b      create a block (buffered) special file
+
+       c, u   create a character (unbuffered) special file
+
+       p      create a FIFO
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by David MacKenzie.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-coreutils@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2003 Free Software Foundation, Inc.
+       This  is  free software; see the source for copying condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  full  documentation for <B>mknod</B> is maintained as a Tex­
+       info manual.  If the <B>info</B> and <B>mknod</B> programs are  properly
+       installed at your site, the command
+
+              <B>info</B> <B>mknod</B>
+
+       should give you access to the complete manual.
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

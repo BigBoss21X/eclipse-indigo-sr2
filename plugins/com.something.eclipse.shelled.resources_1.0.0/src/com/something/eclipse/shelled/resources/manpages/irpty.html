@@ -1,0 +1,60 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>irpty</B> [<I>options</I>] <I>config</I><B>_</B><I>file</I> <I>--</I> <I>program</I> [<I>args</I> ...]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       irpty connects to lircd to receive infrared codes and con­
+       verts them to key strokes. E.g. type  irpty  ~/.lircrc  --
+       workbone  to  control  the  CD-player program workbone. Of
+       course you will have to create an appropriate config  file
+       for  this  purpose first. The config string will be passed
+       to the desired application. Note that you can  use  escape
+       sequences to specify non printable characters. Have a look
+       at the .lircrc file format description for details.
+
+       <B>-h</B> <B>--help</B>
+              display usage summary
+
+       <B>-V</B> <B>--version</B>
+              display version
+
+       <B>-s</B> <B>--socket</B>=<I>socket</I>
+              select a non-default socket location
+
+       <B>-e</B> <B>--no-echo</B>
+              disable echo
+
+       <B>-i</B> <B>--ignore-eof</B>
+              ignore EOF
+
+       <B>-n</B> <B>--non-interactive</B>
+              force non-interactive mode
+
+       <B>-v</B> <B>--verbose</B>
+              verbose mode
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The documentation for <B>lirc</B> is maintained  as  html  pages.
+       They  are  located under html/ in the documentation direc­
+       tory.
+
+
+
+irpty 0.6.6                October 2002                  <B>IRPTY(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

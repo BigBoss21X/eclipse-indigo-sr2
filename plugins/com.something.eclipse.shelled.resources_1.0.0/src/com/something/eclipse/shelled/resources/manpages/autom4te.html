@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>autom4te</B> [<I>OPTION</I>] ... [<I>FILES</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Run  GNU  M4  on the FILES, avoiding useless runs.  Output
+       the traces if tracing, the frozen file if freezing, other­
+       wise the expansion of the FILES.
+
+       If some of the FILES are named `FILE.m4f' they are consid­
+       ered to be M4 frozen  files  of  all  the  previous  files
+       (which  are  therefore  not loaded).  If `FILE.m4f' is not
+       found, then `FILE.m4' will be used, together with all  the
+       previous files.
+
+       Some  files  may be optional, i.e., will only be processed
+       if found in the include path, but then must end in `.m4?';
+       the question mark is not part of the actual file name.
+
+   <B>Operation</B> <B>modes:</B>
+       <B>-h</B>, <B>--help</B>
+              print this help, then exit
+
+       <B>-V</B>, <B>--version</B>
+              print version number, then exit
+
+       <B>-v</B>, <B>--verbose</B>
+              verbosely report processing
+
+       <B>-d</B>, <B>--debug</B>
+              don't remove temporary files
+
+       <B>-o</B>, <B>--output</B>=<I>FILE</I>
+              save output in FILE (defaults to `-', stdout)
+
+       <B>-f</B>, <B>--force</B>
+              don't rely on cached values
+
+       <B>-W</B>, <B>--warnings</B>=<I>CATEGORY</I>
+              report the warnings falling in CATEGORY
+
+       <B>-l</B>, <B>--language</B>=<I>LANG</I>
+              specify the set of M4 macros to use
+
+       <B>-C</B>, <B>--cache</B>=<I>DIRECTORY</I>
+              preserve results for future runs in DIRECTORY
+
+       <B>--no-cache</B>
+              disable the cache
+
+       <B>-m</B>, <B>--mode</B>=<I>OCTAL</I>
+              change the non trace output file mode (0666)
+
+
+   <B>Warning</B> <B>categories</B> <B>include:</B>
+       `cross'
+              cross compilation issues
+
+       `obsolete'
+              obsolete constructs
+
+       `syntax'
+              dubious syntactic constructs
+
+       `all'  all the warnings
+
+       `no-CATEGORY'
+              turn off the warnings on CATEGORY
+
+       `none' turn off all the warnings
+
+       `error'
+              warnings are error
+
+       The environment variable `WARNINGS' is honored.
+
+   <B>Library</B> <B>directories:</B>
+       <B>-B</B>, <B>--prepend-include</B>=<I>DIR</I>
+              prepend directory DIR to search path
+
+       <B>-I</B>, <B>--include</B>=<I>DIR</I>
+              append directory DIR to search path
+
+   <B>Tracing:</B>
+       <B>-t</B>, <B>--trace</B>=<I>MACRO</I>
+              report the MACRO invocations
+
+       <B>-p</B>, <B>--preselect</B>=<I>MACRO</I>
+              prepare to trace MACRO in a future run
+
+   <B>Freezing:</B>
+       <B>-F</B>, <B>--freeze</B>
+              produce an M4 frozen state file for FILES
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Akim Demaille.
+
+       Copyright  2002  Free  Software  Foundation, Inc.  This is
+       free software; see  the  source  for  copying  conditions.
+       There is NO warranty; not even for MERCHANTABILITY or FIT­
+       NESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-autoconf@gnu.org&gt;.
+
+
+autom4te 2.57             December 2002               <B>AUTOM4TE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

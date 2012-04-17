@@ -1,0 +1,176 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>gperf</B> [<I>OPTION</I>]... [<I>INPUT-FILE</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       GNU `gperf' generates perfect hash functions.
+
+       If  a  long option shows an argument as mandatory, then it
+       is mandatory for the equivalent short option also.
+
+   <B>Input</B> <B>file</B> <B>interpretation:</B>
+       <B>-e</B>, <B>--delimiters</B>=<I>DELIMITER-LIST</I>
+              Allow user to provide a  string  containing  delim­
+              iters   used   to   separate  keywords  from  their
+              attributes.  Default is ",\n".
+
+       <B>-t</B>, <B>--struct-type</B>
+              Allows the user to include a structured type decla­
+              ration  for  generated  code. Any text before %% is
+              considered part of the type declaration. Key  words
+              and additional fields may follow this, one group of
+              fields per line.
+
+   <B>Language</B> <B>for</B> <B>the</B> <B>output</B> <B>code:</B>
+       <B>-L</B>, <B>--language</B>=<I>LANGUAGE-NAME</I>
+              Generates code in the specified language. Languages
+              handled are currently C++, ANSI-C, C, and KR-C. The
+              default is C.
+
+   <B>Details</B> <B>in</B> <B>the</B> <B>output</B> <B>code:</B>
+       <B>-K</B>, <B>--slot-name</B>=<I>NAME</I>
+              Select name of the keyword component in the keyword
+              structure.
+
+       <B>-F</B>, <B>--initializer-suffix</B>=<I>INITIALIZERS</I>
+              Initializers  for additional components in the key­
+              word structure.
+
+       <B>-H</B>, <B>--hash-fn-name</B>=<I>NAME</I>
+              Specify name of generated hash function. Default is
+              `hash'.
+
+       <B>-N</B>, <B>--lookup-fn-name</B>=<I>NAME</I>
+              Specify  name of generated lookup function. Default
+              name is `in_word_set'.
+
+       <B>-Z</B>, <B>--class-name</B>=<I>NAME</I>
+              Specify name of generated C++ class.  Default  name
+              is `Perfect_Hash'.
+
+       <B>-7</B>, <B>--seven-bit</B>
+              Assume 7-bit characters.
+
+              &lt;string.h&gt; at the beginning of the code.
+
+       <B>-G</B>, <B>--global</B>
+              Generate  the  static table of keywords as a static
+              global variable, rather than hiding  it  inside  of
+              the  lookup  function  (which is the default behav­
+              ior).
+
+       <B>-W</B>, <B>--word-array-name</B>=<I>NAME</I>
+              Specify name of word list array.  Default  name  is
+              `wordlist'.
+
+       <B>-S</B>, <B>--switch</B>=<I>COUNT</I>
+              Causes  the generated C code to use a switch state­
+              ment scheme, rather than  an  array  lookup  table.
+              This can lead to a reduction in both time and space
+              requirements for some keyfiles. The COUNT  argument
+              determines  how  many  switch statements are gener­
+              ated.  A value of 1 generates 1  switch  containing
+              all  the  elements, a value of 2 generates 2 tables
+              with 1/2 the elements in each table, etc. If  COUNT
+              is  very  large,  say 1000000, the generated C code
+              does a binary search.
+
+       <B>-T</B>, <B>--omit-struct-type</B>
+              Prevents the transfer of the  type  declaration  to
+              the  output  file.  Use  this option if the type is
+              already defined elsewhere.
+
+   <B>Algorithm</B> <B>employed</B> <B>by</B> <B>gperf:</B>
+       <B>-k</B>, <B>--key-positions</B>=<I>KEYS</I>
+              Select the key positions used in the hash function.
+              The  allowable  choices range between 1-126, inclu­
+              sive.   The  positions  are  separated  by  commas,
+              ranges  may be used, and key positions may occur in
+              any order.  Also, the meta-character '*' causes the
+              generated  hash  function to consider ALL key posi­
+              tions, and $ indicates the ``final character'' of a
+              key, e.g., $,1,2,4,6-10.
+
+       <B>-l</B>, <B>--compare-strlen</B>
+              Compare key lengths before trying a string compari­
+              son. This helps cut down on the  number  of  string
+              comparisons made during the lookup.
+
+       <B>-D</B>, <B>--duplicates</B>
+              Handle keywords that hash to duplicate values. This
+              is useful  for  certain  highly  redundant  keyword
+              sets.
+
+       <B>-f</B>, <B>--fast</B>=<I>ITERATIONS</I>
+              Generate  the gen-perf.hash function ``fast''. This
+              sions. Must be an odd number, default is 5.
+
+       <B>-n</B>, <B>--no-strlen</B>
+              Do not include the length of the keyword when  com­
+              puting the hash function.
+
+       <B>-o</B>, <B>--occurrence-sort</B>
+              Reorders  input  keys by frequency of occurrence of
+              the key sets. This should decrease the search  time
+              dramatically.
+
+       <B>-r</B>, <B>--random</B>
+              Utilizes  randomness  to  initialize the associated
+              values table.
+
+       <B>-s</B>, <B>--size-multiple</B>=<I>N</I>
+              Affects the size of the generated hash  table.  The
+              numeric  argument  N  indicates  ``how  many  times
+              larger or  smaller''  the  associated  value  range
+              should  be,  in relationship to the number of keys,
+              e.g. a value of 3 means ``allow the maximum associ­
+              ated value to be about 3 times larger than the num­
+              ber of input keys.''  Conversely,  a  value  of  <B>-3</B>
+              means  ``make  the maximum associated value about 3
+              times smaller than the  number  of  input  keys.  A
+              larger  table should decrease the time required for
+              an unsuccessful search, at  the  expense  of  extra
+              table space. Default value is 1.
+
+   <B>Informative</B> <B>output:</B>
+       <B>-h</B>, <B>--help</B>
+              Print this message.
+
+       <B>-v</B>, <B>--version</B>
+              Print the gperf version number.
+
+       <B>-d</B>, <B>--debug</B>
+              Enables the debugging option (produces verbose out­
+              put to the standard error).
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-gnu-utils@gnu.org&gt;.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The full documentation for <B>gperf</B> is maintained as  a  Tex­
+       info  manual.  If the <B>info</B> and <B>gperf</B> programs are properly
+       installed at your site, the command
+
+              <B>info</B> <B>gperf</B>
+
+       should give you access to the complete manual.
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

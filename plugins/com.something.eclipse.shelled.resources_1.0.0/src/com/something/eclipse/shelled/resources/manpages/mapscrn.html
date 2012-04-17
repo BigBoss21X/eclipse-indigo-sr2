@@ -1,0 +1,90 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>mapscrn</B> [<B>-v</B>] [<B>-o</B> <I>map.orig</I>] <I>mapfile</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  <B>mapscrn</B>  command  is  obsolete  - its function is now
+       built-in into setfont.  However, for backwards compatibil­
+       ity it is still available as a separate command.
+
+       The  <I>mapscrn</I> command loads a user defined output character
+       mapping table into the console driver. The console  driver
+       may  be later put into <B>use</B> <B>user-defined</B> <B>mapping</B> <B>table</B> mode
+       by outputting a special escape  sequence  to  the  console
+       device.  This sequence is <I>&lt;esc&gt;(K</I> for the <B>G0</B> character set
+       and <I>&lt;esc&gt;)K</I> for the <B>G1</B> character set.  When the <I>-o</I>  option
+       is given, the old map is saved in <I>map.orig.</I>
+
+
+</PRE>
+<H2>USE</H2><PRE>
+       There  are  two  kinds  of  mapping tables: direct-to-font
+       tables, that give a  font  position  for  each  user  byte
+       value,  and  user-to-unicode  tables  that  give a unicode
+       value for each user byte. The corresponding glyph  is  now
+       found using the unicode index of the font.  The command
+              mapscrn trivial
+       sets up a one-to-one direct-to-font table where user bytes
+       directly address the font. This is useful for  fonts  that
+       are  in  the  same order as the character set one uses.  A
+       command like
+              mapscrn 8859-2
+       sets up a user-to-unicode table that assumes that the user
+       uses ISO 8859-2.
+
+
+</PRE>
+<H2>INPUT FORMAT</H2><PRE>
+       The <I>mapscrn</I> command can read the map in either of two for­
+       mats:
+       1. 256 or 512 bytes binary data
+       2. two-column text file
+       Format (1) is a direct image of the translation <I>table.</I> <I>The</I>
+       <I>256-bytes</I>  <I>tables</I> <I>are</I> <I>direct-to-font,</I> the 512-bytes tables
+       are user-to-unicode tables.  Format (2) is  used  to  fill
+       the  <I>table</I>  as  follows: cell with offset mentioned in the
+       first column is filled with the  value  mentioned  in  the
+       second column.  When values larger than 255 occur, or val­
+       ues are written using the U+xxxx notation,  the  table  is
+       assumed  to  be a user-to-unicode table, otherwise it is a
+       direct-to-font table.
+
+       Values in the file may be specified in one of several <B>for­</B>
+       <B>mats:</B>
+       <B>1.</B> <B>Decimal:</B> String of decimal digits not starting with '0'
+       <B>2.</B> <B>Octal:</B> String of octal digits beginning with '0'.
+       <B>3.</B> <B>Hexadecimal:</B> String of hexadecimal digits  preceded  by
+       "0x".
+       <I>/usr/share/kbd/consoletrans</I> is the default  directory  for
+       screen mappings.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>setfont(8)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Copyright (C) 1993 Eugene G. Crosser
+       &lt;crosser@pccross.msk.su&gt;
+       This software and documentation may be distributed freely.
+
+
+
+Local                     20 March 1993                <B>MAPSCRN(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

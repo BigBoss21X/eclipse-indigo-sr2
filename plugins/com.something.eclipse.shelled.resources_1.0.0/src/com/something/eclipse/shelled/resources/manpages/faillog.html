@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>faillog</B> [<B>-u</B> <I>login-name</I>] [<B>-a</B>] [<B>-t</B> <I>days</I>]
+               [<B>-m</B> <I>max</I>] [<B>-pr</B>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>faillog</B>   formats   the   contents  of  the  failure  log,
+       <I>/var/log/faillog</I>, and maintains failure counts and limits.
+       The  order  of  the  arguments  to <B>faillog</B> is significant.
+       Each argument is processed immediately in the order given.
+
+       The  <B>-p</B>  flag  causes failure entries to be printed in UID
+       order.  Entering <B>-u</B> <I>login-name</I> flag will cause the failure
+       record  for  <I>login-name</I>  only  to be printed.  Entering <B>-t</B>
+       <I>days</I> will cause only the failures more recent than <I>days</I> to
+       be  printed.  The <B>-t</B> flag overrides the use of <B>-u</B>.  The <B>-a</B>
+       flag causes all users to be selected.  When used with  the
+       <B>-p</B> flag, this option selects all users who have ever had a
+       login failure.  It is meaningless with the <B>-r</B> flag.
+
+       The <B>-r</B> flag is used to reset the count of login  failures.
+       Write  access  to  <I>/var/log/faillog</I>  is  required for this
+       option.  Entering <B>-u</B> <I>login-name</I> will cause only the  fail­
+       ure count for <I>login-name</I> to be reset.
+
+       The  <B>-m</B>  flag  is  used to set the maximum number of login
+       failures before the account is disabled.  Write access  to
+       <I>/var/log/faillog</I> is required for this option.  Entering <B>-m</B>
+       <I>max</I> will cause all  accounts  to  be  disabled  after  <I>max</I>
+       failed  logins occur.  This may be modified with <B>-u</B> <I>login-</I>
+       <I>name</I> to limit this function to <I>login-name</I> only.  Selecting
+       a  <I>max</I> value of 0 has the effect of not placing a limit on
+       the number of failed logins.  The  maximum  failure  count
+       should  always  be  0 for <B>root</B> to prevent a denial of ser­
+       vices attack against the system.
+
+       Options may be combined in virtually  any  fashion.   Each
+       <B>-p</B>, <B>-r</B>, and <B>-m</B> option will cause immediate execution using
+       any <B>-u</B> or <B>-t</B> modifier.
+
+
+</PRE>
+<H2>CAVEATS</H2><PRE>
+       <B>faillog</B> only prints out users  with  no  successful  login
+       since the last failure.  To print out a user who has had a
+       successful  login  since  their  last  failure,  you  must
+       explicitly request the user with the <B>-u</B> flag, or print out
+       all users with the <B>-a</B> flag.
+
+       Some  systems  may  replace  /var/log  with  /var/adm   or
+       /usr/adm.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /var/log/faillog - failure logging file
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

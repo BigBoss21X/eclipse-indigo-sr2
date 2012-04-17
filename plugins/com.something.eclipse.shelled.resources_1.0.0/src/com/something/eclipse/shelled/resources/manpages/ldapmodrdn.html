@@ -1,0 +1,166 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ldapmodrdn</B> [<B>-r</B>] [<B>-n</B>] [<B>-v</B>] [<B>-k</B>] [<B>-K</B>] [<B>-c</B>] [<B>-M[M]</B>] [<B>-d</B> <I>debu­</I>
+       <I>glevel</I>]  [<B>-D</B> <I>binddn</I>]  [<B>-W</B>]   [<B>-w</B> <I>passwd</I>]   [<B>-y</B> <I>passwdfile</I>]
+       [<B>-H</B> <I>ldapuri</I>]    [<B>-h</B> <I>ldaphost</I>]    [<B>-p</B> <I>ldapport</I>]    [<B>-P</B> <I>2</I>|<I>3</I>]
+       [<B>-O</B> security-properties<B>]</B> [<B>-I</B>] [<B>-Q</B>] [<B>-U</B> <I>authcid</I>] [<B>-R</B> <I>realm</I>]
+       [<B>-x</B>] [<B>-X</B> <I>authzid</I>] [<B>-Y</B> <I>mech</I>] [<B>-Z[Z]</B>] [<B>-f</B> <I>file</I>] [<I>dn</I> <I>rdn</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>ldapmodrdn</B>   is   a   shell-accessible  interface  to  the
+       <B>ldap_modrdn2(3)</B> library call.
+
+       <B>ldapmodrdn</B> opens a connection to an  LDAP  server,  binds,
+       and modifies the RDN of entries.  The entry information is
+       read from standard input, from <I>file</I> through the use of the
+       -<I>f</I> option, or from the command-line pair <I>dn</I> and <I>rdn</I>.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-r</B>     Remove  old  RDN values from the entry.  Default is
+              to keep old values.
+
+       <B>-n</B>     Show what would be done, but don't actually  change
+              entries.   Useful for debugging in conjunction with
+              -v.
+
+       <B>-v</B>     Use verbose mode, with many diagnostics written  to
+              standard output.
+
+       <B>-k</B>     Use  Kerberos  IV  authentication instead of simple
+              authentication.  It is  assumed  that  you  already
+              have  a  valid  ticket granting ticket.  <B>ldapmodrdn</B>
+              must be compiled with  Kerberos  support  for  this
+              option to have effect.
+
+       <B>-K</B>     Same as -k, but only does step 1 of the Kerberos IV
+              bind.  This is useful when connecting  to  a  slapd
+              and  there  is no x500dsa.hostname principal regis­
+              tered with your Kerberos Domain Controller(s).
+
+       <B>-c</B>     Continuous operation mode.  Errors  are   reported,
+              but ldapmodify will  continue  with  modifications.
+              The default is to exit after reporting an error.
+
+       <B>-M[M]</B>  Enable manage DSA IT control.   <B>-MM</B>  makes  control
+              critical.
+
+       <B>-d</B> <B>debuglevel</B>
+              Set  the LDAP debugging level to <I>debuglevel</I>.  <B>ldap­</B>
+              <B>modrdn</B> must be compiled with LDAP_DEBUG defined for
+              this option to have any effect.
+
+       <B>-f</B> <B>file</B>
+              Read  the  entry modification information from <I>file</I>
+              tion.
+
+       <B>-y</B> <I>passwdfile</I>
+              Use complete contents of <I>passwdfile</I> as the password
+              for simple authentication.
+
+       <B>-H</B> <I>ldapuri</I>
+              Specify URI(s) referring to the ldap server(s).
+
+       <B>-h</B> <I>ldaphost</I>
+              Specify an alternate host on which the ldap  server
+              is running.  Deprecated in favor of -H.
+
+       <B>-p</B> <I>ldapport</I>
+              Specify an alternate TCP port where the ldap server
+              is listening.  Deprecated in favor of -H.
+
+       <B>-P</B> <I>2</I>|<I>3</I> Specify the LDAP protocol version to use.
+
+       <B>-O</B> <I>security-properties</I>
+              Specify SASL security properties.
+
+       <B>-I</B>     Enable  SASL  Interactive  mode.   Always   prompt.
+              Default is to prompt only as needed.
+
+       <B>-Q</B>     Enable SASL Quiet mode.  Never prompt.
+
+       <B>-U</B> <I>authcid</I>
+              Specify  the  authentication  ID for SASL bind. The
+              form of the ID depends on the actual SASL mechanism
+              used.
+
+       <B>-R</B> <I>realm</I>
+              Specify  the  realm  of  authentication ID for SASL
+              bind. The form of the realm depends on  the  actual
+              SASL mechanism used.
+
+       <B>-X</B> <I>authzid</I>
+              Specify  the  proxy authorization ID for SASL bind.
+              <I>authzid</I> must  be  one  of  the  following  formats:
+              <B>dn:</B><I>&lt;distinguished</I> <I>name&gt;</I> or <B>u:</B><I>&lt;username&gt;</I>
+
+       <B>-Y</B> <I>mech</I>
+              Specify the SASL mechanism to be used for authenti­
+              cation. If it's not  specified,  the  program  will
+              choose the best mechanism the server knows.
+
+       <B>-Z[Z]</B>  Issue  StartTLS (Transport Layer Security) extended
+              operation. If you use <B>-ZZ</B>, the command will require
+              the operation to be successful.
+
+
+</PRE>
+<H2>INPUT FORMAT</H2><PRE>
+       contents:
+
+           cn=Modify Me,dc=example,dc=com
+           cn=The New Me
+
+       the command:
+
+           ldapmodify -r -f /tmp/entrymods
+
+       will change the RDN of the "Modify Me" entry from  "Modify
+       Me"  to  "The  New Me" and the old cn, "Modify Me" will be
+       removed.
+
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       Exit status is 0 if no errors occur.  Errors result  in  a
+       non-zero  exit status and a diagnostic message being writ­
+       ten to standard error.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ldapadd(1)</B>, <B>ldapdelete(1)</B>,  <B>ldapmodify(1)</B>,  <B>ldapsearch(1)</B>,
+       <B>ldap.conf(5)</B>, <B>ldap(3)</B>, <B>ldap_modrdn2(3)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       The OpenLDAP Project &lt;http://www.openldap.org/&gt;
+
+
+</PRE>
+<H2>ACKNOWLEDGEMENTS</H2><PRE>
+       <B>OpenLDAP</B>  is developed and maintained by The OpenLDAP Pro­
+       ject (http://www.openldap.org/).  <B>OpenLDAP</B> is derived from
+       University of Michigan LDAP 3.3 Release.
+
+
+
+OpenLDAP 2.1.12                                     <B>LDAPMODRDN(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

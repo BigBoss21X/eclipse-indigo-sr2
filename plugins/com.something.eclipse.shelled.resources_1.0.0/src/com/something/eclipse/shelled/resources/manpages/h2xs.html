@@ -1,0 +1,357 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>h2xs</B> [<B>OPTIONS</B> ...] [headerfile ... [extra_libraries]]
+
+       <B>h2xs</B> <B>-h</B>|<B>-?</B>|<B>--help</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>h2xs</I> builds a Perl extension from C header files.  The
+       extension will include functions which can be used to
+       retrieve the value of any #define statement which was in
+       the C header files.
+
+       The <I>module</I><B>_</B><I>name</I> will be used for the name of the exten­
+       sion.  If module_name is not supplied then the name of the
+       first header file will be used, with the first character
+       capitalized.
+
+       If the extension might need extra libraries, they should
+       be included here.  The extension Makefile.PL will take
+       care of checking whether the libraries actually exist and
+       how they should be loaded.  The extra libraries should be
+       specified in the form -lm -lposix, etc, just as on the cc
+       command line.  By default, the Makefile.PL will search
+       through the library path determined by Configure.  That
+       path can be augmented by including arguments of the form
+       <B>-L/another/library/path</B> in the extra-libraries argument.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-A</B>, <B>--omit-autoload</B>
+            Omit all autoload facilities.  This is the same as <B>-c</B>
+            but also removes the "use AutoLoader" statement from
+            the .pm file.
+
+       <B>-B</B>, <B>--beta-version</B>
+            Use an alpha/beta style version number.  Causes ver­
+            sion number to be "0.00_01" unless <B>-v</B> is specified.
+
+       <B>-C</B>, <B>--omit-changes</B>
+            Omits creation of the <I>Changes</I> file, and adds a HIS­
+            TORY section to the POD template.
+
+       <B>-F</B>, <B>--cpp-flags</B>=<I>addflags</I>
+            Additional flags to specify to C preprocessor when
+            scanning header for function declarations.  Writes
+            these options in the generated <I>Makefile.PL</I> too.
+
+       <B>-M</B>, <B>--func-mask</B>=<I>regular</I> <I>expression</I>
+            selects functions/macros to process.
+
+       <B>-O</B>, <B>--overwrite-ok</B>
+            Allows a pre-existing extension directory to be over­
+            written.
+
+            (and return the new value) if called with an addi­
+            tional argument. Embedded structures and unions are
+            returned as a pointer rather than the complete struc­
+            ture, to facilitate chained calls.
+
+            These methods all apply to the Ptr type for the
+            structure; additionally two methods are constructed
+            for the structure type itself, "_to_ptr" which
+            returns a Ptr type pointing to the same structure,
+            and a "new" method to construct and return a new
+            structure, initialised to zeroes.
+
+       <B>-b</B>, <B>--compat-version</B>=<I>version</I>
+            Generates a .pm file which is backwards compatible
+            with the specified perl version.
+
+            For versions &lt; 5.6.0, the changes are.
+                - no use of 'our' (uses 'use vars' instead)
+                - no 'use warnings'
+
+            Specifying a compatibility version higher than the
+            version of perl you are using to run h2xs will have
+            no effect.  If unspecified h2xs will default to com­
+            patibility with the version of perl you are using to
+            run h2xs.
+
+       <B>-c</B>, <B>--omit-constant</B>
+            Omit "constant()" from the .xs file and corresponding
+            specialised "AUTOLOAD" from the .pm file.
+
+       <B>-d</B>, <B>--debugging</B>
+            Turn on debugging messages.
+
+       <B>-f</B>, <B>--force</B>
+            Allows an extension to be created for a header even
+            if that header is not found in standard include
+            directories.
+
+       <B>-g</B>, <B>--global</B>
+            Include code for safely storing static data in the
+            .xs file.  Extensions that do no make use of static
+            data can ignore this option.
+
+       <B>-h</B>, <B>-?</B>, <B>--help</B>
+            Print the usage, help and version for this h2xs and
+            exit.
+
+       <B>-k</B>, <B>--omit-const-func</B>
+            For function arguments declared as "const", omit the
+            const attribute in the generated XS code.
+
+       <B>-m</B>, <B>--gen-tied-var</B>
+            This may be useful since, say, types which are "type­
+            def"-equivalent to integers may represent OS-related
+            handles, and one may want to work with these handles
+            in OO-way, as in "$handle-&gt;do_something()".  Use "-o
+            ." if you want to handle all the "typedef"ed types as
+            opaque types.
+
+            The type-to-match is whitewashed (except for commas,
+            which have no whitespace before them, and multiple
+            "*" which have no whitespace between them).
+
+       <B>-p</B>, <B>--remove-prefix</B>=<I>prefix</I>
+            Specify a prefix which should be removed from the
+            Perl function names, e.g., -p sec_rgy_ This sets up
+            the XS <B>PREFIX</B> keyword and removes the prefix from
+            functions that are autoloaded via the "constant()"
+            mechanism.
+
+       <B>-s</B>, <B>--const-subs</B>=<I>sub1,sub2</I>
+            Create a perl subroutine for the specified macros
+            rather than autoload with the <I>constant()</I> subroutine.
+            These macros are assumed to have a return type of
+            <B>char</B> <B>*</B>, e.g., -s sec_rgy_wildcard_name,sec_rgy_wild­
+            card_sid.
+
+       <B>-t</B>, <B>--default-type</B>=<I>type</I>
+            Specify the internal type that the <I>constant()</I> mecha­
+            nism uses for macros.  The default is IV (signed
+            integer).  Currently all macros found during the
+            header scanning process will be assumed to have this
+            type.  Future versions of "h2xs" may gain the ability
+            to make educated guesses.
+
+       <B>--use-new-tests</B>
+            When <B>--compat-version</B> (<B>-b</B>) is present the generated
+            tests will use "Test::More" rather than "Test" which
+            is the default for versions before 5.7.2 .
+            "Test::More" will be added to PREREQ_PM in the gener­
+            ated "Makefile.PL".
+
+       <B>--use-old-tests</B>
+            Will force the generation of test code that uses the
+            older "Test" module.
+
+       <B>--skip-exporter</B>
+            Do not use "Exporter" and/or export any symbol.
+
+       <B>--skip-ppport</B>
+            Do not use "Devel::PPPort": no portability to older
+            version.
+
+       <B>--skip-autoloader</B>
+
+       <B>-x</B>, <B>--autogen-xsubs</B>
+            Automatically generate XSUBs basing on function dec­
+            larations in the header file.  The package "C::Scan"
+            should be installed. If this option is specified, the
+            name of the header file may look like "NAME1,NAME2".
+            In this case NAME1 is used instead of the specified
+            string, but XSUBs are emitted only for the declara­
+            tions included from file NAME2.
+
+            Note that some types of arguments/return-values for
+            functions may result in XSUB-declara­
+            tions/typemap-entries which need hand-editing. Such
+            may be objects which cannot be converted from/to a
+            pointer (like "long long"), pointers to functions, or
+            arrays.  See also the section on "LIMITATIONS of <B>-x</B>".
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+               # Default behavior, extension is Rusers
+               h2xs rpcsvc/rusers
+
+               # Same, but extension is RUSERS
+               h2xs -n RUSERS rpcsvc/rusers
+
+               # Extension is rpcsvc::rusers. Still finds &lt;rpcsvc/rusers.h&gt;
+               h2xs rpcsvc::rusers
+
+               # Extension is ONC::RPC.  Still finds &lt;rpcsvc/rusers.h&gt;
+               h2xs -n ONC::RPC rpcsvc/rusers
+
+               # Without constant() or AUTOLOAD
+               h2xs -c rpcsvc/rusers
+
+               # Creates templates for an extension named RPC
+               h2xs -cfn RPC
+
+               # Extension is ONC::RPC.
+               h2xs -cfn ONC::RPC
+
+               # Makefile.PL will look for library -lrpc in
+               # additional directory /opt/net/lib
+               h2xs rpcsvc/rusers -L/opt/net/lib -lrpc
+
+               # Extension is DCE::rgynbase
+               # prefix "sec_rgy_" is dropped from perl function names
+               h2xs -n DCE::rgynbase -p sec_rgy_ dce/rgynbase
+
+               # Extension is DCE::rgynbase
+               # prefix "sec_rgy_" is dropped from perl function names
+               # subroutines are created for sec_rgy_wildcard_name and sec_rgy_wildcard_sid
+               h2xs -n DCE::rgynbase -p sec_rgy_ \
+               -s sec_rgy_wildcard_name,sec_rgy_wildcard_sid dce/rgynbase
+
+               # Same with function declaration in proto.h as visible from perl.h.
+               h2xs -xAn perl2 perl.h,proto.h
+
+               # Same but select only functions which match /^av_/
+               h2xs -M '^av_' -xAn perl2 perl.h,proto.h
+
+               # Same but treat SV* etc as "opaque" types
+               h2xs -o '^[S]V \*$' -M '^av_' -xAn perl2 perl.h,proto.h
+
+       <B>Extension</B> <B>based</B> <B>on</B> <I>.h</I> <B>and</B> <I>.c</I> <B>files</B>
+
+       Suppose that you have some C files implementing some func­
+       tionality, and the corresponding header files.  How to
+       create an extension which makes this functionality access­
+       able in Perl?  The example below assumes that the header
+       files are <I>interface</I><B>_</B><I>simple.h</I> and <I>interface</I><B>_</B><I>hairy.h</I>, and
+       you want the perl module be named as "Ext::Ension".  If
+       you need some preprocessor directives and/or linking with
+       external libraries, see the flags "-F", "-L" and "-l" in
+       "OPTIONS".
+
+       Find the directory name
+           Start with a dummy run of h2xs:
+
+             h2xs -Afn Ext::Ension
+
+           The only purpose of this step is to create the needed
+           directories, and let you know the names of these
+           directories.  From the output you can see that the
+           directory for the extension is <I>Ext/Ension</I>.
+
+       Copy C files
+           Copy your header files and C files to this directory
+           <I>Ext/Ension</I>.
+
+       Create the extension
+           Run h2xs, overwriting older autogenerated files:
+
+             h2xs -Oxan Ext::Ension interface_simple.h interface_hairy.h
+
+           h2xs looks for header files <I>after</I> changing to the
+           extension directory, so it will find your header files
+           OK.
+
+       Archive and test
+           As usual, run
+
+             cd Ext/Ension
+             perl Makefile.PL
+             make dist
+             make
+
+           Consider this section as a guideline only, some other
+           options of h2xs may better suit your needs.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       No environment variables are used.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Larry Wall and others
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       perl, perlxstut, ExtUtils::MakeMaker, and AutoLoader.
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       The usual warnings if it cannot read or write the files
+       involved.
+
+
+</PRE>
+<H2>LIMITATIONS of -x</H2><PRE>
+       <I>h2xs</I> would not distinguish whether an argument to a C
+       function which is of the form, say, "int *", is an input,
+       output, or input/output parameter.  In particular, argu­
+       ment declarations of the form
+
+           int
+           foo(n)
+               int *n
+
+       should be better rewritten as
+
+           int
+           foo(n)
+               int &amp;n
+
+       if "n" is an input parameter.
+
+       Additionally, <I>h2xs</I> has no facilities to intuit that a
+       function
+
+          int
+          foo(addr,l)
+               char *addr
+               int   l
+
+       takes a pair of address and length of data at this
+       address, so it is better to rewrite this function as
+
+           int
+           foo(sv)
+                   SV *addr
+               PREINIT:
+                   STRLEN len;
+                   char *s;
+
+               return foo(s, len);
+           }
+
+           MODULE = foo        PACKAGE = foo   PREFIX = my_
+
+           int
+           foo(sv)
+               SV *sv
+
+       See perlxs and perlxstut for additional details.
+
+
+
+perl v5.8.0                 2003-03-13                    <B>H2XS(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

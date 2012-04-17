@@ -1,0 +1,79 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>jaztool</B> option device [mountdir]
+       <B>ziptool</B> option device [mountdir]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Disk write-protection is done by software for Iomega's JAZ
+       and ZIP drives.  <B>jaztool</B> and <B>ziptool</B> make  these  features
+       available for Linux. Before performing any protection mode
+       changes, it is checked that <I>device</I> is actually  a  JAZ  or
+       ZIP  drive  and  that no partition of the inserted disk is
+       currently mounted.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-e</B>      Eject the disk.
+
+       <B>-ro</B>     Make disk read-only. If the current mode  is  pro­
+               tected by a password, you are prompted for it.
+
+       <B>-rp</B>     Make  disk  read-only and protect this mode with a
+               password. The maximum length of a password  is  33
+               characters.
+
+               <B>WARNING:</B>  Don't forget the password! Otherwise you
+               will have to reformat the disk in order to  remove
+               write-protection.
+
+       <B>-rw</B>     Remove  any  protection from the disk. If the cur­
+               rent mode is protected  by  a  password,  you  are
+               prompted for it.
+
+       <B>-ld</B>     Lock the Drive door so the disk cannot be ejected.
+               Only works if the disk is already mounted.
+
+       <B>-ud</B>     Unlock the Drive door
+
+       <B>-m</B>      Mount the device dev4 on [dir], then lock the door
+               (like -ld)
+
+       <B>-u</B>      Unmount the device dev4.
+
+       <B>-s</B>      Get the current protection status. Supported modes
+               are:
+
+                      unprotected
+                      write-protected
+                      password write-protected
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Changing password if the disk is password  write-protected
+       is  currently  not  supported.  If  you want to change the
+       password now you first have to remove protection from  the
+       (grant@torque.net)  and  Itai Nahshon.  <B>jaztool</B> was origi­
+       nally   written   by   Bob   Willmot   (bwillmot@cnct.com,
+       http://www.cnct.com/~bwillmot).
+
+
+
+      Linux tools for Iomega JAZ and ZIP drives <B>Versionziptool(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

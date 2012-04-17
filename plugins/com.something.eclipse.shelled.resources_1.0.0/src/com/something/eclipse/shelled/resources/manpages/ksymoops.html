@@ -1,0 +1,745 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ksymoops</B>
+       [ <B>-v</B> <I>vmlinux</I> ]    [ <B>--vmlinux=</B><I>vmlinux</I> ]   [ <B>-V</B> ]   [ <B>--no-</B>
+       <B>vmlinux</B> ]
+       [ <B>-k</B> <I>ksyms</I> ] [ <B>--ksyms=</B><I>ksyms</I> ] [ <B>-K</B> ] [ <B>--no-ksyms</B> ]
+       [ <B>-l</B> <I>lsmod</I> ] [ <B>--lsmod=</B><I>lsmod</I> ] [ <B>-L</B> ] [ <B>--no-lsmod</B> ]
+       [ <B>-o</B> <I>object</I> ] [ <B>--object=</B><I>object</I> ] [ <B>-O</B> ] [ <B>--no-object</B> ]
+       [ <B>-m</B> <I>system.map</I> ]    [ <B>--system-map=</B><I>system.map</I> ]    [ <B>-M</B> ]
+       [ <B>--no-system-map</B> ]
+       [ <B>-s</B> <I>save.map</I> ] [ <B>--save-map=</B><I>save.map</I> ]
+       [ <B>-S</B> ] [ <B>--short-lines</B> ]
+       [ <B>-e</B> ] [ <B>--endian-swap</B> ]
+       [ <B>-x</B> ] [ <B>--hex</B> ]
+       [ <B>-1</B> ] [ <B>--one-shot</B> ]
+       [ <B>-i</B> ] [ <B>--ignore-insmod-path</B> ]
+       [ <B>-I</B> ] [ <B>--ignore-insmod-all</B> ]
+       [ <B>-T</B> <I>truncate</I> ] [ <B>--truncate=</B><I>truncate</I> ]
+       [ <B>-d</B> ] [ <B>--debug</B> ]
+       [ <B>-h</B> ] [ <B>--help</B> ]
+       [ <B>-t</B> <I>target</I> ] [ <B>--target=</B><I>target</I> ]
+       [ <B>-a</B> <I>architecture</I> ] [ <B>--architecture=</B><I>architecture</I> ]
+       [ <B>-A</B> <I>"address</I> <I>list"</I> ] [ <B>--addresses=</B><I>"address</I> <I>list"</I> ]
+       [ <I>Oops.file</I> <I>...</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       ksymoops  extracts  kernel Oops reports from the Oops.file
+       and uses various sources of symbol information to  convert
+       the  addresses  and  code to meaningful text.  Reporting a
+       kernel Oops is meaningless on its own because other people
+       do  not know what your kernel looks like, you need to feed
+       the Oops text through  ksymoops  then  send  the  ksymoops
+       output as part of your bug report.
+
+       The  ksymoops  executable  is meant to be run whenever you
+       have Oops to report.  The original Oops text can come from
+       anywhere.   Typically  it  is  in  a  file created by your
+       <B>syslogd(8)</B>.  If syslogd is not available, the log might be
+       available  via  <B>dmesg(8)</B>.   If  you  are  running a serial
+       console (see linux/Documentation/serial-console.txt)  then
+       you  can capture the Oops text on another machine.  If all
+       else fails, copy the Oops by hand from the screen,  reboot
+       and enter it by hand.
+
+       ksymoops  can be run by anybody who has read access to the
+       various input files.  It does not have to be run as  root.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Some  of  the  options have default values that are set in
+       the Makefile.   The  text  below  describes  the  standard
+       defaults  but  your distribution may have been modified to
+       use different defaults.  If  in  doubt,  <I>ksymoops</I> <I>-h</I>  will
+       list the current defaults.
+       <B>-m</B> <I>system.map</I> or  <B>-M</B>  are  specified,  ksymoops  prints  a
+       warning message.
+
+           You  did not tell me where to find symbol information.
+           I will assume that the  log  matches  the  kernel  and
+           modules  that  are  running right now and I'll use the
+           default options above for symbol resolution.   If  the
+           current  kernel  and/or  modules do not match the log,
+           you can get more accurate output  by  telling  me  the
+           kernel  version  and where to find map, modules, ksyms
+           etc.  ksymoops -h explains the options.
+
+       If any of the <B>-v</B> <I>vmlinux</I>, <B>-k</B> <I>ksyms</I>, <B>-l</B> <I>lsmod</I>, <B>-o</B> <I>object</I> or
+       <B>-m</B> <I>system.map</I>  options  contain the string *r (*m, *n, *s)
+       then the string is replaced at run  time  by  the  current
+       value of `uname -r` (-m, -n, -s).  This is mainly intended
+       to let ksymoops automatically pick  up  version  dependent
+       files  using  its  default parameters, however it could be
+       used by bug reporting scripts  to  automatically  pick  up
+       files  whose  name  or  directory  depends  on the current
+       kernel.
+
+       <B>-v</B> <I>vmlinux</I> <B>--vmlinux=</B><I>vmlinux</I>
+              Name of the vmlinux file that  corresponds  to  the
+              failing  kernel.   <B>Note:</B> This  is the vmlinux file,
+              not zImage, bzImage, vmlinuz etc.   Typically  this
+              would  be  /usr/src/linux/vmlinux.   If you specify
+              <B>-v</B>, you should only specify it once.
+
+       <B>-V</B> <B>--no-vmlinux</B>
+              Do not read any vmlinux file.
+
+       Default is <B>-V</B>.
+
+       <B>-k</B> <I>ksyms</I> <B>--ksyms=</B><I>ksyms</I>
+              Where to find the list of  kernel  symbols  at  the
+              time  of  the  failure.   Unfortunately  the kernel
+              symbol list  in  /proc/ksyms  is  volatile,  it  is
+              updated  as modules are loaded and removed.  Try to
+              copy /proc/ksyms  to  a  normal  file  as  soon  as
+              possible  after the Oops and point ksymoops at that
+              copy  using   <B>-k</B>.    Modutils   has   support   for
+              automatically  copying  ksyms  and  lsmod data, see
+              <B>insmod(8)</B>.  If you had to reboot after the Oops and
+              you  do  not have a copy of /proc/ksyms at the time
+              of the Oops, try to reload the same modules in  the
+              same order before running ksymoops.  If you specify
+              <B>-k</B>, you should only specify it once.
+
+       <B>-K</B> <B>--no-ksyms</B>
+              Do not read any kernel symbols.
+
+              running  ksymoops.   If  you specify <B>-l</B>, you should
+              only specify it once.
+
+       <B>-L</B> <B>--no-lsmod</B>
+              Do not read any list of loaded modules.
+
+       Default is <B>-l</B> <I>/proc/modules</I>.
+
+       <B>-o</B> <I>object</I> <B>--object=</B><I>object</I>
+              Where to find the objects for modules used  by  the
+              failing kernel.  This can be a directory name or an
+              individual  file.   If  it  is  a  directory   then
+              ksymoops does a recursive <B>find(1)</B> in that directory
+              for all files matching '*.o'.  <B>-o</B> can be  specified
+              more  than  once,  the  list  is cumulative and can
+              contain a mixture of directories and files.
+
+              <B>Note:</B> When you specify a directory,  ksymoops  only
+              uses files that end in '.o'.  Any modules with non-
+              standard names are ignored unless you specify those
+              files  explicitly.  For example, if vmnet and vmmon
+              modules do not end in '.o', you need something like
+              this  to  pick  up  all the normal modules plus the
+              non-standard names.
+
+                <B>-o</B> <I>/lib/modules/*r/</I> <B>\</B>
+                <B>-o</B> <I>/lib/modules/*r/misc/vmnet</I> <B>\</B>
+                <B>-o</B> <I>/lib/modules/*r/misc/vmmon</I>
+
+              If you are using a version of <B>insmod(8)</B> that stores
+              the module filename in /proc/ksyms, ksymoops can go
+              directly to that file, it does not need <B>-o</B>.  The <B>-o</B>
+              option  is  only  used when ksyms contains at least
+              one module whose filename is not explicitly  listed
+              in ksyms.
+
+       <B>-O</B> <B>--no-object</B>
+              Do  not  scan  for  any objects.  If /proc/ksyms is
+              supplied and insmod added the  ksymoops  assistance
+              symbols (starting with __insmod) then those symbols
+              are  used  to  access  the  objects,  no  directory
+              scanning  is  done  so  neither  -o nor -O have any
+              effect.  To completely disable the  use  of  module
+              objects   when  ksyms  contains  __insmod  symbols,
+              specify -O <B>and</B> one of -i or -I.
+
+       Default is <B>-o</B> <I>/lib/modules/*r/</I>.  For example, if  uname -r
+       reports  2.2.7,  ksymoops uses <B>-o</B> <I>/lib/modules/2.2.7/</I>, but
+       only if it does not already know where the objects are.
+
+       <B>-m</B> <I>system.map</I> <B>--system-map=</B><I>system.map</I>
+              Where to find the System.map corresponding  to  the
+              not  need to save the map for normal bug reporting.
+
+       Default is no saved map.
+
+       <B>-S</B> <B>--short-lines</B>
+              Some of the ksymoops  output  lines  can  be  quite
+              long,  especially  in  the code disassembly, but if
+              you have a  wide  screen  the  ksymoops  output  is
+              easier  to  read  as  long  lines.   The  <B>-S</B> toggle
+              switches between short and long lines.   Note  that
+              lines  printed by the kernel and extracted from the
+              Oops.file are not affected by <B>-S</B>, problem  text  is
+              printed as is.
+
+       Default is short lines.
+
+       <B>-e</B> <B>--endian-swap</B>
+              ksymoops  extracts  code bytes from the reports and
+              converts them to instructions.  All  kernels  print
+              code  bytes  in  hex but unfortunately some systems
+              print  multiple  bytes  using  the  native  machine
+              endianess.   This only causes a problem if the code
+              is printed in anything other than  1  byte  chunks.
+              For  example,  i386 prints one byte at a time which
+              is machine portable, alpha prints 4 bytes at a time
+              in  native  endianess and the report is not machine
+              portable.
+
+              If you are doing cross system Oops  diagnosis  (say
+              for  a new system or an embedded version of Linux),
+              then the failing system and  the  reporting  system
+              can  have  different  endianess.   On  systems that
+              support little and big endianess at the same  time,
+              ksymoops  could  be compiled with one endianess but
+              the kernel dump could be using  another.   If  your
+              code  disassembly  is  wrong,  specify  <B>-e</B>.  The <B>-e</B>
+              toggles between native and reverse  endianess  when
+              reading  the  bytes in each chunk of code.  In this
+              context, a chunk of code is 4 or 8 hex digits (2 or
+              4  bytes of code), <B>-e</B> has no effect on code that is
+              printed as 2 hex digits (one byte at a time).
+
+              <B>Note:</B>  Earlier  versions   of   ksymoops   used   a
+              <B>-c</B> <I>code</I><B>_</B><I>bytes</I> option.  That is now obsolete, use <B>-e</B>
+              instead, but only  when  the  code  disassembly  is
+              incorrect.
+
+       The default is to read code bytes using the endianess that
+       ksymoops was compiled with.
+
+       <B>-x</B> <B>--hex</B>
+              Normally, ksymoops prints offsets  and  lengths  in
+                  while (true)
+                  do
+                   ksymoops -1 &gt; $HOME/oops1
+                   if [ $? -eq 3 ]
+                   then
+                      exit 0  # end of input, no Oops found
+                   fi
+                   mail -s Oops admin &lt; $HOME/oops1
+                  done
+
+                  tail -f /var/log/messages | ksymoops1
+
+              Restarting the tail command after log  rotation  is
+              left as an exercise for the reader.
+
+              In  one  shot  mode,  reading of the various symbol
+              sources is delayed until ksymoops  sees  the  first
+              program  counter,  call  trace  or code line.  This
+              ensures that  the  current  module  information  is
+              used.   The  downside  is that any parameter errors
+              are not detected until an Oops actually occurs.
+
+       The default is to  read  everything  from  the  Oops.file,
+       extracting  and processing every Oops it finds.  Note that
+       the default method  reads  the  symbol  sources  once  and
+       assumes that the environment does not change from one Oops
+       to the next, not necessarily  valid  when  you  are  using
+       modules.
+
+       <B>-i</B> <B>--ignore-insmod-path</B>
+              When  you are using an initial ramdisk for modules,
+              the path name to  the  modules  is  typically  just
+              /lib.    That   pathname   is   recorded   in   the
+              __insmod..._O symbol in ksyms but  ksymoops  cannot
+              find  the  files  in  the  real  /lib, so it issues
+              warning messages.  If you specify -i then  ksymoops
+              ignores  the  path  name  in  __insmod...O symbols,
+              instead it searchs the -o paths  (if  any)  looking
+              for  the  object  with  the  correct  basename  and
+              timestamp.  -i is recommended when loading  modules
+              from  a  ramdisk.   This  assumes that the -o paths
+              contain the modules used to build the ramdisk, with
+              the same timestamp.
+
+       Default is to use the path from __insmod...O symbols.
+
+       <B>-T</B> <B>--ignore-insmod-all</B>
+              Use  this  toggle  if you want to completely ignore
+              all  <B>insmod(8)</B>  assistance   information   (symbols
+              starting  with  __insmod  in ksyms).  This includes
+              module paths, timestamps, section start and  length
+              etc.   Then  ksymoops  will  fall  back  on the old
+              should have the same address to appear at different
+              addresses.   This  is  a  particular  problem  when
+              building  for  mixed  32  and  64  bit targets.  To
+              remove the ambiguity, use  <B>--truncate=</B><I>truncate</I>.   A
+              value  of  0  means  no truncation, a value greater
+              than 8*sizeof(unsigned long) is silently  converted
+              to 0.
+
+       Default is <B>--truncate=</B><I>0</I>, no truncation.
+
+       <B>-d</B> <B>--debug</B>
+              Each occurrence of <B>-d</B> increases the debugging level
+              of ksymoops by one.
+
+       Level 1
+              Regular expression compile summaries.   Before  and
+              after    text   for   *[mns]   expansion.    Option
+              processing, but only for  options  appearing  after
+              <B>-d</B>.    Entry   to  the  main  processing  routines.
+              KSYMOOPS_  environment  variables.   Object   files
+              extracted  directly  from  ksyms.   Information  on
+              matches between loaded modules and module  objects.
+              Filename  of  the  Oops report.  Version number for
+              the oops.  Saving merged system map.
+
+       Level 2
+              Summary information on symbol table  sizes.   Every
+              version number found in the oops.  Comparing symbol
+              maps.  Appending symbol maps.  Full pathname  of  a
+              program.    External   commands  issued.   Progress
+              reports for <B>-o</B> <I>object</I>.  The names  of  '*.o'  files
+              found  in  a  <B>-o</B> directory.  Offset adjustments for
+              module sections.  Every line  output  from  running
+              objdump on the code bytes.
+
+       Level 3
+              Every input line from Oops.file.  Non-duplicate and
+              low address symbols dropped from the merged  system
+              map.  Mapping of addresses to symbols.
+
+       Level 4
+              Every  input  line  from  all  sources, this prints
+              duplicate  lines.   The  return  code  from   every
+              regexec  call.  Ambiguous matches that are ignored.
+              Every symbol added to every table.  Copying  symbol
+              tables.  Increases in symbol table sizes.  Entry to
+              some lower level routines.  Every symbol dropped.
+
+       Level 5
+              For matching regexecs, details on every  substring.
+
+       Default is no debugging.
+              can find out which targets your machine supports by
+
+                ksymoops -t '?'
+
+       Default  is  the  same target as ksymoops itself, with one
+       exception.  On sparc64, the kernel  uses  elf64-sparc  but
+       user  programs  are  elf32-sparc.   If  <B>-t</B> <I>target</I>  was not
+       specified and ksymoops was compiled  for  elf32-sparc  and
+       the  Oops  contains a TPC line then ksymoops automatically
+       switches to -t elf64-sparc.
+
+       <B>-a</B> <I>architecture</I> <B>--architecture=</B><I>architecture</I>
+              To do cross system Oops processing, you  must  tell
+              ksymoops  what  the  target  architecture is, using
+              <B>-a</B> <I>architecture</I>,  where  <I>architecture</I>  is   a   bfd
+              architecture   name.    You   can  find  out  which
+              architectures your machine supports by
+
+                ksymoops -a '?'
+
+       Default is the same architecture as ksymoops itself,  with
+       one  exception.  On sparc64, the kernel uses sparc:v9a but
+       user programs  are  sparc.   If  <B>-a</B> <I>architecture</I>  was  not
+       specified and ksymoops was compiled for sparc and the Oops
+       contains a TPC line then ksymoops  automatically  switches
+       to -a sparcv:9a.
+
+       <B>-A</B> <I>"address</I> <I>list"</I> <B>--addresses=</B><I>"address</I> <I>list"</I> If you
+              have  a  few adhoc addresses to convert to symbols,
+              you can specify them explicitly  using  <B>-A</B> <I>"address</I>
+              <I>list"</I>.   Any  words  in  the list that appear to be
+              addresses are converted  to  symbols.   Punctuation
+              characters   and  non-address  words  are  silently
+              ignored, leading 0x on addresses is  also  ignored,
+              so  you can paste text including words and only the
+              addresses will be processed.
+
+       <B>Oops.file</B> <B>...</B>
+              ksymoops accepts zero or more input files and reads
+              them all.  If no files are specified on the command
+              line and no addresses  are  supplied  via  <B>-A</B>  then
+              ksymoops  reads  from standard input.  You can even
+              type  the  Oops  text  directly  at  the  terminal,
+              although that is not recommended.
+
+
+</PRE>
+<H2>INPUT</H2><PRE>
+       ksymoops   reads   the   input   file(s),   using  regular
+       expressions to select lines that are  to  be  printed  and
+       further  analyzed.   You  do  not need to extract the Oops
+       report by hand.
+
+       All tabs are  converted  to  spaces,  assuming  tabstop=8.
+       Every kernel architecture team uses different messages for
+       kernel problems, see Oops_read in  oops.c  for  the  full,
+       gory  list.  If you are entering an Oops by hand, you need
+       to follow the kernel format as much as possible, otherwise
+       ksymoops  may not recognize your input.  Input is not case
+       sensitive.
+
+       A bracketed address is  optional  '[',  required  '&lt;',  at
+       least  4  hex digits, required '&gt;', optional ']', optional
+       spaces.  For example [&lt;01234567&gt;] or &lt;beaf&gt;.
+
+       An unbracketed address is at least 4 hex digits,  followed
+       by optional spaces.  For example 01234567 or abCDeF.
+
+       The  sparc  PC line is 'PSR:' at start of line, space, hex
+       digits, space, ´PC:', space, unbracketed address.
+
+       The sparc64 TPC line is 'TSTATE:' at start of line, space,
+       16 hex digits, space 'TPC:', space, unbracketed address.
+
+       The   ppc  NIP  line  has  several  formats.   'kernel pc'
+       'trap at PC:'  ´bad area pc'  or  'NIP:'.   Any  of  those
+       strings  followed  by  a  single  space and an unbracketed
+       address is the NIP value.
+
+       The mips PC line is  'epc'  at  start  of  line,  optional
+       space,  one  or  more  ´:',  optional  space,  unbracketed
+       address.
+
+       The ix86 EIP line is 'EIP:' at start of line, at least one
+       space, any text, bracketed address.
+
+       The  x86_64  EIP line is 'RIP:' at start of line, at least
+       one space, any text, bracketed address.
+
+       The m68k PC line  is  'PC'  at  start  of  line,  optional
+       spaces, '=', optional spaces, bracketed address.
+
+       The arm PC line is 'pc' at start of line, optional spaces,
+       ':', optional spaces, bracketed address.
+
+       The IA64 IP line is ' ip', optional space,  ':',  optional
+       space, bracketed address.
+
+       A  mips ra line is 'ra', optional spaces, one or more '=',
+       optional spaces, unbracketed address.
+
+       A sparc register dump line  is  ('i',  '0'  or  '4',  ':',
+       space) or ('Instruction DUMP:', space) or ('Caller[').
+
+       The  IA64  b0  line is 'b0', optional space, ':', optional
+       space, unbracketed address.   This  can  be  repeated  for
+       'Function entered at'  (arm  only)  or  ´Caller[' (sparc64
+       only) followed by at least one space.
+
+       For 'Trace:' and 'Call Trace:', the rest of  the  line  is
+       bracketed  addresses,  they  can  be  continued onto extra
+       lines.  Addresses can not be split across lines.
+
+       For 'Call Backtrace:' (ppc only), the rest of the line  is
+       unbracketed  addresses,  they  can be continued onto extra
+       lines.  Addresses can not be split across lines.
+
+       For 'Function entered at' (arm only),  the  line  contains
+       exactly two bracketed addresses and is not continued.
+
+       For  'Caller['  (sparc64  only), the line contains exactly
+       one unbracketed address and is not continued.
+
+       Spin loop information is indicated by a line starting with
+       'bh: ',  followed  by  lines  containing reverse bracketed
+       trace back addresses.  For some  reason,  these  addresses
+       are  different from every other address and look like this
+       '&lt;[hex]&gt; &lt;[hex]&gt;' instead of the normal ´[&lt;hex&gt;] [&lt;hex&gt;]'.
+
+       The  Code  line  is  identified  by  'Instruction DUMP' or
+       ('Code' followed by optional spaces),  ':',  one  or  more
+       spaces,  followed by at least one hex value.  The line can
+       contain multiple hex values, each separated  by  at  least
+       one  space.  Each hex value must be 2 to 8 digits and must
+       be a multiple of 2 digits.
+
+       Any of the code values can be enclosed in  &lt;..&gt;  or  (..),
+       the   last  such  value  is  assumed  to  be  the  failing
+       instruction.  If no value has &lt;..&gt; or (..) then the  first
+       byte is assumed to be the failing instruction.
+
+       Special cases where Code: can be followed by text.  'Code:
+       general protection' or 'Code: &lt;n&gt;'.  Dump the data anyway,
+       the code was unavailable.
+
+       Do you detect a slight note of inconsistency in the above?
+
+
+</PRE>
+<H2>ADDRESS TO SYMBOL CONVERSION</H2><PRE>
+       Addresses are converted to symbols based on the symbols in
+       vmlinux,   /proc/ksyms,   object  files  for  modules  and
+       System.map, or as many of those sources  as  ksymoops  was
+       told to read.  ksymoops uses as many symbol sources as you
+       can provide, does cross checks between the various sources
+       to  identify  any  discrepancies  and  builds a merged map
+       containing all symbols,  including  loaded  modules  where
+       possible.
+
+       Symbols  which  end  in  _R_xxxxxxxx  (8  hex  digits)  or
+       of them in /proc/ksyms so they are effectively  invisible.
+       Even  when  a  module  exports  symbols, it typically only
+       exports one or two, not the complete list that  is  really
+       needed  for Oops diagnosis.  ksymoops can build a complete
+       symbol table from the object module but it has to
+
+       (a) Know that the module is loaded.
+
+       (b) Find the correct object file for that module.
+
+       (c) Convert section and symbol data from the  module  into
+           kernel addresses.
+
+       If  a  module  exports no symbols then there is no way for
+       ksymoops to obtain  any  information  about  that  module.
+       lsmod  says  it  is  loaded  but without symbols, ksymoops
+       cannot find the corresponding object file nor map  offsets
+       to  addresses.   Sorry  but  that is the way it is, if you
+       Oops in a module that displays no symbols in ksyms, forget
+       it :(.
+
+       When  a  module  exports symbols, the next step is to find
+       the object file for that module.  In most cases the loaded
+       module  and the object file has the same basename but that
+       is not guaranteed.  For example,
+         insmod uart401 -o xyz
+       will load uart401.o from your module directories but store
+       it  as  xyz.   Both  ksyms and lsmod say module name 'xyz'
+       with no indication  that  the  original  object  file  was
+       uart401.  So ksymoops cannot just use the module name from
+       ksyms or lsmod, it has to do a lot more work to  find  the
+       correct  object.   It  does  this  by looking for a unique
+       match between exported symbols and symbols in  the  module
+       objects.
+
+       For  every  file  obtained from the <B>-o</B> option(s), ksymoops
+       extracts all symbols (both  static  and  external),  using
+       <B>nm(1)</B>.   It then runs the exported module symbols in ksyms
+       and, for every exported module symbol, it  does  a  string
+       compare  of  that  symbol  against  every  symbol in every
+       object.  When ksymoops  finds  a  module  symbol  that  is
+       exported in ksyms and appears exactly <B>once</B> amongst all the
+       <B>-o</B> objects then it has to assume that the  object  is  the
+       one  used to load the module.  If ksymoops cannot find any
+       match for any exported symbol in a module  or  finds  more
+       than  one match for every exported symbol in a module then
+       it cannot determine which object was actually loaded.
+
+       After ksymoops has matched  a  loaded  module  against  an
+       object  using  a  unique symbol, it still has to calculate
+       addresses for the symbols from the object.   To  do  this,
+       ksymoops  first  needs the start address of the text, data
+       symbol sources contain a kernel version  number,  ksymoops
+       compares  all  the version numbers.  It flags a warning if
+       there is any mismatch.  One of the more common  causes  of
+       problems  is force loading a module from one kernel into a
+       different kernel.  Even if it was deliberate, it needs  to
+       be highlighted for diagnosis.
+
+       When  both  ksyms  and  lsmod  are  available, the list of
+       modules extracted from ksyms is compared against the  list
+       of  modules  from  lsmod.   Any difference is flagged as a
+       warning,  it  typically   indicates   invisible   modules.
+       However  it can also be caused by a mismatch between ksyms
+       and lsmod.
+
+       When multiple symbol sources are available, ksymoops  does
+       cross  checks  between them.  Each check is only performed
+       if both symbol sources are present and  non-empty.   Every
+       symbol  in  the  first  source should appear in the second
+       source and should have the same address.  Where  there  is
+       any  discrepancy, one of the sources takes precedence, the
+       precedence is somewhat arbitrary.  Some discrepancies  are
+       silently  ignored  because  they are special cases but the
+       vast majority of symbols are expected to match.
+
+       * Exported module symbols in ksyms  are  compared  against
+         the  symbols  in  the  corresponding object file.  ksyms
+         takes precedence.
+
+       * The kernel (non module) symbols from ksyms are  compared
+         against vmlinux.  vmlinux takes precedence.
+
+       * The   symbols   from  System.map  are  compared  against
+         vmlinux.  vmlinux takes precedence.
+
+       * The  symbols   from   vmlinux   are   compared   against
+         System.map.    vmlinux   takes  precedence.   These  two
+         sources are compared in both directions, they should  be
+         identical.
+
+       * The  kernel (non module) symbols from ksyms are compared
+         against System.map.  System.map takes precedence.
+
+       After reading and cross checking all the  symbol  sources,
+       they  are  merged  into  a  single  system map.  Duplicate
+       symbols, registers (type a)  and  static  'gcc2_compiled.'
+       symbols are dropped from the merged map.  Any symbols with
+       an address below 4096 are  discarded,  these  are  symbols
+       like Using_Versions which has an address of 0.
+
+       Given  all  the  above  processing  and  deduction,  it is
+       obvious  that  the  merged  system  map  cannot  be   100%
+       reliable,  which  means  that  conversion  of addresses to
+       details.   If  you  want  automatic snapshots of ksyms and
+       lsmod data as modules  are  loaded  and  unloaded,  create
+       /var/log/ksymoops,  it  should  be owned by root with mode
+       644 or 600.  If you do not want  automatic  snapshots,  do
+       not      create      the      directory.      A     script
+       (insmod_ksymoops_clean) is provided by modutils to  delete
+       old versions, this should be run by cron once a day.
+
+
+</PRE>
+<H2>OUTPUT</H2><PRE>
+       ksymoops  prints  all  lines that contain text which might
+       indicate a kernel  problem.   Due  the  complete  lack  of
+       standards  in  kernel  error  messages, I cannot guarantee
+       that all problem lines are printed.  If you see a line  in
+       your  logs  which  ksymoops  should  extract but does not,
+       contact the maintainer.
+
+       When ksymoops sees EIP/PC/NIP/TPC lines, call trace  lines
+       or  code  lines,  it prints them and stores them for later
+       processing.  When the  code  line  is  detected,  ksymoops
+       converts  the  EIP/PC/NIP/TPC  address  and the call trace
+       addresses to symbols.  These  lines  have  ';'  after  the
+       header  instead of ':', just in case anybody wants to feed
+       ksymoops output back into ksymoops, these generated  lines
+       are ignored.
+
+       Formatted  data for the program counter, trace and code is
+       only output when the Code: line is seen.  If any data  has
+       been  stored  for  later  formatting and more than 5 lines
+       other than Oops text or end of file are  encountered  then
+       ksymoops assumes that the Code: line is missing or garbled
+       and dumps the formatted data anyway.  That should be  fail
+       safe  because  the  Code: line (or its equivalent) signals
+       the end of the Oops report.  Except  for  sparc64  on  SMP
+       which  has a register dump <I>after</I> the code.  ksymoops tries
+       to cater for this exception.  Sigh.
+
+       Addresses are converted to symbols wherever possible.  For
+       example
+
+         &gt;&gt;EIP; c0113f8c &lt;sys_init_module+49c/4d0&gt;
+         Trace; c011d3f5 &lt;sys_mremap+295/370&gt;
+         Trace; c011af5f &lt;do_generic_file_read+5bf/5f0&gt;
+         Trace; c011afe9 &lt;file_read_actor+59/60&gt;
+         Trace; c011d2bc &lt;sys_mremap+15c/370&gt;
+         Trace; c010e80f &lt;do_sigaltstack+ff/1a0&gt;
+         Trace; c0107c39 &lt;overflow+9/c&gt;
+         Trace; c0107b30 &lt;tracesys+1c/23&gt;
+         Trace; 00001000 Before first symbol
+
+       Each  converted  address is followed by the nearest symbol
+       below that address.  That symbol is followed by the offset
+       of  the  address  from the symbol.  The value after '/' is
+       the target hardware, it defaults to EIP.
+
+       When  a  Code:  line  is  read, ksymoops extracts the code
+       bytes.  It uses the program counter line together with the
+       code  bytes  to generate a small object file in the target
+       architecture.   ksymoops  then   invokes   <B>objdump(1)</B>   to
+       disassemble   this   object   file.   The  human  readable
+       instructions are extracted from  the  objdump  output  and
+       printed   with  address  to  symbol  conversion.   If  the
+       disassembled code does not look sensible, see the  <I>-e</I>,  <I>-a</I>
+       and <I>-t</I> options.
+
+       <B>TAKE</B>  <B>ALL</B>  <B>SYMBOLS,</B>  <B>OFFSETS</B>  <B>AND</B>  <B>LENGTHS</B> <B>WITH</B> <B>A</B> <B>PINCH</B> <B>OF</B>
+       <B>SALT!</B>  The addresses are valid but the  symbol  conversion
+       is  only  as good as the input you gave ksymoops.  See all
+       the problems in  "ADDRESS  TO  SYMBOL  CONVERSION"  above.
+       Also the stack trace is potentially ambiguous.  The kernel
+       prints any addresses on the  stack  that  <B>might</B>  be  valid
+       addresses.   The  kernel  has  no way of telling which (if
+       any) of these addresses are real and which are just  lying
+       on  the  stack  from  previous  procedures.  ksymoops just
+       decodes what the kernel prints.
+
+
+</PRE>
+<H2>ENVIRONMENT VARIABLES</H2><PRE>
+       KSYMOOPS_NM
+              Path       for        nm,        defaults        to
+              ${INSTALL_PREFIX}/bin/${CROSS}nm.
+
+       KSYMOOPS_FIND
+              Path for find, defaults to /usr/bin/find.
+
+       KSYMOOPS_OBJDUMP
+              Path       for       objdump,      defaults      to
+              ${INSTALL_PREFIX}/bin/${CROSS}objdump.
+
+
+</PRE>
+<H2>CROSS SYSTEM OOPS DIAGNOSIS</H2><PRE>
+       To process an Oops from one system on  another,  you  need
+       access  to  all  the  symbol  sources,  including modules,
+       System.map, ksyms etc.  If the two systems  are  different
+       hardware,  you  also  need  versions of the nm and objdump
+       commands that run on your system  but  handle  the  target
+       system.  You also need versions of libbfd, libopcodes, and
+       libiberty that handle  the  target  system.   Consult  the
+       binutils  documentation  for  instructions on how to build
+       cross system versions of these utilities.
+
+       To override the default versions of nm and find,  use  the
+       environment variables above.  To use different versions of
+       libbfd and libiberty, use the --rpath option when  linking
+       ksymoops  or the LD_LIBRARY_PATH environment variable when
+       running  ksymoops.   See  the  info  pages  for   ld   and
+       /usr/doc/glibc*/FAQ.   You  can  also  build  a version of
+           an Oops.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Because  of  the  plethora  of  possible  kernel error and
+       information strings, ksymoops's pattern matching sometimes
+       prints  lines  that are not errors at all.  For example, a
+       line starting with 3c589 matches the pattern  for  a  call
+       trace line, both start with at least 4 hex digits.  Humans
+       are smarter than programs, ignore spurious lines.
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Keith Owens &lt;kaos@ocs.com.au&gt; - maintainer.
+
+       Patches  from  Jakub   Jelinek   &lt;jj@sunsite.mff.cuni.cz&gt;,
+       Richard Henderson &lt;rth@twiddle.net&gt;.
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+       The  original  ksymoops.cc  was  written  by  Greg  McGary
+       &lt;gkm@magilla.cichlid.com&gt; and updated  by  Andreas  Schwab
+       &lt;schwab@issan.informatik.uni-dortmund.de&gt;.   That  version
+       required C++ and supported only ix86 and m68k.
+
+       To get the equivalent of the old ksymoops.cc (no  vmlinux,
+       no  modules, no ksyms, no System.map) use ksymoops -VKLOM.
+       Or to just read System.map, ksymoops -VKLO -m mapfile.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>find(1)</B>,    <B>insmod(8)</B>,   <B>nm(1)</B>,   <B>objdump(1)</B>,    <B>rmmod(8)</B>,
+       <B>dmesg(8)</B>, <B>genksyms(8)</B>, <B>syslogd(8)</B>.  bfd info files.
+
+
+
+                          July 20, 2002               <B>KSYMOOPS(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

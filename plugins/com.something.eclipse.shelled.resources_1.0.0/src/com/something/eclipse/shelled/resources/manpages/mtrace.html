@@ -1,0 +1,52 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>#include</B> <B>&lt;macheck.h&gt;</B>
+
+       <B>void</B> <B>mtrace(void);</B>
+
+       <B>void</B> <B>muntrace(void);</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  function  <B>mtrace</B>()  installs  handlers  for <I>malloc</I>(),
+       <I>realloc</I>() and <I>free</I>().  The  function  <B>muntrace</B>()  disables
+       these handlers.
+       The environment variable <B>MALLOC_TRACE</B> defines a file where
+       <B>mtrace</B>() writes its output.  This file must be writable to
+       the  user or <B>mtrace</B>() will do nothing.  If the file is not
+       empty it will be truncated.
+
+
+</PRE>
+<H2>NOTE</H2><PRE>
+       The output of <B>mtrace</B>() will be ASCII but not in a friendly
+       format.   So  glibc comes with a perl-script called mtrace
+       to make sense of it.
+
+
+</PRE>
+<H2>CONFORMS TO</H2><PRE>
+       These are GNU extensions.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>malloc(3)</B>, <B>malloc_hook(3)</B>
+
+
+
+GNU                         2002-07-20                  <B>MTRACE(3)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,156 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>cvsbug</B> [ <I>site</I> ] [ <B>-f</B> <I>problem-report</I> ] [ <B>-t</B> <I>mail-address</I> ]
+               [ <B>-P</B> ] [ <B>-L</B> ] [ <B>--request-id</B> ] [ <B>-v</B> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>cvsbug</B> is a tool used to submit <I>problem</I> <I>reports</I> (PRs) to a
+       central support site.  In most cases the correct <I>site</I> will
+       be the default.  This argument indicates the support  site
+       which is responsible for the category of problem involved.
+       Some sites may use a local address  as  a  default.   <I>site</I>
+       values are defined by using the <B>aliases(5)</B>.
+
+       <B>cvsbug</B>  invokes  an  editor  on  a problem report template
+       (after trying to  fill  in  some  fields  with  reasonable
+       default  values).   When you exit the editor, <B>cvsbug</B> sends
+       the completed form to the <I>Problem</I> <I>Report</I> <I>Management</I> <I>System</I>
+       (<B>GNATS</B>)  at  a central support site.  At the support site,
+       the PR is assigned a unique number and is  stored  in  the
+       <B>GNATS</B> database according to its category and submitter-id.
+       <B>GNATS</B> automatically replies with an acknowledgement,  cit­
+       ing the category and the PR number.
+
+       To ensure that a PR is handled promptly, it should contain
+       your (unique) <I>submitter-id</I> and one of the available  <I>cate­</I>
+       <I>gories</I>  to identify the problem area.  (Use <B>`cvsbug</B> <B>-L'</B> to
+       see a list of categories.)
+
+       The <B>cvsbug</B> template at your site should  already  be  cus­
+       tomized  with your submitter-id (running `<B>install-sid</B> <I>sub­</I>
+       <I>mitter-id</I>' to accomplish this is part of the  installation
+       procedures  for  <B>cvsbug</B>).   If  this hasn't been done, see
+       your  system  administrator  for  your  submitter-id,   or
+       request  one  from  your  support site by invoking <B>`cvsbug</B>
+       <B>--request-id'.</B>  If your site does not distinguish  between
+       different  user  sites,  or if you are not affiliated with
+       the support site, use <B>`net'</B> for this field.
+
+       The more precise your problem  description  and  the  more
+       complete  your  information,  the faster your support team
+       can solve your problems.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-f</B> <I>problem-report</I>
+              specify a file (<I>problem-report</I>) which already  con­
+              tains  a complete problem report.  <B>cvsbug</B> sends the
+              contents of the file without invoking  the  editor.
+              If the value for <I>problem-report</I> is <B>`-'</B>, then <B>cvsbug</B>
+              reads from standard input.
+
+       <B>-t</B> <I>mail-address</I>
+              Change mail address at the support site for problem
+              specified, with a request  for  your  <I>submitter-id</I>.
+              If  you are not affiliated with <I>site</I>, use a <I>submit­</I>
+              <I>ter-id</I> of <B>net</B>'.
+
+       <B>-v</B>     Display the <B>cvsbug</B> version number.
+
+       Note: use <B>cvsbug</B> to submit  problem  reports  rather  than
+       mailing them directly.  Using both the template and <B>cvsbug</B>
+       itself will help ensure  all  necessary  information  will
+       reach the support site.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       The  environment  variable  <B>EDITOR</B> specifies the editor to
+       invoke on the template.
+       default: <B>vi</B>
+
+       If the environment variable <B>PR_FORM</B> is set, then its value
+       is used as the file name of the template for your problem-
+       report editing session.  You can use this to start with  a
+       partially  completed  form  (for  example, a form with the
+       identification fields already completed).
+
+
+</PRE>
+<H2>HOW TO FILL OUT A PROBLEM REPORT</H2><PRE>
+       Problem reports have to be in a particular form so that  a
+       program  can easily manage them.  Please remember the fol­
+       lowing guidelines:
+
+       ·  describe only <B>one</B> <B>problem</B> with each problem report.
+
+       ·  For follow-up mail, use the same subject  line  as  the
+          one  in  the  automatic acknowledgement. It consists of
+          category, PR number and  the  original  synopsis  line.
+          This  allows  the  support  site to relate several mail
+          messages to a particular PR and to record them automat­
+          ically.
+
+       ·  Please try to be as accurate as possible in the subject
+          and/or synopsis line.
+
+       ·  The subject and the synopsis line are not confidential.
+          This is because open-bugs lists are compiled from them.
+          Avoid confidential information there.
+
+       See the GNU <B>Info</B> file <B>cvsbug.info</B> or the document  <I>Report­</I>
+       <I>ing</I>  <I>Problems</I>  <I>With</I>  <I>cvsbug</I> for  detailed  information  on
+       reporting problems
+
+
+</PRE>
+<H2>HOW TO SUBMIT TEST CASES, CODE, ETC.</H2><PRE>
+       Submit small code samples with the PR.  Contact  the  sup­
+       port site for instructions on submitting larger test cases
+       and problematic source code.
+
+       Seidl (Cygnus Support)
+
+
+</PRE>
+<H2>COPYING</H2><PRE>
+       Copyright (c) 1992, 1993 Free Software Foundation, Inc.
+
+       Permission is granted  to  make  and  distribute  verbatim
+       copies  of  this  manual provided the copyright notice and
+       this permission notice are preserved on all copies.
+
+       Permission is granted to copy and distribute modified ver­
+       sions  of  this  manual  under the conditions for verbatim
+       copying, provided that the entire resulting  derived  work
+       is  distributed  under  the  terms  of a permission notice
+       identical to this one.
+
+       Permission is granted to copy and distribute  translations
+       of this manual into another language, under the above con­
+       ditions for modified versions, except that this permission
+       notice  may  be  included  in translations approved by the
+       Free  Software  Foundation  instead  of  in  the  original
+       English.
+
+
+
+
+February 1993               xVERSIONx                   <B>CVSBUG(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

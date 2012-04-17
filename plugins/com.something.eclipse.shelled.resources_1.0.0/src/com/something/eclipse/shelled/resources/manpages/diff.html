@@ -1,0 +1,194 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>diff</B> [<I>OPTION</I>]... <I>FILES</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Compare files line by line.
+
+       <B>-i</B>  <B>--ignore-case</B>
+              Ignore case differences in file contents.
+
+       <B>--ignore-file-name-case</B>
+              Ignore case when comparing file names.
+
+       <B>--no-ignore-file-name-case</B>
+              Consider case when comparing file names.
+
+       <B>-E</B>  <B>--ignore-tab-expansion</B>
+              Ignore changes due to tab expansion.
+
+       <B>-b</B>  <B>--ignore-space-change</B>
+              Ignore changes in the amount of white space.
+
+       <B>-w</B>  <B>--ignore-all-space</B>
+              Ignore all white space.
+
+       <B>-B</B>  <B>--ignore-blank-lines</B>
+              Ignore changes whose lines are all blank.
+
+       <B>-I</B> RE  <B>--ignore-matching-lines</B>=<I>RE</I>
+              Ignore changes whose lines all match RE.
+
+       <B>--strip-trailing-cr</B>
+              Strip trailing carriage return on input.
+
+       <B>-a</B>  <B>--text</B>
+              Treat all files as text.
+
+       <B>-c</B>  <B>-C</B> NUM  <B>--context</B>[=<I>NUM</I>]
+              Output NUM (default 3) lines of copied context.
+
+       <B>-u</B>  <B>-U</B> NUM  <B>--unified</B>[=<I>NUM</I>]
+              Output NUM (default 3) lines of unified context.
+
+       <B>--label</B> LABEL
+              Use LABEL instead of file name.
+
+       <B>-p</B>  <B>--show-c-function</B>
+              Show which C function each change is in.
+
+       <B>-F</B> RE  <B>--show-function-line</B>=<I>RE</I>
+              Show the most recent line matching RE.
+
+       <B>-q</B>  <B>--brief</B>
+       <B>-W</B> NUM  <B>--width</B>=<I>NUM</I>
+              Output at most NUM (default 130) print columns.
+
+       <B>--left-column</B>
+              Output only the left column of common lines.
+
+       <B>--suppress-common-lines</B>
+              Do not output common lines.
+
+       <B>-D</B> NAME  <B>--ifdef</B>=<I>NAME</I>
+              Output merged file to show `#ifdef NAME' diffs.
+
+       <B>--GTYPE-group-format</B>=<I>GFMT</I>
+              Similar, but format GTYPE input groups with GFMT.
+
+       <B>--line-format</B>=<I>LFMT</I>
+              Similar, but format all input lines with LFMT.
+
+       <B>--LTYPE-line-format</B>=<I>LFMT</I>
+              Similar, but format LTYPE input lines with LFMT.
+
+       LTYPE is `old', `new', or `unchanged'.
+              GTYPE is LTYPE or `changed'.
+
+              GFMT may contain:
+
+       %&lt;     lines from FILE1
+
+       %&gt;     lines from FILE2
+
+       %=     lines common to FILE1 and FILE2
+
+       %[-][WIDTH][.[PREC]]{doxX}LETTER
+              printf-style spec for LETTER
+
+              LETTERs  are  as  follows for new group, lower case
+              for old group:
+
+       F      first line number
+
+       L      last line number
+
+       N      number of lines = L-F+1
+
+       E      F-1
+
+       M      L+1
+
+              LFMT may contain:
+
+       %L     contents of line
+
+       <B>-l</B>  <B>--paginate</B>
+              Pass the output through `pr' to paginate it.
+
+       <B>-t</B>  <B>--expand-tabs</B>
+              Expand tabs to spaces in output.
+
+       <B>-T</B>  <B>--initial-tab</B>
+              Make tabs line up by prepending a tab.
+
+       <B>-r</B>  <B>--recursive</B>
+              Recursively compare any subdirectories found.
+
+       <B>-N</B>  <B>--new-file</B>
+              Treat absent files as empty.
+
+       <B>--unidirectional-new-file</B>
+              Treat absent first files as empty.
+
+       <B>-s</B>  <B>--report-identical-files</B>
+              Report when two files are the same.
+
+       <B>-x</B> PAT  <B>--exclude</B>=<I>PAT</I>
+              Exclude files that match PAT.
+
+       <B>-X</B> FILE  <B>--exclude-from</B>=<I>FILE</I>
+              Exclude files that match any pattern in FILE.
+
+       <B>-S</B> FILE  <B>--starting-file</B>=<I>FILE</I>
+              Start with FILE when comparing directories.
+
+       <B>--from-file</B>=<I>FILE1</I>
+              Compare FILE1 to all  operands.   FILE1  can  be  a
+              directory.
+
+       <B>--to-file</B>=<I>FILE2</I>
+              Compare  all  operands  to  FILE2.   FILE2 can be a
+              directory.
+
+       <B>--horizon-lines</B>=<I>NUM</I>
+              Keep NUM lines of the common prefix and suffix.
+
+       <B>-d</B>  <B>--minimal</B>
+              Try hard to find a smaller set of changes.
+
+       <B>--speed-large-files</B>
+              Assume  large  files  and  many   scattered   small
+              changes.
+
+       <B>-v</B>  <B>--version</B>
+              Output version info.
+
+       <B>--help</B> Output this help.
+       Copyright © 2002 Free Software Foundation, Inc.
+
+       This program comes with NO WARRANTY, to the extent permit­
+       ted by law.  You may redistribute copies of  this  program
+       under  the  terms  of the GNU General Public License.  For
+       more information about these matters, see the  file  named
+       COPYING.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The full documentation for <B>diff</B> is maintained as a Texinfo
+       manual.  If  the  <B>info</B>  and  <B>diff</B>  programs  are  properly
+       installed at your site, the command
+
+              <B>info</B> <B>diff</B>
+
+       should give you access to the complete manual.
+
+
+
+diffutils 2.8.1             April 2002                    <B>DIFF(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

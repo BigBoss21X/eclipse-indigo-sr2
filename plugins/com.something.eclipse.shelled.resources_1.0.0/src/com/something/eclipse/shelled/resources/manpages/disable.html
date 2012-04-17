@@ -1,0 +1,63 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>disable</B> [ -E ] [ -c ] [ -h <I>server</I> ] [ -r <I>reason</I> ] destina­
+       tion(s)
+       <B>enable</B> [ -E ] destination(s)
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>enable</I> starts the named printers or classes.
+
+       <I>disable</I> stops the named printers or classes.  The  follow­
+       ing options may be used:
+
+       -c
+            Cancels all jobs on the named destination.
+
+       -r [ <I>reason</I> ]
+            Sets  the  message associated with the stopped state.
+            If no reason is specified then the message is set  to
+            "Reason Unknown".
+
+       The  <I>-E</I>  option  forces  encryption when connecting to the
+       server.
+
+
+</PRE>
+<H2>COMPATIBILITY</H2><PRE>
+       The CUPS versions of <I>disable</I> and <I>enable</I> may ask  the  user
+       for  an  access  password depending on the printing system
+       configuration.  This differs from the  System  V  versions
+       which require the root user to execute these commands.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>accept(8)</B>,   <B>cancel(1)</B>,   <B>lp(1)</B>,   <B>lpadmin(8)</B>,  <B>lpstat(1)</B>,
+       <B>reject(8)</B>,   CUPS    Software    Administrators    Manual,
+       http://localhost:631/documentation.html
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright  1993-2003 by Easy Software Products, All Rights
+       Reserved.
+
+
+
+
+23 January 2001    Common UNIX Printing System          <B>enable(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

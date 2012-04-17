@@ -1,0 +1,118 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ldapwhoami</B> [<B>-n</B>] [<B>-v</B>] [<B>-z</B>] [<B>-d</B> <I>debuglevel</I>] [<B>-D</B> <I>binddn</I>] [<B>-W</B>]
+       [<B>-w</B> <I>passwd</I>]  [<B>-y</B> <I>passwdfile</I>]  [<B>-H</B> <I>ldapuri</I>]   [<B>-h</B> <I>ldaphost</I>]
+       [<B>-p</B> <I>ldapport</I>] [<B>-O</B> security-properties<B>]</B> [<B>-I</B>] [<B>-Q</B>] [<B>-U</B> <I>auth­</I>
+       <I>cid</I>] [<B>-R</B> <I>realm</I>] [<B>-x</B>] [<B>-X</B> <I>authzid</I>] [<B>-Y</B> <I>mech</I>] [<B>-Z[Z]</B>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>ldapwhoami</I> implements the LDAP "Who Am I?" extended opera­
+       tion.
+
+       <B>ldapwhoami</B>  opens  a  connection to an LDAP server, binds,
+       and performs a whoami operation.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-n</B>     Show what would be done, but don't actually perform
+              the whoami operation.  Useful for debugging in con­
+              junction with -v.
+
+       <B>-v</B>     Run in verbose mode, with many diagnostics  written
+              to standard output.
+
+       <B>-d</B> <I>debuglevel</I>
+              Set  the LDAP debugging level to <I>debuglevel</I>.  <B>ldap­</B>
+              <B>compare</B> must be compiled  with  LDAP_DEBUG  defined
+              for this option to have any effect.
+
+       <B>-x</B>     Use simple authentication instead of SASL.
+
+       <B>-D</B> <I>binddn</I>
+              Use  the  Distinguished  Name <I>binddn</I> to bind to the
+              LDAP directory.
+
+       <B>-W</B>     Prompt for simple  authentication.   This  is  used
+              instead  of  specifying the password on the command
+              line.
+
+       <B>-w</B> <I>passwd</I>
+              Use <I>passwd</I> as the password for  simple  authentica­
+              tion.
+
+       <B>-y</B> <I>passwdfile</I>
+              Use complete contents of <I>passwdfile</I> as the password
+              for simple authentication.
+
+       <B>-H</B> <I>ldapuri</I>
+              Specify URI(s) referring to the ldap server(s).
+
+       <B>-h</B> <I>ldaphost</I>
+              Specify an alternate host on which the ldap  server
+              is running.  Deprecated in favor of -H.
+
+       <B>-p</B> <I>ldapport</I>
+              Specify  the  authentication  ID for SASL bind. The
+              form of the ID depends on the actual SASL mechanism
+              used.
+
+       <B>-R</B> <I>realm</I>
+              Specify  the  realm  of  authentication ID for SASL
+              bind. The form of the realm depends on  the  actual
+              SASL mechanism used.
+
+       <B>-X</B> <I>authzid</I>
+              Specify  the  requested  authorization  ID for SASL
+              bind.  <I>authzid</I> must be one of  the  following  for­
+              mats: <B>dn:</B><I>&lt;distinguished</I> <I>name&gt;</I> or <B>u:</B><I>&lt;username&gt;</I>
+
+       <B>-Y</B> <I>mech</I>
+              Specify the SASL mechanism to be used for authenti­
+              cation. If it's not  specified,  the  program  will
+              choose the best mechanism the server knows.
+
+       <B>-Z[Z]</B>  Issue  StartTLS (Transport Layer Security) extended
+              operation. If you use <B>-ZZ</B>, the command will require
+              the operation to be successful.
+
+
+</PRE>
+<H2>EXAMPLE</H2><PRE>
+           ldapwhoami -x -D "cn=Manager,dc=example,dc=com" -W
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ldap.conf(5)</B>, <B>ldap(3)</B>, <B>ldap_extended_s(3)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       The OpenLDAP Project &lt;http://www.openldap.org/&gt;
+
+
+</PRE>
+<H2>ACKNOWLEDGEMENTS</H2><PRE>
+       <B>OpenLDAP</B>  is developed and maintained by The OpenLDAP Pro­
+       ject (http://www.openldap.org/).  <B>OpenLDAP</B> is derived from
+       University of Michigan LDAP 3.3 Release.
+
+
+
+OpenLDAP 2.1.12                                     <B>LDAPWHOAMI(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

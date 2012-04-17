@@ -1,0 +1,92 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>manpath</B> [<B>-qgdc</B>] [<B>-m</B> <I>system</I>[,...]]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       If  $<B>MANPATH</B>  is set, <B>manpath</B> will simply display its con­
+       tents and issue a warning.  If not, <B>manpath</B> will determine
+       a  suitable  manual page hierarchy search path and display
+       the results.
+
+       The colon-delimited path is determined  using  information
+       gained  from  the  man_db  configuration file - (<I>/etc/man­</I>
+       <I>path.config</I>) and the user's environment.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-q,</B> <B>--quiet</B>
+              Do not issue warnings.
+
+       <B>-d,</B> <B>--debug</B>
+              Produce debugging information.
+
+       <B>-c,</B> <B>--catpath</B>
+              Produce a catpath as opposed to  a  manpath.   Once
+              the  manpath  is  determined,  each path element is
+              converted to its relative catpath.
+
+       <B>-g,</B> <B>--global</B>
+              Produce a manpath consisting of all paths named  as
+              `global' within the man_db configuration file.
+
+       <B>-m</B> <I>system</I>[,...]<B>,</B> <B>--systems=</B><I>system</I>[,...]
+              If  this  system has access to other operating sys­
+              tem's manual hierarchies, this option can  be  used
+              to  include  them  in  the  output  of <B>manpath</B>.  To
+              include NewOS's manual  page  hierarchies  use  the
+              option <B>-m</B> <B>NewOS</B>.
+
+              The  <I>system</I> specified can be a combination of comma
+              delimited operating system names.  To  include  the
+              native  operating system's manual page hierarchies,
+              the system name <B>man</B> must be included in  the  argu­
+              ment string.  This option will override the $<B>SYSTEM</B>
+              environment variable.
+
+       <B>-h,</B> <B>--help</B>
+              Print a help message and exit.
+
+       <B>-V,</B> <B>--version</B>
+              Display version and author information.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>MANPATH</B>
+              If $<B>MANPATH</B> is  set,  <B>manpath</B>  displays  its  value
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/etc/manpath.config</I>  System configuration file.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>apropos(1)</B>, <B>whatis(1)</B>, <B>man(1)</B>.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Wilf. (G.Wilford@ee.surrey.ac.uk).
+       Fabrizio Polacco (fpolacco@debian.org).
+
+
+
+2.3.19                     14 May 2001                 <B>manpath(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

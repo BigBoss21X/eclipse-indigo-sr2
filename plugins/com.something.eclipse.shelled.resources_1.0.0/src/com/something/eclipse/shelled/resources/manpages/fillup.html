@@ -1,0 +1,148 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       fillup [options] basefile addfile outputfile
+
+       fillup [options] basefile addfile
+
+       fillup -V|--version ...
+
+       fillup -h|--help ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       fillup  -  merges  input  files  into one resulting output
+       file. Usually, each file is a configuration file.
+
+       fillup merges files which are holding variables  (ie  con­
+       figuration  or  environment  variables).   A  variable  is
+       defined by an entity composed of a  preceding  comment,  a
+       variable  name,  an  assignment  delimiter,  and a related
+       variable value.  A variable is determined by its  variable
+       name.
+
+       A  preceding comment is optional.  An assignment delimiter
+       may be optional, but if there is an assignment  delimiter,
+       a  variable  name must precede it.  The last entity may be
+       composed only of a comment.
+
+       Only if variables are included in both input files  (base­
+       file  and  addfile)  fillup has to select one of the vari­
+       ables.  Otherwise, if variables are included only  in  one
+       of  the input files they are added to the resulting output
+       file  (with  the  exception  of  the  -i|--ignoreDefinites
+       option).
+
+       The  functionality  is now controlled by a parameter which
+       determines whether a variable included both in  the  base­
+       file  and  in the addfile is taken from the former or from
+       the latter.  Furthermore, a parameter controls whether the
+       variable is removed from a copy of the basefile.
+
+       To  keep  the  fillup  v1.04 functionality, the outputfile
+       parameter can be omitted -- this means the resulting  out­
+       put  file  is named exactly like the first input file name
+       (basefile = outputfile).
+
+       If variables should be  removed  from  the  basefile,  the
+       basefile  is  not  touched,  but  the result is written to
+       basefile.new.
+
+       If basefile includes a header as part of the  first  vari­
+       able  this  header is preserved only for the outputfile if
+       after the header an empty line follows.
+
+       Starting  with  version  1.20  handling  of  metadata  for
+
+       fillup -exchange "/etc/rc.config" "my.config"
+
+       Only variables  of  "/etc/rc.config"  that  are  not  also
+       defined  within  "my.config"  are  passed to the resulting
+       output file "/etc/rc.config".  All variables  of  "my.con­
+       fig" are appended.
+
+
+       fillup -m -r "/etc/rc.config" "my.config" "/etc/rc.config"
+
+       All  variables  of  "/etc/rc.config"  are  passed  to  the
+       resulting output file "/etc/rc.config".  Variables defined
+       only within  "my.config"  are  appended.   The  additional
+       parameter  '-r'  removes  variables defined more than once
+       from a copy of "/etc/rc.config".   "/etc/rc.config"  isn't
+       touched  and  the  result  of  the  removal  is written to
+       "/etc/rc.config.new".
+
+
+       fillup -i "/etc/rc.config" "my.config"
+
+       This is a filter functionality. Variables of "/etc/rc.con­
+       fig"   are  only  passed  to  the  resulting  output  file
+       "/etc/rc.config" if they are defined in both input  files.
+       Because  "my.config"  is  normally only a list of variable
+       names from "/etc/rc.config", this is  named  filter  func­
+       tionality.   Additionally  variables  of  "my.config"  are
+       appended if they are defined only in "my.config".
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       There are many options, which are displayed if  fillup  is
+       called without or with the -h or --help option.
+
+       Most  of  the parameters are based on v1.04. In the sequel
+       only useful parameters are listed:
+
+         -i, --ignoreDefinites    filter functionality
+         -t, --trailing           save trailing comment
+         -v, --verbose            maximum output to screen
+         -V, --version            print fillup version and exit
+         -c | --char &lt;char&gt;       use &lt;char&gt; as comment marker
+         -d | --delim &lt;char&gt;      use &lt;char&gt; as delimiter
+
+         -m, --maintain           maintaining the basefile
+         -x, --exchange           exchanging the basefile
+         -r, --remove             removing within a copy
+
+
+</PRE>
+<H2>EXIT CODE</H2><PRE>
+       fillup  returns  EXIT_SUCCESS  on  successful  completion.
+       Otherwise,  an  exception  handler  is  called,  which may
+       return EXIT_FAILURE;
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       fillup is copyright 1996,1997,1998,1999,2000,2001 by  SuSE
+       GmbH,  Germany.   fillup  is  copyright  2002,2003 by SuSE
+       Linux AG, Germany.
+
+       There is NO warranty; not even for MERCHANTABILITY or FIT­
+       NESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+         Martin Scherbaum, maddin@suse.de (v1.04, 1996)
+         Joerg Dippel,     jd@suse.de     (v1.05, 1998)
+         Joerg Dippel,     jd@suse.de     (v1.06, 2000)
+         Joerg Dippel,     jd@suse.de     (v1.10, 2002)
+         Joerg Dippel,     jd@suse.de     (v1.21, 2003)
+
+
+
+
+fillup                       Jan 2002                   <B>FILLUP(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

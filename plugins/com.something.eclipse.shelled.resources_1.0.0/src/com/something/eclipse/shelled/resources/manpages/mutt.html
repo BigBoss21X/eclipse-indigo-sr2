@@ -1,0 +1,188 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>mutt</B> [-nRyzZ] [-e <I>cmd</I>] [-F <I>file</I>] [-m <I>type</I>] [-f <I>file</I>]
+
+       <B>mutt</B>  [-nx]  [-e  <I>cmd</I>]  [-a  <I>file</I>] [-F <I>file</I>] [-H <I>file</I>] [-i
+       <I>file</I>] [-s <I>subj</I>] [-b <I>addr</I>] [-c <I>addr</I>] <I>addr</I> [...]
+
+       <B>mutt</B> [-n] [-e <I>cmd</I>] [-F <I>file</I>] -p
+
+       <B>mutt</B> -v[v]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Mutt is a small but very powerful text based  program  for
+       reading  electronic  mail  under  unix  operating systems,
+       including support color terminals, MIME,  and  a  threaded
+       sorting mode.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       -a <I>file</I>
+              Attach a file to your message using MIME.
+
+       -b <I>address</I>
+              Specify a blind-carbon-copy (BCC) recipient
+
+       -c <I>address</I>
+              Specify a carbon-copy (CC) recipient
+
+       -e <I>command</I>
+              Specify  a  configuration  command  to be run after
+              processing of initialization files.
+
+       -f <I>mailbox</I>
+              Specify which mailbox to load.
+
+       -F <I>muttrc</I>
+              Specify an initialization file to read  instead  of
+              ~/.muttrc
+
+       -h     Display help.
+
+       -H <I>draft</I>
+              Specify a draft file which contains header and body
+              to use to send a message.
+
+       -i <I>include</I>
+              Specify a file to include into the body of  a  mes­
+              sage.
+
+       -m <I>type</I>
+              specify a default mailbox type
+
+       -n     Causes  Mutt  to  bypass  the  system configuration
+              file.
+              fied by the <I>mailboxes</I> command.
+
+       -z     When used with -f, causes  Mutt  not  to  start  if
+              there are no messages in the mailbox.
+
+       -Z     Causes  Mutt to open the first mailbox specified by
+              the <I>mailboxes</I> command which contains new mail.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       EDITOR Editor to invoke when composing a message.
+
+       EMAIL  The user's e-mail address.
+
+       HOME   Full path of the user's home directory.
+
+       MAIL   Full path of the user's spool mailbox.
+
+       MAILDIR
+              Full path of the user's  spool  mailbox.   Commonly
+              used  when  the  spool  mailbox  is  a  <B>maildir</B> <B>(5)</B>
+              folder.
+
+       MAILCAPS
+              Path to search for mailcap files.
+
+       MM_NOASK
+              If this variable is set, mailcap  are  always  used
+              without prompting first.
+
+       PGPPATH
+              Directory  in  which  the user's PGP public keyring
+              can be found.
+
+       TMPDIR Directory in which temporary files are created.
+
+       REPLYTO
+              Default Reply-To address.
+
+       VISUAL Editor to invoke when the ~v command  is  given  in
+              the builtin editor.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       ~/.muttrc or ~/.mutt/muttrc
+              User configuration file.
+
+       /etc/Muttrc
+              System-wide configuration file.
+
+       /tmp/muttXXXXXX
+              Temporary files created by Mutt.
+
+       ~/.mailcap
+              The privileged dotlocking program.
+
+       /usr/share/doc/packages/mutt/manual.txt
+              The Mutt manual.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       None.  Mutts have fleas, not bugs.
+
+
+</PRE>
+<H2>FLEAS</H2><PRE>
+       Suspend/resume while editing a file with an external  edi­
+       tor  does  not  work under SunOS 4.x if you use the curses
+       lib in /usr/5lib.  It <I>does</I> work with the  S-Lang  library,
+       however.
+
+       Resizing  the  screen while using an external pager causes
+       Mutt to go haywire on some systems.
+
+       suspend/resume does not work under Ultrix.
+
+       The help line for the index menu is  not  updated  if  you
+       change  the bindings for one of the functions listed while
+       Mutt is running.
+
+       For a more up-to-date list of bugs,  errm,  fleas,  please
+       visit   the  mutt  project's  bug  tracking  system  under
+       http://bugs.guug.de/.  To report a  bug,  please  use  the
+       <B>flea(1)</B> program.
+
+
+</PRE>
+<H2>NO WARRANTIES</H2><PRE>
+       This  program  is  distributed in the hope that it will be
+       useful, but WITHOUT ANY WARRANTY; without even the implied
+       warranty  of  MERCHANTABILITY  or FITNESS FOR A PARTICULAR
+       PURPOSE.  See the GNU  General  Public  License  for  more
+       details.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>curses(3)</B>,   <B>flea(1)</B>,   <B>mailcap(5)</B>,  <B>maildir(5)</B>,  <B>mbox(5)</B>,
+       <B>mutt_dotlock(1)</B>,   <B>muttrc(5)</B>,   <B>ncurses(3)</B>,   <B>sendmail(1)</B>,
+       <B>smail(1)</B>
+
+       Mutt Home Page: http://www.mutt.org/
+
+       The Mutt manual
+
+       The GNU General Public License.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Michael  Elkins,  and  others.  Use &lt;mutt-dev@mutt.org&gt; to
+       contact the developers.
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

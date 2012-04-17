@@ -1,0 +1,102 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>indxbib</B> [ <B>-vw</B> ] [ <B>-c</B><I>file</I> ] [ <B>-d</B><I>dir</I> ] [ <B>-f</B><I>file</I> ] [ <B>-h</B><I>n</I> ]
+               [ <B>-i</B><I>string</I> ] [ <B>-k</B><I>n</I> ] [ <B>-l</B><I>n</I> ] [ <B>-n</B><I>n</I> ] [ <B>-o</B><I>file</I> ]
+               [ <B>-t</B><I>n</I> ] [ <I>filename</I>... ]
+
+       It  is  possible to have whitespace between a command line
+       option and its parameter.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>indxbib</B> makes an  inverted  index  for  the  bibliographic
+       databases  in  <I>filename</I>...   for  use with <B>refer(1)</B>, <B>look­</B>
+       <B>bib(1)</B>, and <B>lkbib(1)</B>.  The index will be named <I>filename</I><B>.i</B>;
+       the  index  is  written  to a temporary file which is then
+       renamed to this.  If no filenames are given on the command
+       line because the <B>-f</B> option has been used, and no <B>-o</B> option
+       is given, the index will be named <B>Ind.i</B>.
+
+       Bibliographic databases are divided into records by  blank
+       lines.  Within a record, each fields starts with a <B>%</B> char­
+       acter at the beginning of a line.  Fields have a one  let­
+       ter name which follows the <B>%</B> character.
+
+       The values set by the <B>-c</B>, <B>-n</B>, <B>-l</B> and <B>-t</B> options are stored
+       in the index; when the index is  searched,  keys  will  be
+       discarded  and  truncated in a manner appropriate to these
+       options; the original keys will be used for verifying that
+       any  record  found  using  the index actually contains the
+       keys.  This means that a user of an index  need  not  know
+       whether  these  options  were  used in the creation of the
+       index, provided that not all the keys to be  searched  for
+       would  have  been  discarded  during indexing and that the
+       user supplies at least the part of  each  key  that  would
+       have  remained after being truncated during indexing.  The
+       value set by the <B>-i</B> option is also stored in the index and
+       will be used in verifying records found using the index.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-v</B>     Print the version number.
+
+       <B>-w</B>     Index whole files.  Each file is a separate record.
+
+       <B>-c</B><I>file</I> Read the list of common words from <I>file</I> instead  of
+              <B>/usr/share/groff/1.17.2/eign</B>.
+
+       <B>-d</B><I>dir</I>  Use  <I>dir</I>  as  the  pathname  of the current working
+              directory to store in the  index,  instead  of  the
+              path printed by <B>pwd(1)</B>.  Usually <I>dir</I> will be a sym­
+              bolic link that points to the directory printed  by
+              <B>pwd(1)</B>.
+
+       <B>-f</B><I>file</I> Read the files to be indexed from <I>file</I>.  If <I>file</I> is
+              <B>-</B>, files will be read from the standard input.  The
+
+       <B>-l</B><I>n</I>    Discard  keys that are shorter than <I>n</I>.  Initially <I>n</I>
+              is 3.
+
+       <B>-n</B><I>n</I>    Discard the <I>n</I> most common words.   Initially  <I>n</I>  is
+              100.
+
+       <B>-o</B><I>basename</I>
+              The index should be named <I>basename</I><B>.i</B>.
+
+       <B>-t</B><I>n</I>    Truncate keys to <I>n</I>.  Initially <I>n</I> is 6.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>filename</I><B>.i</B>     Index.
+
+       <B>Ind.i</B>          Default index name.
+
+       <B>/usr/share/groff/1.17.2/eign</B>
+                      List of common words.
+
+       <B>indxbib</B><I>XXXXXX</I>  Temporary file.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>refer(1)</B>, <B>lkbib(1)</B>, <B>lookbib(1)</B>
+
+
+
+Groff Version 1.17.2       27 June 2001                <B>INDXBIB(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

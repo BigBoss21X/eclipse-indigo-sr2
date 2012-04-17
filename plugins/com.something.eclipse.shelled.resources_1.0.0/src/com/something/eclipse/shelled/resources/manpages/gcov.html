@@ -1,0 +1,308 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       gcov [<B>-v</B>|<B>--version</B>] [<B>-h</B>|<B>--help</B>]
+            [<B>-b</B>|<B>--branch-probabilities</B>]
+            [<B>-c</B>|<B>--branch-counts</B>]
+            [<B>-n</B>|<B>--no-output</B>]
+            [<B>-l</B>|<B>--long-file-names</B>]
+            [<B>-p</B>|<B>--preserve-paths</B>]
+            [<B>-f</B>|<B>--function-summaries</B>]
+            [<B>-o</B>|<B>--object-directory</B> <I>directory|file</I>] <I>sourcefile</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>gcov</B> is a test coverage program.  Use it in concert with
+       GCC to analyze your programs to help create more effi­
+       cient, faster running code and to discover untested parts
+       of your program.  You can use <B>gcov</B> as a profiling tool to
+       help discover where your optimization efforts will best
+       affect your code.  You can also use <B>gcov</B> along with the
+       other profiling tool, <B>gprof</B>, to assess which parts of your
+       code use the greatest amount of computing time.
+
+       Profiling tools help you analyze your code's performance.
+       Using a profiler such as <B>gcov</B> or <B>gprof</B>, you can find out
+       some basic performance statistics, such as:
+
+       ·   how often each line of code executes
+
+       ·   what lines of code are actually executed
+
+       ·   how much computing time each section of code uses
+
+       Once you know these things about how your code works when
+       compiled, you can look at each module to see which modules
+       should be optimized.  <B>gcov</B> helps you determine where to
+       work on optimization.
+
+       Software developers also use coverage testing in concert
+       with testsuites, to make sure software is actually good
+       enough for a release.  Testsuites can verify that a pro­
+       gram works as expected; a coverage program tests to see
+       how much of the program is exercised by the testsuite.
+       Developers can then determine what kinds of test cases
+       need to be added to the testsuites to create both better
+       testing and a better final product.
+
+       You should compile your code without optimization if you
+       plan to use <B>gcov</B> because the optimization, by combining
+       some lines of code into one function, may not give you as
+       much information as you need to look for `hot spots' where
+       the code is using a great deal of computer time.  Like­
+       wise, because <B>gcov</B> accumulates statistics by line (at the
+       lowest resolution), it works best with a programming style
+       that places only one statement on each line.  If you use
+       patible with any other profiling or test coverage mecha­
+       nism.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-h</B>
+       <B>--help</B>
+           Display help about using <B>gcov</B> (on the standard out­
+           put), and exit without doing any further processing.
+
+       <B>-v</B>
+       <B>--version</B>
+           Display the <B>gcov</B> version number (on the standard out­
+           put), and exit without doing any further processing.
+
+       <B>-b</B>
+       <B>--branch-probabilities</B>
+           Write branch frequencies to the output file, and write
+           branch summary info to the standard output.  This
+           option allows you to see how often each branch in your
+           program was taken.
+
+       <B>-c</B>
+       <B>--branch-counts</B>
+           Write branch frequencies as the number of branches
+           taken, rather than the percentage of branches taken.
+
+       <B>-n</B>
+       <B>--no-output</B>
+           Do not create the <B>gcov</B> output file.
+
+       <B>-l</B>
+       <B>--long-file-names</B>
+           Create long file names for included source files.  For
+           example, if the header file <I>x.h</I> contains code, and was
+           included in the file <I>a.c</I>, then running <B>gcov</B> on the
+           file <I>a.c</I> will produce an output file called
+           <I>a.c##x.h.gcov</I> instead of <I>x.h.gcov</I>.  This can be useful
+           if <I>x.h</I> is included in multiple source files.
+
+       <B>-p</B>
+       <B>--preserve-paths</B>
+           Preserve complete path information in the names of
+           generated <I>.gcov</I> files. Without this option, just the
+           filename component is used. With this option, all
+           directories are used, with '/' characters translated
+           to '#' characters, '.' directory components removed
+           and '..'  components renamed to '^'. This is useful if
+           sourcefiles are in several different directories. It
+           also affects the <B>-l</B> option.
+
+       <B>-f</B>
+       <B>--function-summaries</B>
+           to the current directory.
+
+       Gcov should be run with the current directory the same as
+       that when you invoked the compiler. Otherwise it will not
+       be able to locate the source files. Gcov produces files
+       called <I>mangledname.gcov</I> in the current directory. These
+       contain the coverage information of the source file they
+       correspond to. One <I>.gcov</I> file is produced for each source
+       file containing code, which was compiled to produce the
+       data files. The <I>.gcov</I> files contain the ':' separated
+       fields along with program source code. The format is
+
+               &lt;execution_count&gt;:&lt;line_number&gt;:&lt;source line text&gt;
+
+       Additional block information may succeed each line, when
+       requested by command line option. The <I>execution</I><B>_</B><I>count</I> is <B>-</B>
+       for lines containing no code and <B>#####</B> for lines which
+       were never executed. Some lines of information at the
+       start have <I>line</I><B>_</B><I>number</I> of zero.
+
+       When printing percentages, 0% and 100% are only printed
+       when the values are <I>exactly</I> 0% and 100% respectively.
+       Other values which would conventionally be rounded to 0%
+       or 100% are instead printed as the nearest non-boundary
+       value.
+
+       When using <B>gcov</B>, you must first compile your program with
+       two special GCC options: <B>-fprofile-arcs</B> <B>-ftest-coverage</B>.
+       This tells the compiler to generate additional information
+       needed by gcov (basically a flow graph of the program) and
+       also includes additional code in the object files for gen­
+       erating the extra profiling information needed by gcov.
+       These additional files are placed in the directory where
+       the object file is located.
+
+       Running the program will cause profile output to be gener­
+       ated.  For each source file compiled with <B>-fprofile-arcs</B>,
+       an accompanying <I>.da</I> file will be placed in the object file
+       directory.
+
+       Running <B>gcov</B> with your program's source file names as
+       arguments will now produce a listing of the code along
+       with frequency of execution for each line.  For example,
+       if your program is called <I>tmp.c</I>, this is what you see when
+       you use the basic <B>gcov</B> facility:
+
+               $ gcc -fprofile-arcs -ftest-coverage tmp.c
+               $ a.out
+               $ gcov tmp.c
+               90.00% of 10 source lines executed in file tmp.c
+               Creating tmp.c.gcov.
+
+                       -:    6:
+                       1:    7:  total = 0;
+                       -:    8:
+                      11:    9:  for (i = 0; i &lt; 10; i++)
+                      10:   10:    total += i;
+                       -:   11:
+                       1:   12:  if (total != 45)
+                   #####:   13:    printf ("Failure\n");
+                       -:   14:  else
+                       1:   15:    printf ("Success\n");
+                       1:   16:  return 0;
+                       1:   17:}
+
+       When you use the <B>-b</B> option, your output looks like this:
+
+               $ gcov -b tmp.c
+               90.00% of 10 source lines executed in file tmp.c
+               80.00% of 5 branches executed in file tmp.c
+               80.00% of 5 branches taken at least once in file tmp.c
+               50.00% of 2 calls executed in file tmp.c
+               Creating tmp.c.gcov.
+
+       Here is a sample of a resulting <I>tmp.c.gcov</I> file:
+
+                       -:    0:Source:tmp.c
+                       -:    0:Object:tmp.bb
+                       -:    1:#include &lt;stdio.h&gt;
+                       -:    2:
+                       -:    3:int main (void)
+                       1:    4:{
+                       1:    5:  int i, total;
+                       -:    6:
+                       1:    7:  total = 0;
+                       -:    8:
+                      11:    9:  for (i = 0; i &lt; 10; i++)
+               branch  0: taken 90%
+               branch  1: taken 100%
+               branch  2: taken 100%
+                      10:   10:    total += i;
+                       -:   11:
+                       1:   12:  if (total != 45)
+               branch  0: taken 100%
+                   #####:   13:    printf ("Failure\n");
+               call    0: never executed
+               branch  1: never executed
+                       -:   14:  else
+                       1:   15:    printf ("Success\n");
+               call    0: returns 100%
+                       1:   16:  return 0;
+                       1:   17:}
+
+       For each basic block, a line is printed after the last
+       executed'' is printed.
+
+       For a call, if it was executed at least once, then a per­
+       centage indicating the number of times the call returned
+       divided by the number of times the call was executed will
+       be printed.  This will usually be 100%, but may be less
+       for functions call "exit" or "longjmp", and thus may not
+       return every time they are called.
+
+       The execution counts are cumulative.  If the example pro­
+       gram were executed again without removing the <I>.da</I> file,
+       the count for the number of times each line in the source
+       was executed would be added to the results of the previous
+       run(s).  This is potentially useful in several ways.  For
+       example, it could be used to accumulate data over a number
+       of program runs as part of a test verification suite, or
+       to provide more accurate long-term information over a
+       large number of program runs.
+
+       The data in the <I>.da</I> files is saved immediately before the
+       program exits.  For each source file compiled with <B>-fpro­</B>
+       <B>file-arcs</B>, the profiling code first attempts to read in an
+       existing <I>.da</I> file; if the file doesn't match the exe­
+       cutable (differing number of basic block counts) it will
+       ignore the contents of the file.  It then adds in the new
+       execution counts and finally writes the data to the file.
+
+       <B>Using</B> <B>gcov</B> <B>with</B> <B>GCC</B> <B>Optimization</B>
+
+       If you plan to use <B>gcov</B> to help optimize your code, you
+       must first compile your program with two special GCC
+       options: <B>-fprofile-arcs</B> <B>-ftest-coverage</B>.  Aside from that,
+       you can use any other GCC options; but if you want to
+       prove that every single line in your program was executed,
+       you should not compile with optimization at the same time.
+       On some machines the optimizer can eliminate some simple
+       code lines by combining them with other lines.  For exam­
+       ple, code like this:
+
+               if (a != b)
+                 c = 1;
+               else
+                 c = 0;
+
+       can be compiled into one instruction on some machines.  In
+       this case, there is no way for <B>gcov</B> to calculate separate
+       execution counts for each line because there isn't sepa­
+       rate code for each line.  Hence the <B>gcov</B> output looks like
+       this if you compiled the program with optimization:
+
+                     100:   12:if (a != b)
+                     100:   13:  c = 1;
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright (c) 1996, 1997, 1999, 2000, 2001, 2002, 2003
+       Free Software Foundation, Inc.
+
+       Permission is granted to copy, distribute and/or modify
+       this document under the terms of the GNU Free Documenta­
+       tion License, Version 1.2 or any later version published
+       by the Free Software Foundation; with the Invariant Sec­
+       tions being ``GNU General Public License'' and ``Funding
+       Free Software'', the Front-Cover texts being (a) (see
+       below), and with the Back-Cover Texts being (b) (see
+       below).  A copy of the license is included in the <B>gfdl(7)</B>
+       man page.
+
+       (a) The FSF's Front-Cover Text is:
+
+            A GNU Manual
+
+       (b) The FSF's Back-Cover Text is:
+
+            You have freedom to copy and modify this GNU Manual, like GNU
+            software.  Copies published by the Free Software Foundation raise
+            funds for GNU development.
+
+
+
+gcc-3.3-hammer              2003-02-08                    <B>GCOV(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

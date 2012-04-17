@@ -1,0 +1,88 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+
+</PRE>
+<H2>Note of warning</H2><PRE>
+       This   manpage   has  been  automatically  generated  from
+       mtools's texinfo documentation, and may  not  be  entirely
+       accurate  or  complete.   See the end of this man page for
+       details.
+
+
+
+</PRE>
+<H2>Description</H2><PRE>
+       The mtype command is used to display contents of an MS-DOS
+       file. Its syntax is:
+
+       mtype [-ts] <I>msdosfile</I> [ <I>msdosfiles</I>... ]
+
+
+       Mtype displays the specified MS-DOS file on the screen.
+
+       In addition to the standard options, Mtype allows the fol­
+       lowing command line options:
+
+       t      Text file viewing.  Mtype translates incoming  car­
+              riage return/line feeds to line feeds.
+
+       s      Mtype strips the high bit from the data.
+
+       The  mcd  command  may be used to establish the device and
+       the current working directory (relative to MS-DOS), other­
+       wise the default is A:/.
+
+       Mtype  returns  0  on success, 1 on utter failure, or 2 on
+       partial failure.
+
+       Unlike the MS-DOS version of TYPE, mtype  allows  multiple
+       arguments.
+
+
+
+</PRE>
+<H2>See Also</H2><PRE>
+       Mtools' texinfo doc
+
+
+</PRE>
+<H2>Viewing the texi doc</H2><PRE>
+       This   manpage   has  been  automatically  generated  from
+       mtools's texinfo documentation. However, this  process  is
+       only  approximative,  and  some items, such as crossrefer­
+       ences, footnotes and indices are lost in this  translation
+       process.   Indeed,  these items have no appropriate repre­
+       sentation in the manpage format.  Moreover, not all infor­
+       mation has been translated into the manpage version.  Thus
+       I strongly advise you to use  the  original  texinfo  doc.
+       See  the  end of this manpage for instructions how to view
+       the texinfo doc.
+
+
+       *      To  generate  an  info copy (browsable using emacs'
+              info mode), run:
+
+                     <B>./configure;</B> <B>make</B> <B>info</B>
+
+
+
+       The texinfo doc looks most pretty when printed or as html.
+       Indeed, in the info version certain examples are difficult
+       to read due to the quoting conventions used in info.
+
+
+
+
+mtools-3.9.8                 02Nov02                     <B>mtype(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

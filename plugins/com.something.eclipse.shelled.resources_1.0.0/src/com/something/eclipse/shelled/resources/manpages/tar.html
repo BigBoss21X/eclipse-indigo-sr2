@@ -1,0 +1,210 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>tar</B>  [<B>-</B>]  [<B>A</B>  <B>--catenate</B> <B>--concatenate</B>|<B>c</B> <B>--create</B>|<B>d</B> <B>--diff</B>
+       <B>--compare</B>|<B>r</B>  <B>--append</B>|<B>t</B>  <B>--list</B>|<B>u</B>   <B>--update</B>|<B>x</B>   <B>--extract</B>
+       <B>--get</B>]   [<B>--atime-preserve</B>]   [<B>-b,</B>   <B>--block-size=</B><I>N</I>]  [<B>-B,</B>
+       <B>--read-full-blocks</B>] [<B>-C,</B>  <B>--directory=</B><I>DIR</I>]  [<B>--checkpoint</B>]
+       [<B>-f,</B>     <B>--file=</B>[<I>HOSTNAME</I><B>:</B>]<I>F</I>]     [<B>--force-local</B>]     [<B>-F,</B>
+       <B>--info-script=</B><I>F</I><B>,</B> <B>--new-volume-script=</B><I>F</I>]  [<B>-G,</B>  <B>--incremen­</B>
+       <B>tal</B>] [<B>-g,</B> <B>--listed-incremental=</B><I>F</I>] [<B>-h,</B> <B>--dereference</B>] [<B>-i,</B>
+       <B>--ignore-zeros</B>]       [<B>-j,</B>       <B>--bzip2,</B>       <B>--bunzip2</B>]
+       [<B>--ignore-failed-read</B>]    [<B>-k,</B>    <B>--keep-old-files</B>]   [<B>-K,</B>
+       <B>--starting-file=</B><I>F</I>]    [<B>-l,</B>     <B>--one-file-system</B>]     [<B>-L,</B>
+       <B>--tape-length=</B><I>N</I>]     [<B>-m,</B>     <B>--modification-time</B>]    [<B>-M,</B>
+       <B>--multi-volume</B>] [<B>-N,</B> <B>--after-date=</B><I>DATE</I><B>,</B> <B>--newer=</B><I>DATE</I>] [<B>-o,</B>
+       <B>--old-archive,</B>   <B>--portability</B>]   [<B>-O,</B>  <B>--to-stdout</B>]  [<B>-p,</B>
+       <B>--same-permissions,</B> <B>--preserve-permissions</B>]  [<B>-P,</B>  <B>--abso­</B>
+       <B>lute-paths</B>]     [<B>--preserve</B>]     [<B>-R,</B>     <B>--record-number</B>]
+       [<B>--remove-files</B>]  [<B>-s,</B>   <B>--same-order,</B>   <B>--preserve-order</B>]
+       [<B>--same-owner</B>]   [<B>-S,</B>   <B>--sparse</B>]   [<B>-T,</B>   <B>--files-from=</B><I>F</I>]
+       [<B>--null</B>] [<B>--totals</B>]  [<B>-v,</B>  <B>--verbose</B>]  [<B>-V,</B>  <B>--label=</B><I>NAME</I>]
+       [<B>--version</B>]   [<B>-w,</B>   <B>--interactive,</B>  <B>--confirmation</B>]  [<B>-W,</B>
+       <B>--verify</B>] [<B>--exclude=</B><I>FILE</I>] [<B>-X,</B> <B>--exclude-from=</B><I>FILE</I>]  [<B>-Z,</B>
+       <B>--compress,</B>    <B>--uncompress</B>]    [<B>-z,</B>   <B>--gzip,</B>   <B>--ungzip</B>]
+       [<B>--use-compress-program=</B><I>PROG</I>]           [<B>--block-compress</B>]
+       [<B>-</B>[<B>0-7</B>][<B>lmh</B>]]
+
+       <I>filename1</I> [ <I>filename2</I>, ... <I>filenameN</I> ]
+
+       <I>directory1</I> [ <I>directory2</I>, ... <I>directoryN</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This  manual  page  documents  the  GNU version of <B>tar</B>, an
+       archiving program designed to store and extract files from
+       an archive file known as a <I>tarfile</I>.  A <I>tarfile</I> may be made
+       on a tape drive, however, it is also  common  to  write  a
+       <I>tarfile</I>  to a normal file.  The first argument to <B>tar</B> must
+       be one of the options: <B>Acdrtux</B>, followed by  any  optional
+       functions.   The  final  arguments to <B>tar</B> are the names of
+       the files or directories which should be archived. The use
+       of a directory name always implies that the subdirectories
+       below should be included in the archive.
+
+
+</PRE>
+<H2>FUNCTION LETTERS</H2><PRE>
+       <B>One</B> <B>of</B> <B>the</B> <B>following</B> <B>options</B> <B>must</B> <B>be</B> <B>used:</B>
+
+       <B>-A,</B> <B>--catenate,</B> <B>--concatenate</B>
+              append tar files to an archive
+
+       <B>-c,</B> <B>--create</B>
+              create a new archive
+
+       <B>-d,</B> <B>--diff,</B> <B>--compare</B>
+              find differences between archive and file system
+
+       <B>-x,</B> <B>--extract,</B> <B>--get</B>
+              extract files from an archive
+
+
+</PRE>
+<H2>OTHER OPTIONS</H2><PRE>
+       <B>--atime-preserve</B>
+              don't change access times on dumped files
+
+       <B>-b,</B> <B>--block-size=</B><I>N</I>
+              block size of <I>N</I>x512 bytes (default <I>N</I>=20)
+
+       <B>-B,</B> <B>--read-full-blocks</B>
+              reblock as we read (for reading 4.2BSD pipes)
+
+       <B>-C,</B> <B>--directory=</B><I>DIR</I>
+              change to directory <I>DIR</I>
+
+       <B>--checkpoint</B>
+              print directory names while reading the archive
+
+       <B>-f,</B> <B>--file=</B>[<I>HOSTNAME</I><B>:</B>]<I>F</I>
+              use archive file or device <I>F</I> (default /dev/rmt0)
+
+       <B>--force-local</B>
+              archive file is local even if has a colon
+
+       <B>-F,</B> <B>--info-script=</B><I>F</I><B>,</B> <B>--new-volume-script=</B><I>F</I>
+              run script at end of each tape (implies -M)
+
+       <B>-G,</B> <B>--incremental</B>
+              create/list/extract  old   GNU-format   incremental
+              backup
+
+       <B>-g,</B> <B>--listed-incremental=</B><I>F</I>
+              create/list/extract   new   GNU-format  incremental
+              backup
+
+       <B>-h,</B> <B>--dereference</B>
+              don't dump symlinks; dump the files they point to
+
+       <B>-i,</B> <B>--ignore-zeros</B>
+              ignore blocks of zeros in  archive  (normally  mean
+              EOF)
+
+       <B>-j,</B> <B>--bzip2,</B> <B>--bunzip2</B>
+              filter the archive through bzip2
+
+       <B>--ignore-failed-read</B>
+              don't exit with non-zero status on unreadable files
+
+       <B>-k,</B> <B>--keep-old-files</B>
+              keep existing  files;  don't  overwrite  them  from
+              archive
+              create/list/extract multi-volume archive
+
+       <B>-N,</B> <B>--after-date=</B><I>DATE</I><B>,</B> <B>--newer=</B><I>DATE</I>
+              only store files newer than <I>DATE</I>
+
+       <B>-o,</B> <B>--old-archive,</B> <B>--portability</B>
+              write a V7 format archive, rather than ANSI format
+
+       <B>-O,</B> <B>--to-stdout</B>
+              extract files to standard output
+
+       <B>-p,</B> <B>--same-permissions,</B> <B>--preserve-permissions</B>
+              extract all protection information
+
+       <B>-P,</B> <B>--absolute-paths</B>
+              don't strip leading `/'s from file names
+
+       <B>--preserve</B>
+              like -p -s
+
+       <B>-R,</B> <B>--record-number</B>
+              show record number within archive with each message
+
+       <B>--remove-files</B>
+              remove files after adding them to the archive
+
+       <B>-s,</B> <B>--same-order,</B> <B>--preserve-order</B>
+              list of names to extract is sorted to match archive
+
+       <B>--same-owner</B>
+              create extracted files with the same ownership
+
+       <B>-S,</B> <B>--sparse</B>
+              handle sparse files efficiently
+
+       <B>-T,</B> <B>--files-from=</B><I>F</I>
+              get names to extract or create from file <I>F</I>
+
+       <B>--null</B> -T reads null-terminated names, disable -C
+
+       <B>--totals</B>
+              print total bytes written with --create
+
+       <B>-v,</B> <B>--verbose</B>
+              verbosely list files processed
+
+       <B>-V,</B> <B>--label=</B><I>NAME</I>
+              create archive with volume name <I>NAME</I>
+
+       <B>--version</B>
+              print tar program version number
+
+
+       <B>-z,</B> <B>--gzip,</B> <B>--ungzip</B>
+              filter the archive through gzip
+
+       <B>--use-compress-program=</B><I>PROG</I>
+              filter  the archive through <I>PROG</I> (which must accept
+              -d)
+
+       <B>--block-compress</B>
+              block the output of compression program for tapes
+
+       <B>-</B>[<B>0-7</B>][<B>lmh</B>]
+              specify drive and density
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       The GNU folks, in general, abhor  man  pages,  and  create
+       info  documents instead.  The maintainer of tar falls into
+       this category.  This man page  is  neither  complete,  nor
+       current, and was included in the Debian Linux packaging of
+       tar entirely to reduce the frequency with which  the  lack
+       of  a man page gets reported as a bug in our defect track­
+       ing system.
+
+       If you really want to understand tar, then you should  run
+       info  and read the tar info pages, or use the info mode in
+       emacs.
+
+
+
+
+Version 1.13.25          14 December 2000                  <B>TAR(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

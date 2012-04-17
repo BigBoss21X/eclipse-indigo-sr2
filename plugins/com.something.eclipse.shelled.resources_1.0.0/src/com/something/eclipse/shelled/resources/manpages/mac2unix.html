@@ -1,0 +1,142 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSYS</H2><PRE>
+       dos2unix  [options] [-c convmode] [-o file ...] [-n infile
+       outfile ...]
+
+       Options:
+
+       [-hkqV] [--help] [--keepdate] [--quiet] [--version]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This manual page documents dos2unix, the program that con­
+       verts plain text files in DOS/MAC format to UNIX format.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       The following options are available:
+
+       <B>-h</B> <B>--help</B>
+              Print online help.
+
+
+       <B>-k</B> <B>--keepdate</B>
+              Keep  the  date  stamp of output file same as input
+              file.
+
+
+       <B>-q</B> <B>--quiet</B>
+              Quiet mode. Suppress all warning and messages.
+
+
+       <B>-V</B> <B>--version</B>
+              Prints version information.
+
+
+       <B>-c</B> <B>--convmode</B> <B>convmode</B>
+              Sets  conversion  mode.  Simulates  dos2unix  under
+              SunOS.
+
+
+       <B>-o</B> <B>--oldfile</B> <B>file</B> <B>...</B>
+              Old file mode. Convert the file and write output to
+              it. The program default to run in this mode.  Wild­
+              card names may be used.
+
+
+       <B>-n</B> <B>--newfile</B> <B>infile</B> <B>outfile</B> <B>...</B>
+              New  file mode. Convert the infile and write output
+              to outfile. File names must be given in  pairs  and
+              wildcard  names should NOT be used or you WILL lost
+              your files.
+
+       Convert and replace a.txt in ASCII conversion mode.   Con­
+       vert  and  replace  b.txt in ISO conversion mode.  Convert
+       c.txt from Mac to Unix ascii format.
+
+              <B>dos2unix</B> <B>a.txt</B> <B>-c</B> <B>iso</B> <B>b.txt</B>
+
+              <B>dos2unix</B> <B>-c</B> <B>ascii</B> <B>a.txt</B> <B>-c</B> <B>iso</B> <B>b.txt</B>
+
+              <B>dos2unix</B> <B>-c</B> <B>mac</B> <B>a.txt</B> <B>b.txt</B>
+
+
+       Convert and replace  a.txt  while  keeping  original  date
+       stamp.
+
+              <B>dos2unix</B> <B>-k</B> <B>a.txt</B>
+
+              <B>dos2unix</B> <B>-k</B> <B>-o</B> <B>a.txt</B>
+
+
+       Convert a.txt and write to e.txt.
+
+              <B>dos2unix</B> <B>-n</B> <B>a.txt</B> <B>e.txt</B>
+
+
+       Convert a.txt and write to e.txt, keep date stamp of e.txt
+       same as a.txt.
+
+              <B>dos2unix</B> <B>-k</B> <B>-n</B> <B>a.txt</B> <B>e.txt</B>
+
+
+       Convert and replace a.txt.  Convert  b.txt  and  write  to
+       e.txt.
+
+              <B>dos2unix</B> <B>a.txt</B> <B>-n</B> <B>b.txt</B> <B>e.txt</B>
+
+              <B>dos2unix</B> <B>-o</B> <B>a.txt</B> <B>-n</B> <B>b.txt</B> <B>e.txt</B>
+
+
+       Convert  c.txt  and  write  to  e.txt. Convert and replace
+       a.txt.  Convert and replace b.txt. Convert d.txt and write
+       to f.txt.
+
+              <B>dos2unix</B>  <B>-n</B>  <B>c.txt</B>  <B>e.txt</B>  <B>-o</B> <B>a.txt</B> <B>b.txt</B> <B>-n</B> <B>d.txt</B>
+              <B>f.txt</B>
+
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       The program does not work properly under  MSDOS  in  stdio
+       processing  mode.  If you know why is that so, please tell
+       me.
+
+              SunOS 4.1.3 with GNU C 2.6.3
+
+              MS-DOS 6.20 with Borland C++ 4.02
+
+       Suggestions and bug reports are welcome.
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>unix2dos(1)</B> <B>mac2unix(1)</B>
+
+
+
+
+1995.03.31                dos2unix v3.0               <B>dos2unix(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

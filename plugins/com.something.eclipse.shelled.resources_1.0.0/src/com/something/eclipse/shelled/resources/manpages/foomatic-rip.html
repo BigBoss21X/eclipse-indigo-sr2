@@ -1,0 +1,195 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       foomatic-rip - Universal print filter/RIP wrapper
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+   Spooler-less printing/CPS filter:
+       <B>foomatic-rip</B> <B>[-P</B> <I>&lt;printer&gt;</I> <B>|</B> <B>--ppd</B> <I>&lt;ppdfile&gt;</I><B>]</B> <B>[-J</B> <I>&lt;jobti­</I>
+       <I>tle&gt;]</I> <B>[-o</B> <I>&lt;option&gt;</I><B>=</B><I>&lt;value&gt;</I> <B>[...]]</B> <B>[</B><I>&lt;files&gt;</I><B>]</B>
+
+
+   CUPS filter:
+       <B>foomatic-rip</B> <I>&lt;jobid&gt;</I> <I>&lt;user&gt;</I> <I>&lt;jobtitle&gt;</I> <I>&lt;num­</I>
+       <I>copies&gt;</I> <I>&lt;options&gt;</I> <B>[</B><I>&lt;file&gt;</I><B>]</B>
+
+
+   LPRng filter:
+       <B>foomatic-rip</B> <B>--lprng</B> <B>[-J</B><I>&lt;jobti­</I>
+       <I>tle&gt;</I><B>]</B> <B>[-Z</B><I>&lt;option&gt;</I><B>=</B><I>&lt;value&gt;</I><B>[,</B><I>&lt;option&gt;</I><B>=</B><I>&lt;value&gt;</I><B>[,</B> <B>...]]</B> <I>&lt;ppdfile&gt;</I>
+
+
+   LPD/GNUlpr filter:
+       <B>foomatic-rip</B> <B>[-w</B> <I>&lt;number&gt;</I><B>]</B> <B>[-l</B> <I>&lt;number&gt;</I><B>]</B> <B>[-x</B> <I>&lt;num­</I>
+       <I>ber&gt;</I><B>]</B> <B>[-y</B> <I>&lt;num­</I>
+       <I>ber&gt;</I><B>]</B> <B>[-i</B> <I>&lt;num­</I>
+       <I>ber&gt;</I><B>]</B> <B>[-c]</B> <B>[-n</B> <I>&lt;string&gt;</I><B>]</B> <B>[-h</B> <I>&lt;string&gt;</I><B>]</B> <B>[-j|-J</B> <I>&lt;jobti­</I>
+       <I>tle&gt;</I><B>|</B><I>&lt;options&gt;</I><B>]</B> <I>&lt;ppdfile&gt;</I>
+
+
+   PPR RIP:
+       <B>foomatic-rip</B> <B>[</B><I>&lt;option&gt;</I><B>=</B><I>&lt;value&gt;</I> <I>[...]]</I>
+
+
+   PPR interface:
+       <B>foomatic-rip</B> <I>&lt;queue&gt;</I> <I>&lt;destaddress&gt;</I> <I>&lt;options&gt;</I> <I>&lt;job­</I>
+       <I>break&gt;</I> <I>&lt;feed­</I>
+       <I>back&gt;</I> <I>&lt;codes&gt;</I> <I>&lt;jobname&gt;</I> <I>&lt;routing&gt;</I> <I>&lt;for&gt;</I> <I>&lt;file­</I>
+       <I>type&gt;</I> <B>[</B><I>&lt;file&gt;</I><B>]</B>
+
+
+   PDQ driver file generation:
+       <B>foomatic-</B>
+       <B>rip</B> <B>[--ppd</B> <I>&lt;ppdfile&gt;</I><B>]</B> <B>[-o</B> <I>&lt;option&gt;</I><B>=</B><I>&lt;value&gt;</I> <B>[...]]</B> <B>--gen­</B>
+       <B>pdq|--appendpdq|--genrawpdq|--appendrawpdq</B>
+
+
+   PDQ filter:
+       <B>foomatic-</B>
+       <B>rip</B> <B>--pdq</B> <B>--ppd</B> <I>&lt;ppdfile&gt;</I><B>]</B> <I>[</I><B>-o</B> <I>&lt;option&gt;</I><B>=</B><I>&lt;value&gt;</I> <I>[...]]</I> <I>&lt;file&gt;</I>
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       foomatic-rip is a universal print filter which works  with
+       every  know free software printer spooler. It has the fol­
+       lowing features:
+       · Printer capabilities, how to handle  user  options,  and
+         how  to  build  the  renderer  command  line  is  always
+         described by <B>PPD</B> <B>files</B>, these PPD files  can  come  from
+         <B>Foomatic</B>  or can be the ones supplied by the manufactur­
+         ers of PostScript printers. The PPD files are  the  same
+         for all spoolers.
+
+
+       · foomatic-rip  works  with  every  known  spooler  (<B>CUPS</B>,
+         <B>LPRng</B>, <B>LPD</B>, <B>GNUlpr</B>, <B>PPR</B>, <B>PDQ</B>, <B>CPS</B>, and <B>without</B> <B>spooler</B>).
+         It  auto-detects the spooler from which it was called by
+         the command line options and environment variables which
+         were supplied by the spooler.
+
+
+       · Non-PostScript files are translated to PostScript before
+         they are passed to the renderer. This is usually done by
+         <B>a2ps(1)</B>,  <B>enscript(1)</B>,  or  <B>mpage(1)</B>. foomatic-rip auto-
+         detects which program is installed, but manual  configu­
+         ration is also possible.
+
+
+       · foomatic-rip  does  not  only apply option settings sup­
+         plied by the user through the command line of the print­
+         ing command, but also searches the entire job for embed­
+         ded option settings (only  PostScript  jobs).  Here  not
+         only  settings  affectimg  the  whole job are taken into
+         account, but also settings in the  page  headers,  which
+         are  only  valid  for the page where they were found, so
+         applications which produce PostScript  code  with  page-
+         specific printer option settings are fully supported.
+
+
+
+</PRE>
+<H2>SPOOLER-LESS PRINTING</H2><PRE>
+   <B>Options</B>
+       <B>-P</B> <I>&lt;printer&gt;</I>
+                 <I>&lt;printer&gt;</I> is the configured printer which should
+                 be used for this job.
+
+       <B>--ppd</B> <I>&lt;ppdfile&gt;</I>
+                 The PPD file <I>&lt;ppdfile&gt;</I>  should  be  applied  for
+                 processing this job.
+
+       <B>-J</B> <I>&lt;jobtitle&gt;</I>
+                 The  <I>&lt;jobtitle&gt;</I> will be printed in the head line
+                 of every page of a plain text job.
+
+       <B>-o</B> <I>&lt;option&gt;</I><B>=</B><I>&lt;value&gt;</I>
+                 Option settings for this job, do
+
+                 <B>foomatic-rip</B> <B>-P</B> <I>&lt;printer&gt;</I> <B>-o</B> <B>docs</B> <I>&lt;file&gt;</I>
+
+       Put a line
+
+       <B>*FoomaticRIPPostPipe:</B> <B>"|</B> <I>&lt;command&gt;</I><B>"</B>
+
+       into  the  PPD  file, right after <B>*PPD-Adobe:</B> <B>"4.3"</B>, where
+       <I>&lt;command&gt;</I> is a command into which you  wnat  to  re-direct
+       the output data. Due to the restictions of PPD files <B>&lt;</B>, <B>&gt;</B>,
+       and <B>"</B> are not allowed in the <I>&lt;command&gt;</I>,  replace  them  as
+       follows:
+
+
+       <B>Character</B> <B>Replacement</B>
+       <B>---------------------</B>
+            <B>&lt;</B>    <B>&amp;lt;</B>
+            <B>&gt;</B>    <B>&amp;gt;</B>
+            <B>"</B>    <B>&amp;quot;</B>
+
+       This way you can print directly to your printer, use
+
+       <B>*FoomaticRIPPostPipe:</B> <B>"|</B> <B>cat</B> <B>&amp;gt;</B> <B>/dev/lp0"</B>
+
+       or
+
+       <B>*FoomaticRIPPostPipe:</B> <B>"|</B> <B>cat</B> <B>&amp;gt;</B> <B>/dev/usb/lp0"</B>
+
+       for  local  parallel or USB printers. To make normal users
+       able to print this way add them to the group <B>lp</B>  and  make
+       sure  that the appropriate printer device file <I>/dev/...</I> is
+       group-writable for the <B>lp</B> group.
+
+       for a TCP/Socket/JetDirect  printer  with  the  host  name
+       <B>printer</B> listening on port <B>9100</B> you need this:
+
+       <B>*FoomaticRIPPostPipe:</B> <B>"|</B> <B>/usr/bin/nc</B> <B>-w</B> <B>1</B> <B>printer</B> <B>9100"</B>
+
+       Note  the  "-w  1" in the "nc" command line, it makes "nc"
+       exiting immediately after the data is  tranferred  to  the
+       printer.
+
+       <B>*FoomaticRIPPostPipe:</B> <B>"|</B> <B>rlpr</B> <B>-Plp@printserver"</B>
+
+       directs  your  jobs  to  the  LPD  printer queue <B>lp</B> on the
+       machine named <B>printserver</B>.
+
+       See also  http://www.linuxprinting.org/foomatic2.9/direct-
+       doc.html
+
+
+
+</PRE>
+<H2>PRINTING WITH SPOOLER</H2><PRE>
+       To be done.
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Till Kamppeter &lt;<I>till.kamppeter@gmx.net</I>&gt; with parts of Man­
+       fred  Wassmanns's &lt;<I>manolo@NCC-1701.B.Shuttle.de</I>&gt; man pages
+       for the Foomatic  2.0.x  filters  (<B>directomatic(1)</B>,  <B>lpdo­</B>
+       <B>matic(8)</B>).
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       None so far.
+
+       Please  send  bug  reports  to  foomatic-devel@linuxprint­
+       ing.org.
+
+
+
+Foomatic Project            2002-11-26            <B>FOOMATIC-RIP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

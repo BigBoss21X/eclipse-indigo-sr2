@@ -1,0 +1,105 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ln</B> [<I>OPTION</I>]... <I>TARGET</I> [<I>LINK</I><B>_</B><I>NAME</I>]
+       <B>ln</B> [<I>OPTION</I>]... <I>TARGET</I>... <I>DIRECTORY</I>
+       <B>ln</B> [<I>OPTION</I>]... <I>--target-directory=DIRECTORY</I> <I>TARGET</I>...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Create  a  link  to  the  specified  TARGET  with optional
+       LINK_NAME.  If LINK_NAME is omitted, a link with the  same
+       basename  as  the  TARGET is created in the current direc­
+       tory.  When using the second form with more than one  TAR­
+       GET,  the last argument must be a directory;  create links
+       in  DIRECTORY  to  each  TARGET.   Create  hard  links  by
+       default,  symbolic  links  with <B>--symbolic</B>.  When creating
+       hard links, each TARGET must exist.
+
+       Mandatory arguments to  long  options  are  mandatory  for
+       short options too.
+
+       <B>--backup</B>[=<I>CONTROL</I>]
+              make a backup of each existing destination file
+
+       <B>-b</B>     like <B>--backup</B> but does not accept an argument
+
+       <B>-d</B>, <B>-F</B>, <B>--directory</B>
+              hard link directories (super-user only)
+
+       <B>-f</B>, <B>--force</B>
+              remove existing destination files
+
+       <B>-n</B>, <B>--no-dereference</B>
+              treat  destination that is a symlink to a directory
+              as if it were a normal file
+
+       <B>-i</B>, <B>--interactive</B>
+              prompt whether to remove destinations
+
+       <B>-s</B>, <B>--symbolic</B>
+              make symbolic links instead of hard links
+
+       <B>-S</B>, <B>--suffix</B>=<I>SUFFIX</I>
+              override the usual backup suffix
+
+       <B>--target-directory</B>=<I>DIRECTORY</I>
+              specify the DIRECTORY in which to create the links
+
+       <B>-v</B>, <B>--verbose</B>
+              print name of each file before linking
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+              wise
+
+       simple, never
+              always make simple backups
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Mike Parker and David MacKenzie.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-coreutils@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2003 Free Software Foundation, Inc.
+       This is free software; see the source for  copying  condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The full documentation for <B>ln</B> is maintained as  a  Texinfo
+       manual.    If  the  <B>info</B>  and  <B>ln</B>  programs  are  properly
+       installed at your site, the command
+
+              <B>info</B> <B>ln</B>
+
+       should give you access to the complete manual.
+
+
+
+ln (coreutils) 4.5.8      February 2003                     <B>LN(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

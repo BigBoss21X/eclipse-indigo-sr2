@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>escputil</B>  [ <I>-P</I> <I>printer</I> | <I>-r</I> <I>device</I> ] [ <I>-m</I> <I>model</I> ] [ <I>-u</I> ] [
+       <I>-c</I> | <I>-n</I> | <I>-a</I> | <I>-i</I> | <I>-d</I> | <I>-o</I> | <I>-s</I> | <I>-l</I> | <I>-M</I> | <I>-h</I> ] [ <I>-q</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>escputil</B> is a command  line  utility  to  perform  various
+       maintenance  tasks on Epson Stylus inkjet printers.  These
+       tasks include head alignment, head cleaning, nozzle check,
+       printer  identification,  and  retrieval of ink level from
+       the printer.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>escputil</B> accepts the following options:
+
+       <B>-P,</B> <B>--printer-name=</B><I>printer</I>
+              Specify the name of the printer to operate on.  The
+              default is the default system printer.
+
+       <B>-r,</B> <B>--raw-device=</B><I>device</I>
+              Specify the name of the device to write to directly
+              rather than going through a printer queue. You must
+              use  this  (rather  than specifying a printer) when
+              retrieving ink levels or identifying  the  printer,
+              or  if  you  wish to perform head alignment without
+              specifying the printer model.
+
+       <B>-m,</B> <B>--model=</B><I>model</I>
+              Specify the precise printer model for  head  align­
+              ment.
+
+       <B>-u,</B> <B>--new</B>
+              The  printer  is a new printer (Stylus Color 740 or
+              newer).
+
+       <B>-c,</B> <B>--clean-head</B>
+              Clean the print head.  This can also  be  performed
+              from the printer front panel.
+
+       <B>-n,</B> <B>--nozzle-check</B>
+              Print a nozzle test pattern.  Dirty or clogged noz­
+              zles will show as gaps in the pattern.  If you  see
+              any  gaps,  you  should run a head cleaning pass or
+              two.
+
+       <B>-a,</B> <B>--align-head</B>
+              Align the print  head.   CAUTION:  Misuse  of  this
+              option may result in poor print quality and/or dam­
+              age to the printer.  You must  either  specify  the
+              printer  model  with  the -m option, or use the raw
+              printer device to  allow  escputil  to  detect  the
+              printer model.
+
+              the printer.
+
+       <B>-s,</B> <B>--status</B>
+              Retrieve printer status.
+
+       <B>-l,</B> <B>--license</B>
+              Display the license/warranty terms of this program.
+
+       <B>-M,</B> <B>--list-models</B>
+              List the supported printer models.
+
+       <B>-h,</B> <B>--help</B>
+              Display a list of all command line options.
+
+       <B>-q,</B> <B>--quiet</B>
+              Suppress the banner.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       USB-connected  printers  sometimes  fail  to  identify  or
+       return ink levels.  You may have to  repeat  the  command.
+       This is probably a timing issue in escputil, not a flaw in
+       the printer.
+
+       Anything requiring bidirectional  communication  with  the
+       printer  (identify,  ink levels, or head alignment without
+       specifying the printer model) requires  read/write  access
+       to  the  printer  port  (for  example /dev/lp0).  This may
+       require these operations to  be  performed  as  root.   In
+       addition,  kernel  support  is  required for bidirectional
+       communication.     For    Linux    version    2.2,    <I>CON­</I>
+       <I>FIG</I><B>_</B><I>PRINTER</I><B>_</B><I>READBACK</I>  should  be  enabled;  this is called
+       <I>CONFIG</I><B>_</B><I>PARPORT</I><B>_</B><I>1284</I> on 2.4 and later kernels.
+
+       If the printer is performing self-test or head cleaning on
+       power  up,  the  identify and ink level commands will time
+       out, although the printer successfully receives  the  com­
+       mand.   The  command  will  need  to  be reissued when the
+       printer is quiescent.
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Robert Krawitz.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright ©  2000 Robert Krawitz (rlk@alum.mit.edu)
+
+       This program is free software;  you  can  redistribute  it
+       and/or modify it under the terms of the GNU General Public
+       License as published  by  the  Free  Software  Foundation;
+       either  version  2 of the License, or (at your option) any
+       later version.
+
+
+</PRE>
+<H2>OTHER INFORMATION</H2><PRE>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

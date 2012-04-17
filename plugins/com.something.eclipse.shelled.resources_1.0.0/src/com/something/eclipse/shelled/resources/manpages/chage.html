@@ -1,0 +1,115 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>chage</B> [<B>-P</B> <I>path</I>] [<B>-m</B> <I>mindays</I>] [<B>-M</B> <I>maxdays</I>]
+            [<B>-d</B>  <I>lastday</I>] [<B>-I</B> <I>inactive</I>] [<B>-E</B> <I>expiredate</I>] [<B>-W</B> <I>warn­</I>
+            <I>days</I>] <I>user</I>
+
+       <B>chage</B> <B>-l</B> [<I>user</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>chage</B> is used to  list  and  change  the  password  expiry
+       information  of a user. It allows the system administrator
+       to change the number of days between allowed and  required
+       password changes and the date of the last password change.
+       It allows also to define when an account will expire.  The
+       <B>chage</B>  command  is restricted to the system administrator,
+       except for the <B>-l</B> option, which may be used by an user  to
+       determine when his password or account is due to expire.
+
+       If  no  option  is given, <B>chage</B> operates in an interactive
+       mode, prompting the user with the current values  for  all
+       of the fields. Enter the new value to change the field, or
+       leave the line blank to use the  current value.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-P,</B> <B>--path</B> <I>path</I>
+              The <I>passwd</I> and <I>shadow</I> files are located  under  the
+              specified  directory  path.  <B>chage</B>  will  use  this
+              files, not <I>/etc/passwd</I> and  <I>/etc/shadow</I>.   This  is
+              useful for example on NIS master servers, where you
+              do not want to give all users in the  NIS  database
+              automatic access to your NIS server and the NIS map
+              is build from special files.
+
+       <B>-l,</B> <B>--list</B>
+              This option will list the password expiry  informa­
+              tion  in a human readable format. The user will see
+              the date when he  changed  the  password  the  last
+              time,  when  the  password will be expire, when the
+              password will be locked and when the  account  will
+              expire.
+
+       <B>-m,</B> <B>--mindays</B> <I>mindays</I>
+              With this option the minimum number of days between
+              password changes is changed. A value  of  zero  for
+              this  field  indicates that the user may change her
+              password at any time. Else the  user  will  not  be
+              permitted  to  change  the  password until <I>min</I> days
+              have elapsed.
+
+       <B>-M,</B> <B>--maxdays</B> <I>maxdays</I>
+              With this option the maximum number of days  during
+              which  a password is valid is changed. When <I>maxdays</I>
+              plus <I>lastday</I> is less than the current day, the user
+              expired can be changed. <I>expiredate</I> has to be speci­
+              fied as number of days since January 1st, 1970. The
+              date  may  also be expressed in the format YYYY-MM-
+              DD.
+
+       <B>-I,</B> <B>--inactive</B> <I>inactive</I>
+              This option is used to set the number  of  days  of
+              inactivity  after a password has expired before the
+              account is locked. A user whose account  is  locked
+              must contact the system  administrator before being
+              able to use the account again.  A value of  0  dis­
+              ables this feature.
+
+       <B>-W,</B> <B>--warndays</B> <I>warndays</I>
+              With  this  option  the  number  of days of warning
+              before  a  password  change  is  required  can   be
+              changed. This option is the number of days prior to
+              the password expiring that a user  will  be  warned
+              the password is about to expire.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       <B>chage</B> is not able yet to change the password expiry infor­
+       mations in a LDAP server.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       passwd - user account information
+       shadow - shadow user account information
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>passwd(1)</B>, <B>passwd(5)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Thorsten Kukuk &lt;kukuk@suse.de&gt;
+
+
+
+pwdutils                   January 2003                  <B>chage(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

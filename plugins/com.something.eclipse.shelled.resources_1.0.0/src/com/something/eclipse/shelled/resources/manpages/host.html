@@ -1,0 +1,109 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>host</B> [ <B>-aCdlnrTwv</B> ]  [ <B>-c</B> <I>class</I> ]  [ <B>-N</B> <I>ndots</I> ]  [ <B>-R</B> <I>num­</I>
+       <I>ber</I> ]  [ <B>-t</B> <I>type</I> ]  [ <B>-W</B> <I>wait</I> ]  <B>name</B> [ <B>server</B> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>host</B> is a simple utility for performing DNS  lookups.   It
+       is normally used to convert names to IP addresses and vice
+       versa.  When no  arguments  or  options  are  given,  <B>host</B>
+       prints  a  short summary of its command line arguments and
+       options.
+
+       <I>name</I> is the domain name that is to be looked  up.  It  can
+       also be a dotted-decimal IPv4 address or a colon-delimited
+       IPv6 address, in which case <B>host</B> will by default perform a
+       reverse  lookup  for  that address.  <I>server</I> is an optional
+       argument which is either the name or  IP  address  of  the
+       name  server  that <B>host</B> should query instead of the server
+       or servers listed in <I>/etc/resolv.conf</I>.
+
+       The <B>-a</B> (all) option is equivalent to setting the <B>-v</B> option
+       and asking <B>host</B> to make a query of type ANY.
+
+       When  the  <B>-C</B> option is used, <B>host</B> will attempt to display
+       the SOA records for zone <I>name</I> from all the listed authori­
+       tative  name  servers  for  that  zone.  The  list of name
+       servers is defined by the NS records that  are  found  for
+       the zone.
+
+       The  <B>-c</B>  option  instructs  to  make  a DNS query of class
+       <I>class</I>. This can be used to lookup Hesiod or Chaosnet class
+       resource records. The default class is IN (Internet).
+
+       Verbose  output  is  generated  by  <B>host</B> when the <B>-d</B> or <B>-v</B>
+       option is used. The two options are equivalent. They  have
+       been  provided  for  backwards  compatibility. In previous
+       versions, the <B>-d</B> option switched on debugging  traces  and
+       <B>-v</B> enabled verbose output.
+
+       List  mode  is  selected by the <B>-l</B> option. This makes <B>host</B>
+       perform a zone transfer for zone  <I>name</I>.  The  argument  is
+       provided  for  compatibility  with  older implementations.
+       This option is equivalent to making a query of type  AXFR.
+
+       The  <B>-n</B>  option  specifies  that  reverse  lookups of IPv6
+       addresses should  use  the  IP6.INT  domain  and  "nibble"
+       labels  as  defined  in  RFC1886.   The  default is to use
+       IP6.ARPA and binary labels as defined in RFC2874.
+
+       The <B>-N</B> option sets the number of dots that have to  be  in
+       <I>name</I>  for  it to be considered absolute. The default value
+       is   that   defined   using   the   ndots   statement   in
+       <I>/etc/resolv.conf</I>,  or  1 if no ndots statement is present.
+       resolve <I>name</I>. The <B>-r</B> option  enables  <B>host</B>  to  mimic  the
+       behaviour of a name server by making non-recursive queries
+       and expecting to receive answers to those queries that are
+       usually referrals to other name servers.
+
+       By  default  <B>host</B>  uses  UDP  when  making queries. The <B>-T</B>
+       option makes it use a TCP  connection  when  querying  the
+       name  server.  TCP  will  be  automatically  selected  for
+       queries that require it,  such  as  zone  transfer  (AXFR)
+       requests.
+
+       The  <B>-t</B> option is used to select the query type.  <I>type</I> can
+       be any recognised query type: CNAME, NS,  SOA,  SIG,  KEY,
+       AXFR, etc. When no query type is specified, <B>host</B> automati­
+       cally selects an appropriate query  type.  By  default  it
+       looks  for  A  records,  but  if  the <B>-C</B> option was given,
+       queries will be made for SOA records, and  if  <I>name</I>  is  a
+       dotted-decimal   IPv4   address  or  colon-delimited  IPv6
+       address, <B>host</B> will query for PTR records.
+
+       The time to wait for a reply can be controlled through the
+       <B>-W</B>  and <B>-w</B> options. The <B>-W</B> option makes <B>host</B> wait for <I>wait</I>
+       seconds. If <I>wait</I> is less than one, the  wait  interval  is
+       set  to  one second. When the <B>-w</B> option is used, <B>host</B> will
+       effectively wait forever for a reply. The time to wait for
+       a  response  will be set to the number of seconds given by
+       the hardware's maximum value for an integer quantity.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/etc/resolv.conf</I>
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>dig(1)</B>, <B>named(8)</B>.
+
+
+
+BIND9                      Jun 30, 2000                   <B>HOST(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

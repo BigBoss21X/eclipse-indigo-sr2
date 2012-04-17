@@ -1,0 +1,133 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+
+</PRE>
+<H2>Note of warning</H2><PRE>
+       This   manpage   has  been  automatically  generated  from
+       mtools's texinfo documentation, and may  not  be  entirely
+       accurate  or  complete.   See the end of this man page for
+       details.
+
+
+
+</PRE>
+<H2>Description</H2><PRE>
+       The mcopy command is used to copy MS-DOS files to and from
+       Unix. It uses the following syntax:
+
+
+          mcopy [-bspanvmQT] [-D <I>clash</I><B>_</B><I>option</I>] <I>sourcefile</I> <I>targetfile</I>
+          mcopy [-bspanvmQT] [-D <I>clash</I><B>_</B><I>option</I>] <I>sourcefile</I> [ <I>sourcefiles</I>... ] <I>targetdirectory</I>
+          mcopy [-tnvm] <I>MSDOSsourcefile</I>
+
+
+
+       Mcopy  copies  the  specified  file  to the named file, or
+       copies multiple files to the named directory.  The  source
+       and target can be either MS-DOS or Unix files.
+
+       The use of a drive letter designation on the MS-DOS files,
+       'a:' for example, determines the direction of  the  trans­
+       fer.   A  missing  drive  designation  implies a Unix file
+       whose path starts in the current directory.  If  a  source
+       drive letter is specified with no attached file name (e.g.
+       mcopy a: .), all files are copied from that drive.
+
+       If only a single,  MS-DOS  source  parameter  is  provided
+       (e.g.  "mcopy  a:foo.exe"),  an implied destination of the
+       current directory (`.') is assumed.
+
+       A filename of `-' means standard input or standard output,
+       depending on its position on the command line.
+
+       Mcopy accepts the following command line options:
+
+       t      Text file transfer.  Mcopy translates incoming car­
+              riage return/line feeds to line feeds when  copying
+              from  Dos to Unix, and vice-versa when copying from
+              Unix to Dos.
+
+       b      Batch mode. Optimized for  huge  recursive  copies,
+              but less secure if a crash happens during the copy.
+
+       s      Recursive copy.  Also copies directories and  their
+              contents
+
+       p      Preserves the attributes of the copied files
+              replaced by '.'.
+
+       n      No confirmation when overwriting Unix files.  Mcopy
+              doesn't warn the user when overwriting an  existing
+              Unix file.  In order to switch off confirmation for
+              DOS files, use -o.
+
+       m      Preserve the file modification time. If the  target
+              file  already  exists,  and the -n option is not in
+              effect, mcopy asks whether to overwrite the file or
+              to   rename  the  new  file  (`name  clashes')  for
+              details).
+
+       v      Verbose. Displays the name of each file  as  it  is
+              copied.
+
+
+
+</PRE>
+<H2>Bugs</H2><PRE>
+       Unlike  MS-DOS,  the  '+' operator (append) from MS-DOS is
+       not supported. However, you may use mtype to  produce  the
+       same effect:
+
+          <B>mtype</B> <B>a:file1</B> <B>a:file2</B> <B>a:file3</B> <B>&gt;unixfile</B>
+          <B>mtype</B> <B>a:file1</B> <B>a:file2</B> <B>a:file3</B> <B>|</B> <B>mcopy</B> <B>-</B> <B>a:msdosfile</B>
+
+
+
+
+
+</PRE>
+<H2>See Also</H2><PRE>
+       Mtools' texinfo doc
+
+
+</PRE>
+<H2>Viewing the texi doc</H2><PRE>
+       This   manpage   has  been  automatically  generated  from
+       mtools's texinfo documentation. However, this  process  is
+       only  approximative,  and  some items, such as crossrefer­
+       ences, footnotes and indices are lost in this  translation
+       process.   Indeed,  these items have no appropriate repre­
+       sentation in the manpage format.  Moreover, not all infor­
+       mation has been translated into the manpage version.  Thus
+       I strongly advise you to use  the  original  texinfo  doc.
+       See  the  end of this manpage for instructions how to view
+       the texinfo doc.
+
+       *      To generate a printable copy from the texinfo  doc,
+              run the following commands:
+
+                     <B>./configure;</B> <B>make</B> <B>dvi;</B> <B>dvips</B> <B>mtools.dvi</B>
+
+
+
+       *      To generate a html copy,  run:
+
+       Indeed, in the info version certain examples are difficult
+       to read due to the quoting conventions used in info.
+
+
+
+
+mtools-3.9.8                 02Nov02                     <B>mcopy(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

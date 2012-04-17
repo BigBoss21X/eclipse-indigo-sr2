@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>flea</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>flea</B>  is  a  shell  script which helps you to submit a bug
+       report against the <B>mutt(1)</B> mail user agent.
+
+       If you invoke <B>flea</B>, you'll first be prompted for  a  short
+       description  of  the problem you experience.  This will be
+       used as the bug report's subject line,  so  it  should  be
+       concise, but informative.
+
+       You  are then asked to assign an initial severity level to
+       the problem you observe; <B>flea</B> will give you a  description
+       which severity level is appropriate or not.
+
+       Then,  you are asked for the location of a core dump (nor­
+       mally named <B>core</B>) which may have been left over by a crash
+       of  your <B>mutt(1)</B>.  You can just type "no" here, or you can
+       enter the path leading to a core dump.  <B>flea</B> will  try  to
+       use  either  <B>sdb(1)</B>,  <B>dbx(1)</B>,  or  <B>gdb(1)</B>  to extract some
+       information from this core dump which may  be  helpful  to
+       developers in order to determine the reason for the crash.
+
+       Finally, you are asked whether or not you want to  include
+       personal  and  system <B>mutt(1)</B> configuration files with the
+       bug report.  If at all possible, we  urge  you  to  answer
+       these  questions  with "yes", since a reference configura­
+       tion makes it incredibly easier to track down a problem.
+
+       If you are using Debian GNU/Linux,  <B>flea</B>  will  now  check
+       whether or not <B>mutt</B> has been installed as a Debian package
+       on your system, and suggest to file the  bug  against  the
+       <B>mutt(1)</B>  and Debian bug tracking systems.  This option was
+       added since the <B>mutt(1)</B> project uses another instantiation
+       of  the  Debian  bug  tracking  system, so submitting bugs
+       against both systems in one pass is simple.
+
+       You are then dropped into your favorite editor  as  deter­
+       mined by the <B>EDITOR</B> and <B>VISUAL</B> environment variables.
+
+       Please  give  us  details  about  the problem in the empty
+       space below the line  reading  "Please  type  your  report
+       below  this  line".   We  are  most  interested in precise
+       information on what symptoms you observe  and  what  steps
+       may  be used to reproduce the bug.  Chances are that prob­
+       lems which can easily be reproduced will be fixed quickly.
+       So please take some time when filling out this part of the
+       template.
+
+       The remainder of the template contains  various  kinds  of
+       information gathered from your system, including output of
+       on: Once your bug report has been  entered  into  the  bug
+       tracking  system, it will be assigned a unique serial num­
+       ber about which you are informed via e-mail.  If you  wish
+       to  submit  additional  information about the bug, you can
+       just send it to the address <I>serial</I><B>@bugs.guug.de</B>.
+
+       Later, you will most likely  receive  questions  from  the
+       developers  about  the  problem you observed, and you will
+       eventually be informed  that  your  bug  report  has  been
+       closed.   This  means that the bug has been fixed at least
+       in the <B>cvs(1)</B> repository.   If  the  answers  you  receive
+       don't  satisfy you, don't hesitate to contact the develop­
+       ers directly under <B>mutt-dev@mutt.org.</B>
+
+       You can also browse your bug  report  and  all  additional
+       information  and  replies  connected  to  it using the bug
+       tracking system's Web interface under the  following  URL:
+       http://bugs.guug.de/
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>flea</B> will use the following environment variables:
+
+       EMAIL  Your  electronic mail address.  Will be used to set
+              the bug report's From header, and  to  send  you  a
+              copy of the report.
+
+       LOGNAME
+              Your login name.  If the <B>EMAIL</B> environment variable
+              isn't set, this will be used instead to send you  a
+              copy  of  the  report.   Setting the sender will be
+              left to <B>sendmail(1)</B> on your system.
+
+       REPLYTO
+              If set, the bug  report  will  contain  a  Reply-To
+              header  with  the  e-mail address contained in this
+              environment variable.
+
+       ORGANIZATION
+              If set, the bug report will contain an Organization
+              header  with the contents of this environment vari­
+              able.
+
+       PAGER  If set, this environment variable will be  expected
+              to  contain  the  path  to  your favorite pager for
+              viewing the bug report.  If unset, <B>more(1)</B> will  be
+              used.
+
+       VISUAL If  set, this environment variable will be expected
+              to contain the path to your favorite visual editor.
+
+       EDITOR If  set, this environment variable will be expected
+              to contain the path to your favorite editor.   This
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       <B>flea</B> and this manual page were written by Thomas  Roessler
+       &lt;roessler@does-not-exist.org&gt;.
+
+
+
+Unix                        July 2000                     <B>flea(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>atmdiag</B> [<B>-z</B>] [<I>interface</I>...<B>]</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>atmdiag</B>  shows statistic counters maintained by ATM device
+       drivers. If one or more interface numbers  are  specified,
+       the  statistics of only these interfaces are shown. Other­
+       wise, statistics of all interfaces are displayed.
+
+       The following counters are shown for each AAL:
+
+              <B>TX_okay</B>
+                     number of successfully sent PDUs.
+
+              <B>TX_err</B> number of PDUs not sent because of errors.
+
+              <B>RX_okay</B>
+                     number of successfully received PDUs.
+
+              <B>RX_err</B> number of PDUs discarded because of  errors.
+
+              <B>RX_drop</B>
+                     number  of  PDUs  dropped because of lack of
+                     memory.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-z</B>     zero all counters after showing them.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Werner Almesberger, EPFL ICA &lt;Werner.Almesberger@epfl.ch&gt;
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>atmdump(8)</B>, <B>sonetdiag(8)</B>
+
+
+
+Linux                     April 26, 2000               <B>ATMDIAG(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

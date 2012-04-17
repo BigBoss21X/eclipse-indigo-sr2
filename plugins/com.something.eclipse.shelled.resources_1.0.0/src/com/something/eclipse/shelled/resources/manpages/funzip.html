@@ -1,0 +1,109 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>funzip</B> [<B>-password</B>] [<I>input[.zip|.gz]</I>]
+
+
+</PRE>
+<H2>ARGUMENTS</H2><PRE>
+       [<I>-password</I>]
+              Optional password to be  used  if  ZIP  archive  is
+              encrypted.  Decryption may not be supported at some
+              sites.  See DESCRIPTION for more details.
+
+       [<I>input[.zip|.gz]</I>]
+              Optional  input  archive  file  specification.  See
+              DESCRIPTION for details.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>funzip</I>  without a file argument acts as a filter; that is,
+       it assumes that a ZIP archive (or  a  <I>gzip</I>'<B>d(1)</B>  file)  is
+       being piped into standard input, and it extracts the first
+       member from the archive to stdout.  When stdin comes  from
+       a  tty device, <I>funzip</I> assumes that this cannot be a stream
+       of (binary) compressed data and shows a short  help  text,
+       instead.   If there is a file argument, then input is read
+       from the specified file instead of from stdin.
+
+       A password for encrypted zip files can be specified on the
+       command  line (preceding the file name, if any) by prefix­
+       ing the password with a dash.  Note that this  constitutes
+       a  security  risk  on many systems; currently running pro­
+       cesses are often visible via simple commands (e.g.,  <B>ps(1)</B>
+       under  Unix),  and command-line histories can be read.  If
+       the first entry of the zip file is encrypted and no  pass­
+       word  is  specified  on the command line, then the user is
+       prompted for a password and the password is not echoed  on
+       the console.
+
+       Given  the  limitation on single-member extraction, <I>funzip</I>
+       is most useful in conjunction with  a  secondary  archiver
+       program such as <B>tar(1)</B>.  The following section includes an
+       example illustrating this usage in the case of disk  back­
+       ups to tape.
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+       To  use  <I>funzip</I>  to  extract  the first member file of the
+       archive test.zip and to pipe it into <B>more(1)</B>:
+
+           funzip test.zip | more
+
+       To use <I>funzip</I> to test the first member  file  of  test.zip
+       (any errors will be reported on standard error):
+
+           funzip test.zip &gt; /dev/null
+
+       and  <I>more</I>  then  ``restores''  the  terminal  to this mode
+       before exiting.  To recover, run <I>funzip</I> on the  same  file
+       but  redirect  to  /dev/null rather than piping into more;
+       after prompting again for the password, <I>funzip</I> will  reset
+       the terminal properly.
+
+       There  is  presently  no way to extract any member but the
+       first from a ZIP archive.  This would  be  useful  in  the
+       case  where  a  ZIP  archive  is  included  within another
+       archive.  In the case where the first member is  a  direc­
+       tory, <I>funzip</I> simply creates the directory and exits.
+
+       The  functionality  of  <I>funzip</I> should be incorporated into
+       <I>unzip</I> itself (future release).
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>gzip(1L)</B>, <B>unzip(1L)</B>, <B>unzipsfx(1L)</B>, <B>zip(1L)</B>,  <B>zipcloak(1L)</B>,
+       <B>zipinfo(1L)</B>, <B>zipnote(1L)</B>, <B>zipsplit(1L)</B>
+
+
+</PRE>
+<H2>URL</H2><PRE>
+       The Info-ZIP home page is currently at
+           http://www.info-zip.org/pub/infozip/
+       or
+           ftp://ftp.info-zip.org/pub/infozip/ .
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Mark Adler (Info-ZIP)
+
+
+
+Info-ZIP             17 February 2002 (v3.94)          <B>FUNZIP(1L)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

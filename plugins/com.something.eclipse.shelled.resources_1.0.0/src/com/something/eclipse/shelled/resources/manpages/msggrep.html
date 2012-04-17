@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>msggrep</B> [<I>OPTION</I>] [<I>INPUTFILE</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Extracts  all messages of a translation catalog that match
+       a given pattern or belong to some given source files.
+
+       Mandatory arguments to  long  options  are  mandatory  for
+       short options too.
+
+   <B>Input</B> <B>file</B> <B>location:</B>
+       INPUTFILE
+              input PO file
+
+       <B>-D</B>, <B>--directory</B>=<I>DIRECTORY</I>
+              add DIRECTORY to list for input files search
+
+       If no input file is given or if it is -, standard input is
+       read.
+
+   <B>Output</B> <B>file</B> <B>location:</B>
+       <B>-o</B>, <B>--output-file</B>=<I>FILE</I>
+              write output to specified file
+
+       The results are written to standard output  if  no  output
+       file is specified or if it is -.
+
+   <B>Message</B> <B>selection:</B>
+              [-N  SOURCEFILE]...  [-M DOMAINNAME]...  [-K MSGID-
+              PATTERN] [-T MSGSTR-PATTERN] [-C COMMENT-PATTERN]
+
+       A message is selected if it comes from one of  the  speci­
+       fied  source  files, or if it comes from one of the speci­
+       fied domains, or if <B>-K</B> is given  and  its  key  (msgid  or
+       msgid_plural) matches MSGID-PATTERN, or if <B>-T</B> is given and
+       its translation (msgstr) matches MSGSTR-PATTERN, or if  <B>-C</B>
+       is given and the translator's comment matches COMMENT-PAT­
+       TERN.
+
+       When more than one selection criterion is  specified,  the
+       set of selected messages is the union of the selected mes­
+       sages of each criterion.
+
+   <B>MSGID-PATTERN</B> <B>or</B> <B>MSGSTR-PATTERN</B> <B>syntax:</B>
+              [-E | <B>-F]</B> [-e PATTERN | <B>-f</B> FILE]...
+
+       PATTERNs are basic  regular  expressions  by  default,  or
+       extended  regular  expressions  if  <B>-E</B>  is given, or fixed
+       strings if <B>-F</B> is given.
+
+       <B>-N</B>, <B>--location</B>=<I>SOURCEFILE</I>
+              select messages extracted from SOURCEFILE
+              PATTERN is a set of newline-separated strings
+
+       <B>-e</B>, <B>--regexp</B>=<I>PATTERN</I>
+              use PATTERN as a regular expression
+
+       <B>-f</B>, <B>--file</B>=<I>FILE</I>
+              obtain PATTERN from FILE
+
+       <B>-i</B>, <B>--ignore-case</B>
+              ignore case distinctions
+
+   <B>Output</B> <B>details:</B>
+       <B>--no-escape</B>
+              do not use C escapes in output (default)
+
+       <B>--escape</B>
+              use C escapes in output, no extended chars
+
+       <B>--force-po</B>
+              write PO file even if empty
+
+       <B>--indent</B>
+              indented output style
+
+       <B>--no-location</B>
+              suppress '#: filename:line' lines
+
+       <B>--add-location</B>
+              preserve '#: filename:line' lines (default)
+
+       <B>--strict</B>
+              strict Uniforum output style
+
+       <B>-w</B>, <B>--width</B>=<I>NUMBER</I>
+              set output page width
+
+       <B>--no-wrap</B>
+              do not break long message lines,  longer  than  the
+              output page width, into several lines
+
+       <B>--sort-output</B>
+              generate sorted output
+
+       <B>--sort-by-file</B>
+              sort output by file location
+
+   <B>Informative</B> <B>output:</B>
+       <B>-h</B>, <B>--help</B>
+              display this help and exit
+
+       <B>-V</B>, <B>--version</B>
+              output version information and exit
+
+       The full documentation for <B>msggrep</B> is maintained as a Tex­
+       info manual.  If the <B>info</B> and <B>msggrep</B> programs  are  prop­
+       erly installed at your site, the command
+
+              <B>info</B> <B>msggrep</B>
+
+       should give you access to the complete manual.
+
+
+
+GNU gettext 0.11.5         August 2002                 <B>MSGGREP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

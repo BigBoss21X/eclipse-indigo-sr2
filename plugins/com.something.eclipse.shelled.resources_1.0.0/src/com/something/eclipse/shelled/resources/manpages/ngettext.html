@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ngettext</B> [<I>OPTION</I>] [<I>TEXTDOMAIN</I>] <I>MSGID</I> <I>MSGID-PLURAL</I> <I>COUNT</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The <B>ngettext</B> program translates a natural language message
+       into the user's language, by looking up the translation in
+       a  message  catalog,  and  chooses  the appropriate plural
+       form, which depends on the number <I>COUNT</I> and  the  language
+       of the message catalog where the translation was found.
+
+       Display  native  language translation of a textual message
+       whose grammatical form depends on a number.
+
+       <B>-d</B>, <B>--domain</B>=<I>TEXTDOMAIN</I>
+              retrieve translated message from TEXTDOMAIN
+
+       <B>-e</B>     enable expansion of some escape sequences
+
+       <B>-E</B>     (ignored for compatibility)
+
+       <B>-h</B>, <B>--help</B>
+              display this help and exit
+
+       <B>-V</B>, <B>--version</B>
+              display version information and exit
+
+       [TEXTDOMAIN]
+              retrieve translated message from TEXTDOMAIN
+
+       MSGID MSGID-PLURAL
+              translate MSGID (singular) / MSGID-PLURAL (plural)
+
+       COUNT  choose singular/plural form based on this value
+
+       If the TEXTDOMAIN parameter is not given,  the  domain  is
+       determined  from  the environment variable TEXTDOMAIN.  If
+       the message catalog is not found in the regular directory,
+       another  location  can  be  specified with the environment
+       variable  TEXTDOMAINDIR.    Standard   search   directory:
+       /usr/share/locale
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Ulrich Drepper.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-gnu-gettext@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright  ©  1995-1997,  2000, 2001 Free Software Founda­
+       tion, Inc.
+       This is free software; see the source for  copying  condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

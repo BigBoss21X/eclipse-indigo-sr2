@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>cmp</B> [<I>OPTION</I>]... <I>FILE1</I> [<I>FILE2</I> [<I>SKIP1</I> [<I>SKIP2</I>]]]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Compare two files byte by byte.
+
+       <B>-b</B>  <B>--print-bytes</B>
+              Print differing bytes.
+
+       <B>-i</B> SKIP  <B>--ignore-initial</B>=<I>SKIP</I>
+              Skip the first SKIP bytes of input.
+
+       <B>-i</B> SKIP1:SKIP2  <B>--ignore-initial</B>=<I>SKIP1</I>:SKIP2
+
+              Skip  the  first SKIP1 bytes of FILE1 and the first
+              SKIP2 bytes of FILE2.
+
+       <B>-l</B>  <B>--verbose</B>
+              Output byte numbers and  values  of  all  differing
+              bytes.
+
+       <B>-n</B> LIMIT  <B>--bytes</B>=<I>LIMIT</I>
+              Compare at most LIMIT bytes.
+
+       <B>-s</B>  <B>--quiet</B>  <B>--silent</B>
+              Output nothing; yield exit status only.
+
+       <B>-v</B>  <B>--version</B>
+              Output version info.
+
+       <B>--help</B> Output this help.
+
+       SKIP1  and  SKIP2  are the number of bytes to skip in each
+       file.  SKIP values may be followed by the following multi­
+       plicative  suffixes:  kB  1000,  K  1024,  MB 1,000,000, M
+       1,048,576, GB 1,000,000,000, G 1,073,741,824,  and  so  on
+       for T, P, E, Z, Y.
+
+       If a FILE is `-' or missing, read standard input.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Torbjorn Granlund and David MacKenzie.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-gnu-utils@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2002 Free Software Foundation, Inc.
+
+       This program comes with NO WARRANTY, to the extent permit­
+       ted by law.  You may redistribute copies of  this  program
+       under  the  terms  of the GNU General Public License.  For
+
+diffutils 2.8.1             April 2002                     <B>CMP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

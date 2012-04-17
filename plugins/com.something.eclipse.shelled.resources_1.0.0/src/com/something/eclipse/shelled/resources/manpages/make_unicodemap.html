@@ -1,0 +1,100 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>make_unicodemap</B> <B>codepage</B> <B>inputfile</B> <B>outputfile</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This tool is part of the Samba suite.
+
+       <B>make_unicodemap</B>  compiles  text  unicode  map  files  into
+       binary unicode map files for use with  the  international­
+       ization features of Samba 2.2.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>codepage</B>
+              This  is  the codepage or UNIX character set we are
+              processing (a number, e.g. 850).
+
+       <B>inputfile</B>
+              This is the input file to process. This is  a  text
+              unicode  map  file  such  as  the ones found in the
+              Samba <I>source/codepages</I> directory.
+
+       <B>outputfile</B>
+              This is the binary output file to produce.
+
+
+</PRE>
+<H2>SAMBA UNICODE MAP FILES</H2><PRE>
+       A text Samba unicode map file is a description that  tells
+       Samba how to map characters from a specified DOS code page
+       or UNIX character set to 16 bit unicode.
+
+       A binary Samba unicode map file is a binary representation
+       of  the same information, including a value that specifies
+       what codepage or UNIX character set this file is  describ­
+       ing.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>CP&lt;codepage&gt;.TXT</I>
+
+       These  are  the input (text) unicode map files provided in
+       the Samba <I>source/codepages</I> directory.
+
+       A text unicode map file consists of  multiple  lines  con­
+       taining two fields. These fields are :
+
+       · <I>character</I>  - which is the (hex) character mapped on this
+         line.
+
+       · <I>unicode</I> - which is the (hex) 16  bit  unicode  character
+         that the character will map to.
+
+       <I>unicode</I><B>_</B><I>map.&lt;codepage&gt;</I>  -  These  are  the output (binary)
+       unicode map files produced and placed in the Samba  desti­
+       nation <I>lib/codepage</I> directory.
+
+       suite.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>smbd(8)</B> <B>smb.conf(5)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       The original Samba software  and  related  utilities  were
+       created  by Andrew Tridgell. Samba is now developed by the
+       Samba Team as an Open Source project similar  to  the  way
+       the Linux kernel is developed.
+
+       The  original  Samba  man pages were written by Karl Auer.
+       The  man  page  sources  were  converted  to  YODL  format
+       (another  excellent  piece of Open Source software, avail­
+       able          at           ftp://ftp.icce.rug.nl/pub/unix/
+       &lt;URL:ftp://ftp.icce.rug.nl/pub/unix/&gt;) and updated for the
+       Samba 2.0 release by Jeremy  Allison.  The  conversion  to
+       DocBook for Samba 2.2 was done by Gerald Carter
+
+
+
+                         19 November 2002      <B>MAKE_UNICODEMAP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

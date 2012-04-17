@@ -1,0 +1,101 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       addr2line [<B>-b</B> <I>bfdname</I>|<B>--target=</B><I>bfdname</I>]
+                 [<B>-C</B>|<B>--demangle</B>[=<I>style</I>]]
+                 [<B>-e</B> <I>filename</I>|<B>--exe=</B><I>filename</I>]
+                 [<B>-f</B>|<B>--functions</B>] [<B>-s</B>|<B>--basename</B>]
+                 [<B>-H</B>|<B>--help</B>] [<B>-V</B>|<B>--version</B>]
+                 [addr addr ...]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>addr2line</B> translates program addresses into file names and
+       line numbers.  Given an address and an executable, it uses
+       the debugging information in the executable to figure  out
+       which  file  name  and  line  number are associated with a
+       given address.
+
+       The executable to use is specified  with  the  <B>-e</B>  option.
+       The default is the file <I>a.out</I>.
+
+       <B>addr2line</B> has two modes of operation.
+
+       In  the  first, hexadecimal addresses are specified on the
+       command line, and <B>addr2line</B> displays  the  file  name  and
+       line number for each address.
+
+       In  the second, <B>addr2line</B> reads hexadecimal addresses from
+       standard input, and prints the file name and  line  number
+       for  each  address  on  standard  output.   In  this mode,
+       <B>addr2line</B> may be used in a  pipe  to  convert  dynamically
+       chosen addresses.
+
+       The  format  of  the  output is <B>FILENAME:LINENO</B>.  The file
+       name and line number for each address is printed on a sep­
+       arate  line.   If  the  <B>-f</B> option is used, then each <B>FILE­</B>
+       <B>NAME:LINENO</B> line is preceded by a <B>FUNCTIONNAME</B> line  which
+       is the name of the function containing the address.
+
+       If  the  file name or function name can not be determined,
+       <B>addr2line</B> will print two question marks  in  their  place.
+       If  the  line number can not be determined, <B>addr2line</B> will
+       print 0.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       The long and short forms of options, shown here as  alter­
+       natives, are equivalent.
+
+       <B>-b</B> <I>bfdname</I>
+       <B>--target=</B><I>bfdname</I>
+           Specify  that  the  object-code  format for the object
+           files is <I>bfdname</I>.
+
+       <B>-C</B>
+       <B>-f</B>
+       <B>--functions</B>
+           Display function names as well as file and line number
+           information.
+
+       <B>-s</B>
+       <B>--basenames</B>
+           Display only the base of each file name.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       Info entries for <I>binutils</I>.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright (c) 1991, 92, 93, 94, 95, 96, 97, 98, 99,  2000,
+       2001, 2002 Free Software Foundation, Inc.
+
+       Permission  is  granted  to copy, distribute and/or modify
+       this document under the terms of the GNU  Free  Documenta­
+       tion  License,  Version 1.1 or any later version published
+       by the Free Software Foundation; with  no  Invariant  Sec­
+       tions,  with  no Front-Cover Texts, and with no Back-Cover
+       Texts.  A copy of the license is included in  the  section
+       entitled "GNU Free Documentation License".
+
+
+
+binutils-2.13.90.0.18       2003-03-13               <B>ADDR2LINE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

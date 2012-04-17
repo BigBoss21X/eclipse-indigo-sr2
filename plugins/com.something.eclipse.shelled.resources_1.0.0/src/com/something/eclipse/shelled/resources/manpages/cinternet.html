@@ -1,0 +1,123 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>cinternet</B> is a simple frontend for the <B>smpppd.</B>
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       These  options  are  recognized  by  <B>cinternet</B>.  If a long
+       option shows an argument as mandatory, then it  is  manda­
+       tory for the equivalent short option also.
+
+       The order of the options is relevant except for the --ver­
+       bose, --only-local, --version and --help options.
+
+       <I>-I,</I> <I>--interface-list</I>
+              List all configured interfaces of the  smpppd.  The
+              interfaces  are  also marked either with `u' or `d'
+              for their status of up or  down  respectively.  The
+              interface names are utf-8 encoded.
+
+       <I>-i,</I> <I>--interface-name=NAME</I>
+              Specify  a interface. A interface must be specified
+              for most of the options below. This option must  be
+              given before any option that requires an interface.
+              The name must exactly match one  of  the  interface
+              list.
+
+       <I>--interface-number=NUM</I>
+              Specify  a interface. A interface must be specified
+              for most of the options below. This option must  be
+              given before any option that requires an interface.
+              The numbers start at one.
+
+       <I>-P,</I> <I>--provider-list</I>
+              List all configured  providers  for  the  specified
+              interface.  The  currently  active provider is pre­
+              fixed by a `a', all others by a `i'.  The  provider
+              names are utf-8 encoded.
+
+       <I>-p,</I> <I>--provider-name=NAME</I>
+              Select the active provider for the specified inter­
+              face by name. The name must exactly  match  one  of
+              the provider list. Only works when the interface is
+              down.
+
+       <I>--provider-number=NUM</I>
+              Select the active provider for the specified inter­
+              face  by  number.  The  numbers  start at one. Only
+              works when the interface is down.
+
+       <I>-A,</I> <I>--start</I>
+              Start the specified interface.
+
+       <I>-D,</I> <I>--dialin</I>
+              Trigger dialin for the specified  interface.  (Only
+              face.
+
+       <I>-l,</I> <I>--log</I>
+              Displays the log of the specified interface.
+
+       <I>-d,</I> <I>--debug={on,off}</I>
+              Turn  debugging  mode of the smpppd on or off. This
+              does not affect connections already up.
+
+       <I>-L,</I> <I>--main-conifg</I>
+              List the main config of the smpppd.
+
+       <I>-L,</I> <I>--main-log</I>
+              List the  main  log,  the  log  containing  general
+              informations  not  specific to an interface, of the
+              smpppd.
+
+       <I>-v,</I> <I>--verbose</I>
+              Be more verbose.
+
+       <I>-o,</I> <I>--only-local</I>
+              Only connect to local smpppd.
+
+       <I>--script[=STYLE]</I>
+              Format output for script. Known styles  are  c  and
+              sh.
+
+       <I>--version</I>
+              Show program version and exit.
+
+       <I>--help</I> Show help information and exit.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/etc/smpppd-c.conf</B>
+              Contains information about remote smpppd.
+
+       <B>/var/run/smpppd/control</B>
+              Socket to communicate with local smpppd.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>kinternet,</B>   <B>qinternet,</B>  <B>accounting(1)</B>,  <B>smpppd-c.conf(5)</B>,
+       <B>smpppd(8)</B>.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Arvin Schnell &lt;arvin@suse.de&gt;
+
+
+
+SuSE                      December 2002              <B>CINTERNET(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

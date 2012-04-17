@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>chsh</B> [<B>-s</B> <I>shell</I>] [<B>-l</B>] [<B>-q</B>] [<B>-u</B>] [<B>-v</B>] [<I>user</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>chsh</B>  is  used  to  change the user login shell.  A normal
+       user may  only  change  the  login  shell  for  their  own
+       account, the super user may change the login shell for any
+       account.
+
+       If a shell is not given on the command line, <B>chsh</B> operates
+       in  an  interactive  fashion,  prompting the user with the
+       current login shell.  Enter the new value  to  change  the
+       field,  or  leave the line blank to use the current value.
+       Enter <I>none</I> to remove the current value.  The current value
+       is displayed between a pair of <B>[</B> <B>]</B> marks.
+
+       The  only  restrictions  placed on the login shell is that
+       the command name must be listed in <I>/etc/shells</I>, unless the
+       invoker  is  the  super-user,  and  then  any value may be
+       added.  An account with a restricted login shell  may  not
+       change their login shell.
+
+       This version of <B>chsh</B> is able to change the shell of local,
+       NIS, NIS+ and LDAP accounts , if the permissions allow it.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <I>-s,</I> <I>--shell</I>
+              Specify your login shell.
+
+       <I>-l,</I> <I>--list-shells</I>
+              Print  the list of shells listed in <I>/etc/shells</I> and
+              exit.
+
+       <I>-q,</I> <I>--quite</I>
+              Don't be verbose.
+
+       <I>-u,</I> <I>--usage</I>
+              Print a usage message and exit.
+
+           <I>--help</I>
+              Print a more verbose help text and exit.
+
+       <I>-v,</I> <I>--version</I>
+              Print version information and exit.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /etc/passwd - user account information
+       /etc/shells - list of valid login shells
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>chfn(1)</B>, <B>passwd(5)</B>, <B>shells(5)</B>
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

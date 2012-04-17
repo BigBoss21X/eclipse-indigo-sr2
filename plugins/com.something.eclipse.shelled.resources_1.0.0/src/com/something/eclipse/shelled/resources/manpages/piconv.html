@@ -1,0 +1,83 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+         piconv [-f from_encoding] [-t to_encoding] [-s string] [files...]
+         piconv -l
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>piconv</B> is perl version of <B>iconv</B>, a character encoding con­
+       verter widely available for various Unixen today.  This
+       script was primarily a technology demonstrator for Perl
+       5.8.0, but you can use piconv in the place of iconv for
+       virtually any case.
+
+       piconv converts the character encoding of either STDIN or
+       files specified in the argument and prints out to STDOUT.
+
+       Here is the  list of options.
+
+       -f from_encoding
+           Specifies the encoding you are converting from.
+           Unlike <B>iconv</B>, this option can be omitted.  In such
+           cases, the current locale is used.
+
+       -t to_encoding
+           Specifies the encoding you are converting to.  Unlike
+           <B>iconv</B>, this option can be omitted.  In such cases, the
+           current locale is used.
+
+           Therefore, when both -f and -t are omitted, <B>piconv</B>
+           just acts like <B>cat</B>.
+
+       -s <I>string</I>
+           uses <I>string</I> instead of file for the source of text.
+           Same as <B>iconv</B>.
+
+       -l  Lists all available encodings, one per line, in case-
+           insensitive order.  Note that only the canonical names
+           are listed; many aliases exist.  For example, the
+           names are case-insensitive, and many standard and com­
+           mon aliases work, such as "latin1" for "ISO-8859-1",
+           or "ibm850" instead of "cp850", or "winlatin1" for
+           "cp1252".  See Encode::Supported for a full discus­
+           sion.
+
+       -C <I>N</I>
+           Check the validity of the stream if <I>N</I> = 1.  When <I>N</I> =
+           -1, something interesting happens when it encounters
+           an invalid character.
+
+       -c  Same as "-C 1".
+
+       -p  Same as "-C -1".
+
+       -h  Show usage.
+
+           perlio
+               The new perlIO layer is used.  NI-S' favorite.
+
+           Like the <I>-D</I> option, this is also for Encode hackers.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>iconv(1)</B> <B>locale(3)</B> Encode Encode::Supported Encode::Alias
+       PerlIO
+
+
+
+perl v5.8.0                 2003-03-13                  <B>PICONV(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

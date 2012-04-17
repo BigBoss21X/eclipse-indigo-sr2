@@ -1,0 +1,144 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>mt</B>  [-V]  [-f  device] [--file=device] [--rsh-command=com­
+       mand] [--version] operation [count]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This manual page documents the GNU version of <B>mt</B>.  <B>mt</B> per­
+       forms  the  given <I>operation</I>, which must be one of the tape
+       operations listed below, on a tape drive.
+
+       The default tape device to operate on is  taken  from  the
+       file  <I>/usr/include/sys/mtio.h</I> when <B>mt</B> is compiled.  It can
+       be overridden by giving a device file name in the environ­
+       ment  variable  <B>TAPE</B>  or  by  a  command  line option (see
+       below), which also overrides the environment variable.
+
+       The device must be either a character special  file  or  a
+       remote tape drive.  To use a tape drive on another machine
+       as the archive, use a filename  that  starts  with  `HOST­
+       NAME:'.  The hostname can be preceded by a username and an
+       `@' to access the remote tape drive as that user,  if  you
+       have  permission  to  do  so  (typically  an entry in that
+       user's `~/.rhosts' file).
+
+       The available operations are listed below.  Unique  abbre­
+       viations  are  accepted.  Not all operations are available
+       on all systems, or work on all types of tape drives.  Some
+       operations  optionally  take  a repeat count, which can be
+       given after the operation name and defaults to 1.
+
+       eof, weof
+              Write <I>count</I> EOF marks at current position.
+
+       fsf    Forward space <I>count</I> files.  The tape is  positioned
+              on the first block of the next file.
+
+       bsf    Backward space <I>count</I> files.  The tape is positioned
+              on the first block of the next file.
+
+       fsr    Forward space <I>count</I> records.
+
+       bsr    Backward space <I>count</I> records.
+
+       bsfm   Backward space <I>count</I> file marks.  The tape is posi­
+              tioned  on  the  beginning-of-the-tape  side of the
+              file mark.
+
+       fsfm   Forward space <I>count</I> file marks.  The tape is  posi­
+              tioned  on  the  beginning-of-the-tape  side of the
+              file mark.
+
+       asf    Absolute space to file number <I>count</I>.  Equivalent to
+              rewind followed by fsf <I>count</I>.
+              reel, then rewind it again.
+
+       erase  Erase the tape.
+
+       fss    (SCSI tapes) Forward space <I>count</I> setmarks.
+
+       bss    (SCSI tapes) Backward space <I>count</I> setmarks.
+
+       wset   (SCSI tapes) Write <I>count</I> setmarks at current  posi­
+              tion (only SCSI tape).
+
+       eod, seod
+              Space  to end of valid data.  Used on streamer tape
+              drives to append data to the logical and of tape.
+
+       setblk (SCSI tapes) Set the block size  of  the  drive  to
+              <I>count</I> bytes per record.
+
+       setdensity
+              (SCSI  tapes)  Set  the tape density code to <I>count.</I>
+              The proper codes to use with each drive  should  be
+              looked up from the drive documentation.
+
+       drvbuffer
+              (SCSI tapes) Set the tape drive buffer code to <I>num­</I>
+              <I>ber.</I>  The proper value for unbuffered operation  is
+              zero and "normal" buffered operation one. The mean­
+              ings of other values can be found in the drive doc­
+              umentation  or, in case of a SCSI-2 drive, from the
+              SCSI-2 standard.
+
+       stoptions
+              (SCSI tapes) Set the driver options bits  to  <I>count</I>
+              for  the  device.  The bits can be set by oring the
+              following values: 1 to enable write buffering, 2 to
+              enable asynchronous writes, 4 to enable read ahead,
+              8 to enable debugging output (if it has  been  com­
+              piled to the driver).
+
+       stwrthreshold
+              (SCSI  tapes)  The  write  threshold  for  the tape
+              device is set to <I>count</I> kilobytes. The value must be
+              smaller than or equal to the driver buffer size.
+
+       seek   (SCSI  tapes)  Seek to the <I>count</I> block on the tape.
+              This operation is available on  some  Tandberg  and
+              Wangtek streamers and some SCSI-2 tape drives.
+
+       tell   (SCSI  tapes) Tell the current block on tape.  This
+              operation is available on some Tandberg and Wangtek
+              streamers and some SCSI-2 tape drives.
+
+       if the operation or device name given was invalid, or 2 if
+       the operation failed.
+
+   <B>OPTIONS</B>
+       <I>-f,</I> <I>--file=device</I>
+              Use <I>device</I> as the file name of the  tape  drive  to
+              operate  on.   To  use  a  tape  drive  on  another
+              machine, use a filename  that  starts  with  `HOST­
+              NAME:'.  The hostname can be preceded by a username
+              and an `@' to access the remote tape drive as  that
+              user, if you have permission to do so (typically an
+              entry in that user's `~/.rhosts' file).
+
+       <I>--rsh-command=command</I>
+              Notifies <B>mt</B> that it should use <I>command</I> to  communi­
+              cate with remote devices instead of <I>/usr/bin/ssh</I> or
+              <I>/usr/bin/rsh</I>.
+
+       <I>-V,</I> <I>--version</I>
+              Print the version number of <B>mt</B>.
+
+
+
+                                                           <B>MT(1L)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

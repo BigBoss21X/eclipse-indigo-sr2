@@ -1,0 +1,132 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>h2ph</B> <B>[-d</B> <B>destination</B> <B>directory]</B> <B>[-r</B> <B>|</B> <B>-a]</B> <B>[-l]</B> <B>[header­</B>
+       <B>files]</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>h2ph</I> converts any C header files specified to the corre­
+       sponding Perl header file format.  It is most easily run
+       while in /usr/include:
+
+               cd /usr/include; h2ph * sys/*
+
+       or
+
+               cd /usr/include; h2ph * sys/* arpa/* netinet/*
+
+       or
+
+               cd /usr/include; h2ph -r -l .
+
+       The output files are placed in the hierarchy rooted at
+       Perl's architecture dependent library directory.  You can
+       specify a different hierarchy with a <B>-d</B> switch.
+
+       If run with no arguments, filters standard input to stan­
+       dard output.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       -d destination_dir
+           Put the resulting <B>.ph</B> files beneath <B>destination_dir</B>,
+           instead of beneath the default Perl library location
+           ($Config{'installsitsearch'}).
+
+       -r  Run recursively; if any of <B>headerfiles</B> are directo­
+           ries, then run <I>h2ph</I> on all files in those directories
+           (and their subdirectories, etc.).  <B>-r</B> and <B>-a</B> are mutu­
+           ally exclusive.
+
+       -a  Run automagically; convert <B>headerfiles</B>, as well as any
+           <B>.h</B> files which they include.  This option will search
+           for <B>.h</B> files in all directories which your C compiler
+           ordinarily uses.  <B>-a</B> and <B>-r</B> are mutually exclusive.
+
+       -l  Symbolic links will be replicated in the destination
+           directory.  If <B>-l</B> is not specified, then links are
+           skipped over.
+
+       -h  Put ``hints'' in the .ph files which will help in
+           locating problems with <I>h2ph</I>.  In those cases when you
+           <B>require</B> a <B>.ph</B> file containing syntax errors, instead
+           of the cryptic
+
+                   [ some error condition ] at (eval mmm) line nnn
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       No environment variables are used.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+        /usr/include/*.h
+        /usr/include/sys/*.h
+
+       etc.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Larry Wall
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>perl(1)</B>
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       The usual warnings if it can't read or write the files
+       involved.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Doesn't construct the %sizeof array for you.
+
+       It doesn't handle all C constructs, but it does attempt to
+       isolate definitions inside evals so that you can get at
+       the definitions that it can translate.
+
+       It's only intended as a rough tool.  You may need to
+       dicker with the files produced.
+
+       You have to run this program by hand; it's not run as part
+       of the Perl installation.
+
+       Doesn't handle complicated expressions built piecemeal, a
+       la:
+
+           enum {
+               FIRST_VALUE,
+               SECOND_VALUE,
+           #ifdef ABC
+               THIRD_VALUE
+           #endif
+           };
+
+       Doesn't necessarily locate all of your C compiler's inter­
+       nally-defined symbols.
+
+
+
+perl v5.8.0                 2003-03-13                    <B>H2PH(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

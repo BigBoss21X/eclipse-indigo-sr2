@@ -1,0 +1,391 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>grep</B> [<I>options</I>] <I>PATTERN</I> [<I>FILE</I>...]
+       <B>grep</B> [<I>options</I>] [<B>-e</B> <I>PATTERN</I> | <B>-f</B> <I>FILE</I>] [<I>FILE</I>...]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Grep</B>  searches the named input <I>FILE</I>s (or standard input if
+       no files are named, or the file name <B>-</B> is given) for lines
+       containing a match to the given <I>PATTERN</I>.  By default, <B>grep</B>
+       prints the matching lines.
+
+       In addition, two variant  programs  <B>egrep</B>  and  <B>fgrep</B>  are
+       available.   <B>Egrep</B>  is  the same as <B>grep</B> <B>-E</B>.  <B>Fgrep</B> is the
+       same as <B>grep</B> <B>-F</B>.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-A</B> <I>NUM</I>, <B>--after-context=</B><I>NUM</I>
+              Print <I>NUM</I> lines of trailing context after  matching
+              lines.   Places  a  line containing <B>--</B> between con­
+              tiguous groups of matches.
+
+       <B>-a</B>, <B>--text</B>
+              Process a binary file as if it were text;  this  is
+              equivalent to the <B>--binary-files=text</B> option.
+
+       <B>-B</B> <I>NUM</I>, <B>--before-context=</B><I>NUM</I>
+              Print  <I>NUM</I> lines of leading context before matching
+              lines.  Places a line containing  <B>--</B>  between  con­
+              tiguous groups of matches.
+
+       <B>-C</B> <I>NUM</I>, <B>--context=</B><I>NUM</I>
+              Print  <I>NUM</I>  lines of output context.  Places a line
+              containing <B>--</B> between contiguous groups of matches.
+
+       <B>-b</B>, <B>--byte-offset</B>
+              Print  the byte offset within the input file before
+              each line of output.
+
+       <B>--binary-files=</B><I>TYPE</I>
+              If the first few bytes of a file indicate that  the
+              file  contains binary data, assume that the file is
+              of type <I>TYPE</I>.  By default, <I>TYPE</I> is <B>binary</B>, and <B>grep</B>
+              normally  outputs  either a one-line message saying
+              that a binary file matches, or no message if  there
+              is  no  match.   If  <I>TYPE</I>  is  <B>without-match</B>,  <B>grep</B>
+              assumes that a binary file does not match; this  is
+              equivalent to the <B>-I</B> option.  If <I>TYPE</I> is <B>text</B>, <B>grep</B>
+              processes a binary file as if it were text; this is
+              equivalent   to   the  <B>-a</B>  option.   <I>Warning:</I>  <B>grep</B>
+              <B>--binary-files=text</B> might  output  binary  garbage,
+              which  can have nasty side effects if the output is
+              a terminal and if the  terminal  driver  interprets
+              some of it as commands.
+              <I>ACTION</I>  to process it.  By default, <I>ACTION</I> is <B>read</B>,
+              which means that devices are read just as  if  they
+              were  ordinary  files.   If <I>ACTION</I> is <B>skip</B>, devices
+              are silently skipped.
+
+       <B>-d</B> <I>ACTION</I>, <B>--directories=</B><I>ACTION</I>
+              If an input file is a directory, use <I>ACTION</I> to pro­
+              cess  it.   By default, <I>ACTION</I> is <B>read</B>, which means
+              that directories are read  just  as  if  they  were
+              ordinary files.  If <I>ACTION</I> is <B>skip</B>, directories are
+              silently skipped.  If <I>ACTION</I> is <B>recurse</B>, <B>grep</B> reads
+              all  files  under each directory, recursively; this
+              is equivalent to the <B>-r</B> option.
+
+       <B>-E</B>, <B>--extended-regexp</B>
+              Interpret <I>PATTERN</I> as an extended regular expression
+              (see below).
+
+       <B>-e</B> <I>PATTERN</I>, <B>--regexp=</B><I>PATTERN</I>
+              Use  <I>PATTERN</I> as the pattern; useful to protect pat­
+              terns beginning with <B>-</B>.
+
+       <B>-F</B>, <B>--fixed-strings</B>
+              Interpret <I>PATTERN</I> as a list of fixed strings, sepa­
+              rated  by  newlines, any of which is to be matched.
+              <B>-P</B>, <B>--perl-regexp</B> Interpret <I>PATTERN</I> as a Perl regu­
+              lar expression.
+
+       <B>-f</B> <I>FILE</I>, <B>--file=</B><I>FILE</I>
+              Obtain patterns from <I>FILE</I>, one per line.  The empty
+              file contains zero patterns, and therefore  matches
+              nothing.
+
+       <B>-G</B>, <B>--basic-regexp</B>
+              Interpret  <I>PATTERN</I>  as  a  basic regular expression
+              (see below).  This is the default.
+
+       <B>-H</B>, <B>--with-filename</B>
+              Print the filename for each match.
+
+       <B>-h</B>, <B>--no-filename</B>
+              Suppress the prefixing of filenames on output  when
+              multiple files are searched.
+
+       <B>--help</B> Output a brief help message.
+
+       <B>-I</B>     Process  a  binary  file  as  if it did not contain
+              matching data; this is equivalent to the  <B>--binary-</B>
+              <B>files=without-match</B> option.
+
+       <B>-i</B>, <B>--ignore-case</B>
+              Ignore  case  distinctions  in both the <I>PATTERN</I> and
+
+       <B>-m</B> <I>NUM</I>, <B>--max-count=</B><I>NUM</I>
+              Stop reading a file after <I>NUM</I> matching  lines.   If
+              the  input  is  standard input from a regular file,
+              and <I>NUM</I> matching lines  are  output,  <B>grep</B>  ensures
+              that the standard input is positioned to just after
+              the last matching line before  exiting,  regardless
+              of  the  presence  of trailing context lines.  This
+              enables a calling process to resume a search.  When
+              <B>grep</B> stops after <I>NUM</I> matching lines, it outputs any
+              trailing context lines.  When  the  <B>-c</B>  or  <B>--count</B>
+              option  is  also used, <B>grep</B> does not output a count
+              greater than <I>NUM</I>.  When the  <B>-v</B>  or  <B>--invert-match</B>
+              option  is  also  used, <B>grep</B> stops after outputting
+              <I>NUM</I> non-matching lines.
+
+       <B>--mmap</B> If possible, use the <B>mmap(2)</B> system  call  to  read
+              input,  instead of the default <B>read(2)</B> system call.
+              In some situations, <B>--mmap</B>  yields  better  perfor­
+              mance.   However, <B>--mmap</B> can cause undefined behav­
+              ior (including core dumps) if an input file shrinks
+              while <B>grep</B> is operating, or if an I/O error occurs.
+
+       <B>-n</B>, <B>--line-number</B>
+              Prefix each line of output  with  the  line  number
+              within its input file.
+
+       <B>-o</B>, <B>--only-matching</B>
+              Show  only the part of a matching line that matches
+              <I>PATTERN.</I>
+
+       <B>--label=</B><I>LABEL</I>
+              Displays input actually coming from standard  input
+              as  input  coming  from  file <I>LABEL.</I>  This is espe­
+              cially useful for tools like zgrep, e.g.  <B>gzip</B>  <B>-cd</B>
+              <B>foo.gz</B> <B>|grep</B> <B>--label=foo</B> <B>something</B>
+
+       <B>--line-buffering</B>
+              Use  line buffering, it can be a performance penal­
+              ity.
+
+       <B>-q</B>, <B>--quiet</B>, <B>--silent</B>
+              Quiet; do not write anything  to  standard  output.
+              Exit  immediately  with zero status if any match is
+              found, even if an error was detected.  Also see the
+              <B>-s</B> or <B>--no-messages</B> option.
+
+       <B>-R</B>, <B>-r</B>, <B>--recursive</B>
+              Read  all  files under each directory, recursively;
+              this is equivalent to the <B>-d</B> <B>recurse</B> option.
+
+         <B>--include=</B>PATTERN
+              Recurse in directories only searching file matching
+
+       <B>-U</B>, <B>--binary</B>
+              Treat the file(s) as binary.  By default, under MS-
+              DOS and MS-Windows, <B>grep</B> guesses the file  type  by
+              looking at the contents of the first 32KB read from
+              the file.  If <B>grep</B> decides the file is a text file,
+              it  strips the CR characters from the original file
+              contents (to make regular expressions with <B>^</B> and  <B>$</B>
+              work  correctly).   Specifying  <B>-U</B>  overrules  this
+              guesswork, causing all files to be read and  passed
+              to  the matching mechanism verbatim; if the file is
+              a text file with CR/LF pairs at  the  end  of  each
+              line,  this  will cause some regular expressions to
+              fail.  This option has no effect on platforms other
+              than MS-DOS and MS-Windows.
+
+       <B>-u</B>, <B>--unix-byte-offsets</B>
+              Report Unix-style byte offsets.  This switch causes
+              <B>grep</B> to report byte offsets as  if  the  file  were
+              Unix-style  text  file,  i.e.  with  CR  characters
+              stripped off.  This will produce results  identical
+              to running <B>grep</B> on a Unix machine.  This option has
+              no effect unless <B>-b</B> option is also used; it has  no
+              effect  on  platforms other than MS-DOS and MS-Win­
+              dows.
+
+       <B>-V</B>, <B>--version</B>
+              Print the version number of <B>grep</B> to standard error.
+              This  version  number should be included in all bug
+              reports (see below).
+
+       <B>-v</B>, <B>--invert-match</B>
+              Invert the sense of matching, to select  non-match­
+              ing lines.
+
+       <B>-w</B>, <B>--word-regexp</B>
+              Select  only  those  lines  containing matches that
+              form whole words.  The test is  that  the  matching
+              substring  must  either  be at the beginning of the
+              line, or preceded by a non-word constituent charac­
+              ter.   Similarly,  it  must be either at the end of
+              the line or  followed  by  a  non-word  constituent
+              character.   Word-constituent  characters  are let­
+              ters, digits, and the underscore.
+
+       <B>-x</B>, <B>--line-regexp</B>
+              Select only those matches that  exactly  match  the
+              whole line.
+
+       <B>-y</B>     Obsolete synonym for <B>-i</B>.
+
+       <B>-Z</B>, <B>--null</B>
+       to  arithmetic  expressions, by using various operators to
+       combine smaller expressions.
+
+       <B>Grep</B> understands two different versions of regular expres­
+       sion  syntax:  "basic" and "extended."  In GNU <B>grep</B>, there
+       is no difference in available functionality  using  either
+       syntax.   In  other implementations, basic regular expres­
+       sions  are  less  powerful.   The  following   description
+       applies  to  extended regular expressions; differences for
+       basic regular expressions are summarized afterwards.
+
+       The fundamental building blocks are  the  regular  expres­
+       sions  that  match  a  single character.  Most characters,
+       including all letters and digits, are regular  expressions
+       that  match  themselves.   Any  metacharacter with special
+       meaning may be quoted by preceding it with a backslash.
+
+       A <I>bracket</I> <I>expression</I> is a list of characters enclosed by <B>[</B>
+       and  <B>]</B>.   It matches any single character in that list; if
+       the first character of the list is the  caret  <B>^</B>  then  it
+       matches  any  character <I>not</I> in the list.  For example, the
+       regular expression <B>[0123456789]</B> matches any single  digit.
+
+       Within  a  bracket expression, a <I>range</I> <I>expression</I> consists
+       of two characters separated by a hyphen.  It  matches  any
+       single  character  that  sorts between the two characters,
+       inclusive, using the locale's collating sequence and char­
+       acter set.  For example, in the default C locale, <B>[a-d]</B> is
+       equivalent to <B>[abcd]</B>.  Many  locales  sort  characters  in
+       dictionary  order, and in these locales <B>[a-d]</B> is typically
+       not equivalent to <B>[abcd]</B>; it might be equivalent to <B>[aBbC­</B>
+       <B>cDd]</B>,  for example.  To obtain the traditional interpreta­
+       tion of bracket expressions, you can use the C  locale  by
+       setting the <B>LC_ALL</B> environment variable to the value <B>C</B>.
+
+       Finally,  certain  named  classes of characters are prede­
+       fined within bracket expressions, as follows.  Their names
+       are  self  explanatory, and they are <B>[:alnum:]</B>, <B>[:alpha:]</B>,
+       <B>[:cntrl:]</B>,  <B>[:digit:]</B>,  <B>[:graph:]</B>,  <B>[:lower:]</B>,  <B>[:print:]</B>,
+       <B>[:punct:]</B>,  <B>[:space:]</B>,  <B>[:upper:]</B>,  and  <B>[:xdigit:].</B>   For
+       example, <B>[[:alnum:]]</B> means <B>[0-9A-Za-z]</B>, except the  latter
+       form  depends  upon  the  C locale and the ASCII character
+       encoding, whereas the former is independent of locale  and
+       character  set.   (Note  that  the brackets in these class
+       names are part of the symbolic names, and must be included
+       in  addition to the brackets delimiting the bracket list.)
+       Most metacharacters  lose  their  special  meaning  inside
+       lists.  To include a literal <B>]</B> place it first in the list.
+       Similarly, to include a literal <B>^</B> place  it  anywhere  but
+       first.  Finally, to include a literal <B>-</B> place it last.
+
+       The period <B>.</B>  matches any single character.  The symbol <B>\w</B>
+              once.
+       <B>*</B>      The  preceding  item  will  be matched zero or more
+              times.
+       <B>+</B>      The preceding item will  be  matched  one  or  more
+              times.
+       <B>{</B><I>n</I><B>}</B>    The preceding item is matched exactly <I>n</I> times.
+       <B>{</B><I>n</I><B>,}</B>   The preceding item is matched <I>n</I> or more times.
+       <B>{</B><I>n</I><B>,</B><I>m</I><B>}</B>  The preceding item is matched at least <I>n</I> times, but
+              not more than <I>m</I> times.
+
+       Two regular expressions may be concatenated; the resulting
+       regular  expression  matches any string formed by concate­
+       nating two substrings that respectively match the concate­
+       nated subexpressions.
+
+       Two  regular expressions may be joined by the infix opera­
+       tor <B>|</B>; the resulting regular expression matches any string
+       matching either subexpression.
+
+       Repetition  takes  precedence over concatenation, which in
+       turn takes precedence over alternation.   A  whole  subex­
+       pression  may be enclosed in parentheses to override these
+       precedence rules.
+
+       The backreference <B>\</B><I>n</I>, where <I>n</I> is a single  digit,  matches
+       the  substring previously matched by the <I>n</I>th parenthesized
+       subexpression of the regular expression.
+
+       In basic regular expressions the metacharacters <B>?</B>,  <B>+</B>,  <B>{</B>,
+       <B>|</B>,  <B>(</B>,  and  <B>)</B> lose their special meaning; instead use the
+       backslashed versions <B>\?</B>, <B>\+</B>, <B>\{</B>, <B>\|</B>, <B>\(</B>, and <B>\)</B>.
+
+       Traditional <B>egrep</B> did not support the <B>{</B> metacharacter, and
+       some <B>egrep</B> implementations support <B>\{</B> instead, so portable
+       scripts should avoid <B>{</B> in <B>egrep</B> patterns  and  should  use
+       <B>[{]</B> to match a literal <B>{</B>.
+
+       GNU  <B>egrep</B> attempts to support traditional usage by assum­
+       ing that <B>{</B> is not special if it would be the start  of  an
+       invalid  interval  specification.   For example, the shell
+       command <B>egrep</B> <B>'{1'</B> searches for the  two-character  string
+       <B>{1</B>  instead  of  reporting  a  syntax error in the regular
+       expression.  POSIX.2 allows this behavior as an extension,
+       but portable scripts should avoid it.
+
+
+</PRE>
+<H2>ENVIRONMENT VARIABLES</H2><PRE>
+       Grep's  behavior  is affected by the following environment
+       variables.
+
+       A locale <B>LC_</B><I>foo</I> is specified by examining the three  envi­
+       ronment  variables  <B>LC_ALL</B>,  <B>LC_</B><I>foo</I>,  <B>LANG</B>, in that order.
+       The first of these variables that  is  set  specifies  the
+              explicit options.  Option specifications are  sepa­
+              rated  by whitespace.  A backslash escapes the next
+              character, so it can be used to specify  an  option
+              containing whitespace or a backslash.
+
+       <B>GREP_COLOR</B>
+              Specifies the marker for highlighting.
+
+       <B>LC_ALL</B>, <B>LC_COLLATE</B>, <B>LANG</B>
+              These  variables  specify  the  <B>LC_COLLATE</B>  locale,
+              which determines the  collating  sequence  used  to
+              interpret range expressions like <B>[a-z]</B>.
+
+       <B>LC_ALL</B>, <B>LC_CTYPE</B>, <B>LANG</B>
+              These  variables specify the <B>LC_CTYPE</B> locale, which
+              determines the  type  of  characters,  e.g.,  which
+              characters are whitespace.
+
+       <B>LC_ALL</B>, <B>LC_MESSAGES</B>, <B>LANG</B>
+              These  variables  specify  the  <B>LC_MESSAGES</B> locale,
+              which determines the language that  <B>grep</B>  uses  for
+              messages.   The  default  C  locale  uses  American
+              English messages.
+
+       <B>POSIXLY_CORRECT</B>
+              If set, <B>grep</B> behaves as  POSIX.2  requires;  other­
+              wise,  <B>grep</B>  behaves  more like other GNU programs.
+              POSIX.2 requires  that  options  that  follow  file
+              names  must  be  treated as file names; by default,
+              such options are  permuted  to  the  front  of  the
+              operand  list  and  are  treated as options.  Also,
+              POSIX.2 requires that unrecognized options be diag­
+              nosed  as  "illegal", but since they are not really
+              against the law the default is to diagnose them  as
+              "invalid".      <B>POSIXLY_CORRECT</B>    also    disables
+              <B>_</B><I>N</I><B>_GNU_nonoption_argv_flags_</B>, described below.
+
+       <B>_</B><I>N</I><B>_GNU_nonoption_argv_flags_</B>
+              (Here <I>N</I> is <B>grep</B>'s numeric process ID.)  If the  <I>i</I>th
+              character  of  this environment variable's value is
+              <B>1</B>, do not consider the <I>i</I>th operand of <B>grep</B> to be an
+              option,  even if it appears to be one.  A shell can
+              put this variable in the environment for each  com­
+              mand  it  runs,  specifying  which operands are the
+              results of file name wildcard expansion and  there­
+              fore should not be treated as options.  This behav­
+              ior is available only with the GNU C  library,  and
+              only when <B>POSIXLY_CORRECT</B> is not set.
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       Normally, exit status is 0 if selected lines are found and
+       1 otherwise.  But  the  exit  status  is  2  if  an  error
+
+
+
+GNU Project                 2002/01/22                    <B>GREP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

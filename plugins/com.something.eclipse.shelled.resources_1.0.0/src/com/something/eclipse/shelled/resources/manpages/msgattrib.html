@@ -1,0 +1,127 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>msgattrib</B> [<I>OPTION</I>] [<I>INPUTFILE</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Filters the messages of a translation catalog according to
+       their attributes, and manipulates the attributes.
+
+       Mandatory  arguments  to  long  options  are mandatory for
+       short options too.
+
+   <B>Input</B> <B>file</B> <B>location:</B>
+       INPUTFILE
+              input PO file
+
+       <B>-D</B>, <B>--directory</B>=<I>DIRECTORY</I>
+              add DIRECTORY to list for input files search
+
+       If no input file is given or if it is -, standard input is
+       read.
+
+   <B>Output</B> <B>file</B> <B>location:</B>
+       <B>-o</B>, <B>--output-file</B>=<I>FILE</I>
+              write output to specified file
+
+       The  results  are  written to standard output if no output
+       file is specified or if it is -.
+
+   <B>Message</B> <B>selection:</B>
+       <B>--translated</B>
+              keep translated, remove untranslated messages
+
+       <B>--untranslated</B>
+              keep untranslated, remove translated messages
+
+       <B>--no-fuzzy</B>
+              remove 'fuzzy' marked messages
+
+       <B>--only-fuzzy</B>
+              keep 'fuzzy' marked messages
+
+       <B>--no-obsolete</B>
+              remove obsolete #~ messages
+
+       <B>--only-obsolete</B>
+              keep obsolete #~ messages
+
+   <B>Attribute</B> <B>manipulation:</B>
+       <B>--set-fuzzy</B>
+              set all messages 'fuzzy'
+
+       <B>--clear-fuzzy</B>
+
+   <B>Output</B> <B>details:</B>
+       <B>-e</B>, <B>--no-escape</B>
+              do not use C escapes in output (default)
+
+       <B>-E</B>, <B>--escape</B>
+              use C escapes in output, no extended chars
+
+       <B>--force-po</B>
+              write PO file even if empty
+
+       <B>-i</B>, <B>--indent</B>
+              write the .po file using indented style
+
+       <B>--no-location</B>
+              do not write '#: filename:line' lines
+
+       <B>-n</B>, <B>--add-location</B>
+              generate '#: filename:line' lines (default)
+
+       <B>--strict</B>
+              write out strict Uniforum conforming .po file
+
+       <B>-w</B>, <B>--width</B>=<I>NUMBER</I>
+              set output page width
+
+       <B>--no-wrap</B>
+              do not break long message lines,  longer  than  the
+              output page width, into several lines
+
+       <B>-s</B>, <B>--sort-output</B>
+              generate sorted output
+
+       <B>-F</B>, <B>--sort-by-file</B>
+              sort output by file location
+
+   <B>Informative</B> <B>output:</B>
+       <B>-h</B>, <B>--help</B>
+              display this help and exit
+
+       <B>-V</B>, <B>--version</B>
+              output version information and exit
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Bruno Haible.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-gnu-gettext@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2001-2002 Free Software Foundation, Inc.
+       This  is  free software; see the source for copying condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

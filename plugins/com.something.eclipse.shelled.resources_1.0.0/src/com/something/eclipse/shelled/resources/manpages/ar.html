@@ -1,0 +1,230 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       ar  [<B>-X32_64</B>]  [<B>-</B>]<I>p</I>[<I>mod</I>  [<I>relpos</I>]  [<I>count</I>]]  <I>archive</I> [<I>mem­</I>
+       <I>ber</I>...]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The GNU <B>ar</B> program creates, modifies,  and  extracts  from
+       archives.   An  <I>archive</I> is a single file holding a collec­
+       tion of other files in a structure that makes it  possible
+       to  retrieve the original individual files (called <I>members</I>
+       of the archive).
+
+       The original files' contents, mode  (permissions),  times­
+       tamp,  owner,  and group are preserved in the archive, and
+       can be restored on extraction.
+
+       GNU <B>ar</B> can maintain archives whose members have  names  of
+       any  length; however, depending on how <B>ar</B> is configured on
+       your system, a limit on member-name length may be  imposed
+       for  compatibility  with  archive  formats maintained with
+       other tools.  If it exists, the limit is often 15  charac­
+       ters  (typical  of formats related to a.out) or 16 charac­
+       ters (typical of formats related to coff).
+
+       <B>ar</B> is considered a binary utility because archives of this
+       sort  are  most  often  used as <I>libraries</I> holding commonly
+       needed subroutines.
+
+       <B>ar</B> creates an index to the symbols defined in  relocatable
+       object  modules  in the archive when you specify the modi­
+       fier <B>s</B>.  Once  created,  this  index  is  updated  in  the
+       archive  whenever  <B>ar</B> makes a change to its contents (save
+       for the <B>q</B> update operation).   An  archive  with  such  an
+       index  speeds  up  linking to the library, and allows rou­
+       tines in the library to call each other without regard  to
+       their placement in the archive.
+
+       You  may  use <B>nm</B> <B>-s</B> or <B>nm</B> <B>--print-armap</B> to list this index
+       table.  If an archive lacks the table, another form of  <B>ar</B>
+       called <B>ranlib</B> can be used to add just the table.
+
+       GNU  <B>ar</B>  is  designed  to be compatible with two different
+       facilities.  You can control its activity  using  command-
+       line  options,  like the different varieties of <B>ar</B> on Unix
+       systems; or, if you specify the single command-line option
+       <B>-M</B>, you can control it with a script supplied via standard
+       input, like the MRI ``librarian'' program.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       GNU <B>ar</B> allows you to mix the operation code <I>p</I> and modifier
+       flags  <I>mod</I>  in  any  order,  within the first command-line
+       argument.
+
+       <B>m</B>   Use this operation to <I>move</I> members in an archive.
+
+           The ordering of members in an archive can make a  dif­
+           ference  in how programs are linked using the library,
+           if a symbol is defined in more than one member.
+
+           If no modifiers are used with  "m",  any  members  you
+           name  in  the <I>member</I> arguments are moved to the <I>end</I> of
+           the archive; you can use the <B>a</B>, <B>b</B>, or <B>i</B>  modifiers  to
+           move them to a specified place instead.
+
+       <B>p</B>   <I>Print</I>  the  specified  members  of the archive, to the
+           standard output file.  If the <B>v</B> modifier is specified,
+           show  the  member  name before copying its contents to
+           standard output.
+
+           If you specify no <I>member</I> arguments, all the  files  in
+           the archive are printed.
+
+       <B>q</B>   <I>Quick</I> <I>append</I>; Historically, add the files <I>member</I>... to
+           the end of <I>archive</I>, without checking for  replacement.
+
+           The  modifiers  <B>a</B>,  <B>b</B>, and <B>i</B> do <I>not</I> affect this opera­
+           tion; new members are always placed at the end of  the
+           archive.
+
+           The  modifier  <B>v</B>  makes  <B>ar</B>  list  each  file as it is
+           appended.
+
+           Since the  point  of  this  operation  is  speed,  the
+           archive's  symbol  table index is not updated, even if
+           it already existed; you can use <B>ar</B> <B>s</B> or <B>ranlib</B> explic­
+           itly to update the symbol table index.
+
+           However,  too  many  different  systems  assume  quick
+           append rebuilds the index, so GNU ar implements "q" as
+           a synonym for "r".
+
+       <B>r</B>   Insert the files <I>member</I>... into <I>archive</I> (with <I>replace­</I>
+           <I>ment</I>). This operation differs from <B>q</B> in that any  pre­
+           viously  existing  members  are deleted if their names
+           match those being added.
+
+           If one of the files named in <I>member</I>... does not exist,
+           <B>ar</B>  displays  an error message, and leaves undisturbed
+           any existing members  of  the  archive  matching  that
+           name.
+
+           By  default,  new  members are added at the end of the
+           file; but you may use one of the modifiers <B>a</B>, <B>b</B>, or  <B>i</B>
+           to request placement relative to some existing member.
+
+
+           If  there  is  more  than  one file with the same name
+           (say, <B>fie</B>) in an archive (say <B>b.a</B>), <B>ar</B> <B>t</B> <B>b.a</B> <B>fie</B> lists
+           only the first instance; to see them all, you must ask
+           for a complete listing---in our example, <B>ar</B> <B>t</B> <B>b.a</B>.
+
+       <B>x</B>   <I>Extract</I> members (named <I>member</I>) from the archive.   You
+           can use the <B>v</B> modifier with this operation, to request
+           that <B>ar</B> list each name as it extracts it.
+
+           If you do not specify  a  <I>member</I>,  all  files  in  the
+           archive are extracted.
+
+       A  number  of modifiers (<I>mod</I>) may immediately follow the <I>p</I>
+       keyletter, to specify variations on an operation's  behav­
+       ior:
+
+       <B>a</B>   Add new files <I>after</I> an existing member of the archive.
+           If you use the modifier <B>a</B>, the  name  of  an  existing
+           archive member must be present as the <I>relpos</I> argument,
+           before the <I>archive</I> specification.
+
+       <B>b</B>   Add  new  files  <I>before</I>  an  existing  member  of  the
+           archive.   If  you  use the modifier <B>b</B>, the name of an
+           existing archive member must be present as the  <I>relpos</I>
+           argument,  before the <I>archive</I> specification.  (same as
+           <B>i</B>).
+
+       <B>c</B>   <I>Create</I> the archive.  The specified <I>archive</I>  is  always
+           created  if  it  did  not  exist,  when you request an
+           update.  But a warning is issued unless you specify in
+           advance  that  you  expect to create it, by using this
+           modifier.
+
+       <B>f</B>   Truncate names in the archive.  GNU <B>ar</B>  will  normally
+           permit  file  names of any length.  This will cause it
+           to create archives which are not compatible  with  the
+           native  <B>ar</B> program on some systems.  If this is a con­
+           cern, the <B>f</B> modifier may  be  used  to  truncate  file
+           names when putting them in the archive.
+
+       <B>i</B>   Insert  new  files  <I>before</I>  an  existing member of the
+           archive.  If you use the modifier <B>i</B>, the  name  of  an
+           existing  archive member must be present as the <I>relpos</I>
+           argument, before the <I>archive</I> specification.  (same  as
+           <B>b</B>).
+
+       <B>l</B>   This modifier is accepted but not used.
+
+       <B>N</B>   Uses  the  <I>count</I> parameter.  This is used if there are
+           multiple entries in the archive with  the  same  name.
+           Extract  or  delete  instance  <I>count</I> of the given name
+
+       <B>s</B>   Write an object-file index into the archive, or update
+           an existing one, even if no other change  is  made  to
+           the  archive.   You  may use this modifier flag either
+           with any operation, or alone.   Running  <B>ar</B>  <B>s</B>  on  an
+           archive is equivalent to running <B>ranlib</B> on it.
+
+       <B>S</B>   Do  not  generate  an  archive symbol table.  This can
+           speed up building a large library  in  several  steps.
+           The resulting archive can not be used with the linker.
+           In order to build a symbol table, you must omit the  <B>S</B>
+           modifier  on the last execution of <B>ar</B>, or you must run
+           <B>ranlib</B> on the archive.
+
+       <B>u</B>   Normally, <B>ar</B> <B>r</B>... inserts all files  listed  into  the
+           archive.   If  you  would like to insert <I>only</I> those of
+           the files you list that are newer than  existing  mem­
+           bers of the same names, use this modifier.  The <B>u</B> mod­
+           ifier is allowed only for the operation  <B>r</B>  (replace).
+           In  particular,  the  combination  <B>qu</B>  is not allowed,
+           since checking the timestamps  would  lose  any  speed
+           advantage from the operation <B>q</B>.
+
+       <B>v</B>   This modifier requests the <I>verbose</I> version of an oper­
+           ation.  Many operations  display  additional  informa­
+           tion, such as filenames processed, when the modifier <B>v</B>
+           is appended.
+
+       <B>V</B>   This modifier shows the version number of <B>ar</B>.
+
+       <B>ar</B> ignores an initial option spelt <B>-X32_64</B>,  for  compati­
+       bility with AIX.  The behaviour produced by this option is
+       the default for GNU <B>ar</B>.  <B>ar</B> does not support  any  of  the
+       other  <B>-X</B> options; in particular, it does not support <B>-X32</B>
+       which is the default for AIX <B>ar</B>.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>nm(1)</B>, <B>ranlib(1)</B>, and the Info entries for <I>binutils</I>.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright (c) 1991, 92, 93, 94, 95, 96, 97, 98, 99,  2000,
+       2001, 2002 Free Software Foundation, Inc.
+
+       Permission  is  granted  to copy, distribute and/or modify
+       this document under the terms of the GNU  Free  Documenta­
+       tion  License,  Version 1.1 or any later version published
+       by the Free Software Foundation; with  no  Invariant  Sec­
+       tions,  with  no Front-Cover Texts, and with no Back-Cover
+       Texts.  A copy of the license is included in  the  section
+       entitled "GNU Free Documentation License".
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>accounting</B> is a simple  program  to  calculate  statistics
+       about  your  internet  connections  that  are  started and
+       stopped by either <B>ifup</B> and <B>ifdown</B>  or  by  a  frontend  to
+       <B>smpppd</B> like <B>cinternet</B> , <B>qinternet</B> or <B>kinternet.</B>
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       These  options  are  recognized  by <B>accounting</B>.  If a long
+       option shows an argument as mandatory, then it  is  manda­
+       tory for the equivalent short option also.
+
+       <I>-l,</I> <I>--last=NUM</I>
+              Only consider the last NUM connections.
+
+       <I>-a,</I> <I>--after=DATE</I>
+              Only  consider connections started after DATE. DATE
+              is a date with optional time in  ISO  8601  format,
+              e.g. `2002-12-24 20:15:00'.
+
+              Note  that a date without time is treated as if the
+              time is 00:00:00. Hence connections started on  the
+              specified date are consider.
+
+       <I>-b,</I> <I>--before=DATE</I>
+              Only consider connections started before DATE.
+
+       <I>--this-year</I>
+              Only consider connections started this year.
+
+       <I>--last-year</I>
+              Only consider connections started last year.
+
+       <I>--this-month</I>
+              Only consider connections started this month.
+
+       <I>--last-month</I>
+              Only consider connections started last month.
+
+       <I>--today</I>
+              Only consider connections started today.
+
+       <I>--yesterday</I>
+              Only consider connections started yesterday.
+
+       <I>-c,</I> <I>--connections</I>
+              Only  list the connections but do not show provider
+              statistics.
+
+       <I>-p,</I> <I>--providers</I>
+              Do not list the connections only show the  provider
+              statistics.
+              rx, tx and rxtx.
+
+       <I>--local</I>
+              Display all dates in  local  time.  Also  interpret
+              dates  on  the  command line in local time. This is
+              the default.
+
+       <I>--utc</I>  Display all dates in UTC. Also interpret  dates  on
+              the command line in UTC.
+
+       <I>--script[=STYLE]</I>
+              Format  output  for  script. Known styles are c and
+              sh.
+
+       <I>-f,</I> <I>--file=NAME</I>
+              Use a different file with accounting information.
+
+       <I>--report-errors</I>
+              Report erros in the accounting file.
+
+       <I>--version</I>
+              Show program version and exit.
+
+       <I>--help</I> Show help information and exit.
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       All informations are only obtained through the  accounting
+       log. Hence the informations, esp. the data volume, of cur­
+       rently active connections is not accurate. If you want the
+       know the status of a connection use <B>ifstatus</B> or a frontend
+       to <B>smpppd</B> like <B>cinternet</B> , <B>qinternet</B> or <B>kinternet</B> instead.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Not yet implemented for ISDN.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/var/log/smpppd/accounting.log</B>
+              File containing accounting information.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>kinternet,</B> <B>qinternet,</B> <B>cinternet(1)</B>, <B>smpppd(8)</B>.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Arvin Schnell &lt;arvin@suse.de&gt;
+
+
+
+SuSE                      December 2002             <B>ACCOUNTING(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

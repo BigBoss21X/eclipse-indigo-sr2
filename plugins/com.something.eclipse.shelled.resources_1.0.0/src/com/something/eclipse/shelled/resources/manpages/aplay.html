@@ -1,0 +1,138 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>arecord</B> [<I>flags</I>] [filename]
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>aplay</B> [<I>flags</I>] [filename [filename]] ...
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>arecord</B> is a command-line soundfile recorder for the  ALSA
+       soundcard  driver.  It  supports  several file formats and
+       multiple soundcards with multiple devices.
+
+       <B>aplay</B> is much the same, only it plays instead  of  record­
+       ing.  For  supported soundfile formats, the sampling rate,
+       bit depth, and so forth can  be  automatically  determined
+       from the soundfile header.
+
+
+
+</PRE>
+<H2>INVOKING</H2><PRE>
+       [<B>arecord</B> | <B>aplay</B> ] [<I>flags</I>] filename
+
+       If filename is not specified, the standard output or input
+       is used. The <B>aplay</B> utility accepts multiple filenames.
+
+
+
+   <B>Options</B>
+       <I>--help</I> Help: show syntax.
+
+       <I>--version</I>
+              Print current version.
+
+       <I>-l,</I> <I>--list-devices</I>
+              List all soundcards and digital audio devices
+
+       <I>-L,</I> <I>--list-pcms</I>
+              List all PCMs defined
+
+       <I>-D,</I> <I>--device=NAME</I>
+              Select PCM by name
+
+       <I>-q</I> <I>--quiet</I>
+              Quiet mode. Suppress messages (not sound :))
+
+       <I>-t,</I> <I>--file-type</I> <I>TYPE</I>
+              File type (voc, wav, raw or au)
+
+       <I>-c,</I> <I>--channels=#</I>
+              The number of channels
+
+       <I>-f</I> <I>--format=FORMAT</I>
+
+       <I>-d,</I> <I>--duration=#</I>
+              Interrupt after # seconds
+
+       <I>-s,</I> <I>--sleep-min=#</I>
+              Min ticks to sleep
+
+       <I>-M,</I> <I>--mmap</I>
+              Mmap stream
+
+       <I>-N,</I> <I>--nonblock</I>
+              Nonblocking mode
+
+       <I>-F,</I> <I>--period-time=#</I>
+              Distance between interrupts is # microseconds
+
+       <I>-B,</I> <I>--buffer-time=#</I>
+              Buffer duration is # microseconds
+
+       <I>-A,</I> <I>--avail-min=#</I>
+              Min available space for wakeup is # microseconds
+
+       <I>-R,</I> <I>--start-delay=#</I>
+              Delay for automatic PCM  start  is  #  microseconds
+              (relative to buffer size if &lt;= 0)
+
+       <I>-T,</I> <I>--stop-delay=#</I>
+              Delay for automatic PCM stop is # microseconds from
+              xrun
+
+       <I>-v,</I> <I>--verbose</I>
+              Show PCM structure and setup
+
+       <I>-I,</I> <I>--separate-channels</I>
+              One file for each channel
+
+
+
+          <B>Example:</B>
+
+              <B>aplay</B> <B>-c</B> <B>1</B> <B>-t</B> <B>raw</B> <B>-r</B> <B>22050</B> <B>-f</B> <B>mu_law</B> <B>foobar</B>
+
+              will play the raw  file  "foobar"  as  a  22050-Hz,
+              mono, 8-bit, Mu-Law .au file.
+
+              <B>arecord</B> <B>-d</B> <B>10</B> <B>-f</B> <B>cd</B> <B>-t</B> <B>wav</B> <B>-D</B> <B>copy</B> <B>foobar.wav</B>
+
+              will  record  foobar.wav as a 10-second, CD-quality
+              wave file, using the PCM  "copy"  (which  might  be
+              defined in the user's .asoundrc file as:
+              pcm.copy {
+                type plug
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       <B>arecord</B>  and  <B>aplay</B> are by Jaroslav Kysela &lt;perex@suse.cz&gt;
+       This document is  by  Paul  Winkler  &lt;zarmzarm@erols.com&gt;.
+       Updated     for     Alsa     0.9     by    James    Tappin
+       &lt;james@xena.uklinux.net&gt;
+
+
+
+
+                          2 August 2001                  <B>APLAY(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

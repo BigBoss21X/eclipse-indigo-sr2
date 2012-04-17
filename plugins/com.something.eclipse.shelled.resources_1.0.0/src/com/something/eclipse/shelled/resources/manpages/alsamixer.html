@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>alsamixer</B> [<I>options</I>]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>alsamixer</B> is an ncurses mixer program  for  use  with  the
+       ALSA  soundcard  drivers.  It supports multiple soundcards
+       with multiple devices.
+
+
+
+</PRE>
+<H2>INVOKING</H2><PRE>
+       <B>alsamixer</B> [<I>options</I>]
+
+
+   <B>Options</B>
+       <I>-h,</I> <I>-help</I>
+              Help: show available flags.
+
+
+       <I>-c</I> &lt;card number or idenfication&gt;
+              Select the soundcard to use, if you have more  than
+              one. Cards are numbered from 0 (the default).
+
+
+       <I>-D</I> &lt;device identification&gt;
+              Select the mixer device to control.
+
+
+       <I>-g</I> &lt;toggle color settings&gt;
+              Toggle the using of colors.
+
+
+       <I>-s</I> &lt;minimize mixer window&gt;
+              Minimize the mixer window.
+
+
+
+</PRE>
+<H2>KEYBOARD COMMANDS</H2><PRE>
+       <B>alsamixer</B>  recognizes  the  following keyboard commands to
+       control the soundcard.
+
+
+   <B>General</B> <B>Controls</B>
+       The <I>Left</I> and <I>right</I> <I>arrow</I> keys are used to select the chan­
+       nel  (or device, depending on your preferred terminology).
+       You can also use <I>n</I> ("next") and <I>p</I> ("previous").
+
+       The <I>Up</I> and <I>Down</I> <I>Arrows</I> control the  volume  for  the  cur­
+       rently  selected  device.  You can also use <I>+</I> or <I>-</I> for the
+       same  purpose.  Both  the  left  and  right  signals   are
+       affected.  For  independent  left  and  right control, see
+       below.
+       <I>L</I> re-draws the screen.
+
+
+   <B>Quick</B> <B>Volume</B> <B>Changes</B>
+       <I>PageUp</I> increases volume by 5.
+
+       <I>PageDown</I> decreases volume by 5.
+
+       <I>End</I> sets volume to 0.
+
+       You  can  also control left &amp; right levels for the current
+       channel independently, as follows:
+
+       [<I>Q</I> | <I>W</I> | <I>E</I> ]  -- turn UP [ left | both | right ]
+
+       [<I>Z</I> | <I>X</I> | <I>C</I> ] -- turn DOWN [ left | both | right ]
+
+       If the currently selected mixer channel is  not  a  stereo
+       channel,  then  all UP keys will work like <I>W</I>, and all DOWN
+       keys will work like <I>X</I>.
+
+
+   <B>Exiting</B>
+       Quit the program with <I>ALT</I> <I>Q</I>, or by  hitting  <I>ESC</I>.   Please
+       note  that  you might need to hit <I>ESC</I> twice on some termi­
+       nals since it's regarded as a prefix key.
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>amixer(1),</B> <B>aplay(1),</B> <B>arecord(1)</B>
+
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Some terminal emulators (e.g. <B>nxterm</B>) may not  work  quite
+       right with ncurses, but that's their own damn fault. Plain
+       old <B>xterm</B> seems to be fine.
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       <B>alsamixer</B> has been written by Tim Janik &lt;timj@gtk.org&gt; and
+       been     furtherly    improved    by    Jaroslav    Kysela
+       &lt;perex@suse.cz&gt;.
+
+       This  manual   page   was   provided   by   Paul   Winkler
+       &lt;zarmzarm@erols.com&gt;.
+
+
+
+                           15 May 2001               <B>ALSAMIXER(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,747 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNTAX</H2><PRE>
+       <B>bc</B> [ <B>-hlwsqv</B> ] [long-options] [  <I>file</I> <I>...</I> ]
+
+
+</PRE>
+<H2>VERSION</H2><PRE>
+       This man page documents GNU bc version 1.06.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>bc</B> is a language that supports arbitrary precision numbers
+       with interactive execution of statements.  There are  some
+       similarities  in the syntax to the C programming language.
+       A standard math  library  is  available  by  command  line
+       option.   If requested, the math library is defined before
+       processing any files.  <B>bc</B> starts by processing  code  from
+       all  the  files  listed  on  the command line in the order
+       listed.  After all files have  been  processed,  <B>bc</B>  reads
+       from  the  standard  input.  All code is executed as it is
+       read.  (If a file contains a command to halt  the  proces­
+       sor, <B>bc</B> will never read from the standard input.)
+
+       This version of <B>bc</B> contains several extensions beyond tra­
+       ditional <B>bc</B> implementations and the POSIX draft  standard.
+       Command line options can cause these extensions to print a
+       warning or to be rejected.  This  document  describes  the
+       language  accepted  by this processor.  Extensions will be
+       identified as such.
+
+   <B>OPTIONS</B>
+       -h, --help
+              Print the usage and exit.
+
+       -i, --interactive
+              Force interactive mode.
+
+       -l, --mathlib
+              Define the standard math library.
+
+       -w, --warn
+              Give warnings for extensions to POSIX <B>bc</B>.
+
+       -s, --standard
+              Process exactly the POSIX <B>bc</B> language.
+
+       -q, --quiet
+              Do not print the normal GNU bc welcome.
+
+       -v, --version
+              Print the version number and copyright and quit.
+
+   <B>NUMBERS</B>
+       The most basic element in <B>bc</B> is the number.   Numbers  are
+       arbitrary  precision  numbers.   This precision is both in
+       the integer part and the fractional part.  All numbers are
+       any number of letters, digits and underscores.   All  let­
+       ters must be lower case.  (Full alpha-numeric names are an
+       extension. In POSIX <B>bc</B> all names are a single  lower  case
+       letter.)   The  type  of  variable is clear by the context
+       because all array  variable  names  will  be  followed  by
+       brackets ([]).
+
+       There are four special variables, <B>scale,</B> <B>ibase,</B> <B>obase,</B> and
+       <B>last</B>.  <B>scale</B> defines how some operations use digits  after
+       the decimal point.  The default value of <B>scale</B> is 0. <B>ibase</B>
+       and <B>obase</B> define the conversion base for input and  output
+       numbers.   The  default  for both input and output is base
+       10.  <B>last</B> (an extension) is a variable that has the  value
+       of  the  last  printed number.  These will be discussed in
+       further detail where appropriate.  All of these  variables
+       may  have  values  assigned  to  them  as  well as used in
+       expressions.
+
+   <B>COMMENTS</B>
+       Comments in <B>bc</B> start with the characters <B>/*</B> and  end  with
+       the characters <B>*/</B>.  Comments may start anywhere and appear
+       as a single space in the input.  (This causes comments  to
+       delimit other input items.  For example, a comment can not
+       be found in the middle  of  a  variable  name.)   Comments
+       include  any  newlines (end of line) between the start and
+       the end of the comment.
+
+       To support the use of scripts for <B>bc</B>, a single  line  com­
+       ment  has  been added as an extension.  A single line com­
+       ment starts at a <B>#</B> character and continues to the next end
+       of the line.  The end of line character is not part of the
+       comment and is processed normally.
+
+   <B>EXPRESSIONS</B>
+       The numbers are manipulated by expressions and statements.
+       Since  the language was designed to be interactive, state­
+       ments and expressions are executed as  soon  as  possible.
+       There  is no "main" program.  Instead, code is executed as
+       it is encountered.  (Functions, discussed in detail later,
+       are defined when encountered.)
+
+       A  simple  expression is just a constant. <B>bc</B> converts con­
+       stants into internal decimal  numbers  using  the  current
+       input  base, specified by the variable <B>ibase</B>. (There is an
+       exception in functions.)  The legal values of <B>ibase</B> are  2
+       through 16.  Assigning a value outside this range to <B>ibase</B>
+       will result in a value of 2 or 16.  Input numbers may con­
+       tain the characters 0-9 and A-F. (Note: They must be capi­
+       tals.  Lower case letters  are  variable  names.)   Single
+       digit  numbers  always have the value of the digit regard­
+       less of the value of <B>ibase</B>. (i.e. A  =  10.)   For  multi-
+       digit  numbers,  <B>bc</B>  changes  all  input digits greater or
+       refers to a complete expression and "var" refers to a sim­
+       ple or an array variable.  A simple variable is just a
+              <I>name</I>
+       and an array variable is specified as
+              <I>name</I>[<I>expr</I>]
+       Unless  specifically  mentioned the scale of the result is
+       the maximum scale of the expressions involved.
+
+       - expr The result is the negation of the expression.
+
+       ++ var The variable is incremented  by  one  and  the  new
+              value is the result of the expression.
+
+       -- var The  variable  is  decremented  by  one and the new
+              value is the result of the expression.
+
+       var ++  The result of the expression is the value  of  the
+              variable  and  then  the variable is incremented by
+              one.
+
+       var -- The result of the expression is the  value  of  the
+              variable  and  then  the variable is decremented by
+              one.
+
+       expr + expr
+              The result of the expression is the sum of the  two
+              expressions.
+
+       expr - expr
+              The  result  of the expression is the difference of
+              the two expressions.
+
+       expr * expr
+              The result of the expression is the product of  the
+              two expressions.
+
+       expr / expr
+              The result of the expression is the quotient of the
+              two expressions.  The scale of the  result  is  the
+              value of the variable <B>scale</B>.
+
+       expr % expr
+              The result of the expression is the "remainder" and
+              it is computed in the following  way.   To  compute
+              a%b,  first  a/b is computed to <B>scale</B> digits.  That
+              result is used to compute a-(a/b)*b to the scale of
+              the  maximum  of  <B>scale</B>+scale(b)  and scale(a).  If
+              <B>scale</B> is set to zero and both expressions are inte­
+              gers this expression is the integer remainder func­
+              tion.
+
+       expr ^ expr
+       ( expr )
+              This alters the standard precedence  to  force  the
+              evaluation of the expression.
+
+       var = expr
+              The  variable  is assigned the value of the expres­
+              sion.
+
+       var &lt;op&gt;= expr
+              This is equivalent to "var = var  &lt;op&gt;  expr"  with
+              the exception that the "var" part is evaluated only
+              once.  This can make a difference if  "var"  is  an
+              array.
+
+        Relational  expressions  are a special kind of expression
+       that always evaluate to 0 or 1, 0 if the relation is false
+       and  1  if  the relation is true.  These may appear in any
+       legal expression.   (POSIX  bc  requires  that  relational
+       expressions are used only in if, while, and for statements
+       and that only one relational test may be  done  in  them.)
+       The relational operators are
+
+       expr1 &lt; expr2
+              The  result  is  1  if  expr1 is strictly less than
+              expr2.
+
+       expr1 &lt;= expr2
+              The result is 1 if expr1 is less than or  equal  to
+              expr2.
+
+       expr1 &gt; expr2
+              The  result  is 1 if expr1 is strictly greater than
+              expr2.
+
+       expr1 &gt;= expr2
+              The result is 1 if expr1 is greater than  or  equal
+              to expr2.
+
+       expr1 == expr2
+              The result is 1 if expr1 is equal to expr2.
+
+       expr1 != expr2
+              The result is 1 if expr1 is not equal to expr2.
+
+       Boolean  operations  are  also  legal.  (POSIX <B>bc</B> does NOT
+       have boolean operations). The result of all boolean opera­
+       tions  are  0  and 1 (for false and true) as in relational
+       expressions.  The boolean operators are:
+
+       !expr  The result is 1 if expr is 0.
+
+       expr &amp;&amp; expr
+              ^ operator, right associative
+              unary - operator, nonassociative
+              ++ and -- operators, nonassociative
+
+       This precedence was chosen so that POSIX compliant <B>bc</B> pro­
+       grams will run correctly. This will cause the use  of  the
+       relational  and  logical  operators  to  have some unusual
+       behavior when used with assignment expressions.   Consider
+       the expression:
+              a = 3 &lt; 5
+
+       Most  C  programmers  would  assume  this would assign the
+       result of "3 &lt; 5" (the value 1) to the variable "a".  What
+       this  does in <B>bc</B> is assign the value 3 to the variable "a"
+       and then compare 3 to 5.  It is best  to  use  parenthesis
+       when  using  relational  and  logical  operators  with the
+       assignment operators.
+
+       There are a few more special expressions that are provided
+       in  <B>bc</B>.   These have to do with user defined functions and
+       standard functions.   They  all  appear  as  "<I>name</I><B>(</B><I>parame­</I>
+       <I>ters</I><B>)</B>".   See  the  section  on functions for user defined
+       functions.  The standard functions are:
+
+       length ( expression )
+              The value of the length function is the  number  of
+              significant digits in the expression.
+
+       read ( )
+              The read function (an extension) will read a number
+              from the standard input, regardless  of  where  the
+              function  occurs.   Beware, this can cause problems
+              with the mixing of data and program in the standard
+              input.  The best use for this function is in a pre­
+              viously written program that needs input  from  the
+              user,  but  never  allows  program code to be input
+              from the user.  The value of the read  function  is
+              the  number  read from the standard input using the
+              current value of the variable <B>ibase</B> for the conver­
+              sion base.
+
+       scale ( expression )
+              The  value  of  the scale function is the number of
+              digits after the decimal point in the expression.
+
+       sqrt ( expression )
+              The value of the sqrt function is the  square  root
+              of  the expression.  If the expression is negative,
+              a run time error is generated.
+
+   <B>STATEMENTS</B>
+       Statements (as in most algebraic  languages)  provide  the
+       the statement.)
+
+       expression
+              This  statement  does  one  of  two things.  If the
+              expression  starts  with  "&lt;variable&gt;  &lt;assignment&gt;
+              ...",  it  is considered to be an assignment state­
+              ment.  If  the  expression  is  not  an  assignment
+              statement,  the expression is evaluated and printed
+              to the output.  After the number is printed, a new­
+              line  is printed.  For example, "a=1" is an assign­
+              ment statement and "(a=1)" is  an  expression  that
+              has  an  embedded assignment.  All numbers that are
+              printed are printed in the base  specified  by  the
+              variable  <B>obase</B>.  The  legal values for <B>obase</B> are 2
+              through BC_BASE_MAX.   (See  the  section  LIMITS.)
+              For bases 2 through 16, the usual method of writing
+              numbers is used.  For bases  greater  than  16,  <B>bc</B>
+              uses a multi-character digit method of printing the
+              numbers where each higher base digit is printed  as
+              a  base  10 number.  The multi-character digits are
+              separated by spaces.  Each digit contains the  num­
+              ber  of  characters  required to represent the base
+              ten value of "obase-1".  Since numbers are of arbi­
+              trary  precision, some numbers may not be printable
+              on a single output line.  These long  numbers  will
+              be  split  across  lines  using the "\" as the last
+              character on a line.  The maximum number of charac­
+              ters  printed  per line is 70.  Due to the interac­
+              tive nature of <B>bc</B>, printing  a  number  causes  the
+              side  effect  of assigning the printed value to the
+              special variable <B>last</B>.  This  allows  the  user  to
+              recover  the  last  value printed without having to
+              retype the  expression  that  printed  the  number.
+              Assigning  to  <B>last</B> is legal and will overwrite the
+              last printed value with the  assigned  value.   The
+              newly  assigned  value  will  remain until the next
+              number is printed or another value is  assigned  to
+              <B>last</B>.   (Some  installations may allow the use of a
+              single period (.) which is not part of a number  as
+              a short hand notation for for <B>last</B>.)
+
+       string The string is printed to the output.  Strings start
+              with a double quote character and contain all char­
+              acters  until the next double quote character.  All
+              characters are take literally, including  any  new­
+              line.   No  newline  character is printed after the
+              string.
+
+       <B>print</B> list
+              The print statement (an extension) provides another
+              method  of output.  The "list" is a list of strings
+              and expressions separated by commas.   Each  string
+              This is the compound statement.  It allows multiple
+              statements to be grouped together for execution.
+
+       <B>if</B> ( expression ) statement1 [<B>else</B> statement2]
+              The  if statement evaluates the expression and exe­
+              cutes statement1 or  statement2  depending  on  the
+              value of the expression.  If the expression is non-
+              zero, statement1 is  executed.   If  statement2  is
+              present  and the value of the expression is 0, then
+              statement2 is executed.  (The  else  clause  is  an
+              extension.)
+
+       <B>while</B> ( expression ) statement
+              The  while  statement  will  execute  the statement
+              while the expression is non-zero.  It evaluates the
+              expression  before each execution of the statement.
+              Termination of the loop is caused by a zero expres­
+              sion value or the execution of a break statement.
+
+       <B>for</B>  (  [expression1]  ;  [expression2]  ; [expression3] )
+       statement
+              The  for  statement  controls repeated execution of
+              the statement.  Expression1 is evaluated before the
+              loop.   Expression2 is evaluated before each execu­
+              tion of the statement.   If  it  is  non-zero,  the
+              statement is evaluated.  If it is zero, the loop is
+              terminated.  After each execution of the statement,
+              expression3 is evaluated before the reevaluation of
+              expression2.  If  expression1  or  expression3  are
+              missing,  nothing  is  evaluated  at the point they
+              would be evaluated.  If expression2 is missing,  it
+              is the same as substituting the value 1 for expres­
+              sion2.  (The optional expressions are an extension.
+              POSIX <B>bc</B> requires all three expressions.)  The fol­
+              lowing is equivalent code for the for statement:
+              expression1;
+              while (expression2) {
+                 statement;
+                 expression3;
+              }
+
+       <B>break</B>  This statement causes a forced  exit  of  the  most
+              recent  enclosing while statement or for statement.
+
+       <B>continue</B>
+              The continue statement (an extension)   causes  the
+              most  recent  enclosing  for statement to start the
+              next iteration.
+
+       <B>halt</B>   The halt statement (an extension)  is  an  executed
+              statement that causes the <B>bc</B> processor to quit only
+              when it is executed.  For example,  "if  (0  ==  1)
+
+       is performed at "compile" time.
+
+       <B>limits</B> Print  the  local limits enforced by the local ver­
+              sion of <B>bc</B>.  This is an extension.
+
+       <B>quit</B>   When the quit statement is read, the  <B>bc</B>  processor
+              is  terminated, regardless of where the quit state­
+              ment is found.  For example, "if  (0  ==  1)  quit"
+              will cause <B>bc</B> to terminate.
+
+       <B>warranty</B>
+              Print  a longer warranty notice.  This is an exten­
+              sion.
+
+   <B>FUNCTIONS</B>
+       Functions provide a method of defining a computation  that
+       can  be  executed later.  Functions in <B>bc</B> always compute a
+       value and return it to the caller.   Function  definitions
+       are  "dynamic"  in  the sense that a function is undefined
+       until a definition is encountered in the input.  That def­
+       inition is then used until another definition function for
+       the same name is encountered.   The  new  definition  then
+       replaces  the  older definition.  A function is defined as
+       follows:
+              <B>define</B> <I>name</I> <B>(</B> <I>parameters</I> <B>)</B> <B>{</B> <I>newline</I>
+                  <I>auto</I><B>_</B><I>list</I>   <I>statement</I><B>_</B><I>list</I> <B>}</B>
+       A  function  call  is  just  an  expression  of  the  form
+       "<I>name</I><B>(</B><I>parameters</I><B>)</B>".
+
+       Parameters  are  numbers or arrays (an extension).  In the
+       function definition, zero or more parameters  are  defined
+       by  listing  their names separated by commas.  Numbers are
+       only call by value parameters.  Arrays are  only  call  by
+       variable.   Arrays  are specified in the parameter defini­
+       tion by the notation "<I>name</I><B>[]</B>".    In  the  function  call,
+       actual  parameters are full expressions for number parame­
+       ters.  The same notation is used for passing arrays as for
+       defining  array  parameters.  The named array is passed by
+       variable to the function.  Since function definitions  are
+       dynamic,  parameter  numbers  and types are checked when a
+       function is called.  Any mismatch in number  or  types  of
+       parameters  will  cause  a runtime error.  A runtime error
+       will also occur for the call to an undefined function.
+
+       The <I>auto</I><B>_</B><I>list</I> is an optional list of  variables  that  are
+       for "local" use.  The syntax of the auto list (if present)
+       is "<B>auto</B> <I>name</I>, ... ;".  (The semicolon is optional.)  Each
+       <I>name</I> is the name of an auto variable.  Arrays may be spec­
+       ified by using the same notation as  used  in  parameters.
+       These  variables  have their values pushed onto a stack at
+       the start of the function.  The variables  are  then  ini­
+       tialized  to zero and used throughout the execution of the
+       Return statements cause the termination of a function  and
+       the  return  of  a  value.   There are two versions of the
+       return statement.  The first form, "<B>return</B>",  returns  the
+       value  0  to  the  calling  expression.   The second form,
+       "<B>return</B> <B>(</B> <I>expression</I> <B>)</B>", computes the value of the expres­
+       sion  and  returns  that  value to the calling expression.
+       There is an implied "<B>return</B> <B>(0)</B>" at the end of every func­
+       tion.   This  allows  a function to terminate and return 0
+       without an explicit return statement.
+
+       Functions also change the usage  of  the  variable  <B>ibase</B>.
+       All constants in the function body will be converted using
+       the value of <B>ibase</B> at  the  time  of  the  function  call.
+       Changes  of  <B>ibase</B> will be ignored during the execution of
+       the function except for the standard function <B>read</B>,  which
+       will  always use the current value of <B>ibase</B> for conversion
+       of numbers.
+
+       As an extension, the format of  the  definition  has  been
+       slightly relaxed.  The standard requires the opening brace
+       be on the same line as the <B>define</B> keyword  and  all  other
+       parts must be on following lines.  This version of <B>bc</B> will
+       allow any number of newlines before and after the  opening
+       brace of the function.  For example, the following defini­
+       tions are legal.
+
+              define d (n) { return (2*n); }
+              define d (n)
+                { return (2*n); }
+
+
+   <B>MATH</B> <B>LIBRARY</B>
+       If <B>bc</B> is invoked with the <B>-l</B> option,  a  math  library  is
+       preloaded  and  the default scale is set to 20.   The math
+       functions will calculate their results to the scale set at
+       the time of their call.  The math library defines the fol­
+       lowing functions:
+
+       s (<I>x</I>)  The sine of x, x is in radians.
+
+       c (<I>x</I>)  The cosine of x, x is in radians.
+
+       a (<I>x</I>)  The arctangent of x, arctangent returns radians.
+
+       l (<I>x</I>)  The natural logarithm of x.
+
+       e (<I>x</I>)  The exponential function of raising e to the  value
+              x.
+
+       j (<I>n,x</I>)
+              The bessel function of integer order n of x.
+
+                 When x is small enough, we use the series:
+                   e^x = 1 + x + x^2/2! + x^3/3! + ...
+              */
+
+              define e(x) {
+                auto  a, d, e, f, i, m, v, z
+
+                /* Check the sign of x. */
+                if (x&lt;0) {
+                  m = 1
+                  x = -x
+                }
+
+                /* Precondition x. */
+                z = scale;
+                scale = 4 + z + .44*x;
+                while (x &gt; 1) {
+                  f += 1;
+                  x /= 2;
+                }
+
+                /* Initialize the variables. */
+                v = 1+x
+                a = x
+                d = 1
+
+                for (i=2; 1; i++) {
+                  e = (a *= x) / (d *= i)
+                  if (e == 0) {
+                    if (f&gt;0) while (f--)  v = v*v;
+                    scale = z
+                    if (m) return (1/v);
+                    return (v/1);
+                  }
+                  v += e
+                }
+              }
+
+
+       The following is code that uses the extended  features  of
+       <B>bc</B> to implement a simple program for calculating checkbook
+       balances.  This program is best kept in a file so that  it
+       can  be  used  many  times  without having to retype it at
+       every use.
+
+              scale=2
+              print "\nCheck book program!\n"
+              print "  Remember, deposits are negative transactions.\n"
+              print "  Exit by a 0 transaction.\n\n"
+
+              print "Initial balance? "; bal = read()
+              bal /= 1
+              define f (x) {
+                if (x &lt;= 1) return (1);
+                return (f(x-1) * x);
+              }
+
+
+   <B>READLINE</B> <B>AND</B> <B>LIBEDIT</B> <B>OPTIONS</B>
+       GNU <B>bc</B> can be compiled (via a configure option) to use the
+       GNU <B>readline</B> input  editor  library  or  the  BSD  <B>libedit</B>
+       library.   This  allows  the  user  to do editing of lines
+       before sending them to <B>bc</B>.  It also allows for  a  history
+       of previous lines typed.  When this option is selected, <B>bc</B>
+       has one more special  variable.   This  special  variable,
+       <B>history</B>  is  the number of lines of history retained.  For
+       <B>readline</B>, a value of -1 means that an unlimited number  of
+       history  lines are retained.  Setting the value of <B>history</B>
+       to a positive number restricts the number of history lines
+       to  the number given.  The value of 0 disables the history
+       feature.  The default value is 100. For more  information,
+       read  the  user  manuals for the GNU <B>readline</B>, <B>history</B> and
+       BSD <B>libedit</B> libraries.  One can not enable  both  <B>readline</B>
+       and <B>libedit</B> at the same time.
+
+   <B>DIFFERENCES</B>
+       This   version  of  <B>bc</B>  was  implemented  from  the  POSIX
+       P1003.2/D11 draft and  contains  several  differences  and
+       extensions relative to the draft and traditional implemen­
+       tations.  It is not implemented  in  the  traditional  way
+       using  <I>dc(1).</I>   This  version  is  a  single process which
+       parses and runs a byte code translation  of  the  program.
+       There  is  an  "undocumented"  option (-c) that causes the
+       program to output the byte code  to  the  standard  output
+       instead  of  running it.  It was mainly used for debugging
+       the parser and preparing the math library.
+
+       A major source of differences is extensions, where a  fea­
+       ture  is extended to add more functionality and additions,
+       where new features are added.  The following is  the  list
+       of differences and extensions.
+
+       LANG   This version does not conform to the POSIX standard
+              in the processing of the LANG environment  variable
+              and all environment variables starting with LC_.
+
+       names  Traditional  and  POSIX <B>bc</B> have single letter names
+              for functions, variables  and  arrays.   They  have
+              been  extended  to  be  multi-character  names that
+              start with a letter and may contain  letters,  num­
+              bers and the underscore character.
+
+       Strings
+              Strings  are not allowed to contain NUL characters.
+
+       if statement, else clause
+              POSIX <B>bc</B> does not have an else clause.
+
+       for statement
+              POSIX  <B>bc</B> requires all expressions to be present in
+              the for statement.
+
+       &amp;&amp;, ||, !
+              POSIX <B>bc</B> does not have the logical operators.
+
+       read function
+              POSIX <B>bc</B> does not have a read function.
+
+       print statement
+              POSIX <B>bc</B> does not have a print statement .
+
+       continue statement
+              POSIX <B>bc</B> does not have a continue statement.
+
+       return statement
+              POSIX <B>bc</B> requires  parentheses  around  the  return
+              expression.
+
+       array parameters
+              POSIX <B>bc</B> does not (currently) support array parame­
+              ters in full.  The POSIX grammar allows for  arrays
+              in  function  definitions,  but  does not provide a
+              method to specify an array as an actual  parameter.
+              (This  is most likely an oversight in the grammar.)
+              Traditional implementations of <B>bc</B> have only call by
+              value array parameters.
+
+       function format
+              POSIX  <B>bc</B>  requires  the  opening brace on the same
+              line as the <B>define</B> key word and the <B>auto</B>  statement
+              on the next line.
+
+       =+, =-, =*, =/, =%, =^
+              POSIX <B>bc</B> does not require these "old style" assign­
+              ment operators to be  defined.   This  version  may
+              allow  these "old style" assignments.  Use the lim­
+              its statement to see if the installed version  sup­
+              ports  them.   If  it  does support the "old style"
+              assignment operators, the statement "a =-  1"  will
+              decrement  <B>a</B> by 1 instead of setting <B>a</B> to the value
+              -1.
+
+       spaces in numbers
+              Other implementations of <B>bc</B> allow  spaces  in  num­
+              bers.   For example, "x=1 3" would assign the value
+              13 to the variable x.   The  same  statement  would
+              cause a syntax error in this version of <B>bc</B>.
+              ments.  For example,
+              a = 1
+              b = 2
+       has two execution blocks and
+              { a = 1
+                b = 2 }
+       has one execution block.  Any runtime error will terminate
+       the execution of the current execution block.   A  runtime
+       warning will not terminate the current execution block.
+
+       Interrupts
+              During  an  interactive  session, the SIGINT signal
+              (usually generated by the control-C character  from
+              the  terminal)  will cause execution of the current
+              execution block to be interrupted.  It will display
+              a  "runtime"  error  indicating  which function was
+              interrupted.  After  all  runtime  structures  have
+              been  cleaned  up,  a  message  will  be printed to
+              notify the user that <B>bc</B> is ready  for  more  input.
+              All previously defined functions remain defined and
+              the value of all non-auto variables are  the  value
+              at  the  point of interruption.  All auto variables
+              and function  parameters  are  removed  during  the
+              clean  up  process.   During a non-interactive ses­
+              sion, the SIGINT signal will terminate  the  entire
+              run of <B>bc</B>.
+
+   <B>LIMITS</B>
+       The  following  are the limits currently in place for this
+       <B>bc</B> processor.  Some of them may have been  changed  by  an
+       installation.   Use the limits statement to see the actual
+       values.
+
+       BC_BASE_MAX
+              The maximum output base is currently  set  at  999.
+              The maximum input base is 16.
+
+       BC_DIM_MAX
+              This  is  currently  an arbitrary limit of 65535 as
+              distributed.  Your installation may be different.
+
+       BC_SCALE_MAX
+              The number of digits after  the  decimal  point  is
+              limited  to  INT_MAX  digits.   Also, the number of
+              digits before  the  decimal  point  is  limited  to
+              INT_MAX digits.
+
+       BC_STRING_MAX
+              The  limit  on the number of characters in a string
+              is INT_MAX characters.
+
+       exponent
+       BC_ENV_ARGS
+              This  is  another mechanism to get arguments to <B>bc</B>.
+              The format is the same as the  command  line  argu­
+              ments.  These arguments are processed first, so any
+              files listed in the environent arguments  are  pro­
+              cessed  before  any  command  line  argument files.
+              This allows the user to set up  "standard"  options
+              and  files  to  be processed at every invocation of
+              <B>bc</B>.  The files in the environment  variables  would
+              typically  contain  function  definitions for func­
+              tions the user wants defined every time <B>bc</B> is  run.
+
+       BC_LINE_LENGTH
+              This  should  be an integer specifing the number of
+              characters in an  output  line  for  numbers.  This
+              includes  the  backslash and newline characters for
+              long numbers.
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       If any file on the command line can not be opened, <B>bc</B> will
+       report  that the file is unavailable and terminate.  Also,
+       there are compile and run time diagnostics that should  be
+       self-explanatory.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Error recovery is not very good yet.
+
+       Email  bug  reports to <B>bug-bc@gnu.org</B>.  Be sure to include
+       the word ``bc'' somewhere in the ``Subject:'' field.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Philip A. Nelson
+       philnelson@acm.org
+
+
+</PRE>
+<H2>ACKNOWLEDGEMENTS</H2><PRE>
+       The author would like to thank Steve  Sommars  (Steve.Som­
+       mars@att.com) for his extensive help in testing the imple­
+       mentation.  Many great suggestions were given.  This is  a
+       much better product due to his involvement.
+
+
+
+                                .                           <B>bc(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

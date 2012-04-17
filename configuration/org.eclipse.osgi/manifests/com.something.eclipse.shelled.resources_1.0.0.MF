@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Generated-from: 1136910240000;type=2
+Bundle-ManifestVersion: 2
+Bundle-Name: ShellEd Resources
+Bundle-SymbolicName: com.something.eclipse.shelled.resources
+Bundle-Version: 1.0.0
+Bundle-ClassPath: resources.jar
+Bundle-Vendor: Something Software
+Bundle-Localization: plugin
+Export-Package: com.something.eclipse.shelled.resources,
+ com.something.eclipse.shelled.resources.manpages
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime

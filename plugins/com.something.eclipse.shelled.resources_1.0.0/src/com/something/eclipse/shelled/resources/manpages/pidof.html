@@ -1,0 +1,69 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>pidof</B> [<B>-s</B>] [<B>-x</B>] [<B>-o</B> <I>omitpid</I>] [<B>-o</B> <I>omitpid..</I>]  <B>program</B> [<B>pro­</B>
+       <B>gram..</B>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Pidof</B> finds the process id's (pids) of the named programs.
+       It  prints those id's on the standard output. This program
+       is on some systems used in run-level change scripts, espe­
+       cially  when  the system has a <I>System-V</I> like <I>rc</I> structure.
+       In that case these  scripts  are  located  in  /etc/rc?.d,
+       where  ?  is the runlevel. If the system has a <B>start-stop-</B>
+       <B>daemon</B> (8) program that should be used instead.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       -s     Single shot - this instructs the  program  to  only
+              return one <I>pid</I>.
+
+       -x     Scripts  too  -  this  causes  the  program to also
+              return process id's of  shells  running  the  named
+              scripts.
+
+       -o     Tells <I>pidof</I> to omit processes with that process id.
+              The special pid <B>%PPID</B> can be used to name the  par­
+              ent  process  of  the <I>pidof</I> program, in other words
+              the calling shell or shell script.
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       <I>pidof</I> is simply a (symbolic) link to the <I>killall5</I> program,
+       which should also be located in <I>/sbin</I>.
+
+       When  <I>pidof</I> is invoked with a full pathname to the program
+       it should find the pid of, it is reasonably  safe.  Other­
+       wise  it  is possible that it returns pids of running pro­
+       grams that happen to have the same  name  as  the  program
+       you're after but are actually other programs.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>pidofproc(8)</B>, <B>shutdown(8)</B>, <B>init(8)</B>, <B>halt(8)</B>, <B>reboot(8)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Miquel van Smoorenburg, miquels@cistron.nl
+
+
+
+                           01 Sep 1998                   <B>PIDOF(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

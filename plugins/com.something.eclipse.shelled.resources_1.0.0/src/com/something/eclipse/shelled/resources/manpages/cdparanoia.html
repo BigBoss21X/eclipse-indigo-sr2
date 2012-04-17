@@ -1,0 +1,306 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DATE</H2><PRE>
+       version III release alpha 9.8 (02 Mar 2001)
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>cdparanoia</B> [<B>options</B>] <B>span</B> [<B>outfile</B>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>cdparanoia</B> retrieves audio tracks from CDDA capable  CDROM
+       drives.   The  data  can be saved to a file or directed to
+       standard output in WAV, AIFF, AIFF-C or raw format.   Most
+       ATAPI,  SCSI and several proprietary CDROM drive makes are
+       supported; <B>cdparanoia</B> can determine if the target drive is
+       CDDA capable.
+
+       In  addition  to  simple  reading,  <B>cdparanoia</B> adds extra-
+       robust data verification, synchronization, error  handling
+       and scratch reconstruction capability.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-v</B> <B>--verbose</B>
+              Be absurdly verbose about the autosensing and read­
+              ing process. Good for setup and debugging.
+
+
+       <B>-q</B> <B>--quiet</B>
+              Do not print any progress or error information dur­
+              ing the reading process.
+
+
+       <B>-e</B> <B>--stderr-progress</B>
+              Force output of progress information to stderr (for
+              wrapper scripts).
+
+
+       <B>-V</B> <B>--version</B>
+              Print the program version and quit.
+
+
+       <B>-Q</B> <B>--query</B>
+              Perform CDROM drive autosense, query and print  the
+              CDROM table of contents, then quit.
+
+
+       <B>-s</B> <B>--search-for-drive</B>
+              Forces a complete search for a cdrom drive, even if
+              the /dev/cdrom link exists.
+
+
+       <B>-h</B> <B>--help</B>
+              Print a brief  synopsis  of  <B>cdparanoia</B>  usage  and
+              options.
+
+       <B>-R</B> <B>--output-raw-big-endian</B>
+              Output  headerless data as raw 16 bit PCM data with
+              interleaved samples in MSB first byte order.
+
+
+       <B>-w</B> <B>--output-wav</B>
+              Output data in Micro$oft RIFF WAV format (note that
+              WAV data is always LSB first byte order).
+
+
+       <B>-f</B> <B>--output-aiff</B>
+              Output  data  in  Apple AIFF format (note that AIFC
+              data is always in MSB first byte order).
+
+
+       <B>-a</B> <B>--output-aifc</B>
+              Output data in  uncompressed  Apple  AIFF-C  format
+              (note  that AIFF-C data is always in MSB first byte
+              order).
+
+
+       <B>-B</B> <B>--batch</B>
+
+              Cdda2wav-style batch output flag;  cdparanoia  will
+              split  the  output  into  multiple  files  at track
+              boundaries.  Output file names are  prepended  with
+              'track#.'
+
+
+       <B>-c</B> <B>--force-cdrom-little-endian</B>
+              Some CDROM drives misreport their endianness (or do
+              not report it at all); it's possible  that  cdpara­
+              noia  will guess wrong.  Use <B>-c</B> to force cdparanoia
+              to treat the drive as a little endian device.
+
+
+       <B>-C</B> <B>--force-cdrom-big-endian</B>
+              As above but force cdparanoia to treat the drive as
+              a big endian device.
+
+
+       <B>-n</B> <B>--force-default-sectors</B> <I>n</I>
+              Force the interface backend to do atomic reads of <B>n</B>
+              sectors per read.  This number can  be  misleading;
+              the kernel will often split read requests into mul­
+              tiple atomic reads (the automated Paranoia code  is
+              aware   of  this)  or  allow  reads  only  wihin  a
+              restricted size range.  <B>This</B> <B>option</B>  <B>should</B>  <B>gener­</B>
+              <B>ally</B> <B>not</B> <B>be</B> <B>used.</B>
+
+
+       <B>-d</B> <B>--force-cdrom-device</B> <I>device</I>
+              Use this option explicitly to set the read rate  of
+              the  CD  drive  (where supported).  This can reduce
+              underruns on machines with slow disks, or which are
+              low on memory.
+
+
+       <B>-t</B> <B>--toc-offset</B> <I>number</I>
+              Use  this  option  to  force  the  entire  disc LBA
+              addressing to shift by the given amount; the  value
+              is added to the beginning offsets in the TOC.  This
+              can be used to shift track boundaries for the whole
+              disc  manually  on  sector  granularity.   The next
+              option does something similar...
+
+
+       <B>-T</B> <B>--toc-bias</B>
+              Some drives (usually random  Toshibas)  report  the
+              actual  track  beginning  offset values in the TOC,
+              but then treat the beginning of track 1 index 1  as
+              sector  0 for all read operations.  This results in
+              every track seeming to start too late (losing a bit
+              of  the  beginning  and  catching a bit of the next
+              track).  <B>-T</B> accounts for this behavior.  Note  that
+              this  option  will  cause  cdparanoia to attempt to
+              read sectors before or past  the  known  user  data
+              area  of the disc, resulting in read errors at disc
+              edges on most drives and possibly even hard lockups
+              on some buggy hardware.
+
+
+       <B>-O</B> <B>--sample-offset</B> <I>number</I>
+              Use  this  option to force the entire disc to shift
+              sample position output by the  given  amount;  This
+              can be used to shift track boundaries for the whole
+              disc manually on sample granularity. Note that this
+              will  cause  cdparanoia  to attempt to read partial
+              sectors before or past the known user data area  of
+              the  disc,  probably  causing  read  errors on most
+              drives and possibly even hard lockups on some buggy
+              hardware.
+
+
+
+       <B>-Z</B> <B>--disable-paranoia</B>
+              Disable  <B>all</B>  data verification and correction fea­
+              tures.   When  using  -Z,  cdparanoia  reads   data
+              exactly  as  would cdda2wav with an overlap setting
+              of zero.  This option implies that <B>-Y</B> is active.
+
+
+       <B>-z</B> <B>--never-skip[=max_retries]</B>
+              Do not accept any skips; retry forever  if  needed.
+              whatever,  abort  reading this track.  If output is
+              to a file, delete the partially completed file.
+
+
+
+</PRE>
+<H2>OUTPUT SMILIES</H2><PRE>
+         <B>:-)</B>  Normal operation, low/no jitter
+
+         <B>:-|</B>  Normal operation, considerable jitter
+
+         <B>:-/</B>  Read drift
+
+         <B>:-P</B>  Unreported loss of streaming in atomic read  opera­
+              tion
+
+         <B>8-|</B>  Finding  read problems at same point during reread;
+              hard to correct
+
+         <B>:-0</B>  SCSI/ATAPI transport error
+
+         <B>:-(</B>  Scratch detected
+
+         <B>;-(</B>  Gave up trying to perform a correction
+
+         <B>8-X</B>  Aborted read due to known, uncorrectable error
+
+         <B>:^D</B>  Finished extracting
+
+
+
+</PRE>
+<H2>PROGRESS BAR SYMBOLS</H2><PRE>
+       <B>&lt;space&gt;</B>
+              No corrections needed
+
+          <B>-</B>   Jitter correction required
+
+          <B>+</B>   Unreported loss of streaming/other error in read
+
+          <B>!</B>   Errors found after stage 1 correction; the drive is
+              making  the  same  error through multiple re-reads,
+              and cdparanoia is having trouble detecting them.
+
+          <B>e</B>   SCSI/ATAPI transport error (corrected)
+
+          <B>V</B>   Uncorrected error/skip
+
+
+
+</PRE>
+<H2>SPAN ARGUMENT</H2><PRE>
+       The span argument specifies which track, tracks or subsec­
+       tions  of  tracks  to  read.   This  argument is required.
+       <B>NOTE:</B> Unless the span is a simple number, it's generally a
+       good  idea  to  quote the span argument to protect it from
+       the shell.
+
+       When only a single offset is supplied, it  is  interpreted
+       as  a starting offset and ripping will continue to the end
+       of the track.  If a single offset is preceeded or followed
+       by  a  hyphen,  the implicit missing offset is taken to be
+       the start or end of the disc, respectively. Thus:
+
+
+       <B>1:[20.35]</B>
+              Specifies ripping from track 1, second  20,  sector
+              35 to the end of track 1.
+
+       <B>1:[20.35]-</B>
+              Specifies  ripping  from 1[20.35] to the end of the
+              disc
+
+       <B>-2</B>     Specifies ripping from the beginning of the disc up
+              to (and including) track 2
+
+       <B>-2:[30.35]</B>
+              Specifies ripping from the beginning of the disc up
+              to 2:[30.35]
+
+       <B>2-4</B>    Specifies ripping from the beginning of track 2  to
+              the end of track 4.
+
+       Again,  don't  forget  to protect square brackets and pre­
+       ceeding hyphens from the shell.
+
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+       A few examples, protected from the shell:
+
+       Query only with exhaustive search for  a  drive  and  full
+       reporting of autosense:
+
+              cdparanoia -vsQ
+
+       Extract an entire disc, putting each track in  a  seperate
+       file:
+
+              cdparanoia -B
+
+       Extract from track 1, time 0:30.12 to 1:10.00:
+
+              cdparanoia "1[:30.12]-1[1:10]"
+
+       Extract from the beginning of the disc up to track 3:
+
+              cdparanoia -- "-3"
+
+       The "--" above is to distinguish "-3" from an option flag.
+
+
+       Joerg  Schilling  has  also  contributed  SCSI   expertise
+       through his generic SCSI transport library.
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Monty &lt;monty@xiph.org&gt;
+
+       Cdparanoia's homepage may be found at:
+
+                     http://www.xiph.org/paranoia/
+
+
+
+                                                    <B>CDPARANOIA(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

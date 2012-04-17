@@ -1,0 +1,99 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>umount</B> <B>[-hV]</B>
+
+       <B>umount</B> <B>-a</B> <B>[-dflnrv]</B> <B>[-t</B> <I>vfstype</I><B>]</B> <B>[-O</B> <I>options</I><B>]</B>
+       <B>umount</B> <B>[-dflnrv]</B> <I>dir</I> <B>|</B> <I>device</I> <B>[...]</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  <B>umount</B>  command detaches the file system(s) mentioned
+       from the file hierarchy.  A file system  is  specified  by
+       giving the directory where it has been mounted. Giving the
+       special device on which the file  system  lives  may  also
+       work, but is obsolete, mainly because it will fail in case
+       this device was mounted on more than one directory.
+
+       Note that a file system cannot be  unmounted  when  it  is
+       `busy'  - for example, when there are open files on it, or
+       when some process has its working directory there, or when
+       a  swap file on it is in use.  The offending process could
+       even be <B>umount</B> itself - it opens libc,  and  libc  in  its
+       turn  may  open  for example locale files.  A lazy unmount
+       avoids this problem.
+
+       Options for the <B>umount</B> command:
+
+       <B>-V</B>     Print version and exit.
+
+       <B>-h</B>     Print help message and exit.
+
+       <B>-v</B>     Verbose mode.
+
+       <B>-n</B>     Unmount without writing in <I>/etc/mtab</I>.
+
+       <B>-r</B>     In case unmounting fails, try to remount read-only.
+
+       <B>-d</B>     In  case  the  unmounted  device was a loop device,
+              also free this loop device.
+
+       <B>-a</B>     All of the file systems described in <I>/etc/mtab</I>  are
+              unmounted.  (With <B>umount</B> version 2.7 and later: the
+              <I>proc</I> filesystem is not unmounted.)
+
+       <B>-t</B> <I>vfstype</I>
+              Indicate that the actions should only be  taken  on
+              file  systems of the specified type.  More than one
+              type may be specified in a  comma  separated  list.
+              The  list of file system types can be prefixed with
+              <B>no</B> to specify the file system  types  on  which  no
+              action should be taken.
+
+       <B>-O</B> <I>options</I>
+              Indicate  that  the actions should only be taken on
+              file  systems  with  the   specified   options   in
+
+
+</PRE>
+<H2>THE LOOP DEVICE</H2><PRE>
+       The <B>umount</B> command will free  the  loop  device  (if  any)
+       associated  with  the  mount,  in case it finds the option
+       `loop=...' in <I>/etc/mtab</I>, or when the -d option was  given.
+       Any  pending loop devices can be freed using `losetup -d',
+       see <B>losetup(8)</B>.
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/etc/mtab</I> table of mounted file systems
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>umount(2)</B>, <B>mount(8)</B>, <B>losetup(8)</B>.
+
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+       A <B>umount</B> command appeared in Version 6 AT&amp;T UNIX.
+
+
+
+Linux 2.0                  26 July 1997                 <B>UMOUNT(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,196 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       and running
+
+
+
+
+</PRE>
+<H2>Note of warning</H2><PRE>
+       This   manpage   has  been  automatically  generated  from
+       mtools's texinfo documentation, and may  not  be  entirely
+       accurate  or  complete.   See the end of this man page for
+       details.
+
+
+
+</PRE>
+<H2>Description</H2><PRE>
+       Floppyd is used as a server to grant access to the  floppy
+       drive to clients running on a remote machine, just as an X
+       server grants access to the display to remote clients.  It
+       has the following syntax:
+
+       floppyd  [-d] [-l] [-s <I>port</I>] [-r <I>user</I>] [-b <I>ipaddr</I>] <I>device­</I>
+       <I>name</I> [<I>displaynames</I>]
+
+       floppyd is always associated with an X server.  It runs on
+       the same machine as its X server, and listens on port 5703
+       and above.
+
+
+
+</PRE>
+<H2>Authentication</H2><PRE>
+       floppyd authenticates remote clients using the  Xauthority
+       protocol.  Xhost  authentication  is  not  supported. Each
+       floppyd is associated with an X  server.   When  a  remote
+       client  attempts  to  connect to floppyd, it sends floppyd
+       the  X  authority  record  corresponding  to  floppyd's  X
+       server.   Floppyd  in turn then tries to open up a connec­
+       tion to the X server in order to verify  the  authenticity
+       of  the  xauth  record.  If the connection to the X server
+       succeeds, the client is granted access
+
+       <B>Caution</B>: In order to make authentication  work  correctly,
+       the  local  host should <B>not</B> be listed in the xhost list of
+       allowed hosts.
+        Indeed, hosts listed in xhost do not need a correct  Xau­
+       thority cookie to connect to the X server. As floppyd runs
+       on the same host as the X server, all its probe connection
+       would  succeed even for clients who supplied a bad cookie.
+       This means that your floppy drive would  be  open  to  the
+       world, i.e. a huge security hole.
+        If your X server does not allow you to remove localhost:0
+       and :0 from the xhost list, you can prevent  floppyd  from
+       probing those display names with the -l option.
+
+
+
+</PRE>
+<H2>Command line options</H2><PRE>
+       d      Daemon  mode. Floppyd runs its own server loop.  Do
+              Run the server under as the given user
+
+       l      Do not generate local default display names
+
+       <I>devicename</I>  is  the  name of the device node to be opened.
+       Default is /dev/fd0.
+
+       <I>displaynames</I> is a list of display names to connect to  for
+       authentication.   All displays in the list are tried until
+       one is found that grants  access  or  until  the  list  is
+       exhausted.   If  no  list  is supplied, the a display name
+       list based on the ip address supplied using the -b flag is
+       constructed: <I>ipaddr</I>:<I>n</I>.0.
+
+       *  :<I>n</I>.0
+               If  floppyd  is started from inetd, the address of
+              the socket  used  for  stdin  is  used  as  a  bind
+              address.
+
+        If  no  bind  address  is supplied, a list containing the
+       following 3 items is constructed:
+
+       *  <I>hostname</I>:<I>n</I>.0
+
+       *  localhost:<I>n</I>.0
+
+       *  :<I>n</I>.0
+
+        <I>n</I> is the display number  derived  from  the  port  number
+       (<I>port</I>  - 5703 modulo 10). The local items (localhost:0 and
+       :0) are not constructed if the -l flag is given.
+
+
+
+</PRE>
+<H2>Connecting to floppyd</H2><PRE>
+        In order to use floppyd,  add  the  flag  remote  to  the
+       device  description  in  your  `~/.mtoolsrc' file.  If the
+       flag remote is given, the file  parameter  of  the  device
+       description  is taken to be a remote address.  It's format
+       is the following: <I>hostname</I>:<I>displaynumber</I>[/<I>baseport</I>].  When
+       using  this  entry,  mtools connects to port <I>baseport</I>+<I>dis­</I>
+       <I>playnumber</I> at <I>hostname</I>. By default <I>baseport</I> is 5703.
+
+
+
+</PRE>
+<H2>Examples:</H2><PRE>
+        The following starts a floppy  daemon  giving  access  to
+       `/dev/fd0',  listening  on  the default port 5703, tied to
+       the default X servers:
+
+
+          <B>floppyd</B> <B>-d</B> <B>/dev/fd0</B>
+
+
+       vices':
+
+          <B>#</B> <B>floppy</B> <B>daemon</B>
+          <B>floppyd-0</B>    <B>5703/tcp</B>    <B>#</B> <B>floppy</B> <B>daemon</B> <B>for</B> <B>X</B> <B>server</B> <B>:0</B>
+          <B>floppyd-1</B>    <B>5704/tcp</B>    <B>#</B> <B>floppy</B> <B>daemon</B> <B>for</B> <B>X</B> <B>server</B> <B>:1</B>
+
+
+
+        And insert the following into `/etc/inetd.conf' (assuming
+       that  you  have  defined  a  user  named  floppy  in  your
+       `/etc/passwd'):
+
+
+          <B>#</B> <B>floppy</B> <B>daemon</B>
+          <B>floppyd-0</B>   <B>stream</B>  <B>tcp</B>  <B>wait</B>  <B>floppy</B>  <B>/usr/sbin/floppyd</B> <B>floppyd</B> <B>/dev/fd0</B>
+          <B>floppyd-1</B>   <B>stream</B>  <B>tcp</B>  <B>wait</B>  <B>floppy</B>  <B>/usr/sbin/floppyd</B> <B>floppyd</B> <B>/dev/fd1</B>
+
+
+
+        Note  that you need to supply the X display names for the
+       second floppyd.  This is because the  port  is  opened  by
+       inetd.conf,  and  hence  floppyd cannot know its number to
+       interfere the display number.
+
+        On the  client  side,  insert  the  following  into  your
+       `~/.mtoolsrc'  to  define  a drive letter accessing floppy
+       drive in your X terminal:
+
+          <B>drive</B> <B>x:</B> <B>file="$DISPLAY"</B> <B>remote</B>
+
+
+
+
+
+</PRE>
+<H2>See Also</H2><PRE>
+       Mtools' texinfo doc
+
+
+</PRE>
+<H2>Viewing the texi doc</H2><PRE>
+       This  manpage  has  been  automatically   generated   from
+       mtools's  texinfo  documentation. However, this process is
+       only approximative, and some items,  such  as  crossrefer­
+       ences,  footnotes and indices are lost in this translation
+       process.  Indeed, these items have no  appropriate  repre­
+       sentation in the manpage format.  Moreover, not all infor­
+       mation has been translated into the manpage version.  Thus
+       I  strongly  advise  you  to use the original texinfo doc.
+       See the end of this manpage for instructions how  to  view
+       the texinfo doc.
+
+       *      To  generate a printable copy from the texinfo doc,
+              run the following commands:
+
+                     <B>./configure;</B> <B>make</B> <B>dvi;</B> <B>dvips</B> <B>mtools.dvi</B>
+                     <B>./configure;</B> <B>make</B> <B>info</B>
+
+
+
+       The texinfo doc looks most pretty when printed or as html.
+       Indeed, in the info version certain examples are difficult
+       to read due to the quoting conventions used in info.
+
+
+
+
+mtools-3.9.8                 02Nov02                   <B>floppyd(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

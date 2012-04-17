@@ -1,0 +1,85 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>csplit</B> [<I>OPTION</I>]... <I>FILE</I> <I>PATTERN</I>...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Output pieces of FILE separated  by  PATTERN(s)  to  files
+       `xx01',  `xx02', ..., and output byte counts of each piece
+       to standard output.
+
+       Mandatory arguments to  long  options  are  mandatory  for
+       short options too.
+
+       <B>-b</B>,  <B>--suffix-format</B>=<I>FORMAT</I>  use sprintf FORMAT instead of
+              %d
+
+       <B>-f</B>, <B>--prefix</B>=<I>PREFIX</I>
+              use PREFIX instead of `xx'
+
+       <B>-k</B>, <B>--keep-files</B>
+              do not remove output files on errors
+
+       <B>-n</B>, <B>--digits</B>=<I>DIGITS</I>
+              use specified number of digits instead of 2
+
+       <B>-s</B>, <B>--quiet</B>, <B>--silent</B>
+              do not print counts of output file sizes
+
+       <B>-z</B>, <B>--elide-empty-files</B>
+              remove empty output files
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+       Read standard input if FILE is -.  Each PATTERN may be:
+
+       INTEGER
+              copy up to but not including specified line number
+
+       /REGEXP/[OFFSET]
+              copy up to but not including a matching line
+
+       %REGEXP%[OFFSET]
+              skip to, but not including a matching line
+
+       {INTEGER}
+              repeat the previous  pattern  specified  number  of
+              times
+
+       {*}    repeat the previous pattern as many times as possi­
+              ble
+
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  full documentation for <B>csplit</B> is maintained as a Tex­
+       info manual.  If the <B>info</B> and <B>csplit</B> programs are properly
+       installed at your site, the command
+
+              <B>info</B> <B>csplit</B>
+
+       should give you access to the complete manual.
+
+
+
+csplit (coreutils) 4.5.8  February 2003                 <B>CSPLIT(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

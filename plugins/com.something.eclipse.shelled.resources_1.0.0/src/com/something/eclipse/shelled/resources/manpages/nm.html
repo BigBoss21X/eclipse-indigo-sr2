@@ -1,0 +1,218 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       nm [<B>-a</B>|<B>--debug-syms</B>] [<B>-g</B>|<B>--extern-only</B>]
+          [<B>-B</B>] [<B>-C</B>|<B>--demangle</B>[=<I>style</I>]] [<B>-D</B>|<B>--dynamic</B>]
+          [<B>-S</B>|<B>--print-size</B>] [<B>-s</B>|<B>--print-armap</B>]
+          [<B>-A</B>|<B>-o</B>|<B>--print-file-name</B>]
+          [<B>-n</B>|<B>-v</B>|<B>--numeric-sort</B>] [<B>-p</B>|<B>--no-sort</B>]
+          [<B>-r</B>|<B>--reverse-sort</B>] [<B>--size-sort</B>] [<B>-u</B>|<B>--undefined-only</B>]
+          [<B>-t</B> <I>radix</I>|<B>--radix=</B><I>radix</I>] [<B>-P</B>|<B>--portability</B>]
+          [<B>--target=</B><I>bfdname</I>] [<B>-f</B><I>format</I>|<B>--format=</B><I>format</I>]
+          [<B>--defined-only</B>] [<B>-l</B>|<B>--line-numbers</B>] [<B>--no-demangle</B>]
+          [<B>-V</B>|<B>--version</B>] [<B>-X</B> <B>32_64</B>] [<B>--help</B>]  [<I>objfile</I>...]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       GNU <B>nm</B> lists the symbols from object files <I>objfile</I>....  If
+       no  object  files  are listed as arguments, <B>nm</B> assumes the
+       file <I>a.out</I>.
+
+       For each symbol, <B>nm</B> shows:
+
+       ·   The symbol value, in the  radix  selected  by  options
+           (see below), or hexadecimal by default.
+
+       ·   The  symbol  type.   At  least the following types are
+           used; others are, as well,  depending  on  the  object
+           file  format.   If  lowercase, the symbol is local; if
+           uppercase, the symbol is global (external).
+
+           "A" The symbol's value is absolute, and  will  not  be
+               changed by further linking.
+
+           "B" The  symbol  is  in the uninitialized data section
+               (known as BSS).
+
+           "C" The symbol is common.  Common symbols  are  unini­
+               tialized data.  When linking, multiple common sym­
+               bols may appear with the same name.  If the symbol
+               is   defined  anywhere,  the  common  symbols  are
+               treated as undefined references.
+
+           "D" The symbol is in the initialized data section.
+
+           "G" The symbol is in an initialized data  section  for
+               small  objects.   Some  object file formats permit
+               more efficient access to small data objects,  such
+               as  a  global  int  variable as opposed to a large
+               global array.
+
+           "I" The symbol is an  indirect  reference  to  another
+               symbol.   This  is  a  GNU  extension to the a.out
+               object file format which is rarely used.
+
+           "N" The symbol is a debugging symbol.
+               is  not  defined,  the  value  of  the weak symbol
+               becomes zero with no error.
+
+           "W" The symbol is a weak  symbol  that  has  not  been
+               specifically tagged as a weak object symbol.  When
+               a weak defined symbol  is  linked  with  a  normal
+               defined  symbol, the normal defined symbol is used
+               with no error.  When a weak  undefined  symbol  is
+               linked and the symbol is not defined, the value of
+               the weak symbol becomes zero with no error.
+
+           "-" The symbol is a stabs symbol in  an  a.out  object
+               file.   In  this case, the next values printed are
+               the stabs other field, the stabs desc  field,  and
+               the  stab  type.   Stabs  symbols are used to hold
+               debugging information.
+
+           "?" The symbol type is unknown, or object file  format
+               specific.
+
+       ·   The symbol name.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       The  long and short forms of options, shown here as alter­
+       natives, are equivalent.
+
+       <B>-A</B>
+       <B>-o</B>
+       <B>--print-file-name</B>
+           Precede each symbol by the name of the input file  (or
+           archive  member)  in  which  it was found, rather than
+           identifying the input file once only,  before  all  of
+           its symbols.
+
+       <B>-a</B>
+       <B>--debug-syms</B>
+           Display  all symbols, even debugger-only symbols; nor­
+           mally these are not listed.
+
+       <B>-B</B>  The same as <B>--format=bsd</B> (for compatibility  with  the
+           MIPS <B>nm</B>).
+
+       <B>-C</B>
+       <B>--demangle[=</B><I>style</I><B>]</B>
+           Decode  (<I>demangle</I>)  low-level  symbol names into user-
+           level names.  Besides removing any initial  underscore
+           prepended by the system, this makes C++ function names
+           readable. Different compilers have different  mangling
+           styles.  The optional demangling style argument can be
+           used to choose an  appropriate  demangling  style  for
+           your compiler.
+
+           first character of <I>format</I> is significant;  it  can  be
+           either upper or lower case.
+
+       <B>-g</B>
+       <B>--extern-only</B>
+           Display only external symbols.
+
+       <B>-l</B>
+       <B>--line-numbers</B>
+           For  each  symbol, use debugging information to try to
+           find a filename and line number.  For a  defined  sym­
+           bol,  look  for  the line number of the address of the
+           symbol.  For an undefined symbol, look  for  the  line
+           number  of a relocation entry which refers to the sym­
+           bol.  If line number information can be  found,  print
+           it after the other symbol information.
+
+       <B>-n</B>
+       <B>-v</B>
+       <B>--numeric-sort</B>
+           Sort  symbols  numerically  by their addresses, rather
+           than alphabetically by their names.
+
+       <B>-p</B>
+       <B>--no-sort</B>
+           Do not bother to sort the symbols in any order;  print
+           them in the order encountered.
+
+       <B>-P</B>
+       <B>--portability</B>
+           Use  the POSIX.2 standard output format instead of the
+           default format.  Equivalent to <B>-f</B> <B>posix</B>.
+
+       <B>-S</B>
+       <B>--print-size</B>
+           Print size of defined symbols  for  the  "bsd"  output
+           format.
+
+       <B>-s</B>
+       <B>--print-armap</B>
+           When listing symbols from archive members, include the
+           index: a mapping (stored in the archive by <B>ar</B> or  <B>ran­</B>
+           <B>lib</B>)  of  which  modules contain definitions for which
+           names.
+
+       <B>-r</B>
+       <B>--reverse-sort</B>
+           Reverse the order of  the  sort  (whether  numeric  or
+           alphabetic); let the last come first.
+
+       <B>--size-sort</B>
+           Sort  symbols  by  size.   The size is computed as the
+
+       <B>-u</B>
+       <B>--undefined-only</B>
+           Display only undefined symbols (those external to each
+           object file).
+
+       <B>--defined-only</B>
+           Display only defined symbols for each object file.
+
+       <B>-V</B>
+       <B>--version</B>
+           Show the version number of <B>nm</B> and exit.
+
+       <B>-X</B>  This  option is ignored for compatibility with the AIX
+           version of <B>nm</B>.  It takes one parameter which  must  be
+           the  string  <B>32_64</B>.  The default mode of AIX <B>nm</B> corre­
+           sponds to <B>-X</B> <B>32</B>, which is not supported by GNU <B>nm</B>.
+
+       <B>--help</B>
+           Show a summary of the options to <B>nm</B> and exit.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ar(1)</B>, <B>objdump(1)</B>, <B>ranlib(1)</B>, and  the  Info  entries  for
+       <I>binutils</I>.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright  (c) 1991, 92, 93, 94, 95, 96, 97, 98, 99, 2000,
+       2001, 2002 Free Software Foundation, Inc.
+
+       Permission is granted to copy,  distribute  and/or  modify
+       this  document  under the terms of the GNU Free Documenta­
+       tion License, Version 1.1 or any later  version  published
+       by  the  Free  Software Foundation; with no Invariant Sec­
+       tions, with no Front-Cover Texts, and with  no  Back-Cover
+       Texts.   A  copy of the license is included in the section
+       entitled "GNU Free Documentation License".
+
+
+
+binutils-2.13.90.0.18       2003-03-13                      <B>NM(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

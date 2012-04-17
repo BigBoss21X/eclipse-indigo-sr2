@@ -1,0 +1,65 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+     The <B>look</B> utility displays any lines in <I>file</I> which contain <I>string</I> as a
+     prefix.  As <B>look</B> performs a binary search, the lines in <I>file</I> must be
+     sorted (where <B>sort(1)</B> got the same options -d and/or -f that <B>look</B> is
+     invoked with).
+
+     If <I>file</I> is not specified, the file <I>/usr/share/dict/words</I> is used, only
+     alphanumeric characters are compared and the case of alphabetic charac­
+     ters is ignored.
+
+     Options:
+
+     <B>-d</B>      Dictionary character set and order, i.e. only alphanumeric char­
+             acters are compared.
+
+     <B>-f</B>      Ignore the case of alphabetic characters.
+
+     <B>-a</B>      Use the alternate dictionary <I>/usr/share/dict/web2</I>
+
+     <B>-t</B>      Specify a string termination character, i.e. only the characters
+             in <I>string</I> up to and including the first occurrence of <I>termchar</I>
+             are compared.
+
+     The <B>look</B> utility exits 0 if one or more lines were found and displayed, 1
+     if no lines were found, and &gt;1 if an error occurred.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+     /usr/share/dict/words  the dictionary
+     /usr/share/dict/web2   the alternate dictionary
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+     <B>grep(1)</B>, <B>sort(1)</B>
+
+
+</PRE>
+<H2>COMPATIBILITY</H2><PRE>
+     The original manual page stated that tabs and blank characters partici­
+     pated in comparisons when the <B>-d</B> option was specified.  This was incor­
+     rect and the current man page matches the historic implementation.
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+     <B>Look</B> appeared in Version 7 AT&amp;T Unix.
+
+BSD                              June 14, 1993                             BSD
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

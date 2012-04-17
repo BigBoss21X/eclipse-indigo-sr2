@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="com.something.eclipse.shelled.ui"
+   name="ShellEd UI"
+   version="1.0.0"
+   provider-name="Something Software"
+   class="com.something.eclipse.shelled.ui.UIPlugin">
+
+   <runtime>
+      <library name="shelled-ui.jar"/>
+   </runtime>
+   <requires>
+      <import plugin="org.eclipse.core.runtime.compatibility"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.compare"/>
+      <import plugin="com.something.eclipse.script"/>
+      <import plugin="com.something.eclipse.shelled.resources"/>
+      <import plugin="org.eclipse.debug.core"/>
+   </requires>
+
+   <extension point="org.eclipse.team.core.fileTypes">
+      <fileTypes
+            type="text"
+            extension="sh">
+      </fileTypes>
+      <fileTypes
+            type="text"
+            extension="ash">
+      </fileTypes>
+      <fileTypes
+            type="text"
+            extension="bsh">
+      </fileTypes>
+      <fileTypes
+            type="text"
+            extension="bash">
+      </fileTypes>
+      <fileTypes
+            type="text"
+            extension="csh">
+      </fileTypes>
+      <fileTypes
+            type="text"
+            extension="ksh">
+      </fileTypes>
+      <fileTypes
+            type="text"
+            extension="zsh">
+      </fileTypes>
+   </extension>
+   
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            name="ShellEd"
+            icon="icons/rosetta.gif"
+            extensions="sh,ash,bsh,bash,csh,ksh,zsh"
+            class="com.something.eclipse.shelled.ui.editors.SHEditor"
+            contributorClass="com.something.eclipse.shelled.ui.actions.EditorActionBarContributor"
+            id="com.something.eclipse.shelled.ui.editors.SHEditor">
+      </editor>
+   </extension>
+   
+   <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     											PREFERENCES
+     Define preferences here
+     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension
+         point="org.eclipse.ui.preferencePages">
+<!--      <page
+            name="Shell"
+            class="com.something.eclipse.shelled.ui.preference.MainPreferencePage"
+            id="com.something.eclipse.shelled.ui.preference.MainPreferencePage">
+      </page>
+      <page
+            name="Editor"
+            category="com.something.eclipse.p4spoon.preferences.mainPreferencePage"
+            class="com.something.eclipse.p4spoon.preferences.EditorPreferencePage"
+            id="com.something.eclipse.p4spoon.preferences.editorPreferencePage">
+      </page> -->
+   </extension>
+   
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     											COMPARE SUPPORT
+     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+   <extension point="org.eclipse.compare.contentMergeViewers">
+	  <viewer
+		id="com.something.eclipse.shelled.ui.compare.SHTextMergeViewerCreator"
+		extensions="ksh"
+		class="com.something.eclipse.shelled.ui.compare.SHTextMergeViewerCreator">
+	  </viewer>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+   </extension> 
+   
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     											LAUNCH SUPPORT
+     +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!--   <extension point = "org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+   	     id="com.something.eclipse.eclipsh.launching.localShellScript"
+	     name="%localShellScript"
+	     delegate="com.something.eclipse.eclipsh.launching.SHLocalLaunchConfigurationDelegate"
+	     modes= "run">
+     </launchConfigurationType>
+   </extension> -->
+   
+   <extension
+       point="org.eclipse.ui.contexts">
+      <context
+            name="Editing Shell Source"
+            description="Editing Shell Source"
+            parentId="org.eclipse.ui.textEditorScope"
+            id="com.something.eclipse.shelled.ui.SHEditorScope">
+      </context>
+   </extension>
+   
+  <extension
+     point="org.eclipse.ui.commands">
+     <command
+        name="Show Man Pages"
+        description="Show Man Pages Description"
+        category="org.eclipse.ui.category.edit"
+        id="com.something.eclipse.shelled.ui.show.manpage">
+     </command>
+     <keyBinding
+        string="F2"
+        contextId="com.something.eclipse.shelled.ui.SHEditorScope"
+        command="com.something.eclipse.shelled.ui.show.manpage"
+        configuration="org.eclipse.ui.defaultAcceleratorConfiguration">
+     </keyBinding>
+  </extension>
+   
+</plugin>

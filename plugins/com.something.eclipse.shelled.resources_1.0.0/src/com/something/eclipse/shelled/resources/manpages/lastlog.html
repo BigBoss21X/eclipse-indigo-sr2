@@ -1,0 +1,64 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>lastlog</B> [&lt;<B>-u</B>|<B>--user</B>&gt; <I>login-name</I>]
+               [&lt;<B>-t</B>|<B>--time</B>&gt; <I>days</I>] [&lt;<B>-h</B>|<B>--help</B>&gt;]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>lastlog</B>  formats and prints the contents of the last login
+       log <I>/var/log/lastlog</I> file . The <B>login-name</B>, <B>port</B>, and <B>last</B>
+       <B>login</B>  <B>time</B> will be printed. The default (no flags) causes
+       lastlog entries to be printed,  sorted  by  the  numerical
+       UID.
+
+       <B>-u</B>, <B>--user</B> <I>login-name</I> will cause the lastlog record for
+              <I>login-name</I> only to be printed
+
+       <B>-t</B>, <B>--time</B> <I>days</I> will cause only the lastlogins more recent
+              han fIdays to be printed
+
+       <B>-h</B>, <B>--help</B> print a one-line help message and exit.
+
+
+       The <B>-t</B> flag overrides the use of <B>-u</B>.
+
+       If  the  user  has  never  logged  in the message <B>"**Never</B>
+       <B>logged</B> <B>in**"</B> will be displayed instead  of  the  port  and
+       time.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /var/log/lastlog - lastlog logging file
+
+
+</PRE>
+<H2>CAVEATS</H2><PRE>
+       Large  gaps  in uid numbers will cause the lastlog program
+       to run longer with  no  output  to  the  screen  (i.e.  if
+       mmdf=800  and last uid=170, program will appear to hang as
+       it processes uid 171-799).
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Julianne Frances Haugh (jockgrrl@ix.netcom.com)    Phillip
+       Street
+
+
+
+                                                       <B>LASTLOG(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

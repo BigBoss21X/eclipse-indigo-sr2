@@ -1,0 +1,1055 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>enscript</B>  [<B>-12BcgGhjkKlmOqrRvVzZ</B>]  [<B>-#</B>  <I>copies</I>] [<B>-a</B> <I>pages</I>]
+       [<B>-A</B> <I>align</I>] [<B>-b</B> <I>header</I>] [<B>-C</B>[<I>start</I><B>_</B><I>line</I>]] [<B>-d</B>  <I>printer</I>]  [<B>-D</B>
+       <I>key</I>[<B>:</B><I>value</I>]]   [<B>-e</B>[<I>char</I>]]   [<B>-E</B>[<I>lang</I>]]   [<B>-f</B>   <I>font</I>]   [<B>-F</B>
+       <I>header</I><B>_</B><I>font</I>] [<B>-H</B>[<I>num</I>]] [<B>-i</B> <I>indent</I>] [<B>-I</B> <I>filter</I>] [<B>-J</B>  <I>title</I>]
+       [<B>-L</B>  <I>lines</I><B>_</B><I>per</I><B>_</B><I>page</I>]  [<B>-M</B>  <I>media</I>] [<B>-n</B> <I>copies</I>] [<B>-N</B> <I>newline</I>]
+       [<B>-o</B> <I>outputfile</I>] [<B>-o</B> <B>-</B>] [<B>-p</B> <I>outputfile</I>] [<B>-p</B> <B>-</B>] [<B>-P</B> <I>printer</I>]
+       [<B>-s</B> <I>baselineskip</I>] [<B>-S</B> <I>key</I>[<B>:</B><I>value</I>]] [<B>-t</B> <I>title</I>] [<B>-T</B> <I>tabsize</I>]
+       [<B>-u</B>[<I>text</I>]] [<B>-U</B> <I>num</I>] [<B>-W</B> <I>language</I>] [<B>-X</B> <I>encoding</I>]  [<I>filename</I>
+       ...]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>Enscript</B> converts text files to PostScript and spools gen­
+       erated PostScript  output  to  the  specified  printer  or
+       leaves  it to file.  If no input files are given, <B>enscript</B>
+       processes standard input.  <B>Enscript</B>  can  be  extended  to
+       handle  different  output  media  and  it has many options
+       which can be used to customize printouts.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-#</B> <I>num</I>  Print <I>num</I> copies of each page.
+
+       <B>-1,</B> <B>-2,</B> <B>--columns=</B><I>num</I>
+               Specify how many columns  each  page  have.   With
+               long  option  <B>--columns=</B><I>num</I>  you  can specify more
+               than 2 columns per page.
+
+       <B>-a</B> <I>pages</I><B>,</B> <B>--pages=</B><I>pages</I>
+               Specify which pages are printed.  Page  specifica­
+               tion <I>pages</I> can be given in following formats:
+
+               <I>begin</I>-<I>end</I>
+                       print pages from <I>begin</I> to <I>end</I>
+
+               -<I>end</I>    print pages from 0 to <I>end</I>
+
+               <I>begin</I>-  print pages from <I>begin</I> to end
+
+               <I>page</I>    print page <I>page</I>
+
+               odd     print odd pages
+
+               even    print even pages
+
+       <B>-A</B> <I>align</I><B>,</B> <B>--file-align=</B><I>align</I>
+               Align  separate  input  files  to  even <I>align</I> page
+               count.  This is handy for two-side and 2-up print­
+               ings (--file-align=2).
+
+               and right justified  fields  which  are  separated
+               with the <B>'|'</B> character:
+
+               <B>enscript</B> <B>--header='$n|%W|Page</B> <B>$%</B> <B>of</B> <B>$='</B> <B>*.c</B>
+
+               now  the  file name is printed left justified, the
+               date is centered to the header and the  page  num­
+               bers are printed right justified.
+
+       <B>-B,</B> <B>--no-header</B>
+               Do not print page headers.
+
+       <B>-c,</B> <B>--truncate-lines</B>
+               Cut  lines  that  are  too  long.   As  a default,
+               <B>enscript</B> wraps long lines  so  no  information  is
+               lost.
+
+               See also option <B>--slice</B> which can be used to slice
+               long lines to separate pages.
+
+       <B>-C</B>[<I>start</I><B>_</B><I>line</I>]<B>,</B> <B>--line-numbers</B>[<B>=</B><I>start</I><B>_</B><I>line</I>]
+               Precede each line with its line number.   Optional
+               argument  <I>start</I><B>_</B><I>line</I>  specifies  the number of the
+               first line in the input.  The number of the  first
+               line defaults to 1.
+
+       <B>-d</B> <I>name</I> Spool output to the printer <I>name</I>.
+
+       <B>-D</B> <I>key</I>[<B>:</B><I>value</I>]<B>,</B> <B>--setpagedevice=</B><I>key</I>[<B>:</B><I>value</I>]
+               Pass  a  page  device  definition to the generated
+               PostScript output.  If no value is given, key  <I>key</I>
+               is removed from definitions.
+
+               For example, command
+
+               <B>enscript</B> <B>-DDuplex:true</B> <B>foo.txt</B>
+
+               prints file foo.txt in duplex (two side) mode.
+
+               Page device operators are implementation dependant
+               but  they  are  standardized.   See  section  <B>PAGE</B>
+               <B>DEVICE</B> <B>OPTIONS</B> for details.
+
+       <B>-e</B>[<I>char</I>]<B>,</B> <B>--escapes</B>[<B>=</B><I>char</I>]
+               Enable special escapes interpretation (see section
+               <B>SPECIAL</B> <B>ESCAPES</B>).  If argument <I>char</I> is  given,  it
+               changes the escape character to <I>char</I>.  The default
+               escape character is 0.
+
+       <B>-E</B>[<I>lang</I>]<B>,</B> <B>--pretty-print</B>[<B>=</B><I>lang</I>]
+               Pretty-print source code  by  creating  a  special
+               input  filter  with  the <B>states</B> program.  Optional
+               this option.
+
+       <B>-f</B> <I>name</I><B>,</B> <B>--font=</B><I>name</I>
+               Select font that  is  used  for  body  text.   The
+               default body font is <I>Courier10</I>, unless multicolumn
+               landscape printing mode is selected, in which case
+               the default is <I>Courier7</I>.
+
+               Font specification <I>name</I> contains two parts: font's
+               name and  font's  size  in  points.   For  example
+               "<B>Times-Roman12</B>"  selects  "Times-Roman"  font with
+               size 12pt.
+
+               The font specification <I>name</I> can also be  given  in
+               format  `<I>name</I>@<I>ptsize</I>', where font's name and point
+               size are  separated  by  a  `@'  character.   This
+               allows  <B>enscript</B>  to use fonts which contain digit
+               characters in their names.
+
+               The font point size can also be  given  in  format
+               <I>width</I>/<I>height</I>  where  <I>width</I>  and <I>height</I> specify the
+               font's size in x- and y-directions.   For  example
+               "<B>Times-Roman@10/12</B>"  selects 10 points wide and 12
+               points high "Times-Roman" font.
+
+               <B>Note!</B> font sizes can be given as a decimal number.
+               For   example   "<B>Times-Roman10.2</B>"  selects  10.2pt
+               "Times-Roman" font.
+
+       <B>-F</B> <I>name</I><B>,</B> <B>--header-font=</B><I>name</I>
+               Select font for header texts.
+
+       <B>-g,</B> <B>--print-anyway</B>
+               Print  file  even  if  it  contains  binary  data.
+               Option   is  here  only  for  compatibility  since
+               <B>enscript</B> prints binary files anyway.
+
+       <B>-G,</B> <B>--fancy-header</B>[<B>=</B><I>name</I>]
+               Print fancy page header <I>name</I> to top of each  page.
+               Option  <B>-G</B> specifies the default fancy header (see
+               section <B>CONFIGURATION</B> <B>FILES</B> to see how the default
+               fancy header can be changed).
+
+       <B>-h,</B> <B>--no-job-header</B>
+               Suppress printing of the job header page.
+
+       <B>-H</B>[<I>num</I>]<B>,</B> <B>--highlight-bars</B>[<B>=</B><I>num</I>]
+               Specify  how high highlight bars are in lines.  If
+               <I>num</I> is not given, the default value 2 is used.  As
+               a default, no highlight bars are printed.
+
+       <B>-i</B> <I>num</I><B>,</B> <B>--indent=</B><I>num</I>
+               Read all input files through input filter  <I>filter</I>.
+               Input  filter can be a single command or a command
+               pipeline and it can refer to the name of the input
+               file with escape `%s'.  The name of the input file
+               <B>stdin</B> can be changed with option `<B>--filter-stdin</B>'.
+
+               For  example, the following command can be used to
+               print file `foo.c' by using only upper-case  char­
+               acters:
+
+               enscript --filter="cat %s | tr 'a-z' 'A-Z'" foo.c
+
+               And  to  highlight changes made to files since the
+               last checkout:
+
+               enscript --filter="rcsdiff %s | diffpp %s" -e *.c
+
+               <B>Note!</B> To include string "%s" to  the  filter  com­
+               mand, you must write it as "%%s".
+
+       <B>-j,</B> <B>--borders</B>
+               Print borders around columns.
+
+       <B>-J</B> <I>title</I>
+               An alias for option <B>-t</B>, <B>--title</B>.
+
+       <B>-k,</B> <B>--page-prefeed</B>
+               Enable page prefeed.
+
+       <B>-K,</B> <B>--no-page-prefeed</B>
+               Disable page prefeed (default).
+
+       <B>-l,</B> <B>--lineprinter</B>
+               Emulate  lineprinter.   This  option is a shortcut
+               for options: <B>--lines-per-page=66</B>, <B>--no-header</B>.
+
+       <B>-L</B> <I>num</I><B>,</B> <B>--lines-per-page=</B><I>num</I>
+               Print only <I>num</I> lines per each page.
+
+       <B>-m,</B> <B>--mail</B>
+               Send mail notification to user after print job has
+               been completed.
+
+       <B>-M</B> <I>name</I><B>,</B> <B>--media=</B><I>name</I>
+               Select output media <I>name</I>.  <B>Enscript</B>'s default out­
+               put media is <B>LC_PAPER</B>.
+
+       <B>-n</B> <I>num</I><B>,</B> <B>--copies=</B><I>num</I>
+               Print <I>num</I> copies of each page.
+
+       <B>-N</B> <I>nl</I><B>,</B> <B>--newline=</B><I>nl</I>
+               Select the <I>newline</I> character.  Possible values for
+               Spool output to the printer <I>name</I>.
+
+       <B>-q,</B> <B>--quiet,</B> <B>--silent</B>
+               Make <B>enscript</B> really quiet.  Only fatal error mes­
+               sages are printed to <I>stderr</I>.
+
+       <B>-r,</B> <B>--landscape</B>
+               Print in landscape mode; rotate page 90 degrees.
+
+       <B>-R,</B> <B>--portrait</B>
+               Print in portrait mode (default).
+
+       <B>-s</B> <I>num</I><B>,</B> <B>--baselineskip=</B><I>num</I>
+               Specify  the  baseline  skip in PostScript points.
+               Number <I>num</I> can be given as a decimal number.  When
+               <B>enscript</B>  moves from line to line, current point <I>y</I>
+               coordinate is moved (<I>font</I>  <I>point</I>  <I>size</I>  <I>+</I>  <I>baseli­</I>
+               <I>neskip</I>) points down.  The default baseline skip is
+               1.
+
+       <B>-S</B> <I>key</I>[<B>:</B><I>value</I>]<B>,</B> <B>--statusdict=</B><I>key</I>[<B>:</B><I>value</I>]
+               Pass a  statusdict  definition  to  the  generated
+               PostScript  output.  If no value is given, key <I>key</I>
+               is removed from definitions.
+
+               Statusdict operators are implementation dependant;
+               see printer's documentation for details.
+
+               For example, command
+
+               <B>enscript</B> <B>-Ssetpapertray:1</B> <B>foo.txt</B>
+
+               prints  file <I>foo.txt</I> by using paper from the paper
+               tray 1 (assuming that printer supports paper  tray
+               selection).
+
+       <B>-t</B> <I>title</I><B>,</B> <B>--title=</B><I>title</I>
+               Set banner page's job title to <I>title</I>.  Option sets
+               also the name of the input file <B>stdin</B>.
+
+       <B>-T</B> <I>num</I><B>,</B> <B>--tabsize=</B><I>num</I>
+               Set tabulator size to <I>num</I> (default is 8).
+
+       <B>-u</B>[<I>text</I>]<B>,</B> <B>--underlay</B>[<B>=</B><I>text</I>]
+               Print string <I>text</I> under every page.  Text's  prop­
+               erties  can  be  changed  with options <B>--ul-angle</B>,
+               <B>--ul-font</B>,    <B>--ul-gray</B>,     <B>--ul-position</B>     and
+               <B>--ul-style</B>.
+
+               If no <I>text</I> is given, no underlay is printed.  This
+               can be used to remove underlay that was  specified
+               with the `<B>Underlay</B>' configuration file option.
+
+               <B>PostScript</B>
+                       generate PostScript (default)
+
+               <B>html</B>    generate HTML
+
+               <B>overstrike</B>
+                       generate overstrikes (line printers, less)
+
+               <B>rtf</B>     generate RTF (Rich Text Format)
+
+       <B>-X</B> <I>name</I><B>,</B> <B>--encoding=</B><I>name</I>
+               Use input encoding <I>name</I>.  Currently <B>enscript</B>  sup­
+               ports following encodings:
+
+               <B>88591,</B> <B>latin1</B>
+                       ISO-8859-1    (ISO   Latin1)   (<B>enscript</B>'s
+                       default encoding).
+
+               <B>88592,</B> <B>latin2</B>
+                       ISO-8859-2 (ISO Latin2)
+
+               <B>88593,</B> <B>latin3</B>
+                       ISO-8859-3 (ISO Latin3)
+
+               <B>88594,</B> <B>latin4</B>
+                       ISO-8859-4 (ISO Latin4)
+
+               <B>88595,</B> <B>cyrillic</B>
+                       ISO-8859-5 (ISO Cyrillic)
+
+               <B>88597,</B> <B>greek</B>
+                       ISO-8859-7 (ISO Greek)
+
+               <B>88599,</B> <B>latin5</B>
+                       ISO-8859-9 (ISO Latin5)
+
+               <B>885910,</B> <B>latin6</B>
+                       ISO-8859-10 (ISO Latin6)
+
+               <B>885913,</B> <B>latin7</B>
+                       ISO-8859-13 (ISO Latin7)
+
+               <B>885915,</B> <B>latin9</B>
+                       ISO-8859-15 (ISO Latin9)
+
+               <B>ascii</B>   7-bit ascii
+
+               <B>asciifise,</B> <B>asciifi,</B> <B>asciise</B>
+                       7-bit ascii with  some  scandinavian  (fi,
+                       se) extensions
+
+
+               <B>ps,</B> <B>PS</B>  PostScript font's default encoding
+
+               <B>pslatin1,</B> <B>ISOLatin1Encoding</B>
+                       PostScript interpreter's  `ISOLatin1Encod­
+                       ing'
+
+       <B>-z,</B> <B>--no-formfeed</B>
+               Turn off form feed character interpretation.
+
+       <B>-Z,</B> <B>--pass-through</B>
+               Pass  through all PostScript and PCL files without
+               any modifications.  This allows that <B>enscript</B>  can
+               be used as a lp filter.
+
+               PostScript  files are recognized by looking up the
+               `%!' magic cookie from the beginning of the  file.
+               <B>Note!</B> <B>Enscript</B> recognized also the Windoze damaged
+               `^D%!' cookie.
+
+               PCL files are recognized by looking up  the  `^[E'
+               or  `^[%'  magic cookies from the beginning of the
+               file.
+
+       <B>--color</B>[<B>=</B><I>bool</I>]
+               Use colors in the highlighting outputs.
+
+       <B>--download-font=</B><I>fontname</I>
+               Include the font description file  (<I>.pfa</I>  or  <I>.pfb</I>
+               file)  of  the font <I>fontname</I> to the generated out­
+               put.
+
+       <B>--filter-stdin=</B><I>name</I>
+               Specify how <B>stdin</B> is shown to  the  input  filter.
+               The default value is an empty string ("") but some
+               programs require that <B>stdin</B>  is  called  something
+               else, usually "-".
+
+       <B>--h-column-height=</B><I>height</I>
+               Set  the  horizontal  column  height  to be <I>height</I>
+               PostScript points.  The option sets  the  formfeed
+               type to <I>horizontal-columns</I>.
+
+       <B>--help</B>  Print short help message and exit.
+
+       <B>--help-pretty-print</B>
+               Describe  all  supported  <B>--pretty-print</B> languages
+               and file formats.
+
+       <B>--highlight-bar-gray=</B><I>gray</I>
+               Specify the gray level  which  is  used  to  print
+               highlight bars.
+
+       <B>--mark-wrapped-lines</B>[<B>=</B><I>style</I>]
+               Mark wrapped lines in the output with style <I>style</I>.
+               Possible values for <I>style</I> <B>are:</B>
+
+               <B>none</B>    do not mark them (default)
+
+               <B>plus</B>    print  a  plus (+) character to the end of
+                       each wrapped line
+
+               <B>box</B>     print a black  box  to  the  end  of  each
+                       wrapped line
+
+               <B>arrow</B>   print  a  small  arrow  to the end of each
+                       wrapped line
+
+       <B>--non-printable-format=</B><I>format</I>
+               Specify how non-printable characters are  printed.
+               Possible values for <I>format</I> <B>are:</B>
+
+               <B>caret</B>   caret notation: `^@', `^A', `^B', ...
+
+               <B>octal</B>   octal  notation:  `\000',  `\001', `\002',
+                       ... (default)
+
+               <B>questionmark</B>
+                       replace non-printable  characters  with  a
+                       question mark `?'
+
+               <B>space</B>   replace  non-printable  characters  with a
+                       space ` '
+
+       <B>--nup-xpad=</B><I>num</I>
+               Set the page x-padding of the <I>n</I>-up printing to <I>num</I>
+               PostScript points.  The default is 10 points.
+
+       <B>--nup-ypad=</B><I>num</I>
+               Set the page y-padding of the <I>n</I>-up printing to <I>num</I>
+               PostScript points.  The default is 10 points.
+
+       <B>--page-label-format=</B><I>format</I>
+               Set page label format to <I>format</I>.  Page label  for­
+               mat   specifies   how  labels  for  the  `%%Page:'
+               PostScript comments are formatted.  Possible  val­
+               ues are:
+
+               <B>short</B>   Print  current pagenumber: `%%Page: (1) 1'
+                       (default)
+
+               <B>long</B>    Print  current  filename  and  pagenumber:
+                       `%%Page: (main.c:  1) 1'
+
+               point where the line would otherwise be wrapped to
+               the next line.  Slice numbers start from 1.
+
+       <B>--style=</B><I>style</I>
+               Set the highlighting style to <I>style</I>.
+
+       <B>--toc</B>   Print table of contents to the end  of  the  print
+               job.
+
+       <B>--word-wrap</B>
+               Wrap long lines from word boundaries.
+
+       <B>--ul-angle=</B><I>angle</I>
+               Set underlay text's angle.  As a default, angle is
+               atan(-page_height, page_width).
+
+       <B>--ul-font=</B><I>name</I>
+               Select font for the underlay  text.   The  default
+               underlay font is <I>Times-Roman200</I>.
+
+       <B>--ul-gray=</B><I>num</I>
+               Print underlay text with gray value <I>num</I> (0 ... 1),
+               the default gray is .8.
+
+       <B>--ul-position=</B><I>position</I><B>_</B><I>spec</I>
+               Set underlay text's starting position according to
+               <I>position</I><B>_</B><I>spec</I>.   Position  specification  must  be
+               given in format: `<I>sign</I> <I>xpos</I> <I>sign</I> <I>ypos</I>', where <I>sign</I>
+               must  be `+' or `-'.  Positive dimensions are mea­
+               sured from the  lower  left  corner  and  negative
+               dimensions from the upper right corner.  For exam­
+               ple, spec `+0-0' specifies the upper  left  corner
+               and `-0+0' specifies the lower right corner.
+
+       <B>--ul-style=</B><I>style</I>
+               Set underlay text's style to <I>style</I>.  Possible val­
+               ues for <I>style</I> are:
+
+               <B>outline</B> print outline underlay texts (default)
+
+               <B>filled</B>  print filled underlay texts
+
+
+
+</PRE>
+<H2>CONFIGURATION FILES</H2><PRE>
+       <B>Enscript</B> reads configuration  information  from  following
+       sources (in this order): command line options, environment
+       variable  <B>ENSCRIPT</B>,  user's  personal  configuration  file
+       (<B>$HOME/.enscriptrc</B>),      site      configuration     file
+       (<B>/etc/enscriptsite.cfg</B>) and system's global  configuration
+       file (<B>/etc/enscript.cfg</B>).
+
+       The configuration files have the following format:
+
+       <B>AFMPath:</B> <I>path</I>
+               Specifies search path for the <I>AFM</I> files.
+
+       <B>AppendCtrlD:</B> <I>bool</I>
+               Specify if the Control-D (^D) character should  be
+               appended  to  the  end of the output.  The default
+               value is false (0).
+
+       <B>Clean7Bit:</B> <I>bool</I>
+               Specify  how  characters  greater  than  127   are
+               printed.   Value  true  (1)  generates 7-bit clean
+               code by escaping all characters greater  than  127
+               to  the backslash-octal notation (default).  Value
+               false (0) generates 8-bit PostScript code  leaving
+               all characters untouched.
+
+       <B>DefaultEncoding:</B> <I>name</I>
+               Select  the default input encoding.  Encoding name
+               <I>name</I> can be one of the values of the <B>-X</B>,  <B>--encod­</B>
+               <B>ing</B> option.
+
+       <B>DefaultFancyHeader:</B> <I>name</I>
+               Select  the  default fancy header.  Default header
+               is used when option  <B>-G</B>  is  specified  or  option
+               <B>--fancy-header</B> is given without an argument.  Sys­
+               tem-wide default is `<B>enscript</B>'.
+
+       <B>DefaultMedia:</B> <I>name</I>
+               Select the default output media.
+
+       <B>DefaultOutputMethod:</B> <I>method</I>
+               Select the default target to which generated  out­
+               put is send.  Possible values for <I>method</I> are:
+
+               <B>printer</B> send output to printer (default)
+
+               <B>stdout</B>  send output to <I>stdout</I>
+
+       <B>DownloadFont:</B> <I>fontname</I>
+               Include  the  font  description  file  of the font
+               <I>fontname</I> to the generated output.
+
+       <B>EscapeChar:</B> <I>num</I>
+               Specify the escape character for special  escapes.
+               The default value is 0.
+
+       <B>FormFeedType:</B> <I>type</I>
+               Specify  what  to  do when a formfeed character is
+               encountered from the input.  Possible  values  for
+               <I>type</I> are:
+
+       <B>HighlightBars:</B> <I>num</I>
+               Specify how high highlight bars are in lines.  The
+               default value  is  0  so  no  highlight  bars  are
+               printed.
+
+       <B>LibraryPath:</B> <I>path</I>
+               Specifies  <B>enscript</B>'s library path that is used to
+               lookup  various  resources.   Default   path   is:
+               `/usr/share/enscript:<I>home</I>/.enscript'.   Where <I>home</I>
+               is the user's home directory.
+
+       <B>MarkWrappedLines:</B> <I>style</I>
+               Mark wraped lines in the output with style  <I>style</I>.
+               Possible  values for <I>format</I> are the same which can
+               be given for the <B>--mark-wrapped-lines</B> option.
+
+       <B>Media:</B> <I>name</I> <I>width</I> <I>height</I> <I>llx</I> <I>lly</I> <I>urx</I> <I>ury</I>
+               Add a new output media with  name  <I>name</I>.   Media's
+               physical dimensions are <I>width</I> and <I>height</I>.  Media's
+               bounding box is specified by points (<I>llx</I>, <I>lly</I>) and
+               (<I>urx</I>,  <I>ury</I>).   <B>Enscript</B> prints all graphics inside
+               media's bounding box.
+
+               User can select this media  by  giving  option  <B>-M</B>
+               <I>name</I>.
+
+       <B>NoJobHeaderSwitch:</B> <I>switch</I>
+               Specify  the  spooler option to suppress the print
+               job header.  This option is passed to the  printer
+               spooler when <B>enscript</B>'s option <B>-h</B>, <B>--no-job-header</B>
+               is selected.
+
+       <B>NonPrintableFormat:</B> <I>format</I>
+               Specify how non-printable characters are  printed.
+               Possible  values for <I>format</I> are the same which can
+               be given for the <B>--non-printable-format</B> option.
+
+       <B>OutputFirstLine:</B> <I>line</I>
+               Set PostScript output's first line  to  <I>line</I>,  the
+               default  value is <B>PS-Adobe-3.0</B>.  Since some print­
+               ers do not like DSC levels greater than 2.0,  this
+               option can be used to change the output first line
+               to something more suitable like <B>%!PS-Adobe-2.0</B>  or
+               <B>%!</B>.
+
+       <B>PageLabelFormat:</B> <I>format</I>
+               Set  page label format to <I>format</I>.  Possible values
+               for <I>format</I> are the same which can be given for the
+               <B>--page-label-format</B> option.
+
+       <B>PagePrefeed:</B> <I>bool</I>
+               Enable  /  disable  page  prefeed.  The default is
+               to  pass  other  flags  to the spooler command but
+               they must be given before the queue switch.
+
+       <B>SetPageDevice:</B> <I>key</I>[<B>:</B><I>value</I>]
+               Pass a page device  definition  to  the  generated
+               PostScript output.
+
+       <B>Spooler:</B> <I>name</I>
+               Names  printer  spooler  command.   <B>Enscript</B> pipes
+               generated PostScript to command <I>name</I>.
+
+       <B>StatesBinary:</B> <I>path</I>
+               Define an absolute path to the <B>states</B> program.
+
+       <B>StatesColor:</B> <I>bool</I>
+               Should the <B>states</B> program generate color  outputs.
+
+       <B>StatesConfigFile:</B> <I>file</I>
+               Read pretty-printer states configuration from file
+               <I>file</I>.     The    default    config     file     is
+               `/usr/share/enscript/hl/enscript.st'.
+
+       <B>StatesHighlightStyle:</B> <I>style</I>
+               Set  the pretty-printing highlight style to <I>style</I>.
+
+       <B>StatesPath:</B> <I>path</I>
+               Define the  path  for  the  <B>states</B>  program.   The
+               <B>states</B>  program  will  lookup its state definition
+               files  from  this  path.   The  default  value  is
+               `$HOME/.enscript:/usr/share/enscript/hl'.
+
+       <B>StatusDict:</B> <I>key</I>[<B>:</B><I>value</I>]
+               Pass  a  statusdict  definition  to  the generated
+               PostScript output.
+
+       <B>TOCFormat:</B> <I>format</I>
+               Format  table  of  contents  entries  with  format
+               string  <I>format</I>.   Format string <I>format</I> can contain
+               the same escapes which are used to  format  header
+               strings with the `%Format' special comment.
+
+       <B>Underlay:</B> <I>text</I>
+               Print string <I>text</I> under every page.
+
+       <B>UnderlayAngle:</B> <I>num</I>
+               Set underlay text's angle to <I>num</I>.
+
+       <B>UnderlayFont:</B> <I>fontspec</I>
+               Select font for the underlay text.
+
+       <B>UnderlayGray:</B> <I>num</I>
+               Print underlay text with gray value <I>num</I>.
+
+       can be selected by giving  option:  <B>--fancy-header=</B><I>header­</I>
+       <I>name</I>.
+
+       Header  description  file  contains  PostScript  code that
+       paints the header.  Description file must  provide  proce­
+       dure  <B>do_header</B>  which is called by <B>enscript</B> at the begin­
+       ning of every page.
+
+       Header description file contains two parts:  comments  and
+       code.  Parts are separated by a line containing text:
+
+       % -- code follows this line --
+
+       <B>Enscript</B>  copies only the code part of description file to
+       the generated PostScript output.  The  comments  part  can
+       contain  any data, it is not copied.  If separator line is
+       missing, no data is copied to output.
+
+       <B>Enscript</B> defines following constants which can be used  in
+       header description files:
+
+       <B>d_page_w</B>        page width
+
+       <B>d_page_h</B>        page height
+
+       <B>d_header_x</B>      header lower left <I>x</I> coordinate
+
+       <B>d_header_y</B>      header lower left <I>y</I> coordinate
+
+       <B>d_header_w</B>      header width
+
+       <B>d_header_h</B>      header height
+
+       <B>d_footer_x</B>      footer lower left <I>x</I> coordinate
+
+       <B>d_footer_y</B>      footer lower left <I>y</I> coordinate
+
+       <B>d_footer_w</B>      footer width
+
+       <B>d_footer_h</B>      footer height
+
+       <B>d_output_w</B>      width of the text output area
+
+       <B>d_output_h</B>      height of the text output area
+
+       <B>user_header_p</B>   predicate  which tells if user has defined
+                       his/her own header string: <B>true</B>/<B>false</B>
+
+       <B>user_header_left_str</B>
+                       if <B>user_header_p</B> is <B>true</B>, this is the left
+                       field  of the user supplied header string.
+
+
+       <B>pagenum</B>         the number of the current page
+
+       <B>fname</B>           the   full   name   of  the  printed  file
+                       (/foo/bar.c)
+
+       <B>fdir</B>            the directory part of the file name (/foo)
+
+       <B>ftail</B>           file   name  without  the  directory  part
+                       (bar.c)
+
+       <B>gs_languagelevel</B>
+                       PostScript  interpreter's  language  level
+                       (currently 1 or 2)
+
+
+       You  can  also  use the following special comments to cus­
+       tomize your headers and to  specify  some  extra  options.
+       Special comments are like DSC comments but they start with
+       a single `%' character; special comments  start  from  the
+       beginning of the line and they have the following syntax:
+
+       %<I>commentname</I>: <I>options</I>
+
+       Currently <B>enscript</B> support the following special comments:
+
+       <B>%Format:</B> <I>name</I> <I>format</I>
+               Define a new string constant <I>name</I> according to the
+               format  string  <I>format</I>.   Format string start from
+               the first non-space character and it ends  to  the
+               end  of  the line.  Format string can contain gen­
+               eral  `%'  escapes  and  input  file  related  `$'
+               escapes.   Currently  following  escapes  are sup­
+               ported:
+
+               <B>%%</B>      character `%'
+
+               <B>$$</B>      character `$'
+
+               <B>$%</B>      current page number
+
+               <B>$=</B>      number of pages in the current file
+
+               <B>$(</B><I>VAR</I><B>)</B>  value of the environment variable <I>VAR</I>.
+
+               <B>%c</B>      trailing component of the current  working
+                       directory
+
+               <B>%C</B> (<B>$C</B>) current  time  (file modification time) in
+                       `hh:mm:ss' format
+
+               <B>%d</B>      current working directory
+                       `dd.mm.yyyy' format
+
+               <B>%H</B>      document title
+
+               <B>$L</B>      number of lines in the current input file.
+                       This is valid only for the toc entries, it
+                       can't be used in header strings.
+
+               <B>%m</B>      the hostname up to the first `.' character
+
+               <B>%M</B>      the full hostname
+
+               <B>%n</B>      the user login name
+
+               <B>$n</B>      input file name without the directory part
+
+               <B>%N</B>      the user's pw_gecos field up to the  first
+                       `,' character
+
+               <B>$N</B>      the full input file name
+
+               <B>%t</B> (<B>$t</B>) current  time  (file modification time) in
+                       12-hour am/pm format
+
+               <B>%T</B> (<B>$T</B>) current time (file modification  time)  in
+                       24-hour format `hh:mm'
+
+               <B>%*</B> (<B>$*</B>) current  time  (file modification time) in
+                       24-hour format with seconds `hh:mm:ss'
+
+               <B>$v</B>      the sequence number of the  current  input
+                       file
+
+               <B>$V</B>      the  sequence  number of the current input
+                       file in the `Table of Contents' format: if
+                       the  <B>--toc</B> option is given, escape expands
+                       to `<I>num</I>-'; if  the  <B>--toc</B>  is  not  given,
+                       escape expands to an empty string.
+
+               <B>%W</B> (<B>$W</B>) current  date  (file modification date) in
+                       `mm/dd/yy' format
+
+               All format directives  except  `$='  can  also  be
+               given in format
+
+               <I>escape</I> <I>width</I> <I>directive</I>
+
+               where  <I>width</I>  specifies the width of the column to
+               which the escape is printed.  For example,  escape
+               "$5%" will expand to something like " 12".  If the
+               width is negative, the value will be printed left-
+               justified.
+
+       <B>%FooterHeight:</B> <I>height</I>
+               Allocate  <I>height</I> points space for the page footer.
+               The default footer height is 0 points.
+
+
+       According  to  Adobe's  Document  Structuring  Conventions
+       (DSC),  all  resources needed by a document must be listed
+       in document's prolog.  Since user's can create  their  own
+       headers,  <B>enscript</B> don't know what resources those headers
+       use.  That's why all headers must contain a  standard  DSC
+       comment  that  lists  all  needed resources.  For example,
+       used fonts can be listed with following comment:
+
+       %%DocumentNeededResources: font <I>fontname1</I> <I>fontname2</I>
+
+       Comment can be continued to the next line with  the  stan­
+       dard continuation comment:
+
+       %%+ font <I>fontname3</I>
+
+
+
+</PRE>
+<H2>SPECIAL ESCAPES</H2><PRE>
+       <B>Enscript</B>  supports  special  escape sequences which can be
+       used to add some page formatting commands to  ASCII  docu­
+       ments.   As  a  default, special escapes interpretation is
+       off, so all ASCII files print  out  as  everyone  expects.
+       Special  escapes  interpretation  is  activated  by giving
+       option <B>-e</B>, <B>--escapes</B> to <B>enscript</B>.
+
+       All special escapes start with the escape character.   The
+       default escape character is ^@ (octal 000); escape charac­
+       ter can be changed  with  option  <B>-e</B>,  <B>--escapes</B>.   Escape
+       character  is  followed  by  escape's  name  and  optional
+       options and arguments.
+
+       Currently <B>enscript</B> supports following escapes:
+
+       <B>bggray</B>  change the text background color.  Escape's syntax
+               is:
+
+               ^@bggray{<I>gray</I>}
+
+               where  <I>gray</I> is the new text background gray value.
+               The default value is 1.0 (white).
+
+       <B>color</B>   change the text color.  Escape's syntax is:
+
+               ^@color{<I>red</I> <I>green</I> <I>blue</I>}
+
+               where color components <I>red</I>,  <I>green</I>  and  <I>blue</I>  are
+               given as a decimal numbers between 0 and 1.
+               is:
+
+               ^@epsf[<I>options</I>]{<I>filename</I>}
+
+               where <I>options</I> is an optional  sequence  of  option
+               characters  and  values enclosed with brackets and
+               <I>filename</I> is the name of the EPS file.
+
+               If <I>filename</I> ends to the `|' character, then  <I>file­</I>
+               <I>name</I>  is assumed to name a command that prints EPS
+               data  to  its  standard  output.   In  this  case,
+               <B>enscript</B> opens a pipe to the specified command and
+               reads EPS data from pipe.
+
+               Following  options  can  be  given  for  the  <B>epsf</B>
+               escape:
+
+               <B>c</B>       print image centered
+
+               <B>r</B>       print image right justified
+
+               <B>n</B>       do  not  update  current point.  Following
+                       output is printed to that  position  where
+                       the current point was just before the <B>epsf</B>
+                       escape
+
+               <B>nx</B>      do not update current point <I>x</I> coordinate
+
+               <B>ny</B>      do not update current point <I>y</I> coordinate
+
+               <B>x</B><I>num</I>    move image's top  left  <I>x</I>  coordinate  <I>num</I>
+                       characters from current point <I>x</I> coordinate
+                       (relative position)
+
+               <B>x</B><I>num</I><B>a</B>   set image's top left <I>x</I> coordinate to  col­
+                       umn <I>num</I> (absolute position)
+
+               <B>y</B><I>num</I>    move  image's  top  left  <I>y</I> coordinate <I>num</I>
+                       lines from current  line  (relative  posi­
+                       tion)
+
+               <B>y</B><I>num</I><B>a</B>   set  image's top left <I>y</I> coordinate to line
+                       <I>num</I> (absolute position)
+
+               <B>h</B><I>num</I>    set image's height to <I>num</I> lines
+
+               <B>s</B><I>num</I>    scale image with factor <I>num</I>
+
+               <B>sx</B><I>num</I>   scale image in <I>x</I> direction with factor <I>num</I>
+
+               <B>sy</B><I>num</I>   scale image in <I>y</I> direction with factor <I>num</I>
+
+               For example to print an image one inch  high,  you
+               can  specify  height  by following options: <B>h1i</B> (1
+               inch), <B>h2.54c</B> (2.54 cm), <B>h72p</B> (72 points).
+
+       <B>font</B>    select current font.  Escape's syntax is:
+
+               ^@font{<I>fontname</I>[:<I>encoding</I>]}
+
+               where <I>fontname</I> is a standard  font  specification.
+               Special  font specification <B>default</B> can be used to
+               select the default body font  (<B>enscript</B>'s  default
+               or  the  one  specified by the command line option
+               <B>-f</B>, <B>--font</B>).
+
+               The  optional  argument  <I>encoding</I>  specifies   the
+               encoding  that  should  be  used for the new font.
+               Currently the encoding can only be the  <B>enscript</B>'s
+               global input encoding or <B>ps</B>.
+
+       <B>ps</B>      include   raw   PostScript  code  to  the  output.
+               Escape's syntax is:
+
+               ^@ps{<I>code</I>}
+
+       <B>shade</B>   highlight regions of text  by  changing  the  text
+               background color.  Escape's syntax is:
+
+               ^@shade{<I>gray</I>}
+
+               where  <I>gray</I> is the new text background gray value.
+               The default value is 1.0  (white)  which  disables
+               highlighting.
+
+
+
+</PRE>
+<H2>PAGE DEVICE OPTIONS</H2><PRE>
+       Page device is a PostScript level 2 feature that offers an
+       uniform interface  to  control  printer's  output  device.
+       <B>Enscript</B>  protects  all  page  device options inside an if
+       block so they have no  effect  in  level  1  interpreters.
+       Although  all  level  2  interpreters support page device,
+       they do not have to support all page device options.   For
+       example  some  printers  can print in duplex mode and some
+       can not.  Refer to the documentation of your  printer  for
+       supported options.
+
+       Here  are  some  usable  page  device options which can be
+       selected with the <B>-D</B>, <B>--setpagedevice</B> option.  For a  com­
+       plete  listing,  see <I>PostScript</I> <I>Language</I> <I>Reference</I> <I>Manual</I>:
+       section 4.11 Device Setup.
+
+       <B>Collate</B> <I>boolean</I>
+               how output is  organized  when  printing  multiple
+
+
+
+</PRE>
+<H2>PRINTING EXAMPLES</H2><PRE>
+       Following printing examples assume that <B>enscript</B> uses  the
+       default  configuration.   If  default  actions  have  been
+       changed from the configuration files, some  examples  will
+       behave differently.
+
+       <B>enscript</B> <B>foo.txt</B>
+               Print file <B>foo.txt</B> to the default printer.
+
+       <B>enscript</B> <B>-Possu</B> <B>foo.txt</B>
+               Print file <B>foo.txt</B> to printer <B>ossu</B>.
+
+       <B>enscript</B> <B>-pfoo.ps</B> <B>foo.txt</B>
+               Print file <B>foo.txt</B>, but leave PostScript output to
+               file <B>foo.ps</B>.
+
+       <B>enscript</B> <B>-2</B> <B>foo.txt</B>
+               Print file <B>foo.txt</B> to two columns.
+
+       <B>enscript</B> <B>-2r</B> <B>foo.txt</B>
+               Print file to two columns  and  rotate  output  90
+               degrees (landscape).
+
+       <B>enscript</B> <B>-DDuplex:true</B> <B>foo.txt</B>
+               Print  file  in  duplex  (two  side) mode (printer
+               dependant).
+
+       <B>enscript</B> <B>-G2rE</B> <B>-U2</B> <B>foo.c</B>
+               My default code printing  command:  gaudy  header,
+               two  columns,  landscape,  code highlighting, 2-up
+               printing.
+
+       <B>enscript</B> <B>-E</B> <B>--color</B> <B>-Whtml</B> <B>--toc</B> <B>-pfoo.html</B> <B>*.h</B> <B>*.c</B>
+               A nice HTML report  of  your  project's  C  source
+               files.
+
+
+
+</PRE>
+<H2>ENVIRONMENT VARIABLES</H2><PRE>
+       The  environment  variable  <B>ENSCRIPT</B>  can  be used to pass
+       default options for <B>enscript</B>.  For example, to select  the
+       default body font to be Times-Roman 7pt, set the following
+       value to the <B>ENSCRIPT</B> environment variable:
+
+       <B>-fTimes-Roman7</B>
+
+
+       The value of the <B>ENSCRIPT</B> variable is processed before the
+       command  line options, so command line options can be used
+       to overwrite these defaults.
+
+       <B>4</B>       some characters were missing from the used fonts
+
+       <B>8</B>       some characters were unprintable
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /usr/share/enscript/*.hdr               header files
+       /usr/share/enscript/*.enc               input encoding vectors
+       /usr/share/enscript/enscript.pro        PostScript prolog
+       /usr/share/enscript/afm/*.afm           AFM files for PostScript fonts
+       /usr/share/enscript/font.map            index for the AFM files
+       /usr/share/enscript/hl/*.st             states definition files
+       /etc/enscript.cfg                       system-wide configuration file
+       /etc/enscriptsite.cfg                   site configuration file
+       ~/.enscriptrc                           personal configuration file
+       ~/.enscript/                            personal resource directory
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>diffpp(1)</B>, <B>ghostview(1)</B>, <B>gs(1)</B>, <B>lpq(1)</B>,  <B>lpr(1)</B>,  <B>lprm(1)</B>,
+       <B>states(1)</B>
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Markku Rossi &lt;mtr@iki.fi&gt; &lt;http://www.iki.fi/~mtr/&gt;
+
+       GNU  Enscript  WWW home page: &lt;http://www.iki.fi/~mtr/gen­
+       script/&gt;
+
+
+
+ENSCRIPT                   Oct 23, 1998               <B>ENSCRIPT(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

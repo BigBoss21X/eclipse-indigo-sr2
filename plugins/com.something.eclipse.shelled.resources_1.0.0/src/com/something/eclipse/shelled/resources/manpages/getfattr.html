@@ -1,0 +1,100 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>getfattr</B> [<B>-hRLP</B>] <B>-n</B> <B>name</B> [<B>-e</B> <B>en</B>] <B>pathname</B>...
+       <B>getfattr</B> [<B>-hRLP</B>] <B>-d</B> [<B>-e</B> <B>en</B>] [<B>-m</B> <B>pattern</B>] <B>pathname</B>...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       For  each  file,  <B>getfattr</B> displays the file name, and the
+       set of extended attribute names  (and  optionally  values)
+       which are associated with that file.
+
+       The output format of <B>getfattr</B> <B>-d</B> is as follows:
+               1:  # file: somedir/
+               2:  user.name0="value0"
+               3:  user.name1="value1"
+               4:  user.name2="value2"
+               5:  ...
+
+       Line  1  identifies  the file name for which the following
+       lines are being reported.  The remaining lines (lines 2 to
+       4 above) show the <I>name</I> and <I>value</I> pairs associated with the
+       specified file.
+
+   <B>OPTIONS</B>
+       <B>-n</B> <I>name</I>, <B>--name</B>=<I>name</I>
+           Dump  the  value  of  the  named  extended   attribute
+           extended attribute.
+
+       <B>-d</B>, <B>--dump</B>
+           Dump  the values of all extended attributes associated
+           with <I>pathname</I>.
+
+       <B>-e</B> <I>en</I>, <B>--encoding</B>=<I>en</I>
+           Encode values after retrieving them.  Valid values  of
+           <I>en</I> are "text", "hex", and "base64".  Values encoded as
+           text strings are enclosed in double quotes ("),  while
+           strings encoded as hexidecimal and base64 are prefixed
+           with 0x and 0s, respectively.
+
+       <B>-h</B>, <B>--no-dereference</B>
+           Do not follow symlinks.  If  <I>pathname</I>  is  a  symbolic
+           link,  the  symbolic  link  itself is examined, rather
+           than the file the link refers to.
+
+       <B>-m</B> <I>pattern</I>, <B>--match</B>=<I>pattern</I>
+           Only include attributes with names matching the  regu­
+           lar expression <I>pattern</I>.  The default value for <I>pattern</I>
+           is "^user\\.", <B>-m</B> which includes all the attributes in
+           the  user  namespace.   Refer  to  <B>attr(5)</B>  for a more
+           detailed discussion on namespaces.
+
+       <B>--absolute-names</B>
+           Do not strip  leading  slash  characters  ('/').   The
+           default  behaviour  is  to strip leading slash charac­
+
+       <B>-P</B>, <B>--physical</B>
+           Physical  walk,  skip  all  symbolic links.  This also
+           skips symbolic link arguments.
+
+       <B>--version</B>
+           Print the version of <B>getfattr</B> and exit.
+
+       <B>--help</B>
+           Print help explaining the command line options.
+
+       <B>--</B>  End of command line options.  All remaining parameters
+           are interpreted as file names, even if they start with
+           a dash character.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Andreas Gruenbacher, &lt;<I>a.gruenbacher@computer.org</I>&gt; and  the
+       SGI XFS development team, &lt;<I>linux-xfs@oss.sgi.com</I>&gt;.
+
+       Please   send  your  bug  reports  or  comments  to  these
+       addresses.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>setfattr(1)</B>, and <B>attr(5)</B>.
+
+
+
+Dec 2001               Extended Attributes            <B>GETFATTR(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

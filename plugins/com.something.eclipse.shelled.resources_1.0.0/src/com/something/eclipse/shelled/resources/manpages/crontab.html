@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       crontab [ -u user ] file
+       crontab [ -u user ] { -l | -r | -e }
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>crontab</I> is the program used to install, deinstall or  list
+       the tables used to drive the <B>cron(8)</B> daemon in Vixie Cron.
+       Each user can have their own crontab, and though these are
+       files  in  /var,  they  are  not  intended  to  be  edited
+       directly.
+
+       If the <I>allow</I> file exists, then you must be listed  therein
+       in  order to be allowed to use this command.  If the <I>allow</I>
+       file does not exist but the <I>deny</I> file does exist, then you
+       must  <B>not</B>  be listed in the <I>deny</I> file in order to use this
+       command.  If neither of these files exists, then depending
+       on site-dependent configuration parameters, only the super
+       user will be allowed to use this  command,  or  all  users
+       will be able to use this command.
+
+       If  the  <I>-u</I>  option is given, it specifies the name of the
+       user whose crontab is to be tweaked.  If  this  option  is
+       not  given,  <I>crontab</I>  examines  "your"  crontab, i.e., the
+       crontab of the person executing the  command.   Note  that
+       <B>su(8)</B>  can  confuse  <I>crontab</I>  and  that if you are running
+       inside of <B>su(8)</B> you should always use the  <I>-u</I>  option  for
+       safety's sake.
+
+       The  first  form  of this command is used to install a new
+       crontab from some named file  or  standard  input  if  the
+       pseudo-filename ``-'' is given.
+
+       The  <I>-l</I>  option causes the current crontab to be displayed
+       on standard output.
+
+       The <I>-r</I> option causes the current crontab to be removed.
+
+       The <I>-e</I> option is used to edit the  current  crontab  using
+       the  editor  specified by the VISUAL or EDITOR environment
+       variables.  After you exit from the editor,  the  modified
+       crontab will be installed automatically.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>crontab(5)</B>, <B>cron(8)</B>
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /var/spool/cron/allow
+       /var/spool/cron/deny
+
+
+</PRE>
+<H2>STANDARDS</H2><PRE>
+       The   <I>crontab</I>  command  conforms  to  IEEE  Std1003.2-1992
+       (``POSIX'').  This new command syntax differs from  previ­
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

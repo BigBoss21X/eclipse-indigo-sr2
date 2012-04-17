@@ -1,0 +1,83 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ipcrm</B> [ <B>-M</B> <I>key</I> | <B>-m</B> <I>id</I> | <B>-Q</B> <I>key</I> | <B>-q</B> <I>id</I> | <B>-S</B> <I>key</I> | <B>-s</B> <I>id</I> ]
+       ...
+
+       deprecated usage
+
+       <B>ipcrm</B> [ <B>shm</B> | <B>msg</B> | <B>sem</B> ] <I>id</I> ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>ipcrm</I>  removes  System  V interprocess communication (IPC)
+       objects and associated data structures  from  the  system.
+       In order to delete such objects, you must be superuser, or
+       the creator or owner of the object.
+
+       System V IPC objects are of three  types:  shared  memory,
+       message  queues,  and  semaphores.   Deletion of a message
+       queue or semaphore  object  is  immediate  (regardless  of
+       whether  any process still holds an IPC identifier for the
+       object).  A shared memory object is only removed after all
+       currently  attached processes have detached (<B>shmdt(2)</B>) the
+       object from their virtual address space.
+
+       Two syntax styles are supported.  The old Linux historical
+       syntax  specifies  a three letter keyword indicating which
+       class of object is to be deleted, followed by one or  more
+       IPC identifiers for objects of this type.
+
+       The  SUS-compliant syntax allows the specification of zero
+       or more objects of all three types  in  a  single  command
+       line,  with  objects specified either by key or by identi­
+       fier. (See below.)  Both keys and identifiers may be spec­
+       ified  in  decimal, hexadecimal (specified with an initial
+       '0x' or '0X'), or octal (specified with an initial '0').
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-M</B> <I>shmkey</I>
+              removes the  shared  memory  segment  created  with
+              <I>shmkey</I> after the last detach is performed.
+
+       <B>-m</B> <I>shmid</I>
+              removes  the  shared  memory  segment identified by
+              <I>shmid</I> after the last detach is performed.
+
+       <B>-Q</B> <I>msgkey</I>
+              removes the message queue created with <I>msgkey</I>.
+
+       <B>-q</B> <I>msgid</I>
+              removes the message queue identified by <I>msgid</I>.
+
+       <B>-S</B> <I>semkey</I>
+       just identifier), and to  respect  the  same  command-line
+       syntax.  For backward compatibility the previous syntax is
+       still supported.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ipcs(8)</B>,  <B>msgctl(2)</B>,  <B>msgget(2)</B>,   <B>semctl(2)</B>,   <B>semget(2)</B>,
+       <B>shmctl(2)</B>, <B>shmdt(2)</B>, <B>shmget(2)</B>, <B>ftok(3)</B>
+
+
+
+ipcrm               last change: 19 March 2002           <B>IPCRM(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

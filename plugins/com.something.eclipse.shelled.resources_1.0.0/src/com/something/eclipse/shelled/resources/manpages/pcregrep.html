@@ -1,0 +1,109 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>pcregrep</B> <B>[-Vcfhilnrsvx]</B> <B>pattern</B> <B>[file]</B> <B>...</B>
+
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>pcregrep</B> searches files for  character  patterns,  in  the
+       same  way  as other grep commands do, but it uses the PCRE
+       regular expression library to support  patterns  that  are
+       compatible  with  the  regular  expressions of Perl 5. See
+       <B>pcre(3)</B> for a full description of syntax and semantics.
+
+       If no files are specified,  <B>pcregrep</B>  reads  the  standard
+       input.  By  default, each line that matches the pattern is
+       copied to the standard output, and if there is  more  than
+       one  file,  the  file  name is printed before each line of
+       output. However, there are options  that  can  change  how
+       <B>pcregrep</B> behaves.
+
+       Lines  are limited to BUFSIZ characters. BUFSIZ is defined
+       in <B>&lt;stdio.h&gt;</B>.  The newline character is removed  from  the
+       end of each line before it is matched against the pattern.
+
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-V</B>        Write the version number  of  the  PCRE  library
+                 being used to the standard error stream.
+
+       <B>-c</B>        Do  not  print  individual  lines;  instead just
+                 print a count of the number of lines that  would
+                 otherwise  have  been  printed. If several files
+                 are given, a count is printed for each of  them.
+
+       <B>-f</B><I>filename</I>
+                 Read  patterns  from the file, one per line, and
+                 match all patterns against each line. There is a
+                 maximum of 100 patterns. Trailing white space is
+                 removed, and blank lines are ignored.  An  empty
+                 file  contains no patterns and therefore matches
+                 nothing.
+
+       <B>-h</B>        Suppress printing of  filenames  when  searching
+                 multiple files.
+
+       <B>-i</B>        Ignore upper/lower case distinctions during com­
+                 parisons.
+
+       <B>-l</B>        Instead of printing lines from the  files,  just
+                 print  the  names  of the files containing lines
+                 that would have been printed. Each file name  is
+                 which  do <I>not</I> match the pattern are now the ones
+                 that are found.
+
+       <B>-x</B>        Force the pattern to be anchored (it must  start
+                 matching  at  the  beginning of the line) and in
+                 addition, require it to match the  entire  line.
+                 This  is equivalent to having ^ and $ characters
+                 at the start and end of each alternative  branch
+                 in the regular expression.
+
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>pcre(3)</B>, Perl 5 documentation
+
+
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       Exit  status  is  0  if  any  matches  were found, 1 if no
+       matches were found, and 2 for syntax errors or inacessible
+       files (even if matches were found).
+
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Philip Hazel &lt;ph10@cam.ac.uk&gt;
+
+       Last updated: 15 August 2001
+       Copyright (c) 1997-2001 University of Cambridge.
+
+
+
+                                                      <B>PCREGREP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

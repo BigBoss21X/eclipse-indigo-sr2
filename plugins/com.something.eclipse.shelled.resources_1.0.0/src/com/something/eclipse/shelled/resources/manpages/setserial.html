@@ -1,0 +1,432 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>setserial</B> <B>[</B> <B>-abqvVWz</B> <B>]</B> device <B>[</B> parameter1 <B>[</B> arg <B>]</B> <B>]</B> <B>...</B>
+
+       <B>setserial</B> <B>-g</B> <B>[</B> <B>-abGv</B> <B>]</B> device1 ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>setserial</B>  is  a program designed to set and/or report the
+       configuration information associated with a  serial  port.
+       This information includes what I/O port and IRQ a particu­
+       lar serial port is using, and whether or not the break key
+       should  be interpreted as the Secure Attention Key, and so
+       on.
+
+       During the normal bootup process, only COM ports  1-4  are
+       initialized,  using  the default I/O ports and IRQ values,
+       as listed below.  In order to  initialize  any  additional
+       serial  ports,  or  to  change the COM 1-4 ports to a non­
+       stadard configuration, the  <B>setserial</B>  program  should  be
+       used.   Typically  it  is called from an <I>rc.serial</I> script,
+       which is usually run out of <I>/etc/rc.local</I>.
+
+       The <I>device</I> argument  or  arguments  specifies  the  serial
+       device  which  should  be  configured or interrogated.  It
+       will usually have the following form: <B>/dev/cua[0-3]</B>.
+
+       If no parameters are specified, <B>setserial</B> will  print  out
+       the  port  type  (i.e., 8250, 16450, 16550, 16550A, etc.),
+       the hardware I/O port, the hardware IRQ  line,  its  "baud
+       base," and some of its operational flags.
+
+       If  the <B>-g</B> option is given, the arguments to setserial are
+       interpreted as a list of devices for which the  character­
+       istics of those devices should be printed.
+
+       Without  the <B>-g</B> option, the first argument to setserial is
+       interpreted as the device to be modified  or  characteris­
+       tics  to  be  printed,  and  any  additional arguments are
+       interpreted as parameters which should be assigned to that
+       serial device.
+
+       For  the most part, superuser privilege is required to set
+       the configuration parameters of  a  serial  port.   A  few
+       serial  port  parameters  can be set by normal users, how­
+       ever, and these will be noted as exceptions in this manual
+       page.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>Setserial</B> accepts the following options:
+
+
+       <B>-a</B>     When   reporting  the  configuration  of  a  serial
+       <B>-v</B>     Be verbose.  <B>Setserial</B> will print additional status
+              output.
+
+       <B>-V</B>     Display version and exit.
+
+       <B>-W</B>     Do  wild  interrupt  initialization and exit.  This
+              option is no longer relevant in Linux kernels after
+              version 2.1.
+
+       <B>-z</B>     Zero  out  the  serial flags before starting to set
+              flags.  This is related to the automatic saving  of
+              serial flags using the -G flag.
+
+
+
+</PRE>
+<H2>PARAMETERS</H2><PRE>
+       The following parameters can be assigned to a serial port.
+
+       All argument values are assumed to be  in  decimal  unless
+       preceeded by "0x".
+
+
+       <B>port</B> port_number
+              The  <B>port</B>  option  sets  the I/O port, as described
+              above.
+
+       <B>irq</B> irq_number
+              The <B>irq</B> option sets the hardware IRQ, as  described
+              above.
+
+       <B>uart</B> uart_type
+              This option is used to set the UART type.  The per­
+              mitted types are <B>none</B>, 8250, 16450, 16550,  16550A,
+              16650,  16650V2,  16654,  16750,  16850, 16950, and
+              16954.  Using UART type <B>none</B> will disable the port.
+
+              Some internal modems are billed as having a "16550A
+              UART with a 1k buffer".  This is a  lie.   They  do
+              not  have  really  have  a  16550A compatible UART;
+              instead what they have is a 16450  compatible  UART
+              with  a 1k receive buffer to prevent receiver over­
+              runs.  This is important, because they do not  have
+              a  transmit  FIFO.   Hence, they are not compatible
+              with a 16550A UART, and the autoconfiguration  pro­
+              cess  will  correctly identify them as 16450's.  If
+              you attempt to override this using the <B>uart</B> parame­
+              ter,  you  will  see dropped characters during file
+              transmissions.  These  UART's  usually  have  other
+              problems:  the  <B>skip_test</B> parameter also often must
+              be specified.
+
+       <B>autoconfig</B>
+              When this parameter is given,  <B>setserial</B>  will  ask
+              not to use the  <B>auto_irq</B>  feature,  but  rather  to
+              specify  the  IRQ  to be used explicitly, using the
+              <B>irq</B> parameter.
+
+       <B>^auto_irq</B>
+              During autoconfiguration, do <I>not</I> try  to  determine
+              the IRQ.
+
+       <B>skip_test</B>
+              During autoconfiguration, skip the UART test.  Some
+              internal modems do not have National  Semiconductor
+              compatible   UART's,   but  have  cheap  imitations
+              instead.  Some of these cheasy imitations UART's do
+              not  fully  support  the  loopback  detection mode,
+              which is used by the  kernel  to  make  sure  there
+              really  is  a  UART  at a particular address before
+              attempting to configure it.  So for certain  inter­
+              nal  modems you will need to specify this parameter
+              so Linux can initialize the UART correctly.
+
+       <B>^skip_test</B>
+              During autoconfiguration,  do  <I>not</I>  skip  the  UART
+              test.
+
+       <B>baud_base</B> baud_base
+              This  option  sets the base baud rate, which is the
+              clock frequency divided by 16.  Normally this value
+              is  115200,  which  is  also  the fastest baud rate
+              which the UART can support.
+
+       <B>spd_hi</B> Use 57.6kb when the  application  requests  38.4kb.
+              This parameter may be specified by a non-privileged
+              user.
+
+       <B>spd_vhi</B>
+              Use 115kb when  the  application  requests  38.4kb.
+              This parameter may be specified by a non-privileged
+              user.
+
+       <B>spd_shi</B>
+              Use 230kb when  the  application  requests  38.4kb.
+              This parameter may be specified by a non-privileged
+              user.
+
+       <B>spd_warp</B>
+              Use 460kb when  the  application  requests  38.4kb.
+              This parameter may be specified by a non-privileged
+              user.
+
+       <B>spd_cust</B>
+              Use the custom divisor to set the  speed  when  the
+              application  requests  38.4kb.   In  this case, the
+              privileged user.
+
+       <B>sak</B>    Set the break key at the Secure Attention Key.
+
+       <B>^sak</B>   disable the Secure Attention Key.
+
+       <B>fourport</B>
+              Configure the port as an AST Fourport card.
+
+       <B>^fourport</B>
+              Disable AST Fourport configuration.
+
+       <B>close_delay</B> delay
+              Specify the amount of time, in hundredths of a sec­
+              ond,  that  DTR  should remain low on a serial line
+              after the callout  device  is  closed,  before  the
+              blocked   dialin  device  raises  DTR  again.   The
+              default value of this option is 50, or a  half-sec­
+              ond delay.
+
+       <B>closing_wait</B> delay
+              Specify the amount of time, in hundredths of a sec­
+              ond, that the kernel should wait  for  data  to  be
+              transmitted  from the serial port while closing the
+              port.  If "none" is specified, no delay will occur.
+              If  "infinite"  is  specified  the kernel will wait
+              indefinitely  for the buffered data to be transmit­
+              ted.   The default setting is 3000 or 30 seconds of
+              delay.  This default is generally  appropriate  for
+              most  devices.   If  too  long a delay is selected,
+              then the serial port may hang for a  long  time  if
+              when  a serial port which is not connected, and has
+              data pending, is closed.  If too short a  delay  is
+              selected,  then  there  is  a risk that some of the
+              transmitted data is output at all.  If  the  device
+              is extremely slow, like a plotter, the closing_wait
+              may need to be larger.
+
+       <B>session_lockout</B>
+              Lock out callout port (/dev/cuaXX) accesses  across
+              different  sessions.   That  is, once a process has
+              opened a port, do not allow a process with  a  dif­
+              ferent session ID to open that port until the first
+              process has closed it.
+
+       <B>^session_lockout</B>
+              Do not lock out callout port accesses  across  dif­
+              ferent sessions.
+
+       <B>pgrp_lockout</B>
+              Lock  out callout port (/dev/cuaXX) accesses across
+              different process groups.  That is, once a  process
+              The  application  of  this parameter is for getty's
+              which are blocked on a serial port's dial in  line.
+              This allows the getty to reset the modem (which may
+              have had its configuration modified by the applica­
+              tion  using  the callout device) before blocking on
+              the open again.
+
+       <B>^hup_notify</B>
+              Do not notify a process blocked on opening  a  dial
+              in line when the callout device is hung up.
+
+       <B>split_termios</B>
+              Treat  the  termios  settings  used  by the callout
+              device and the termios settings used by the  dialin
+              devices as separate.
+
+       <B>^split_termios</B>
+              Use  the  same  termios structure to store both the
+              dialin and callout  ports.   This  is  the  default
+              option.
+
+       <B>callout_nohup</B>
+              If this particular serial port is opened as a call­
+              out device, do not  hangup  the  tty  when  carrier
+              detect is dropped.
+
+       <B>^callout_nohup</B>
+              Do  not  skip hanging up the tty when a serial port
+              is opened as a  callout  device.   Of  course,  the
+              HUPCL termios flag must be enabled if the hangup is
+              to occur.
+
+       <B>low_latency</B>
+              Minimize the receive latency of the  serial  device
+              at  the cost of greater CPU utilization.  (Normally
+              there is an average of 5-10ms latency before  char­
+              acters are handed off to the line discpline to min­
+              imize overhead.)  This is off by default, but  cer­
+              tain real-time applications may find this useful.
+
+       <B>^low_latency</B>
+              Optimize  for  efficient  CPU  processing of serial
+              characters at the cost  of  paying  an  average  of
+              5-10ms  of  latency  before the characters are pro­
+              cessed.  This is the default.
+
+
+</PRE>
+<H2>CONSIDERATIONS OF CONFIGURING SERIAL PORTS</H2><PRE>
+       It is important to note that setserial  merely  tells  the
+       Linux  kernel  where it should expect to find the I/O port
+       and IRQ lines of a particular serial port.  It does  *not*
+       configure  the hardware, the actual serial board, to use a
+       particular I/O port.  In order to do that, you  will  need
+       architecture,  normally  an  IRQ  line  may  not be shared
+       between two or more serial ports.  If you  attempt  to  do
+       this,  one  or both serial ports will become unreliable if
+       you try to use both simultaneously.  This  limitation  can
+       be  overcome  by  special  multi-port  serial port boards,
+       which are designed to share multiple serial ports  over  a
+       single  IRQ  line.   Multi-port  serial cards supported by
+       Linux include the AST FourPort, the  Accent  Async  board,
+       the   Usenet  Serial  II  board,  the  Bocaboard  BB-1004,
+       BB-1008, and BB-2016 boards, and the HUB-6 serial board.
+
+       The selection of an alternative  IRQ  line  is  difficult,
+       since  most of them are already used.  The following table
+       lists the "standard MS-DOS" assignments of  available  IRQ
+       lines:
+
+              IRQ 3: COM2
+              IRQ 4: COM1
+              IRQ 5: LPT2
+              IRQ 7: LPT1
+
+       Most  people  find  that  IRQ 5 is a good choice, assuming
+       that there is only one parallel port active  in  the  com­
+       puter.  Another good choice is IRQ 2 (aka IRQ 9); although
+       this IRQ is sometimes used  by  network  cards,  and  very
+       rarely VGA cards will be configured to use IRQ 2 as a ver­
+       tical retrace interrupt.  If your VGA card  is  configured
+       this  way;  try  to disable it so you can reclaim that IRQ
+       line for some other card.  It's not  necessary  for  Linux
+       and most other Operating systems.
+
+       The  only  other  available IRQ lines are 3, 4, and 7, and
+       these are probably used by the other serial  and  parallel
+       ports.  (If your serial card has a 16bit card edge connec­
+       tor, and supports higher interrupt numbers, then  IRQ  10,
+       11, 12, and 15 are also available.)
+
+       On  AT  class  machines, IRQ 2 is seen as IRQ 9, and Linux
+       will interpret it in this manner.
+
+       IRQ's other than 2 (9), 3, 4, 5, 7, 10, 11,  12,  and  15,
+       should <I>not</I> be used, since they are assigned to other hard­
+       ware and cannot, in general, be  changed.   Here  are  the
+       "standard" assignments:
+
+              IRQ  0      Timer channel 0
+              IRQ  1      Keyboard
+              IRQ  2      Cascade for controller 2
+              IRQ  3      Serial port 2
+              IRQ  4      Serial port 1
+              IRQ  5      Parallel port 2 (Reserved in PS/2)
+              IRQ  6      Floppy diskette
+
+       or  not  there are any pending ports which need to be ser­
+       viced.  If your multiport board supports these ports,  you
+       should  make use of them to avoid potential lockups if the
+       interrupt gets lost.
+
+       In order to set these ports  specify  <B>set_multiport</B>  as  a
+       parameter,  and  follow  it with the multiport parameters.
+       The multiport parameters take the form of  specifying  the
+       <I>port</I>  that  should be checked, a <I>mask</I> which indicate which
+       bits in the register are significant, and finally, a <I>match</I>
+       parameter  which  specifies  what  the significant bits in
+       that register must match when there  is  no  more  pending
+       work to be done.
+
+       Up to four such port/mask/match combinations may be speci­
+       fied.  The first such combinations should be specified  by
+       setting the parameters <B>port1</B>, <B>mask1</B>, and <B>match1</B>.  The sec­
+       ond such  combination  should  be  specified  with  <B>port2</B>,
+       <B>mask2</B>,  and  <B>match2</B>,  and so on.  In order to disable this
+       multiport checking, set <B>port1</B> to be zero.
+
+       In order to view the current multiport  settings,  specify
+       the parameter <B>get_multiport</B> on the command line.
+
+       Here  are  some  multiport settings for some common serial
+       boards:
+
+              AST FourPort    port1 0x1BF mask1 0xf match1 0xf
+
+              Boca BB-1004/8  port1 0x107 mask1 0xff match1 0
+
+              Boca BB-2016    port1 0x107 mask1 0xff match1 0
+                              port2 0x147 mask2 0xff match2 0
+
+
+
+</PRE>
+<H2>Hayes ESP Configuration</H2><PRE>
+       <B>Setserial</B> may also be used to configure ports on  a  Hayes
+       ESP serial board.
+
+       The following parameters when configuring ESP ports:
+
+       <B>rx_trigger</B>
+              This is the trigger level (in bytes) of the receive
+              FIFO. Larger values may result in fewer  interrupts
+              and  hence better performance; however, a value too
+              high could result in data loss. Valid values are  1
+              through 1023.
+
+       <B>tx_trigger</B>
+              This  is the trigger level (in bytes) of the trans­
+              mit FIFO. Larger values may result in fewer  inter­
+              rupts  and  hence  better  performance;  however, a
+              him to resume sending bytes) after having flowed it
+              off.   Valid values are 1 through 1023.  This value
+              should be less than the flow off level, but greater
+              than the receive trigger level.
+
+       <B>rx_timeout</B>
+              This  is  the amount of time that the ESP port will
+              wait after receiving  the  final  character  before
+              signaling an interrupt.  Valid values are 0 through
+              255.  A value too high will increase latency, and a
+              value too low will cause unnecessary interrupts.
+
+
+
+</PRE>
+<H2>CAUTION</H2><PRE>
+       CAUTION: Configuring a serial port to use an incorrect I/O
+       port can lock up your machine.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/etc/rc.local</B> <B>/etc/rc.serial</B>
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>tty(4)</B>, <B>ttys(4)</B>, kernel/chr_drv/serial.c
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       The original version of  setserial  was  written  by  Rick
+       Sladkey  (jrs@world.std.com),  and was modified by Michael
+       K. Johnson (johnsonm@stolaf.edu).
+
+       This version has since  been  rewritten  from  scratch  by
+       Theodore  Ts'o  (tytso@mit.edu)  on  1/1/93.   Any bugs or
+       problems are solely his responsibility.
+
+
+
+Setserial 2.17             January 2000              <B>SETSERIAL(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

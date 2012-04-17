@@ -1,0 +1,205 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>grolpb</B> [ <B>-l</B> ] [ <B>--landscape</B> ] [ <B>-v</B> ] [ <B>--version</B> ] [ <B>-c</B><I>n</I> ]
+              [ <B>--copies=</B><I>numcopies</I> ] [ <B>-p</B><I>paper</I><B>_</B><I>size</I> ] [ <B>--paper­</B>
+              <B>size=</B><I>paper</I><B>_</B><I>size</I> ] [ <B>-o</B><I>orientation</I> ] [ <B>--orienta­</B>
+              <B>tion=</B><I>orientation</I> ] [ <B>-F</B><I>dir</I> ] [ <B>--fontdir=</B><I>dir</I> ]
+              [ <B>-h</B> ] [ <B>--help</B> ] [ <I>files...</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>grolbp</B> is a driver for <B>groff</B> that produces output in CAPSL
+       and  VDM  format suitable for Canon LBP-4 and LBP-8 print­
+       ers.
+
+       For compatibility with grolj4 there is an additional draw­
+       ing command available:
+
+       <B>\D'R</B> <I>dh</I> <I>dv</I><B>'</B>
+              Draw  a  rule  (i.e. a solid black rectangle), with
+              one corner at the current position, and the  diago­
+              nally  opposite  corner  at  the  current  position
+              +(<I>dh</I>,<I>dv</I>).
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Note that there can be  whitespace  between  a  one-letter
+       option  and its argument; on the other hand, there must be
+       whitespace and/or an equal sign (`=') between a  long-name
+       option and its argument.
+
+       <B>-c</B><I>numcopies</I>
+       <B>--copies=</B><I>numcopies</I>
+              Print <I>numcopies</I> copies of each page.
+
+       <B>-l</B>
+       <B>--landscape</B>
+              Print the document with a landscape orientation.
+
+       <B>-p</B><I>paper</I><B>_</B><I>size</I>
+       <B>--papersize=</B><I>paper</I><B>_</B><I>size</I>
+              Set  the  paper size to <I>paper</I><B>_</B><I>size</I>, which must be a
+              valid paper size description as  indicated  in  the
+              section <B>PAPER</B> <B>SIZES</B>.
+
+       <B>-o</B><I>orientation</I>
+       <B>--orientation=</B><I>orientation</I>
+              Print  the  document  with <I>orientation</I> orientation,
+              which must be `portrait' or `landscape'.
+
+       <B>-v</B>
+       <B>--version</B>
+              Print the version number.
+
+       <B>-F</B><I>dir</I>
+
+       The following chart summarizes the font names you can  use
+       to access these fonts:
+
+    +----------------+-----------+--------+----------+--------------+
+    |   Typeface     |  Regular  |  Bold  |  Italic  |  Bold-Italic |
+    +----------------+-----------+--------+----------+--------------+
+    | <B>Dutch</B>          |    TR     |   TB   |    TI    |      TBI     |
+    +----------------+-----------+--------+----------+--------------+
+    | <B>Swiss</B>          |    HR     |   HB   |    HI    |      HBI     |
+    +----------------+-----------+--------+----------+--------------+
+    | <B>Swiss</B> <B>Narrow</B>   |    HNR    |  HNB   |   HNI    |     HNBI     |
+    +----------------+-----------+--------+----------+--------------+
+    | <B>Courier</B>        |    CR     |   CB   |    CI    |              |
+    +----------------+-----------+--------+----------+--------------+
+    | <B>Elite</B>          |    ER     |   EB   |    EI    |              |
+    +----------------+-----------+--------+----------+--------------+
+
+
+</PRE>
+<H2>PAPER SIZES</H2><PRE>
+       The paper size can be set in the <B>DESC</B> file or with command
+       line options to <B>grolbp</B>.  If the paper  size  is  specified
+       both  ways,  the command line options take precedence over
+       the contents of the <B>DESC</B> file (this applies  to  the  page
+       orientation too).
+
+       To  set  the  paper  size in the <B>DESC</B> file, insert in that
+       file a line containing <B>papersize</B> <I>desired</I><B>_</B><I>papersize</I>,  where
+       <I>desired</I><B>_</B><I>papersize</I> is:
+
+       ·   One  of  the  recognized  paper sizes: `a4', `letter',
+           `legal' or `executive'.
+
+       ·   A custom defined paper size, as described in the  <B>CUS­</B>
+           <B>TOM</B> <B>PAPER</B> <B>SIZES</B> subsection below.
+
+       ·   The  name of a file (e.g.  <I>/etc/papersize</I>) whose first
+           line must be the desired paper  size  in  one  of  the
+           above formats.
+
+       If  there  are  various  papersize lines in the <B>DESC</B> file,
+       only the first valid one is used.
+
+       To set the paper size in the command line, add
+
+         <B>-p</B> <I>desired</I><B>_</B><I>papersize</I>
+
+       or
+
+         <B>--papersize=</B><I>desired</I><B>_</B><I>papersize</I>
+
+       to the other <B>grolbp</B> options, where <B>desired_papersize</B> is in
+       the same format as in the <B>DESC</B> file.
+              is two inches long and four  inches  wide  you  can
+              insert a line containing
+
+                <B>papersize</B> <B>cust600x1200</B>
+
+              at the beginning of the <B>DESC</B> file.
+
+
+</PRE>
+<H2>PAGE ORIENTATION</H2><PRE>
+       As with the page size, the orientation of the printed page
+       (<B>portrait</B> or <B>landscape</B>) can be set in  the  <B>DESC</B>  file  or
+       with command line options.  It is also case insensitive.
+
+       To  set  the  orientation  in the <B>DESC</B> file, insert a line
+       with the following content:
+
+         <B>orientation</B> [<B>portrait</B>|<B>landscape</B>]
+
+       As with paper sizes, only the first valid orientation com­
+       mand in the <B>DESC</B> file is used.
+
+       To  set the page orientation with command line options you
+       can use the <B>-o</B>  or  <B>--orientation</B>  option  with  the  same
+       parameters  (<B>portrait</B>  or  <B>landscape</B>) as in the <B>DESC</B> file.
+       Or you can use the <B>-l</B> option to  force  the  pages  to  be
+       printed in landscape.
+
+
+</PRE>
+<H2>FONT FILE FORMAT</H2><PRE>
+       In   addition   to   the   usual   commands  described  in
+       <B>groff_font(5)</B>, <B>grolbp</B> provides the command  <I>lbpname</I>  which
+       sets  the  font  name  sent to the printer when requesting
+       this font.  The syntax of this command is:
+
+         <B>lbpname</B> <I>printer</I><B>_</B><I>font</I><B>_</B><I>name</I>
+
+       ·      For bitmapped fonts, <I>printer</I><B>_</B><I>font</I><B>_</B><I>name</I> has the form
+
+                N&lt;<I>base</I><B>_</B><I>fontname</I>&gt;&lt;<I>font</I><B>_</B><I>style</I>&gt;
+
+              <I>base</I><B>_</B><I>fontname</I> is the font name as it appears in the
+              printers font listings without the first letter, up
+              to  (but  not including) the font size.  <I>font</I><B>_</B><I>style</I>
+              can be one of the letters <B>R</B>, <B>I</B>,  or  <B>B</B>,  indicating
+              the  font  styles  Roman,  Italic  and Bold respec­
+              tively.
+
+              For instance, if the printer's <I>font</I> <I>listing</I> <I>A</I> shows
+              font  `Nelite12I.ISO_USA',  the corresponding entry
+              in the font description file is
+
+                <B>lbpname</B> <B>NeliteI</B>
+
+              Note that you may need to modify <B>grolbp</B> to add sup­
+
+
+       The argument of <B>lbpname</B> is case sensitive.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/usr/share/groff/1.17.2/font/devlbp/DESC</B>
+              Device description file.
+
+       <B>/usr/share/groff/1.17.2/font/devlbp/</B><I>F</I>
+              Font description file for font <I>F</I>.
+
+       <B>/usr/share/groff/1.17.2/tmac/lbp.tmac</B>
+              Macros for use with <B>grolbp</B>.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>groff(1)</B>,     <B>troff(1)</B>,    <B>groff_out(5)</B>,    <B>groff_font(5)</B>,
+       <B>groff_char(7)</B>
+
+
+
+Groff Version 1.17.2     22 November 2000               <B>GROLBP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

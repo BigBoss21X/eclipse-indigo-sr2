@@ -1,0 +1,65 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>newgrp</B> [<B>-</B>] [<I>group</I>]
+       <B>sg</B> [<B>-</B>] [<I>group</I> [[<B>-c</B>] <I>command</I>]]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>newgrp</B>  is  used  to  change the current group ID during a
+       login session.  If the  optional  <B>-</B>  flag  is  given,  the
+       user's  environment  will  be  reinitialized as though the
+       user had logged in,  otherwise  the  current  environment,
+       including current working directory, remains unchanged.
+
+       <B>newgrp</B>  changes  the  current  real  group ID to the named
+       group, or to the default group listed in <I>/etc/passwd</I> if no
+       group name is given. The user will be prompted for a pass­
+       word if she do not have a password and the group does,  or
+       if  the user is not listed as a member and the group has a
+       password. The user will be  denied  access  if  the  group
+       password  is empty and the user is not listed as a member.
+
+       The <B>sg</B> command works similiar to <B>newgrp</B> but accepts a com­
+       mand.  The command will be executed with the Bourne shell.
+       With most shells you may run <B>sg</B> from, you need to  enclose
+       multi-word commands in quotes.  Another difference between
+       <B>newgrp</B> and <B>sg</B> is that some shells treat <B>newgrp</B>  specially,
+       replacing  themselves  with a new instance of a shell that
+       <B>newgrp</B> creates.  This doesn't happen with <B>sg</B>, so upon exit
+       from  a <B>sg</B> command you are returned to your previous group
+       ID.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /etc/passwd - user account information
+       /etc/group - group information
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>id(1)</B>, <B>login(1)</B>, <B>su(1)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Julianne Frances Haugh &lt;jockgrrl@ix.netcom.com&gt;
+
+
+
+                                                        <B>NEWGRP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

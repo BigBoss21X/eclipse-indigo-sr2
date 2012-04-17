@@ -1,0 +1,93 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>source</B> <B>ipg</B>
+
+
+       <B>pg</B>
+
+
+       <B>pgset</B> <I>COMMAND</I>
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>ipg</B> is not a program, it is script which should be sourced
+       to <B>bash</B>. When sourced it loads module <I>pg3</I>  and  exports  a
+       few  of  functions  accessible  from  parent  shell. These
+       macros are <B>pg</B> to start packet injection  and  to  get  the
+       results of run; and <B>pgset</B> to setup packet generator.
+
+       <B>pgset</B> can send the following commands to module <I>pg3</I>:
+
+
+</PRE>
+<H2>COMMAND</H2><PRE>
+       <B>odev</B> <I>DEVICE</I>
+              Name of Ethernet device to test. See warning below.
+
+       <B>pkt_size</B> <I>BYTES</I>
+              Size of packet to generate. The size  includes  all
+              the headers: UDP, IP, MAC, but does not account for
+              overhead internal to medium, i.e. FCS  and  various
+              paddings.
+
+       <B>frags</B> <I>NUMBER</I>
+              Each packet will contain <I>NUMBER</I> of fragments.  Max­
+              imal amount for linux-2.4 is 6.  Far  not  all  the
+              devices support fragmented buffers.
+
+       <B>count</B> <I>NUMBER</I>
+              Send  stream  of  <I>NUMBER</I>  of packets and stop after
+              this.
+
+       <B>ipg</B> <I>TIME</I>
+              Introduce artificial delay between packets of  <I>TIME</I>
+              microseconds.
+
+       <B>dst</B> <I>IP</I><B>_</B><I>ADDRESS</I>
+              Select  IP destination where the stream is sent to.
+              Beware, never set this address at  random.  <B>pg3</B>  is
+              not  a toy, it creates really tough stream. Default
+              value is 0.0.0.0.
+
+       <B>dst</B> <I>MAC</I><B>_</B><I>ADDRESS</I>
+              Select MAC destination where the stream is sent to.
+              Default  value  is  00:00:00:00:00:00  in hope that
+              this will not be received by any node on LAN.
+
+
+</PRE>
+<H2>SECURITY</H2><PRE>
+       This can be used only by superuser.
+
+       This  tool  creates floods of packets which is unlikely to
+       be handled even by high-end machines. For example, it sat­
+       urates  gigabit  link  with 60 byte packets when used with
+       Intel's e1000. In face of such  stream  switches,  routers
+       and  end  hosts may deadlock, crash, explode.  Use only in
+       test lab environment.
+
+
+</PRE>
+<H2>AVAILABILITY</H2><PRE>
+       <B>pg3</B> is part of <I>iputils</I> package and the latest versions are
+       available    in    source    form    for   anonymous   ftp
+       ftp://ftp.inr.ac.ru/ip-routing/iputils-current.tar.gz.
+
+
+
+iputils-020927          27 September 2002                  <B>PG3(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

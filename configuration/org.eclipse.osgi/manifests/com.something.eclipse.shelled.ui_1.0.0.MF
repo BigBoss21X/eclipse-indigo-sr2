@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Generated-from: 1136910236000;type=2
+Bundle-ManifestVersion: 2
+Bundle-Name: ShellEd UI
+Bundle-SymbolicName: com.something.eclipse.shelled.ui; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: shelled-ui.jar
+Bundle-Activator: org.eclipse.core.internal.compatibility.PluginActivator
+Bundle-Vendor: Something Software
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime.compatibility,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.views,
+ org.eclipse.jface.text,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.ui.editors,
+ org.eclipse.core.resources,
+ org.eclipse.ui,
+ org.eclipse.compare,
+ com.something.eclipse.script,
+ com.something.eclipse.shelled.resources,
+ org.eclipse.debug.core
+Eclipse-LazyStart: true
+Plugin-Class: com.something.eclipse.shelled.ui.UIPlugin

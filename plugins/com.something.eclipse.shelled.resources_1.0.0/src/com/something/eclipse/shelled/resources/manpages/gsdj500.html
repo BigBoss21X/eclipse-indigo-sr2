@@ -1,0 +1,120 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       ghostscript
+       gsdj - Format and print text  for  DeskJet  printer  using
+       ghostscript
+       gsdj500  - Format and print text for DeskJet 500 BubbleJet
+       using ghostscript
+       gslj - Format and print text for  LaserJet  printer  using
+       ghostscript
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>gslp</B> <B>-12BclqRr</B> <B>-b&lt;header&gt;</B> <B>-f&lt;font&gt;</B> <B>-F&lt;hfont&gt;</B> <B>-L&lt;lines&gt;</B>
+       <B>-p&lt;outfile&gt;</B> <B>-T&lt;n&gt;</B> <B>--add-to-space</B> <B>&lt;units&gt;</B>
+       <B>--add-to-width</B> <B>&lt;units&gt;</B> <B>--columns</B> <B>&lt;n&gt;</B> <B>--detect</B>
+       <B>--first-page</B> <B>&lt;n&gt;</B> <B>--kern</B> <B>&lt;file.afm&gt;</B> <B>--last-page</B> <B>&lt;n&gt;</B>
+       <B>--(heading|footing)-(left|center|right)</B> <B>&lt;string&gt;</B> <B>--mar­</B>
+       <B>gin-(top|bottom|left|right)</B> <B>&lt;inches&gt;</B>
+       <B>--no-eject-(file|formfeed)</B> <B>--spacing</B> <B>&lt;n&gt;</B> <B>[gs</B> <B>options]</B>
+       <B>[files]</B>
+       <B>gsbj</B> [options] [files]
+       <B>gsdj</B> [options] [files]
+       <B>gsdj500</B> [options] [files]
+       <B>gslj</B> [options] [files]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This utility provides functionality approximately  equiva­
+       lent  to  the  Unix  <B>enscript(1)</B> program.  It prints plain
+       text files using a single font.  It currently handles tabs
+       and formfeeds, but not backspaces.  It will line-wrap when
+       using fixed-pitch fonts.  It  will  also  do  kerning  and
+       width adjustment.
+
+       The  default device (-sDEVICE=) and resolution (-r) are as
+       follows:
+             gslp      epson      180
+             gsbj      bj10e      180
+             gsdj      deskjet    300
+             gsdj500   djet500    300
+             gslj      laserjet   300
+       By default the current date is  formatted  as  the  center
+       header.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Standard switches implemented:
+              -12BclqRr  -b&lt;header&gt;  -f&lt;font&gt; -F&lt;hfont&gt; -L&lt;lines&gt;
+              -p&lt;outfile&gt;
+
+       Sun switches implemented:
+              -T&lt;n&gt;     set tab width
+
+       Switches ignored:
+              -GghKkmow -# -C -d -J -n -P -S -s -t -v
+
+       Switches added:
+                     with %!
+
+              --first-page &lt;n&gt;
+                     start printing at page &lt;n&gt;
+
+              --kern &lt;file.afm&gt;
+                     kern  using  information from the given .AFM
+                     file
+
+              --last-page &lt;n&gt;
+                     stop printing after page &lt;n&gt;
+
+              --(heading|footing)-(left|center|right) &lt;string&gt;
+                     set the heading/footing fields; use -B first
+                     to clear
+
+              --margin-(top|bottom|left|right) &lt;inches&gt;
+                     set a margin
+
+              --no-eject-(file|formfeed)
+                     end-of-file/FF only starts a new column, not
+                     a new sheet
+
+              --spacing &lt;n&gt;
+                     use double (n=2), triple (n=3), etc. spacing
+       Also,  the  string  %# in a heading or footing is replaced
+       with the page #.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>gs(1)</B>
+
+
+</PRE>
+<H2>VERSION</H2><PRE>
+       This document was last  revised  for  Ghostscript  version
+       7.05.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       L.  Peter  Deutsch  &lt;ghost@aladdin.com&gt;  is  the principal
+       author of Ghostscript.  Russell J. Lang  &lt;rjl@aladdin.com&gt;
+       is   the  author  of  most  of  the  MS  Windows  code  in
+       Ghostscript.  This manpage by George Ferguson.
+
+
+
+7.05                      22 April 2002                   <B>GSLP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

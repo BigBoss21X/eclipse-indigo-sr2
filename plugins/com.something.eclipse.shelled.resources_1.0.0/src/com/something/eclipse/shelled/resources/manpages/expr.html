@@ -1,0 +1,117 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>expr</B> <I>EXPRESSION</I>
+       <B>expr</B> <I>OPTION</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+       Print the value of EXPRESSION to standard output.  A blank
+       line  below  separates   increasing   precedence   groups.
+       EXPRESSION may be:
+
+       ARG1 | ARG2
+              ARG1 if it is neither null nor 0, otherwise ARG2
+
+       ARG1 &amp; ARG2
+              ARG1 if neither argument is null or 0, otherwise 0
+
+       ARG1 &lt; ARG2
+              ARG1 is less than ARG2
+
+       ARG1 &lt;= ARG2
+              ARG1 is less than or equal to ARG2
+
+       ARG1 = ARG2
+              ARG1 is equal to ARG2
+
+       ARG1 != ARG2
+              ARG1 is unequal to ARG2
+
+       ARG1 &gt;= ARG2
+              ARG1 is greater than or equal to ARG2
+
+       ARG1 &gt; ARG2
+              ARG1 is greater than ARG2
+
+       ARG1 + ARG2
+              arithmetic sum of ARG1 and ARG2
+
+       ARG1 - ARG2
+              arithmetic difference of ARG1 and ARG2
+
+       ARG1 * ARG2
+              arithmetic product of ARG1 and ARG2
+
+       ARG1 / ARG2
+              arithmetic quotient of ARG1 divided by ARG2
+
+       ARG1 % ARG2
+              arithmetic remainder of ARG1 divided by ARG2
+              length of STRING
+
+       + TOKEN
+              interpret TOKEN as a string, even if it is a
+
+              keyword like `match' or an operator like `/'
+
+       ( EXPRESSION )
+              value of EXPRESSION
+
+       Beware  that  many  operators need to be escaped or quoted
+       for shells.  Comparisons are arithmetic if both  ARGs  are
+       numbers, else lexicographical.  Pattern matches return the
+       string matched between \( and \) or null; if \( and \) are
+       not  used, they return the number of characters matched or
+       0.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Mike Parker.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-coreutils@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2003 Free Software Foundation, Inc.
+       This is free software; see the source for  copying  condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The full documentation for <B>expr</B> is maintained as a Texinfo
+       manual.   If  the  <B>info</B>  and  <B>expr</B>  programs  are properly
+       installed at your site, the command
+
+              <B>info</B> <B>expr</B>
+
+       should give you access to the complete manual.
+
+
+
+expr 4.5.8                February 2003                   <B>EXPR(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

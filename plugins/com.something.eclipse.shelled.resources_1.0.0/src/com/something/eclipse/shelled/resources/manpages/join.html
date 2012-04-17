@@ -1,0 +1,85 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>join</B> [<I>OPTION</I>]... <I>FILE1</I> <I>FILE2</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       For  each  pair of input lines with identical join fields,
+       write a line to standard output.  The default  join  field
+       is  the  first,  delimited  by  whitespace.  When FILE1 or
+       FILE2 (not both) is -, read standard input.
+
+       <B>-a</B> FILENUM
+              print unpairable lines coming  from  file  FILENUM,
+              where  FILENUM is 1 or 2, corresponding to FILE1 or
+              FILE2
+
+       <B>-e</B> EMPTY
+              replace missing input fields with EMPTY
+
+       <B>-i</B>, <B>--ignore-case</B> ignore differences in case when  compar­
+              ing fields
+
+       <B>-j</B> FIELD
+              (obsolescent) equivalent to `-1 FIELD <B>-2</B> FIELD'
+
+       <B>-j1</B> FIELD
+              (obsolescent) equivalent to `-1 FIELD'
+
+       <B>-j2</B> FIELD
+              (obsolescent) equivalent to `-2 FIELD'
+
+       <B>-o</B> FORMAT
+              obey FORMAT while constructing output line
+
+       <B>-t</B> CHAR
+              use CHAR as input and output field separator
+
+       <B>-v</B> FILENUM
+              like <B>-a</B> FILENUM, but suppress joined output lines
+
+       <B>-1</B> FIELD
+              join on this FIELD of file 1
+
+       <B>-2</B> FIELD
+              join on this FIELD of file 2
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+       Unless  <B>-t</B>  CHAR  is given, leading blanks separate fields
+       and are ignored, else fields are separated by  CHAR.   Any
+       FIELD  is a field number counted from 1.  FORMAT is one or
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The full documentation for <B>join</B> is maintained as a Texinfo
+       manual.  If  the  <B>info</B>  and  <B>join</B>  programs  are  properly
+       installed at your site, the command
+
+              <B>info</B> <B>join</B>
+
+       should give you access to the complete manual.
+
+
+
+join (coreutils) 4.5.8    February 2003                   <B>JOIN(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,144 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>msgmerge</B> [<I>OPTION</I>] <I>def.po</I> <I>ref.pot</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Merges  two Uniforum style .po files together.  The def.po
+       file is an existing PO file with translations  which  will
+       be  taken  over  to the newly created file as long as they
+       still match; comments will  be  preserved,  but  extracted
+       comments  and  file  positions  will  be  discarded.   The
+       ref.pot file is the last created PO file  with  up-to-date
+       source  references  but old translations, or a PO Template
+       file (generally created by xgettext); any translations  or
+       comments  in  the file will be discarded, however dot com­
+       ments and file positions  will  be  preserved.   Where  an
+       exact  match  cannot  be  found, fuzzy matching is used to
+       produce better results.
+
+       Mandatory arguments to  long  options  are  mandatory  for
+       short options too.
+
+   <B>Input</B> <B>file</B> <B>location:</B>
+       def.po translations referring to old sources
+
+       ref.pot
+              references to new sources
+
+       <B>-D</B>, <B>--directory</B>=<I>DIRECTORY</I>
+              add DIRECTORY to list for input files search
+
+       <B>-C</B>, <B>--compendium</B>=<I>FILE</I>
+              additional  library of message translations, may be
+              specified more than once
+
+   <B>Operation</B> <B>mode:</B>
+       <B>-U</B>, <B>--update</B>
+              update def.po, do nothing if def.po already  up  to
+              date
+
+   <B>Output</B> <B>file</B> <B>location:</B>
+       <B>-o</B>, <B>--output-file</B>=<I>FILE</I>
+              write output to specified file
+
+       The  results  are  written to standard output if no output
+       file is specified or if it is -.
+
+       Output file location in update mode: The result is written
+       back to def.po.
+
+       <B>--backup</B>=<I>CONTROL</I>
+              make a backup of def.po
+
+       <B>--suffix</B>=<I>SUFFIX</I>
+              wise
+
+       simple, never
+              always make simple backups
+
+       The backup suffix is `~', unless set with <B>--suffix</B> or  the
+       SIMPLE_BACKUP_SUFFIX environment variable.
+
+   <B>Operation</B> <B>modifiers:</B>
+       <B>-m</B>, <B>--multi-domain</B>
+              apply ref.pot to each of the domains in def.po
+
+   <B>Output</B> <B>details:</B>
+       <B>-e</B>, <B>--no-escape</B>
+              do not use C escapes in output (default)
+
+       <B>-E</B>, <B>--escape</B>
+              use C escapes in output, no extended chars
+
+       <B>--force-po</B>
+              write PO file even if empty
+
+       <B>-i</B>, <B>--indent</B>
+              indented output style
+
+       <B>--no-location</B>
+              suppress '#: filename:line' lines
+
+       <B>--add-location</B>
+              preserve '#: filename:line' lines (default)
+
+       <B>--strict</B>
+              strict Uniforum output style
+
+       <B>-w</B>, <B>--width</B>=<I>NUMBER</I>
+              set output page width
+
+       <B>--no-wrap</B>
+              do  not  break  long message lines, longer than the
+              output page width, into several lines
+
+       <B>-s</B>, <B>--sort-output</B>
+              generate sorted output
+
+       <B>-F</B>, <B>--sort-by-file</B>
+              sort output by file location
+
+   <B>Informative</B> <B>output:</B>
+       <B>-h</B>, <B>--help</B>
+              display this help and exit
+
+       <B>-V</B>, <B>--version</B>
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 1995-1998, 2000-2002 Free Software Foundation,
+       Inc.
+       This  is  free software; see the source for copying condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  full  documentation  for  <B>msgmerge</B> is maintained as a
+       Texinfo manual.  If the <B>info</B>  and  <B>msgmerge</B>  programs  are
+       properly installed at your site, the command
+
+              <B>info</B> <B>msgmerge</B>
+
+       should give you access to the complete manual.
+
+
+
+GNU gettext 0.11.5         August 2002                <B>MSGMERGE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

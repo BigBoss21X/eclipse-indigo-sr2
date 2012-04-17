@@ -1,0 +1,180 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>Syntax</H2><PRE>
+       <B>pico</B> [ <I>options</I> ] [ <I>file</I> ]
+
+
+</PRE>
+<H2>Description</H2><PRE>
+       <I>Pico</I> is a simple, display-oriented text  editor  based  on
+       the  Pine message system composer.  As with Pine, commands
+       are displayed at the bottom of the  screen,  and  context-
+       sensitive  help is provided.  As characters are typed they
+       are immediately inserted into the text.
+
+       Editing commands are entered  using  control-key  combina­
+       tions.   As a work-around for communications programs that
+       swallow certain control characters, you can emulate a con­
+       trol key by pressing ESCAPE twice, followed by the desired
+       control character, e.g. "ESC ESC c" would be equivalent to
+       entering  a  ctrl-c.   The editor has five basic features:
+       paragraph justification,  searching,  block  cut/paste,  a
+       spelling checker, and a file browser.
+
+       Paragraph  justification  (or  filling) takes place in the
+       paragraph that contains the cursor, or, if the  cursor  is
+       between  lines, in the paragraph immediately below.  Para­
+       graphs are delimited by blank lines, or by lines beginning
+       with  a space or tab.  Unjustification can be done immedi­
+       ately after justification using the control-U key combina­
+       tion.
+
+       String  searches  are  not  sensitive  to  case.  A search
+       begins at the current cursor position and wraps around the
+       end of the text.  The most recent search string is offered
+       as the default in subsequent searches.
+
+       Blocks of text can be moved, copied or deleted  with  cre­
+       ative  use of the command for mark (ctrl-^), delete (ctrl-
+       k) and undelete (ctrl-u).  The delete command will  remove
+       text  between  the "mark" and the current cursor position,
+       and place it in the "cut" buffer.   The  undelete  command
+       effects a "paste" at the current cursor position.
+
+       The spell checker examines all words in the text.  It then
+       offers, in turn, each misspelled word for correction while
+       highlighting  it  in the text.  Spell checking can be can­
+       celled at any time.  Alternatively, <I>pico</I>  will  substitute
+       for  the  default spell checking routine a routine defined
+       by the SPELL environment variable.  The  replacement  rou­
+       tine should read standard input and write standard output.
+
+       The file browser is offered as  an  option  in  the  "Read
+       File"  and "Write Out" command prompts.  It is intended to
+       help in searching for specific files and navigating direc­
+       tory  hierarchies.   Filenames  with  sizes  and  names of
+       <B>-a</B>     Display  all files including those beginning with a
+              period (.).
+
+       <B>-b</B>     Enable the option to  Replace  text  matches  found
+              using the "Where is" command.
+
+       <B>-d</B>     Rebind the "delete" key so the character the cursor
+              is on is rubbed out rather than  the  character  to
+              its left.
+
+       <B>-e</B>     Enable file name completion.
+
+       <B>-f</B>     Use  function  keys for commands.  This option sup­
+              ported only in conjunction with  UW  Enhanced  NCSA
+              telnet.
+
+       <B>-h</B>     List valid command line options.
+
+       <B>-j</B>     Enable  "Goto"  command  in the file browser.  This
+              enables the command to  permit  explicitly  telling
+              <I>pilot</I> which directory to visit.
+
+       <B>-g</B>     Enable  "Show  Cursor" mode in file browser.  Cause
+              cursor to be positioned before the  current  selec­
+              tion  rather  than  placed at the lower left of the
+              display.
+
+       <B>-k</B>     Causes "Cut Text" command to remove characters from
+              the  cursor  position to the end of the line rather
+              than remove the entire line.
+
+       <B>-m</B>     Enable mouse functionality.  This only  works  when
+              <I>pico</I>  is run from within an X Window System "xterm"
+              window.
+
+       <B>-n</B><I>n</I>    The -n<I>n</I> option enables new mail notification.   The
+              <I>n</I> argument is optional, and specifies how often, in
+              seconds, your mailbox is checked for new mail.  For
+              example,  -n60  causes  <I>pico</I>  to check for new mail
+              once every minute.  The  default  interval  is  180
+              seconds, while the minimum allowed is 30. (Note: no
+              space between "n" and the number)
+
+       <B>-o</B> <I>dir</I> Sets operating directory.  Only files  within  this
+              directory   are  accessible.   Likewise,  the  file
+              browser is limited to the specified directory  sub­
+              tree.
+
+       <B>-r</B><I>n</I>    Sets  column  used to limit the "Justify" command's
+              right margin
+
+       <B>-s</B> <I>speller</I>
+       <B>-w</B>     Disable  word  wrap  (thus  allow  editing  of long
+              lines).
+
+       <B>-x</B>     Disable keymenu at the bottom of the screen.
+
+       <B>-z</B>     Enable ^Z suspension of <I>pico</I>.
+
+       <B>-p</B>     Preserve the "start" and "stop"  characters,  typi­
+              cally  Ctrl-Q  and Ctrl-S, which are sometimes used
+              in  communications  paths  to  control  data   flow
+              between devices that operate at different speeds.
+
+       <B>-Q</B> <I>quotestr</I>
+              Set  the quote string.  Especially useful when com­
+              posing email, setting this allows the quote  string
+              to  be  checked  for when Justifying paragraphs.  A
+              common quote string is "&gt; ".
+
+       <B>-q</B>     Termcap or terminfo  definition  for  input  escape
+              sequences  are  used  in  preference  to  sequences
+              defined by default.  This option is only  available
+              if  <I>pico</I>  was compiled with the TERMCAP_WINS define
+              turned on.
+
+       Lastly,  when  a  running  <I>pico</I>  is  disconnected   (i.e.,
+       receives  a  SIGHUP),  <I>pico</I>  will save the current work if
+       needed before exiting.  Work is saved  under  the  current
+       filename  with  ".save"  appended.  If the current work is
+       unnamed, it is saved under the filename "pico.save".
+
+
+
+</PRE>
+<H2>Bugs</H2><PRE>
+       The manner in which lines longer than  the  display  width
+       are dealt is not immediately obvious.  Lines that continue
+       beyond the edge of the display  are  indicated  by  a  '$'
+       character at the end of the line.  Long lines are scrolled
+       horizontally as the cursor moves through them.
+
+
+</PRE>
+<H2>Files</H2><PRE>
+       pico.save        Unnamed interrupted work saved here.
+       *.save           Interrupted work on a named file is saved here.
+
+
+</PRE>
+<H2>Authors</H2><PRE>
+       Michael Seibel &lt;mikes@cac.washington.edu&gt;
+       Laurence Lundblade &lt;lgl@cac.washington.edu&gt;
+       Pico was originally derived from MicroEmacs 3.6,  by  Dave
+       G. Conroy.
+       Pico is a trademark of the University of Washington.
+       Copyright 1989-2002 by the University of Washington.
+
+
+</PRE>
+<H2>See Also</H2><PRE>
+       <B>pine(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

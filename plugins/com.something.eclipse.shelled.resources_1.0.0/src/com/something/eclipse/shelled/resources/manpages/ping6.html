@@ -1,0 +1,294 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ping</B> [ <B>-LRUbdfnqrvVaAB</B>]  [ <B>-c</B> <I>count</I>]  [ <B>-i</B> <I>interval</I>]  [ <B>-l</B>
+       <I>preload</I>]  [ <B>-p</B> <I>pattern</I>]  [ <B>-s</B> <I>packetsize</I>]  [ <B>-t</B> <I>ttl</I>]  [ <B>-w</B>
+       <I>deadline</I>]  [ <B>-F</B> <I>flowlabel</I>]  [ <B>-I</B> <I>interface</I>]  [ <B>-M</B> <I>hint</I>]  [
+       <B>-Q</B> <I>tos</I>]  [ <B>-S</B> <I>sndbuf</I>]  [ <B>-T</B> <I>timestamp</I> <I>option</I>]  [ <B>-W</B>  <I>time­</I>
+       <I>out</I>]  [ <I>hop</I> <I>...</I>]  <I>destination</I>
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>ping</B> uses the ICMP protocol's mandatory ECHO_REQUEST data­
+       gram to elicit an ICMP ECHO_RESPONSE from a host or  gate­
+       way.   ECHO_REQUEST  datagrams  (``pings'') have an IP and
+       ICMP header, followed by a  struct  timeval  and  then  an
+       arbitrary  number  of  ``pad''  bytes used to fill out the
+       packet.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-a</B>     Audible ping.
+
+       <B>-A</B>     Adaptive  ping.  Interpacket  interval  adapts   to
+              round-trip  time, so that effectively not more than
+              one (or more, if preload is set) unanswered  probes
+              present in the network. Minimal interval is 200msec
+              for not super-user.  On networks with low rtt  this
+              mode is essentially equivalent to flood mode.
+
+       <B>-b</B>     Allow pinging a broadcast address.
+
+       <B>-B</B>     Do  not  allow  <B>ping</B>  to  change  source address of
+              probes.  The address is bound to one selected  when
+              <B>ping</B> starts.
+
+       <B>-c</B> <I>count</I>
+              Stop after sending <I>count</I> ECHO_REQUEST packets. With
+              <I>deadline</I> option, <B>ping</B> waits  for  <I>count</I>  ECHO_REPLY
+              packets, until the timeout expires.
+
+       <B>-d</B>     Set  the  SO_DEBUG option on the socket being used.
+              Essentially, this socket  option  is  not  used  by
+              Linux kernel.
+
+       <B>-F</B> <I>flow</I> <I>label</I>
+              Allocate  and set 20 bit flow label on echo request
+              packets.  (Only <B>ping6</B>). If value  is  zero,  kernel
+              allocates random flow label.
+
+       <B>-f</B>     Flood  ping.  For  every ECHO_REQUEST sent a period
+              ``.''  is  printed,  while  for   ever   ECHO_REPLY
+              received  a  backspace is printed.  This provides a
+              rapid  display  of  how  many  packets  are   being
+              dropped.   If interval is not given, it sets inter­
+              val to zero and outputs packets  as  fast  as  they
+              device.  When  pinging IPv6 link-local address this
+              option is required.
+
+       <B>-l</B> <I>preload</I>
+              If <I>preload</I> is specified, <B>ping</B> sends that many pack­
+              ets not waiting for reply.  Only the super-user may
+              select preload more than 3.
+
+       <B>-L</B>     Suppress loopback of multicast packets.  This  flag
+              only applies if the ping destination is a multicast
+              address.
+
+       <B>-n</B>     Numeric output only.  No attempt will  be  made  to
+              lookup symbolic names for host addresses.
+
+       <B>-p</B> <I>pattern</I>
+              You  may specify up to 16 ``pad'' bytes to fill out
+              the packet you send.  This is useful for diagnosing
+              data-dependent problems in a network.  For example,
+              <B>-p</B> <B>ff</B> will cause the sent packet to be filled  with
+              all ones.
+
+       <B>-Q</B> <I>tos</I> Set  Quality of Service -related bits in ICMP data­
+              grams.  <I>tos</I> can be either decimal  or  hex  number.
+              Traditionally  (RFC1349),  these  have  been inter­
+              preted as: 0 for reserved  (currently  being  rede­
+              fined  as congestion control), 1-4 for Type of Ser­
+              vice and 5-7 for Precedence.  Possible settings for
+              Type  of Service are: minimal cost: 0x02, reliabil­
+              ity: 0x04, throughput: 0x08, low delay: 0x10.  Mul­
+              tiple  TOS  bits  should not be set simultaneously.
+              Possible settings for special Precedence range from
+              priority (0x20) to net control (0xe0).  You must be
+              root (CAP_NET_ADMIN capability) to use Critical  or
+              higher  precedence  value.  You cannot set bit 0x01
+              (reserved) unless ECN has been enabled in the  ker­
+              nel.   In  RFC2474, these fields has been redefined
+              as 8-bit Differentiated Services  (DS),  consisting
+              of:  bits  0-1  of separate data (ECN will be used,
+              here), and  bits  2-7  of  Differentiated  Services
+              Codepoint (DSCP).
+
+       <B>-q</B>     Quiet output.  Nothing is displayed except the sum­
+              mary lines at startup time and when finished.
+
+       <B>-R</B>     Record route. (IPv4 only) Includes the RECORD_ROUTE
+              option  in the ECHO_REQUEST packet and displays the
+              route buffer on returned packets.  Note that the IP
+              header  is  only large enough for nine such routes.
+              Many hosts ignore or discard this option.
+
+       <B>-r</B>     Bypass the normal routing tables and send  directly
+              to buffer not more than one packet.
+
+       <B>-t</B> <I>ttl</I> Set the IP Time to Live.
+
+       <B>-T</B> <I>timestamp</I> <I>option</I>
+              Set special IP timestamp options.  <I>timestamp</I> <I>option</I>
+              may be either <I>tsonly</I> (only  timestamps),  <I>tsandaddr</I>
+              (timestamps   and  addresses)  or  <I>tsprespec</I>  <I>host1</I>
+              <I>[host2</I>  <I>[host3</I>  <I>[host4]]]</I>  (timestamp  prespecified
+              hops).
+
+       <B>-M</B> <I>hint</I>
+              Select  Path  MTU  Discovery strategy.  <I>hint</I> may be
+              either <I>do</I> (prohibit fragmentation, even local one),
+              <I>want</I>  (do  PMTU  discovery,  fragment  locally when
+              packet size is large),  or  <I>dont</I>  (do  not  set  DF
+              flag).
+
+       <B>-U</B>     Print    full   user-to-user   latency   (the   old
+              behaviour). Normally <B>ping</B> prints network round trip
+              time,  which can be different f.e. due to DNS fail­
+              ures.
+
+       <B>-v</B>     Verbose output.
+
+       <B>-V</B>     Show version and exit.
+
+       <B>-w</B> <I>deadline</I>
+              Specify a timeout, in seconds,  before  <B>ping</B>  exits
+              regardless  of  how  many packets have been sent or
+              received. In this case <B>ping</B>  does  not  stop  after
+              <I>count</I> packet are sent, it waits either for <I>deadline</I>
+              expire or until <I>count</I> probes are  answered  or  for
+              some error notification from network.
+
+       <B>-W</B> <I>timeout</I>
+              Time to wait for a response, in seconds. The option
+              affects only timeout in absense of  any  responses,
+              otherwise <B>ping</B> waits for two RTTs.
+
+       When  using  <B>ping</B>  for fault isolation, it should first be
+       run on the local host, to verify that  the  local  network
+       interface is up and running. Then, hosts and gateways fur­
+       ther and further away  should  be  ``pinged''.  Round-trip
+       times  and packet loss statistics are computed.  If dupli­
+       cate packets are received, they are not  included  in  the
+       packet  loss  calculation, although the round trip time of
+       these packets is used  in  calculating  the  minimum/aver­
+       age/maximum  round-trip  time numbers.  When the specified
+       number of packets have been sent (and received) or if  the
+       program  is  terminated  with a SIGINT, a brief summary is
+       displayed. Shorter  current  statistics  can  be  obtained
+
+
+</PRE>
+<H2>ICMP PACKET DETAILS</H2><PRE>
+       An IP  header  without  options  is  20  bytes.   An  ICMP
+       ECHO_REQUEST  packet  contains an additional 8 bytes worth
+       of ICMP header followed by an arbitrary  amount  of  data.
+       When  a  <I>packetsize</I>  is  given, this indicated the size of
+       this extra piece of data (the default  is  56).  Thus  the
+       amount  of  data  received  inside of an IP packet of type
+       ICMP ECHO_REPLY will always  be  8  bytes  more  than  the
+       requested data space (the ICMP header).
+
+       If  the  data  space is at least of size of struct timeval
+       <B>ping</B> uses the beginning bytes of this space to  include  a
+       timestamp  which  it uses in the computation of round trip
+       times.  If the data space is shorter, no round trip  times
+       are given.
+
+
+</PRE>
+<H2>DUPLICATE AND DAMAGED PACKETS</H2><PRE>
+       <B>ping</B> will report duplicate and damaged packets.  Duplicate
+       packets should never occur, and seem to be caused by inap­
+       propriate   link-level  retransmissions.   Duplicates  may
+       occur in many situations and are rarely (if ever)  a  good
+       sign,  although  the  presence of low levels of duplicates
+       may not always be cause for alarm.
+
+       Damaged packets are obviously serious cause for alarm  and
+       often  indicate  broken  hardware  somewhere  in  the <B>ping</B>
+       packet's path (in the network or in the hosts).
+
+
+</PRE>
+<H2>TRYING DIFFERENT DATA PATTERNS</H2><PRE>
+       The (inter)network layer should never treat  packets  dif­
+       ferently  depending on the data contained in the data por­
+       tion.  Unfortunately, data-dependent  problems  have  been
+       known  to  sneak  into  networks and remain undetected for
+       long periods of time.  In many cases the  particular  pat­
+       tern  that  will  have  problems is something that doesn't
+       have sufficient ``transitions'', such as all ones  or  all
+       zeros,  or a pattern right at the edge, such as almost all
+       zeros.  It isn't necessarily enough to specify a data pat­
+       tern  of  all  zeros  (for  example)  on  the command line
+       because the pattern that is of interest  is  at  the  data
+       link level, and the relationship between what you type and
+       what the controllers transmit can be complicated.
+
+       This means that if you have a data-dependent  problem  you
+       will  probably have to do a lot of testing to find it.  If
+       you are lucky, you may manage to find a file  that  either
+       can't  be  sent  across  your  network  or that takes much
+       longer to transfer than other similar length  files.   You
+       can  then examine this file for repeated patterns that you
+       can test using the <B>-p</B> option of <B>ping</B>.
+
+       some hosts, but not reach them with <B>telnet(1)</B> or <B>ftp(1)</B>.
+
+       In  normal  operation  ping  prints the ttl value from the
+       packet it receives.  When a remote system receives a  ping
+       packet,  it  can do one of three things with the TTL field
+       in its response:
+
+       · Not change it; this is what Berkeley  Unix  systems  did
+         before  the  4.3BSD  Tahoe release. In this case the TTL
+         value in the received packet will be 255 minus the  num­
+         ber of routers in the round-trip path.
+
+       · Set  it  to 255; this is what current Berkeley Unix sys­
+         tems do.  In this case the TTL  value  in  the  received
+         packet  will  be  255 minus the number of routers in the
+         path <B>from</B> the remote system <B>to</B> the <B>ping</B>ing host.
+
+       · Set it to some other value. Some machines use  the  same
+         value  for  ICMP  packets that they use for TCP packets,
+         for example either 30 or 60.  Others may use  completely
+         wild values.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       · Many  Hosts and Gateways ignore the RECORD_ROUTE option.
+
+       · The maximum IP header length is too  small  for  options
+         like  RECORD_ROUTE to be completely useful.  There's not
+         much that that can be done about this, however.
+
+       · Flood pinging is not recommended in general,  and  flood
+         pinging  the broadcast address should only be done under
+         very controlled conditions.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>netstat(1)</B>, <B>ifconfig(8)</B>.
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+       The <B>ping</B> command appeared in 4.3BSD.
+
+       The version described here is its descendant  specific  to
+       Linux.
+
+
+</PRE>
+<H2>SECURITY</H2><PRE>
+       <B>ping</B>  requires CAP_NET_RAWIO capability to be executed. It
+       may be used as set-uid root.
+
+
+</PRE>
+<H2>AVAILABILITY</H2><PRE>
+       <B>ping</B> is part of <I>iputils</I> package and  the  latest  versions
+       are    available   in   source   form  for  anonymous  ftp
+       ftp://ftp.inr.ac.ru/ip-routing/iputils-current.tar.gz.
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

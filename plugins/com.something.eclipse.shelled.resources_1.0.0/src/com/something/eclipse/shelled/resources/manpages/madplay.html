@@ -1,0 +1,286 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>madplay</B> [<I>options</I>] <I>file</I> ...
+       <B>madplay</B> [<I>options</I>] <B>-o</B> [<I>type</I><B>:</B>]<I>path</I> <I>file</I> ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>madplay</B>  is  a  command-line MPEG audio decoder and player
+       based on the MAD library (<I>libmad</I>).
+
+       MAD is a high-quality MPEG  audio  decoder.  It  currently
+       supports MPEG-1 and the MPEG-2 extension to Lower Sampling
+       Frequencies, as well as the so-called MPEG 2.5 format. All
+       three  audio  layers  (Layer I,  Layer II,  and  Layer III
+       a.k.a. MP3) are fully implemented.
+
+       Among the special features of MAD are 24-bit  PCM  resolu­
+       tion and 100% fixed-point (integer) computation. Since MAD
+       is implemented entirely without the use of floating  point
+       arithmetic,  it  performs especially well on architectures
+       without an FPU.
+
+       MAD  does  not  yet  support  MPEG-2  multichannel   audio
+       (although  it  should  be  backward  compatible  with such
+       streams) nor does it currently support AAC.
+
+       By default <B>madplay</B> reads and decodes  one  or  more  input
+       <I>file</I>s  containing  MPEG  audio  data and plays them on the
+       native audio device. If the input file is  a  single  dash
+       (-), data is read from standard input.
+
+       Decoded  output  may  optionally  be  redirected to a file
+       instead of being played on the audio device by  using  the
+       <B>-o</B> (<B>--output</B>) option.
+
+       For  each <I>file</I>, <B>madplay</B> will also attempt to read and dis­
+       play ID3 tag information. If data is being read from stan­
+       dard input, ID3 tags will be displayed as they are encoun­
+       tered.  The supported tag  versions  are  ID3v1,  ID3v1.1,
+       ID3v2.2, ID3v2.3, and ID3v2.4.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+   <B>Verbosity</B>
+       <B>-v</B> or <B>--verbose</B>
+              Show  information about the stream during decoding,
+              including playing time, audio layer, bit rate, sam­
+              pling frequency, and stereo mode.
+
+       <B>-q</B> or <B>--quiet</B>
+              Do not show any information during decoding, except
+              warnings.
+
+       <B>-Q</B> or <B>--very-quiet</B>
+              Do  not  show  any  information  during   decoding,
+
+   <B>Audio</B> <B>Output</B>
+       <B>-o</B> or <B>--output=</B>[<I>type</I><B>:</B>]<I>path</I>
+              Direct output to <I>path</I>, rather than playing audio on
+              the  native  audio device. The format of the output
+              is specified by <I>type</I> which can be any of  the  sup­
+              ported  output  formats (see <B>Output</B> <B>Formats</B> below.)
+              If a format is not specified, one will be  inferred
+              from  <I>path</I>.  If <I>path</I> is a single dash (-), the out­
+              put will be written to standard output.
+
+       <B>-b</B> or <B>--bit-depth=</B><I>depth</I>
+              Request an output precision of <I>depth</I> bits per  sam­
+              ple.  Higher bit depths yield higher quality sound.
+              Typical bit depths are 8, 16, 24, and  32,  however
+              other  depths  may  also be possible. See the <B>NOTES</B>
+              section  below  for  further  details  about   this
+              option.
+
+       <B>-d</B> or <B>--no-dither</B>
+              Do  not  dither output PCM samples. This may result
+              in lower sound quality but is useful for  analyzing
+              output from the decoder.
+
+       <B>--fade-in</B>[<B>=</B><I>duration</I>]
+              Gradually  fade-in  the  audio  from each file over
+              <I>duration</I>.  If not specified, the  default  duration
+              is <B>0:05</B> (five seconds.)
+
+       <B>-a</B> or <B>--attenuate=</B><I>decibels</I> or <B>--amplify=</B><I>decibels</I>
+              Attenuate  or  amplify the signal by <I>decibels</I> (dB).
+              The signal is attenuated if the  decibel  value  is
+              negative; it is amplified if the value is positive.
+              The decibel value must be in the range -175 to +18.
+              The value may be fractional, e.g. -1.5.  A value of
+              0 will leave the signal unchanged.   Each  step  of
+              6 dB  will  approximately  halve  (in  the negative
+              direction) or double (in  the  positive  direction)
+              the strength of the signal.
+
+   <B>Channel</B> <B>Selection</B>
+       For  dual  channel  streams,  an  output channel should be
+       selected. If one is not selected, the first (left) channel
+       will be used.
+
+       For  stereo streams, making a channel selection other than
+       stereo will cause the output to become monaural.
+
+       <B>-1</B> or <B>--left</B>
+              Output the first (left) channel only.
+
+       <B>-2</B> or <B>--right</B>
+
+       <B>-t</B> or <B>--time=</B><I>duration</I>
+              Stop  playback after the playing time of the output
+              audio equals <I>duration</I>.
+
+       <B>-z</B> or <B>--shuffle</B>
+              Randomize the list of files given  on  the  command
+              line for playback.
+
+       <B>-r</B> or <B>--repeat</B>[<B>=</B><I>max</I>]
+              Play  the  input  files <I>max</I> times, or indefinitely.
+              Playback can be stopped  prematurely  by  giving  a
+              time  limit  with  the  <B>-t</B>  (<B>--time</B>)  option. If <B>-z</B>
+              (<B>--shuffle</B>) is also used, the files will be contin­
+              uously shuffled and repeated in such a way that the
+              same file is not played again until at  least  half
+              of the other files have played in the interim.
+
+       <B>--tty-control</B>
+              Enable  keyboard  controls during playback. This is
+              the default unless standard input is not a terminal
+              or  output  is  redirected with <B>-o</B> (<B>--output</B>).  The
+              keyboard controls are:
+
+              <B>P</B>  Pause; press any key to resume.
+
+              <B>S</B>  Stop; press any key to replay the  current  file
+                 from the beginning.
+
+              <B>F</B>  Forward; advance to the next file.
+
+              <B>B</B>  Back;  replay  the  current  file, unless it has
+                 been playing for less than 4 seconds,  in  which
+                 case replay the previous file.
+
+              <B>T</B>  Time display; change the time display mode. This
+                 only works with  <B>-v</B>  (<B>--verbose</B>).   The  display
+                 mode alternates among overall playing time, cur­
+                 rent time remaining, and current playing time.
+
+              <B>Q</B>  Quit; stop decoding and exit.
+
+       <B>--no-tty-control</B>
+              Disable keyboard controls during playback. This  is
+              the  default  when standard input is not a terminal
+              or output is redirected with <B>-o</B> (<B>--output</B>).
+
+   <B>Miscellaneous</B>
+       <B>-V</B> or <B>--version</B>
+              Display the effective version and build options for
+              <B>madplay</B> and exit.
+
+       <B>wave</B>   Microsoft RIFF/WAVE, [16-bit] PCM (<B>*.wav</B>)
+
+       <B>snd</B>    Sun/NeXT audio, 8-bit ISDN µ-law (<B>*.au</B>, <B>*.snd</B>)
+
+       <B>raw</B>    binary  [16-bit]  host-endian  linear  PCM,  stereo
+              interleaved
+
+       <B>hex</B>    ASCII  hexadecimal  [24-bit]  linear  PCM,   stereo
+              interleaved,  one  sample  per  output  line (debug
+              builds only)
+
+       <B>esd</B>    Enlightened Sound Daemon  (EsounD)  [16-bit]  (give
+              speaker host as <I>path</I>)
+
+       <B>null</B>   no  output  (usually  for  testing  or  timing  the
+              decoder)
+
+       Default bit depths shown in square brackets can be changed
+       with the <B>-b</B> (<B>--bit-depth</B>) option.
+
+       Note that EsounD support requires the <I>libesd</I> library.
+
+
+</PRE>
+<H2>Time Specifications</H2><PRE>
+       For  options which accept a time or duration argument, the
+       following time specifications are recognized:
+
+       <I>hh</I><B>:</B><I>mm</I><B>:</B><I>ss</I><B>.</B><I>ddd</I>
+              Hours, minutes, seconds, and decimal fractions of a
+              second.  This  specification is flexible; <I>hh</I><B>:</B><I>mm</I><B>:</B><I>ss</I>,
+              <I>mmm</I><B>:</B><I>ss</I>,  <B>:</B><I>ss</I>,  <I>sss</I><B>.</B><I>ddd</I>,  <B>.</B><I>ddd</I>,  and  <I>ssss</I>  are  all
+              acceptable.  The  component  values  are  not  con­
+              strained to any particular range or number of  dig­
+              its.
+
+       <I>frac</I><B>/</B><I>unit</I>
+              A length of time specified as a rational number, in
+              seconds. This can be used  for  sample-granularity,
+              for  example  <B>32/44100</B>  for  32 samples, assuming a
+              44100 Hz sample frequency.
+
+       <I>time1</I><B>+</B><I>time2</I>
+              A composite time made by  adding  two  time  values
+              together.  This permits mixing the above specifica­
+              tion forms.
+
+       The resolution of any time value cannot exceed 1/352800000
+       seconds.
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       <B>error:</B> <B>frame</B> <B>#:</B> <B>lost</B> <B>synchronization</B>
+              If  encountered  at  the  beginning of a file, this
+              means the file contains  something  other  than  an
+              help  restore the bit reservoir for the next frame.
+
+       Most other messages indicate a  deficiency  in  the  input
+       stream.
+
+       When  a  frame  cannot  be properly decoded, a concealment
+       strategy is used as follows:
+
+       · If the  previous  frame  was  properly  decoded,  it  is
+         repeated in place of the current frame.
+
+       · If the previous frame was <I>not</I> properly decoded, the cur­
+         rent frame is muted.
+
+
+</PRE>
+<H2>CONFORMING TO</H2><PRE>
+       MAD conforms  to  Part 3  of  the  ISO/IEC 11172  (MPEG-1)
+       international  standard  for decoding MPEG audio. In addi­
+       tion, MAD supports the extension to  Lower  Sampling  Fre­
+       quencies  (LSF)  as  defined  in  Part 3  of ISO/IEC 13818
+       (MPEG-2).
+
+       The output from MAD has been tested and found  to  satisfy
+       the  ISO/IEC 11172-4  computational  accuracy requirements
+       for compliance. In most  configurations,  MAD  is  a  <I>Full</I>
+       <I>Layer</I> <I>III</I>  <I>ISO/IEC</I> <I>11172-3</I> <I>audio</I> <I>decoder</I> as defined by the
+       standard.
+
+       The ID3 tag parsing library used by  <B>madplay</B>  conforms  to
+       the ID3v2.4.0 informal standard.
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       Because MAD produces samples with a precision greater than
+       24 bits, by default <B>madplay</B> will dither the samples to the
+       precision of the output format. This produces high quality
+       audio that generally sounds superior to the  output  of  a
+       simple rounding algorithm. However, dithering may unfavor­
+       ably affect an analytic examination  of  the  output,  and
+       therefore it may be disabled by using the <B>-d</B> (<B>--no-dither</B>)
+       option.
+
+       The actual precision of output samples  can  be  requested
+       with the <B>-b</B> (<B>--bit-depth</B>) option. Whether this request can
+       be honored depends on the  output  format.  If  output  is
+       directed  to an audio device, success depends on the capa­
+       bilities of the device. If this option is not specified, a
+       typical  default  depth  will be used (often 16) or in the
+       case of output to an audio device, the highest  bit  depth
+       determined  to work reliably with the device will be used.
+
+       Note that bit depths greater than 24 are  effectively  the
+       same  as  24-bit precision samples padded to the requested
+       depth.
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+       domain
+       ypdomainname - set or  display  name  of  current  NIS(YP)
+       domain
+
+
+</PRE>
+<H2>SYNOPSYS</H2><PRE>
+       <B>domainname</B> [ <B>domain</B> ]
+       <B>nisdomainname</B> [ <B>domain</B> ]
+       <B>ypdomainname</B> [ <B>domain</B> ]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Without  an  argument, <B>domainname</B> displays the name of the
+       current NIS domainname of the system.  <B>domainname</B> uses the
+       <B>getdomainname(2)</B> function for getting the domainname, <B>nis­</B>
+       <B>domainname</B>      and      <B>ypdomainname</B>      are       using
+       <B>yp_get_default_domain(3)</B>.
+
+       Only  the  super-user  can  set  the name of the domain by
+       specifying the new <B>domain</B> as an argument. All  three  pro­
+       grams uses <B>setdomainname(2)</B> for this.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>getdomainname(2)</B>,                        <B>setdomainname(2)</B>,
+       <B>yp_get_default_domain(3)</B>, <B>ypbind(8)</B>, <B>ypcat(1)</B>, <B>ypmatch(1)</B>,
+       <B>ypwhich(1)</B>, <B>yppoll(8)</B>, <B>ypserv(8)</B>, <B>yset(8)</B>
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       <B>domainname</B>  is  part  of  the  <B>yp-tools</B> package, which was
+       written by Thorsten Kukuk &lt;kukuk@suse.de&gt;.
+
+
+
+YP Tools 2.8                 May 1999               <B>domainname(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

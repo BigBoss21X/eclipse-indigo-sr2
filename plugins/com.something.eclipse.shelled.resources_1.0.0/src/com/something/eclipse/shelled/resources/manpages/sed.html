@@ -1,0 +1,239 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       sed [-V] [--version] [--help] [-n] [--quiet] [--silent]
+           [-l N] [--line-length=N] [-u] [--unbuffered]
+           [-e script] [--expression=script]
+           [-f script-file] [--file=script-file]
+           [script-if-no-other-script]
+           [file...]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>Sed</I>  is  a stream editor.  A stream editor is used to per­
+       form basic text transformations on an input stream (a file
+       or  input from a pipeline).  While in some ways similar to
+       an editor which permits scripted edits (such as  <I>ed</I>),  <I>sed</I>
+       works  by  making  only one pass over the input(s), and is
+       consequently more efficient.  But it is <I>sed</I>'s  ability  to
+       filter text in a pipeline which particularly distinguishes
+       it from other types of editors.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <I>Sed</I>  may  be  invoked  with  the  following   command-line
+       options:
+
+       <B>-V</B>
+
+       <B>--version</B>
+              Print  out the version of <I>sed</I> that is being run and
+              a copyright notice, then exit.
+
+       <B>-h</B>
+
+       <B>--help</B> Print a usage  message  briefly  summarizing  these
+              command-line options and the bug-reporting address,
+              then exit.
+
+       <B>-n</B>
+
+       <B>--quiet</B>
+
+       <B>--silent</B>
+              By default, <I>sed</I> will print out the pattern space at
+              the  end  of  each cycle through the script.  These
+              options disable this automatic  printing,  and  <I>sed</I>
+              will  only  produce  output when explicitly told to
+              via the <B>p</B> command.
+
+       <B>-l</B><I>N</I>
+
+       <B>--line-length=</B><I>N</I>
+              Specify the desired line-wrap length  for  the  'l'
+              command.   A length of 0 (zero) means to never wrap
+              long lines.
+
+       <B>-f</B> <I>script-file</I>
+
+       <B>--file=</B><I>script-file</I>
+              Add  the commands contained in the file <I>script-file</I>
+              to the set of commands to be run  while  processing
+              the input.
+
+       If  no  <B>-e</B>,<B>-f</B>,<B>--expression</B>, or <B>--file</B> options are given on
+       the command-line, then the first  non-option  argument  on
+       the command line is taken to be the <I>script</I> to be executed.
+
+       If any command-line parameters remain after processing the
+       above,  these  parameters  are interpreted as the names of
+       input files to be processed.  A file name of <B>-</B>  refers  to
+       the  standard  input stream.  The standard input will pro­
+       cessed if no file names are specified.
+
+
+
+</PRE>
+<H2>Command Synopsis</H2><PRE>
+       This is just a brief synopsis of <I>sed</I> commands to serve  as
+       a reminder to those who already know <I>sed</I>; other documenta­
+       tion (such as the texinfo document) must be consulted  for
+       fuller descriptions.
+
+   <B>Zero-address</B> <B>``commands''</B>
+       : <I>label</I>
+              Label for <B>b</B> and <B>t</B> commands.
+
+       #<I>comment</I>
+              The  comment extends until the next newline (or the
+              end of a <B>-e</B> script fragment).
+
+       }      The closing bracket of a { } block.
+
+   <B>Zero-</B> <B>or</B> <B>One-</B> <B>address</B> <B>commands</B>
+       =      Print the current line number.
+
+       a \
+
+       <I>text</I>   Append <I>text</I>, which has each embedded  newline  pre­
+              ceded by a backslash.
+
+       i \
+
+       <I>text</I>   Insert  <I>text</I>,  which has each embedded newline pre­
+              ceded by a backslash.
+
+       q      Immediately quit the <I>sed</I> script without  processing
+              any  more  input,  except that if auto-print is not
+              disabled the current pattern space will be printed.
+
+              branch to end of script.
+
+       c \
+
+       <I>text</I>   Replace  the  selected  lines  with <I>text</I>, which has
+              each embedded newline preceded by a backslash.
+
+       d      Delete pattern space.  Start next cycle.
+
+       D      Delete up to the first embedded newline in the pat­
+              tern  space.   Start  next  cycle, but skip reading
+              from the input if there is still data in  the  pat­
+              tern space.
+
+       h H    Copy/append pattern space to hold space.
+
+       g G    Copy/append hold space to pattern space.
+
+       x      Exchange  the  contents  of  the  hold  and pattern
+              spaces.
+
+       l      List out the current line in a ``visually unambigu­
+              ous'' form.
+
+       n N    Read/append the next line of input into the pattern
+              space.
+
+       p      Print the current pattern space.
+
+       P      Print up to the first embedded newline of the  cur­
+              rent pattern space.
+
+       s/<I>regexp</I>/<I>replacement</I>/
+              Attempt  to match <I>regexp</I> against the pattern space.
+              If successful, replace that  portion  matched  with
+              <I>replacement</I>.   The <I>replacement</I> may contain the spe­
+              cial character <B>&amp;</B> to refer to that  portion  of  the
+              pattern   space  which  matched,  and  the  special
+              escapes \1 through \9 to refer to the corresponding
+              matching sub-expressions in the <I>regexp</I>.
+
+       w      <I>filename</I>  Write  the current pattern space to <I>file­</I>
+              <I>name</I>.
+
+       y/<I>source</I>/<I>dest</I>/
+              Transliterate the characters in the  pattern  space
+              which appear in <I>source</I> to the corresponding charac­
+              ter in <I>dest</I>.
+
+
+</PRE>
+<H2>Addresses</H2><PRE>
+       <I>Sed</I> commands can be given with no addresses, in which case
+       the command will be executed for all input lines; with one
+       mand shall only be executed if the  address  (or  address-
+       range) does <B>not</B> match.
+
+       The following address types are supported:
+
+       <I>number</I> Match only the specified line <I>number</I>.
+
+       <I>first</I>~<I>step</I>
+              Match  every <I>step</I>'th line starting with line <I>first</I>.
+              For example, ``sed -n 1~2p''  will  print  all  the
+              odd-numbered  lines  in  the  input stream, and the
+              address 2~5 will match every fifth  line,  starting
+              with the second.  (This is a GNU extension.)
+
+       $      Match the last line.
+
+       /<I>regexp</I>/
+              Match lines matching the regular expression <I>regexp</I>.
+
+       \<B>c</B><I>regexp</I><B>c</B>
+              Match lines matching the regular expression <I>regexp</I>.
+              The <B>c</B> may be any character.
+
+       GNU <I>sed</I> also supports some special 2-address forms:
+
+       0,<I>addr2</I>
+              Start  out  in "matched first address" state, until
+              <I>addr2</I> is found.  This is similar to 1,<I>addr2</I>, except
+              that  if <I>addr2</I> matches the very first line of input
+              the 0,<I>addr2</I> form will be at the end of  its  range,
+              whereas  the  1,<I>addr2</I>  form  will  still  be at the
+              beginning of its range.
+
+       <I>addr1</I>,+<I>N</I>
+              Will match <I>addr1</I> and the <I>N</I> lines following <I>addr1</I>.
+
+       <I>addr1</I>,~<I>N</I>
+              Will match <I>addr1</I>  and  the  lines  following  <I>addr1</I>
+              until  the  next  line whose input line number is a
+              multiple of <I>N</I>.
+
+
+</PRE>
+<H2>Regular expressions</H2><PRE>
+       POSIX.2 BREs <I>should</I> be supported,  but  they  aren't  com­
+       pletely  yet.   The  <B>\n</B>  sequence  in a regular expression
+       matches the newline character.  There are  also  some  GNU
+       extensions.   [XXX  FIXME:  more needs to be said.  At the
+       very  least,  a  reference  to  another   document   which
+       describes what is supported should be given.]
+
+
+</PRE>
+<H2>Miscellaneous notes</H2><PRE>
+       This  version of <I>sed</I> supports a \<B>&lt;newline&gt;</B> sequence in all
+       regular expressions, the <I>replacement</I> part of a  substitute
+       sion'' in the body of your report if at all possible.
+
+
+
+GNU Project                 1999-09-06                     <B>SED(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

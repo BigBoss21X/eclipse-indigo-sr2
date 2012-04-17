@@ -1,0 +1,53 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Starts up EsounD, which provides a sound mixing server.
+
+
+</PRE>
+<H2>USAGE</H2><PRE>
+       esd [options]
+
+         -d DEVICE     force esd to use sound device DEVICE
+         -b            run server in 8 bit sound mode
+         -r RATE       run server at sample rate of RATE
+         -as SECS      free audio device after SECS of inactivity
+         -unix         use unix domain sockets instead of tcp/ip
+         -tcp          use tcp/ip sockets instead of unix domain
+         -public       make tcp/ip access public (other than localhost)
+         -promiscuous  start unlocked and owned (disable authenticaton) NOT RECOMMENDED
+         -terminate    terminate esd daemone after last client exits
+         -nobeeps      disable startup beeps
+         -trust        start esd even if use of /tmp/.esd can be insecure
+         -port PORT    listen for connections at PORT (only for tcp/ip)
+         -bind ADDRESS binds to ADDRESS (only for tcp/ip)
+
+         -v --version  print version information
+
+       Possible devices are:  /dev/dsp, /dev/dsp2, etc.
+
+
+</PRE>
+<H2>FILES /etc/esound/esd.conf              daemon configuration file</H2><PRE>
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>esdcat(1)</B>, <B>esddsp(1)</B>, <B>esdloop(1)</B>, <B>esdplay(1)</B>, <I>esdsam­</I>
+       <B>ple(1)</B>, <B>esd-config(1)</B>, <B>esdctl(1)</B>, <B>esdfilt(1)</B>, <B>esdmon(1)</B>,
+       <B>esdrec(1)</B>
+
+
+
+2002-06-04                EsounD 0.2.29                    <B>ESD(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

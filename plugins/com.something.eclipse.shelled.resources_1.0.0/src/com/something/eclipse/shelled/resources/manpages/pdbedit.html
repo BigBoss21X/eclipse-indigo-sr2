@@ -1,0 +1,182 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>pdbedit</B>  [  <B>-l</B>  ]   [  <B>-v</B> ]  [ <B>-w</B> ]  [ <B>-u</B> <B>username</B> ]  [ <B>-f</B>
+       <B>fullname</B> ]  [ <B>-h</B> <B>homedir</B> ]  [ <B>-d</B> <B>drive</B> ]  [ <B>-s</B> <B>script</B> ]  [
+       <B>-p</B> <B>profile</B> ]  [ <B>-a</B> ]  [ <B>-t</B> ]  [ <B>-m</B> ]  [ <B>-x</B> ]  [ <B>-i</B> <B>file</B> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This tool is part of the  Samba suite.
+
+       The  pdbedit  program is used to manage the users accounts
+       stored in the sam database and can be run only by root.
+
+       The pdbedit tool use the passdb modular interface  and  is
+       independent  from  the  kind  of users database used (cur­
+       rently there are smbpasswd, ldap, nis+ and tdb  based  and
+       more can be addedd without changing the tool).
+
+       There  are  five  main  ways to use pdbedit: adding a user
+       account, removing a user account, modifing a user account,
+       listing user accounts, importing users accounts.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-l</B>     This  option  list all the user accounts present in
+              the users database.  This option prints a  list  of
+              user/uid pairs separated by the ':' character.
+
+              Example: <B>pdbedit</B> <B>-l</B>
+
+
+                        sorce:500:Simo Sorce
+                        samba:45:Test User
+
+
+
+       <B>-v</B>     This  option  sets  the verbose listing format.  It
+              will make pdbedit list the users  in  the  database
+              printing  out  the  account fields in a descriptive
+              format.
+
+              Example: <B>pdbedit</B> <B>-l</B> <B>-v</B>
+
+
+                        ---------------
+                        username:       sorce
+                        user ID/Group:  500/500
+                        user RID/GRID:  2000/2001
+                        Full Name:      Simo Sorce
+                        Home Directory: \\BERSERKER\sorce
+                        HomeDir Drive:  H:
+                        Logon Script:   \\BERSERKER\netlogon\sorce.bat
+                        Profile Path:   \\BERSERKER\profile
+                        ---------------
+                        username:       samba
+
+              <I>passwd(5)</I> for details)
+
+              Example: <B>pdbedit</B> <B>-l</B> <B>-w</B>
+
+
+                        sorce:500:508818B733CE64BEAAD3B435B51404EE:D2A2418EFC466A8A0F6B1DBB5C3DB80C:[UX         ]:LCT-00000000:
+                        samba:45:0F2B255F7B67A7A9AAD3B435B51404EE:BC281CE3F53B6A5146629CD4751D3490:[UX         ]:LCT-3BFA1E8D:
+
+
+
+       <B>-u</B> <B>username</B>
+              This option specifies that the username to be  used
+              for   the  operation  requested  (listing,  adding,
+              removing) It is <B>required</B> in add, remove and  modify
+              operations and <B>optional</B> in list operations.
+
+       <B>-f</B> <B>fullname</B>
+              This  option can be used while adding or modifing a
+              user account. It will specify the user's full name.
+
+              Example: <B>-f</B> <B>"Simo</B> <B>Sorce"</B>
+
+       <B>-h</B> <B>homedir</B>
+              This  option can be used while adding or modifing a
+              user account.  It  will  specify  the  user's  home
+              directory network path.
+
+              Example: <B>-h</B> <B>"\\\\BERSERKER\\sorce"</B>
+
+       <B>-d</B> <B>drive</B>
+              This  option can be used while adding or modifing a
+              user account. It will  specify  the  windows  drive
+              letter to be used to map the home directory.
+
+              Example: <B>-d</B> <B>"H:"</B>
+
+       <B>-s</B> <B>script</B>
+              This  option can be used while adding or modifing a
+              user account. It  will  specify  the  user's  logon
+              script path.
+
+              Example: <B>-s</B> <B>"\\\\BERSERKER\\netlogon\\sorce.bat"</B>
+
+       <B>-p</B> <B>profile</B>
+              This  option can be used while adding or modifing a
+              user account. It will specify  the  user's  profile
+              directory.
+
+              Example: <B>-p</B> <B>"\\\\BERSERKER\\netlogon"</B>
+
+       <B>-a</B>     This  option  is  used  to  add  a  user  into  the
+              database. This command need the user name be speci­
+
+       <B>-m</B>     This option may only be used  in  conjunction  with
+              the  <I>-a</I>  option.  It  will  make  pdbedit  to add a
+              machine trust account instead of a user account (-u
+              username will provide the machine name).
+
+              Example: <B>pdbedit</B> <B>-a</B> <B>-m</B> <B>-u</B> <B>w2k-wks</B>
+
+       <B>-x</B>     This  option  causes  pdbedit  to delete an account
+              from the database. It need the username  be  speci­
+              fied with the -u switch.
+
+              Example: <B>pdbedit</B> <B>-x</B> <B>-u</B> <B>bob</B>
+
+       <B>-i</B> <B>file</B>
+              This  command  is  used  to import a smbpasswd file
+              into the database.
+
+              This option will ease migration from the plain smb­
+              passwd  file  database  to  more  powerful  backend
+              databases like tdb and ldap.
+
+              Example: <B>pdbedit</B> <B>-i</B> <B>/etc/smbpasswd.old</B>
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       This command may be used only by root.
+
+
+</PRE>
+<H2>VERSION</H2><PRE>
+       This man page is correct for  version  2.2  of  the  Samba
+       suite.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>smbpasswd(8)</B> <B>samba(7)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       The  original  Samba  software  and related utilities were
+       created by Andrew Tridgell. Samba is now developed by  the
+       Samba  Team  as  an Open Source project similar to the way
+       the Linux kernel is developed.
+
+       The original Samba man pages were written  by  Karl  Auer.
+       The  man  page  sources  were  converted  to  YODL  format
+       (another excellent piece of Open Source  software,  avail­
+       able           at          ftp://ftp.icce.rug.nl/pub/unix/
+       &lt;URL:ftp://ftp.icce.rug.nl/pub/unix/&gt;) and updated for the
+       Samba  2.0  release  by  Jeremy Allison. The conversion to
+       DocBook for Samba 2.2 was done by Gerald Carter
+
+
+
+                         19 November 2002              <B>PDBEDIT(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

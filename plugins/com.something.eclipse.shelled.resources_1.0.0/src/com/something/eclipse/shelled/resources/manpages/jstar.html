@@ -1,0 +1,803 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>Syntax</H2><PRE>
+       <B>joe</B> <B>[global-options]</B> <B>[</B> <B>[local-options]</B> <B>filename</B> <B>]...</B>
+
+       <B>jstar</B> <B>[global-options]</B> <B>[</B> <B>[local-options]</B> <B>filename</B> <B>]...</B>
+
+       <B>jmacs</B> <B>[global-options]</B> <B>[</B> <B>[local-options]</B> <B>filename</B> <B>]...</B>
+
+       <B>rjoe</B> <B>[global-options]</B> <B>[</B> <B>[local-options]</B> <B>filename</B> <B>]...</B>
+
+       <B>jpico</B> <B>[global-options]</B> <B>[</B> <B>[local-options]</B> <B>filename</B> <B>]...</B>
+
+
+</PRE>
+<H2>Description</H2><PRE>
+       JOE  is  a  powerful  ASCII-text  screen editor.  It has a
+       "mode-less" user interface which is similer to many  user-
+       friendly  PC  editors.   Users  of Micro-Pro's WordStar or
+       Borland's "Turbo" languages will feel at home.  JOE  is  a
+       full featured UNIX screen-editor though, and has many fea­
+       tures for editing programs and text.
+
+       JOE also emulates several other editors.  JSTAR is a close
+       immitation  of WordStar with many "JOE" extensions.  JPICO
+       is a close immitation of the Pine  mailing  system's  PICO
+       editor,  but with many extensions and improvements.  JMACS
+       is a GNU-EMACS immitation.  RJOE is a  restricted  version
+       of JOE, which allowes you to edit only the files specified
+       on the command line.
+
+       Although JOE is actually five different editors, it  still
+       requires  only one executable, but one with five different
+       names.  The name of the editor with an "rc" appended gives
+       the  name  of  JOE's initialization file, which determines
+       the personality of the editor.
+
+       JOE is free software;  you can distribute it and/or modify
+       it  under  the  terms of the GNU General Public License as
+       published by the Free  Software  Foundation.   I  have  no
+       plans  for  turning  JOE  into  a commercial or share-ware
+       product.   JOE  is  available  over  the   Internet   from
+       <B>www.sourceforge.net/projects/joe-editor</B>.
+
+
+
+</PRE>
+<H2>Usage</H2><PRE>
+       To  start  the  editor,  type <B>joe</B> followed by zero or more
+       names of files you want to edit.  Each file  name  may  be
+       preceeded by a local option setting (see the local options
+       table which follows).  Other global options,  which  apply
+       to  the  editor as a whole, may also be placed on the com­
+       mand line (see the global options  table  which  follows).
+       If  you  are  editing  a new file, you can either give the
+       name of the new file when you invoke the editor, or in the
+       editor  when you save the new file.  A modified syntax for
+       file names is provided to allow you to edit  program  out­
+       sequences  are duplicated on other keys, so that you don't
+       need to press the control key: <B>ESC</B> will work in  place  of
+       <B>^[</B>,  <B>Del</B>  will work in place of <B>^?</B>, <B>Backspace</B> will work in
+       place of <B>^H</B>, <B>Tab</B> will work in place of <B>^I</B>, <B>Return</B> or <B>Enter</B>
+       will  work  in place of <B>^M</B> and <B>Linefeed</B> will work in place
+       of <B>^J</B>.  Some keyboards may give you trouble with some con­
+       trol  keys.   <B>^_</B>, <B>^^</B> and <B>^@</B> can usually be entered without
+       pressing shift (I.E., try <B>^-</B>, <B>^6</B> and <B>^2</B>).  Other keyboards
+       may  reassign  these  to  other keys.  Try: <B>^.</B>, <B>^,</B> and <B>^/</B>.
+       <B>^SPACE</B> can usually be used in place of <B>^@</B>.  <B>^\</B> and <B>^]</B>  are
+       interpreted by many communication programs, including tel­
+       net and kermit.  Usually you just hit the key twice to get
+       it to pass through the communication program.
+
+       Once you have typed <B>^K</B> <B>H</B>, the first help window appears at
+       the top of the screen.  You can continue to enter and edit
+       text  while  the help window is on.  To page through other
+       topics, hit ^[, and ^[. (that is, ESC , and ESC  .).   Use
+       <B>^K</B> <B>H</B> to dismiss the help window.
+
+       You  can  customize  the keyboard layout, the help screens
+       and a number of behavior defaults by  copying  JOE's  ini­
+       tialization  file  (usually  <B>/etc/joerc</B>) to <B>.joerc</B> in your
+       home directory and then by modifying it.  See the  section
+       <B>joerc</B> below.
+
+       To  have  JOE  used  as your default editor for e-mail and
+       News, you need to set the <B>EDITOR</B>  and  <B>VISUAL</B>  environment
+       variables  in  your  shell  initialization file (<B>.cshrc</B> or
+       <B>.profile</B>)  to  refer  to  JOE  (joe  usually  resides   as
+       <B>${exec_prefix}/bin/joe</B>).
+
+       There  are a number of other obscure invocation parameters
+       which may have to be set, particularly  if  your  terminal
+       screen  is  not  updating as you think it should.  See the
+       section <B>Environment</B> <B>variables</B> below.
+
+
+
+</PRE>
+<H2>Command Line Options</H2><PRE>
+       The following global options may be specified on the  com­
+       mand line:
+
+
+       -asis  Characters with codes above 127 will be sent to the
+              terminal as-is, instead of as inverse of the corre­
+              sponding  character  below  128.   If this does not
+              work, check your terminal server.
+
+
+       -backpath path
+              If this option  is  given,  backup  files  will  be
+              stored  in  the  specified  directory instead of in
+              goes past extremes.
+
+
+       -columns nnn
+              Sets the number of screen columns.
+
+
+       -csmode
+              Continued  search mode: a search immediatly follow­
+              ing  a  search  will  repeat  the  previous  search
+              instead  of prompting for new string.  This is use­
+              ful for the the ^[S and ^[R commands and  for  when
+              joe is trying to be emacs.
+
+
+       -dopadding
+              Joe usually assumes that there is some kind of flow
+              control between it and the tty.   If  there  isn't,
+              this  option  will make joe output extra ^@s to the
+              tty as specified by the termcap entry.   The  extra
+              ^@s  allow the terminal to catch up after long ter­
+              minal commands.
+
+
+       -exask This option makes ^KX verify  the  file  name  that
+              it's about to write.
+
+
+       -force This  option  makes  sure that the last line of the
+              file has a line-feed which it's saved.
+
+
+       -help  The editor will start with the help  screen  on  if
+              this option is given.
+
+
+       -keepup
+              Normally  the  column number and control-key prefix
+              fields of the status lines  are  on  a  one  second
+              delay  to  reduce  CPU  consumption,  but with this
+              option they are updated after each key-stroke.
+
+
+       -lightoff
+              The block highlighting will go away after any block
+              command if this option is given.
+
+
+       -lines nnn
+              Sets the number of screen lines.
+
+
+
+
+       -nonotice
+              This option prevent the copyright notice from being
+              displayed when the editor starts.
+
+
+       -nosta This option eliminates the  top-most  status  line.
+              It's  nice  for when you only want to see your text
+              on the screen or if you're using a vt52.
+
+
+       -noxon Attempt to turn off ^S/^Q processing.  This is use­
+              ful for when joe is trying to be WordStar or EMACS.
+
+
+       -orphan
+              When this option is active, extra files on the com­
+              mand  line  will  be  placed  in  orphaned  buffers
+              instead of in extra windows.  This  is  useful  for
+              when joe is trying to be emacs.
+
+
+       -pg nnn
+              This  specifies  the  number of lines to keep after
+              PgUp/PgDn (^U/^V).  If -1 is given, half the window
+              is kept.
+
+
+       -skiptop nnn
+              Don't  use the top nnn lines of the screen.  Useful
+              for when joe is used as a BBS editor.
+
+
+       Each of these options may be specified in the  joerc  file
+       as well.  In addition, the NOXON, BAUD, LINES, COLUMNS and
+       DOPADDING options may be specified with environment  vari­
+       ables.
+
+       The  JOETERM  environment  variable may be set to override
+       the regular TERM environment variable for specifying  your
+       terminal type.
+
+       The  following  options may be specified before each file­
+       name on the command line:
+
+
+       +nnn   The cursor starts on the specified line.
+
+
+       -crlf  Joe uses CR-LF as the end of line sequence  instead
+              of  just  LF.   This  is  for editing MS-DOS or VMS
+              Typing overwrites existing  characters  instead  of
+              inserting before them.
+
+
+       -lmargin nnn
+              Sets the left margin.
+
+
+       -rmargin nnn
+              Sets the right margin.
+
+
+       -tab nnn
+              Sets the tab width.
+
+
+       -indentc nnn
+              Sets  the indentation character for ^K, and ^K. (32
+              for SPACE, 9 for TAB).
+
+
+       -istep nnn
+              Sets the indentation step for ^K, and ^K..
+
+
+       -linums
+              Line numbers are displayed before each line.
+
+
+       -rdonly
+              The file is read only.
+
+
+       -keymap name
+              Use an alternate section of the joerc file for  the
+              key sequence bindings.
+
+
+       These  options  can  also  be specified in the joerc file.
+       They can be set  depending  on  the  file-name  extension.
+       Programs  (.c, .h or .p extension) usually have autoindent
+       enabled.  Wordwrap is enabled on other files, but rc files
+       have it disabled.
+
+
+
+</PRE>
+<H2>Editing Tasks</H2><PRE>
+   <B>Basic</B> <B>Editing</B>
+       When  you  type  characters into the editor, they are nor­
+       mally inserted into the file being edited (or appended  to
+       the  file  if the cursor is at the end of the file).  This
+       is the normal operating mode of the editor.  If  you  want
+       to  replace some existing text, you have to delete the old
+       some reason), use <B>^F</B> to move forwards (right), <B>^B</B> to  move
+       backwards  (left),  <B>^P</B>  to move to the previous line (up),
+       and <B>^N</B> to move to the next line  (down).   The  right  and
+       left  arrow  keys  simply  move  forwards or backwards one
+       character at a time through the text:  if  you're  at  the
+       beginning of a line and you press left-arrow, you will end
+       up at the end of the previous line.  The up and down arrow
+       keys  move  forwards and backwards by enough characters so
+       that the cursor appears in the same column that it was  in
+       on the original line.
+
+       If  you want to indent the text you enter, you can use the
+       <B>TAB</B> key.  This inserts a special control  character  which
+       makes the characters which follow it begin at the next TAB
+       STOP.  TAB STOPS normally occur every 8 columns, but  this
+       can  be  changed with the <B>^T</B> <B>D</B> command.  PASCAL and C pro­
+       grammers often set TAB STOPS on every 4 columns.
+
+       If for some reason your terminal  screen  gets  messed  up
+       (for example, if you receive a mail notice from biff), you
+       can have the editor refresh the screen by hitting <B>^R</B>.
+
+       There are many other keys for  deleting  text  and  moving
+       around  the file.  For example, hit <B>^D</B> to delete the char­
+       acter the cursor is on instead of deleting backwards  like
+       <B>Backspace</B>.  <B>^D</B> will also delete a line-break if the cursor
+       is at the end of a line.  Type <B>^Y</B>  to  delete  the  entire
+       line the cursor is on or <B>^J</B> to delete just from the cursor
+       to the end of the line.
+
+       Hit <B>^A</B> to move the cursor to the  beginning  of  the  line
+       it's  on.   Hit  <B>^E</B>  to  move the cursor to the end of the
+       line.  Hit <B>^U</B> or <B>^V</B> for scrolling the cursor  up  or  down
+       1/2  a screen's worth.  "Scrolling" means that the text on
+       the screen moves, but the cursor stays at the  same  place
+       relative to the screen.  Hit <B>^K</B> <B>U</B> or <B>^K</B> <B>V</B> to move the cur­
+       sor to the beginning or the end of the file.  Look at  the
+       help  screens  in  the editor to find even more delete and
+       movement commands.
+
+       If you make a mistake, you can hit <B>^_</B> to  "undo"  it.   On
+       most  keyboards you hit just <B>^-</B> to get <B>^_</B>, but on some you
+       might have to hold both the <B>Shift</B> and <B>Control</B> keys down at
+       the  same time to get it.  If you "undo" too much, you can
+       "redo" the changes back into existence by hitting <B>^^</B> (type
+       this with just <B>^6</B> on most keyboards).
+
+       If  you were editing in one place within the file, and you
+       then temporarily had to look  or  edit  some  other  place
+       within the file, you can get back to the original place by
+       hitting <B>^K</B> <B>-</B>.  This command actually returns  you  to  the
+       last  place  you  made a change in the file.  You can step
+       of that file is created in the current directory, with a ~
+       appended  to the name, which contains the original version
+       of the file.
+
+
+   <B>Word</B> <B>wrap</B> <B>and</B> <B>formatting</B>
+       If you type past the right edge of the screen in a C  lan­
+       guage  or PASCAL file, the screen will scroll to the right
+       to follow the cursor.  If you type past the right edge  of
+       the screen in a normal file (one whose name doesn't end in
+       .c, .h or .p), JOE will automatically wrap the  last  word
+       onto  the  next line so that you don't have to hit <B>Return</B>.
+       This is called word-wrap mode.  Word-wrap can be turned on
+       or  off  with the <B>^T</B> <B>W</B> command.  JOE's initialization file
+       is usually set up  so  that  this  mode  is  automatically
+       turned  on  for  all  non-program  files.  See the section
+       below on the <B>joerc</B> file to change this and other defaults.
+
+       Aside  for Word-wrap mode, JOE does not automatically keep
+       paragraphs formatted like some word-processors.   Instead,
+       if you need a paragraph to be reformatted, hit <B>^K</B> <B>J</B>.  This
+       command "fills in" the paragraph that the  cursor  is  in,
+       fitting  as  many words in a line as is possible.  A para­
+       graph, in this case, is a block of  text  separated  above
+       and below by a blank line.
+
+       The  margins  which  JOE uses for paragraph formatting and
+       word-wrap can be set with the <B>^T</B> <B>L</B> and <B>^T</B> <B>R</B> commands.   If
+       the  left margin is set to a value other than 1, then when
+       you start typing at the beginning of a  line,  the  cursor
+       will immediately jump to the left margin.
+
+       If  you  want to center a line within the margins, use the
+       <B>^K</B> <B>A</B> command.
+
+
+   <B>Over-type</B> <B>mode</B>
+       Sometimes it's tiresome to have to delete old text  before
+       or  after you insert new text.  This happens, for example,
+       when you are changing a table and you want to maintain the
+       column position of the right side of the table.  When this
+       occurs, you can put the editor in over-type mode  with  <B>^T</B>
+       <B>T</B>.   When  the  editor is in this mode, the characters you
+       type in replace existing characters, in the way an  ideal­
+       ized  typewriter would.  Also, <B>Backspace</B> simply moves left
+       instead of deleting the character to the left,  when  it's
+       not  at the end or beginning of a line.  Over-type mode is
+       not the natural way of dealing with  text  electronically,
+       so  you  should go back to insert-mode as soon as possible
+       by typing <B>^T</B> <B>T</B> again.
+
+       If you need to insert while you're in over-type mode,  hit
+       then  hitting a character in the range <B>@</B> <B>A</B> <B>B</B> <B>C</B> <B>...</B> <B>X</B> <B>Y</B> <B>Z</B> <B>[</B>
+       <B>^</B> <B>]</B> <B>\</B> <B>_</B> to get the number 0 - 31, and ? to get  127.   For
+       example,  if you hit <B>`</B> <B>J</B>, you'll insert a line-break char­
+       acter, or if you hit <B>`</B> <B>I</B>, you'll insert  a  TAB  character
+       (which  does  the  same thing the TAB key does).  A useful
+       control character to enter is 12 (<B>`</B> <B>L</B>), which causes  most
+       printers to advance to the top of the page.  You'll notice
+       that JOE displays this character as an underlined L.   You
+       can  enter  the characters above 127, the <B>meta</B> <B>characters</B>,
+       by first hitting <B>^\</B>.  This adds 128 to the next  (possibly
+       control) character entered.  JOE displays characters above
+       128 in inverse-video.  Some foreign languages, which  have
+       more letters than English, use the meta characters for the
+       rest of their alphabet.  You have to  put  the  editor  in
+       <B>ASIS</B>  mode (described later) to have these passed untrans­
+       lated to the terminal.
+
+
+   <B>Prompts</B>
+       If you hit <B>TAB</B> at any file name prompt, joe  will  attempt
+       to  complete the name you entered as much as possible.  If
+       it couldn't complete the entire name,  because  there  are
+       more than one possible completions, joe beeps.  If you hit
+       <B>TAB</B> again, joe list the  completions.   You  can  use  the
+       arrow  keys  to  move around this directory menu and press
+       RETURN or SPACE to select an item.  If you press the first
+       letter  of  one  of  the  directory  entries,  it  will be
+       selected, or if more than one entry  has  the  same  first
+       letter,  the  cursor  will jump between those entries.  If
+       you select a subdirectory or ..,  the  directory  name  is
+       appended  to  the  prompt  and the new directory is loaded
+       into the menu.  You can hit Backspace to go  back  to  the
+       previous directory.
+
+       Most  prompts  record  a history of the responses you give
+       them.  You can hit up and down arrow to step through these
+       histories.
+
+       Prompts  are  actually  single line windows with no status
+       line, so you can use any editing command that you normally
+       use  on  text  within  the prompts.  The prompt history is
+       actually just other lines of the same "prompt file".  Thus
+       you  can  can  search  backwards though the prompt history
+       with the normal <B>^K</B> <B>F</B> command if you want.
+
+       Since prompts are windows, you can also switch out of them
+       with <B>^K</B> <B>P</B> and <B>^K</B> <B>N</B>.
+
+
+   <B>Where</B> <B>am</B> <B>I?</B>
+       Hit  <B>^K</B>  <B>SPACE</B>  to have JOE report the line number, column
+       number, and byte number on the last line  of  the  screen.
+       If  you  want to save only a selected section of the file,
+       see the section on <B>Blocks</B> below.
+
+       If you want to include another file  in  the  file  you're
+       editing, use <B>^K</B> <B>R</B> to insert it.
+
+
+   <B>Temporarily</B> <B>suspending</B> <B>the</B> <B>editor</B>
+       If  you need to temporarily stop the editor and go back to
+       the shell, hit <B>^K</B> <B>Z</B>.  You might want to do  this  to  stop
+       whatever  you're  editing  and answer an e-mail message or
+       read this man page, for example.  You have to type  <B>fg</B>  or
+       <B>exit</B> (you'll be told which when you hit <B>^K</B> <B>Z</B>) to return to
+       the editor.
+
+
+   <B>Searching</B> <B>for</B> <B>text</B>
+       Hit <B>^K</B> <B>F</B> to have the editor search forwards  or  backwards
+       for  a  text  fragment  (<B>string</B>)  for  you.   You  will be
+       prompted for the  text  to  search  for.   After  you  hit
+       <B>Return</B>,  you  are prompted to enter options.  You can just
+       hit <B>Return</B> again to have  the  editor  immediately  search
+       forwards  for  the  text,  or you can enter one or more of
+       these options:
+
+
+       <B>b</B>      Search backwards instead of forwards.
+
+
+       <B>i</B>      Treat uppercase and lower case letters as the  same
+              when  searching.   Normally uppercase and lowercase
+              letters are considered to be different.
+
+
+       <B>nnn</B>    (where <B>nnn</B> is a number) If you enter a number,  JOE
+              searches  for the Nth occurrence of the text.  This
+              is useful for going to  specific  places  in  files
+              structured in some regular manner.
+
+
+       <B>r</B>      Replace  text.  If you enter the <B>r</B> option, then you
+              will be  further  prompted  for  replacement  text.
+              Each  time  the  editor  finds the search text, you
+              will be prompted as to whether you want to  replace
+              the  found  search  text with the replacement text.
+              You hit: <B>y</B> to replace the text and  then  find  the
+              next occurrence, <B>n</B> to not replace this text, but to
+              then find the next occurrence, <B>r</B> to replace all  of
+              the remaining occurrences of the search text in the
+              remainder of the file without asking for  confirma­
+              tion  (subject  to  the <B>nnn</B> option above), or <B>^C</B> to
+              stop searching and replacing.
+
+
+       <B>\?</B>     This finds exactly one character.  For example,  if
+              you  give  <B>A\?B</B>  as  the search text, JOE will find
+              AXB, but not AB or AXXB.
+
+
+       <B>\^</B> <B>\$</B>  These match the beginning and end of a  line.   For
+              example,  if  you give <B>\^test\$</B>, then JOE with find
+              <B>test</B> on a line by itself.
+
+
+       <B>\&lt;</B> <B>\&gt;</B>  These match the beginning and end of a  word.   For
+              example, if you give <B>\&lt;\*is\*\&gt;</B>, then joe will find
+              whole words which have  the  sub-string  <B>is</B>  within
+              them.
+
+
+       <B>\[...]</B> This  matches  any  single  character which appears
+              within the brackets.  For example, if  <B>\[Tt]his</B>  is
+              entered  as  the search string, then JOE finds both
+              <B>This</B> and <B>this</B>.  Ranges of characters can be entered
+              within the brackets.  For example, <B>\[A-Z]</B> finds any
+              uppercase letter.  If the first character given  in
+              the brackets is <B>^</B>, then JOE tries to find any char­
+              acter not given in the the brackets.
+
+
+       <B>\c</B>     This works like <B>\*</B>, but matches a  balanced  C-lan­
+              guage  expression.   For example, if you search for
+              <B>malloc(\c)</B>, then JOE will find all  function  calls
+              to  <B>malloc</B>, even if there was a <B>)</B> within the paren­
+              thesis.
+
+
+       <B>\+</B>     This finds zero or  more  of  the  character  which
+              immediately  follows  the  <B>\+</B>.  For example, if you
+              give <B>\[</B> <B>]\+\[</B> <B>]</B>, where the  characters  within  the
+              brackets are both SPACE and TAB, then JOE will find
+              whitespace.
+
+
+       <B>\\</B>     Matches a single \.
+
+
+       <B>\n</B>     This finds the special  end-of-line  or  line-break
+              character.
+
+
+       A  number of special character sequences may also be given
+       in the replacement string:
+
+              string.
+
+
+       <B>\n</B>     Use this if you need to put  a  line-break  in  the
+              replacement string.
+
+       Some examples:
+
+       Suppose  you  have a list of addresses, each on a separate
+       line, which starts with "Address:" and  has  each  element
+       separated by commas.  Like so:
+
+       Address: S. Holmes, 221b Baker St., London, England
+
+       If  you  wanted  to rearrange the list, to get the country
+       first, then the city, then the person's name, and then the
+       address, you could do this:
+
+       Type <B>^K</B> <B>F</B> to start the search, and type:
+
+       <B>Address:\*,\*,\*,\*\$</B>
+
+       to  match  "Address:",  the four comma-separated elements,
+       and then the end of the line.  When asked for options, you
+       would type <B>r</B> to replace the string, and then type:
+
+       <B>Address:\3,\2,\0,\1</B>
+
+       To shuffle the information the way you want it. After hit­
+       ting return, the search would begin, and the  sample  line
+       would be changed to:
+
+       Address: England, London, S. Holmes, 221b Baker St.
+
+
+
+   <B>Blocks</B>
+       If  you want to move, copy, save or delete a specific sec­
+       tion of text, you  can  do  it  with  highlighted  blocks.
+       First, move the cursor to the start of the section of text
+       you want to work on, and press <B>^K</B> <B>B</B>.  Then move the cursor
+       to  the  character just after the end of the text you want
+       to affect and press <B>^K</B> <B>K</B>.  The text between the <B>^K</B>  <B>B</B>  and
+       <B>^K</B>  <B>K</B>  should  become  highlighted.  Now you can move your
+       cursor to someplace else in your document and press  <B>^K</B>  <B>M</B>
+       to move the highlighted text there.  You can press <B>^K</B> <B>C</B> to
+       make a copy of the highlighted text and insert it to where
+       the cursor is positioned.  <B>^K</B> <B>Y</B> to deletes the highlighted
+       text.  <B>^K</B> <B>W</B>, writes the highlighted text to a file.
+
+       A very useful command is <B>^K</B> <B>/</B>, which filters  a  block  of
+       text through a unix command.  For example, if you select a
+       Auto-indent mode toggled with the <B>^T</B> <B>I</B> command.  The <B>joerc</B>
+       is  normally  set  up so that files with names ending with
+       .p, .c or .h have auto-indent mode  enabled.   When  auto-
+       indent mode is enabled and you hit <B>Return</B>, the cursor will
+       be placed in the same column that the first  non-SPACE/TAB
+       character was in on the original line.
+
+       You can use the <B>^K</B> <B>,</B> and <B>^K</B> <B>.</B> commands to shift a block of
+       text to the left or right.  If no highlighting is set when
+       you  give  these commands, the program block the cursor is
+       located in will be selected, and will be moved  by  subse­
+       quent <B>^K</B> <B>,</B> and <B>^K</B> <B>.</B> commands.  The number of columns these
+       commands shift by can be set through a <B>^T</B> option.
+
+
+   <B>Windows</B>
+       You can edit more than one file at the same time  or  edit
+       two  or  more  different  places  of the same file.  To do
+       this, hit <B>^K</B> <B>O</B>, to split the screen into two windows.  Use
+       <B>^K</B> <B>P</B> or <B>^K</B> <B>N</B> to move the cursor into the top window or the
+       lower window.  Use <B>^K</B> <B>E</B> to edit a new file in one  of  the
+       windows.   A  window  will  go away when you save the file
+       with <B>^K</B> <B>X</B> or abort the file with <B>^C</B>.  If you abort a  file
+       which  exists in two windows, one of the window goes away,
+       not the file.
+
+       You can hit <B>^K</B> <B>O</B> within a window to create even more  win­
+       dows.  If you have too many windows on the screen, but you
+       don't want to eliminate them, you can hit <B>^K</B> <B>I</B>.  This will
+       show  only  the  window  the cursor is in, or if there was
+       only one window on the screen to begin with,  try  to  fit
+       all  hidden windows on the screen.  If there are more win­
+       dows than can fit on the screen, you can hit <B>^K</B> <B>N</B>  on  the
+       bottom-most  window  or <B>^K</B> <B>P</B> on the top-most window to get
+       to them.
+
+       If you gave more than one file name to JOE on the  command
+       line, each file will be placed in a different window.
+
+       You can change the height of the windows with the <B>^K</B> <B>G</B> and
+       <B>^K</B> <B>T</B> commands.
+
+
+   <B>Keyboard</B> <B>macros</B>
+       Macros allow you to record  a  series  of  keystrokes  and
+       replay them with the press of two keys.  This is useful to
+       automate repetitive tasks.  To start  a  macro  recording,
+       hit  <B>^K</B>  <B>[</B>  followed  by a number from 0 to 9.  The status
+       line will display (Macro n recording...).   Now,  type  in
+       the  series  of  keystrokes  that  you  want to be able to
+       repeat.  The commands  you  type  will  have  their  usual
+       effect. Hit <B>^K</B> <B>]</B> to stop recording the macro.  Hit <B>^K</B> fol­
+       keep in mind when recording a macro.
+
+       If you find that the macro you are recording itself has  a
+       repeated  set of key-strokes in it, you can record a macro
+       within the macro, as long as you  use  a  different  macro
+       number.   Also  you can execute previously recorded macros
+       from within new macros.
+
+
+
+   <B>Repeat</B>
+       You can use the repeat command, <B>^K</B> <B>\</B>, to repeat  a  macro,
+       or  any  other  edit command or even a normal character, a
+       specified number of times.  Hit <B>^K</B> <B>\</B>, type in  the  number
+       of  times  you want the command repeated and press <B>Return</B>.
+       The next edit command you now give will be  repeated  that
+       many times.
+
+       For example, to delete the next 20 lines of text, type:
+
+       <B>^K</B>  <B>20</B>&lt;return&gt;<B>^Y</B>
+
+
+   <B>Rectangle</B> <B>mode</B>
+       Type  <B>^T</B> <B>X</B> to have <B>^K</B> <B>B</B> and <B>^K</B> <B>K</B> select rectangular blocks
+       instead of stream-of-text blocks.  This mode is useful for
+       moving,  copying, deleting or saving columns of text.  You
+       can also filter columns of text with the <B>^K</B> <B>/</B> command-  if
+       you  want  to sort a column, for example.  The insert file
+       command, <B>^K</B> <B>R</B> is also effected.
+
+       When rectangle mode is selected, over-type  mode  is  also
+       useful  (<B>^T</B>  <B>T</B>).  When over-type mode is selected, rectan­
+       gles  will  replace  existing  text  instead  of   getting
+       inserted  before it.  Also the delete block command (<B>^K</B> <B>Y</B>)
+       will clear the selected rectangle  with  SPACEs  and  TABs
+       instead of deleting it.  Over-type mode is especially use­
+       ful for the filter block command (<B>^K</B>  <B>/</B>),  since  it  will
+       maintain the original width of the selected column.
+
+
+   <B>Tag</B> <B>search</B>
+       If  you  are  editing  a  large C program with many source
+       files, you can use the <B>ctags</B> program to  generate  a  <B>tags</B>
+       file.   This  file  contains a list of program symbols and
+       the files and positions where  the  symbols  are  defined.
+       The  <B>^K</B>  <B>;</B>  command  can be used to lookup a symbol (func­
+       tions, defined constants, etc.), load the file  where  the
+       symbol is defined into the current window and position the
+       cursor to where the symbol is defined.  <B>^K</B> <B>;</B>  prompts  you
+       for  the  symbol  you want, but uses the symbol the cursor
+       was on as a default.  Since <B>^K</B> <B>;</B> loads the definition file
+       output  of <B>make</B>, the result of <B>grep</B>ping a set of files for
+       a  string,  or  directory  listings  from  <B>FTP</B>   sessions.
+       Besides  typeable characters, the keys ^C, Backspace, DEL,
+       Return and ^D are passed to the  shell.   Type  the  shell
+       <B>exit</B> command to stop recording shell output.  If you press
+       <B>^C</B> in a shell window, when the cursor is not at the end of
+       the window, the shell is <B>kill</B>ed.
+
+
+
+</PRE>
+<H2>Environment variables</H2><PRE>
+       For  JOE  to operate correctly, a number of other environ­
+       ment settings must be correct.  The throughput (baud rate)
+       of  the  connection between the computer and your terminal
+       must be  set  correctly  for  JOE  to  update  the  screen
+       smoothly  and  allow typeahead to defer the screen update.
+       Use the <B>stty</B> <B>nnn</B> command to set this.  You want to set  it
+       as  close  as possible to actual throughput of the connec­
+       tion.  For example, if you are connected via a  1200  baud
+       modem,  you  want  to use this value for <B>stty</B>.  If you are
+       connected via 14.4k modem, but the terminal server you are
+       connected  to  connects  to  the computer a 9600 baud, you
+       want to set your speed as 9600  baud.   The  special  baud
+       rate  of 38400 or <B>extb</B> is used to indicate that you have a
+       very-high speed connection, such as a memory  mapped  con­
+       sole  or  an X-window terminal emulator.  If you can't use
+       <B>stty</B> to set the actual throughput (perhaps  because  of  a
+       modem  communicating with the computer at a different rate
+       than it's communicating over the phone line), you can  put
+       a  numeric  value in the <B>BAUD</B> environment variable instead
+       (use <B>setenv</B> <B>BAUD</B> <B>9600</B> for csh or  <B>BAUD=9600;</B>  <B>export</B>  <B>BAUD</B>
+       for sh).
+
+       The  <B>TERM</B>  environment variable must be set to the type of
+       terminal  you're  using.    If   the   size   (number   of
+       lines/columns)  of your terminal is different from what is
+       reported in the TERMCAP or TERMINFO  entry,  you  can  set
+       this  with the <B>stty</B> <B>rows</B> <B>nn</B> <B>cols</B> <B>nn</B> command, or by setting
+       the <B>LINES</B> and <B>COLUMNS</B> environment variables.
+
+       JOE normally expects that flow control  between  the  com­
+       puter and your terminal to use ^S/^Q handshaking (I.E., if
+       the computer is sending characters too fast for your  ter­
+       minal, your terminal sends ^S to stop the output and ^Q to
+       restart it).  If the  flow  control  uses  out-of-band  or
+       hardware handshaking or if your terminal is fast enough to
+       always keep up with the computer output and  you  wish  to
+       map  ^S/^Q  to  edit commands, you can set the environment
+       variable <B>NOXON</B> to have JOE attempt to turn off ^S/^Q hand­
+       shaking.   If the connection between the computer and your
+       terminal uses no handshaking and your terminal is not fast
+       enough to keep up with the output of the computer, you can
+       set the environment variable <B>DOPADDING</B> to  have  <B>JOE</B>  slow
+              <B>^K</B>  <B>D</B>  <B>!mail</B> <B>jhallen@world.std.com</B> to send the file
+              being edited to me.
+
+
+       <B>&gt;&gt;filename</B>
+              Use this to have JOE append the edited text to  the
+              end of the file "filename."
+
+
+       <B>filename,START,SIZE</B>
+              Use  this  to  access  a fixed section of a file or
+              device.  <B>START</B> and <B>SIZE</B> may be entered  in  decimal
+              (ex.:  123)  octal (ex.: 0777) or hexadecimal (ex.:
+              0xFF).  For example, use <B>joe</B> <B>/dev/fd0,508,2</B> to edit
+              bytes  508  and  509  of  the first floppy drive in
+              Linux.
+
+
+       <B>-</B>      Use this to get input from the standard input or to
+              write  output to the standard output.  For example,
+              you can put joe in a pipe of commands: <B>quota</B>  <B>-v</B>  <B>|</B>
+              <B>joe</B>  <B>-</B>  <B>|</B>  <B>mail</B> <B>root</B>, if you want to complain about
+              your low quota.
+
+
+
+
+</PRE>
+<H2>The joerc file</H2><PRE>
+       <B>^T</B> options, the help screens and the key-sequence to  edi­
+       tor  command bindings are all defined in JOE's initializa­
+       tion file.  If you make a copy of this  file  (which  nor­
+       mally resides in <B>/etc/joerc</B>) to <B>$HOME/.joerc</B>, you can cus­
+       tomize these setting to your liking.  The  syntax  of  the
+       initialization file should be fairly obvious and there are
+       further instruction in it.
+
+
+
+</PRE>
+<H2>Acknowledgements</H2><PRE>
+       JOE was writen by  Joseph  H.  Allen.   If  you  have  bug
+       reports      or      questions,     e-mail     them     to
+       jhallen@world.std.com.             Larry             Foard
+       (entropy@world.std.com)        and        Gary        Gray
+       (ggray@world.std.com) also helped  with  the  creation  of
+       JOE.
+
+
+
+                                                           <B>JOE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

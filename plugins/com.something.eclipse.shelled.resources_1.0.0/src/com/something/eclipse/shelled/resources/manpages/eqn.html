@@ -1,0 +1,488 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>eqn</B> [ <B>-rvCNR</B> ] [ <B>-d</B><I>cc</I> ] [ <B>-T</B><I>name</I> ] [ <B>-M</B><I>dir</I> ] [ <B>-f</B><I>F</I> ]
+           [ <B>-s</B><I>n</I> ] [ <B>-p</B><I>n</I> ] [ <B>-m</B><I>n</I> ] [ <I>files...</I> ]
+
+       It is possible to have whitespace between a  command  line
+       option and its parameter.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This  manual  page describes the GNU version of <B>eqn</B>, which
+       is part of the groff document formatting system.  <B>eqn</B> com­
+       piles  descriptions  of  equations  embedded  within <B>troff</B>
+       input files into commands that are  understood  by  <B>troff</B>.
+       Normally,  it  should  be  invoked  using the <B>-e</B> option of
+       <B>groff</B>.  The syntax is quite compatible with Unix eqn.  The
+       output  of GNU eqn cannot be processed with Unix troff; it
+       must be processed with GNU troff.  If no files  are  given
+       on  the  command line, the standard input will be read.  A
+       filename of <B>-</B> will cause the standard input to be read.
+
+       <B>eqn</B> searches for the file <B>eqnrc</B> in the  directories  given
+       with  the  <B>-M</B>  option  first, then in <B>/usr/lib/groff/site-</B>
+       <B>tmac</B>, <B>/usr/share/groff/site-tmac</B>, and finally in the stan­
+       dard  macro directory <B>/usr/share/groff/1.17.2/tmac</B>.  If it
+       exists, eqn will process it before the other input  files.
+       The <B>-R</B> option prevents this.
+
+       GNU  eqn  does  not  provide the functionality of neqn: it
+       does not support low-resolution,  typewriter-like  devices
+       (although it may work adequately for very simple input).
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-C</B>     Recognize <B>.EQ</B> and <B>.EN</B> even when followed by a char­
+              acter other than space or newline.
+
+       <B>-N</B>     Don't  allow  newlines  within  delimiters.    This
+              option  allows  <B>eqn</B>  to recover better from missing
+              closing delimiters.
+
+       <B>-v</B>     Print the version number.
+
+       <B>-r</B>     Only one size reduction.
+
+       <B>-m</B><I>n</I>    The minimum point-size is <I>n</I>.  eqn will  not  reduce
+              the size of subscripts or superscripts to a smaller
+              size than <I>n</I>.
+
+       <B>-T</B><I>name</I> The output is for device <I>name</I>.  The only effect  of
+              this  is  to define a macro <I>name</I> with a value of <B>1</B>.
+              Typically <B>eqnrc</B> will use this  to  provide  defini­
+              tions  appropriate  for  the  output  device.   The
+              default output device is <B>ps</B>.
+
+              This option is deprecated.  Normally eqn makes sets
+              subscripts  and  superscripts at 70% of the size of
+              the surrounding text.
+
+
+</PRE>
+<H2>USAGE</H2><PRE>
+       Only the differences between GNU  eqn  and  Unix  eqn  are
+       described here.
+
+       Most  of  the  new  features  of GNU eqn are based on TeX.
+       There are some references to the differences  between  TeX
+       and  GNU  eqn below; these may safely be ignored if you do
+       not know TeX.
+
+   <B>Automatic</B> <B>spacing</B>
+       <B>eqn</B> gives each  component  of  an  equation  a  type,  and
+       adjusts  the  spacing  between components using that type.
+       Possible types are:
+
+       ordinary     an ordinary character such as 1 or <I>x</I>;
+
+       operator     a large operator such as <I>¯</I<B>></B>;
+
+       binary       a binary operator such as +;
+
+       relation     a relation such as =;
+
+       opening      a opening bracket such as (;
+
+       closing      a closing bracket such as );
+
+       punctuation  a punctuation character such as ,;
+
+       inner        a subformula contained within brackets;
+
+       suppress     spacing  that  suppresses  automatic  spacing
+                    adjustment.
+
+       Components of an equation get a type in one of two ways.
+
+       <B>type</B> <I>t</I> <I>e</I>
+              This  yields  an equation component that contains <I>e</I>
+              but that has type <I>t</I>, where <I>t</I> is one  of  the  types
+              mentioned above.  For example, <B>times</B> is defined as
+
+                     <B>type</B> <B>"binary"</B> <B>\(mu</B>
+
+              The name of the type doesn't have to be quoted, but
+              quoting protects from macro expansion.
+
+       <B>chartype</B> <I>t</I> <I>text</I>
+              Unquoted groups of characters  are  split  up  into
+              individual characters, and the type of each charac­
+              This is similar to <B>over</B>; <B>smallover</B> reduces the size
+              of  <I>e1</I>  and  <I>e2</I>;  it  also puts less vertical space
+              between <I>e1</I> or <I>e2</I> and the fraction  bar.   The  <B>over</B>
+              primitive corresponds to the TeX <B>\over</B> primitive in
+              display styles; <B>smallover</B> corresponds to  <B>\over</B>  in
+              non-display styles.
+
+       <B>vcenter</B> <I>e</I>
+              This vertically centers <I>e</I> about the math axis.  The
+              math axis is  the  vertical  position  about  which
+              characters such as + and - are centered; also it is
+              the vertical position used for  the  bar  of  frac­
+              tions.  For example, <B>sum</B> is defined as
+
+                     <B>{</B> <B>type</B> <B>"operator"</B> <B>vcenter</B> <B>size</B> <B>+5</B> <B>\(*S</B> <B>}</B>
+
+       <I>e1</I> <B>accent</B> <I>e2</I>
+              This  sets  <I>e2</I> as an accent over <I>e1</I>.  <I>e2</I> is assumed
+              to be at the correct height for a lowercase letter;
+              <I>e2</I>  will be moved down according if <I>e1</I> is taller or
+              shorter than a lowercase letter.  For example,  <B>hat</B>
+              is defined as
+
+                     <B>accent</B> <B>{</B> <B>"^"</B> <B>}</B>
+
+              <B>dotdot</B>,  <B>dot</B>,  <B>tilde</B>, <B>vec</B> and <B>dyad</B> are also defined
+              using the <B>accent</B> primitive.
+
+       <I>e1</I> <B>uaccent</B> <I>e2</I>
+              This sets <I>e2</I> as an accent under <I>e1</I>.  <I>e2</I> is  assumed
+              to be at the correct height for a character without
+              a descender; <I>e2</I> will be moved  down  if  <I>e1</I>  has  a
+              descender.   <B>utilde</B> is pre-defined using <B>uaccent</B> as
+              a tilde accent below the baseline.
+
+       <B>split</B> <B>"</B><I>text</I><B>"</B>
+              This has the same effect as simply
+
+                     <I>text</I>
+
+              but <I>text</I> is not subject to macro expansion  because
+              it is quoted; <I>text</I> will be split up and the spacing
+              between individual characters will be adjusted.
+
+       <B>nosplit</B> <I>text</I>
+              This has the same effect as
+
+                     <B>"</B><I>text</I><B>"</B>
+
+              but because <I>text</I> is not quoted it will  be  subject
+              to  macro  expansion; <I>text</I> will not be split up and
+              the spacing between individual characters will  not
+
+       <B>special</B> <I>text</I> <I>e</I>
+              This  constructs  a  new  object  from  <I>e</I>  using  a
+              <B>troff(1)</B> macro  named  <I>text</I>.   When  the  macro  is
+              called,  the  string <B>0s</B> will contain the output for
+              <I>e</I>, and the number registers <B>0w</B>, <B>0h</B>, <B>0d</B>, <B>0skern</B>  and
+              <B>0skew</B>  will  contain the width, height, depth, sub­
+              script kern, and skew of <I>e</I>.  (The <I>subscript</I> <I>kern</I> of
+              an  object says how much a subscript on that object
+              should be tucked in; the <I>skew</I> of an object says how
+              far  to  the  right  of the center of the object an
+              accent over the  object  should  be  placed.)   The
+              macro  must  modify  <B>0s</B>  so that it will output the
+              desired result  with  its  origin  at  the  current
+              point, and increase the current horizontal position
+              by the width of the object.  The  number  registers
+              must  also  be  modified so that they correspond to
+              the result.
+
+              For example, suppose you wanted  a  construct  that
+              `cancels'  an expression by drawing a diagonal line
+              through it.
+
+                     <B>.EQ</B>
+                     <B>define</B> <B>cancel</B> <B>'special</B> <B>Ca'</B>
+                     <B>.EN</B>
+                     <B>.de</B> <B>Ca</B>
+                     <B>.ds</B> <B>0s</B> <B>\Z'\\*(0s'\v'\\n(0du'\D'l</B> <B>\\n(0wu</B> <B>-\\n(0hu-\\n(0du'\v'\\n(0hu'</B>
+                     <B>..</B>
+
+              Then you could cancel an  expression  <I>e</I>  with  <B>can­</B>
+              <B>cel</B> <B>{</B> <I>e</I> <B>}</B>
+
+              Here's  a  more  complicated construct that draws a
+              box round an expression:
+
+                     <B>.EQ</B>
+                     <B>define</B> <B>box</B> <B>'special</B> <B>Bx'</B>
+                     <B>.EN</B>
+                     <B>.de</B> <B>Bx</B>
+                     <B>.ds</B> <B>0s</B> <B>\Z'\h'1n'\\*(0s'\</B>
+                     <B>\Z'\v'\\n(0du+1n'\D'l</B> <B>\\n(0wu+2n</B> <B>0'\D'l</B> <B>0</B> <B>-\\n(0hu-\\n(0du-2n'\</B>
+                     <B>\D'l</B> <B>-\\n(0wu-2n</B> <B>0'\D'l</B> <B>0</B> <B>\\n(0hu+\\n(0du+2n''\h'\\n(0wu+2n'</B>
+                     <B>.nr</B> <B>0w</B> <B>+2n</B>
+                     <B>.nr</B> <B>0d</B> <B>+1n</B>
+                     <B>.nr</B> <B>0h</B> <B>+1n</B>
+                     <B>..</B>
+
+   <B>Customization</B>
+       The appearance of equations is controlled by a large  num­
+       ber of parameters. These can be set using the <B>set</B> command.
+
+              <B>minimum_size</B>            <B>eqn</B>  will  not set anything
+                                      at  a  smaller   point-size
+                                      than this.  The value is in
+                                      points.
+
+              <B>fat_offset</B>              The <B>fat</B> primitive emboldens
+                                      an equation by overprinting
+                                      two copies of the  equation
+                                      horizontally offset by this
+                                      amount.
+
+              <B>over_hang</B>               A  fraction  bar  will   be
+                                      longer by twice this amount
+                                      than  the  maximum  of  the
+                                      widths of the numerator and
+                                      denominator;    in    other
+                                      words, it will overhang the
+                                      numerator  and  denominator
+                                      by at least this amount.
+
+              <B>accent_width</B>            When   <B>bar</B>   or   <B>under</B>  is
+                                      applied to a single charac­
+                                      ter,  the line will be this
+                                      long.   Normally,  <B>bar</B>   or
+                                      <B>under</B> produces a line whose
+                                      length is the width of  the
+                                      object to which it applies;
+                                      in the  case  of  a  single
+                                      character,  this  tends  to
+                                      produce a line  that  looks
+                                      too long.
+
+              <B>delimiter_factor</B>        Extensible  delimiters pro­
+                                      duced  with  the  <B>left</B>  and
+                                      <B>right</B>  primitives will have
+                                      a combined height and depth
+                                      of at least this many thou­
+                                      sandths of twice the  maxi­
+                                      mum  amount  by  which  the
+                                      sub-equation    that    the
+                                      delimiters  enclose extends
+                                      away from the axis.
+
+              <B>delimiter_shortfall</B>     Extensible delimiters  pro­
+                                      duced  with  the  <B>left</B>  and
+                                      <B>right</B> primitives will  have
+                                      a combined height and depth
+                                      not less than  the  differ­
+                                      ence  of  twice the maximum
+                                      amount by  which  the  sub-
+                                      equation  that  the  delim­
+                                      iters enclose extends  away
+                                      ters.
+
+              <B>medium_space</B>            This  amount  of  space  is
+                                      automatically  inserted  on
+                                      either side of binary oper­
+                                      ators.
+
+              <B>thick_space</B>             This  amount  of  space  is
+                                      automatically  inserted  on
+                                      either side of relations.
+
+              <B>x_height</B>                The  height  of   lowercase
+                                      letters  without  ascenders
+                                      such as x.
+
+              <B>axis_height</B>             The height above the  base­
+                                      line of the center of char­
+                                      acters such as + and -.  It
+                                      is   important   that  this
+                                      value is  correct  for  the
+                                      font you are using.
+
+              <B>default_rule_thickness</B>  This   should  set  to  the
+                                      thickness of the <B>\(ru</B> char­
+                                      acter,  or the thickness of
+                                      horizontal  lines  produced
+                                      with    the    <B>\D</B>    escape
+                                      sequence.
+
+              <B>num1</B>                    The <B>over</B> command will shift
+                                      up   the  numerator  by  at
+                                      least this amount.
+
+              <B>num2</B>                    The <B>smallover</B> command  will
+                                      shift  up  the numerator by
+                                      at least this amount.
+
+              <B>denom1</B>                  The <B>over</B> command will shift
+                                      down  the denominator by at
+                                      least this amount.
+
+              <B>denom2</B>                  The <B>smallover</B> command  will
+                                      shift  down the denominator
+                                      by at least this amount.
+
+              <B>sup1</B>                    Normally superscripts  will
+                                      be  shifted  up by at least
+                                      this amount.
+
+              <B>sup2</B>                    Superscripts within  super­
+                                      scripts  or upper limits or
+                                      numerators   of   <B>smallover</B>
+                                      this amount.
+
+              <B>sub2</B>                    When  there  is both a sub­
+                                      script and  a  superscript,
+                                      the   subscript   will   be
+                                      shifted down  by  at  least
+                                      this amount.
+
+              <B>sup_drop</B>                The  baseline  of  a super­
+                                      script will be no more than
+                                      this  much amount below the
+                                      top of the object on  which
+                                      the superscript is set.
+
+              <B>sub_drop</B>                The baseline of a subscript
+                                      will be at least this  much
+                                      below  the  bottom  of  the
+                                      object on  which  the  sub­
+                                      script is set.
+
+              <B>big_op_spacing1</B>         The  baseline  of  an upper
+                                      limit will be at least this
+                                      much  above  the top of the
+                                      object on which  the  limit
+                                      is set.
+
+              <B>big_op_spacing2</B>         The  baseline  of  a  lower
+                                      limit will be at least this
+                                      much  below  the  bottom of
+                                      the  object  on  which  the
+                                      limit is set.
+
+              <B>big_op_spacing3</B>         The   bottom  of  an  upper
+                                      limit will be at least this
+                                      much  above  the top of the
+                                      object on which  the  limit
+                                      is set.
+
+              <B>big_op_spacing4</B>         The  top  of  a lower limit
+                                      will be at least this  much
+                                      below  the  bottom  of  the
+                                      object on which  the  limit
+                                      is set.
+
+              <B>big_op_spacing5</B>         This  much  vertical  space
+                                      will  be  added  above  and
+                                      below limits.
+
+              <B>baseline_sep</B>            The  baselines  of the rows
+                                      in a pile  or  matrix  will
+                                      normally be this far apart.
+                                      In most cases  this  should
+
+              <B>matrix_side_sep</B>         This  much  space  will  be
+                                      added  at  each  side  of a
+                                      matrix.
+
+              <B>draw_lines</B>              If this is non-zero,  lines
+                                      will  be drawn using the <B>\D</B>
+                                      escape   sequence,   rather
+                                      than  with  the  <B>\l</B>  escape
+                                      sequence and the <B>\(ru</B> char­
+                                      acter.
+
+              <B>body_height</B>             The  amount  by  which  the
+                                      height  of   the   equation
+                                      exceeds  this will be added
+                                      as extra space  before  the
+                                      line  containing  the equa­
+                                      tion   (using   <B>\x</B>.)    The
+                                      default value is 85.
+
+              <B>body_depth</B>              The  amount  by  which  the
+                                      depth   of   the   equation
+                                      exceeds  this will be added
+                                      as extra  space  after  the
+                                      line  containing  the equa­
+                                      tion   (using   <B>\x</B>.)    The
+                                      default value is 35.
+
+              <B>nroff</B>                   If  this  is non-zero, then
+                                      <B>ndefine</B>  will  behave  like
+                                      <B>define</B>  and <B>tdefine</B> will be
+                                      ignored, otherwise  <B>tdefine</B>
+                                      will behave like <B>define</B> and
+                                      <B>ndefine</B>  will  be  ignored.
+                                      The   default  value  is  0
+                                      (This is typically  changed
+                                      to  1 by the <B>eqnrc</B> file for
+                                      the  <B>ascii</B>,  <B>latin1</B>,  <B>utf8</B>,
+                                      and <B>cp1047</B> devices.)
+
+              A  more  precise description of the role of many of
+              these parameters can be  found  in  Appendix  H  of
+              <I>The</I> <I>TeXbook</I>.
+
+   <B>Macros</B>
+       Macros can take arguments.  In a macro body, <B>$</B><I>n</I> where <I>n</I> is
+       between 1 and 9, will be replaced by the <I>n-th</I> argument  if
+       the  macro  is  called  with arguments; if there are fewer
+       than <I>n</I> arguments, it will be replaced by nothing.  A  word
+       containing  a  left parenthesis where the part of the word
+       before the left parenthesis has  been  defined  using  the
+       <B>define</B>  command  will  be  recognized as a macro call with
+              If  <I>name</I>  has  been  defined by <B>define</B> (or has been
+              automatically defined because <I>name</I>  is  the  output
+              device)  process  <I>anything</I>;  otherwise  ignore <I>any­</I>
+              <I>thing</I>.  <I>X</I> can be any  character  not  appearing  in
+              <I>anything</I>.
+
+   <B>Fonts</B>
+       <B>eqn</B>  normally  uses at least two fonts to set an equation:
+       an italic font for letters, and a roman  font  for  every­
+       thing  else.   The existing <B>gfont</B> command changes the font
+       that is used as the italic font.  By default  this  is  <B>I</B>.
+       The  font  that  is  used as the roman font can be changed
+       using the new <B>grfont</B> command.
+
+       <B>grfont</B> <I>f</I>
+              Set the roman font to <I>f</I>.
+
+       The <B>italic</B> primitive uses the current italic font  set  by
+       <B>gfont</B>; the <B>roman</B> primitive uses the current roman font set
+       by <B>grfont</B>.  There is also  a  new  <B>gbfont</B>  command,  which
+       changes  the font used by the <B>bold</B> primitive.  If you only
+       use the <B>roman</B>, <B>italic</B> and <B>bold</B> primitives to changes fonts
+       within  an  equation, you can change all the fonts used by
+       your equations just by using <B>gfont</B>, <B>grfont</B> and <B>gbfont</B> com­
+       mands.
+
+       You  can  control  which characters are treated as letters
+       (and therefore set in italics) by using the <B>chartype</B>  com­
+       mand described above.  A type of <B>letter</B> will cause a char­
+       acter to be set in italic type.   A  type  of  <B>digit</B>  will
+       cause a character to be set in roman type.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/usr/share/groff/1.17.2/tmac/eqnrc</B>
+              Initialization file.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Inline  equations  will  be  set at the point size that is
+       current at the beginning of the input line.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>groff(1)</B>, <B>troff(1)</B>, <B>groff_font(5)</B>, <I>The</I> <I>TeXbook</I>
+
+
+
+Groff Version 1.17.2       27 June 2001                    <B>EQN(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

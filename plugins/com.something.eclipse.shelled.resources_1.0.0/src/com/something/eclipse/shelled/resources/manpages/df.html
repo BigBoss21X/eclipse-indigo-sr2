@@ -1,0 +1,114 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>df</B> [<I>OPTION</I>]... [<I>FILE</I>]...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This manual page documents the GNU version of <B>df</B>.  <B>df</B> dis­
+       plays the amount of disk space available on the filesystem
+       containing  each  file  name argument.  If no file name is
+       given,  the  space  available  on  all  currently  mounted
+       filesystems is shown.  Disk space is shown in 1K blocks by
+       default, unless the environment  variable  POSIXLY_CORRECT
+       is set, in which case 512-byte blocks are used.
+
+       If  an argument is the absolute file name of a disk device
+       node containing a mounted filesystem, <B>df</B> shows  the  space
+       available on that filesystem rather than on the filesystem
+       containing the device  node  (which  is  always  the  root
+       filesystem).   This  version  of  <B>df</B> cannot show the space
+       available on unmounted filesystems, because on most  kinds
+       of  systems  doing  so  requires very nonportable intimate
+       knowledge of filesystem structures.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Show information about the filesystem on which  each  FILE
+       resides, or all filesystems by default.
+
+       Mandatory  arguments  to  long  options  are mandatory for
+       short options too.
+
+       <B>-a</B>, <B>--all</B>
+              include filesystems having 0 blocks
+
+       <B>-B</B>, <B>--block-size</B>=<I>SIZE</I> use SIZE-byte blocks
+
+       <B>-h</B>, <B>--human-readable</B>
+              print sizes in human readable format (e.g., 1K 234M
+              2G)
+
+       <B>-H</B>, <B>--si</B>
+              likewise, but use powers of 1000 not 1024
+
+       <B>-i</B>, <B>--inodes</B>
+              list inode information instead of block usage
+
+       <B>-k</B>     like <B>--block-size</B>=<I>1K</I>
+
+       <B>-l</B>, <B>--local</B>
+              limit listing to local filesystems
+
+       <B>--no-sync</B>
+              do  not  invoke  sync  before  getting  usage  info
+              (default)
+
+       <B>-v</B>     (ignored)
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+       SIZE may be (or may be an integer optionally followed  by)
+       one  of  following:  kB  1000,  K  1024,  MB  1,000,000, M
+       1,048,576, and so on for G, T, P, E, Z, Y.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written  by  Torbjorn  Granlund,  David  MacKenzie,  Larry
+       McVoy, and Paul Eggert.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-coreutils@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2003 Free Software Foundation, Inc.
+       This  is  free software; see the source for copying condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  full  documentation for <B>df</B> is maintained as a Texinfo
+       manual.   If  the  <B>info</B>  and  <B>df</B>  programs  are   properly
+       installed at your site, the command
+
+              <B>info</B> <B>df</B>
+
+       should give you access to the complete manual.
+
+
+
+df (coreutils) 4.5.8      February 2003                     <B>DF(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

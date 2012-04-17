@@ -1,0 +1,375 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>grops</B> [ <B>-glmv</B> ] [ <B>-b</B><I>n</I> ] [ <B>-c</B><I>n</I> ] [ <B>-w</B><I>n</I> ] [ <B>-F</B><I>dir</I> ] [ <B>-P</B><I>pro­</I>
+             <I>logue</I> ] [ <I>files...</I> ]
+
+       It is possible to have whitespace between a  command  line
+       option and its parameter.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>grops</B>  translates  the  output of GNU <B>troff</B> to PostScript.
+       Normally <B>grops</B> should be invoked by using the  groff  com­
+       mand  with  a <B>-Tps</B> option.  (Actually, this is the default
+       for groff.)  If no files are given, <B>grops</B>  will  read  the
+       standard  input.  A filename of <B>-</B> will also cause <B>grops</B> to
+       read the standard input.  PostScript output is written  to
+       the  standard  output.  When <B>grops</B> is run by <B>groff</B> options
+       can be passed to <B>grops</B> using the <B>groff</B> <B>-P</B> option.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-b</B><I>n</I>    Workaround broken spoolers  and  previewers.   Nor­
+              mally <B>grops</B> produces output that conforms the Docu­
+              ment Structuring Conventions version 3.0.  Unfortu­
+              nately  some  spoolers  and previewers can't handle
+              such output.  The value of <I>n</I>  controls  what  <B>grops</B>
+              does  to its output acceptable to such programs.  A
+              value of 0 will  cause  grops  not  to  employ  any
+              workarounds.   Add 1 if no <B>%%BeginDocumentSetup</B> and
+              <B>%%EndDocumentSetup</B> comments  should  be  generated;
+              this  is  needed  for  early versions of TranScript
+              that get confused by anything between the <B>%%EndPro­</B>
+              <B>log</B> comment and the first <B>%%Page</B> comment.  Add 2 if
+              lines in included files beginning with  <B>%!</B>   should
+              be  stripped out; this is needed for Sun's pageview
+              previewer.  Add 4 if <B>%%Page</B>, <B>%%Trailer</B>  and  <B>%%End­</B>
+              <B>Prolog</B>  comments should be stripped out of included
+              files; this  is  needed  for  spoolers  that  don't
+              understand  the  <B>%%BeginDocument</B>  and <B>%%EndDocument</B>
+              comments.   Add  8  if  the  first  line   of   the
+              PostScript  output  should be <B>%!PS-Adobe-2.0</B> rather
+              than <B>%!PS-Adobe-3.0</B>;  this  is  needed  when  using
+              Sun's  Newsprint  with a printer that requires page
+              reversal.  The default value can be specified by a
+
+                     <B>broken</B> <I>n</I>
+
+              command in the DESC file.   Otherwise  the  default
+              value is 0.
+
+       <B>-c</B><I>n</I>    Print <I>n</I> copies of each page.
+
+       <B>-g</B>     Guess  the  page length.  This generates PostScript
+              code that guesses the page length.  The guess  will
+              be correct only if the imageable area is vertically
+              the prologue instead of the default  prologue  file
+              <B>prologue</B>.   This  option  overrides the environment
+              variable GROPS_PROLOGUE.
+
+       <B>-w</B><I>n</I>    Lines should be drawn using a thickness of <I>n</I>  thou­
+              sandths of an em.
+
+       <B>-v</B>     Print the version number.
+
+
+</PRE>
+<H2>USAGE</H2><PRE>
+       There  are  styles  called <B>R</B>, <B>I</B>, <B>B</B>, and <B>BI</B> mounted at font
+       positions 1 to 4.  The fonts are grouped into families  <B>A</B>,
+       <B>BM</B>,  <B>C</B>,  <B>H</B>, <B>HN</B>, <B>N</B>, <B>P</B> and <B>T</B> having members in each of these
+       styles:
+
+       <B>AR</B>     AvantGarde-Book
+
+       <B>AI</B>     AvantGarde-BookOblique
+
+       <B>AB</B>     AvantGarde-Demi
+
+       <B>ABI</B>    AvantGarde-DemiOblique
+
+       <B>BMR</B>    Bookman-Light
+
+       <B>BMI</B>    Bookman-LightItalic
+
+       <B>BMB</B>    Bookman-Demi
+
+       <B>BMBI</B>   Bookman-DemiItalic
+
+       <B>CR</B>     Courier
+
+       <B>CI</B>     Courier-Oblique
+
+       <B>CB</B>     Courier-Bold
+
+       <B>CBI</B>    Courier-BoldOblique
+
+       <B>HR</B>     Helvetica
+
+       <B>HI</B>     Helvetica-Oblique
+
+       <B>HB</B>     Helvetica-Bold
+
+       <B>HBI</B>    Helvetica-BoldOblique
+
+       <B>HNR</B>    Helvetica-Narrow
+
+       <B>HNI</B>    Helvetica-Narrow-Oblique
+
+       <B>HNB</B>    Helvetica-Narrow-Bold
+
+       <B>PB</B>     Palatino-Bold
+
+       <B>PBI</B>    Palatino-BoldItalic
+
+       <B>TR</B>     Times-Roman
+
+       <B>TI</B>     Times-Italic
+
+       <B>TB</B>     Times-Bold
+
+       <B>TBI</B>    Times-BoldItalic
+
+       There is also the following font which is not a member  of
+       a family:
+
+       <B>ZCMI</B>   ZapfChancery-MediumItalic
+
+       There  are  also some special fonts called <B>SS</B> and <B>S</B>.  Zapf
+       Dingbats is available as <B>ZD</B>  and  a  reversed  version  of
+       ZapfDingbats (with symbols pointing in the opposite direc­
+       tion) is available as <B>ZDR</B>; most characters in these  fonts
+       are unnamed and must be accessed using <B>\N</B>.
+
+       <B>grops</B> understands various X commands produced using the <B>\X</B>
+       escape sequence; <B>grops</B> will only interpret  commands  that
+       begin with a <B>ps:</B> tag.
+
+       <B>\X'ps:</B> <B>exec</B> <I>code</I><B>'</B>
+              This  executes the arbitrary PostScript commands in
+              <I>code</I>.  The PostScript currentpoint will be  set  to
+              the  position  of  the  <B>\X</B> command before executing
+              <I>code</I>.  The origin will be at the top left corner of
+              the  page, and y coordinates will increase down the
+              page.  A procedure <B>u</B> will be defined that  converts
+              groff  units  to  the  coordinate system in effect.
+              For example,
+
+                     <B>.nr</B> <B>x</B> <B>1i</B>
+                     <B>\X'ps:</B> <B>exec</B> <B>\nx</B> <B>u</B> <B>0</B> <B>rlineto</B> <B>stroke'</B>
+
+              will draw a horizontal line one  inch  long.   <I>code</I>
+              may  make  changes  to  the graphics state, but any
+              changes will persist only to the end of  the  page.
+              A  dictionary  containing the definitions specified
+              by the <B>def</B> and <B>mdef</B> will be on top of  the  dictio­
+              nary  stack.  If your code adds definitions to this
+              dictionary, you  should  allocate  space  for  them
+              using  <B>\X'ps</B> <B>mdef</B> <I>n</I><B>'</B>.  Any definitions will persist
+              only until the end of the page.  If you use the  <B>\Y</B>
+              escape  sequence  with  an  argument  that  names a
+              macro, <I>code</I> can extend over  multiple  lines.   For
+              This is the same as the <B>exec</B>  command  except  that
+              the PostScript code is read from file <I>name</I>.
+
+       <B>\X'ps:</B> <B>def</B> <I>code</I><B>'</B>
+              Place  a PostScript definition contained in <I>code</I> in
+              the prologue.  There should be at most one  defini­
+              tion per <B>\X</B> command.  Long definitions can be split
+              over several <B>\X</B> commands; all  the  <I>code</I>  arguments
+              are  simply  joined together separated by newlines.
+              The definitions are placed in a dictionary which is
+              automatically  pushed  on the dictionary stack when
+              an <B>exec</B> command is executed.  If  you  use  the  <B>\Y</B>
+              escape  sequence  with  an  argument  that  names a
+              macro, <I>code</I> can extend over multiple lines.
+
+       <B>\X'ps:</B> <B>mdef</B> <I>n</I> <I>code</I><B>'</B>
+              Like <B>def</B>, except that <I>code</I> may contain up to <I>n</I> def­
+              initions.  <B>grops</B> needs to know how many definitions
+              <I>code</I> contains so that it can  create  an  appropri­
+              ately  sized PostScript dictionary to contain them.
+
+       <B>\X'ps:</B> <B>import</B> <I>file</I> <I>llx</I> <I>lly</I> <I>urx</I> <I>ury</I> <I>width</I> [ <I>height</I> ]<B>'</B>
+              Import a PostScript graphic from <I>file</I>.   The  argu­
+              ments  <I>llx</I>, <I>lly</I>, <I>urx</I>, and <I>ury</I> give the bounding box
+              of the graphic in the default PostScript coordinate
+              system;  they  should  all be integers; <I>llx</I> and <I>lly</I>
+              are the x and y coordinates of the lower left  cor­
+              ner  of  the  graphic;  <I>urx</I> and <I>ury</I> are the x and y
+              coordinates  of  the  upper  right  corner  of  the
+              graphic;  <I>width</I>  and  <I>height</I> are integers that give
+              the desired width and height in groff units of  the
+              graphic.  The graphic will be scaled so that it has
+              this width and height and translated  so  that  the
+              lower  left corner of the graphic is located at the
+              position associated with <B>\X</B> command.  If the height
+              argument  is omitted it will be scaled uniformly in
+              the x and y directions so that it has the specified
+              width.   Note  that  the contents of the <B>\X</B> command
+              are not interpreted by <B>troff</B>; so vertical space for
+              the  graphic  is  not  automatically added, and the
+              <I>width</I> and <I>height</I> arguments are not allowed to  have
+              attached  scaling  indicators.   If  the PostScript
+              file complies with the Adobe  Document  Structuring
+              Conventions  and  contains a <B>%%BoundingBox</B> comment,
+              then  the  bounding  box   can   be   automatically
+              extracted  from  within  groff  by  using  the <B>psbb</B>
+              request.
+
+              The <B>-mps</B> macros  (which  are  automatically  loaded
+              when  <B>grops</B>  is run by the groff command) include a
+              <B>PSPIC</B> macro which allows a  picture  to  be  easily
+              imported.  This has the format
+              The <B>-I</B> option causes the graphic to be indented  by
+              <I>n</I>.
+
+       <B>\X'ps:</B> <B>invis'</B>
+       <B>\X'ps:</B> <B>endinvis'</B>
+              No  output  will  be generated for text and drawing
+              commands that are bracketed with these <B>\X</B> commands.
+              These  commands  are  intended  for use when output
+              from <B>troff</B> will be previewed before being processed
+              with  <B>grops</B>;  if the previewer is unable to display
+              certain characters or other constructs, then  other
+              substitute characters or constructs can be used for
+              previewing by bracketing them with  these  <B>\X</B>  com­
+              mands.
+
+              For  example,  <B>gxditview</B>  is  not able to display a
+              proper <B>\(em</B>  character  because  the  standard  X11
+              fonts  do not provide it; this problem can be over­
+              come by executing the following request
+
+                     <B>.char</B> <B>\(em</B> <B>\X'ps:</B> <B>invis'\</B>
+                     <B>\Z'\v'-.25m'\h'.05m'\D'l</B> <B>.9m</B> <B>0'\h'.05m''\</B>
+                     <B>\X'ps:</B> <B>endinvis'\(em</B>
+
+              In this case, <B>gxditview</B> will be unable  to  display
+              the  <B>\(em</B> character and will draw the line, whereas
+              <B>grops</B> will print the <B>\(em</B> character and ignore  the
+              line.
+
+       The  input  to  <B>grops</B>  must  be  in  the  format output by
+       <B>troff(1)</B>.  This is described in <B>groff_out(5)</B>.  In addition
+       the  device and font description files for the device used
+       must meet  certain  requirements.   The  device  and  font
+       description  files  supplied  for <B>ps</B> device meet all these
+       requirements.  <B>afmtodit(1)</B> can  be  used  to  create  font
+       files  from  AFM files.  The resolution must be an integer
+       multiple of 72 times the <B>sizescale</B>.  The <B>ps</B> device uses  a
+       resolution  of  72000 and a sizescale of 1000.  The device
+       description file should contain a command
+
+              <B>paperlength</B> <I>n</I>
+
+       which says that output should be generated which is  suit­
+       able  for  printing  on  a  page whose length is <I>n</I> machine
+       units.  Each font description file must contain a command
+
+              <B>internalname</B> <I>psname</I>
+
+       which says that the PostScript name of the font is <I>psname</I>.
+       It may also contain a command
+
+              <B>encoding</B> <I>enc</I><B>_</B><I>file</I>
+
+       to select the character, even if the  character  does  not
+       have  a groff name.  Every character in the font file must
+       exist in the PostScript font, and the widths given in  the
+       font  file  must  match  the widths used in the PostScript
+       font.  <B>grops</B> will assume that a  character  with  a  groff
+       name  of  <B>space</B>  is blank (makes no marks on the page); it
+       can make use of such a character to  generate  more  effi­
+       cient and compact PostScript output.
+
+       <B>grops</B>  can  automatically  include  the downloadable fonts
+       necessary to print the document.  Any  downloadable  fonts
+       which  should, when required, be included by <B>grops</B> must be
+       listed              in              the               file
+       <B>/usr/share/groff/1.17.2/font/devps/download</B>;  this  should
+       consist of lines of the form
+
+              <I>font</I>  <I>filename</I>
+
+       where <I>font</I> is the PostScript name of the font,  and  <I>file­</I>
+       <I>name</I>  is  the  name of the file containing the font; lines
+       beginning with <B>#</B> and blank lines are ignored;  fields  may
+       be  separated by tabs or spaces; <I>filename</I> will be searched
+       for using the same mechanism that is used for  groff  font
+       metric  files.   The  <B>download</B>  file  itself  will also be
+       searched for using this mechanism.
+
+       If the file containing a  downloadable  font  or  imported
+       document  conforms  to the Adobe Document Structuring Con­
+       ventions, then <B>grops</B> will interpret any  comments  in  the
+       files  sufficiently  to ensure that its own output is con­
+       forming.  It will also supply any  needed  font  resources
+       that are listed in the <B>download</B> file as well as any needed
+       file resources.  It is also able to handle  inter-resource
+       dependencies.   For example, suppose that you have a down­
+       loadable font called Garamond,  and  also  a  downloadable
+       font  called  Garamond-Outline  which  depends on Garamond
+       (typically it would be defined  to  copy  Garamond's  font
+       dictionary,  and  change the PaintType), then it is neces­
+       sary for Garamond to be appear before Garamond-Outline  in
+       the PostScript document.  <B>grops</B> will handle this automati­
+       cally provided that the downloadable font file  for  Gara­
+       mond-Outline indicates its dependence on Garamond by means
+       of the Document Structuring Conventions,  for  example  by
+       beginning with the following lines
+
+              <B>%!PS-Adobe-3.0</B> <B>Resource-Font</B>
+              <B>%%DocumentNeededResources:</B> <B>font</B> <B>Garamond</B>
+              <B>%%EndComments</B>
+              <B>%%IncludeResource:</B> <B>font</B> <B>Garamond</B>
+
+       In this case both Garamond and Garamond-Outline would need
+       to be listed in the <B>download</B> file.   A  downloadable  font
+              logue  file <B>prologue</B>.  The option <B>-P</B> overrides this
+              environment variable.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/usr/share/groff/1.17.2/font/devps/DESC</B>
+              Device description file.
+
+       <B>/usr/share/groff/1.17.2/font/devps/</B><I>F</I>
+              Font description file for font <I>F</I>.
+
+       <B>/usr/share/groff/1.17.2/font/devps/download</B>
+              List of downloadable fonts.
+
+       <B>/usr/share/groff/1.17.2/font/devps/text.enc</B>
+              Encoding used for text fonts.
+
+       <B>/usr/share/groff/1.17.2/tmac/ps.tmac</B>
+              Macros for use with <B>grops</B>; automatically loaded  by
+              <B>troffrc</B>
+
+       <B>/usr/share/groff/1.17.2/tmac/pspic.tmac</B>
+              Definition  of <B>PSPIC</B> macro, automatically loaded by
+              <B>ps.tmac</B>.
+
+       <B>/usr/share/groff/1.17.2/tmac/psold.tmac</B>
+              Macros to disable use of characters not present  in
+              older  PostScript printers (e.g. `eth' or `thorn').
+
+       <B>/tmp/grops</B><I>XXXXXX</I>
+              Temporary file.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>afmtodit(1)</B>, <B>groff(1)</B>,  <B>troff(1)</B>,  <B>psbb(1)</B>,  <B>groff_out(5)</B>,
+       <B>groff_font(5)</B>, <B>groff_char(7)</B>
+
+
+
+Groff Version 1.17.2       27 June 2001                  <B>GROPS(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

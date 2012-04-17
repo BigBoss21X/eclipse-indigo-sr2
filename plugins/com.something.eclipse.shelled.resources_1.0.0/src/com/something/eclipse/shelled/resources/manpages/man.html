@@ -1,0 +1,471 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>man</B>  [<B>-c</B>|<B>-w</B>|<B>-tZT</B>  <I>device</I>]  [<B>-adhu7V</B>] [<B>-m</B> <I>system</I>[,...]] [<B>-L</B>
+       <I>locale</I>] [<B>-p</B> <I>string</I>] [<B>-M</B> <I>path</I>] [<B>-P</B> <I>pager</I>] [<B>-r</B>  <I>prompt</I>]  [<B>-S</B>
+       <I>list</I>] [<B>-e</B> <I>extension</I>] [[<I>section</I>] <I>page</I> ...] ...
+       <B>man</B>  <B>-l</B>  [<B>-7</B>]  [<B>-tZT</B>  <I>device</I>]  [<B>-p</B>  <I>string</I>] [<B>-P</B> <I>pager</I>] [<B>-r</B>
+       <I>prompt</I>] <I>file</I> ...
+       <B>man</B> <B>-k</B> [<I>apropos</I> <I>options</I>] <I>regexp</I> ...
+       <B>man</B> <B>-f</B> [<I>whatis</I> <I>options</I>] <I>page</I> ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>man</B> is the system's manual pager. Each <I>page</I> argument given
+       to <B>man</B> is normally the name of a program, utility or func­
+       tion.  The <I>manual</I> <I>page</I> associated with each of these argu­
+       ments is then found and displayed. A <I>section</I>, if provided,
+       will direct <B>man</B> to look only in that <I>section</I> of  the  man­
+       ual.  The default action is to search in all of the avail­
+       able <I>sections</I>, following a pre-defined order and  to  show
+       only  the first <I>page</I> found, even if <I>page</I> exists in several
+       <I>sections</I>.
+
+       The table below shows the <I>section</I> numbers  of  the  manual
+       followed by the types of pages they contain.
+
+       1   Executable programs or shell commands
+       2   System calls (functions provided by the kernel)
+       3   Library calls (functions within system libraries)
+       4   Special files (usually found in <I>/dev</I>)
+       5   File formats and conventions eg <I>/etc/passwd</I>
+       6   Games
+       7   Macro packages and conventions eg <B>man(7)</B>, <B>groff(7)</B>.
+       8   System administration commands (usually only for root)
+       9   Kernel routines [Non standard]
+
+       A manual <I>page</I> consists of several parts.
+
+       They may be labelled <B>NAME</B>, <B>SYNOPSIS</B>, <B>DESCRIPTION</B>, <B>OPTIONS</B>,
+       <B>FILES</B>, <B>SEE</B> <B>ALSO</B>, <B>BUGS</B>, and <B>AUTHOR</B>.
+
+       The following conventions apply to  the  <B>SYNOPSIS</B>  section
+       and can be used as a guide in other sections.
+
+       <B>bold</B> <B>text</B>          type exactly as shown.
+       <I>italic</I> <I>text</I>        replace with appropriate argument.
+       [<B>-abc</B>]             any or all arguments within [ ] are optional.
+       <B>-a</B>|<B>-b</B>              options delimited by | cannot be used together.
+       <I>argument</I> <B>...</B>       <I>argument</I> is repeatable.
+       [<I>expression</I>] <B>...</B>   entire <I>expression</I> within [ ] is repeatable.
+
+       The  command  or  function  illustration is a pattern that
+       should match all possible invocations.  In some  cases  it
+       is  advisable  to illustrate several exclusive invocations
+       as is shown in the <B>SYNOPSIS</B> section of this manual page.
+           format  and  pipe  it  to  the  printer named <I>ps</I>.  The
+           default output for <B>groff</B> is usually  PostScript.   <B>man</B>
+           <B>--help</B> should advise as to which processor is bound to
+           the <B>-t</B> option.
+
+       <B>man</B> <B>-l</B> <B>-T</B><I>dvi</I> <I>./foo.1x.gz</I> <B>&gt;</B> <I>./foo.1x.dvi</I>
+           This command will  decompress  and  format  the  nroff
+           source  manual page <I>./foo.1x.gz</I> into a <B>device</B> <B>indepen­</B>
+           <B>dent</B> <B>(dvi)</B> file.  The redirection is necessary as  the
+           <B>-T</B> flag causes output to be directed to <B>stdout</B> with no
+           pager.  The output could be viewed with a program such
+           as  <B>xdvi</B>  or further processed into PostScript using a
+           program such as <B>dvips.</B>
+
+       <B>man</B> <B>-k</B> <I>printf</I>
+           Search the short descriptions and  manual  page  names
+           for  the  keyword <I>printf</I> as regular expression.  Print
+           out any matches.  Equivalent to <B>apropos</B> <B>-r</B> <I>printf</I><B>.</B>
+
+       <B>man</B> <B>-f</B> <I>smail</I>
+           Lookup the manual pages referenced by <I>smail</I> and  print
+           out  the  short descriptions of any found.  Equivalent
+           to <B>whatis</B> <B>-r</B> <I>smail</I><B>.</B>
+
+
+</PRE>
+<H2>OVERVIEW</H2><PRE>
+       Many options are available to <B>man</B> in order to give as much
+       flexibility  as possible to the user.  Changes can be made
+       to the search path, section order, output  processor,  and
+       other behaviours and operations detailed below.
+
+       If  set, various environment variables are interrogated to
+       determine the operation of <B>man</B>.  It is possible to set the
+       `catch all' variable $<B>MANOPT</B> to any string in command line
+       format with the exception that any spaces used as part  of
+       an  option's argument must be escaped (preceded by a back­
+       slash).  <B>man</B> will parse $<B>MANOPT</B> prior to parsing  its  own
+       command line.  Those options requiring an argument will be
+       overridden by the same options found on the command  line.
+       To  reset  all  of  the  options set in $<B>MANOPT</B>, <B>-D</B> can be
+       specified as the initial command line option.   This  will
+       allow  man  to  `forget'  about  the  options specified in
+       $<B>MANOPT</B> although they must still have been valid.
+
+       The manual pager utilities packaged as <B>man_db</B> make  exten­
+       sive  use  of <B>index</B> database caches.  These caches contain
+       information such as where each manual page can be found on
+       the  filesystem  and  what  its  <I>whatis</I>  (short  one  line
+       description of the man page) contains, and  allow  <B>man</B>  to
+       run  faster  than  if it had to search the filesystem each
+       time to find the appropriate manual  page.   If  requested
+       using  the  <B>-u</B>  option,  <B>man</B>  will  ensure that the caches
+       remain consistent, which can obviate the need to  manually
+       Each `global' manual page hierarchy such as <I>/usr/share/man</I>
+       or  <I>/usr/X11R6/man</I>  may have any directory as its cat page
+       hierarchy.  Traditionally the cat pages are  stored  under
+       the  same hierarchy as the man pages, but for reasons such
+       as those specified in the <B>File</B> <B>Hierarchy</B>  <B>Standard</B>  <B>(FHS)</B>,
+       it  may be better to store them elsewhere.  For details on
+       how to do this, please read <B>manpath(5)</B>.   For  details  on
+       why to do this, read the standard.
+
+       International  support  is  available  with  this package.
+       Native language manual pages are accessible (if  available
+       on  your system) via use of <I>locale</I> functions.  To activate
+       such support, it is necessary to set either  $<B>LC_MESSAGES</B>,
+       $<B>LANG</B>  or another system dependent environment variable to
+       your language  locale,  usually  specified  in  the  <B>POSIX</B>
+       <B>1003.1</B> based format:
+
+       &lt;<I>language</I>&gt;[<B>_</B>&lt;<I>territory</I>&gt;[<B>.</B>&lt;<I>character-set</I>&gt;[<B>,</B>&lt;<I>version</I>&gt;]]]
+
+       If  the  desired page is available in your <I>locale,</I> it will
+       be displayed in lieu of  the  standard  (usually  American
+       English) page.
+
+       Support  for international message catalogues is also fea­
+       tured in this package and can be  activated  in  the  same
+       way,  again  if  available.   If  you find that the manual
+       pages and message catalogues supplied  with  this  package
+       are  not  available  in your native language and you would
+       like to supply them, please  contact  the  maintainer  who
+       will be coordinating such activity.
+
+       For  information  regarding  other features and extensions
+       available with this manual pager, please  read  the  docu­
+       ments supplied with the package.
+
+
+</PRE>
+<H2>DEFAULTS</H2><PRE>
+       <B>man</B>  will  search  for the desired manual pages within the
+       <I>index</I> database caches. If the <B>-u</B> option is given, a  cache
+       consistency  check  is  performed  to ensure the databases
+       accurately reflect the  filesystem.   If  this  option  is
+       always  given,  it is not generally necessary to run <B>mandb</B>
+       after the caches are initially  created,  unless  a  cache
+       becomes corrupt.  However, the cache consistency check can
+       be slow on systems with many manual pages installed, so it
+       is not performed by default, and system administrators may
+       wish to run <B>mandb</B> every week or so to  keep  the  database
+       caches  fresh.   To  forestall problems caused by outdated
+       caches, <B>man</B> will fall back to file  globbing  if  a  cache
+       lookup fails, just as it would if no cache was present.
+
+       Once  a manual page has been located, a check is performed
+       to find out if a relative preformatted `cat' file  already
+       $<B>MANROFFSEQ</B>  is  interrogated.  If <B>-p</B> was not used and the
+       environment variable was not set, the initial line of  the
+       nroff  file  is parsed for a preprocessor string.  To con­
+       tain a valid preprocessor  string,  the  first  line  must
+       resemble
+
+       <B>'\"</B> &lt;<B>string</B>&gt;
+
+       where  <B>string</B>  can be any combination of letters described
+       by option <B>-p</B> below.
+
+       If none of the above methods provide any  filter  informa­
+       tion, a default set is used.
+
+       A  formatting  pipeline is formed from the filters and the
+       primary formatter (<B>nroff</B> or [<B>tg</B>]<B>roff</B>  with  <B>-t</B>)  and  exe­
+       cuted.  Alternatively, if an executable program <I>mandb</I><B>_</B><I>nfmt</I>
+       (or <I>mandb</I><B>_</B><I>tfmt</I> with <B>-t</B>) exists in the man tree root, it is
+       executed  instead.  It gets passed the manual source file,
+       the preprocessor string, and optionally the device  speci­
+       fied with <B>-T</B> as arguments.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Non  argument  options  that  are duplicated either on the
+       command line, in $<B>MANOPT</B>, or both, are not  harmful.   For
+       options  that  require  an argument, each duplication will
+       override the previous argument value.
+
+       <B>-l,</B> <B>--local-file</B>
+              Activate `local' mode.  Format  and  display  local
+              manual  files instead of searching through the sys­
+              tem's manual collection.  Each manual page argument
+              will  be interpreted as an nroff source file in the
+              correct format.  No cat file is produced.   If  '-'
+              is  listed  as  one of the arguments, input will be
+              taken from stdin.  When this option  is  not  used,
+              and  man  fails  to  find the page required, before
+              displaying the error message, it attempts to act as
+              if  this  option  was supplied, using the name as a
+              filename and looking for an exact match.
+
+       <B>-L</B> <I>locale</I><B>,</B> <B>--locale=</B><I>locale</I>
+              <B>man</B> will normally determine your current locale  by
+              a  call to the C function <B>setlocale(3)</B> which inter­
+              rogates  various  environment  variables,  possibly
+              including  $<B>LC_MESSAGES</B>  and $<B>LANG</B>.  To temporarily
+              override the determined value, use this  option  to
+              supply  a <I>locale</I> string directly to <B>man</B>.  Note that
+              it will not take effect until the search for  pages
+              actually  begins.   Output such as the help message
+              will always be displayed in  the  initially  deter­
+              mined locale.
+
+              A path specified as a manpath must be the root of a
+              manual page hierarchy structured into  sections  as
+              described  in  the man_db manual (under "The manual
+              page system").  To view manual pages  outside  such
+              hierarchies, see the <B>-l</B> option.
+
+       <B>-P</B> <I>pager</I><B>,</B> <B>--pager=</B><I>pager</I>
+              Specify which output pager to use.  By default, <B>man</B>
+              uses <B>exec</B> <B>/usr/bin/less</B> <B>-s</B>.  This option  overrides
+              the  $<B>PAGER</B> environment variable and is not used in
+              conjunction with <B>-f</B> or <B>-k</B>.
+
+       <B>-r</B> <I>prompt</I><B>,</B> <B>--prompt=</B><I>prompt</I>
+              If a recent version of <B>less</B> is used as  the  pager,
+              <B>man</B>  will attempt to set its prompt and some sensi­
+              ble options.  The default prompt looks like
+
+               <B>Manual</B> <B>page</B> <I>name</I><B>(</B><I>sec</I><B>)</B> <B>line</B> <I>x</I>
+
+              where  <I>name</I>  denotes  the  manual  page  name,  <I>sec</I>
+              denotes  the  section  it was found under and <I>x</I> the
+              current line number.  This is achieved by using the
+              $<B>LESS</B> environment variable.
+
+              Supplying  <B>-r</B>  with  a  string  will  override this
+              default.  The string may contain the  text  <B>$MAN_PN</B>
+              which  will  be expanded to the name of the current
+              manual page and its section name surrounded by  `('
+              and  `)'.   The  string used to produce the default
+              could be expressed as
+
+              <B>\</B> <B>Manual\</B> <B>page\</B> <B>\$MAN_PN\</B> <B>?ltline\</B> <B>%lt?L/%L.:</B>
+              <B>byte\</B> <B>%bB?s/%s..?\</B> <B>(END):?pB</B> <B>%pB\\%..</B>
+
+              It is broken into two lines here for  the  sake  of
+              readability  only.  For its meaning see the <B>less(1)</B>
+              manual page.  The prompt string is first  evaluated
+              by  the  shell.  All double quotes, back-quotes and
+              backslashes in the prompt must be escaped by a pre­
+              ceding  backslash.  The prompt string may end in an
+              escaped $ which may be followed by further  options
+              for less.  By default <B>man</B> sets the <B>-ix8</B> options.
+
+       <B>-7,</B> <B>--ascii</B>
+              When viewing a pure <B>ascii(7)</B> manual page on a 7 bit
+              terminal or terminal emulator, some characters  may
+              not  display  correctly  when  using  the <B>latin1(7)</B>
+              device description with  <B>GNU</B>  <B>nroff</B>.   This  option
+              allows  pure  <I>ascii</I> manual pages to be displayed in
+              <I>ascii</I> with the <I>latin1</I> device.  It will  not  trans­
+              late  any  <I>latin1</I>  text.  The following table shows
+              using this option or <B>man</B> did not format  this  page
+              using the <I>latin1</I> device description.  If the <I>latin1</I>
+              column is missing or corrupt, you may need to  view
+              manual pages with this option.
+
+              This option is ignored when using options <B>-t</B>, <B>-T</B> or
+              <B>-Z</B> and may be useless for <B>nroff</B> other than <B>GNU's</B>.
+
+       <B>-S</B> <I>list</I><B>,</B> <B>--sections=</B><I>list</I>
+              List is a colon-separated list of `order  specific'
+              manual  sections  to search.  This option overrides
+              the $<B>MANSECT</B> environment variable.
+
+       <B>-a,</B> <B>--all</B>
+              By default, <B>man</B> will exit after displaying the most
+              suitable  manual  page it finds.  Using this option
+              forces <B>man</B> to display all  the  manual  pages  with
+              names that match the search criteria.
+
+       <B>-c,</B> <B>--catman</B>
+              This  option is not for general use and should only
+              be used by the <B>catman</B> program.
+
+       <B>-d,</B> <B>--debug</B>
+              Don't actually display any  manual  pages,  but  do
+              print lots of debugging information.
+
+       <B>-e</B> <I>sub-extension</I><B>,</B> <B>--extension=</B><I>sub-extension</I>
+              Some  systems  incorporate large packages of manual
+              pages, such as those that accompany the  <B>Tcl</B>  pack­
+              age,  into  the main manual page hierarchy.  To get
+              around the problem of having two manual pages  with
+              the  same  name such as <B>exit(3)</B>, the <B>Tcl</B> pages were
+              usually all assigned to  section  <B>l</B>.   As  this  is
+              unfortunate, it is now possible to put the pages in
+              the correct  section,  and  to  assign  a  specific
+              `extension'  to  them,  in  this  case, <B>exit</B>(3tcl).
+              Under normal operation, <B>man</B> will display <B>exit(3)</B> in
+              preference to <B>exit</B>(3tcl).  To negotiate this situa­
+              tion and to avoid having to know which section  the
+              page  you require resides in, it is now possible to
+              give <B>man</B> a string indicating which package the page
+              must belong to.  Using the above example, supplying
+              the option <B>-e</B> <B>tcl</B> to <B>man</B> will restrict  the  search
+              to pages having an extension of <B>*tcl</B>.
+
+       <B>-f,</B> <B>--whatis</B>
+              Equivalent  to <B>whatis</B>.  Display a short description
+              from the manual page, if available.  See  <B>whatis(1)</B>
+              for details.
+
+       <B>-h,</B> <B>--help</B>
+              delimited  operating  system  names.   To include a
+              search of  the  native  operating  system's  manual
+              pages,  include the system name <B>man</B> in the argument
+              string.  This  option  will  override  the  $<B>SYSTEM</B>
+              environment variable.
+
+       <B>-p</B> <I>string</I><B>,</B> <B>--preprocessor=</B><I>string</I>
+              Specify the sequence of preprocessors to run before
+              <B>nroff</B> or <B>troff</B>/<B>groff</B>.  Not all  installations  will
+              have a full set of preprocessors.  Some of the pre­
+              processors and the letters used to  designate  them
+              are:  <B>eqn</B>  (<B>e</B>),  <B>grap</B> (<B>g</B>), <B>pic</B> (<B>p</B>), <B>tbl</B> (<B>t</B>), <B>vgrind</B>
+              (<B>v</B>), <B>refer</B> (<B>r</B>).  This option  overrides  the  $<B>MAN­</B>
+              <B>ROFFSEQ</B>  environment  variable.   <B>zsoelim</B> is always
+              run as the very first preprocessor.
+
+       <B>-u,</B> <B>--update</B>
+              This option causes <B>man</B> to perform an `inode  level'
+              consistency  check on its database caches to ensure
+              that they are an  accurate  representation  of  the
+              filesystem.   It  will only have a useful effect if
+              <B>man</B> is installed with the setuid bit set.
+
+       <B>-t,</B> <B>--troff</B>
+              Use <I>/usr/bin/groff</I> <I>-mandoc</I>  to  format  the  manual
+              page  to  stdout.   This  option is not required in
+              conjunction with either <B>-T</B> or <B>-Z</B>.
+
+       <B>-T</B> <I>device</I><B>,</B> <B>--troff-device</B> [<I>=device</I>]
+              This option is used to change  <B>groff</B>  (or  possibly
+              <B>troff's</B>)  output  to be suitable for a device other
+              than the default.  It implies <B>-t</B>.   Examples  (pro­
+              vided with Groff-1.09) include <B>dvi</B>, <B>latin1</B>, <B>X75</B> and
+              <B>X100</B>.
+
+       <B>-Z,</B> <B>--ditroff</B>
+              <B>groff</B> will run <B>troff</B> and then  use  an  appropriate
+              post-processor  to  produce output suitable for the
+              chosen device.  If <I>/usr/bin/groff</I> <I>-mandoc</I> is <B>groff</B>,
+              this  option  is  passed to <B>groff</B> and will suppress
+              the use of a post-processor.  It implies <B>-t</B>.
+
+       <B>-w,</B> <B>--where,</B> <B>--location</B>
+              Don't actually display the  manual  pages,  but  do
+              print  the  location(s)  of the files that would be
+              formatted or displayed.  If the file is a cat file,
+              also show the location of its source nroff file.
+
+       <B>-V,</B> <B>--version</B>
+              Display version information.
+
+
+</PRE>
+<H2>EXIT STATUS</H2><PRE>
+              to search for manual pages.
+
+       <B>MANROFFSEQ</B>
+              If  $<B>MANROFFSEQ</B> is set, its value is used to deter­
+              mine the set of preprocessors to pass  each  manual
+              page  through.   The  default  preprocessor list is
+              system dependent.
+
+       <B>MANSECT</B>
+              If $<B>MANSECT</B> is set, its value is a  colon-delimited
+              list  of sections and it is used to determine which
+              manual sections to search and in what order.
+
+       <B>PAGER</B>  If $<B>PAGER</B> is set, its value is used as the name  of
+              the  program  used  to display the manual page.  By
+              default, <B>exec</B> <B>/usr/bin/less</B> <B>-s</B> is used.
+
+       <B>SYSTEM</B> If $<B>SYSTEM</B> is set, it will have the same effect  as
+              option  <B>-m</B>  <B>string</B>  where  string  will be taken as
+              $<B>SYSTEM</B>'s contents.
+
+       <B>MANOPT</B> If $<B>MANOPT</B> is set, it will be parsed prior to <B>man's</B>
+              command  line  and  is  expected to be in a similar
+              format.  As all of the other <B>man</B> specific  environ­
+              ment  variables  can  be  expressed as command line
+              options, and are thus candidates for being included
+              in  $<B>MANOPT</B>  it  is  expected that they will become
+              obsolete.  N.B. All spaces that  should  be  inter­
+              preted  as  part  of  an  option's argument must be
+              escaped.
+
+       <B>MANWIDTH</B>
+              If $<B>MANWIDTH</B> is set, its value is used as the  line
+              length  for which manual pages should be formatted.
+              If it is not set, manual pages  will  be  formatted
+              with  a line length appropriate to the current ter­
+              minal (using an <B>ioctl(2)</B> if available, the value of
+              $<B>COLUMNS</B>,  or falling back to 80 characters if nei­
+              ther is available).  Cat pages will only  be  saved
+              when  the  default  formatting can be used, that is
+              when the terminal line length is between 66 and  80
+              characters.
+
+       <B>LANG</B>, <B>LC_MESSAGES</B>
+              Depending  on  system and implementation, either or
+              both of $<B>LANG</B> and $<B>LC_MESSAGES</B> will be interrogated
+              for  the  current message locale.  <B>man</B> will display
+              its messages in that locale  (if  available).   See
+              <B>setlocale(3)</B> for precise details.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/etc/manpath.config</I>
+       <B>catman(8)</B>,  <B>less(1)</B>,  <B>nroff(1)</B>,  <B>troff(1)</B>, <B>groff(1)</B>, <B>zsoe­</B>
+       <B>lim(1)</B>,  <B>setlocale(3)</B>,  <B>ascii(7)</B>,  <B>latin1(7)</B>,  the  man_db
+       package manual, <B>FSSTND</B>.
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+       1990,   1991   -  Originally  written  by  John  W.  Eaton
+       (jwe@che.utexas.edu).
+
+       Dec 23 1992:  Rik  Faith  (faith@cs.unc.edu)  applied  bug
+       fixes        supplied        by       Willem       Kasdorp
+       (wkasdo@nikhefk.nikef.nl).
+
+       30th April 1994  -  23rd  February  2000:  Wilf.   (G.Wil­
+       ford@ee.surrey.ac.uk)  has been developing and maintaining
+       this package with the help of a few dedicated people.
+
+       30th October 1996 -  30th  March  2001:  Fabrizio  Polacco
+       &lt;fpolacco@debian.org&gt; maintained and enhanced this package
+       for the Debian project, with the help of  all  the  commu­
+       nity.
+
+       31st  March  2001  -  14  May  2001:  Colin Watson &lt;cjwat­
+       son@debian.org&gt; is now developing and maintaining  man-db.
+
+
+
+2.3.19                     14 May 2001                     <B>man(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

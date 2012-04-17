@@ -1,0 +1,59 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+     The <B>column</B> utility formats its input into multiple columns.  Rows are
+     filled before columns.  Input is taken from <I>file</I> operands, or, by
+     default, from the standard input.  Empty lines are ignored.
+
+     The options are as follows:
+
+     <B>-c</B>      Output is formatted for a display <I>columns</I> wide.
+
+     <B>-s</B>      Specify a set of characters to be used to delimit columns for the
+             <B>-t</B> option.
+
+     <B>-t</B>      Determine the number of columns the input contains and create a
+             table.  Columns are delimited with whitespace, by default, or
+             with the characters supplied using the <B>-s</B> option.  Useful for
+             pretty-printing displays.
+
+     <B>-x</B>      Fill columns before filling rows.
+
+     <B>Column</B> exits 0 on success, &gt;0 if an error occurred.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+     COLUMNS  The environment variable COLUMNS is used to determine the size
+              of the screen if no other information is available.
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+           (printf "PERM LINKS OWNER GROUP SIZE MONTH DAY HH:MM/YEAR NAME\n" \
+           ; ls -l | sed 1d) | column -t
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+     <B>colrm(1)</B>, <B>ls(1)</B>, <B>paste(1)</B>, <B>sort(1)</B>
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+     The <B>column</B> command appeared in 4.3BSD-Reno.
+
+BSD                              June 6, 1993                              BSD
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

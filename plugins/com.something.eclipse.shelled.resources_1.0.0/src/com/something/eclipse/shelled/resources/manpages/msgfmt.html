@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>msgfmt</B> [<I>OPTION</I>] <I>filename.po</I> ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Generate  binary  message catalog from textual translation
+       description.
+
+       Mandatory arguments to  long  options  are  mandatory  for
+       short options too.
+
+   <B>Input</B> <B>file</B> <B>location:</B>
+       filename.po ...
+              input files
+
+       <B>-D</B>, <B>--directory</B>=<I>DIRECTORY</I>
+              add DIRECTORY to list for input files search
+
+       If input file is -, standard input is read.
+
+   <B>Operation</B> <B>mode:</B>
+       <B>-j</B>, <B>--java</B>
+              Java mode: generate a Java ResourceBundle class
+
+       <B>--java2</B>
+              like <B>--java</B>, and assume Java2 (JDK 1.2 or higher)
+
+       <B>--tcl</B>  Tcl mode: generate a tcl/msgcat .msg file
+
+   <B>Output</B> <B>file</B> <B>location:</B>
+       <B>-o</B>, <B>--output-file</B>=<I>FILE</I>
+              write output to specified file
+
+       <B>--strict</B>
+              enable strict Uniforum mode
+
+       If output file is -, output is written to standard output.
+
+   <B>Output</B> <B>file</B> <B>location</B> <B>in</B> <B>Java</B> <B>mode:</B>
+       <B>-r</B>, <B>--resource</B>=<I>RESOURCE</I>
+              resource name
+
+       <B>-l</B>, <B>--locale</B>=<I>LOCALE</I>
+              locale name, either language or language_COUNTRY
+
+       <B>-d</B> DIRECTORY
+              base directory of classes directory hierarchy
+
+       The class name is determined by appending the locale  name
+       to  the  resource name, separated with an underscore.  The
+       <B>-d</B> option is mandatory.  The class is  written  under  the
+       specified directory.
+
+
+       <B>--check-format</B>
+              check language dependent format strings
+
+       <B>--check-header</B>
+              verify presence and contents of the header entry
+
+       <B>--check-domain</B>
+              check  for  conflicts between domain directives and
+              the <B>--output-file</B> option
+
+       <B>-C</B>, <B>--check-compatibility</B>
+              check that GNU msgfmt behaves like X/Open msgfmt
+
+       <B>--check-accelerators</B>[=<I>CHAR</I>]
+              check presence of keyboard  accelerators  for  menu
+              items
+
+       <B>-f</B>, <B>--use-fuzzy</B>
+              use fuzzy entries in output
+
+   <B>Output</B> <B>details:</B>
+       <B>-a</B>, <B>--alignment</B>=<I>NUMBER</I>
+              align strings to NUMBER bytes (default: 1)
+
+       <B>--no-hash</B>
+              binary file will not include the hash table
+
+   <B>Informative</B> <B>output:</B>
+       <B>-h</B>, <B>--help</B>
+              display this help and exit
+
+       <B>-V</B>, <B>--version</B>
+              output version information and exit
+
+       <B>--statistics</B>
+              print statistics about translations
+
+       <B>-v</B>, <B>--verbose</B>
+              increase verbosity level
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Ulrich Drepper.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-gnu-gettext@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 1995-1998, 2000-2002 Free Software Foundation,
+       Inc.
+       This is free software; see the source for  copying  condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

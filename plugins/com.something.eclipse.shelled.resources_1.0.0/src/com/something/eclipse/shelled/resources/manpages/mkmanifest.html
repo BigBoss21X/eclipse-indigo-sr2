@@ -1,0 +1,128 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+
+
+</PRE>
+<H2>Note of warning</H2><PRE>
+       This  manpage  has  been  automatically   generated   from
+       mtools's  texinfo  documentation,  and may not be entirely
+       accurate or complete.  See the end of this  man  page  for
+       details.
+
+
+
+</PRE>
+<H2>Description</H2><PRE>
+       The  mkmanifest  command  is used to create a shell script
+       (packing list) to restore Unix filenames. Its syntax is:
+
+       mkmanifest [ <I>files</I> ]
+
+       Mkmanifest  creates  a  shell  script  that  aids  in  the
+       restoration  of  Unix  filenames that got clobbered by the
+       MS-DOS  filename  restrictions.   MS-DOS   filenames   are
+       restricted  to  8 character names, 3 character extensions,
+       upper case only, no device names, and no  illegal  charac­
+       ters.
+
+       The mkmanifest program is compatible with the methods used
+       in pcomm, arc, and mtools to change  perfectly  good  Unix
+       filenames  to fit the MS-DOS restrictions. This command is
+       only useful if the  target  system  which  will  read  the
+       diskette cannot handle vfat long names.
+
+
+
+</PRE>
+<H2>Example</H2><PRE>
+       You  want  to  copy  the  following Unix files to a MS-DOS
+       diskette (using the mcopy command).
+
+
+            <B>very_long_name</B>
+            <B>2.many.dots</B>
+            <B>illegal:</B>
+            <B>good.c</B>
+            <B>prn.dev</B>
+            <B>Capital</B>
+
+
+
+       Mcopy converts the names to:
+
+
+            <B>very_lon</B>
+            <B>2xmany.dot</B>
+            <B>illegalx</B>
+            <B>good.c</B>
+            <B>xprn.dev</B>
+            <B>mv</B> <B>capital</B> <B>Capital</B>
+
+
+
+       Notice that "good.c" did not require any conversion, so it
+       did not appear in the output.
+
+       Suppose  I've  copied  these  files  from  the diskette to
+       another Unix system, and I now  want  the  files  back  to
+       their  original names.  If the file "manifest" (the output
+       captured above) was sent along with those files, it  could
+       be used to convert the filenames.
+
+
+
+</PRE>
+<H2>Bugs</H2><PRE>
+       The  short  names  generated  by mkmanifest follow the old
+       convention (from mtools-2.0.7) and not the one  from  Win­
+       dows 95 and mtools-3.0.
+
+
+
+</PRE>
+<H2>See Also</H2><PRE>
+       Mtools' texinfo doc
+
+
+</PRE>
+<H2>Viewing the texi doc</H2><PRE>
+       This   manpage   has  been  automatically  generated  from
+       mtools's texinfo documentation. However, this  process  is
+       only  approximative,  and  some items, such as crossrefer­
+       ences, footnotes and indices are lost in this  translation
+       process.   Indeed,  these items have no appropriate repre­
+       sentation in the manpage format.  Moreover, not all infor­
+       mation has been translated into the manpage version.  Thus
+       I strongly advise you to use  the  original  texinfo  doc.
+       See  the  end of this manpage for instructions how to view
+       the texinfo doc.
+
+       *      To generate a printable copy from the texinfo  doc,
+              run the following commands:
+
+                     <B>./configure;</B> <B>make</B> <B>dvi;</B> <B>dvips</B> <B>mtools.dvi</B>
+
+
+
+       *      To generate a html copy,  run:
+
+                     <B>./configure;</B> <B>make</B> <B>html</B>
+
+              A     premade     html    can    be    found    at:
+              `http://mtools.linux.lu'     and      also      at:
+              `http://www.tux.org/pub/knaff/mtools'
+
+       *      To  generate  an  info copy (browsable using emacs'
+              info mode), run:
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

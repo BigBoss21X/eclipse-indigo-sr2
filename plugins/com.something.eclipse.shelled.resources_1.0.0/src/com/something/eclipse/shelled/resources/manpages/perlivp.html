@@ -1,0 +1,107 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>perlivp</B> [<B>-p</B>] [<B>-v</B>] [<B>-h</B>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The <B>perlivp</B> program is set up at Perl source code build
+       time to test the Perl version it was built under.  It can
+       be used after running:
+
+           make install
+
+       (or your platform's equivalent procedure) to verify that
+       <B>perl</B> and its libraries have been installed correctly.  A
+       correct installation is verified by output that looks
+       like:
+
+           ok 1
+           ok 2
+
+       etc.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-h</B> help
+            Prints out a brief help message.
+
+       <B>-p</B> print preface
+            Gives a description of each test prior to performing
+            it.
+
+       <B>-v</B> verbose
+            Gives more detailed information about each test,
+            after it has been performed.  Note that any failed
+            tests ought to print out some extra information
+            whether or not -v is thrown.
+
+
+</PRE>
+<H2>DIAGNOSTICS</H2><PRE>
+       · print "# Perl binary `$perlpath' does not appear exe­
+       cutable.\n";
+           Likely to occur for a perl binary that was not prop­
+           erly installed.  Correct by conducting a proper
+           installation.
+
+       · print "# Perl version `$]' installed, expected $ivp_VER­
+       SION.\n";
+           Likely to occur for a perl that was not properly
+           installed.  Correct by conducting a proper installa­
+           tion.
+
+       · print "# Perl \@INC directory `$_' does not appear to
+       exist.\n";
+           Likely to occur for a perl library tree that was not
+           properly installed.  Correct by conducting a proper
+           installation.
+
+       · print "# Unnecessary module `bLuRfle' appears to be
+       installed.\n";
+           This test not coming out ok could indicate that you
+           have in fact installed a bLuRfle.pm module or that the
+           "eval " require \"$module_name.pm\"; "" test may give
+           misleading results with your installation of perl.  If
+           yours is the latter case then please let the author
+           know.
+
+       · print "# file",+($#missing == 0) ? '' : 's'," missing
+       from installation:\n";
+           One or more files turned up missing according to a run
+           of "ExtUtils::Installed -&gt; validate()" over your
+           installation.  Correct by conducting a proper instal­
+           lation.
+
+       · print "# Perl header `$_' does not appear to be properly
+       installed.\n";
+           Correct by running <B>h2ph</B> over your system's C header
+           files.  If necessary, edit the resulting *.ph files to
+           eliminate perl syntax errors.
+
+       For further information on how to conduct a proper instal­
+       lation consult the INSTALL file that comes with the perl
+       source and the README file for your platform.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Peter Prymmer
+
+
+
+perl v5.8.0                 2003-03-13                 <B>PERLIVP(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

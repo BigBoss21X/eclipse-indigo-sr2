@@ -1,0 +1,63 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ipcs</B> <B>[</B> <B>-asmq</B> <B>]</B> <B>[</B> <B>-tclup</B> <B>]</B>
+       <B>ipcs</B> <B>[</B> <B>-smq</B> <B>]</B> <B>-i</B> <I>id</I>
+       <B>ipcs</B> <B>-h</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>ipcs</B>  provides information on the ipc facilities for which
+       the calling process has read acccess.
+
+       The <B>-i</B> option allows a specific resource <I>id</I> to  be  speci­
+       fied.  Only information on this <I>id</I> will be printed.
+
+       Resources may be specified as follows:
+
+       <B>-m</B>     shared memory segments
+
+       <B>-q</B>     message queues
+
+       <B>-s</B>     semaphore arrays
+
+       <B>-a</B>     all (this is the default)
+
+       The output format may be specified as follows:
+
+       <B>-t</B>     time
+
+       <B>-p</B>     pid
+
+       <B>-c</B>     creator
+
+       <B>-l</B>     limits
+
+       <B>-u</B>     summary
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ipcrm(8)</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       krishna balasubramanian (balasub@cis.ohio-state.edu)
+
+
+
+Linux 0.99                9 October 1993                  <B>IPCS(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

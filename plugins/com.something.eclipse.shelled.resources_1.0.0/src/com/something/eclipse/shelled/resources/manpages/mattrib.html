@@ -1,0 +1,105 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+
+</PRE>
+<H2>Note of warning</H2><PRE>
+       This   manpage   has  been  automatically  generated  from
+       mtools's texinfo documentation, and may  not  be  entirely
+       accurate  or  complete.   See the end of this man page for
+       details.
+
+
+
+</PRE>
+<H2>Description</H2><PRE>
+       Mattrib is used to change MS-DOS file attribute flags.  It
+       has the following syntax:
+
+       mattrib  [-a|+a]  [-h|+h]  [-r|+r] [-s|+s] [-/]  [-p] [-X]
+       <I>msdosfile</I> [ <I>msdosfiles</I> ... ]
+
+       Mattrib adds attribute flags to an MS-DOS file  (with  the
+       `+'  operator)  or  remove  attribute  flags (with the `-'
+       operator).
+
+       Mattrib supports the following attribute bits:
+
+       a      Archive bit.  Used by some backup programs to indi­
+              cate a new file.
+
+       r      Read-only  bit.  Used to indicate a read-only file.
+              Files with this bit set cannot be erased by DEL nor
+              modified.
+
+       s      System bit.  Used by MS-DOS to indicate a operating
+              system file.
+
+       h      Hidden bit.  Used to make files hidden from DIR.
+
+       Mattrib supports the following command line flags:
+
+       /      Recursive.  Recursively list the attributes of  the
+              files in the subdirectories.
+
+       X      Concise. Prints the attributes whithout any whites­
+              pace padding.  If neither the "/" option is  given,
+              nor the <I>msdosfile</I> contains a wildcard, and there is
+              only one Msdos file parameter on the command  line,
+              only  the  attribute  is printed, and not the file­
+              name.  This option is convenient for scripts
+
+       p      Replay mode.  Outputs a series of mformat  commands
+              that will reproduce the current situation, starting
+              from a situation  as  left  by  untarring  the  Dos
+              filesystem.  Commands are only output for attribute
+              settings that differ from the default (archive  bit
+              set for files, unset for directories).  This option
+
+       sentation in the manpage format.  Moreover, not all infor­
+       mation has been translated into the manpage version.  Thus
+       I  strongly  advise  you  to use the original texinfo doc.
+       See the end of this manpage for instructions how  to  view
+       the texinfo doc.
+
+       *      To  generate a printable copy from the texinfo doc,
+              run the following commands:
+
+                     <B>./configure;</B> <B>make</B> <B>dvi;</B> <B>dvips</B> <B>mtools.dvi</B>
+
+
+
+       *      To generate a html copy,  run:
+
+                     <B>./configure;</B> <B>make</B> <B>html</B>
+
+              A    premade    html    can    be     found     at:
+              `http://mtools.linux.lu'      and      also     at:
+              `http://www.tux.org/pub/knaff/mtools'
+
+       *      To generate an info copy  (browsable  using  emacs'
+              info mode), run:
+
+                     <B>./configure;</B> <B>make</B> <B>info</B>
+
+
+
+       The texinfo doc looks most pretty when printed or as html.
+       Indeed, in the info version certain examples are difficult
+       to read due to the quoting conventions used in info.
+
+
+
+
+mtools-3.9.8                 02Nov02                   <B>mattrib(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

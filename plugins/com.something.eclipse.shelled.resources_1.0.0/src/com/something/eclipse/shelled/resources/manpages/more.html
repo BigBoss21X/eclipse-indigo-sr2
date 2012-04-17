@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+     <B>More</B> is a filter for paging through text one screenful at a time.  This
+     version is especially primitve.  Users should realize that <B>less(1)</B> pro­
+     vides <B>more(1)</B> emulation and extensive enhancements.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+     Command line options are described below.  Options are also taken from
+     the environment variable MORE (make sure to precede them with a dash
+     (``-'')) but command line options will override them.
+
+     <B>-num</B>  This option specifies an integer which is the screen size (in
+           lines).
+
+     <B>-d</B>    <B>more</B> will prompt the user with the message "[Press space to con­
+           tinue, 'q' to quit.]" and will display "[Press 'h' for instruc­
+           tions.]" instead of ringing the bell when an illegal key is
+           pressed.
+
+     <B>-l</B>    <B>more</B> usually treats <B>^L</B> (form feed) as a special character, and will
+           pause after any line that contains a form feed.  The <B>-l</B> option will
+           prevent this behavior.
+
+     <B>-f</B>    Causes <B>more</B> to count logical, rather than screen lines (i.e., long
+           lines are not folded).
+
+     <B>-p</B>    Do not scroll.  Instead, clear the whole screen and then display
+           the text.
+
+     <B>-c</B>    Do not scroll.  Instead, paint each screen from the top, clearing
+           the remainder of each line as it is displayed.
+
+     <B>-s</B>    Squeeze multiple blank lines into one.
+
+     <B>-u</B>    Suppress underlining.
+
+     <B>+/</B>    The <B>+/</B> option specifies a string that will be searched for before
+           each file is displayed.
+
+     <B>+num</B>  Start at line number <B>num</B>.
+
+
+</PRE>
+<H2>COMMANDS</H2><PRE>
+     Interactive commands for <B>more</B> are based on <B>vi(1)</B>.  Some commands may be
+     preceded by a decimal number, called k in the descriptions below.  In the
+     following descriptions, ^X means control-X.
+
+     <B>h</B> or ?      Help: display a summary of these commands.  If you forget all
+                 the other commands, remember this one.
+
+     <B>SPACE</B>       Display next k lines of text.  Defaults to current screen
+                 size.
+
+     <B>f</B>           Skip forward k screenfuls of text.  Defaults to 1.
+
+     <B>b</B> or <B>^B</B>     Skip backwards k screenfuls of text.  Defaults to 1.  Only
+                 works with files, not pipes.
+
+     <B>'</B>           Go to place where previous search started.
+
+     <B>=</B>           Display current line number.
+
+     <B>/</B><I>pattern</I>    Search for kth occurrence of regular expression.  Defaults to
+                 1.
+
+     <B>n</B>           Search for kth occurrence of last r.e.  Defaults to 1.
+
+     <B>!&lt;cmd&gt;</B> or <B>:!&lt;cmd&gt;</B>
+                 Execute &lt;cmd&gt; in a subshell
+
+     <B>v</B>           Start up an editor at current line.  The editor is taken from
+                 the environment variable VISUAL if defined, or EDITOR if
+                 VISUAL is not defined, or defaults to "vi" if neither VISUAL
+                 nor EDITOR is defined.
+
+     <B>^L</B>          Redraw screen
+
+     <B>:n</B>          Go to kth next file.  Defaults to 1.
+
+     <B>:p</B>          Go to kth previous file.  Defaults to 1.
+
+     <B>:f</B>          Display current file name and line number
+
+     <B>.</B>           Repeat previous command
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+     <B>More</B> utilizes the following environment variables, if they exist:
+
+     MORE        This variable may be set with favored options to <B>more</B>.
+
+     SHELL       Current shell in use (normally set by the shell at login
+                 time).
+
+     TERM        Specifies terminal type, used by more to get the terminal
+                 characteristics necessary to manipulate the screen.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+     <B>vi(1)</B> <B>less(1)</B>
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+     Eric Shienbrood, UC Berkeley
+     Modified by Geoff Peck, UCB to add underlining, single spacing
+     Modified by John Foderaro, UCB to add -c and MORE environment variable
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

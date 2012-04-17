@@ -1,0 +1,55 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>kbd_mode</B> [ <I>-a</I> <I>|</I> <I>-u</I> <I>|</I> <I>-k</I> <I>|</I> <I>-s</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Without  argument,  <B>kbd_mode</B>  prints  the current keyboard
+       mode (RAW, MEDIUMRAW or XLATE).  With  argument,  it  sets
+       the keyboard mode as indicated:
+
+       -s: scancode mode (RAW),
+
+       -k: keycode mode (MEDIUMRAW),
+
+       -a: ASCII mode (XLATE),
+
+       -u: UTF-8 mode (UNICODE).
+
+       Of  course the "-a" is only traditional, and the code used
+       can be any 8-bit character set.  With "-u" a 16-bit  char­
+       acter  set is expected, and these chars are transmitted to
+       the kernel as 1, 2, or 3 bytes (following the  UTF-8  cod­
+       ing).   In  these latter two modes the key mapping defined
+       by <B>loadkeys(1)</B> is used.
+
+       Warning: changing the keyboard mode,  other  than  between
+       ASCII  and Unicode, will probably make your keyboard unus­
+       able.  This command is only meant for use (say via  remote
+       login)  when  some program left your keyboard in the wrong
+       state.  Note that in some obsolete versions of  this  pro­
+       gram the "-u" option was a synonym for "-s".
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>loadkeys(1)</B>
+
+
+
+
+                            6 Apr 1994                <B>KBD_MODE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

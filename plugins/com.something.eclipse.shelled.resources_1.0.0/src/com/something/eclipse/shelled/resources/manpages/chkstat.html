@@ -1,0 +1,67 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>chkstat</B> [<B>--set|-set</B>] <B>permission-file</B> <B>...</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  perl  script  <I>/usr/bin/chkstat</I> is a tool to check and
+       set file permissions.
+
+       Multiple permissions files can be given  on  the  command­
+       line.   If  the  permission files contain multiple entries
+       for a single file, the last entry found will be used.
+
+
+   <B>General</B> <B>Options</B>
+       <I>-set</I>   This option enables setting the  file  permissions,
+              the default is to check and warn only.
+
+       <I>--set</I> Same as -set
+
+
+</PRE>
+<H2>EXAMPLE</H2><PRE>
+       The command
+
+              <B>chkstat</B> <B>-set</B> <B>/etc/permissions</B>
+
+       will  parse  the  file /etc/permissions and set the access
+       mode and the user- and group memberships each file listed.
+       The format for the input file is
+
+       <B>FILEPATH</B> <B>OWNER.GROUP</B> <B>MODE</B>
+
+       and  wildcards  are  not supported for the filepath. Lines
+       starting with '#' and empty lines are treated as comments.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       1996-2003 SuSE Linux AG, Nuernberg, Germany.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Reinhold Sojer &lt;feedback@suse.de&gt;
+
+       Useful  changes  and  additions  by  Tobias  Burnus  &lt;bur­
+       nus@gmx.de&gt;
+
+
+
+
+Version 0.1                Jul 9, 1998                 <B>CHKSTAT(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

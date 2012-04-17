@@ -1,0 +1,60 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>lppasswd</B> [ -a ] [ -g <I>groupname</I> ] [ -x ] [ <I>username</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>lppasswd</I>  adds,  changes, or deletes passwords in the CUPS
+       digest password file, <I>passwd.md5</I>. When  run  by  a  normal
+       user,  <I>lppasswd</I> will prompt for the old and new passwords.
+       When run by the super-user, <I>lppasswd</I> can add new  accounts
+       (<I>-a</I>  <I>username</I>),  change  existing  accounts (<I>username</I>), or
+       delete accounts (<I>-x</I> <I>username</I>) in the digest password file.
+       Digest  usernames  do  not  have to match local UNIX user­
+       names, but only UNIX usernames are supported by  the  CUPS
+       client programs (<I>lp(1)</I>, <I>lpr(1)</I>, etc.)
+
+       The  <I>-g</I>  option  specifies  a  group other than the system
+       group - "sys", "system", or "root", depending on the oper­
+       ating system.
+
+
+</PRE>
+<H2>SECURITY ISSUES</H2><PRE>
+       The  <I>lppasswd</I>  command  is installed setuid to root. While
+       every attempt has been made  to  make  it  secure  against
+       exploits   that  could  grant  super-user  priviledges  to
+       unpriviledged users, paranoid  system  administrators  may
+       wish  to disable or change the ownership of the program to
+       an unpriviledged account.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>lp(1)</B>, <B>lpr(1)</B>, CUPS Software Administrators  Manual,  CUPS
+       Software   Users  Manual,  http://localhost:631/documenta­
+       tion.html
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright 1993-2003 by Easy Software Products, All  Rights
+       Reserved.
+
+
+
+7 June 2001        Common UNIX Printing System        <B>lppasswd(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

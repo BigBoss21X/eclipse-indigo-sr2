@@ -1,0 +1,71 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>irexec</B> [<I>options</I>] [<I>config</I><B>_</B><I>file</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This  program lets you execute arbitrary commands on an IR
+       signal decoded by lircd, the LIRC  daemon.  You  can  give
+       irexec  a command line parameter which has to be a name of
+       a valid config file. If no  command  line  parameters  are
+       given  irexec  reads the default config file which is usu­
+       ally ~/.lircrc.
+
+       If irexec executes a program it will wait until this  pro­
+       gram terminates.  So append a '&amp;' to the command string if
+       you don't want that.
+
+       The config string consists of the command to be run.
+
+       <B>-h</B> <B>--help</B>
+              display usage summary
+
+       <B>-v</B> <B>--version</B>
+              display version
+
+       <B>-d</B> <B>--daemon</B>
+              run in background
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       If you add the --daemon option irexec will fork  to  back­
+       ground.  That way you can easily start irexec from an init
+       script. In this case you should specify a config  file  on
+       the command line as irexec won't be able to find your home
+       directory. Potential uses are shutting down the  computer,
+       starting a dial-up connection etc.
+
+
+</PRE>
+<H2>NOTE</H2><PRE>
+       If  you  start  irexec, it reads your ~/.lircrc and reacts
+       only on prog= entries that point to irexec.  If  you  have
+       included more than one program in your .lircrc, then start
+       all these  programs,  they  react  itself  only  to  their
+       according entries in .lircrc.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  documentation  for  <B>lirc</B> is maintained as html pages.
+       They are located under html/ in the  documentation  direc­
+       tory.
+
+
+
+irexec 0.6.6               October 2002                 <B>IREXEC(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

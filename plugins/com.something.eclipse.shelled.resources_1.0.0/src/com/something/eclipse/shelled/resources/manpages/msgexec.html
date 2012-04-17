@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>msgexec</B> [<I>OPTION</I>] <I>COMMAND</I> [<I>COMMAND-OPTION</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Applies  a  command  to  all translations of a translation
+       catalog.  The COMMAND can be  any  program  that  reads  a
+       translation  from  standard input.  It is invoked once for
+       each translation.  Its output  becomes  msgexec's  output.
+       msgexec's  return  code  is the maximum return code across
+       all invocations.
+
+       A special builtin command called '0' outputs the  transla­
+       tion,  followed by a null byte.  The output of "msgexec 0"
+       is suitable as input for "xargs <B>-0</B>".
+
+       Mandatory arguments to  long  options  are  mandatory  for
+       short options too.
+
+   <B>Input</B> <B>file</B> <B>location:</B>
+       <B>-i</B>, <B>--input</B>=<I>INPUTFILE</I>
+              input PO file
+
+       <B>-D</B>, <B>--directory</B>=<I>DIRECTORY</I>
+              add DIRECTORY to list for input files search
+
+       If no input file is given or if it is -, standard input is
+       read.
+
+   <B>Informative</B> <B>output:</B>
+       <B>-h</B>, <B>--help</B>
+              display this help and exit
+
+       <B>-V</B>, <B>--version</B>
+              output version information and exit
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Bruno Haible.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-gnu-gettext@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2001-2002 Free Software Foundation, Inc.
+       This is free software; see the source for  copying  condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The full documentation for <B>msgexec</B> is maintained as a Tex­
+       info  manual.   If the <B>info</B> and <B>msgexec</B> programs are prop­
+       erly installed at your site, the command
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

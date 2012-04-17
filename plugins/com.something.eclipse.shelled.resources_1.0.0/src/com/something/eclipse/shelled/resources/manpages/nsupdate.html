@@ -1,0 +1,208 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>nsupdate</B>  [ <B>-d</B> ]  [  <B>[</B> <B>-y</B> <I>keyname:secret</I> <B>]</B>  <B>[</B> <B>-k</B> <I>keyfile</I> <B>]</B>
+       ]  [ <B>-v</B> ]  [ <B>filename</B> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>nsupdate</B> is used to submit Dynamic DNS Update requests  as
+       defined in RFC2136 to a name server.  This allows resource
+       records to be added or removed from a zone  without  manu­
+       ally  editing  the zone file.  A single update request can
+       contain requests to add or remove more than  one  resource
+       record.
+
+       Zones  that  are  under  dynamic control via <B>nsupdate</B> or a
+       DHCP server should not be edited by  hand.   Manual  edits
+       could  conflict  with dynamic updates and cause data to be
+       lost.
+
+       The resource records that are dynamically added or removed
+       with  <B>nsupdate</B>  have to be in the same zone.  Requests are
+       sent to the zone's master server.  This is  identified  by
+       the MNAME field of the zone's SOA record.
+
+       The  <B>-d</B> option makes <B>nsupdate</B> operate in debug mode.  This
+       provides tracing information  about  the  update  requests
+       that  are  made  and  the  replies  received from the name
+       server.
+
+       Transaction signatures can be  used  to  authenticate  the
+       Dynamic  DNS  updates.  These use the TSIG resource record
+       type described in  RFC2845.   The  signatures  rely  on  a
+       shared  secret  that  should only be known to <B>nsupdate</B> and
+       the name server.  Currently, the only supported encryption
+       algorithm  for  TSIG  is HMAC-MD5, which is defined in RFC
+       2104.  Once other algorithms are defined for TSIG,  appli­
+       cations  will  need  to ensure they select the appropriate
+       algorithm as well as  the  key  when  authenticating  each
+       other.   For  instance  suitable <B>key</B> and <B>server</B> statements
+       would be added to <I>/etc/named.conf</I> so that the name  server
+       can  associate  the  appropriate  secret key and algorithm
+       with the IP address of the client application that will be
+       using   TSIG   authentication.   <B>nsupdate</B>  does  not  read
+       <I>/etc/named.conf</I>.
+
+       <B>nsupdate</B> uses the <B>-y</B> or <B>-k</B> option to  provide  the  shared
+       secret needed to generate a TSIG record for authenticating
+       Dynamic DNS update requests.  These options  are  mutually
+       exclusive.   With the <B>-k</B> option, <B>nsupdate</B> reads the shared
+       secret from the file <I>keyfile</I>, whose name is  of  the  form
+       <I>K{name}.+157.+{random}.private</I>.   For  historical reasons,
+       the file <I>K{name}.+157.+{random}.key</I> must also be  present.
+       When  the <B>-y</B> option is used, a signature is generated from
+       <I>keyname:secret.</I>  <I>keyname</I> is  the  name  of  the  key,  and
+       Some commands are for administrative purposes.  The others
+       are  either  update instructions or prerequisite checks on
+       the contents of the zone.   These  checks  set  conditions
+       that  some  name or set of resource records (RRset) either
+       exists or is absent from the zone.  These conditions  must
+       be  met  if  the  entire  update  request  is  to succeed.
+       Updates will be rejected if the tests for the prerequisite
+       conditions fail.
+
+       Every  update  request  consists of zero or more prerequi­
+       sites and zero or more updates.  This  allows  a  suitably
+       authenticated  update request to proceed if some specified
+       resource records are present or missing from the zone.   A
+       blank  input line (or the <B>send</B> command) causes the accumu­
+       lated commands to  be  sent  as  one  Dynamic  DNS  update
+       request to the name server.
+
+       The command formats and their meaning are as follows:
+
+       <B>server</B> <B>servername</B> <B>[</B> <B>port</B> <B>]</B>
+              Sends  all  dynamic  update  requests  to  the name
+              server <I>servername</I>.  When  no  server  statement  is
+              provided,  <B>nsupdate</B> will send updates to the master
+              server of the correct zone.   The  MNAME  field  of
+              that  zone's  SOA  record  will identify the master
+              server for that zone.  <I>port</I> is the port  number  on
+              <I>servername</I>  where  the  dynamic update requests get
+              sent.  If no port number is specified, the  default
+              DNS port number of 53 is used.
+
+       <B>local</B> <B>address</B> <B>[</B> <B>port</B> <B>]</B>
+              Sends  all  dynamic update requests using the local
+              <I>address</I>.  When  no  local  statement  is  provided,
+              <B>nsupdate</B>  will  send  updates  using an address and
+              port choosen by the system.  <I>port</I> can  additionally
+              be used to make requests come from a specific port.
+              If no port number is  specified,  the  system  will
+              assign one.
+
+       <B>zone</B> <B>zonename</B>
+              Specifies  that  all  updates are to be made to the
+              zone <I>zonename</I>.  If no <I>zone</I> statement  is  provided,
+              <B>nsupdate</B> will attempt determine the correct zone to
+              update based on the rest of the input.
+
+       <B>key</B> <B>name</B> <B>secret</B>
+              Specifies that all updates are to  be  TSIG  signed
+              using  the <I>keyname</I> <I>keysecret</I> pair.  The <B>key</B> command
+              overrides any key specified on the command line via
+              <B>-y</B> or <B>-k</B>.
+
+       <B>prereq</B> <B>nxdomain</B> <B>domain-name</B>
+              fied <I>type</I>, <I>class</I> and <I>domain-name</I>  must  exist.   If
+              <I>class</I> is omitted, IN (internet) is assumed.
+
+       <B>prereq</B> <B>yxrrset</B> <B>domain-name</B> <B>[</B> <B>class</B> <B>]</B>  <B>type</B> <B>data</B><I>...</I>
+              The  <I>data</I>  from  each  set of prerequisites of this
+              form sharing a common <I>type</I>, <I>class</I>, and  <I>domain-name</I>
+              are  combined to form a set of RRs. This set of RRs
+              must exactly match the set of RRs existing  in  the
+              zone  at  the  given  <I>type</I>, <I>class</I>, and <I>domain-name</I>.
+              The <I>data</I> are written in the standard text represen­
+              tation of the resource record's RDATA.
+
+       <B>update</B>  <B>delete</B>  <B>domain-name</B>  <B>[</B> <B>ttl</B> <B>]</B>  <B>[</B> <B>class</B> <B>]</B>  <B>[</B> <B>type</B>  <B>[</B>
+       <B>data</B><I>...</I> <B>]</B>  <B>]</B>
+              Deletes any resource records named <I>domain-name</I>.  If
+              <I>type</I> and <I>data</I> is provided, only  matching  resource
+              records  will  be  removed.   The internet class is
+              assumed if  <I>class</I>  is  not  supplied.  The  <I>ttl</I>  is
+              ignored, and is only allowed for compatibility.
+
+       <B>update</B> <B>add</B> <B>domain-name</B> <B>ttl</B> <B>[</B> <B>class</B> <B>]</B>  <B>type</B> <B>data</B><I>...</I>
+              Adds  a new resource record with the specified <I>ttl</I>,
+              <I>class</I> and <I>data</I>.
+
+       <B>show</B>   Displays the current message, containing all of the
+              prerequisites  and updates specified since the last
+              send.
+
+       <B>send</B>   Sends the current message. This  is  equivalent  to
+              entering a blank line.
+
+       Lines  beginning  with  a  semicolon are comments, and are
+       ignored.
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+       The examples below show how  <B>nsupdate</B>  could  be  used  to
+       insert  and  delete  resource records from the <B>example.com</B>
+       zone.  Notice that the input in each  example  contains  a
+       trailing  blank  line so that a group of commands are sent
+       as one dynamic update request to the  master  name  server
+       for <B>example.com</B>.
+
+       # nsupdate
+       &gt; update delete oldhost.example.com A
+       &gt; update add newhost.example.com 86400 A 172.16.1.1
+       &gt;
+
+
+       Any A records for <B>oldhost.example.com</B> are deleted.  and an
+       A record for <B>newhost.example.com</B> it IP address  172.16.1.1
+       is  added.   The newly-added record has a 1 day TTL (86400
+       seconds)
+       CNAME.   (The  rule has been updated for DNSSEC in RFC2535
+       to allow CNAMEs to have SIG, KEY and NXT records.)
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/etc/resolv.conf</B>
+              used to identify default name server
+
+       <B>K{name}.+157.+{random}.key</B>
+              base-64 encoding of HMAC-MD5 key created by <B>dnssec-</B>
+              <B>keygen(8)</B>.
+
+       <B>K{name}.+157.+{random}.private</B>
+              base-64 encoding of HMAC-MD5 key created by <B>dnssec-</B>
+              <B>keygen(8)</B>.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>RFC2136</B>,  <B>RFC3007</B>,  <B>RFC2104</B>,  <B>RFC2845</B>,  <B>RFC1034</B>,  <B>RFC2535</B>,
+       <B>named(8)</B>, <B>dnssec-keygen(8)</B>.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       The  TSIG key is redundantly stored in two separate files.
+       This is a consequence of nsupdate using  the  DST  library
+       for its cryptographic operations, and may change in future
+       releases.
+
+
+
+BIND9                      Jun 30, 2000               <B>NSUPDATE(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

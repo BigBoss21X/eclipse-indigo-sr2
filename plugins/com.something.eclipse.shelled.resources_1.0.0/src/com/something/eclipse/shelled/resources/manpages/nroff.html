@@ -1,0 +1,63 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>nroff</B> [ <B>-h</B> ] [ <B>-i</B> ] [ <B>-m</B><I>name</I> ] [ <B>-n</B><I>num</I> ] [ <B>-o</B><I>list</I> ] [ <B>-p</B> ]
+             [ <B>-r</B><I>cn</I> ] [ <B>-t</B> ] [ <B>-S</B> ] [ <B>-T</B><I>name</I> ] [ <B>-U</B> ] [ <B>-v</B> ]
+             [ <I>file...</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  <B>nroff</B>  script emulates the <B>nroff</B> command using groff.
+       Only <B>ascii</B>, <B>ascii8</B>, <B>latin1</B>, <B>utf8</B>, <B>nippon</B>, and  <B>cp1047</B>  are
+       valid arguments for the <B>-T</B> option.  If an invalid or no <B>-T</B>
+       option is given, <B>nroff</B> checks the current locale to select
+       a  default  output device.  It first tries the <B>locale</B> pro­
+       gram, then the environment variables <B>LC_ALL</B>, <B>LC_CTYPE</B>, and
+       <B>LANG</B>, and finally the <B>LESSCHARSET</B> environment variable.
+
+       The  <B>-h</B>  option  is  equivalent  to the <B>grotty</B>'s <B>-h</B> option
+       (i.e., using tabs in the output).  The <B>-i</B>, <B>-n</B>, <B>-m</B>, <B>-o</B>  and
+       <B>-r</B>  options  have  the  effect  described in <B>troff(1)</B>.  In
+       addition, <B>nroff</B> silently ignores the options <B>-e</B>,  <B>-q</B>,  and
+       <B>-s</B>  (which  are  not  implemented  in  <B>troff</B>).  Options <B>-p</B>
+       (pic), <B>-t</B> (tbl), <B>-S</B> (safer), and <B>-U</B> (unsafe) are passed to
+       <B>groff</B>.   <B>-S</B>  is  passed  by default.  <B>-v</B> shows the version
+       number.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>GROFF_BIN_PATH</B>
+              A colon separated list of directories in  which  to
+              search for the <B>groff</B> executable before searching in
+              PATH.  If unset, `/usr/bin' is used.
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       This shell script  is  basically  intended  for  use  with
+       <B>man(1)</B>, so warnings are suppressed.  nroff-style character
+       definitions (in the file tty-char.tmac) are also loaded to
+       emulate unrepresentable glyphs.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>groff(1)</B>, <B>troff(1)</B>, <B>grotty(1)</B>
+
+
+
+Groff Version 1.17.2      17 March 2003                  <B>NROFF(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

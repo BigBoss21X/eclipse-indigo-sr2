@@ -1,0 +1,1219 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>mount</B> <B>[-lhV]</B>
+
+       <B>mount</B> <B>-a</B> <B>[-fFnrsvw]</B> <B>[-t</B> <I>vfstype</I><B>]</B> <B>[-O</B> <I>optlist</I><B>]</B>
+       <B>mount</B> <B>[-fnrsvw]</B> <B>[-o</B> <I>options</I> <B>[,...]]</B> <I>device</I> <B>|</B> <I>dir</I>
+       <B>mount</B> <B>[-fnrsvw]</B> <B>[-t</B> <I>vfstype</I><B>]</B> <B>[-o</B> <I>options</I><B>]</B> <I>device</I> <I>dir</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       All  files accessible in a Unix system are arranged in one
+       big tree, the file hierarchy, rooted at  <B>/</B>.   These  files
+       can  be spread out over several devices. The <B>mount</B> command
+       serves to attach the file system found on some  device  to
+       the  big file tree. Conversely, the <B>umount(8)</B> command will
+       detach it again.
+
+       The standard form of the <B>mount</B> command, is
+              <B>mount</B> <B>-t</B> <I>type</I> <I>device</I> <I>dir</I>
+       This tells the kernel to attach the file system  found  on
+       <I>device</I>  (which is of type <I>type</I>) at the directory <I>dir</I>.  The
+       previous contents (if any)  and  owner  and  mode  of  <I>dir</I>
+       become  invisible, and as long as this file system remains
+       mounted, the pathname <I>dir</I> refers to the root of  the  file
+       system on <I>device</I>.
+
+       Three forms of invocation do not actually mount anything:
+              <B>mount</B> <B>-h</B>
+       prints a help message;
+              <B>mount</B> <B>-V</B>
+       prints a version string; and just
+              <B>mount</B> <B>[-l]</B> <B>[-t</B> <I>type</I><B>]</B>
+       lists all mounted file systems (of type <I>type</I>).  The option
+       -l adds the (ext2, ext3 and XFS) labels in  this  listing.
+       See below.
+
+       Since  Linux  2.4.0  it is possible to remount part of the
+       file hierarchy somewhere else. The call is
+              <B>mount</B> <B>--bind</B> <B>olddir</B> <B>newdir</B>
+       After this call the same contents  is  accessible  in  two
+       places.
+
+       This call attaches only (part of) a single filesystem, not
+       possible submounts. The entire  file  hierarchy  including
+       submounts is attached a second place using
+              <B>mount</B> <B>--rbind</B> <B>olddir</B> <B>newdir</B>
+
+       Since Linux 2.5.1 it is possible to atomically move a sub­
+       tree to another place. The call is
+              <B>mount</B> <B>--move</B> <B>olddir</B> <B>newdir</B>
+
+       The <I>proc</I> file system is  not  associated  with  a  special
+       device,  and  when mounting it, an arbitrary keyword, such
+       as <I>proc</I> can be used instead  of  a  device  specification.
+       (i) The command
+              <B>mount</B> <B>-a</B> <B>[-t</B> <I>type</I><B>]</B> <B>[-O</B> <I>optlist</I><B>]</B>
+       (usually  given  in  a bootscript) causes all file systems
+       mentioned in <I>fstab</I> (of the proper type  and/or  having  or
+       not having the proper options) to be mounted as indicated,
+       except for those whose line contains the  <B>noauto</B>  keyword.
+       Adding  the  <B>-F</B>  option  will make mount fork, so that the
+       filesystems are mounted simultaneously.
+
+       (ii) When mounting a file system mentioned  in  <I>fstab</I>,  it
+       suffices to give only the device, or only the mount point.
+
+       (iii) Normally, only the superuser can mount file systems.
+       However,  when  <I>fstab</I>  contains the <B>user</B> option on a line,
+       then anybody can mount the corresponding system.
+
+       Thus, given a line
+              <B>/dev/cdrom</B>  <B>/cd</B>  <B>iso9660</B>  <B>ro,user,noauto,unhide</B>
+       any user can mount the iso9660 file system  found  on  his
+       CDROM using the command
+              <B>mount</B> <B>/dev/cdrom</B>
+       or
+              <B>mount</B> <B>/cd</B>
+       For  more  details,  see  <B>fstab(5)</B>.   Only  the  user that
+       mounted a filesystem can unmount it again.   If  any  user
+       should  be able to unmount, then use <B>users</B> instead of <B>user</B>
+       in the <I>fstab</I> line.  The <B>owner</B> option  is  similar  to  the
+       <B>user</B>  option,  with  the restriction that the user must be
+       the owner of the special file. This may be useful e.g. for
+       <I>/dev/fd</I>  if a login script makes the console user owner of
+       this device.
+
+       The programs <B>mount</B> and <B>umount</B> maintain a list of currently
+       mounted  file  systems in the file <I>/etc/mtab</I>.  If no argu­
+       ments are given to <B>mount</B>, this list is printed.
+
+       When the <I>proc</I> filesystem is mounted (say  at  <I>/proc</I>),  the
+       files  <I>/etc/mtab</I>  and  <I>/proc/mounts</I> have very similar con­
+       tents. The former has somewhat more information,  such  as
+       the  mount options used, but is not necessarily up-to-date
+       (cf. the <B>-n</B> option  below).  It  is  possible  to  replace
+       <I>/etc/mtab</I>  by  a  symbolic  link to <I>/proc/mounts</I>, but some
+       information is lost that way, and  in  particular  working
+       with  the  loop  device will be less convenient, and using
+       the "user" option will fail.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       The full set of options used by an invocation of <B>mount</B>  is
+       determined  by  first  extracting the options for the file
+       system from the <I>fstab</I> table,  then  applying  any  options
+       specified by the <B>-o</B> argument, and finally applying a <B>-r</B> or
+              incarnation of mount for each device.  This will do
+              the  mounts  on  different devices or different NFS
+              servers in parallel.  This has the  advantage  that
+              it  is  faster; also NFS timeouts go in parallel. A
+              disadvantage is that the mounts are done  in  unde­
+              fined  order.   Thus, you cannot use this option if
+              you want to mount both <I>/usr</I> and <I>/usr/spool</I>.
+
+       <B>-f</B>     Causes everything to be done except for the  actual
+              system  call;  if  it's not obvious, this ``fakes''
+              mounting the file system.  This option is useful in
+              conjunction  with the <B>-v</B> flag to determine what the
+              <B>mount</B> command is trying to do. It can also be  used
+              to  add  entries for devices that were mounted ear­
+              lier with the -n option.
+
+       <B>-i</B>     Don't call the /sbin/mount.&lt;filesystem&gt; helper even
+              if it exists.
+
+       <B>-l</B>     Add the ext2, ext3 and XFS labels in the mount out­
+              put. Mount must have permission to  read  the  disk
+              device  (e.g.  be suid root) for this to work.  One
+              can set such a label for ext2  or  ext3  using  the
+              <B>e2label(8)</B>  utility, or for XFS using <B>xfs_admin(8)</B>.
+
+       <B>-n</B>     Mount without writing in <I>/etc/mtab</I>.  This is neces­
+              sary  for  example when <I>/etc</I> is on a read-only file
+              system.
+
+       <B>-s</B>     Tolerate sloppy mount options rather than  failing.
+              This  will  ignore mount options not supported by a
+              filesystem type. Not all filesystems  support  this
+              option. This option exists for support of the Linux
+              autofs-based automounter.
+
+       <B>-r</B>     Mount the file system read-only. A  synonym  is  <B>-o</B>
+              <B>ro</B>.
+
+       <B>-w</B>     Mount  the  file  system  read/write.  This  is the
+              default. A synonym is <B>-o</B> <B>rw</B>.
+
+       <B>-L</B> <I>label</I>
+              Mount the partition that has the specified <I>label</I>.
+
+       <B>-U</B> <I>uuid</I>
+              Mount the partition that has  the  specified  <I>uuid</I>.
+              These two options require the file <I>/proc/partitions</I>
+              (present since Linux 2.1.116) to exist.
+
+       <B>-t</B> <I>vfstype</I>
+              The argument following the <B>-t</B> is used  to  indicate
+              the  file system type.  The file system types which
+              required.  For  a  few  types  however  (like  nfs,
+              smbfs,  ncpfs) ad hoc code is necessary. The nfs ad
+              hoc code is built in, but smbfs and  ncpfs  have  a
+              separate  mount program. In order to make it possi­
+              ble to treat all types in a uniform way, mount will
+              execute   the  program  <I>/sbin/mount.TYPE</I>  (if  that
+              exists) when called with type <I>TYPE</I>.  Since  various
+              versions  of  the  <I>smbmount</I>  program have different
+              calling conventions, <I>/sbin/mount.smb</I> may have to be
+              a shell script that sets up the desired call.
+
+              The  type  <I>iso9660</I> is the default.  If no <B>-t</B> option
+              is given, or if the <B>auto</B>  type  is  specified,  the
+              superblock is probed for the filesystem type (<I>adfs</I>,
+              <I>bfs</I>, <I>cramfs</I>, <I>ext</I>, <I>ext2</I>, <I>ext3</I>, <I>hfs</I>,  <I>hpfs</I>,  <I>iso9660</I>,
+              <I>jfs</I>,  <I>minix</I>, <I>ntfs</I>, <I>qnx4</I>, <I>reiserfs</I>, <I>romfs</I>, <I>udf</I>, <I>ufs</I>,
+              <I>vxfs</I>, <I>xfs</I>, <I>xiafs</I> are  supported).   If  this  probe
+              fails,   mount   will   try   to   read   the  file
+              <I>/etc/filesystems</I>,  or,  if  that  does  not  exist,
+              <I>/proc/filesystems</I>.   All  of  the  filesystem types
+              listed there will be tried, except for  those  that
+              are  labeled  "nodev" (e.g., <I>devpts</I>, <I>proc</I> and <I>nfs</I>).
+              If <I>/etc/filesystems</I> ends in a line with a single  *
+              only, mount will read <I>/proc/filesystems</I> afterwards.
+
+              The <B>auto</B> type may be useful for user-mounted  flop­
+              pies.  Creating a file <I>/etc/filesystems</I> can be use­
+              ful to change the probe order (e.g.,  to  try  vfat
+              before  msdos)  or  if  you  use  a  kernel  module
+              autoloader.  Warning: the probing uses a  heuristic
+              (the  presence  of  appropriate `magic'), and could
+              recognize the wrong filesystem type, possibly  with
+              catastrophic  consequences.  If  your data is valu­
+              able, don't ask <B>mount</B> to guess.
+
+              More than one type may be specified in a comma sep­
+              arated  list.  The list of file system types can be
+              prefixed with <B>no</B> to specify the file  system  types
+              on  which  no action should be taken.  (This can be
+              meaningful with the <B>-a</B> option.)
+
+              For example, the command:
+                     <B>mount</B> <B>-a</B> <B>-t</B> <B>nomsdos,ext</B>
+              mounts all file systems except those of type  <I>msdos</I>
+              and <I>ext</I>.
+
+       <B>-O</B>     Used  in  conjunction  with <B>-a</B>, to limit the set of
+              filesystems to which the <B>-a</B> is applied.  Like <B>-t</B> in
+              this regard except that it is useless except in the
+              context of <B>-a</B>.  For example, the command:
+                     <B>mount</B> <B>-a</B> <B>-O</B> <B>no_netdev</B>
+              mounts all file systems except those which have the
+
+       <B>-o</B>     Options  are specified with a <B>-o</B> flag followed by a
+              comma separated string of options.  Some  of  these
+              options  are  only  useful  when they appear in the
+              <I>/etc/fstab</I> file.  The following  options  apply  to
+              any  file  system  that  is  being mounted (but not
+              every file system actually honors them - e.g.,  the
+              <B>sync</B>  option  today  has effect only for ext2, ext3
+              and ufs):
+
+              <B>async</B>  All I/O to the file system  should  be  done
+                     asynchronously.
+
+              <B>atime</B>  Update  inode  access  time for each access.
+                     This is the default.
+
+              <B>auto</B>   Can be mounted with the <B>-a</B> option.
+
+              <B>defaults</B>
+                     Use default options: <B>rw</B>,  <B>suid</B>,  <B>dev</B>,  <B>exec</B>,
+                     <B>auto</B>, <B>nouser</B>, and <B>async.</B>
+
+              <B>dev</B>    Interpret character or block special devices
+                     on the file system.
+
+              <B>exec</B>   Permit execution of binaries.
+
+              <B>_netdev</B>
+                     The filesystem  resides  on  a  device  that
+                     requires network access (used to prevent the
+                     system  from  attempting  to   mount   these
+                     filesystems   until  the  network  has  been
+                     enabled on the system).
+
+              <B>noatime</B>
+                     Do not update inode  access  times  on  this
+                     file  system  (e.g, for faster access on the
+                     news spool to speed up news servers).
+
+              <B>noauto</B> Can only be mounted explicitly (i.e., the <B>-a</B>
+                     option  will not cause the file system to be
+                     mounted).
+
+              <B>nodev</B>  Do not interpret character or block  special
+                     devices on the file system.
+
+              <B>noexec</B> Do  not  allow  execution of any binaries on
+                     the mounted file system.  This option  might
+                     be useful for a server that has file systems
+                     containing binaries for architectures  other
+                     than its own.
+
+              <B>nosuid</B> Do  not  allow  set-user-identifier  or set-
+              <B>ro</B>     Mount the file system read-only.
+
+              <B>rw</B>     Mount the file system read-write.
+
+              <B>suid</B>   Allow set-user-identifier or set-group-iden­
+                     tifier bits to take effect.
+
+              <B>sync</B>   All  I/O  to  the file system should be done
+                     synchronously.
+
+              <B>dirsync</B>
+                     All directory updates within the file system
+                     should  be done synchronously.  This affects
+                     the following  system  calls:  creat,  link,
+                     unlink,  symlink,  mkdir,  rmdir,  mknod and
+                     rename.
+
+              <B>user</B>   Allow an ordinary user  to  mount  the  file
+                     system.   The  name  of the mounting user is
+                     written to mtab so that he can  unmount  the
+                     file  system again.  This option implies the
+                     options <B>noexec</B>, <B>nosuid</B>,  and  <B>nodev</B>  (unless
+                     overridden  by subsequent options, as in the
+                     option line <B>user,exec,dev,suid</B>).
+
+              <B>users</B>  Allow every user to mount  and  unmount  the
+                     file   system.    This  option  implies  the
+                     options <B>noexec</B>, <B>nosuid</B>,  and  <B>nodev</B>  (unless
+                     overridden  by subsequent options, as in the
+                     option line <B>users,exec,dev,suid</B>).
+
+       <B>--bind</B> Remount a subtree somewhere else (so that its  con­
+              tents are available in both places). See above.
+
+       <B>--move</B> Move a subtree to some other place. See above.
+
+
+
+</PRE>
+<H2>FILESYSTEM SPECIFIC MOUNT OPTIONS</H2><PRE>
+       The  following options apply only to certain file systems.
+       We sort them by file system. They all follow the <B>-o</B>  flag.
+
+
+</PRE>
+<H2>Mount options for adfs</H2><PRE>
+       <B>uid=</B><I>value</I> and <B>gid=</B><I>value</I>
+              Set  the  owner  and group of the files in the file
+              system (default: uid=gid=0).
+
+       <B>ownmask=</B><I>value</I> and <B>othmask=</B><I>value</I>
+              Set the permission mask for  ADFS  'owner'  permis­
+              sions   and   'other'   permissions,   respectively
+              (default: 0700 and 0077, respectively).   See  also
+              <I>/usr/src/linux/Documentation/filesystems/adfs.txt</I>.
+
+              The value is given in octal.
+
+       <B>protect</B>
+              Do not allow any changes to the protection bits  on
+              the file system.
+
+       <B>usemp</B>  Set  uid  and gid of the root of the file system to
+              the uid and gid of the mount point upon  the  first
+              sync   or  umount,  and  then  clear  this  option.
+              Strange...
+
+       <B>verbose</B>
+              Print an informational message for each  successful
+              mount.
+
+       <B>prefix=</B><I>string</I>
+              Prefix  used  before  volume name, when following a
+              link.
+
+       <B>volume=</B><I>string</I>
+              Prefix (of length at most 30) used before '/'  when
+              following a symbolic link.
+
+       <B>reserved=</B><I>value</I>
+              (Default:  2.) Number of unused blocks at the start
+              of the device.
+
+       <B>root=</B><I>value</I>
+              Give explicitly the location of the root block.
+
+       <B>bs=</B><I>value</I>
+              Give blocksize. Allowed values are 512, 1024, 2048,
+              4096.
+
+       <B>grpquota</B> / <B>noquota</B> / <B>quota</B> / <B>usrquota</B>
+              These  options are accepted but ignored.  (However,
+              quota  utilities  may  react  to  such  strings  in
+              <I>/etc/fstab</I>.)
+
+
+
+</PRE>
+<H2>Mount options for coherent</H2><PRE>
+       None.
+
+
+
+</PRE>
+<H2>Mount options for devpts</H2><PRE>
+       The devpts file system is a pseudo file system, tradition­
+       ally mounted on <I>/dev/pts</I>.  In order to  acquire  a  pseudo
+       terminal,  a  process  opens  <I>/dev/ptmx</I>; the number of the
+       pseudo terminal is then made available to the process  and
+       the   pseudo   terminal   slave   can   be   accessed   as
+       <I>/dev/pts/</I>&lt;number&gt;.
+
+
+
+</PRE>
+<H2>Mount options for ext</H2><PRE>
+       None.  Note that the `ext' file system is obsolete.  Don't
+       use  it.   Since  Linux  version 2.1.21 extfs is no longer
+       part of the kernel source.
+
+
+
+</PRE>
+<H2>Mount options for ext2</H2><PRE>
+       The `ext2' file system is the standard Linux file  system.
+       Due  to  a kernel bug, it may be mounted with random mount
+       options (fixed in Linux 2.0.4).
+
+       <B>bsddf</B> / <B>minixdf</B>
+              Set the behaviour for the <I>statfs</I> system  call.  The
+              <B>minixdf</B>  behaviour  is  to  return  in the <I>f</I><B>_</B><I>blocks</I>
+              field the total number of blocks of the  file  sys­
+              tem,  while  the  <B>bsddf</B>  behaviour  (which  is  the
+              default) is to subtract the overhead blocks used by
+              the  ext2  file  system  and not available for file
+              storage. Thus
+
+       % mount /k -o minixdf; df /k; umount /k
+       Filesystem   1024-blocks  Used Available Capacity Mounted on
+       /dev/sda6      2630655   86954  2412169      3%   /k
+       % mount /k -o bsddf; df /k; umount /k
+       Filesystem   1024-blocks  Used Available Capacity Mounted on
+       /dev/sda6      2543714      13  2412169      0%   /k
+
+       (Note that this example shows that  one  can  add  command
+       line options to the options given in <I>/etc/fstab</I>.)
+
+
+       <B>check</B> / <B>check=normal</B> / <B>check=strict</B>
+              Set  checking  level.  When  at  least one of these
+              options is set (and <B>check=normal</B> is set by default)
+              the  inodes  and  blocks  bitmaps  are checked upon
+              mount (which can take half a minute or so on a  big
+              disk,  and  is rather useless).  With strict check­
+              ing, block deallocation checks that  the  block  to
+              free is in the data zone.
+
+       <B>check=none</B> / <B>nocheck</B>
+              No  checking  is done. This is fast. Recent kernels
+              do not have a check option anymore - checking  with
+              <B>e2fsck(8)</B> is more meaningful.
+
+       <B>debug</B>  Print debugging info upon each (re)mount.
+
+       <B>errors=continue</B> / <B>errors=remount-ro</B> / <B>errors=panic</B>
+              Define  the behaviour when an error is encountered.
+              (Either ignore errors and just mark the file system
+              erroneous  and continue, or remount the file system
+
+       <B>resgid=</B><I>n</I> and <B>resuid=</B><I>n</I>
+              The  ext2 file system reserves a certain percentage
+              of  the  available  space  (by  default   5%,   see
+              <B>mke2fs(8)</B> and <B>tune2fs(8)</B>).  These options determine
+              who can use the reserved blocks.  (Roughly: whoever
+              has  the specified uid, or belongs to the specified
+              group.)
+
+       <B>sb=</B><I>n</I>   Instead of block 1, use block <I>n</I> as superblock. This
+              could  be  useful when the filesystem has been dam­
+              aged.  (Earlier, copies of the superblock would  be
+              made  every  8192  blocks: in block 1, 8193, 16385,
+              ... (and one got  hundreds  or  even  thousands  of
+              copies  on  a  big filesystem). Since version 1.08,
+              <B>mke2fs</B> has  a  -s  (sparse  superblock)  option  to
+              reduce  the number of backup superblocks, and since
+              version 1.15 this is the default.  Note  that  this
+              may  mean that ext2 filesystems created by a recent
+              <B>mke2fs</B> cannot be mounted r/w  under  Linux  2.0.*.)
+              The  block  number here uses 1k units. Thus, if you
+              want to use logical block  32768  on  a  filesystem
+              with 4k blocks, use "sb=131072".
+
+       <B>grpquota</B> / <B>noquota</B> / <B>quota</B> / <B>usrquota</B>
+              These options are accepted but ignored.
+
+
+       <B>nouid32</B>
+              Disables  32-bit UIDs and GIDs.  This is for inter­
+              operability with older kernels which only store and
+              expect 16-bit values.
+
+       <B>user_xattr</B>
+              Enable  Extended  User  Attributes. See the <B>attr(5)</B>
+              manual page.
+
+       <B>acl</B>    Enable POSIX Access Control Lists. See  the  <B>acl(5)</B>
+              manual page.
+
+
+
+</PRE>
+<H2>Mount options for ext3</H2><PRE>
+       The  `ext3' file system is version of the ext2 file system
+       which has been enhanced with journalling.  It supports the
+       same options as ext2 as well as the following additions:
+
+       <B>journal=update</B>
+              Update  the  ext3 file system's journal to the cur­
+              rent format.
+
+       <B>journal=inum</B>
+              When a  journal  already  exists,  this  option  is
+              ignored.  Otherwise, it specifies the number of the
+                     to being written into the main file  system.
+
+              <B>ordered</B>
+                     This  is  the  default  mode.   All  data is
+                     forced directly out to the main file  system
+                     prior to its metadata being committed to the
+                     journal.
+
+              <B>writeback</B>
+                     Data ordering is not preserved - data may be
+                     written  into the main file system after its
+                     metadata has been committed to the  journal.
+                     This  is rumoured to be the highest-through­
+                     put option.   It  guarantees  internal  file
+                     system  integrity,  however it can allow old
+                     data to appear in files after  a  crash  and
+                     journal recovery.
+
+              <B>user_xattr</B>
+                     Enable  Extended  User  Attributes.  See the
+                     <B>attr(5)</B> manual page.
+
+              <B>acl</B>    Enable POSIX Access Control Lists.  See  the
+                     <B>acl(5)</B> manual page.
+
+
+
+</PRE>
+<H2>Mount options for fat</H2><PRE>
+       (Note: <I>fat</I> is not a separate filesystem, but a common part
+       of the <I>msdos</I>, <I>umsdos</I> and <I>vfat</I> filesystems.)
+
+       <B>blocksize=512</B> / <B>blocksize=1024</B> / <B>blocksize=2048</B>
+              Set blocksize (default 512).
+
+       <B>uid=</B><I>value</I> and <B>gid=</B><I>value</I>
+              Set the owner and group of all files. (Default: the
+              uid and gid of the current process.)
+
+       <B>umask=</B><I>value</I>
+              Set  the umask (the bitmask of the permissions that
+              are <B>not</B> present). The default is the umask  of  the
+              current process.  The value is given in octal.
+
+       <B>dmask=</B><I>value</I>
+              Set  the  umask  applied  to directories only.  The
+              default is the umask of the current  process.   The
+              value is given in octal. Present since 2.5.43.
+
+       <B>fmask=</B><I>value</I>
+              Set  the  umask applied to regular files only.  The
+              default is the umask of the current  process.   The
+              value is given in octal. Present since 2.5.43.
+
+
+              <B>s[trict]</B>
+                     Like  "normal",  but  names  may not contain
+                     long parts and special characters  that  are
+                     sometimes   used   on  Linux,  but  are  not
+                     accepted by  MS-DOS  are  rejected.  (+,  =,
+                     spaces, etc.)
+
+       <B>codepage=</B><I>value</I>
+              Sets the codepage for converting to shortname char­
+              acters on FAT and  VFAT  filesystems.  By  default,
+              codepage 437 is used.
+
+       <B>conv=b[inary]</B> / <B>conv=t[ext]</B> / <B>conv=a[uto]</B>
+              The  <I>fat</I> file system can perform CRLF&lt;--&gt;NL (MS-DOS
+              text format to UNIX text format) conversion in  the
+              kernel.  The  following conversion modes are avail­
+              able:
+
+              <B>binary</B> no translation is performed.   This  is  the
+                     default.
+
+              <B>text</B>   CRLF&lt;--&gt;NL  translation  is performed on all
+                     files.
+
+              <B>auto</B>   CRLF&lt;--&gt;NL translation is performed  on  all
+                     files  that don't have a "well-known binary"
+                     extension. The list of known extensions  can
+                     be  found  at the beginning of <I>fs/fat/misc.c</I>
+                     (as of 2.0, the list is: exe, com, bin, app,
+                     sys, drv, ovl, ovr, obj, lib, dll, pif, arc,
+                     zip, lha, lzh, zoo, tar, z,  arj,  tz,  taz,
+                     tzp,  tpz,  gz, tgz, deb, gif, bmp, tif, gl,
+                     jpg, pcx, tfm, vf, gf, pk, pxl, dvi).
+
+              Programs that do computed lseeks won't like in-ker­
+              nel text conversion.  Several people have had their
+              data ruined by this translation. Beware!
+
+              For file systems mounted in binary mode, a  conver­
+              sion tool (fromdos/todos) is available.
+
+       <B>cvf_format=</B><I>module</I>
+              Forces the driver to use the CVF (Compressed Volume
+              File) module cvf_<I>module</I> instead of  auto-detection.
+              If  the  kernel  supports  kmod, the cvf_format=xxx
+              option also controls on-demand CVF module  loading.
+
+       <B>cvf_option=</B><I>option</I>
+              Option passed to the CVF module.
+
+       <B>debug</B>  Turn  on  the  <I>debug</I>  flag.  A version string and a
+
+       <B>quiet</B>  Turn on the <I>quiet</I> flag.  Attempts to chown or chmod
+              files do not return errors, although they fail. Use
+              with caution!
+
+       <B>sys_immutable,</B> <B>showexec,</B> <B>dots,</B> <B>nodots,</B> <B>dotsOK=[yes|no]</B>
+              Various  misguided  attempts  to  force Unix or DOS
+              conventions onto a FAT file system.
+
+
+
+</PRE>
+<H2>Mount options for hpfs</H2><PRE>
+       <B>uid=</B><I>value</I> and <B>gid=</B><I>value</I>
+              Set the owner and group of all files. (Default: the
+              uid and gid of the current process.)
+
+       <B>umask=</B><I>value</I>
+              Set  the umask (the bitmask of the permissions that
+              are <B>not</B> present). The default is the umask  of  the
+              current process.  The value is given in octal.
+
+       <B>case=lower</B> / <B>case=asis</B>
+              Convert  all  files  names  to lower case, or leave
+              them.  (Default: <B>case=lower</B>.)
+
+       <B>conv=binary</B> / <B>conv=text</B> / <B>conv=auto</B>
+              For <B>conv=text</B>, delete some random CRs (in  particu­
+              lar,  all followed by NL) when reading a file.  For
+              <B>conv=auto</B>, choose more or less  at  random  between
+              <B>conv=binary</B>  and  <B>conv=text</B>.  For <B>conv=binary</B>, just
+              read what is in the file. This is the default.
+
+       <B>nocheck</B>
+              Do not  abort  mounting  when  certain  consistency
+              checks fail.
+
+
+
+</PRE>
+<H2>Mount options for iso9660</H2><PRE>
+       ISO  9660  is a standard describing a filesystem structure
+       to be used on CD-ROMs. (This filesystem type is also  seen
+       on some DVDs. See also the <I>udf</I> filesystem.)
+
+       Normal  <I>iso9660</I>  filenames  appear  in a 8.3 format (i.e.,
+       DOS-like restrictions on filename length), and in addition
+       all  characters are in upper case.  Also there is no field
+       for file ownership, protection, number of links, provision
+       for block/character devices, etc.
+
+       Rock Ridge is an extension to iso9660 that provides all of
+       these unix like features.  Basically there are  extensions
+       to each directory record that supply all of the additional
+       information, and when Rock Ridge is in use, the filesystem
+       is  indistinguishable  from  a  normal  UNIX  file  system
+
+       <B>uid=</B><I>value</I> and <B>gid=</B><I>value</I>
+              Give  all  files  in  the file system the indicated
+              user or group id, possibly overriding the  informa­
+              tion found in the Rock Ridge extensions.  (Default:
+              <B>uid=0,gid=0</B>.)
+
+       <B>map=n[ormal]</B> / <B>map=o[ff]</B> / <B>map=a[corn]</B>
+              For non-Rock Ridge volumes, normal name translation
+              maps  upper  to  lower case ASCII, drops a trailing
+              `;1', and converts `;' to  `.'.   With  <B>map=off</B>  no
+              name  translation  is  done. See <B>norock</B>.  (Default:
+              <B>map=normal</B>.)  <B>map=acorn</B> is like <B>map=normal</B> but also
+              apply Acorn extensions if present.
+
+       <B>mode=</B><I>value</I>
+              For  non-Rock  Ridge  volumes,  give  all files the
+              indicated  mode.   (Default:  read  permission  for
+              everybody.)  Since Linux 2.1.37 one no longer needs
+              to specify the mode in decimal. (Octal is indicated
+              by a leading 0.)
+
+       <B>unhide</B> Also show hidden and associated files.
+
+       <B>block=[512|1024|2048]</B>
+              Set   the   block  size  to  the  indicated  value.
+              (Default: <B>block=1024</B>.)
+
+       <B>conv=a[uto]</B> / <B>conv=b[inary]</B> / <B>conv=m[text]</B> / <B>conv=t[ext]</B>
+              (Default: <B>conv=binary</B>.)  Since  Linux  1.3.54  this
+              option has no effect anymore.  (And non-binary set­
+              tings used to be very dangerous,  possibly  leading
+              to silent data corruption.)
+
+       <B>cruft</B>  If  the high byte of the file length contains other
+              garbage, set this mount option to ignore  the  high
+              order bits of the file length.  This implies that a
+              file cannot  be  larger  than  16MB.   The  `cruft'
+              option is set automatically if the entire CDROM has
+              a weird size (negative, or more than 800MB). It  is
+              also  set when volume sequence numbers other than 0
+              or 1 are seen.
+
+       <B>session=</B><I>x</I>
+              Select number of session on multisession CD. (Since
+              2.3.4.)
+
+       <B>sbsector=</B><I>xxx</I>
+              Session begins from sector xxx. (Since 2.3.4.)
+
+       The  following options are the same as for vfat and speci­
+       fying them only makes sense when using discs encoded using
+
+       <B>iocharset=name</B>
+              Character set to use for converting from Unicode to
+              ASCII.  Joliet filenames are stored in Unicode for­
+              mat, but Unix for the most part doesn't know how to
+              deal with Unicode.  There  is  also  an  option  of
+              doing UTF8 translations with the utf8 option.
+
+       <B>utf8</B>   Encode Unicode names in UTF8 format. Default is no.
+
+
+
+</PRE>
+<H2>Mount options for minix</H2><PRE>
+       None.
+
+
+
+</PRE>
+<H2>Mount options for msdos</H2><PRE>
+       See mount options for  fat.   If  the  <I>msdos</I>  file  system
+       detects an inconsistency, it reports an error and sets the
+       file system read-only. The file system can be made  write­
+       able again by remounting it.
+
+
+
+</PRE>
+<H2>Mount options for ncp</H2><PRE>
+       Just  like  <I>nfs</I>,  the  <I>ncp</I> implementation expects a binary
+       argument (a <I>struct</I> <I>ncp</I><B>_</B><I>mount</I><B>_</B><I>data</I>)  to  the  mount  system
+       call.  This argument is constructed by <B>ncpmount(8)</B> and the
+       current version of <B>mount</B> (2.6h)  does  not  know  anything
+       about ncp.
+
+
+
+</PRE>
+<H2>Mount options for nfs</H2><PRE>
+       Instead  of a textual option string, parsed by the kernel,
+       the <I>nfs</I> file system expects  a  binary  argument  of  type
+       <I>struct</I>  <I>nfs</I><B>_</B><I>mount</I><B>_</B><I>data</I>.   The  program <B>mount</B> itself parses
+       the following options of the form  `tag=value',  and  puts
+       them   in   the  structure  mentioned:  <B>rsize=</B><I>n,</I>  <B>wsize=</B><I>n,</I>
+       <B>timeo=</B><I>n,</I> <B>retrans=</B><I>n,</I>  <B>acregmin=</B><I>n,</I>  <B>acregmax=</B><I>n,</I>  <B>acdirmin=</B><I>n,</I>
+       <B>acdirmax=</B><I>n,</I> <B>actimeo=</B><I>n,</I> <B>retry=</B><I>n,</I> <B>port=</B><I>n,</I> <B>mountport=</B><I>n,</I> <B>moun­</B>
+       <B>thost=</B><I>name,</I>    <B>mountprog=</B><I>n,</I>    <B>mountvers=</B><I>n,</I>     <B>nfsprog=</B><I>n,</I>
+       <B>nfsvers=</B><I>n,</I>  <B>namlen=</B><I>n.</I>   The  option <B>addr=</B><I>n</I> is accepted but
+       ignored.  Also the  following  Boolean  options,  possibly
+       preceded  by  <B>no</B> are recognized: <B>bg</B>, <B>fg</B>, <B>soft</B>, <B>hard</B>, <B>intr</B>,
+       <B>posix</B>, <B>cto</B>, <B>ac</B>, <B>tcp</B>, <B>udp</B>, <B>lock</B>,  <B>acl</B>.   For  details,  see
+       <B>nfs(5)</B>.
+
+       Especially useful options include
+
+       <B>rsize=8192,wsize=8192</B>
+              This will make your nfs connection faster than with
+              the default buffer size of 4096.  (NFSv2  does  not
+              work with larger values of <B>rsize</B> and <B>wsize</B>.)
+
+
+       <B>nolock</B> Do not use locking. Do not start lockd.
+
+
+
+</PRE>
+<H2>Mount options for ntfs</H2><PRE>
+       <B>iocharset=</B><I>name</I>
+              Character set to use  when  returning  file  names.
+              Unlike  VFAT,  NTFS  suppresses  names that contain
+              unconvertible characters.
+
+       <B>utf8</B>   Use UTF-8 for converting file names.
+
+       <B>uni_xlate=[0|1|2]</B>
+              For 0 (or `no'  or  `false'),  do  not  use  escape
+              sequences  for  unknown  Unicode characters.  For 1
+              (or `yes' or `true') or 2,  use  vfat-style  4-byte
+              escape  sequences  starting with ":". Here 2 give a
+              little-endian encoding and 1 a  byteswapped  bigen­
+              dian encoding.
+
+       <B>posix=[0|1]</B>
+              If enabled (posix=1), the file system distinguishes
+              between upper and lower case. The 8.3  alias  names
+              are  presented  as hard links instead of being sup­
+              pressed.
+
+       <B>uid=</B><I>value</I>, <B>gid=</B><I>value</I> and <B>umask=</B><I>value</I>
+              Set the file permission  on  the  filesystem.   The
+              umask  value  is  given  in octal.  By default, the
+              files are owned by root and not readable  by  some­
+              body else.
+
+
+
+</PRE>
+<H2>Mount options for proc</H2><PRE>
+       <B>uid=</B><I>value</I> and <B>gid=</B><I>value</I>
+              These options are recognized, but have no effect as
+              far as I can see.
+
+
+
+</PRE>
+<H2>Mount options for ramfs</H2><PRE>
+       Ramfs is a memory based filesystem. Mount it and you  have
+       it.  Unmount  it  and  it  is  gone.  Present  since Linux
+       2.3.99pre4.  There are no mount options.
+
+
+
+</PRE>
+<H2>Mount options for reiserfs</H2><PRE>
+       Reiserfs is a journaling filesystem.  The  reiserfs  mount
+       options      are      more      fully     described     at
+       <I>http://www.namesys.com/mount-options.html</I>.
+
+       <B>conv</B>   Instructs version 3.6 reiserfs software to mount  a
+              version  3.5  file system, using the 3.6 format for
+
+              <B>tea</B>    A Davis-Meyer function implemented by Jeremy
+                     Fitzhardinge.  It uses hash  permuting  bits
+                     in  the  name.  It gets high randomness and,
+                     therefore, low probability  of  hash  colli­
+                     sions at come CPU cost.  This may be used if
+                     EHASHCOLLISION errors are  experienced  with
+                     the r5 hash.
+
+              <B>r5</B>     A  modified  version of the rupasov hash. It
+                     is used by default and is  the  best  choice
+                     unless  the file system has huge directories
+                     and unusual file-name patterns.
+
+              <B>detect</B> Instructs <I>mount</I> to detect which  hash  func­
+                     tion  is in use by examining the file system
+                     being mounted,  and to write  this  informa­
+                     tion  into  the reiserfs superblock. This is
+                     only useful on the first  mount  of  an  old
+                     format file system.
+
+       <B>hashed_relocation</B>
+              Tunes the block allocator. This may provide perfor­
+              mance improvements in some situations.
+
+       <B>no_unhashed_relocation</B>
+              Tunes the block allocator. This may provide perfor­
+              mance improvements in some situations.
+
+       <B>noborder</B>
+              Disable  the border allocator algorithm invented by
+              Yury Yu. Rupasov.   This  may  provide  performance
+              improvements in some situations.
+
+       <B>nolog</B>  Disable  journalling. This will provide slight per­
+              formance improvements in  some  situations  at  the
+              cost   of  losing  reiserfs's  fast  recovery  from
+              crashes.  Even with this option turned on, reiserfs
+              still performs all journalling operations, save for
+              actual writes into its journalling area.  Implemen­
+              tation of <I>nolog</I> is a work in progress.
+
+       <B>notail</B> By  default,  reiserfs stores small files and `file
+              tails' directly into its tree. This  confuses  some
+              utilities  such as <B>LILO(8)</B><B>.</B>  This option is used to
+              disable packing of files into the tree.
+
+       <B>replayonly</B>
+              Replay the transactions which are in  the  journal,
+              but  do  not actually mount the file system. Mainly
+              used by <I>reiserfsck</I>.
+
+              manual page.
+
+
+
+</PRE>
+<H2>Mount options for romfs</H2><PRE>
+       None.
+
+
+
+</PRE>
+<H2>Mount options for smbfs</H2><PRE>
+       Just like <I>nfs</I>, the <I>smb</I>  implementation  expects  a  binary
+       argument  (a  <I>struct</I>  <I>smb</I><B>_</B><I>mount</I><B>_</B><I>data</I>)  to the mount system
+       call. This argument is constructed by <B>smbmount(8)</B> and  the
+       current  version  of  <B>mount</B>  (2.9w) does not know anything
+       about smb.
+
+
+
+</PRE>
+<H2>Mount options for sysv</H2><PRE>
+       None.
+
+
+
+</PRE>
+<H2>Mount options for tmpfs</H2><PRE>
+       The following parameters accept a suffix <B>k</B>, <B>m</B> or <B>g</B> for Ki,
+       Mi,  Gi (binary kilo, mega and giga) and can be changed on
+       remount.
+
+       <B>size=</B><I>nbytes</I>
+              Override default size of the filesystem.  The  size
+              is  given  in  bytes,  and  rounded  down to entire
+              pages.  The default is half of the memory.
+
+       <B>nr_blocks=</B>
+              Set number of blocks.
+
+       <B>nr_inodes=</B>
+              Set number of inodes.
+
+       <B>mode=</B>  Set initial permissions of the root directory.
+
+
+
+</PRE>
+<H2>Mount options for udf</H2><PRE>
+       udf is the "Universal Disk Format" filesystem  defined  by
+       the  Optical  Storage Technology Association, and is often
+       used for DVD-ROM.  See also <I>iso9660</I>.
+
+       <B>gid=</B>   Set the default group.
+
+       <B>umask=</B> Set the default  umask.   The  value  is  given  in
+              octal.
+
+       <B>uid=</B>   Set the default user.
+
+       <B>unhide</B> Show otherwise hidden files.
+
+       <B>session=</B>
+              Set  the  CDROM  session  counting from 0. Default:
+              last session.
+
+       <B>anchor=</B>
+              Override standard anchor location. Default: 256.
+
+       <B>volume=</B>
+              Override the VolumeDesc location. (unused)
+
+       <B>partition=</B>
+              Override the PartitionDesc location. (unused)
+
+       <B>lastblock=</B>
+              Set the last block of the filesystem.
+
+       <B>fileset=</B>
+              Override the fileset block location. (unused)
+
+       <B>rootdir=</B>
+              Override the root directory location. (unused)
+
+
+
+</PRE>
+<H2>Mount options for ufs</H2><PRE>
+       <B>ufstype=</B><I>value</I>
+              UFS is a file system widely used in different oper­
+              ating  systems.   The problem are differences among
+              implementations. Features of  some  implementations
+              are undocumented, so its hard to recognize the type
+              of ufs automatically.  That's  why  the  user  must
+              specify  the type of ufs by mount option.  Possible
+              values are:
+
+              <B>old</B>    Old format of ufs, this is the default, read
+                     only.  (Don't forget to give the -r option.)
+
+              <B>44bsd</B>  For filesystems created by a BSD-like system
+                     (NetBSD,FreeBSD,OpenBSD).
+
+              <B>sun</B>    For  filesystems created by SunOS or Solaris
+                     on Sparc.
+
+              <B>sunx86</B> For filesystems created by Solaris on x86.
+
+              <B>nextstep</B>
+                     For filesystems created by NeXTStep (on NeXT
+                     station) (currently read only).
+
+              <B>nextstep-cd</B>
+                     For  NextStep  CDROMs  (block_size == 2048),
+                     read-only.
+
+                     present; when an error is encountered only a
+                     console message is printed.
+
+
+
+</PRE>
+<H2>Mount options for umsdos</H2><PRE>
+       See mount options for msdos.  The <B>dotsOK</B> option is explic­
+       itly killed by <I>umsdos</I>.
+
+
+
+</PRE>
+<H2>Mount options for vfat</H2><PRE>
+       First of all, the mount options for  <I>fat</I>  are  recognized.
+       The  <B>dotsOK</B> option is explicitly killed by <I>vfat</I>.  Further­
+       more, there are
+
+       <B>uni_xlate</B>
+              Translate unhandled Unicode characters  to  special
+              escaped   sequences.   This  lets  you  backup  and
+              restore filenames that are created with any Unicode
+              characters. Without this option, a '?' is used when
+              no translation is possible. The escape character is
+              ':'  because  it  is  otherwise illegal on the vfat
+              filesystem. The escape  sequence  that  gets  used,
+              where  u  is  the  unicode character, is: ':', (u &amp;
+              0x3f), ((u&gt;&gt;6) &amp; 0x3f), (u&gt;&gt;12).
+
+       <B>posix</B>  Allow two files with  names  that  only  differ  in
+              case.
+
+       <B>nonumtail</B>
+              First  try  to  make  a short name without sequence
+              number, before trying <I>name~num.ext</I>.
+
+       <B>utf8</B>   UTF8 is the filesystem safe 8-bit encoding of  Uni­
+              code  that  is  used  by  the console. It can be be
+              enabled for the filesystem with  this  option.   If
+              `uni_xlate' gets set, UTF8 gets disabled.
+
+       <B>shortname=[lower|win95|winnt|mixed]</B>
+
+              Defines  the  behaviour for creation and display of
+              filenames which fit into 8.3 characters. If a  long
+              name for a file exists, it will always be preferred
+              display. There are four modes:
+
+              <I>lower</I>  Force the short name to lower case upon dis­
+                     play;  store a long name when the short name
+                     is not all upper case.
+
+              <I>win95</I>  Force the short name to upper case upon dis­
+                     play;  store a long name when the short name
+                     is not all upper case.
+
+
+
+</PRE>
+<H2>Mount options for xfs</H2><PRE>
+       <B>biosize=</B><I>size</I>
+              Sets the preferred buffered I/O size (default  size
+              is  64K).   <I>size</I> must be expressed as the logarithm
+              (base2) of the desired I/O size.  Valid values  for
+              this option are 14 through 16, inclusive (i.e. 16K,
+              32K, and 64K bytes).  On machines with a  4K  page­
+              size, 13 (8K bytes) is also a valid <I>size</I>.  The pre­
+              ferred buffered I/O size can also be altered on  an
+              individual  file  basis  using  the <B>ioctl(2)</B> system
+              call.
+
+       <B>dmapi</B>  <B>/</B>  <B>xdsm</B>
+              Enable the DMAPI (Data Management API) event  call­
+              outs.
+
+       <B>logbufs=</B><I>value</I>
+              Set  the  number  of  in-memory log buffers.  Valid
+              numbers range  from  2-8  inclusive.   The  default
+              value is 8 buffers for filesystems with a blocksize
+              of 64K, 4 buffers for filesystems with a  blocksize
+              of  32K, 3 buffers for filesystems with a blocksize
+              of 16K, and 2 buffers for all other configurations.
+              Increasing  the number of buffers may increase per­
+              formance on some workloads at the cost of the  mem­
+              ory  used  for the additional log buffers and their
+              associated control structures.
+
+       <B>logbsize=</B><I>value</I>
+              Set the size of each in-memory log  buffer.   Valid
+              sizes are 16384 (16K) and 32768 (32K).  The default
+              value for machines with more than 32MB of memory is
+              32768,  machines  with  less  memory  use  16384 by
+              default.
+
+       <B>logdev=</B><I>device</I> and <B>rtdev=</B><I>device</I>
+              Use an external log (metadata journal) and/or real-
+              time  device.   An  XFS  filesystem has up to three
+              parts: a data section, a log section, and  a  real-
+              time  section.   The real-time section is optional,
+              and the log section can be separate from  the  data
+              section or contained within it.  Refer to <B>xfs(5)</B>.
+
+       <B>noalign</B>
+              Data allocations will not be aligned at stripe unit
+              boundaries.
+
+       <B>noatime</B>
+              Access timestamps are not updated when  a  file  is
+              read.
+
+              option  is in effect, timestamp updates from O_SYNC
+              writes can be lost if the system crashes.
+
+       <B>quota</B> / <B>usrquota</B> / <B>uqnoenforce</B>
+              User disk  quota  accounting  enabled,  and  limits
+              (optionally) enforced.
+
+       <B>grpquota</B> / <B>gqnoenforce</B>
+              Group  disk  quota  accounting  enabled  and limits
+              (optionally) enforced.
+
+       <B>sunit=</B><I>value</I> and <B>swidth=</B><I>value</I>
+              Used to specify the stripe unit  and  width  for  a
+              RAID  device  or  a  stripe  volume.  <I>value</I> must be
+              specified in 512-byte block units.  If this  option
+              is  not  specified and the filesystem was made on a
+              stripe volume or the  stripe  width  or  unit  were
+              specified  for  the  RAID device at mkfs time, then
+              the mount system call will restore the  value  from
+              the  superblock.   For  filesystems  that  are made
+              directly on RAID devices, these options can be used
+              to  override  the  information in the superblock if
+              the  underlying  disk  layout  changes  after   the
+              filesystem  has been created.  The <B>swidth</B> option is
+              required if the <B>sunit</B> option  has  been  specified,
+              and must be a multiple of the <B>sunit</B> value.
+
+
+
+</PRE>
+<H2>Mount options for xiafs</H2><PRE>
+       None. Although nothing is wrong with xiafs, it is not used
+       much, and is not maintained. Probably  one  shouldn't  use
+       it.  Since Linux version 2.1.21 xiafs is no longer part of
+       the kernel source.
+
+
+
+</PRE>
+<H2>THE LOOP DEVICE</H2><PRE>
+       One further possible type is a mount via the loop  device.
+       For example, the command
+
+         <B>mount</B> <B>/tmp/fdimage</B> <B>/mnt</B> <B>-t</B> <B>msdos</B> <B>-o</B> <B>loop=/dev/loop3,blocksize=1024</B>
+
+       will  set  up  the loop device <I>/dev/loop3</I> to correspond to
+       the file <I>/tmp/fdimage</I>, and then mount this device on <I>/mnt</I>.
+       This type of mount knows about three options, namely <B>loop</B>,
+       <B>offset</B> and <B>encryption</B>, that are  really  options  to  <B>los­</B>
+       <B>etup(8)</B>.   If  no  explicit  loop device is mentioned (but
+       just an option `<B>-o</B> <B>loop</B>' is given), then <B>mount</B> will try to
+       find some unused loop device and use that.  If you are not
+       so  unwise  as  to  make  <I>/etc/mtab</I>  a  symbolic  link  to
+       <I>/proc/mounts</I>  then any loop device allocated by <B>mount</B> will
+       be freed by <B>umount</B>.  You can also free a  loop  device  by
+       hand, using `losetup -d', see <B>losetup(8)</B>.
+
+       <B>8</B>      user interrupt
+
+       <B>16</B>     problems writing or locking /etc/mtab
+
+       <B>32</B>     mount failure
+
+       <B>64</B>     some mount succeeded
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/etc/fstab</I> file system table
+       <I>/etc/mtab</I> table of mounted file systems
+       <I>/etc/mtab~</I> lock file
+       <I>/etc/mtab.tmp</I> temporary file
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>mount(2)</B>,   <B>umount(2)</B>,   <B>fstab(5)</B>,  <B>umount(8)</B>,  <B>swapon(8)</B>,
+       <B>nfs(5)</B>,  <B>xfs(5)</B>,  <B>e2label(8)</B>,   <B>xfs_admin(8)</B>,   <B>mountd(8)</B>,
+       <B>nfsd(8)</B>, <B>mke2fs(8)</B>, <B>tune2fs(8)</B>, <B>losetup(8)</B>
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       It  is  possible  for  a  corrupted file system to cause a
+       crash.
+
+       Some Linux file systems  don't  support  <B>-o</B>  <B>sync</B>  <B>and</B>  <B>-o</B>
+       <B>dirsync</B>  (the  ext2  and ext3 file systems <I>do</I> support syn­
+       chronous updates (a la BSD) when  mounted  with  the  <B>sync</B>
+       option).
+
+       The  <B>-o</B> <B>remount</B> may not be able to change mount parameters
+       (all <I>ext2fs</I>-specific parameters, except <B>sb</B>, are changeable
+       with  a  remount, for example, but you can't change <B>gid</B> or
+       <B>umask</B> for the <I>fatfs</I>).
+
+
+</PRE>
+<H2>HISTORY</H2><PRE>
+       A <B>mount</B> command existed in Version 5 AT&amp;T UNIX.
+
+
+
+Linux 2.0               14 September 1997                <B>MOUNT(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

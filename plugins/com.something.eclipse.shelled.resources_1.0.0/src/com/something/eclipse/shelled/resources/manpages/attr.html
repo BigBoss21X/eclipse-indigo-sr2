@@ -1,0 +1,121 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>attr</B> [ <B>-LRq</B> ] <B>-s</B> <B>attrname</B> [ <B>-V</B> <B>attrvalue</B> ] <B>pathname</B>
+
+       <B>attr</B> [ <B>-LRq</B> ] <B>-g</B> <B>attrname</B> <B>pathname</B>
+
+       <B>attr</B> [ <B>-LRq</B> ] <B>-r</B> <B>attrname</B> <B>pathname</B>
+
+
+
+</PRE>
+<H2>OVERVIEW</H2><PRE>
+       Extended  attributes  implement  the ability for a user to
+       attach name:value pairs to objects within the XFS filesys­
+       tem.
+
+       They  could  be  used  to store meta-information about the
+       file.  For example "character-set=kanji" could tell a doc­
+       ument browser to use the Kanji character set when display­
+       ing that document  and  "thumbnail=..."  could  provide  a
+       reduced  resolution  overview of a high resolution graphic
+       image.
+
+       This document describes the <I>attr</I> command, which is  mostly
+       compatible  with the IRIX command of the same name.  It is
+       thus aimed specifically at users of the XFS  filesystem  -
+       for  filesystem  independent  extended attribute manipula­
+       tion, consult the <B>getfattr(1)</B> and  <B>setfattr(1)</B>  documenta­
+       tion.
+
+       In the XFS filesystem, the <I>names</I> can be up to 256 bytes in
+       length, terminated by the first 0  byte.   The  intent  is
+       that  they  be  printable  ASCII  (or other character set)
+       names for the attribute.  The <I>values</I> can be up to 64KB  of
+       arbitrary binary data.
+
+       Attributes  can  be  attached  to all types of XFS inodes:
+       regular files, directories, symbolic links, device  nodes,
+       etc.
+
+       XFS  uses 2 disjoint attribute name spaces associated with
+       every filesystem object.   They  are  the  <B>root</B>  and  <B>user</B>
+       address spaces.  The <B>root</B> address space is accessable only
+       to the superuser, and then only by specifying a flag argu­
+       ment to the function call.  Other users will not see or be
+       able to modify attributes in the <B>root</B> address space.   The
+       <B>user</B> address space is protected by the normal file permis­
+       sions mechanism, so the owner of the file can  decide  who
+       is  able  to  see and/or modify the value of attributes on
+       any particular file.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The <I>attr</I>  utility  allows  the  manipulation  of  extended
+       attributes  associated with filesystem objects from within
+       shell scripts.
+
+       <B>SET/CREATE</B>
+              The <B>-s</B> <B>attrname</B> option tells <I>attr</I> to set the  named
+              attribute  of  the  object  to  the value read from
+              <I>s</I<B>s</B><I>t</I<B>t</B><I>d</I<B>d</B><I>i</I<B>i</B><I>n</I<B>n</B>.  If an  attribute  with  that  name  already
+              exists,  its  value will be replaced with this one.
+              If an attribute with that  name  does  not  already
+              exist,  one  will be created with this value.  With
+              the <B>-V</B> <B>attrvalue</B> flag, the attribute will be set to
+              have  a  value  of  <B>attrvalue</B> and <I>s</I<B>s</B><I>t</I<B>t</B><I>d</I<B>d</B><I>i</I<B>i</B><I>n</I<B>n</B> will not be
+              read.  With the <B>-q</B> flag, <I>s</I<B>s</B><I>t</I<B>t</B><I>d</I<B>d</B><I>o</I<B>o</B><I>u</I<B>u</B><I>t</I<B>t</B> will not  be  used.
+              Without   the   <B>-q</B>  flag,  a  message  showing  the
+              attribute  name  and  the  entire  value  will   be
+              printed.
+
+       When the <B>-L</B> option is given and the named object is a sym­
+       bolic link, operate on the attributes of the object refer­
+       enced  by the symbolic link.  Without this option, operate
+       on the attributes of the symbolic link itself.
+
+       When the <B>-R</B> option is given and the process has  appropri­
+       ate  privileges,  operate  in the <I>root</I> attribute namespace
+       rather that the <I>USER</I> attribute namespace.
+
+       When the <B>-q</B> option is given <I>attr</I> will try to  keep  quiet.
+       It  will  output  error  messages (to <I>s</I<B>s</B><I>t</I<B>t</B><I>d</I<B>d</B><I>e</I<B>e</B><I>r</I<B>r</B><I>r</I<B>r</B>) but will not
+       print status messages (to <I>s</I<B>s</B><I>t</I<B>t</B><I>d</I<B>d</B><I>o</I<B>o</B><I>u</I<B>u</B><I>t</I<B>t</B>).
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       The standard file interchange/archive programs <B>tar(1)</B>, and
+       <B>cpio(1)</B>  will  not archive or restore extended attributes,
+       while the <B>xfsdump(8)</B> program will.
+
+
+</PRE>
+<H2>CAVEATS</H2><PRE>
+       The list option present in the IRIX version of  this  com­
+       mand  is  not supported.  <I>getfattr</I> provides a mechanism to
+       retrieve all of the attribute names.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>getfattr(1)</B>,   <B>setfattr(1)</B>,   <B>attr_get(3)</B>,    <B>attr_set(3)</B>,
+       <B>attr_multi(3)</B>, <B>attr_remove(3)</B>, <B>attr(5)</B>, and <B>xfsdump(8)</B>.
+
+
+
+Dec 2001               Extended Attributes                <B>ATTR(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

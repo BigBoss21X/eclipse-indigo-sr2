@@ -1,0 +1,130 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>chattr</B> [ <B>-RV</B> ] [ <B>-v</B> <I>version</I> ] [ <I>mode</I> ] <I>files...</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>chattr</B> changes the  file  attributes  on  a  Linux  second
+       extended file system.
+
+       The format of a symbolic mode is +-=[ASacDdistu].
+
+       The  operator  `+'  causes  the  selected attributes to be
+       added to the existing attributes of the files; `-'  causes
+       them  to  be  removed;  and `=' causes them to be the only
+       attributes that the files have.
+
+       The letters `ASacDdijsu' select the new attributes for the
+       files:  don't  update  atime (A), synchronous updates (S),
+       synchronous directory updates (D), append only  (a),  com­
+       pressed  (c), no dump (d), immutable (i), data journalling
+       (j), secure deletion (s), and undeletable (u).
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-R</B>     Recursively change attributes  of  directories  and
+              their  contents.  Symbolic links encountered during
+              recursive directory traversals are ignored.
+
+       <B>-V</B>     Be verbose with chattr's output and print the  pro­
+              gram version.
+
+       <B>-v</B> <I>version</I>
+              Set the file's version/generation number.
+
+
+</PRE>
+<H2>ATTRIBUTES</H2><PRE>
+       When  a  file  with the 'A' attribute set is accessed, its
+       atime record is  not  modified.   This  avoids  a  certain
+       amount of disk I/O for laptop systems.
+
+       A  file  with  the  `a'  attribute set can only be open in
+       append mode for writing.  Only the superuser  can  set  or
+       clear this attribute.
+
+       A  file  with  the `c' attribute set is automatically com­
+       pressed on the disk by the kernel. A read from  this  file
+       returns uncompressed data. A write to this file compresses
+       data before storing them on the disk.
+
+       When a directory with the `D' attribute set  is  modified,
+       the changes are written synchronously on the disk; this is
+       equivalent to the `dirsync' mount option applied to a sub­
+       set of the files.
+
+       A  file  with  the  `d' attribute set is not candidate for
+       itself,  if   the   filesystem   is   mounted   with   the
+       "data=ordered"  or  "data=writeback"  options.   When  the
+       filesystem is mounted with  the  "data=journalled"  option
+       all file data is already journalled and this attribute has
+       no effect.
+
+       When a file with the `s' attribute  set  is  deleted,  its
+       blocks are zeroed and written back to the disk.
+
+       When  a  file  with the `S' attribute set is modified, the
+       changes are written synchronously on  the  disk;  this  is
+       equivalent  to the `sync' mount option applied to a subset
+       of the files.
+
+       A file with the 't' attribute  will  not  have  a  partial
+       block  fragment at the of the file merged with other files
+       (for those filesystems which support tail-merging).   This
+       is  necessary for applications such as LILO which read the
+       filesystem directly, and who don't understand  tail-merged
+       files.
+
+       When  a  file  with  the `u' attribute set is deleted, its
+       contents are saved.  This allows the user to ask  for  its
+       undeletion.
+
+       The  'X' attribute is used by the experimental compression
+       patches to indicate that a raw contents  of  a  compressed
+       file  can  be  accessed directly.  It currently may not be
+       set or reset using <B>chattr(1)</B>, although it can be displayed
+       by <B>lsattr(1)</B>.
+
+       The  'Z' attribute is used by the experimental compression
+       patches to indicate a compressed file is  dirty.   It  may
+       not  be  set  or reset using <B>chattr(1)</B>, although it can be
+       displayed by <B>lsattr(1)</B>.
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       <B>chattr</B> was written by Remy Card &lt;Remy.Card@linux.org&gt;.
+
+
+</PRE>
+<H2>BUGS AND LIMITATIONS</H2><PRE>
+       As of Linux 2.2, the `c', 's',  and `u' attribute are  not
+       honored by the kernel filesystem code.    These attributes
+       will be implemented in a future ext2 fs version.
+
+       The `j' option is only useful if the filesystem is mounted
+       as ext3.
+
+       The  `D'  option is only useful on Linux kernel 2.5.19 and
+       later.
+
+
+</PRE>
+<H2>AVAILABILITY</H2><PRE>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

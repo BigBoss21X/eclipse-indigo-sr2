@@ -1,0 +1,196 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ls</B> [<I>OPTION</I>]... [<I>FILE</I>]...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       List information about the FILEs (the current directory by
+       default).  Sort entries alphabetically if none of <B>-cftuSUX</B>
+       nor <B>--sort</B>.
+
+       Mandatory  arguments  to  long  options  are mandatory for
+       short options too.
+
+       <B>-a</B>, <B>--all</B>
+              do not hide entries starting with .
+
+       <B>-A</B>, <B>--almost-all</B>
+              do not list implied . and ..
+
+       <B>--author</B>
+              print the author of each file
+
+       <B>-b</B>, <B>--escape</B>
+              print octal escapes for nongraphic characters
+
+       <B>--block-size</B>=<I>SIZE</I>
+              use SIZE-byte blocks
+
+       <B>-B</B>, <B>--ignore-backups</B>
+              do not list implied entries ending with ~
+
+       <B>-c</B>     with <B>-lt</B>: sort by, and show, ctime  (time  of  last
+              modification  of  file status information) with <B>-l</B>:
+              show ctime and sort  by  name  otherwise:  sort  by
+              ctime
+
+       <B>-C</B>     list entries by columns
+
+       <B>--color</B>[=<I>WHEN</I>]
+              control  whether  color is used to distinguish file
+              types.  WHEN may be `never', `always', or `auto'
+
+       <B>-d</B>, <B>--directory</B>
+              list directory entries instead of contents, and  do
+              not dereference symbolic links
+
+       <B>-D</B>, <B>--dired</B>
+              generate output designed for Emacs' dired mode
+
+       <B>-f</B>     do not sort, enable <B>-aU</B>, disable <B>-lst</B>
+
+       <B>-F</B>, <B>--classify</B>
+              append indicator (one of */=@|) to entries
+
+              2G)
+
+       <B>--si</B>   likewise, but use powers of 1000 not 1024
+
+       <B>-H</B>, <B>--dereference-command-line</B>
+              follow symbolic links listed on the command line
+
+       <B>--dereference-command-line-symlink-to-dir</B>
+              follow each command line symbolic link
+
+              that points to a directory
+
+       <B>--indicator-style</B>=<I>WORD</I> append indicator with style WORD to
+       entry names:
+              none (default), classify (-F), file-type (-p)
+
+       <B>-i</B>, <B>--inode</B>
+              print index number of each file
+
+       <B>-I</B>, <B>--ignore</B>=<I>PATTERN</I>
+              do not list implied entries matching shell PATTERN
+
+       <B>-k</B>     like <B>--block-size</B>=<I>1K</I>
+
+       <B>-l</B>     use a long listing format
+
+       <B>-L</B>, <B>--dereference</B>
+              when  showing file information for a symbolic link,
+              show information for the file the  link  references
+              rather than for the link itself
+
+       <B>-m</B>     fill width with a comma separated list of entries
+
+       <B>-n</B>, <B>--numeric-uid-gid</B>
+              like <B>-l</B>, but list numeric UIDs and GIDs
+
+       <B>-N</B>, <B>--literal</B>
+              print  raw  entry  names  (don't treat e.g. control
+              characters specially)
+
+       <B>-o</B>     like <B>-l</B>, but do not list group information
+
+       <B>-p</B>, <B>--file-type</B>
+              append indicator (one of /=@|) to entries
+
+       <B>-q</B>, <B>--hide-control-chars</B>
+              print ? instead of non graphic characters
+
+       <B>--show-control-chars</B>
+              show non graphic characters as-is  (default  unless
+              program is `ls' and output is a terminal)
+
+              print size of each file, in blocks
+
+       <B>-S</B>     sort by file size
+
+       <B>--sort</B>=<I>WORD</I>
+              extension <B>-X</B>, none <B>-U</B>, size <B>-S</B>, time <B>-t</B>, version <B>-v</B>
+
+              status <B>-c</B>, time <B>-t</B>, atime <B>-u</B>, access <B>-u</B>, use <B>-u</B>
+
+       <B>--time</B>=<I>WORD</I>
+              show  time  as  WORD  instead of modification time:
+              atime, access, use, ctime or status; use  specified
+              time as sort key if <B>--sort</B>=<I>time</I>
+
+       <B>--time-style</B>=<I>STYLE</I>
+              show  times  using style STYLE: full-iso, long-iso,
+              iso, locale, +FORMAT
+
+              FORMAT is interpreted like  `date';  if  FORMAT  is
+              FORMAT1&lt;newline&gt;FORMAT2,  FORMAT1  applies  to non-
+              recent files and FORMAT2 to recent files; if  STYLE
+              is  prefixed with `posix-', STYLE takes effect only
+              outside the POSIX locale
+
+       <B>-t</B>     sort by modification time
+
+       <B>-T</B>, <B>--tabsize</B>=<I>COLS</I>
+              assume tab stops at each COLS instead of 8
+
+       <B>-u</B>     with <B>-lt</B>: sort by, and show, access time  with  <B>-l</B>:
+              show  access  time and sort by name otherwise: sort
+              by access time
+
+       <B>-U</B>     do not sort; list entries in directory order
+
+       <B>-v</B>     sort by version
+
+       <B>-w</B>, <B>--width</B>=<I>COLS</I>
+              assume screen width instead of current value
+
+       <B>-x</B>     list entries by lines instead of by columns
+
+       <B>-X</B>     sort alphabetically by entry extension
+
+       <B>-1</B>     list one file per line
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+       SIZE may be (or may be an integer optionally followed  by)
+       Report bugs to &lt;bug-coreutils@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2003 Free Software Foundation, Inc.
+       This  is  free software; see the source for copying condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  full  documentation for <B>ls</B> is maintained as a Texinfo
+       manual.   If  the  <B>info</B>  and  <B>ls</B>  programs  are   properly
+       installed at your site, the command
+
+              <B>info</B> <B>ls</B>
+
+       should give you access to the complete manual.
+
+
+
+ls (coreutils) 4.5.8      February 2003                     <B>LS(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

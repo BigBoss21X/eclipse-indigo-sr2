@@ -1,0 +1,191 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>isdnrate</B> <B>-b</B><I>best</I> <B>-d</B><I>day</I> <B>-f</B><I>from</I> <B>-h</B><I>hour</I> <B>-l</B><I>len</I>  <B>-o</B>  <B>-p</B><I>provs</I>  <B>-s</B>
+       <B>-t</B><I>takt</I>  <B>-v</B><I>verbose</I>  <B>-x</B><I>exclude</I>    <B>-C</B>  <B>-D</B><I>det</I>  <B>-G</B><I>data</I> <B>-H</B> <B>-L</B> <B>-N</B>
+       <B>-O</B><I>socketfile</I> <B>-P</B><I>piddir</I>  <B>-S</B><I>sort</I> <B>-T</B> <B>-U</B> <B>-V</B> <B>-X</B><I>explain</I> <B>-Z</B> <B>NUMBER</B>
+       <B>...</B>
+
+       All options are optional.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       The  <B>isdnrate</B>  program  prints  various  information  from
+       <B>rate-files(5)</B>. It's main purpose  is  the  calculation  of
+       telefon  rates from your location to an arbitrary destina­
+       tion at a certain time and of a certain length for all the
+       providers in a rate-file.
+
+
+   <B>NUMBER</B>
+       A telefon number may be
+
+              <B>1234</B> a local area number
+
+              <B>01234</B> a different area in your country
+
+              <B>+12345</B> a foreign country
+
+              <B>China</B> text for a foreign country
+
+              <B>Paris</B> a town
+
+              <B>US</B> a code as defined in <I>country.dat</I>.
+
+              <B>Internet</B>  a  Service  name  (if  option  <B>-s</B> is also
+              given).
+
+       Note that currently only city names in AT, DE, NL are sup­
+       ported plus some international capitals.
+       Note  also,  spaces  in  country-  or service names may be
+       given as underscores.
+
+   <B>OPTIONS</B>
+       <B>-b</B><I>best</I> Print only <I>best</I> providers. Default is all.
+
+       <B>-d</B><I>day</I> Calc rates for <I>day</I>. <I>day</I> can be one of
+
+              <I>dd</I> day of current month
+              <I>dd.mm</I> day month
+              <I>dd.mm.yy</I>[<I>yy</I>] day, month, year
+              <I>W</I> Weekday
+              <I>N</I> Weekday - night
+              <I>E</I> Weekend
+
+       tions, or <I>B</I> for business providers.
+
+       <B>-s</B>  Consider <B>NUMBER</B> as the name of a service and print all
+       numbers / providers, which supply this service.
+
+       <B>-t</B><I>takt</I>  Print  only  providers,  which  have   calculation
+       impulses smaller or equal to <I>takt</I>.  Default is 9999.
+
+       <B>-v</B><I>verbose</I> Set <I>verbose</I> level.
+
+       <B>-x</B> <I>provider</I>[<I>,provider...</I>]  Exclude these <I>provider</I>(s).
+
+
+   <B>DISPLAY</B> <B>AND</B> <B>RUN</B> <B>OPTIONS</B>
+       <B>-C</B>  Connect to a running isdnrate daemon. This avoids long
+       startup times.
+
+       <B>-D</B> Start as a  daemon,  waiting  for  connections  from  a
+       client. The socket <I>/tmp/isdnrate</I> is created, which clients
+       can connect to.
+
+       <B>-D2</B> Start as a daemon and go background.
+
+       <B>-CD3</B> Stop a running daemon.
+
+       <B>-G</B><I>n</I> Print raw data for  connection.  <I>n</I>  may  be  currently
+       97,98,99.
+
+       <B>-H</B> Print a header.
+
+       <B>-L</B> Print a semicolon separated list of
+
+              vbn ; providername ; zone ; day ; time ; currency ;
+              charge ; basicprice ; price ; duration ; charge/min
+              ; takt ; minimum price
+
+       <B>-N</B>  Show  info  about following numbers. If no provider is
+       given, the preselected provider is used.
+
+       <B>-O</B><I>socketfile</I> Write socket to given filename  on  start  of
+       daemon. Default is <I>tmp/isdnrate</I>.
+
+       <B>-P</B><I>piddir</I>  Write own PID to <I>piddir/isdnrate.pid</I> on start of
+       daemon.
+
+       <B>-S</B><I>sort</I> Sort output by <I>sort</I>, which may be
+
+              <B>v</B> vbn or <B>n</B> provider name. Default is by charge.
+
+       <B>-T</B> Print a table of charges for daytimes  weekday/weekend.
+
+       <B>-V</B> Print version info and exit.
+       <B>-Z</B> Print info for LCR
+       e.g. isdnrate -p1 -ZX 19430
+       shows  the  rate  for  provider 1 and the cheapest rate to
+       this service.
+
+       Note: Various output options may not be used together.  If
+       you gave conflicting options you'll see a warning.
+       Note  also: Sort by name or providernumber and <B>-b</B><I>best</I> will
+       bring you the first <I>best</I> providers in sorting  order,  not
+       the cheapest.
+       And  finally:  Some  options like <I>-X50</I>, <I>-X51</I>, <I>-X52</I>, <I>-D</I>, <I>-V</I>
+       don't require a telefon <I>NUMBER</I>.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>rate-CC.dat</I>, <I>holiday-CC.dat</I>, <I>dest.gdbm</I>,  <I>zone-CC-PPP.gdbm</I>,
+       <I>isdn.conf</I>, <I>telrate.cgi</I> and more.
+       Note:  The  extension of zone- and dest data files depends
+       on configuration.  Recently <I>.cdb</I> is used.
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+       <I>isdnrate</I> <I>-D2</I>
+       Start the isdnrate daemon.
+
+       <I>isdnrate</I> <I>-D2</I> <I>-P</I> <I>/var/run</I> <I>-O</I> <I>/tmp/isdnr</I><B>_</B><I>socket</I>
+       Start the isdnrate daemon, write <I>isdnrate.pid</I> to  /var/run
+       and create thew given socket.
+
+       <I>isdnrate</I> <I>-CH</I> <I>-b5</I> <I>-f01</I> <I>-l120</I> <I>Attersee</I>
+       Connect  to  running daemon, print a header and the best 5
+       rates from Vienna (<I>01</I>) to destination <I>Attersee</I> for a  con­
+       nection length of 2 Minutes.
+
+
+       <I>isdnrate</I> <I>-CX</I> <I>-p1</I><B>_</B><I>2,24</I> <I>+1</I>
+       Show rates and zones for destination USA for providers <I>1</I><B>_</B><I>2</I>
+       and <I>24</I>.
+
+       <I>isdnrate</I> <I>-CX</I> <I>-H</I> <I>-dW</I> <I>-b5</I> <I>US</I> <I>CA</I>
+       Show a header, rates and zones for  destinations  USA  and
+       Canada for best 5 providers during workday.
+
+       <I>isdnrate</I> <I>-CHoX</I> <I>US</I>
+       Show  header, rate and zone for destination USA for booked
+       providers only.
+
+       <I>isdnrate</I> <I>-CsX</I> <I>-l60</I> <I>Internet</I>
+       Show rates and numbers for service <I>Internet</I> for a  1  min­
+       utes call.
+
+       <I>isdnrate</I> <I>-CZ</I> <I>19430</I>
+       Show  rates  and the best provider for this (service-)num­
+       ber.
+       daemon terminates. if this happens ('socket in use'), do a
+       <I>rm</I> <I>/tmp/isdnrate</I> and try again.
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Andreas Kool &lt;akool@isdn4linux.de&gt; started  this  program.
+       Leopold  Toetsch  &lt;lt@toetsch.at&gt;  continued  the work and
+       brought  this   man   page   to   you.   Michael   Reinelt
+       &lt;reinelt@eunet.at&gt;  did the calculation engine and various
+       tools for it.
+
+
+
+-lt-                        2000/09/01                <B>ISDNRATE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

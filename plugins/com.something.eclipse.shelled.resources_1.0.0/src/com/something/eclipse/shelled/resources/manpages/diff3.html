@@ -1,0 +1,80 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>diff3</B> [<I>OPTION</I>]... <I>MYFILE</I> <I>OLDFILE</I> <I>YOURFILE</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Compare three files line by line.
+
+       <B>-e</B>  <B>--ed</B>
+              Output  unmerged  changes  from OLDFILE to YOURFILE
+              into MYFILE.
+
+       <B>-E</B>  <B>--show-overlap</B>
+              Output unmerged changes, bracketing conflicts.
+
+       <B>-A</B>  <B>--show-all</B>
+              Output all changes, bracketing conflicts.
+
+       <B>-x</B>  <B>--overlap-only</B>
+              Output overlapping changes.
+
+       <B>-X</B>     Output overlapping changes, bracketing them.
+
+       <B>-3</B>  <B>--easy-only</B>
+              Output unmerged nonoverlapping changes.
+
+       <B>-m</B>  <B>--merge</B>
+              Output merged file instead of  ed  script  (default
+              <B>-A</B>).
+
+       <B>-L</B> LABEL  <B>--label</B>=<I>LABEL</I>
+              Use LABEL instead of file name.
+
+       <B>-i</B>     Append `w' and `q' commands to ed scripts.
+
+       <B>-a</B>  <B>--text</B>
+              Treat all files as text.
+
+       <B>-T</B>  <B>--initial-tab</B>
+              Make tabs line up by prepending a tab.
+
+       <B>--diff-program</B>=<I>PROGRAM</I>
+              Use PROGRAM to compare files.
+
+       <B>-v</B>  <B>--version</B>
+              Output version info.
+
+       <B>--help</B> Output this help.
+
+       If a FILE is `-', read standard input.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Randy Smith.
+
+       info manual.  If the <B>info</B> and <B>diff3</B> programs are  properly
+       installed at your site, the command
+
+              <B>info</B> <B>diff</B>
+
+       should give you access to the complete manual.
+
+
+
+diffutils 2.8.1             April 2002                   <B>DIFF3(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

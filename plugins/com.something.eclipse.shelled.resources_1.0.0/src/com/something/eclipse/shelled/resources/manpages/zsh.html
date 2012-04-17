@@ -1,0 +1,360 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       Because  zsh  contains  many  features, the zsh manual has
+       been split into a number of sections:
+
+       <I>zsh</I>          Zsh overview (this section)
+       <I>zshmisc</I>      Anything not fitting into the other sections
+       <I>zshexpn</I>      Zsh command and parameter expansion
+       <I>zshparam</I>     Zsh parameters
+       <I>zshoptions</I>   Zsh options
+       <I>zshbuiltins</I>  Zsh built-in functions
+       <I>zshzle</I>       Zsh command line editing
+       <I>zshcompwid</I>   Zsh completion widgets
+       <I>zshcompsys</I>   Zsh completion system
+       <I>zshcompctl</I>   Zsh completion control
+       <I>zshmodules</I>   Zsh loadable modules
+       <I>zshzftpsys</I>   Zsh built-in FTP client
+       <I>zshall</I>       Meta-man page containing all of the above
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Zsh is a UNIX command interpreter  (shell)  usable  as  an
+       interactive login shell and as a shell script command pro­
+       cessor.  Of the standard shells, zsh most  closely  resem­
+       bles  <B>ksh</B> but includes many enhancements.  Zsh has command
+       line editing, builtin  spelling  correction,  programmable
+       command  completion, shell functions (with autoloading), a
+       history mechanism, and a host of other features.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Zsh was originally written by Paul  Falstad  <B>&lt;pf@zsh.org&gt;</B>.
+       Zsh  is  now  maintained by the members of the zsh-workers
+       mailing list <B>&lt;zsh-workers@sunsite.dk&gt;</B>.  The development is
+       currently  coordinated  by Peter Stephenson <B>&lt;pws@zsh.org&gt;</B>.
+       The coordinator can be contacted at <B>&lt;coordinator@zsh.org&gt;</B>,
+       but  matters  relating  to the code should generally go to
+       the mailing list.
+
+
+</PRE>
+<H2>AVAILABILITY</H2><PRE>
+       Zsh is available from the following anonymous  FTP  sites.
+       These  mirror  sites  are kept frequently up to date.  The
+       sites marked with  <I>(H)</I>  may  be  mirroring  <B>ftp.cs.elte.hu</B>
+       instead of the primary site.
+
+       Primary site
+              <B>ftp://ftp.zsh.org/pub/zsh/</B>
+              <B>http://www.zsh.org/pub/zsh/</B>
+
+       Australia
+              <B>ftp://ftp.zsh.org/pub/zsh/</B>
+              <B>http://www.zsh.org/pub/zsh/</B>
+              <B>ftp://ftp.ips.gov.au/pub/packages/zsh/</B>  <I>(H)</I>
+
+       Denmark
+              <B>ftp://ftp.cs.elte.hu/pub/zsh/</B>
+              <B>http://www.cs.elte.hu/pub/zsh/</B>
+              <B>ftp://ftp.kfki.hu/pub/packages/zsh/</B>
+
+       Israel
+              <B>ftp://ftp.math.technion.ac.il/pub/zsh/</B>
+              <B>http://www.math.technion.ac.il/pub/zsh/</B>
+
+       Italy
+              <B>ftp://ftp.unina.it/pub/Unix/pkgs/shell/zsh/</B>
+
+       Japan
+              <B>ftp://ftp.nisiq.net/pub/shells/zsh/</B>  <I>(H)</I>
+              <B>ftp://ftp.win.ne.jp/pub/shell/zsh/</B>
+
+       Norway
+              <B>ftp://ftp.uit.no/pub/unix/shells/zsh/</B>
+
+       Poland
+              <B>ftp://sunsite.icm.edu.pl/pub/unix/shells/zsh/</B>
+
+       Romania
+              <B>ftp://ftp.roedu.net/pub/mirrors/ftp.zsh.org/pub/zsh/</B>
+              <B>ftp://ftp.kappa.ro/pub/mirrors/ftp.zsh.org/pub/zsh/</B>
+
+       Slovenia
+              <B>ftp://ftp.siol.net/mirrors/zsh/</B>
+
+       Sweden
+              <B>ftp://ftp.lysator.liu.se/pub/unix/zsh/</B>
+
+       UK
+              <B>ftp://ftp.net.lut.ac.uk/zsh/</B>
+              <B>ftp://sunsite.org.uk/packages/zsh/</B>
+
+       USA
+              <B>ftp://uiarchive.uiuc.edu/pub/packages/shells/zsh/</B>
+              <B>ftp://ftp.rge.com/pub/shells/zsh/</B>
+              <B>ftp://foad.org/pub/zsh/</B>
+              <B>http://foad.org/zsh/</B>
+
+
+</PRE>
+<H2>MAILING LISTS</H2><PRE>
+       Zsh has 3 mailing lists:
+
+       <B>&lt;zsh-announce@sunsite.dk&gt;</B>
+              Announcements  about releases, major changes in the
+              shell and the  monthly  posting  of  the  Zsh  FAQ.
+              (moderated)
+
+       <B>&lt;zsh-users@sunsite.dk&gt;</B>
+              User discussions.
+
+       NESTED.  All submissions to <B>zsh-announce</B> are automatically
+       forwarded to <B>zsh-users</B>.  All submissions to <B>zsh-users</B>  are
+       automatically forwarded to <B>zsh-workers</B>.
+
+       If  you  have problems subscribing/unsubscribing to any of
+       the mailing lists, send mail to <B>&lt;listmaster@zsh.org&gt;</B>.  The
+       mailing   lists   are   maintained   by  Karsten  Thygesen
+       <B>&lt;karthy@kom.auc.dk&gt;</B>.
+
+       The mailing  lists  are  archived;  the  archives  can  be
+       accessed  via  the  administrative addresses listed above.
+       There is also a hypertext  archive,  maintained  by  Geoff
+       Wing  <B>&lt;gcw@zsh.org&gt;</B>, available at <B>http://www.zsh.org/mla/</B>.
+
+
+</PRE>
+<H2>THE ZSH FAQ</H2><PRE>
+       Zsh has a list of Frequently Asked Questions (FAQ),  main­
+       tained by Peter Stephenson <B>&lt;pws@zsh.org&gt;</B>.  It is regularly
+       posted  to   the   newsgroup   <B>comp.unix.shell</B>   and   the
+       <B>zsh-announce</B>  mailing  list.   The  latest  version can be
+       found   at   any   of   the   Zsh   FTP   sites,   or   at
+       <B>http://www.zsh.org/FAQ/</B>.     The   contact   address   for
+       FAQ-related matters is <B>&lt;faqmaster@zsh.org&gt;</B>.
+
+
+</PRE>
+<H2>THE ZSH WEB PAGE</H2><PRE>
+       Zsh   has   a   web   page    which    is    located    at
+       <B>http://www.zsh.org/</B>.  This is maintained by Karsten Thyge­
+       sen <B>&lt;karthy@zsh.org&gt;</B>, of  SunSITE  Denmark.   The  contact
+       address for web-related matters is <B>&lt;webmaster@zsh.org&gt;</B>.
+
+
+</PRE>
+<H2>THE ZSH USERGUIDE</H2><PRE>
+       A  userguide  is currently in preparation.  It is intended
+       to complement the manual, with explanations and  hints  on
+       issues  where the manual can be cabbalistic, hierographic,
+       or downright mystifying (for  example,  the  word  `hiero­
+       graphic' does not exist).  It can be viewed in its current
+       state at <B>http://zsh.sunsite.dk/Guide/</B>.   At  the  time  of
+       writing,  chapters  dealing  with  startup files and their
+       contents and the new completion  system  were  essentially
+       complete.
+
+
+</PRE>
+<H2>INVOCATION OPTIONS</H2><PRE>
+       The  following  flags  are  interpreted  by the shell when
+       invoked to determine where the shell  will  read  commands
+       from:
+
+       <B>-c</B>     Take  the  first  argument as a command to execute,
+              rather than reading commands from a script or stan­
+              dard  input.   If  any further arguments are given,
+              the first one is assigned to <B>$0</B>, rather than  being
+              used as a positional parameter.
+
+       <B>-i</B>     Force shell to be interactive.
+       acts like a single-letter option, but  takes  a  following
+       string as the option name.  For example,
+
+              <B>zsh</B> <B>-x</B> <B>-o</B> <B>shwordsplit</B> <B>scr</B>
+
+       runs the script <B>scr</B>, setting the <B>XTRACE</B> option by the cor­
+       responding letter `<B>-x</B>' and  the  <B>SH_WORD_SPLIT</B>  option  by
+       name.   Options  may  be  turned  <I>off</I>  by name by using <B>+o</B>
+       instead of <B>-o</B>.  <B>-o</B> can be stacked up with  preceding  sin­
+       gle-letter  options,  so  for example `<B>-xo</B> <B>shwordsplit</B>' or
+       `<B>-xoshwordsplit</B>' is equivalent to `<B>-x</B> <B>-o</B> <B>shwordsplit</B>'.
+
+       Options may also be specified by name in GNU  long  option
+       style, `<B>--</B><I>option-name</I>'.  When this is done, `<B>-</B>' characters
+       in the option name are permitted: they are translated into
+       `<B>_</B>',   and   thus   ignored.    So,   for   example,  `<B>zsh</B>
+       <B>--sh-word-split</B>' invokes zsh with the <B>SH_WORD_SPLIT</B> option
+       turned  on.   Like  other  option syntaxes, options can be
+       turned off by replacing the initial `<B>-</B>' with a  `<B>+</B>';  thus
+       `<B>+-sh-word-split</B>'  is  equivalent to `<B>--no-sh-word-split</B>'.
+       Unlike other option syntaxes, GNU-style long options  can­
+       not  be  stacked  with  any  other options, so for example
+       `<B>-x-shwordsplit</B>' is an error, rather  than  being  treated
+       like `<B>-x</B> <B>--shwordsplit</B>'.
+
+       The  special  GNU-style  option `<B>--version</B>' is handled; it
+       sends to standard output the shell's version  information,
+       then  exits  successfully.   `<B>--help</B>'  is also handled; it
+       sends to standard output a list of  options  that  can  be
+       used when invoking the shell, then exits successfully.
+
+       Option  processing  may  be  finished,  allowing following
+       arguments that start with `<B>-</B>' or `<B>+</B>' to be treated as nor­
+       mal  arguments, in two ways.  Firstly, a lone `<B>-</B>' (or `<B>+</B>')
+       as an argument by itself  ends  option  processing.   Sec­
+       ondly, a special option `<B>--</B>' (or `<B>+-</B>'), which may be spec­
+       ified on its own (which is the standard  POSIX  usage)  or
+       may be stacked with preceding options (so `<B>-x-</B>' is equiva­
+       lent to `<B>-x</B> <B>--</B>').  Options are not permitted to be stacked
+       after `<B>--</B>' (so `<B>-x-f</B>' is an error), but note the GNU-style
+       option form discussed above, where `<B>--shwordsplit</B>' is per­
+       mitted and does not end option processing.
+
+       Except when the <B>sh</B>/<B>ksh</B> emulation single-letter options are
+       in effect, the option `<B>-b</B>' (or `<B>+b</B>') ends option  process­
+       ing.  `<B>-b</B>' is like `<B>--</B>', except that further single-letter
+       options can be stacked after the `<B>-b</B>' and will take effect
+       as normal.
+
+
+
+
+</PRE>
+<H2>COMPATIBILITY</H2><PRE>
+       <B>PROMPT4</B>, <B>psvar</B>, <B>status</B>, <B>watch</B>.
+
+       The  usual  zsh startup/shutdown scripts are not executed.
+       Login shells source <B>/etc/profile</B> followed  by  <B>$HOME/.pro­</B>
+       <B>file</B>.   If  the <B>ENV</B> environment variable is set on invoca­
+       tion, <B>$ENV</B> is sourced  after  the  profile  scripts.   The
+       value  of <B>ENV</B> is subjected to parameter expansion, command
+       substitution, and arithmetic expansion before being inter­
+       preted  as  a  pathname.   Note that the <B>PRIVILEGED</B> option
+       also affects the execution of startup files.
+
+       The following options are set if the shell is  invoked  as
+       <B>sh</B>   or  <B>ksh</B>:  <B>NO_BAD_PATTERN</B>,  <B>NO_BANG_HIST</B>,  <B>NO_BG_NICE</B>,
+       <B>NO_EQUALS</B>,        <B>NO_FUNCTION_ARGZERO</B>,         <B>GLOB_SUBST</B>,
+       <B>NO_GLOBAL_EXPORT</B>,       <B>NO_HUP</B>,      <B>INTERACTIVE_COMMENTS</B>,
+       <B>KSH_ARRAYS</B>,     <B>NO_MULTIOS</B>,     <B>NO_NOMATCH</B>,     <B>NO_NOTIFY</B>,
+       <B>POSIX_BUILTINS</B>,     <B>NO_PROMPT_PERCENT</B>,     <B>RM_STAR_SILENT</B>,
+       <B>SH_FILE_EXPANSION</B>,       <B>SH_GLOB</B>,       <B>SH_OPTION_LETTERS</B>,
+       <B>SH_WORD_SPLIT</B>.      Additionally    the    <B>BSD_ECHO</B>    and
+       <B>IGNORE_BRACES</B> options are set if zsh  is  invoked  as  <B>sh</B>.
+       Also,  the  <B>KSH_OPTION_PRINT</B>,  <B>LOCAL_OPTIONS</B>, <B>PROMPT_BANG</B>,
+       <B>PROMPT_SUBST</B> and <B>SINGLE_LINE_ZLE</B> options are set if zsh is
+       invoked as <B>ksh</B>.
+
+
+</PRE>
+<H2>RESTRICTED SHELL</H2><PRE>
+       When the basename of the command used to invoke zsh starts
+       with the letter `<B>r</B>' or the `<B>-r</B>'  command  line  option  is
+       supplied  at  invocation,  the  shell  becomes restricted.
+       Emulation mode is determined after  stripping  the  letter
+       `<B>r</B>'  from the invocation name.  The following are disabled
+       in restricted mode:
+
+       ·      changing directories with the <B>cd</B> builtin
+
+       ·      changing or unsetting the <B>PATH</B>, <B>path</B>,  <B>MODULE_PATH</B>,
+              <B>module_path</B>,  <B>SHELL</B>, <B>HISTFILE</B>, <B>HISTSIZE</B>, <B>GID</B>, <B>EGID</B>,
+              <B>UID</B>,     <B>EUID</B>,      <B>USERNAME</B>,      <B>LD_LIBRARY_PATH</B>,
+              <B>LD_AOUT_LIBRARY_PATH</B>,         <B>LD_PRELOAD</B>        and
+              <B>LD_AOUT_PRELOAD</B> parameters
+
+       ·      specifying command names containing <B>/</B>
+
+       ·      specifying command pathnames using <B>hash</B>
+
+       ·      redirecting output to files
+
+       ·      using the <B>exec</B> builtin command to replace the shell
+              with another command
+
+       ·      using <B>jobs</B> <B>-Z</B> to overwrite the shell process' argu­
+              ment and environment space
+
+       restrictions described above even if the shell  still  has
+       not processed all startup files.
+
+
+</PRE>
+<H2>STARTUP/SHUTDOWN FILES</H2><PRE>
+       Commands  are  first read from <B>/etc/zshenv</B>; this cannot be
+       overridden.  Subsequent behaviour is modified by  the  <B>RCS</B>
+       and  <B>GLOBAL_RCS</B>  options;  the  former affects all startup
+       files, while the second only affects  those  in  the  <B>/etc</B>
+       directory.   If  one of the options is unset at any point,
+       any subsequent startup file(s) of the  corresponding  type
+       will  not  be  read.   It  is  also possible for a file in
+       <B>$ZDOTDIR</B> to re-enable <B>GLOBAL_RCS</B>. Both <B>RCS</B> and  <B>GLOBAL_RCS</B>
+       are set by default.
+
+       Commands  are  then  read  from  <B>$ZDOTDIR/.zshenv</B>.  If the
+       shell is a login shell, commands are read from  <B>/etc/zpro­</B>
+       <B>file</B>  and  then <B>$ZDOTDIR/.zprofile</B>.  Then, if the shell is
+       interactive, commands are read from  <B>/etc/zshrc</B>  and  then
+       <B>$ZDOTDIR/.zshrc</B>.   Finally, if the shell is a login shell,
+       <B>/etc/zlogin</B> and <B>$ZDOTDIR/.zlogin</B> are read.
+
+       When a login shell exits, the files <B>$ZDOTDIR/.zlogout</B>  and
+       then  <B>/etc/zlogout</B>  are read.  This happens with either an
+       explicit exit via the  <B>exit</B>  or  <B>logout</B>  commands,  or  an
+       implicit  exit  by  reading end-of-file from the terminal.
+       However, if the shell terminates due to  <B>exec</B>'ing  another
+       process,  the  logout  files are not read.  These are also
+       affected by the <B>RCS</B> and  <B>GLOBAL_RCS</B>  options.   Note  also
+       that  the  <B>RCS</B> option affects the saving of history files,
+       i.e. if <B>RCS</B> is unset when the shell exits, no history file
+       will be saved.
+
+       If  <B>ZDOTDIR</B>  is  unset, <B>HOME</B> is used instead.  Those files
+       listed above as being in <B>/etc</B> may be in another directory,
+       depending on the installation.
+
+       As  <B>/etc/zshenv</B>  is  run  for  all instances of zsh, it is
+       important that it be kept as small as possible.   In  par­
+       ticular,  it is a good idea to put code that does not need
+       to be run for every single shell behind a test of the form
+       `<B>if</B>  <B>[[</B>  <B>-o</B>  <B>rcs</B> <B>]];</B> <B>then</B> <B>...</B>' so that it will not be exe­
+       cuted when zsh is invoked with the `<B>-f</B>' option.
+
+       Any of these files may be pre-compiled with  the  <B>zcompile</B>
+       builtin  command (see <B>zshbuiltins(1)</B>).  If a compiled file
+       exists (named for the original file plus the  <B>.zwc</B>  exten­
+       sion) and it is newer than the original file, the compiled
+       file will be used instead.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>$ZDOTDIR/.zshenv</B>
+       <B>$ZDOTDIR/.zprofile</B>
+       <B>zshexpn(1)</B>, <B>zshmisc(1)</B>, <B>zshmodules(1)</B>, <B>zshoptions(1)</B>, <I>zsh­</I>
+       <B>param(1)</B>, <B>zshzle(1)</B>
+
+       <B>IEEE</B>  <B>Standard</B> <B>for</B> <B>information</B> <B>Technology</B> <B>-</B> <B>Portable</B> <B>Oper­</B>
+       <B>ating</B> <B>System</B> <B>Interface</B> <B>(POSIX)</B> <B>-</B> <B>Part</B> <B>2:</B> <B>Shell</B> <B>and</B>  <B>Utili­</B>
+       <B>ties</B>, IEEE Inc, 1993, ISBN 1-55937-255-9.
+
+
+
+zsh 4.0.6                August 14, 2002                   <B>ZSH(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

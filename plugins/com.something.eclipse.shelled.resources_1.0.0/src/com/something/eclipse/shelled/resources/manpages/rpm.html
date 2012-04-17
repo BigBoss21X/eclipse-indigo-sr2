@@ -1,0 +1,616 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>rpm</B> [options]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>rpm</B>  is  a  powerful <I>package</I> <I>manager</I>, which can be used to
+       build, install, query, verify, update, and uninstall indi­
+       vidual  software  packages.   A  <I>package</I>  consists  of  an
+       archive of files, and package information, including name,
+       version, and description.
+
+       One  of  the  following basic modes must be selected: <I>Ini­</I>
+       <I>tialize</I> <I>Database</I>, <I>Rebuild</I> <I>Database</I>, <I>Build</I> <I>Package</I>,  <I>Recom­</I>
+       <I>pile</I>  <I>Package</I>,  <I>Build</I>  <I>Package</I>  <I>from</I>  <I>Tarball</I>, <I>Query</I>, <I>Show</I>
+       <I>Querytags</I>, <I>Install</I>, <I>Freshen</I>, <I>Uninstall</I>, <I>Verify</I>,  <I>Signature</I>
+       <I>Check</I>,  <I>Resign</I>,  <I>Add</I>  <I>Signature</I>, <I>set</I> <I>owners</I> <I>and</I> <I>groups</I> and
+       <I>Show</I> <I>Configuration</I>.
+
+
+
+       Database maintenance:
+           <B>rpm</B> <B>-i</B> <B>[--initdb]</B>
+           <B>rpm</B> <B>-i</B> <B>[--rebuilddb]</B>
+
+       Building:
+           <B>rpm</B> <B>[-b|t]</B> <B>[package_spec]+</B>
+           <B>rpm</B> <B>[--rebuild]</B> <B>[sourcerpm]+</B>
+           <B>rpm</B> <B>[--tarbuild]</B> <B>[tarredsource]+</B>
+
+       Querying:
+           <B>rpm</B> <B>[--query]</B> <B>[queryoptions]</B>
+           <B>rpm</B> <B>[--querytags]</B>
+
+       Maintaining installed packages:
+           <B>rpm</B> <B>[--install]</B> <B>[installoptions]</B> <B>[package_file]+</B>
+           <B>rpm</B> <B>[--freshen|-F]</B> <B>[installoptions]</B> <B>[package_file]+</B>
+           <B>rpm</B> <B>[--uninstall|-e]</B> <B>[uninstalloptions]</B> <B>[package]+</B>
+           <B>rpm</B> <B>[--verify|-V]</B> <B>[verifyoptions]</B> <B>[package]+</B>
+
+       Signatures:
+           <B>rpm</B> <B>[--verify|-V]</B> <B>[verifyoptions]</B> <B>[package]+</B>
+           <B>rpm</B> <B>[--resign]</B> <B>[package_file]+</B>
+           <B>rpm</B> <B>[--addsign]</B> <B>[package_file]+</B>
+
+       Miscellaneous:
+           <B>rpm</B> <B>[--showrc]</B>
+           <B>rpm</B> <B>[--setperms]</B> <B>[package]+</B>
+           <B>rpm</B> <B>[--setgids]</B> <B>[package]+</B>
+
+
+
+
+</PRE>
+<H2>GENERAL OPTIONS</H2><PRE>
+       These options can be used in all the different modes.
+              Each of the files in the colon separated <I>&lt;filelist&gt;</I>
+              is  read  sequentially  by  <B>rpm</B>  for  configuration
+              information.     The    default    <I>&lt;filelist&gt;</I>    is
+              <B>/usr/lib/rpm/rpmrc:/etc/rpmrc:~/.rpmrc</B>.   Only  the
+              first file in the list must exist, and tildes  will
+              be expanded to the value of <B>$HOME</B>.
+
+       <B>--root</B> <I>&lt;dir&gt;</I>
+              Use  the system rooted at <I>&lt;dir&gt;</I> for all operations.
+              Note that this means the database will be  read  or
+              modified  under  <I>&lt;dir&gt;</I>  and any <I>pre</I> or <I>post</I> scripts
+              are run after a chroot() to <I>&lt;dir&gt;</I>.
+
+       <B>--dbpath</B> <I>&lt;path&gt;</I>
+              Use RPM database in <I>&lt;path&gt;</I>.
+
+       <B>--justdb</B>
+              Update only the database, not the filesystem.
+
+       <B>--ftpproxy</B> <I>&lt;host&gt;</I><B>,</B> <B>--httpproxy</B> <I>&lt;host&gt;</I>
+              Use <I>&lt;host&gt;</I> as an  FTP  or  HTTP  proxy  host.   See
+              <B>FTP/HTTP</B> <B>OPTIONS</B>.
+
+       <B>--ftpport</B> <I>&lt;port&gt;</I><B>,</B> <B>--httpport</B> <I>&lt;port&gt;</I>
+              Use  <I>&lt;port&gt;</I>  as  the  FTP or HTTP port on the proxy
+              host.  See <B>FTP/HTTP</B> <B>OPTIONS</B>.
+
+       <B>--pipe</B> <I>&lt;cmd&gt;</I>
+              Pipes the output of <B>rpm</B> to the command <I>&lt;cmd&gt;</I>.
+
+
+
+</PRE>
+<H2>INSTALL AND UPGRADE OPTIONS</H2><PRE>
+       The general form of an rpm install command is
+
+            <B>rpm</B> <B>-i</B> <B>[install-options]</B> <I>&lt;package</I><B>_</B><I>file&gt;+</I>
+
+       This installs a new package.  The general form of  an  rpm
+       upgrade command is
+
+            <B>rpm</B> <B>-U</B> <B>[install-options]</B> <I>&lt;package</I><B>_</B><I>file&gt;+</I>
+
+       This  upgrades or installs the package currently installed
+       to the version in the  new  RPM.   This  is  the  same  as
+       install,  except  all  other  version  of  the package are
+       removed from the system.
+
+            <B>rpm</B> <B>[-F|--freshen]</B> <B>[install-options]</B> <I>&lt;package</I><B>_</B><I>file&gt;+</I>
+
+       This will upgrade packages, but only if an earlier version
+       currently exists.
+
+
+       <B>--oldpackage</B>
+              Allow an upgrade to replace a newer package with an
+              older one.
+
+       <B>--percent</B>
+              Print  percentages  as  files are unpacked from the
+              package archive. This is intended to make RPM  easy
+              to run from other tools.
+
+       <B>--replacefiles</B>
+              Install  the  packages  even  if they replace files
+              from other, already installed, packages.
+
+       <B>--replacepkgs</B>
+              Install the packages  even  if  some  of  them  are
+              already installed on this system.
+
+       <B>--allfiles</B>
+              Installs or upgrades all the missingok files in the
+              package, regardless if they exist.
+
+       <B>--nodeps</B>
+              Don't do a dependency check  before  installing  or
+              upgrading a package.
+
+       <B>--noscripts</B>
+              Don't   execute   the   preinstall  or  postinstall
+              scripts.
+
+       <B>--notriggers</B>
+              Don't execute scripts which are  triggered  by  the
+              installation of this package.
+
+       <B>--ignoresize</B>
+              Don't  check mount file systems for sufficient disk
+              space before installing this package.
+
+       <B>--excludepath</B> <I>&lt;path&gt;</I>
+              Don't install files whose name begins with  <I>&lt;path&gt;</I>.
+
+       <B>--excludedocs</B>
+              Don't  install  any files which are marked as docu­
+              mentation (which includes  man  pages  and  texinfo
+              documents).
+
+       <B>--includedocs</B>
+              Install  documentation  files.  This is the default
+              behavior.
+
+       <B>--test</B> Do not install the package, simply  check  for  and
+              report potential conflicts.
+
+       <B>--relocate</B> <I>&lt;oldpath&gt;</I><B>=</B><I>&lt;newpath&gt;</I>
+              For relocatable packages, translates the files that
+              would be put in <I>&lt;oldpath&gt;</I> to <I>&lt;newpath&gt;</I>.
+
+       <B>--badreloc</B>
+              To  be  used  in  conjunction with --relocate, this
+              forces the relocation even  if  the  package  isn't
+              relocatable.
+
+       <B>--noorder</B>
+              Don't reorder the packages for an install. The list
+              of packages would normally be reordered to  satisfy
+              dependancies.
+
+
+
+
+</PRE>
+<H2>QUERY OPTIONS</H2><PRE>
+       The general form of an rpm query command is
+
+            <B>rpm</B> <B>-q</B> <B>[query-options]</B>
+
+       You may specify the format that package information should
+       be printed in. To do this, you use the <B>[--queryformat|-qf]</B>
+       option, followed by the format string.
+
+       Query   formats  are  modifed  versions  of  the  standard
+       <B>printf(3)</B> formatting. The format  is  made  up  of  static
+       strings  (which  may  include standard C character escapes
+       for newlines, tabs,  and  other  special  characters)  and
+       <B>printf(3)</B>  type  formatters. As <B>rpm</B> already knows the type
+       to print, the type specifier must be omitted however,  and
+       replaced  by  the  name  of  the header tag to be printed,
+       enclosed by <B>{}</B> characters. The <B>RPMTAG_</B> portion of the  tag
+       name may be omitted.
+
+       Alternate output formats may be requested by following the
+       tag with <B>:</B><I>typetag</I>. Currently, the following types are sup­
+       ported:   <B>octal</B>,   <B>date</B>,   <B>shescape</B>,  <B>perms</B>,  <B>fflags</B>,  and
+       <B>depflags</B>.
+
+       For example, to print  only  the  names  of  the  packages
+       queried,  you  could  use <B>%{NAME}</B> as the format string. To
+       print the packages name and  distribution  information  in
+       two columns, you could use <B>%-30{NAME}%{DISTRIBUTION}</B>.
+
+       <B>rpm</B>  will  print  a list of all of the tags it knows about
+       when it is invoked with the <B>--querytags</B> argument.
+
+       There are two subsets of  options  for  querying:  package
+       selection, and information selection.
+
+       Package selection options:
+
+       <B>-f</B> <I>&lt;file&gt;</I><B>,</B> <B>--file</B> <I>&lt;file&gt;</I>
+              Query package owning <I>&lt;file&gt;</I>.
+
+       <B>-g</B> <I>&lt;group&gt;</I><B>,</B> <B>--group</B> <I>&lt;group&gt;</I>
+              Query packages with the group of <I>&lt;group&gt;</I>.
+
+       <B>-p</B> <I>&lt;package</I><B>_</B><I>file&gt;</I>
+              Query an (uninstalled) package <I>&lt;package</I><B>_</B><I>file&gt;</I>.  The
+              <I>&lt;package</I><B>_</B><I>file&gt;</I> may be specified as an ftp  or  http
+              style URL, in which case the package header will be
+              downloaded and queried. See  <B>FTP/HTTP</B>  <B>OPTIONS</B>  for
+              information  on  RPM's built-in ftp and http client
+              support.
+
+       <B>--specfile</B> <I>&lt;specfile&gt;</I>
+              Parse and query <I>&lt;specfile&gt;</I> as if it were a package.
+              Although  not all the information (e.g. file lists)
+              is available, this type of query permits rpm to  be
+              used to extract information from spec files without
+              having to write a specfile parser.
+
+       <B>--querybynumber</B> <I>&lt;num&gt;</I>
+              Query the <I>&lt;num&gt;</I>th database entry directly; this  is
+              helpful for debugging purposes.
+
+       <B>--triggeredby</B> <I>&lt;pkg&gt;</I>
+              Query  packages  that  are  triggered  by  packages
+              <I>&lt;pkg&gt;</I>.
+
+       <B>-P</B>, <B>--patches</B>
+              Limit the selected packages  to  patch-rpms.  As  a
+              side  effect, limit the file list to patched files.
+
+
+       Information selection options:
+
+       <B>-i</B>     Display package information, including  name,  ver­
+              sion,  and description. This uses the <B>--queryformat</B>
+              if one was specified.
+
+       <B>-R</B>, <B>--requires</B>
+              List packages on which this package depends.
+
+       <B>--provides</B>
+              List capabilities this package provides.
+
+       <B>--changelog</B>
+              Display change information for the package.
+
+       <B>-l</B>, <B>--list</B>
+              List files in package. If the  <B>-P</B>  option  is  also
+              List  the  package  specific shell scripts that are
+              used as part of the installation and uninstallation
+              processes, if there are any.
+
+       <B>--triggers</B>, <B>--triggerscripts</B>
+              Display the trigger scripts, if any, which are con­
+              tained in the package.
+
+       <B>--dump</B> Dump file information as follows: path  size  mtime
+              md5sum  mode  owner  group isconfig isdoc rdev sym­
+              link. This must be used with at least  one  of  <B>-l</B>,
+              <B>-c</B>, <B>-d</B>.
+
+       <B>--last</B> Orders  the  package  listing  by install time such
+              that the latest packages are at the top.
+
+       <B>--filesbypkg</B>
+              This lists all the files in each package.
+
+       <B>--triggerscripts</B>
+              Shows all the  trigger  scripts  for  the  selected
+              packages.
+
+       <B>--basedon</B>
+              Show  what  packages  a  patch-rpm  is  based on. A
+              patch-rpm can only be installed if one of the pack­
+              ages it is based on is installed.
+
+
+
+</PRE>
+<H2>VERIFY OPTIONS</H2><PRE>
+       The general form of an rpm verify command is
+
+            <B>rpm</B> <B>-V|-y|--verify</B> <B>[verify-options]</B>
+
+       Verifying   a   package  compares  information  about  the
+       installed files in the package with information about  the
+       files  taken  from  the original package and stored in the
+       rpm database.  Among other things, verifying compares  the
+       size,  MD5 sum, permissions, type, owner and group of each
+       file.  Any discrepencies are displayed.  The package spec­
+       ification options are the same as for package querying.
+
+       Files  that were not installed from the package, for exam­
+       ple documentation files excluded on installation using the
+       "<B>--excludedocs</B>" option, will be silently ignored.
+
+       Options that can be used in verify mode:
+
+
+       <B>--nofiles</B>
+              Ignores missing files when verifying.
+
+              of the file to the value of that attribute recorded
+              in the RPM database.  A single "<B>.</B>"  (period)  means
+              the  test  passed.  The following characters denote
+              failure of certain tests:
+
+
+       <B>5</B>      MD5 sum
+
+       <B>S</B>      File size
+
+       <B>L</B>      Symlink
+
+       <B>T</B>      Mtime
+
+       <B>D</B>      Device
+
+       <B>U</B>      User
+
+       <B>G</B>      Group
+
+       <B>M</B>      Mode (includes permissions and file type)
+
+
+
+</PRE>
+<H2>SIGNATURE CHECKING</H2><PRE>
+       The general form of an rpm signature check command is
+
+            <B>rpm</B> <B>--checksig</B> <I>&lt;package</I><B>_</B><I>file&gt;+</I>
+
+       This checks the PGP signature of package <I>&lt;package</I><B>_</B><I>file&gt;</I> to
+       ensure its integrity and origin.  PGP configuration infor­
+       mation is read from configuration files.  See the  section
+       on PGP SIGNATURES for details.
+
+
+
+</PRE>
+<H2>UNINSTALL OPTIONS</H2><PRE>
+       The general form of an rpm uninstall command is
+
+                <B>rpm</B> <B>-e</B> <I>&lt;package</I><B>_</B><I>name&gt;+</I>
+
+
+       <B>--allmatches</B>
+              Remove  all  versions  of  the  package which match
+              <I>&lt;package</I><B>_</B><I>name&gt;</I>. Normally  an  error  is  issued  if
+              <I>&lt;package</I><B>_</B><I>name&gt;</I> matches multiple packages.
+
+       <B>--noscripts</B>
+              Don't  execute  the  preuninstall  or postuninstall
+              scripts.
+
+       <B>--notriggers</B>
+              Don't execute scripts which are  triggered  by  the
+              removal of this package.
+
+       The argument used is <B>-b</B> if a spec file is  being  used  to
+       build  the  package  and <B>-t</B> if <B>RPM</B> should look inside of a
+       gzipped (or compressed) tar file for the spec file to use.
+       After  the first argument, the next argument (<I>O</I>) specifies
+       the stages of building and packaging to be done and is one
+       of:
+
+
+       <B>-bp</B>    Executes  the  "%prep"  stage  from  the spec file.
+              Normally this involves unpacking  the  sources  and
+              applying any patches.
+
+       <B>-bl</B>    Do  a  "list check".  The "%files" section from the
+              spec file is macro expanded, and checks are made to
+              verify that each file exists.
+
+       <B>-bc</B>    Do  the  "%build"  stage  from the spec file (after
+              doing the prep stage).  This generally involves the
+              equivalent of a "make".
+
+       <B>-bi</B>    Do  the  "%install" stage from the spec file (after
+              doing the prep and build stages).   This  generally
+              involves the equivalent of a "make install".
+
+       <B>-bb</B>    Build  a  binary  package  (after  doing  the prep,
+              build, and install stages).
+
+       <B>-bs</B>    Build just the  source  package  (after  doing  the
+              prep, build, and install stages).
+
+       <B>-ba</B>    Build  binary  and source packages (after doing the
+              prep, build, and install stages).
+
+       The following options may also be used:
+
+       <B>--short-circuit</B>
+              Skip straight to  specified  stage  (ie,  skip  all
+              stages  leading  up  to the specified stage).  Only
+              valid with <B>-bc</B> and <B>-bi</B>.
+
+       <B>--timecheck</B>
+              Set the "timecheck" age (0 to disable).  This value
+              can  also  be  configured  by  defining  the  macro
+              "_timecheck". The  timecheck  value  expresses,  in
+              seconds,  the maximum age of a file being packaged.
+              Warnings will be printed for all files  beyond  the
+              timecheck age.
+
+       <B>--clean</B>
+              Remove  the build tree after the packages are made.
+
+              When building the package, override  the  BuildRoot
+              tag with directory <I>&lt;dir&gt;</I>.
+
+       <B>--target</B> <I>&lt;platform&gt;</I>
+              When  building the package, interpret <I>&lt;platform&gt;</I> as
+              <B>arch-vendor-os</B> and set the  macros  <B>_target</B>,  <B>_tar­</B>
+              <B>get_arch</B> and <B>_target_os</B> accordingly.
+
+       <B>--buildarch</B> <I>&lt;arch&gt;</I>
+              When  building the package, set the architecture to
+              <I>&lt;arch&gt;</I>. This option has been obsoleted by  <B>--target</B>
+              <I>in</I> <I>RPM</I> <I>3.0.</I>
+
+       <B>--buildos</B> <I>&lt;os&gt;</I>
+              When  building the package, set the architecture to
+              <I>&lt;os&gt;</I>. This option has been obsoleted by <B>--target</B> <I>in</I>
+              <I>RPM</I> <I>3.0.</I>
+
+
+
+
+</PRE>
+<H2>REBUILD AND RECOMPILE OPTIONS</H2><PRE>
+       There are two other ways to invoke building with rpm:
+
+       <B>rpm</B> <B>--recompile</B> <I>&lt;source</I><B>_</B><I>package</I><B>_</B><I>file&gt;+</I>
+
+       <B>rpm</B> <B>--rebuild</B> <I>&lt;source</I><B>_</B><I>package</I><B>_</B><I>file&gt;+</I>
+
+       When invoked this way, <B>rpm</B> installs the named source pack­
+       age, and does a prep, compile and install.   In  addition,
+       <B>--rebuild</B>  builds a new binary package. When the build has
+       completed, the build directory is removed (as in  <B>--clean</B>)
+       and  the  the  sources  and  spec file for the package are
+       removed.
+
+
+
+</PRE>
+<H2>SIGNING AN EXISTING RPM</H2><PRE>
+       <B>rpm</B> <B>--resign</B> <I>&lt;binary</I><B>_</B><I>package</I><B>_</B><I>file&gt;+</I>
+
+       This option generates and inserts new signatures  for  the
+       listed packages.  Any existing signatures are removed.
+
+       <B>rpm</B> <B>--addsign</B> <I>&lt;binary</I><B>_</B><I>package</I><B>_</B><I>file&gt;+</I>
+
+       This  option  generates and appends new signatures for the
+       listed packages to those that already exist.
+
+
+
+</PRE>
+<H2>PGP SIGNATURES</H2><PRE>
+       In order to use the signature feature RPM must be  config­
+       ured  to run PGP, and it must be able to find a public key
+       ring with RPM public keys in it.  By default, RPM uses the
+       PGP  defaults to find the keyrings (honoring PGPPATH).  If
+       <B>_signature</B>
+              The signature type.  Right now  only  pgp  is  sup­
+              ported.
+
+       <B>_pgp_name</B>
+              The name of the "user" whose key you wish to use to
+              sign your packages.
+
+
+       When building packages you then add --sign to the  command
+       line.  You will be prompted for your pass phrase, and your
+       package will be built and signed.
+
+       For example, to be able to use PGP to sign packages as the
+       user  <B>"John</B> <B>Doe</B> <B>&lt;jdoe@foo.com&gt;"</B> from the key rings located
+       in <B>/etc/rpm/.pgp</B> using  the  executable  <B>/usr/bin/pgp</B>  you
+       would include
+
+       <B>%_signature</B> <B>pgp</B>
+
+       <B>%_pgp_path</B> <B>/etc/rpm/.pgp</B>
+
+       <B>%_pgp_name</B> <B>John</B> <B>Doe</B> <B>&lt;jdoe@foo.com&gt;</B>
+
+       <B>%_pgpbin</B> <B>/usr/bin/pgp</B>
+
+       in  a  macro  configuration  file. Use <B>/etc/rpm/macros</B> for
+       per-system configuration  and  <B>~/.rpmmacros</B>  for  per-user
+       configuration.
+
+
+
+</PRE>
+<H2>REBUILD DATABASE OPTIONS</H2><PRE>
+       The general form of an rpm rebuild database command is
+
+            <B>rpm</B> <B>--rebuilddb</B>
+
+
+       To rebuild a new database, do:
+
+            <B>rpm</B> <B>--initdb</B>
+
+
+       The  only options for these modes are <B>--dbpath</B> and <B>--root</B>.
+
+
+
+</PRE>
+<H2>SHOWRC</H2><PRE>
+       Running
+
+
+            <B>rpm</B> <B>--showrc</B>
+
+
+
+       If the <B>:password</B> portion is omitted, the password will  be
+       prompted  for  (once  per user/hostname pair). If both the
+       user and password are omitted, anonymous ftp is  used.  In
+       all cases passive (PASV) ftp transfers are used.
+
+       RPM allows the following options to be used with ftp URLs:
+
+
+       <B>--ftpproxy</B> <I>&lt;hostname&gt;</I>
+              The host <I>&lt;hostname&gt;</I> will be used as a proxy  server
+              for  all  ftp  transfers, which allows users to ftp
+              through firewall machines which use proxy  systems.
+              This  option  may  also be specified by configuring
+              the macro <B>_ftpproxy</B>.
+
+
+       <B>--ftpport</B> <I>&lt;port&gt;</I>
+              The TCP <I>&lt;port&gt;</I>  number to use for the  ftp  connec­
+              tion on the proxy ftp server instead of the default
+              port.  This option may also be specified by config­
+              uring the macro <B>_ftpport</B>.
+
+
+       RPM  allows  the  following  options  to be used with http
+       URLs:
+
+
+       <B>--httpproxy</B> <I>&lt;hostname&gt;</I>
+              The host <I>&lt;hostname&gt;</I> will be used as a proxy  server
+              for  all  http  transfers.  This option may also be
+              specified by configuring the macro <B>_httpproxy</B>.
+
+
+       <B>--httpport</B> <I>&lt;port&gt;</I>
+              The TCP <I>&lt;port&gt;</I>  number to use for the http  connec­
+              tion  on  the  proxy  http  server  instead  of the
+              default port.  This option may also be specified by
+              configuring the macro <B>_httpport</B>.
+
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /usr/lib/rpm/rpmrc
+       /etc/rpmrc
+       ~/.rpmrc
+       /usr/lib/rpm/macros
+       /etc/rpm/macros
+       ~/.rpmmacros
+       /var/lib/rpm/conflictsindex.rpm
+       /var/lib/rpm/fileindex.rpm
+       /var/lib/rpm/groupindex.rpm
+
+
+
+Red Hat Software         22 December 1998                  <B>rpm(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

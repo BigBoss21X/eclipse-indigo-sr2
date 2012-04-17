@@ -1,0 +1,131 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>devdump</B> <I>isoimage</I>
+
+       <B>isodump</B> <I>isoimage</I>
+
+       <B>isoinfo</B> [ <B>-d</B> ] [ <B>-h</B> ] [ <B>-R</B> ] [ <B>-J</B> ] [ <B>-j</B> <I>charset</I> ] [ <B>-f</B>  ]
+       [  <B>-l</B> ] [ <B>-p</B> ] [ <B>-T</B> <I>sector</I> ] [ <B>-N</B> <I>sector</I> ] [ <B>-i</B> <I>isoimage</I> ]
+       [ <B>-x</B> <I>path</I> ]
+
+       <B>isovfy</B> <I>isoimage</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>devdump</B> is a crude utility to  interactively  display  the
+       contents  of  device  or  filesystem  images.  The initial
+       screen is a display of the first 256 bytes  of  the  first
+       2048  byte sector.  The commands are the same as with <B>iso­</B>
+       <B>dump</B>.
+
+       <B>isodump</B> is a crude utility to  interactively  display  the
+       contents  of  iso9660  images in order to verify directory
+       integrity.  The initial screen is a display of  the  first
+       part  of  the root directory, and the prompt shows you the
+       extent number and offset in the extent.
+
+              You can use the 'a' and 'b' commands to move  back­
+              wards  and  forwards within the image. The 'g' com­
+              mand allows you to goto an  arbitrary  extent,  and
+              the  'f'  command  specifies  a search string to be
+              used. The '+' command searches forward for the next
+              instance  of the search string, and the 'q' command
+              exits <B>devdump</B> or <B>isodump</B>.
+
+       <B>isoinfo</B> is a utility to perform directory like listings of
+       iso9660 images.
+
+       <B>isovfy</B>  is a utility to verify the integrity of an iso9660
+       image. Most of the tests in <B>isovfy</B> were added  after  bugs
+       were  discovered  in  early versions of <B>mkisofs.</B>  It isn't
+       all that clear how useful this is anymore, but it  doesn't
+       hurt to have this around.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       Only  the  <B>isoinfo</B>  program  has any command line options.
+       These are:
+
+       <B>-h</B>     print a summary of all options.
+
+       <B>-d</B>     Print information from the primary volume  descrip­
+              tor  (PVD)  of  the  iso9660  image.  This includes
+              information about Rock Ridge and Joliet  extensions
+
+       <B>-N</B> <B>sector</B>
+              Quick hack to  help  examine  single  session  disc
+              files  that  are  to  be written to a multi-session
+              disc. The sector number  specified  is  the  sector
+              number at which the iso9660 image should be written
+              when send to the cd-writer. Not used for the  first
+              session on the disc.
+
+       <B>-p</B>     Print path table information.
+
+       <B>-R</B>     Extract  information from Rock Ridge extensions (if
+              present) for permissions,  file  names  and  owner­
+              ships.
+
+       <B>-J</B>     Extract information from Joliet extensions (if pre­
+              sent) for file names.
+
+       <B>-j</B> <B>charset</B>
+              Convert Joliet file names (if present) to the  sup­
+              plied charset. See <B>mkisofs(8)</B> for details.
+
+       <B>-T</B> <B>sector</B>
+              Quick  hack  to  help  examine multi-session images
+              that have already been burned  to  a  multi-session
+              disc.  The  sector  number  specified is the sector
+              number for the start of the session we wish to dis­
+              play.
+
+       <B>-x</B> <B>pathname</B>
+              Extract specified file to stdout.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Eric       Youngdale       &lt;ericy@gnu.ai.mit.edu&gt;       or
+       &lt;eric@andante.jic.com&gt; is to blame for these shoddy hacks.
+       Patches  to  improve  general  usability  would  be gladly
+       accepted.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       The user interface really sucks.
+
+
+</PRE>
+<H2>FUTURE IMPROVEMENTS</H2><PRE>
+       These utilities are really quick  hacks,  which  are  very
+       useful  for debugging problems in mkisofs or in an iso9660
+       filesystem. In the long run, it would be nice  to  have  a
+       daemon that would NFS export a iso9660 image.
+
+       The isoinfo program is probably the program that is of the
+       most use to the general user.
+
+
+</PRE>
+<H2>AVAILABILITY</H2><PRE>
+       These utilities come with the  mkisofs  package,  and  the
+       primary      ftp     site     is     tsx-11.mit.edu     in
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

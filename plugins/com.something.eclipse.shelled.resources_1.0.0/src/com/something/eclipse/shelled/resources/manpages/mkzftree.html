@@ -1,0 +1,109 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>mkzftree</B> [<I>OPTIONS</I>]... <I>INPUT</I> <I>OUTPUT</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Takes  an input file tree (<I>INPUT</I>) and create a correspond­
+       ing compressed file tree (<I>OUTPUT</I>) that can be used with an
+       appropriately  patched <B>mkisofs(8)</B> to create a transparent-
+       compression iso9660/RockRidge filesystem  using  the  "ZF"
+       compression records.
+
+       <B>-f</B>, <B>--force</B>
+              Always  compress all files, even if they get larger
+              when compressed.
+
+       <B>-z</B> <I>level</I>, <B>--level</B> <I>level</I>
+              Select compression level (1-9, default is 9).
+
+       <B>-u</B>, <B>--uncompress</B>
+              Uncompress an already compressed tree.  This can be
+              used  to  read  a compressed filesystem on a system
+              which cannot read them natively.
+
+       <B>-p</B> <I>parallelism</I>, <B>--parallelism</B> <I>parallelism</I>
+              Compress in parallel.  The <I>parallelism</I> value  indi­
+              cates  how  many compression threads are allowed to
+              run.
+
+       <B>-x</B>, <B>--one-filesystem</B>
+              Do not  cross  filesystem  boundaries,  but  create
+              directory stubs at mount points.
+
+       <B>-X</B>, <B>--strict-one-filesystem</B>
+              Do not cross filesystem boundaries, and do not cre­
+              ate directory stubs at mount points.
+
+       <B>-l</B>, <B>--local</B>
+              Do not recurse into subdirectories, but create  the
+              directories themselves.
+
+       <B>-L</B>, <B>--strict-local</B>
+              Do not recurse into subdirectories, and do not cre­
+              ate directories.
+
+       <B>-F</B>, <B>--file</B>
+              Indicates that  <I>INPUT</I>  may  not  necessarily  be  a
+              directory;  this allows operation on a single file.
+              Note especially that if <I>-F</I> is specified, and  <I>INPUT</I>
+              is  a  symlink,  the  symlink itself will be copied
+              rather than whatever it happens to point to.
+
+       <B>-s</B>, <B>--sloppy</B>
+              Treat file modes, times and ownership data as  less
+              Display a brief help message.
+
+       <B>-w</B>, <B>--version</B>
+              Display the release version.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Long  options (beginning with <I>--</I>) may not work on all sys­
+       tems.  See the message printed out by <I>mkzftree</I> <I>-h</I>  to  see
+       if this applies to your system.
+
+       Inode  change  times  (ctimes)  are not copied.  This is a
+       system limitation and applies to all file copy programs.
+
+       If  using  the  parallel  option  (<I>-z</I>)  the  access  times
+       (atimes)  on  directories may or may not be copied.  If it
+       is important that the atimes  on  directories  are  copied
+       exactly, avoid using <I>-z</I>.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by H. Peter Anvin &lt;hpa@zytor.com&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2001 H. Peter Anvin.
+       This  is  free software; see the source for copying condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+       or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>mkisofs(8)</B>
+
+
+
+zisofs-tools               30 July 2001               <B>MKZFTREE(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

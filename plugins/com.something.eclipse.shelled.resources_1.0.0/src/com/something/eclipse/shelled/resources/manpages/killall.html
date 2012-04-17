@@ -1,0 +1,114 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>killall</B> [<B>-e</B>,<B>--exact</B>] [<B>-g</B>,<B>--process-group</B>] [<B>-i</B>,<B>--interac­</B>
+       <B>tive</B>] [<B>-q</B>,<B>--quiet</B>] [<B>-v</B>,<B>--verbose</B>] [<B>-w</B>,<B>--wait</B>] [<B>-V,</B>--ver­
+       sion<B>]</B> [<B>-S</B>,<B>--sid</B>] [<B>-c</B>,<B>--context</B>] [<B>-s</B>,<B>--signal</B> <I>signal</I>] [<B>--</B>]
+       <I>name</I> <I>...</I>
+       <B>killall</B> -l
+       <B>killall</B> -V,<B>--version</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>killall</B> sends a signal to all processes running any of the
+       specified  commands.  If  no  signal  name  is  specified,
+       SIGTERM is sent.
+
+       Signals can be specified either by name (e.g. <B>-HUP</B>) or  by
+       number (e.g. <B>-1</B>).
+
+       If  the  command name contains a slash (<B>/</B>), processes exe­
+       cuting that particular file will be selected for  killing,
+       independent of their name.
+
+       <B>killall</B> returns a zero return code if at least one process
+       has been killed for each ilisted command. <B>killall</B>  returns
+       zero otherwise.
+
+       A  <B>killall</B>  process never kills itself (but may kill other
+       <B>killall</B> processes).
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-e</B>, <B>--exact</B>
+              Require an exact match for very long  names.  If  a
+              command name is longer than 15 characters, the full
+              name may be unavailable (i.e. it is  swapped  out).
+              In  this  case,  <B>killall</B>  will kill everything that
+              matches within the first 15  characters.  With  <B>-e</B>,
+              such entries are skipped.  <B>killall</B> prints a message
+              for each skipped entry if <B>-v</B> is specified in  addi­
+              tion to <B>-e</B>,
+
+       <B>-g</B>, <B>--process-group</B>
+              Kill   the  process  group  to  which  the  process
+              belongs. The kill signal  is  only  sent  once  per
+              group,  even if multiple processes belonging to the
+              same process group were found.
+
+       <B>-i</B>, <B>--interactive</B>
+              Interactively ask for confirmation before  killing.
+
+       <B>-l</B>, <B>--list</B>
+              List all known signal names.
+
+       <B>-q</B>, <B>--quiet</B>
+              Do not complain if no processes were killed.
+
+       <B>-S</B>     (Flask only) Specify SID: kill only processes  with
+              given  SID.  Mutually  exclusive  with <B>-c</B> argument.
+              Must precede other arguments on command line.
+
+       <B>-c</B>     (Flask only) Specify security  context:  kill  only
+              processes  with  given  security context.  Mutually
+              exclusive with <B>-s</B>.  Must precede other arguments on
+              the command line.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       /proc     location of the proc file system
+
+
+</PRE>
+<H2>KNOWN BUGS</H2><PRE>
+       Killing  by  file only works for executables that are kept
+       open during execution, i.e. impure  executables  can't  be
+       killed this way.
+
+       Be  warned  that  typing  <B>killall</B>  <I>name</I>  may  not have the
+       desired effect on non-Linux systems, especially when  done
+       by a privileged user.
+
+       <B>killall</B>  <B>-w</B>  doesn't detect if a process disappears and is
+       replaced by a new process with the same PID between scans.
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Werner  Almesberger &lt;Werner.Almesberger@epfl.ch&gt; wrote the
+       original version of psmisc.  Since version 20 Craig  Small
+       &lt;csmall@small.dropbear.id.au&gt; can be blamed.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>kill(1)</B>, <B>fuser(1)</B>, <B>pgrep(1)</B>, <B>pidof(1)</B>, <B>ps(1)</B>, <B>kill(2)</B>
+
+
+
+Linux                     March 25, 2001               <B>KILLALL(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

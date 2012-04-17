@@ -1,0 +1,70 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>addftinfo</B> [ <B>-v</B> ] [ <B>-</B><I>param</I> <I>value</I>...  ] <I>res</I> <I>unitwidth</I> <I>font</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>addftinfo</B> reads a troff font file and adds some additional
+       font-metric  information that is used by the groff system.
+       The font file with the information added is written on the
+       standard  output.   The information added is guessed using
+       some parametric information about the font and assumptions
+       about  the  traditional  troff  names for characters.  The
+       main information added is the heights and depths of  char­
+       acters.   The  <I>res</I>  and  <I>unitwidth</I> arguments should be the
+       same as the corresponding parameters  in  the  DESC  file;
+       <I>font</I>  is the name of the file describing the font; if <I>font</I>
+       ends with <B>I</B> the font will be assumed to be italic.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-v</B> prints the version number.
+
+       All other options changes one of the  parameters  that  is
+       used  to derive the heights and depths.  Like the existing
+       quantities in the font file, each <I>value</I> is  in  inches/<I>res</I>
+       for  a  font whose point size is <I>unitwidth</I>.  <I>param</I> must be
+       one of:
+
+       <B>x-height</B>
+              The height of lowercase letters  without  ascenders
+              such as x.
+
+       <B>fig-height</B>
+              The height of figures (digits).
+
+       <B>asc-height</B>
+              The height of characters with ascenders, such as b,
+              d or l.
+
+       <B>body-height</B>
+              The height of characters such as parentheses.
+
+       <B>cap-height</B>
+              The height of uppercase letters such as A.
+
+       <B>comma-depth</B>
+              The depth of a comma.
+
+       <B>desc-depth</B>
+              The depth of characters with  descenders,  such  as
+              p,q, or y.
+
+       <B>body-depth</B>
+              The depth of characters such as parentheses.
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>lsdev</B>
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>lsdev</B>  gathers information about your computer's installed
+       hardware from the <B>interrupts,</B> <B>ioports</B> and <B>dma</B> files in the
+       <B>/proc</B> directory, thus giving you a quick overview of which
+       hardware uses what I/O addresses  and  what  IRQ  and  DMA
+       channels.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       None.
+
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/proc/interrupts</B>
+              IRQ channels.
+
+
+       <B>/proc/ioports</B>
+              I/O memory addresses.
+
+
+       <B>/proc/dma</B>
+              DMA channels.
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       <B>lsdev</B>  can't  always  figure  out which lines in the three
+       examined files refer to one and the same  device,  because
+       these  files  sometimes  use  different names for the same
+       piece of hardware. For example, in some kernels  the  key­
+       board  is  referred  to  as  `kbd' in <B>/proc/ioports</B> and as
+       `keyboard' in <B>/proc/interrupts.</B>  This should be  fixed  in
+       the  kernel, not in <B>lsdev</B> (as has indeed happened for this
+       particular example).
+
+       The program does however try to match lines  by  stripping
+       anything  after a space or open parenthesis from the name,
+       so that e.g.  the  `serial'  lines  from  <B>/proc/interrupts</B>
+       match  the  `serial(set)'  lines from <B>/proc/ioports.</B>  This
+       attempt at DWIM might be considered a bug in itself.
+
+       This program only shows the kernel's <B>idea</B> of what hardware
+       is present, not what's actually physically available.
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>procinfo(8)</B>.
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

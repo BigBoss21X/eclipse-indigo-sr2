@@ -1,0 +1,74 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+     The <B>mktemp</B> utility takes the given file name template and overwrites a
+     portion of it to create a file name.  This file name is unique and suit­
+     able for use by the application.  The template may be any file name with
+     exactly six of `Xs' appended to it, for example <I>/tmp/temp.XXXXXX</I>.  The
+     trailing six `Xs' are replaced with the current process number and/or a
+     unique letter combination.  The number of unique file names <B>mktemp</B> can
+     return are roughly 26 ** 6 combinations.
+
+     If <B>mktemp</B> can successfully generate a unique file name, the file is cre­
+     ated with mode 0600 (unless the <B>-u</B> flag is given) and the filename is
+     printed to standard output.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+     The available options are as follows:
+
+     <B>-d</B>      Make a directory instead of a file.
+
+     <B>-q</B>      Fail silently if an error occurs.  This is useful if a script
+             does not want error output to go to standard error.
+
+     <B>-u</B>      Operate in ``unsafe'' mode.  The temp file will be unlinked
+             before <B>mktemp</B> exits.  This is slightly better than <B>mktemp(3)</B> but
+             still introduces a race condition.  Use of this option is not
+             encouraged.
+
+
+</PRE>
+<H2>RETURN VALUES</H2><PRE>
+     The <B>mktemp</B> utility exits with a value of 0 on success, and 1 on failure.
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+     The following <B>sh(1)</B> fragment illustrates a simple use of <B>mktemp</B> where the
+     script should quit if it cannot get a safe temporary file.
+
+           TMPFILE=`mktemp /tmp/$0.XXXXXX` || exit 1
+           echo "program output" &gt;&gt; $TMPFILE
+
+     In this case, we want the script to catch the error itself.
+
+           TMPFILE=`mktemp -q /tmp/$0.XXXXXX`
+           if [ $? -ne 0 ]; then
+                   echo "$0: Can't create temp file, exiting..."
+                   exit 1
+           fi
+
+     Note that one can also check to see that $TMPFILE is zero length instead
+     of checking $?.  This would allow the check to be done later one in the
+     script (since $? would get clobbered by the next shell command).
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+     <B>mkstemp(3)</B>, <B>mktemp(3)</B>
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

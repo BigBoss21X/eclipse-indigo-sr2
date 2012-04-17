@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>cabextract</B> [<B>-v</B>] [<B>-h</B>] [<B>-l</B>] [<B>-q</B>] [<B>-L</B>] [<B>-f</B>] [<B>-d</B><I>dir</I><B>]</B>   <I>cabinet</I>
+       <I>files</I> <I>...</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>cabextract</B>  is  a  program  that  un-archives files in the
+       Microsoft cabinet file format (.cab) or  any  binary  file
+       which  contains an embedded cabinet file (frequently found
+       in .exe files).
+
+       <B>cabextract</B> will extract all files from all  cabinet  files
+       specified on the command line
+
+       To  extract  a  multi-part  cabinet  consisting of several
+       files, only give the <I>first</I> file as an argument  to  <B>cabex­</B>
+       <B>tract</B>  as  it  will  automatically  look for the remaining
+       files.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       A summary of options is included below.
+
+       <B>-v</B>     If given alone on the command line, prints the ver­
+              sion  of <B>cabextract</B> and exits. Given with a list of
+              cabinet files, it will list  the  contents  of  the
+              cabinet files.
+
+       <B>-h</B>     Prints a page of help and exits.
+
+       <B>-l</B>     Lists  the  contents  of  the  given cabinet files,
+              rather than extracting them.
+
+       <B>-q</B>     When extracting cabinet files, supresses  all  mes­
+              sages except errors and warnings.
+
+       <B>-L</B>     When extracting cabinet files, makes each extracted
+              file's name lowercase.
+
+       <B>-f</B>     When extracting cabinet  files,  will  ignore  cor­
+              rupted MSZIP blocks. A warning will be printed if a
+              corrupted MSZIP block is encountered.
+
+       <B>-d</B> <I>dir</I> Extracts all files into the directory <I>dir</I> .
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       This   manual   page   was   written   by   Stuart    Caie
+       &lt;kyzer@4u.net&gt;,  based  on the one written by Eric Sharkey
+       &lt;sharkey@debian.org&gt;, for the Debian GNU/Linux system.
+
+
+
+                          August 2, 2001            <B>CABEXTRACT(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

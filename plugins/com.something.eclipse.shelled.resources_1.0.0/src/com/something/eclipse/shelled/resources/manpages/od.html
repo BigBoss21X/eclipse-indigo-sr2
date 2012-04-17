@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>od</B> [<I>OPTION</I>]... [<I>FILE</I>]...
+       <B>od</B> <I>--traditional</I> [<I>FILE</I>] [[<I>+</I>]<I>OFFSET</I> [[<I>+</I>]<I>LABEL</I>]]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Write   an  unambiguous  representation,  octal  bytes  by
+       default, of FILE to standard output.  With more  than  one
+       FILE  argument,  concatenate  them  in the listed order to
+       form the input.  With no FILE, or when  FILE  is  -,  read
+       standard input.
+
+       All  arguments  to  long  options  are mandatory for short
+       options.
+
+       <B>-A</B>, <B>--address-radix</B>=<I>RADIX</I>
+              decide how file offsets are printed
+
+       <B>-j</B>, <B>--skip-bytes</B>=<I>BYTES</I>
+              skip BYTES input bytes first
+
+       <B>-N</B>, <B>--read-bytes</B>=<I>BYTES</I>
+              limit dump to BYTES input bytes
+
+       <B>-s</B>, <B>--strings</B>[=<I>BYTES</I>]
+              output strings of at least BYTES graphic chars
+
+       <B>-t</B>, <B>--format</B>=<I>TYPE</I>
+              select output format or formats
+
+       <B>-v</B>, <B>--output-duplicates</B>
+              do not use * to mark line suppression
+
+       <B>-w</B>, <B>--width</B>[=<I>BYTES</I>]
+              output BYTES bytes per output line
+
+       <B>--traditional</B>
+              accept arguments in traditional form
+
+       <B>--help</B> display this help and exit
+
+       <B>--version</B>
+              output version information and exit
+
+   <B>Traditional</B> <B>format</B>  <B>specifications</B>  <B>may</B>  <B>be</B>  <B>intermixed;</B>  <B>they</B>
+       <B>accumulate:</B>
+       <B>-a</B>     same as <B>-t</B> a,  select named characters
+
+       <B>-b</B>     same as <B>-t</B> oC, select octal bytes
+
+       <B>-c</B>     same as <B>-t</B> c,  select ASCII characters or backslash
+              escapes
+
+       For older syntax (second call  format),  OFFSET  means  <B>-j</B>
+       OFFSET.    LABEL  is  the  pseudo-address  at  first  byte
+       printed, incremented when dump is progressing.  For OFFSET
+       and  LABEL,  a 0x or 0X prefix indicates hexadecimal, suf­
+       fixes may be . for octal and b for multiply by 512.
+
+       TYPE is made up of one or more of these specifications:
+
+       a      named character
+
+       c      ASCII character or backslash escape
+
+       d[SIZE]
+              signed decimal, SIZE bytes per integer
+
+       f[SIZE]
+              floating point, SIZE bytes per integer
+
+       o[SIZE]
+              octal, SIZE bytes per integer
+
+       u[SIZE]
+              unsigned decimal, SIZE bytes per integer
+
+       x[SIZE]
+              hexadecimal, SIZE bytes per integer
+
+       SIZE is a number.  For TYPE in doux, SIZE may  also  be  C
+       for  sizeof(char),  S for sizeof(short), I for sizeof(int)
+       or L for sizeof(long).  If TYPE is f, SIZE may also  be  F
+       for   sizeof(float),   D   for  sizeof(double)  or  L  for
+       sizeof(long double).
+
+       RADIX is d for decimal, o for octal, x for hexadecimal  or
+       n for none.  BYTES is hexadecimal with 0x or 0X prefix, it
+       is multiplied by 512 with b suffix, by 1024 with k and  by
+       1048576 with m.  Adding a z suffix to any type adds a dis­
+       play of printable characters to the end of  each  line  of
+       output.   <B>--string</B>  without  a  number implies 3.  <B>--width</B>
+       without a number implies 32.  By default, od uses <B>-A</B> o  <B>-t</B>
+       d2 <B>-w</B> 16.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Written by Jim Meyering.
+
+
+</PRE>
+<H2>REPORTING BUGS</H2><PRE>
+       Report bugs to &lt;bug-coreutils@gnu.org&gt;.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 2003 Free Software Foundation, Inc.
+       This  is  free software; see the source for copying condi­
+       tions.  There is NO warranty; not even for MERCHANTABILITY
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

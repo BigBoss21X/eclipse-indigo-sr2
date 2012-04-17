@@ -1,0 +1,592 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       as [<B>-a</B>[<B>cdhlns</B>][=<I>file</I>]] [<B>-D</B>] [<B>--defsym</B> <I>sym</I>=<I>val</I>]
+        [<B>-f</B>] [<B>--gstabs</B>] [<B>--gdwarf2</B>] [<B>--help</B>] [<B>-I</B> <I>dir</I>]
+        [<B>-J</B>] [<B>-K</B>] [<B>-L</B>]
+        [<B>--listing-lhs-width</B>=<I>NUM</I>] [<B>--listing-lhs-width2</B>=<I>NUM</I>]
+        [<B>--listing-rhs-width</B>=<I>NUM</I>] [<B>--listing-cont-lines</B>=<I>NUM</I>]
+        [<B>--keep-locals</B>] [<B>-o</B> <I>objfile</I>] [<B>-R</B>] [<B>--statistics</B>] [<B>-v</B>]
+        [<B>-version</B>] [<B>--version</B>] [<B>-W</B>] [<B>--warn</B>] [<B>--fatal-warnings</B>]
+        [<B>-w</B>] [<B>-x</B>] [<B>-Z</B>] [<B>--target-help</B>] [<I>target-options</I>]
+        [<B>--</B>|<I>files</I> ...]
+
+       <I>Target</I> <I>Alpha</I> <I>options:</I>
+          [<B>-m</B><I>cpu</I>]
+          [<B>-mdebug</B> | <B>-no-mdebug</B>]
+          [<B>-relax</B>] [<B>-g</B>] [<B>-G</B><I>size</I>]
+          [<B>-F</B>] [<B>-32addr</B>]
+
+       <I>Target</I> <I>ARC</I> <I>options:</I>
+          [<B>-marc[5|6|7|8]</B>]
+          [<B>-EB</B>|<B>-EL</B>]
+
+       <I>Target</I> <I>ARM</I> <I>options:</I>
+          [<B>-mcpu</B>=<I>processor</I>[+<I>extension</I>...]]
+          [<B>-march</B>=<I>architecture</I>[+<I>extension</I>...]]
+          [<B>-mfpu</B>=<I>floating-point-fromat</I>]
+          [<B>-mthumb</B>]
+          [<B>-EB</B>|<B>-EL</B>]
+          [<B>-mapcs-32</B>|<B>-mapcs-26</B>|<B>-mapcs-float</B>|
+           <B>-mapcs-reentrant</B>]
+          [<B>-mthumb-interwork</B>] [<B>-moabi</B>] [<B>-k</B>]
+
+       <I>Target</I> <I>CRIS</I> <I>options:</I>
+          [<B>--underscore</B> | <B>--no-underscore</B>]
+          [<B>--pic</B>] [<B>-N</B>]
+          [<B>--emulation=criself</B> | <B>--emulation=crisaout</B>]
+
+       <I>Target</I> <I>D10V</I> <I>options:</I>
+          [<B>-O</B>]
+
+       <I>Target</I> <I>D30V</I> <I>options:</I>
+          [<B>-O</B>|<B>-n</B>|<B>-N</B>]
+
+       <I>Target</I> <I>i386</I> <I>options:</I>
+          [<B>--32</B>|<B>--64</B>]
+
+       <I>Target</I> <I>i960</I> <I>options:</I>
+          [<B>-ACA</B>|<B>-ACA_A</B>|<B>-ACB</B>|<B>-ACC</B>|<B>-AKA</B>|<B>-AKB</B>|
+           <B>-AKC</B>|<B>-AMC</B>]
+          [<B>-b</B>] [<B>-no-relax</B>]
+
+       <I>Target</I> <I>IP2K</I> <I>options:</I>
+          [<B>-mip2022</B>|<B>-mip2022ext</B>]
+          [<B>--print-opcodes</B>] [<B>--generate-example</B>]
+
+       <I>Target</I> <I>MCORE</I> <I>options:</I>
+          [<B>-jsri2bsr</B>] [<B>-sifilter</B>] [<B>-relax</B>]
+          [<B>-mcpu=[210|340]</B>]
+
+       <I>Target</I> <I>MIPS</I> <I>options:</I>
+          [<B>-nocpp</B>] [<B>-EL</B>] [<B>-EB</B>] [<B>-n</B>] [<B>-O</B>[<I>optimization</I> <I>level</I>]]
+          [<B>-g</B>[<I>debug</I> <I>level</I>]] [<B>-G</B> <I>num</I>] [<B>-KPIC</B>] [<B>-call_shared</B>]
+          [<B>-non_shared</B>] [<B>-xgot</B>] [<B>--membedded-pic</B>]
+          [<B>-mabi</B>=<I>ABI</I>] [<B>-32</B>] [<B>-n32</B>] [<B>-64</B>] [<B>-mfp32</B>] [<B>-mgp32</B>]
+          [<B>-march</B>=<I>CPU</I>] [<B>-mtune</B>=<I>CPU</I>] [<B>-mips1</B>] [<B>-mips2</B>]
+          [<B>-mips3</B>] [<B>-mips4</B>] [<B>-mips5</B>] [<B>-mips32</B>] [<B>-mips32r2</B>]
+          [<B>-mips64</B>]
+          [<B>-construct-floats</B>] [<B>-no-construct-floats</B>]
+          [<B>-trap</B>] [<B>-no-break</B>] [<B>-break</B>] [<B>-no-trap</B>]
+          [<B>-mfix7000</B>] [<B>-mno-fix7000</B>]
+          [<B>-mips16</B>] [<B>-no-mips16</B>]
+          [<B>-mips3d</B>] [<B>-no-mips3d</B>]
+          [<B>-mdmx</B>] [<B>-no-mdmx</B>]
+          [<B>-mdebug</B>] [<B>-no-mdebug</B>]
+
+       <I>Target</I> <I>MMIX</I> <I>options:</I>
+          [<B>--fixed-special-register-names</B>] [<B>--globalize-symbols</B>]
+          [<B>--gnu-syntax</B>] [<B>--relax</B>] [<B>--no-predefined-symbols</B>]
+          [<B>--no-expand</B>] [<B>--no-merge-gregs</B>] [<B>-x</B>]
+          [<B>--linker-allocated-gregs</B>]
+
+       <I>Target</I> <I>PDP11</I> <I>options:</I>
+          [<B>-mpic</B>|<B>-mno-pic</B>] [<B>-mall</B>] [<B>-mno-extensions</B>]
+          [<B>-m</B><I>extension</I>|<B>-mno-</B><I>extension</I>]
+          [<B>-m</B><I>cpu</I>] [<B>-m</B><I>machine</I>]
+
+       <I>Target</I> <I>picoJava</I> <I>options:</I>
+          [<B>-mb</B>|<B>-me</B>]
+
+       <I>Target</I> <I>PowerPC</I> <I>options:</I>
+          [<B>-mpwrx</B>|<B>-mpwr2</B>|<B>-mpwr</B>|<B>-m601</B>|<B>-mppc</B>|<B>-mppc32</B>|<B>-m603</B>|<B>-m604</B>|
+           <B>-m403</B>|<B>-m405</B>|<B>-mppc64</B>|<B>-m620</B>|<B>-mppc64bridge</B>|<B>-mbooke</B>|
+           <B>-mbooke32</B>|<B>-mbooke64</B>]
+          [<B>-mcom</B>|<B>-many</B>|<B>-maltivec</B>] [<B>-memb</B>]
+          [<B>-mregnames</B>|<B>-mno-regnames</B>]
+          [<B>-mrelocatable</B>|<B>-mrelocatable-lib</B>]
+          [<B>-mlittle</B>|<B>-mlittle-endian</B>|<B>-mbig</B>|<B>-mbig-endian</B>]
+          [<B>-msolaris</B>|<B>-mno-solaris</B>]
+
+       <I>Target</I> <I>SPARC</I> <I>options:</I>
+          [<B>-Av6</B>|<B>-Av7</B>|<B>-Av8</B>|<B>-Asparclet</B>|<B>-Asparclite</B>
+           <B>-Av8plus</B>|<B>-Av8plusa</B>|<B>-Av9</B>|<B>-Av9a</B>]
+          [<B>-xarch=v8plus</B>|<B>-xarch=v8plusa</B>] [<B>-bump</B>]
+          [<B>-32</B>|<B>-64</B>]
+
+       <B>as</B> always uses the same syntax as  another  assembler  for
+       the  same  architecture;  for  example, we know of several
+       incompatible versions of 680x0 assembly language syntax.
+
+       Each time you run <B>as</B> it assembles exactly one source  pro­
+       gram.  The source program is made up of one or more files.
+       (The standard input is also a file.)
+
+       You give <B>as</B> a command line that has  zero  or  more  input
+       file names.  The input files are read (from left file name
+       to right).  A command line argument (in any position) that
+       has  no special meaning is taken to be an input file name.
+
+       If you give <B>as</B> no file names it attempts to read one input
+       file  from  the  <B>as</B> standard input, which is normally your
+       terminal.  You may have to type <B>ctl-D</B> to tell <B>as</B> there  is
+       no more program to assemble.
+
+       Use  <B>--</B>  if you need to explicitly name the standard input
+       file in your command line.
+
+       If the source is empty, <B>as</B> produces a small, empty  object
+       file.
+
+       <B>as</B>  may  write warnings and error messages to the standard
+       error file (usually your terminal).  This should not  hap­
+       pen  when   a  compiler  runs  <B>as</B> automatically.  Warnings
+       report an assumption made so that <B>as</B> could keep assembling
+       a flawed program; errors report a grave problem that stops
+       the assembly.
+
+       If you are invoking <B>as</B> via the GNU C compiler (version 2),
+       you  can  use  the <B>-Wa</B> option to pass arguments through to
+       the assembler.  The assembler arguments must be  separated
+       from each other (and the <B>-Wa</B>) by commas.  For example:
+
+               gcc -c -g -O -Wa,-alh,-L file.c
+
+       This  passes  two  options  to the assembler: <B>-alh</B> (emit a
+       listing to standard output with  high-level  and  assembly
+       source) and <B>-L</B> (retain local symbols in the symbol table).
+
+       Usually you do not need to use this <B>-Wa</B>  mechanism,  since
+       many   compiler  command-line  options  are  automatically
+       passed to the assembler by the compiler.   (You  can  call
+       the  GNU  compiler  driver  with the <B>-v</B> option to see pre­
+       cisely what options it passes to  each  compilation  pass,
+       including the assembler.)
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-a[cdhlmns]</B>
+           Turn on listings, in any of a variety of ways:
+
+           <B>=file</B>
+               set the name of the listing file
+
+           You  may  combine these options; for example, use <B>-aln</B>
+           for assembly listing without  forms  processing.   The
+           <B>=file</B>  option,  if  used,  must  be  the last one.  By
+           itself, <B>-a</B> defaults to <B>-ahls</B>.
+
+       <B>-D</B>  Ignored.  This option is accepted for script  compati­
+           bility with calls to other assemblers.
+
+       <B>--defsym</B> <I>sym</I><B>=</B><I>value</I>
+           Define  the  symbol  <I>sym</I> to be <I>value</I> before assembling
+           the input file.  <I>value</I> must be  an  integer  constant.
+           As  in  C, a leading <B>0x</B> indicates a hexadecimal value,
+           and a leading <B>0</B> indicates an octal value.
+
+       <B>-f</B>  ``fast''---skip whitespace and  comment  preprocessing
+           (assume source is compiler output).
+
+       <B>--gstabs</B>
+           Generate  stabs  debugging information for each assem­
+           bler line.  This may help debugging assembler code, if
+           the debugger can handle it.
+
+       <B>--gdwarf2</B>
+           Generate  DWARF2 debugging information for each assem­
+           bler line.  This may help debugging assembler code, if
+           the  debugger  can  handle  it.  Note - this option is
+           only supported by some targets, not all of them.
+
+       <B>--help</B>
+           Print a summary of the command line options and  exit.
+
+       <B>--target-help</B>
+           Print  a  summary  of  all target specific options and
+           exit.
+
+       <B>-I</B> <I>dir</I>
+           Add directory <I>dir</I> to the search  list  for  ".include"
+           directives.
+
+       <B>-J</B>  Don't warn about signed overflow.
+
+       <B>-K</B>  This  option is accepted but has no effect on the TAR­
+           GET family.
+
+       <B>-L</B>
+       <B>--keep-locals</B>
+           Keep (in the symbol table) local symbols.   On  tradi­
+           tional a.out systems these start with <B>L</B>, but different
+
+       <B>--listing-cont-lines=</B><I>number</I>
+           Set the maximum number of lines printed in  a  listing
+           for a single line of input to <I>number</I> + 1.
+
+       <B>-o</B> <I>objfile</I>
+           Name the object-file output from <B>as</B> <I>objfile</I>.
+
+       <B>-R</B>  Fold the data section into the text section.
+
+       <B>--statistics</B>
+           Print  the maximum space (in bytes) and total time (in
+           seconds) used by assembly.
+
+       <B>--strip-local-absolute</B>
+           Remove local absolute symbols from the outgoing symbol
+           table.
+
+       <B>-v</B>
+       <B>-version</B>
+           Print the <B>as</B> version.
+
+       <B>--version</B>
+           Print the <B>as</B> version and exit.
+
+       <B>-W</B>
+       <B>--no-warn</B>
+           Suppress warning messages.
+
+       <B>--fatal-warnings</B>
+           Treat warnings as errors.
+
+       <B>--warn</B>
+           Don't  suppress  warning  messages  or  treat  them as
+           errors.
+
+       <B>-w</B>  Ignored.
+
+       <B>-x</B>  Ignored.
+
+       <B>-Z</B>  Generate an object file even after errors.
+
+       <B>--</B> <B>|</B> <I>files</I> <B>...</B>
+           Standard input, or source files to assemble.
+
+       The following options are available when as is  configured
+       for an ARC processor.
+
+       <B>-marc[5|6|7|8]</B>
+           This option selects the core processor variant.
+
+       <B>-EB</B> <B>|</B> <B>-EL</B>
+           Select which Floating Point architecture is  the  tar­
+           get.
+
+       <B>-mthumb</B>
+           Enable Thumb only instruction decoding.
+
+       <B>-mapcs-32</B>  <B>|</B> <B>-mapcs-26</B> <B>|</B> <B>-mapcs-float</B> <B>|</B> <B>-mapcs-reentrant</B> <B>|</B>
+       <B>-moabi</B>
+           Select which procedure calling convention is in use.
+
+       <B>-EB</B> <B>|</B> <B>-EL</B>
+           Select  either big-endian (-EB) or little-endian (-EL)
+           output.
+
+       <B>-mthumb-interwork</B>
+           Specify that the code has been generated  with  inter­
+           working between Thumb and ARM code in mind.
+
+       <B>-k</B>  Specify that PIC code has been generated.
+
+       See  the info pages for documentation of the CRIS-specific
+       options.
+
+       The following options are available when as is  configured
+       for a D10V processor.
+
+       <B>-O</B>  Optimize output by parallelizing instructions.
+
+       The  following options are available when as is configured
+       for a D30V processor.
+
+       <B>-O</B>  Optimize output by parallelizing instructions.
+
+       <B>-n</B>  Warn when nops are generated.
+
+       <B>-N</B>  Warn when a nop after a 32-bit multiply instruction is
+           generated.
+
+       The  following options are available when as is configured
+       for the Intel 80960 processor.
+
+       <B>-ACA</B> <B>|</B> <B>-ACA_A</B> <B>|</B> <B>-ACB</B> <B>|</B> <B>-ACC</B> <B>|</B> <B>-AKA</B> <B>|</B> <B>-AKB</B> <B>|</B> <B>-AKC</B> <B>|</B> <B>-AMC</B>
+           Specify which variant of the 960 architecture  is  the
+           target.
+
+       <B>-b</B>  Add code to collect statistics about branches taken.
+
+       <B>-no-relax</B>
+           Do  not alter compare-and-branch instructions for long
+           displacements; error if necessary.
+
+       The following options are available when as is  configured
+           Specify which processor in the M32R family is the tar­
+           get.  The default  is  normally  the  M32R,  but  this
+           option changes it to the M32RX.
+
+       <B>--warn-explicit-parallel-conflicts</B> <B>or</B> <B>--Wp</B>
+           Produce  warning  messages  when questionable parallel
+           constructs are encountered.
+
+       <B>--no-warn-explicit-parallel-conflicts</B> <B>or</B> <B>--Wnp</B>
+           Do not produce warning messages when questionable par­
+           allel constructs are encountered.
+
+       The  following options are available when as is configured
+       for the Motorola 68000 series.
+
+       <B>-l</B>  Shorten references to undefined symbols, to  one  word
+           instead of two.
+
+       <B>-m68000</B> <B>|</B> <B>-m68008</B> <B>|</B> <B>-m68010</B> <B>|</B> <B>-m68020</B> <B>|</B> <B>-m68030</B>
+       <B>|</B> <B>-m68040</B> <B>|</B> <B>-m68060</B> <B>|</B> <B>-m68302</B> <B>|</B> <B>-m68331</B> <B>|</B> <B>-m68332</B>
+       <B>|</B> <B>-m68333</B> <B>|</B> <B>-m68340</B> <B>|</B> <B>-mcpu32</B> <B>|</B> <B>-m5200</B>
+           Specify what processor in the 68000 family is the tar­
+           get.  The default is normally the 68020, but this  can
+           be changed at configuration time.
+
+       <B>-m68881</B> <B>|</B> <B>-m68882</B> <B>|</B> <B>-mno-68881</B> <B>|</B> <B>-mno-68882</B>
+           The target machine does (or does not) have a floating-
+           point coprocessor.  The default is to assume a  copro­
+           cessor  for  68020,  68030,  and  cpu32.  Although the
+           basic 68000 is not compatible with the 68881, a combi­
+           nation  of the two can be specified, since it's possi­
+           ble to do emulation of  the  coprocessor  instructions
+           with the main processor.
+
+       <B>-m68851</B> <B>|</B> <B>-mno-68851</B>
+           The  target  machine does (or does not) have a memory-
+           management unit coprocessor.  The default is to assume
+           an MMU for 68020 and up.
+
+       For  details  about  the PDP-11 machine dependent features
+       options, see @ref{PDP-11-Options}.
+
+       <B>-mpic</B> <B>|</B> <B>-mno-pic</B>
+           Generate position-independent (or  position-dependent)
+           code.  The default is <B>-mpic</B>.
+
+       <B>-mall</B>
+       <B>-mall-extensions</B>
+           Enable  all  instruction  set extensions.  This is the
+           default.
+
+       <B>-mno-extensions</B>
+
+       The following options are available when as is  configured
+       for a picoJava processor.
+
+       <B>-mb</B> Generate ``big endian'' format output.
+
+       <B>-ml</B> Generate ``little endian'' format output.
+
+       The  following options are available when as is configured
+       for the Motorola 68HC11 or 68HC12 series.
+
+       <B>-m68hc11</B> <B>|</B> <B>-m68hc12</B> <B>|</B> <B>-m68hcs12</B>
+           Specify what processor is the target.  The default  is
+           defined  by the configuration option when building the
+           assembler.
+
+       <B>-mshort</B>
+           Specify to use the 16-bit integer ABI.
+
+       <B>-mlong</B>
+           Specify to use the 32-bit integer ABI.
+
+       <B>-mshort-double</B>
+           Specify to use the 32-bit double ABI.
+
+       <B>-mlong-double</B>
+           Specify to use the 64-bit double ABI.
+
+       <B>--force-long-branchs</B>
+           Relative branches are turned into absolute ones.  This
+           concerns  conditional branches, unconditional branches
+           and branches to a sub routine.
+
+       <B>-S</B> <B>|</B> <B>--short-branchs</B>
+           Do not turn relative branchs into absolute  ones  when
+           the offset is out of range.
+
+       <B>--strict-direct-mode</B>
+           Do  not  turn the direct addressing mode into extended
+           addressing mode when the instruction does not  support
+           direct addressing mode.
+
+       <B>--print-insn-syntax</B>
+           Print the syntax of instruction in case of error.
+
+       <B>--print-opcodes</B>
+           print  the  list  of instructions with syntax and then
+           exit.
+
+       <B>--generate-example</B>
+           print an example  of  instruction  for  each  possible
+           instruction and then exit.  This option is only useful
+
+       <B>-xarch=v8plus</B> <B>|</B> <B>-xarch=v8plusa</B>
+           For  compatibility  with  the  Solaris  v9  assembler.
+           These   options   are   equivalent   to  -Av8plus  and
+           -Av8plusa, respectively.
+
+       <B>-bump</B>
+           Warn when the assembler switches to another  architec­
+           ture.
+
+       The  following options are available when as is configured
+       for a MIPS processor.
+
+       <B>-G</B> <I>num</I>
+           This option sets the largest size of  an  object  that
+           can  be  referenced implicitly with the "gp" register.
+           It is only accepted for targets that use ECOFF format,
+           such  as  a  DECstation  running  Ultrix.  The default
+           value is 8.
+
+       <B>-EB</B> Generate ``big endian'' format output.
+
+       <B>-EL</B> Generate ``little endian'' format output.
+
+       <B>-mips1</B>
+       <B>-mips2</B>
+       <B>-mips3</B>
+       <B>-mips4</B>
+       <B>-mips5</B>
+       <B>-mips32</B>
+       <B>-mips32r2</B>
+       <B>-mips64</B>
+           Generate code for a particular  MIPS  Instruction  Set
+           Architecture   level.    <B>-mips1</B>   is   an   alias  for
+           <B>-march=r3000</B>, <B>-mips2</B> is  an  alias  for  <B>-march=r6000</B>,
+           <B>-mips3</B>  is  an alias for <B>-march=r4000</B> and <B>-mips4</B> is an
+           alias for <B>-march=r8000</B>.  <B>-mips5</B>,  <B>-mips32</B>,  <B>-mips32r2</B>,
+           and  <B>-mips64</B>  correspond  to  generic  <B>MIPS</B> <B>V</B>, <B>MIPS32</B>,
+           <B>MIPS32</B> <B>Release</B> <B>2</B>, and <B>MIPS64</B> ISA  processors,  respec­
+           tively.
+
+       <B>-march=</B><I>CPU</I>
+           Generate code for a particular MIPS cpu.
+
+       <B>-mtune=</B><I>cpu</I>
+           Schedule and tune for a particular MIPS cpu.
+
+       <B>-mfix7000</B>
+       <B>-mno-fix7000</B>
+           Cause  nops to be inserted if the read of the destina­
+           tion register of an mfhi or mflo instruction occurs in
+           the following two instructions.
+           ters.
+
+       <B>-mips16</B>
+       <B>-no-mips16</B>
+           Generate code for the  MIPS  16  processor.   This  is
+           equivalent  to  putting  ".set mips16" at the start of
+           the assembly file.  <B>-no-mips16</B> turns off this  option.
+
+       <B>-mips3d</B>
+       <B>-no-mips3d</B>
+           Generate  code  for  the  MIPS-3D Application Specific
+           Extension.  This tells the assembler to accept MIPS-3D
+           instructions.  <B>-no-mips3d</B> turns off this option.
+
+       <B>-mdmx</B>
+       <B>-no-mdmx</B>
+           Generate code for the MDMX Application Specific Exten­
+           sion.   This  tells  the  assembler  to  accept   MDMX
+           instructions.  <B>-no-mdmx</B> turns off this option.
+
+       <B>--construct-floats</B>
+       <B>--no-construct-floats</B>
+           The  <B>--no-construct-floats</B>  option  disables  the con­
+           struction of double width floating point constants  by
+           loading  the two halves of the value into the two sin­
+           gle width floating point registers that  make  up  the
+           double  width register.  By default <B>--construct-floats</B>
+           is selected, allowing construction of  these  floating
+           point constants.
+
+       <B>--emulation=</B><I>name</I>
+           This  option  causes  <B>as</B>  to emulate <B>as</B> configured for
+           some other target, in all respects,  including  output
+           format (choosing between ELF and ECOFF only), handling
+           of pseudo-opcodes which may generate debugging  infor­
+           mation  or store symbol table information, and default
+           endianness.  The available  configuration  names  are:
+           <B>mipsecoff</B>,  <B>mipself</B>, <B>mipslecoff</B>, <B>mipsbecoff</B>, <B>mipslelf</B>,
+           <B>mipsbelf</B>.  The first two  do  not  alter  the  default
+           endianness  from  that of the primary target for which
+           the assembler was configured; the  others  change  the
+           default to little- or big-endian as indicated by the <B>b</B>
+           or <B>l</B> in the name.  Using <B>-EB</B> or <B>-EL</B> will override  the
+           endianness selection in any case.
+
+           This  option is currently supported only when the pri­
+           mary target <B>as</B> is configured for  is  a  MIPS  ELF  or
+           ECOFF target.  Furthermore, the primary target or oth­
+           ers specified with <B>--enable-targets=...</B> at  configura­
+           tion  time  must include support for the other format,
+           if both are to be available.  For example, the Irix  5
+           configuration includes support for both.
+           Control  how  to deal with multiplication overflow and
+           division by zero.  <B>--trap</B>  or  <B>--no-break</B>  (which  are
+           synonyms)  take  a  trap  exception (and only work for
+           Instruction Set  Architecture  level  2  and  higher);
+           <B>--break</B>  or <B>--no-trap</B> (also synonyms, and the default)
+           take a break exception.
+
+       <B>-n</B>  When this option is used,  <B>as</B>  will  issue  a  warning
+           every  time  it  generates  a  nop  instruction from a
+           macro.
+
+       The following options are available when as is  configured
+       for an MCore processor.
+
+       <B>-jsri2bsr</B>
+       <B>-nojsri2bsr</B>
+           Enable  or disable the JSRI to BSR transformation.  By
+           default this is  enabled.   The  command  line  option
+           <B>-nojsri2bsr</B> can be used to disable it.
+
+       <B>-sifilter</B>
+       <B>-nosifilter</B>
+           Enable  or  disable  the silicon filter behaviour.  By
+           default this is disabled.  The default can be overrid­
+           den by the <B>-sifilter</B> command line option.
+
+       <B>-relax</B>
+           Alter jump instructions for long displacements.
+
+       <B>-mcpu=[210|340]</B>
+           Select the cpu type on the target hardware.  This con­
+           trols which instructions can be assembled.
+
+       <B>-EB</B> Assemble for a big endian target.
+
+       <B>-EL</B> Assemble for a little endian target.
+
+       See the info pages for documentation of the  MMIX-specific
+       options.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>gcc(1)</B>, <B>ld(1)</B>, and the Info entries for <I>binutils</I> and <I>ld</I>.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright  (C) 1991, 92, 93, 94, 95, 96, 97, 98, 99, 2000,
+       2001, 2002 Free Software Foundation, Inc.
+
+       Permission is granted to copy,  distribute  and/or  modify
+       this  document  under the terms of the GNU Free Documenta­
+       tion License, Version 1.1 or any later  version  published
+       by  the  Free  Software Foundation; with no Invariant Sec­
+       tions, with no Front-Cover Texts, and with  no  Back-Cover
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

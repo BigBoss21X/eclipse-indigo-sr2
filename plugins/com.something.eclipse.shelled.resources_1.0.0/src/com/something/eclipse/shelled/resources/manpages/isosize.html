@@ -1,0 +1,47 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>isosize</B> [<I>-x</I>] [<I>-d</I> <I>&lt;num&gt;</I>] <I>&lt;iso9660</I><B>_</B><I>image</I><B>_</B><I>file&gt;</I>...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This  command outputs the length of an iso9660 file system
+       that is contained in given file. That file may be a normal
+       file or a block device (e.g. /dev/hdd or /dev/sr0). In the
+       absence of any switches (or errors)  it  will  output  the
+       size  of the iso9660 file system in bytes. This can now be
+       a large number (&gt; > 4 GB).
+
+       -x     output in humanly readable form the block count and
+              the  block size. Output uses the term "sectors" for
+              "blocks".
+
+       -d &lt;num&gt;
+              only has affect when "-x" is not given. The  number
+              output  (if  no errors) is the iso9660 file size in
+              bytes divided by &lt;num&gt;. So if &lt;num&gt;  is  the  block
+              size  then  the  output  number  will  be the block
+              count.
+
+       The size of the file (or block device) holding  a  iso9660
+       file  system can be marginally larger than the actual size
+       of the iso9660 file system. One reason for this is that cd
+       writers are allowed to add "run out" sectors at the end of
+       a iso9660 image.
+
+
+
+sg3_utils-0.91            December 2000                <B>ISOSIZE(8)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

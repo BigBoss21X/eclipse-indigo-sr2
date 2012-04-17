@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>amixer</B> [<I>-c</I> card] [<I>cmd</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>amixer</B>  allows  command-line  control of the mixer for the
+       ALSA soundcard driver.  <B>amixer</B>  supports  multiple  sound­
+       cards.
+
+
+</PRE>
+<H2>INVOKING</H2><PRE>
+       <B>amixer</B>  with  no  arguments will display the current mixer
+       settings for the default soundcard and device. This  is  a
+       good  way  to  see a list of the simple mixer controls you
+       can use.
+
+
+
+</PRE>
+<H2>COMMANDS</H2><PRE>
+       <I>help</I>   Shows syntax.
+
+
+       <I>info</I>   Shows the information about a mixer device.
+
+
+       <I>scontrols</I>
+              Shows a complete list of simple mixer controls.
+
+
+       <I>scontents</I>
+              Shows a complete list of simple mixer controls with
+              their contents.
+
+
+       <I>set</I> or <I>sset</I> &lt;<I>SCONTROL</I>&gt; &lt;<I>PARAMETER</I>&gt; ...
+              Sets the simple mixer control contents. The parame­
+              ter can be the volume either as a  percentage  from
+              0% to 100% or an exact hardware value.  The parame­
+              ters <I>cap,</I> <I>nocap,</I> <I>mute,</I> <I>unmute,</I> <I>toggle</I> are  used  to
+              change capture (recording) and muting for the group
+              specified.  The  parameters  <I>front,</I>  <I>rear,</I>  <I>center,</I>
+              <I>woofer</I>  are used to specify channels to be changed.
+              When plus(+) or minus(-) letter is  appended  after
+              volume  value,  the volume is incremented or decre­
+              mented from the current value, respectively.
+
+              A simple mixer control must be specified. Only  one
+              device can be controlled at a time.
+
+
+       <I>get</I> or <I>sget</I> &lt;<I>SCONTROL</I>&gt;
+              Shows the simple mixer control contents.
+
+              A  simple mixer control must be specified. Only one
+              device can be controlled at a time.
+              device,  numid.  The  next  argument  specifies the
+              value of control.
+
+
+       <I>cget</I> &lt;<I>CONTROL</I>&gt;
+              Shows the card control contents. The identifier has
+              same syntax as for the <I>cset]fP</I> <I>command.</I>
+
+
+   <B>Options</B>
+       [<I>-c</I> card]
+
+              Select  the card number to control. The device name
+              created from this parameter has syntax 'hw:N' where
+              N is specified card number.
+
+
+       [<I>-D</I> device]
+
+              Select the device name to control. The default con­
+              trol name is 'default'.
+
+
+       <I>-h</I>     Help: show syntax.
+
+       <I>-q</I>     Quiet mode. Do not show results of changes.
+
+
+   <B>Example</B> <B>#1:</B>
+              <B>amixer</B> <B>-c</B> <B>1</B> <B>sset</B> <B>Line,0</B> <B>80%,40%</B> <B>unmute</B> <B>cap</B>
+
+              will set the second  soundcard's  left  line  input
+              volume  to  80% and right line input to 40%, unmute
+              it, and select it as a source for capture  (record­
+              ing).
+
+
+   <B>Example</B> <B>#2:</B>
+              <B>amixer</B>  <B>-c</B>  <B>2</B>  <B>cset</B> <B>iface=MIXER,name='Line</B> <B>Playback</B>
+              <B>Volume",index=1</B> <B>40%</B>
+
+              will set the third soundcard's second line playback
+              volume(s) to 40%
+
+
+   <B>Example</B> <B>#3:</B>
+              <B>amixer</B> <B>-c</B> <B>2</B> <B>cset</B> <B>numid=34</B> <B>40%</B>
+
+              will set the 34th soundcard element to 40%
+
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

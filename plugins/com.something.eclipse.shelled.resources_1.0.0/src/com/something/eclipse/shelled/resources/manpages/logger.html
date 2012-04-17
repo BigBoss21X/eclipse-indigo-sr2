@@ -1,0 +1,72 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+     <B>Logger</B> makes entries in the system log.  It provides a shell command
+     interface to the <B>syslog(3)</B> system log module.
+
+     Options:
+
+     <B>-i</B>       Log the process id of the logger process with each line.
+
+     <B>-s</B>       Log the message to standard error, as well as the system log.
+
+     <B>-f</B> <I>file</I>  Log the specified file.
+
+     <B>-p</B> <I>pri</I>   Enter the message with the specified priority.  The priority may
+              be specified numerically or as a ``facility.level'' pair.  For
+              example, ``-p local3.info'' logs the message(s) as <I>info</I>rmational
+              level in the <I>local3</I> facility.  The default is ``user.notice.''
+
+     <B>-t</B> <I>tag</I>   Mark every line in the log with the specified <I>tag</I>.
+
+     <B>-u</B> <I>sock</I>  Write to socket as specified with <I>socket</I> instead of builtin sys­
+              log routines.
+
+     <B>-d</B>       Use a datagram instead of a stream connection to this socket.
+
+     --       End the argument list. This is to allow the <I>message</I> to start
+              with a hyphen (-).
+
+     <I>message</I>  Write the message to log; if not specified, and the <B>-f</B> flag is
+              not provided, standard input is logged.
+
+     The <B>logger</B> utility exits 0 on success, and &gt;0 if an error occurs.
+
+     Valid facility names are: auth, authpriv (for security information of a
+     sensitive nature), cron, daemon, ftp, kern, lpr, mail, news, security
+     (deprecated synonym for auth), syslog, user, uucp, and local0 to local7,
+     inclusive.
+
+     Valid level names are): alert, crit, debug, emerg, err, error (deprecated
+     synonym for err), info, notice, panic (deprecated synonym for emerg),
+     warning, warn (deprecated synonym for warning).  For the priority order
+     and intended purposes of these levels, see <B>syslog(3)</B>.
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+           logger System rebooted
+
+           logger -p local0.notice -t HOSTIDM -f /dev/idmc
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+     <B>syslog(3)</B>, <B>syslogd(8)</B>
+
+
+</PRE>
+<H2>STANDARDS</H2><PRE>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

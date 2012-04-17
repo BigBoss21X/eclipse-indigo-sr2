@@ -1,0 +1,73 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>lpr</B>  [ -E ] [ -P <I>destination</I> ] [ -# <I>num-copies</I> [ -l ] [ -o
+       <I>option</I> ] [ -p] [ -r ] [ -C/J/T <I>title</I> ] [ <I>file(s)</I> ]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>lpr</B> submits files for printing. Files named on the command
+       line  are sent to the named printer (or the system default
+       destination if no destination is specified). If  no  files
+       are  listed  on  the command-line <B>lpr</B> reads the print file
+       from the standard input.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       The following options are recognized by <B>lpr</B>:
+
+       -E
+            Forces encryption when connecting to the server.
+
+       -P <I>destination</I>
+            Prints files to the named printer.
+
+       -# <I>copies</I>
+            Sets the number of copies to print from 1 to 100.
+
+       -C <I>name</I>
+            Sets the job name.
+
+       -J <I>name</I>
+            Sets the job name.
+
+       -T <I>name</I>
+            Sets the job name.
+
+       -l
+            Specifies that the print file  is  already  formatted
+            for  the  destination and should be sent without fil­
+            tering. This option is equivalent to "-oraw".
+
+       -o <I>option</I>
+            Sets a job option.
+
+       -p
+            Specifies that the print  file  should  be  formatted
+            with  a  shaded header with the date, time, job name,
+            and  page  number.  This  option  is  equivalent   to
+            "-oprettyprint" and is only useful when printing text
+            files.
+
+       -r
+            Specifies  that  the  named  print  files  should  be
+            deleted after printing them.
+
+
+</PRE>
+<H2>COMPATIBILITY</H2><PRE>
+23 January 2001    Common UNIX Printing System             <B>lpr(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

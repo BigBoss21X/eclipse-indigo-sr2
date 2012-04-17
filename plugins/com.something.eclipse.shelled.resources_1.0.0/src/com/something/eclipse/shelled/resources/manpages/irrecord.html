@@ -1,0 +1,70 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>irrecord</B> [<I>options</I>] <I>file</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This program will record the signals from your remote con­
+       trol  and  create a config file for lircd. A proper config
+       file for lircd is maybe the most vital part of this  pack­
+       age,  so  you  should invest some time to create a working
+       config file. Although I put a good deal of effort in  this
+       program  it  is often not possible to automatically recog­
+       nize all features of a remote control.
+
+       If the program fails to  recognize  the  protocol  of  the
+       remote  control  you  should  use the --force option to at
+       least create a config file in raw mode.
+
+       If  <I>file</I>  already  exists  and  contains  a  valid  config
+       irrecord will use the protocol description found there and
+       will only try to record the buttons. This is  very  useful
+       if  you  want  to learn a remote where config files of the
+       same brand are already available. Of course this will only
+       work if the remotes use the same protocol but it's worth a
+       try. You will find template files for the most common pro­
+       tocols  in the remotes/generic/ directory of this package.
+       The name of the new file is created by appending .conf  to
+       the given filename in this case.
+
+       <B>-h</B> <B>--help</B>
+              display this message
+
+       <B>-v</B> <B>--version</B>
+              display version
+
+       <B>-f</B> <B>--force</B>
+              force raw mode
+
+       <B>-H</B> <B>--driver</B>=<I>driver</I>
+              use given driver
+
+       <B>-d</B> <B>--device</B>=<I>device</I>
+              read from given device
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       The  documentation  for  <B>lirc</B> is maintained as html pages.
+       They are located under html/ in the  documentation  direc­
+       tory.
+
+       Further  information on this topic is available in section
+       "Adding new remote controls" in html/help.html
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

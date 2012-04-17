@@ -1,0 +1,126 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>cspctl</B> command [-options] &lt;filename&gt;
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>cspctl</B>  is a simple CSP microcode loader for Crative Sound
+       Blaster 16ASP and some Sound  Blaster  AWE32  sound  cards
+       with   Creative  Signal  Processor  (CSP)  chip  (CT1748A)
+       installed.  <B>cspctl</B> can also  be  used  as  a  post-install
+       function  to  <I>snd-sb16-csp</I> module to load default codec at
+       module installation. If CSP chip is  succesfully  detected
+       and initialized, it will be installed as a hardware depen­
+       dant device <I>hwC0D2</I>  into  /dev/snd  directory.  Currently,
+       following codecs can be loaded to CSP device:
+
+
+           <B>wfm0001a.csp</B>  QSound decoder
+           <B>wfm0006a.csp</B>  A-law codec
+           <B>wfm0007a.csp</B>  u-law codec
+           <B>wfm0011a.csp</B>  IMA ADPCM codec (distorted output for IMA test files)
+           <B>wfm0200a.csp</B>  Creative ADPCM codec (sounds like Intel/DVI IMA ADPCM compatible)
+           <B>wfm0202a.csp</B>  Fast Speech 8 codec
+           <B>wfm0203a.csp</B>  Fast Speech 10 codec
+
+       These codecs are not yet supported by ALSA:
+
+           <B>wfm0201a.csp</B>  Text2Speech decoder
+
+       Qsound microcode file has <B>four</B> <B>functions,</B> each function is
+       a decoder for different  sample  rate.  Rates  for  QSound
+       functions  #1,  #2,  #3 and #4 are 44100, 22050, 11025 and
+       8000Hz respectively. IMA ADPCM and FastSpeech  codecs  are
+       formed  of <B>two</B> <B>functions,</B> the first one is for capture and
+       the second one is for playback.  A-law  and  u-law  codecs
+       have  only  <B>one</B> <B>function.</B>  To load for example function #2
+       from QSound microcode file (decoder for 22050Hz),  run  as
+       follows:
+
+           % cspctl load -f 2 -d QSound wfm0001a.csp
+
+       After  successful  loading,  /proc/asound/SB16/cspD2  will
+       show:
+
+
+           Creative Signal Processor [v1.0]
+           State: -x--L
+           Codec: QSound [func #2]
+           Sample rates: 22050Hz
+           QSound decoder disabled
+
+       With QSound decoder microcode loaded, all simple PCM  file
+           QSound decoder enabled
+           Processing 16bit mono PCM samples
+           Qsound position: left = 0x9, right = 0x9
+
+       Driver supports autoloading of u-Law, A-Law and  Ima-ADPCM
+       hardware  codecs. Autoloading is active only when there is
+       no microcode loaded to  CSP,  and  there  is  no  need  to
+       preload appropriate *.csp files. To unload manually loaded
+       microcode, you should run
+
+           % cspctl unload
+
+       If hardware codec microcode has been manually loaded, then
+       CSP  will  support  only loaded PCM format and autoloading
+       will be disabled. In such case, proc interface  will  show
+       loaded codec properties:
+
+
+           Creative Signal Processor [v1.0]
+           State: -x--L
+           Codec: IMA-ADPCM [func #2]
+           Sample rates: All
+           PCM format ID: 0x400000 (16bit/-) [mono/stereo] [playback/-]
+
+
+
+</PRE>
+<H2>COMMANDS</H2><PRE>
+       <B>load</B>   Load microcode from filename to CSP.
+
+       <B>unload</B> Unload microcode from CSP.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-h,</B> <B>--help</B>
+              Display a short help.
+
+       <B>-c</B> <B>card</B>
+              Select a card number. Option defaults to 0.
+
+       <B>-f</B> <B>function</B>
+              Select  a  function  from  microcode  file.  Option
+              defaults to 1.
+
+       <B>-d</B> <B>description</B>
+              Optional microcode description string.
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Uros Bizjak &lt;uros@kss-loka.si&gt;.
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

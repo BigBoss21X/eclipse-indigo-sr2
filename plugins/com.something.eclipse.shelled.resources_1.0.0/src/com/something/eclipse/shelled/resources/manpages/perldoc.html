@@ -1,0 +1,123 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>perldoc</B> [<B>-h</B>] [<B>-v</B>] [<B>-t</B>] [<B>-u</B>] [<B>-m</B>] [<B>-l</B>] [<B>-F</B>]  [<B>-X</B>] Page­
+       Name|ModuleName|ProgramName
+
+       <B>perldoc</B> <B>-f</B> BuiltinFunction
+
+       <B>perldoc</B> <B>-q</B> FAQ Keyword
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>perldoc</I> looks up a piece of documentation in .pod format
+       that is embedded in the perl installation tree or in a
+       perl script, and displays it via "pod2man | nroff -man |
+       $PAGER". (In addition, if running under HP-UX, "col -x"
+       will be used.) This is primarily used for the documenta­
+       tion for the perl library modules.
+
+       Your system may also have man pages installed for those
+       modules, in which case you can probably just use the
+       <B>man(1)</B> command.
+
+       If you are looking for a table of contents to the Perl
+       library modules documentation, see the perltoc page.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-h</B> help
+            Prints out a brief help message.
+
+       <B>-v</B> verbose
+            Describes search for the item in detail.
+
+       <B>-t</B> text output
+            Display docs using plain text converter, instead of
+            nroff. This may be faster, but it won't look as nice.
+
+       <B>-u</B> unformatted
+            Find docs only; skip reformatting by pod2*
+
+       <B>-m</B> module
+            Display the entire module: both code and unformatted
+            pod documentation.  This may be useful if the docs
+            don't explain a function in the detail you need, and
+            you'd like to inspect the code directly; perldoc will
+            find the file for you and simply hand it off for dis­
+            play.
+
+       <B>-l</B> file name only
+            Display the file name of the module found.
+
+       <B>-F</B> file names
+            Consider arguments as file names, no search in direc­
+            tories will be performed.
+
+            file "$Config{archlib}/pod.idx".  The pod.idx file
+            should contain fully qualified filenames, one per
+            line.
+
+       <B>-U</B> run insecurely
+            Because <B>perldoc</B> does not run properly tainted, and is
+            known to have security issues, it will not normally
+            execute as the superuser.  If you use the <B>-U</B> flag, it
+            will do so, but only after setting the effective and
+            real IDs to nobody's or nouser's account, or -2 if
+            unavailable.  If it cannot relinquish its privileges,
+            it will not run.
+
+       <B>PageName|ModuleName|ProgramName</B>
+            The item you want to look up.  Nested modules (such
+            as "File::Basename") are specified either as
+            "File::Basename" or "File/Basename".  You may also
+            give a descriptive name of a page, such as "perl­
+            func".
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       Any switches in the "PERLDOC" environment variable will be
+       used before the command line arguments.  "perldoc" also
+       searches directories specified by the "PERL5LIB" (or "PER­
+       LLIB" if "PERL5LIB" is not defined) and "PATH" environment
+       variables.  (The latter is so that embedded pods for exe­
+       cutables, such as "perldoc" itself, are available.)
+       "perldoc" will use, in order of preference, the pager
+       defined in "PERLDOC_PAGER", "MANPAGER", or "PAGER" before
+       trying to find a pager on its own.  ("MANPAGER" is not
+       used if "perldoc" was told to display plain text or unfor­
+       matted pod.)
+
+       One useful value for "PERLDOC_PAGER" is "less -+C -E".
+
+
+</PRE>
+<H2>VERSION</H2><PRE>
+       This is perldoc v2.03.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Kenneth Albanowski &lt;kjahds@kjahds.com&gt;
+
+       Minor updates by Andy Dougherty &lt;doughera@laf­
+       col.lafayette.edu&gt;, and others.
+
+
+
+perl v5.8.0                 2003-03-13                 <B>PERLDOC(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

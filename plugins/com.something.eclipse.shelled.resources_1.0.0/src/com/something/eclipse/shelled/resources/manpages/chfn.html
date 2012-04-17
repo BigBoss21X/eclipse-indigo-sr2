@@ -1,0 +1,76 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>chfn</B> [<B>-f</B>  <I>name</I>]  [<B>-r</B> <I>room</I>] [<B>-w</B> <I>work</I><B>_</B><I>phone</I>] [<B>-h</B> <I>home</I><B>_</B><I>phone</I>]
+            [<B>-o</B> <I>other</I>] [<B>-q</B>] [<B>-u</B>] [<B>-v</B>] [<I>user</I>]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>chfn</B> is used to change the user finger  information.  This
+       are  the  users fullname, office room number, office phone
+       number and home phone number. This information  is  stored
+       in the <I>/etc/passwd</I> file and typically printed by <B>finger(1)</B>
+       and similiar programs. A normal user may only  change  the
+       fields  for  their  own account, the super user may change
+       the fields for any account. Also, only the super user  may
+       use  the <B>-o</B> option to change the undefined portions of the
+       GCOS field.
+
+       If no information is given on the command line, <B>chfn</B> oper­
+       ates  in  an  interactive  fashion, prompting the user for
+       each field.  Enter the new value to change the  field,  or
+       leave  the line blank to use the current value. Enter <I>none</I>
+       or a blank only to remove the current value.  The  current
+       value is displayed between a pair of <B>[</B> <B>]</B> marks.
+
+       The only restrictions placed on the contents of the fields
+       is that no control characters may be present, nor  any  of
+       comma, colon, or equal sign. The <I>other</I> field does not have
+       this restriction, and is used to store accounting informa­
+       tion used by other applications.
+
+       This version of <B>chfn</B> is able to change the shell of local,
+       NIS, NIS+ and LDAP accounts, if the permissions allow  it.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <I>-f,</I> <I>--full-name</I>
+              Specify your real name.
+
+       <I>-r,</I> <I>--room</I>
+              Specify your office room number.
+
+       <I>-w,</I> <I>--work-phone</I>
+              Specify your office phone number.
+
+       <I>-h,</I> <I>--home-phone</I>
+              Specify your home phone number.
+
+       <I>-o,</I> <I>--other</I>
+              Specify the undefined portions of the GCOS field.
+
+       <I>-q,</I> <I>--quite</I>
+              Don't be verbose.
+
+       <I>-u,</I> <I>--usage</I>
+              Print a usage message and exit.
+
+       Thorsten Kukuk &lt;kukuk@suse.de&gt;
+
+
+
+pwdutils                   January 2002                   <B>chfn(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

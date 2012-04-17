@@ -1,0 +1,57 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>mmroff</B> [ <I>-x</I> ] <I>groff</I><B>_</B><I>arguments</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>mmroff</B>  is a simple preprocessor for <B>groff</B>, it is used for
+       expanding references in <B>mm</B>,  see  <B>groff_mm(7)</B>.   <B>groff</B>  is
+       executed  twice,  first with <B>-z</B> and <B>-rRef=1</B> to collect all
+       references and then to do the  real  processing  when  the
+       reference file is up to date.
+
+       <B>-x</B>     Just create the reference file. This can be used to
+              refresh the reference file, it isn't always  needed
+              to  have  accurate  references  and  by  using this
+              option <B>groff</B> will only be run once.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Jörgen Hägg, Lund, Sweden &lt;jh@axis.se&gt;.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <B>/usr/share/groff/1.17.2/tmac/tmac.m</B>
+
+       <B>/usr/share/groff/1.17.2/tmac/mm/*.cov</B>
+
+       <B>/usr/share/groff/1.17.2/tmac/mm/*.MT</B>
+
+       <B>/usr/share/groff/1.17.2/tmac/mm/locale</B>
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>groff_mm(7),</B> <B>groff_mmse(7),</B>  <B>groff(1)</B>,  <B>troff(1)</B>,  <B>tbl(1)</B>,
+       <B>pic(1)</B>, <B>eqn(1)</B>
+       <B>mm(7)</B> <B>mmse(7)</B>
+
+
+
+Groff Version 1.17.2       27 June 2001                 <B>MMROFF(7)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

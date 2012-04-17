@@ -1,0 +1,3840 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>tcsh</B> [<B>-bcdefFimnqstvVxX</B>] [<B>-Dname</B>[<B>=value</B>]] [arg ...]
+       <B>tcsh</B> <B>-l</B>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>tcsh</I> is an enhanced but completely compatible  version  of
+       the  Berkeley  UNIX C shell, <B>csh(1)</B>.  It is a command lan­
+       guage interpreter usable  both  as  an  interactive  login
+       shell and a shell script command processor.  It includes a
+       command-line editor (see <B>The</B>  <B>command-line</B>  <B>editor</B>),  pro­
+       grammable  word  completion  (see <B>Completion</B> <B>and</B> <B>listing</B>),
+       spelling correction (see <B>Spelling</B> <B>correction</B>),  a  history
+       mechanism  (see  <B>History</B>  <B>substitution</B>),  job control (see
+       <B>Jobs</B>) and a  C-like  syntax.   The  <B>NEW</B>  <B>FEATURES</B>  section
+       describes   major   enhancements   of  <I>tcsh</I>  over  <B>csh(1)</B>.
+       Throughout this manual, features of <I>tcsh</I> not found in most
+       <B>csh(1)</B>  implementations (specifically, the 4.4BSD <I>csh</I>) are
+       labeled with `(+)', and  features  which  are  present  in
+       <B>csh(1)</B>  but not usually documented are labeled with `(u)'.
+
+   <B>Argument</B> <B>list</B> <B>processing</B>
+       If the first argument (argument 0) to  the  shell  is  `-'
+       then it is a login shell.  A login shell can be also spec­
+       ified by invoking the shell with the <B>-l</B> flag as  the  only
+       argument.
+
+       The rest of the flag arguments are interpreted as follows:
+
+       <B>-b</B>  Forces a ``break'' from option processing, causing any
+           further  shell  arguments  to be treated as non-option
+           arguments.  The remaining arguments will not be inter­
+           preted  as  shell  options.   This may be used to pass
+           options to a shell script without confusion or  possi­
+           ble  subterfuge.  The shell will not run a set-user ID
+           script without this option.
+
+       <B>-c</B>  Commands are read from the following  argument  (which
+           must  be  present,  and  must  be  a single argument),
+           stored in the <B>command</B> shell  variable  for  reference,
+           and  executed.   Any remaining arguments are placed in
+           the <B>argv</B> shell variable.
+
+       <B>-d</B>  The shell loads the directory stack from <I>~/.cshdirs</I> as
+           described  under  <B>Startup</B> <B>and</B> <B>shutdown</B>, whether or not
+           it is a login shell. (+)
+
+       <B>-D</B><I>name</I>[=<I>value</I>]
+           Sets  the  environment   variable   <I>name</I>   to   <I>value</I>.
+           (Domain/OS only) (+)
+
+       <B>-e</B>  The  shell  exits  if  any  invoked command terminates
+
+       <B>-m</B>  The  shell  loads <I>~/.tcshrc</I> even if it does not belong
+           to the effective user.  Newer versions  of  <B>su(1)</B>  can
+           pass <B>-m</B> to the shell. (+)
+
+       <B>-n</B>  The  shell  parses commands but does not execute them.
+           This aids in debugging shell scripts.
+
+       <B>-q</B>  The shell accepts SIGQUIT (see  <B>Signal</B>  <B>handling</B>)  and
+           behaves when it is used under a debugger.  Job control
+           is disabled. (u)
+
+       <B>-s</B>  Command input is taken from the standard input.
+
+       <B>-t</B>  The shell reads and executes a single line  of  input.
+           A  `\' may be used to escape the newline at the end of
+           this line and continue onto another line.
+
+       <B>-v</B>  Sets the <B>verbose</B> shell variable, so that command input
+           is echoed after history substitution.
+
+       <B>-x</B>  Sets  the  <B>echo</B>  shell  variable, so that commands are
+           echoed immediately before execution.
+
+       <B>-V</B>  Sets the <B>verbose</B> shell variable even before  executing
+           <I>~/.tcshrc</I>.
+
+       <B>-X</B>  Is to <B>-x</B> as <B>-V</B> is to <B>-v</B>.
+
+       After  processing  of  flag arguments, if arguments remain
+       but none of the <B>-c</B>, <B>-i</B>, <B>-s</B>, or <B>-t</B> options were given,  the
+       first argument is taken as the name of a file of commands,
+       or ``script'', to be executed.  The shell opens this  file
+       and  saves  its  name for possible resubstitution by `$0'.
+       Because many systems use either the standard version 6  or
+       version  7  shells  whose shell scripts are not compatible
+       with this shell, the shell uses such a `standard' shell to
+       execute a script whose first character is not a `#', i.e.,
+       that does not start with a comment.
+
+       Remaining arguments are placed in the <B>argv</B> shell variable.
+
+   <B>Startup</B> <B>and</B> <B>shutdown</B>
+       A login shell begins by executing commands from the system
+       files <I>/etc/csh.cshrc</I> and <I>/etc/csh.login</I>.  It then executes
+       commands  from  files  in the user's <B>home</B> directory: first
+       <I>~/.tcshrc</I> (+) or, if <I>~/.tcshrc</I>  is  not  found,  <I>~/.cshrc</I>,
+       then  <I>~/.history</I> (or the value of the <B>histfile</B> shell vari­
+       able), then <I>~/.login</I>, and finally <I>~/.cshdirs</I> (or the value
+       of  the  <B>dirsfile</B> shell variable) (+).  The shell may read
+       <I>/etc/csh.login</I> before instead of after <I>/etc/csh.cshrc</I>, and
+       <I>~/.login</I> before instead of after <I>~/.tcshrc</I> or <I>~/.cshrc</I> and
+       specific commands, or can  have  both  a  <I>~/.cshrc</I>  and  a
+       <I>~/.tcshrc</I>   which   <I>source</I>s   (see  the  builtin  command)
+       <I>~/.cshrc</I>.  The rest of this  manual  uses  `<I>~/.tcshrc</I>'  to
+       mean  `<I>~/.tcshrc</I> or, if <I>~/.tcshrc</I> is not found, <I>~/.cshrc</I>'.
+
+       In the normal case, the shell begins reading commands from
+       the  terminal,  prompting with `&gt; '.  (Processing of argu­
+       ments and the use of the shell to process files containing
+       command  scripts  are described later.)  The shell repeat­
+       edly reads a line of command input, breaks it into  words,
+       places  it on the command history list, parses it and exe­
+       cutes each command in the line.
+
+       One can log out by typing `^D' on an empty line,  `logout'
+       or  `login'  or  via the shell's autologout mechanism (see
+       the <B>autologout</B> shell variable).  When a login shell termi­
+       nates  it  sets  the  <B>logout</B> shell variable to `normal' or
+       `automatic' as appropriate, then  executes  commands  from
+       the  files  <I>/etc/csh.logout</I>  and <I>~/.logout</I>.  The shell may
+       drop DTR on logout if so compiled; see the  <B>version</B>  shell
+       variable.
+
+       The  names  of the system login and logout files vary from
+       system to system for compatibility with  different  <B>csh(1)</B>
+       variants; see <B>FILES</B>.
+
+   <B>Editing</B>
+       We first describe <B>The</B> <B>command-line</B> <B>editor</B>.  The <B>Completion</B>
+       <B>and</B> <B>listing</B> and <B>Spelling</B> <B>correction</B> sections describe  two
+       sets  of functionality that are implemented as editor com­
+       mands but which deserve  their  own  treatment.   Finally,
+       <B>Editor</B>  <B>commands</B>  lists  and describes the editor commands
+       specific to the shell and their default bindings.
+
+   <B>The</B> <B>command-line</B> <B>editor</B> <B>(+)</B>
+       Command-line input can be edited using key sequences  much
+       like  those  used  in  GNU  Emacs or <B>vi(1)</B>.  The editor is
+       active only when the <B>edit</B> shell variable is set, which  it
+       is  by default in interactive shells.  The <I>bindkey</I> builtin
+       can display and  change  key  bindings.   Emacs-style  key
+       bindings  are  used  by default (unless the shell was com­
+       piled otherwise; see  the  <B>version</B>  shell  variable),  but
+       <I>bindkey</I>  can  change the key bindings to <I>vi</I>-style bindings
+       en masse.
+
+       The shell always binds the arrow keys (as defined  in  the
+       <B>TERMCAP</B> environment variable) to
+
+           down    <I>down-history</I>
+           up      <I>up-history</I>
+           left    <I>backward-char</I>
+           right   <I>forward-char</I>
+
+       with any non-alphanumeric  characters  not  in  the  shell
+       variable   <B>wordchars</B>,  while  the  shell  recognizes  only
+       whitespace and some of the characters with  special  mean­
+       ings to it, listed under <B>Lexical</B> <B>structure</B>.
+
+   <B>Completion</B> <B>and</B> <B>listing</B> <B>(+)</B>
+       The  shell  is  often  able to complete words when given a
+       unique abbreviation.  Type part of a word (for example `ls
+       /usr/lost')  and  hit the tab key to run the <I>complete-word</I>
+       editor  command.   The  shell   completes   the   filename
+       `/usr/lost'  to  `/usr/lost+found/',  replacing the incom­
+       plete word with the complete word  in  the  input  buffer.
+       (Note  the  terminal `/'; completion adds a `/' to the end
+       of completed directories and a space to the end  of  other
+       completed  words,  to  speed  typing  and provide a visual
+       indicator of successful completion.  The  <B>addsuffix</B>  shell
+       variable  can  be  unset to prevent this.)  If no match is
+       found (perhaps `/usr/lost+found' doesn't exist), the  ter­
+       minal  bell  rings.  If the word is already complete (per­
+       haps there is a `/usr/lost' on your system, or perhaps you
+       were  thinking  too far ahead and typed the whole thing) a
+       `/' or space is added to  the  end  if  it  isn't  already
+       there.
+
+       Completion  works  anywhere  in  the line, not at just the
+       end; completed text pushes the rest of  the  line  to  the
+       right.   Completion  in the middle of a word often results
+       in leftover characters to the right  of  the  cursor  that
+       need to be deleted.
+
+       Commands  and  variables can be completed in much the same
+       way.  For example, typing `em[tab]' would complete `em' to
+       `emacs'  if  <I>emacs</I>  were  the  only command on your system
+       beginning with `em'.  Completion can find a command in any
+       directory  in  <B>path</B>  or  if given a full pathname.  Typing
+       `echo $ar[tab]' would complete  `$ar'  to  `$argv'  if  no
+       other variable began with `ar'.
+
+       The shell parses the input buffer to determine whether the
+       word you want to complete should be completed as  a  file­
+       name,  command  or variable.  The first word in the buffer
+       and the first word following `;', `|', `|&amp;', `&amp;&amp;' or  `||'
+       is  considered to be a command.  A word beginning with `$'
+       is considered to be a variable.  Anything else is a  file­
+       name.  An empty line is `completed' as a filename.
+
+       You  can  list  the  possible completions of a word at any
+       time by typing `^D' to run the  <I>delete-char-or-list-or-eof</I>
+       editor  command.  The shell lists the possible completions
+       using the <I>ls-F</I> builtin (q.v.)  and reprints the prompt and
+       unfinished command line, for example:
+
+       word being completed.
+
+       A filename to be completed can contain variables, your own
+       or  others'  home  directories  abbreviated  with `~' (see
+       <B>Filename</B> <B>substitution</B>) and directory stack entries  abbre­
+       viated  with  `=' (see <B>Directory</B> <B>stack</B> <B>substitution</B>).  For
+       example,
+
+           &gt; ls ~k[^D]
+           kahn    kas     kellogg
+           &gt; ls ~ke[tab]
+           &gt; ls ~kellogg/
+
+       or
+
+           &gt; set local = /usr/local
+           &gt; ls $lo[tab]
+           &gt; ls $local/[^D]
+           bin/ etc/ lib/ man/ src/
+           &gt; ls $local/
+
+       Note that variables can also be expanded  explicitly  with
+       the <I>expand-variables</I> editor command.
+
+       <I>delete-char-or-list-or-eof</I>  lists  at  only the end of the
+       line; in the middle of a line  it  deletes  the  character
+       under  the cursor and on an empty line it logs one out or,
+       if <B>ignoreeof</B> is set, does nothing.  `M-^D', bound  to  the
+       editor  command  <I>list-choices</I>, lists completion possibili­
+       ties anywhere on a line, and <I>list-choices</I> (or any  one  of
+       the  related editor commands that do or don't delete, list
+       and/or log out, listed  under  <I>delete-char-or-list-or-eof</I>)
+       can  be  bound to `^D' with the <I>bindkey</I> builtin command if
+       so desired.
+
+       The <I>complete-word-fwd</I> and <I>complete-word-back</I>  editor  com­
+       mands  (not  bound  to any keys by default) can be used to
+       cycle up and down through the  list  of  possible  comple­
+       tions,  replacing the current word with the next or previ­
+       ous word in the list.
+
+       The shell variable <B>fignore</B> can be set to a  list  of  suf­
+       fixes  to  be ignored by completion.  Consider the follow­
+       ing:
+
+           &gt; ls
+           Makefile        condiments.h~   main.o          side.c
+           README          main.c          meal            side.o
+           condiments.h    main.c~
+           &gt; set fignore = (.o \~)
+           &gt; emacs ma[^D]
+           main.c   main.c~  main.o
+
+       the following files
+
+           comp.lang.c      comp.lang.perl   comp.std.c++
+           comp.lang.c++    comp.std.c
+
+       and  typed  `mail -f c.l.c[tab]', it would be completed to
+       `mail -f comp.lang.c', and ^D would list `comp.lang.c' and
+       `comp.lang.c++'.    `mail   -f   c..c++[^D]'   would  list
+       `comp.lang.c++'   and    `comp.std.c++'.     Typing    `rm
+       a--file[^D]' in the following directory
+
+           A_silly_file                         a-hyphenated-file
+           another_silly_file
+
+       would list all three files, because case  is  ignored  and
+       hyphens and underscores are equivalent.  Periods, however,
+       are not equivalent to hyphens or underscores.
+
+       Completion and listing are affected by several other shell
+       variables: <B>recexact</B> can be set to complete on the shortest
+       possible unique match, even if more typing might result in
+       a longer match:
+
+           &gt; ls
+           fodder   foo      food     foonly
+           &gt; set recexact
+           &gt; rm fo[tab]
+
+       just  beeps,  because `fo' could expand to `fod' or `foo',
+       but if we type another `o',
+
+           &gt; rm foo[tab]
+           &gt; rm foo
+
+       the completion completes on `foo', even though `food'  and
+       `foonly'  also  match.   <B>autoexpand</B>  can be set to run the
+       <I>expand-history</I>  editor  command  before  each   completion
+       attempt,  <B>autocorrect</B>  can  be set to spelling-correct the
+       word to be completed (see <B>Spelling</B> <B>correction</B>) before each
+       completion attempt and <B>correct</B> can be set to complete com­
+       mands automatically after one  hits  `return'.   <B>matchbeep</B>
+       can  be set to make completion beep or not beep in a vari­
+       ety of situations, and <B>nobeep</B> can be set to never beep  at
+       all.   <B>nostat</B>  can  be set to a list of directories and/or
+       patterns that match directories to prevent the  completion
+       mechanism  from <B>stat(2)</B>ing those directories.  <B>listmax</B> and
+       <B>listmaxrows</B> can be set to limit the number  of  items  and
+       rows  (respectively) that are listed without asking first.
+       <B>recognize_only_executables</B> can be set to  make  the  shell
+       list  only  executables  when  listing commands, but it is
+       quite slow.
+
+       entire  input  buffer  with  <I>spell-line</I>  (usually bound to
+       M-$).  The <B>correct</B> shell variable can be set to  `cmd'  to
+       correct  the  command  name or `all' to correct the entire
+       line each time return is typed, and <B>autocorrect</B> can be set
+       to correct the word to be completed before each completion
+       attempt.
+
+       When spelling correction is invoked in any of  these  ways
+       and  the shell thinks that any part of the command line is
+       misspelled, it prompts with the corrected line:
+
+           &gt; set correct = cmd
+           &gt; lz /usr/bin
+           CORRECT&gt;ls /usr/bin (y|n|e|a)?
+
+       One can answer `y' or space to execute the corrected line,
+       `e'  to leave the uncorrected command in the input buffer,
+       `a' to abort the command as if `^C' had been hit, and any­
+       thing else to execute the original line unchanged.
+
+       Spelling  correction  recognizes  user-defined completions
+       (see the <I>complete</I> builtin command).  If an input word in a
+       position  for  which  a  completion is defined resembles a
+       word in the completion list, spelling correction registers
+       a  misspelling  and  suggests the latter word as a correc­
+       tion.  However, if the input word does not  match  any  of
+       the  possible completions for that position, spelling cor­
+       rection does not register a misspelling.
+
+       Like completion, spelling correction works anywhere in the
+       line, pushing the rest of the line to the right and possi­
+       bly leaving extra characters to the right of the cursor.
+
+       Beware: spelling correction is not guaranteed to work  the
+       way one intends, and is provided mostly as an experimental
+       feature.  Suggestions and improvements are welcome.
+
+   <B>Editor</B> <B>commands</B> <B>(+)</B>
+       `bindkey' lists key bindings and `bindkey  -l'  lists  and
+       briefly describes editor commands.  Only new or especially
+       interesting  editor  commands  are  described  here.   See
+       <B>emacs(1)</B>  and  <B>vi(1)</B> for descriptions of each editor's key
+       bindings.
+
+       The character or characters to which each command is bound
+       by  default is given in parentheses.  `^<I>character</I>' means a
+       control character  and  `M-<I>character</I>'  a  meta  character,
+       typed as escape-<I>character</I> on terminals without a meta key.
+       Case counts, but commands that are  bound  to  letters  by
+       default are bound to both lower- and uppercase letters for
+       convenience.
+
+       <B>complete-word-raw</B> (^X-tab)
+               Like  <I>complete-word</I>, but ignores user-defined com­
+               pletions.
+
+       <B>copy-prev-word</B> (M-^_)
+               Copies the previous word in the current line  into
+               the input buffer.  See also <I>insert-last-word</I>.
+
+       <B>dabbrev-expand</B> (M-/)
+               Expands  the  current word to the most recent pre­
+               ceding one for which the current is a leading sub­
+               string, wrapping around the history list (once) if
+               necessary.  Repeating <I>dabbrev-expand</I>  without  any
+               intervening  typing  changes  to the next previous
+               word etc., skipping identical  matches  much  like
+               <I>history-search-backward</I> does.
+
+       <B>delete-char</B>   (bound   to  `Del'  if  using  the  standard
+       <I>/etc/csh.cshrc</I>)
+               Deletes  the character under the cursor.  See also
+               <I>delete-char-or-list-or-eof</I>.
+
+       <B>delete-char-or-eof</B> (not bound)
+               Does <I>delete-char</I> if there is a character under the
+               cursor  or <I>end-of-file</I> on an empty line.  See also
+               <I>delete-char-or-list-or-eof</I>.
+
+       <B>delete-char-or-list</B> (not bound)
+               Does <I>delete-char</I> if there is a character under the
+               cursor  or  <I>list-choices</I>  at  the end of the line.
+               See also <I>delete-char-or-list-or-eof</I>.
+
+       <B>delete-char-or-list-or-eof</B> (^D)
+               Does <I>delete-char</I> if there is a character under the
+               cursor,  <I>list-choices</I>  at  the  end of the line or
+               <I>end-of-file</I> on an  empty  line.   See  also  those
+               three  commands,  each of which does only a single
+               action,  and  <I>delete-char-or-eof</I>,  <I>delete-char-or-</I>
+               <I>list</I> and <I>list-or-eof</I>, each of which does a differ­
+               ent two out of the three.
+
+       <B>down-history</B> (down-arrow, ^N)
+               Like <I>up-history</I>, but steps down, stopping  at  the
+               original input line.
+
+       <B>end-of-file</B> (not bound)
+               Signals  an end of file, causing the shell to exit
+               unless the <B>ignoreeof</B> shell variable (q.v.) is  set
+               to prevent this.  See also <I>delete-char-or-list-or-</I>
+               <I>eof</I>.
+
+       <B>expand-history</B> (M-space)
+               Expands  the  variable  to the left of the cursor.
+               See <B>Variable</B> <B>substitution</B>.
+
+       <B>history-search-backward</B> (M-p, M-P)
+               Searches backwards through the history list for  a
+               command beginning with the current contents of the
+               input buffer up to the cursor and copies  it  into
+               the  input  buffer.   The  search  string may be a
+               glob-pattern (see <B>Filename</B> <B>substitution</B>)  contain­
+               ing  `*', `?', `[]' or `{}'.  <I>up-history</I> and <I>down-</I>
+               <I>history</I> will proceed from the appropriate point in
+               the history list.  Emacs mode only.  See also <I>his­</I>
+               <I>tory-search-forward</I> and <I>i-search-back</I>.
+
+       <B>history-search-forward</B> (M-n, M-N)
+               Like <I>history-search-backward</I>,  but  searches  for­
+               ward.
+
+       <B>i-search-back</B> (not bound)
+               Searches  backward  like  <I>history-search-backward</I>,
+               copies the first match into the input buffer  with
+               the  cursor  positioned at the end of the pattern,
+               and prompts with `bck:  '  and  the  first  match.
+               Additional  characters  may be typed to extend the
+               search, <I>i-search-back</I> may  be  typed  to  continue
+               searching  with  the same pattern, wrapping around
+               the history list if necessary, (<I>i-search-back</I> must
+               be  bound  to a single character for this to work)
+               or one of the following special characters may  be
+               typed:
+
+                   ^W      Appends the rest of the word under the
+                           cursor to the search pattern.
+                   delete (or any character  bound  to  <I>backward-</I>
+                   <I>delete-char</I>)
+                           Undoes the effect of the last  charac­
+                           ter typed and deletes a character from
+                           the search pattern if appropriate.
+                   ^G      If the previous search was successful,
+                           aborts  the  entire  search.   If not,
+                           goes  back  to  the  last   successful
+                           search.
+                   escape  Ends  the  search, leaving the current
+                           line in the input buffer.
+
+               Any other character not bound to  <I>self-insert-com­</I>
+               <I>mand</I>  terminates  the  search, leaving the current
+               line in the input buffer, and is then  interpreted
+               as normal input.  In particular, a carriage return
+               causes the current line  to  be  executed.   Emacs
+               mode  only.   See  also  <I>i-search-fwd</I> and <I>history-</I>
+               <I>search-backward</I>.
+
+       <B>list-choices-raw</B> (^X-^D)
+               Like <I>list-choices</I>, but ignores  user-defined  com­
+               pletions.
+
+       <B>list-glob</B> (^X-g, ^X-G)
+               Lists  (via the <I>ls-F</I> builtin) matches to the glob-
+               pattern (see <B>Filename</B> <B>substitution</B>) to the left of
+               the cursor.
+
+       <B>list-or-eof</B> (not bound)
+               Does <I>list-choices</I> or <I>end-of-file</I> on an empty line.
+               See also <I>delete-char-or-list-or-eof</I>.
+
+       <B>magic-space</B> (not bound)
+               Expands history substitutions in the current line,
+               like  <I>expand-history</I>, and appends a space.  <I>magic-</I>
+               <I>space</I> is designed to be bound to  the  space  bar,
+               but is not bound by default.
+
+       <B>normalize-command</B> (^X-?)
+               Searches  for  the current word in PATH and, if it
+               is found, replaces it with the full  path  to  the
+               executable.    Special   characters   are  quoted.
+               Aliases  are  expanded  and  quoted  but  commands
+               within  aliases  are  not.  This command is useful
+               with commands that  take  commands  as  arguments,
+               e.g., `dbx' and `sh -x'.
+
+       <B>normalize-path</B> (^X-n, ^X-N)
+               Expands  the  current  word as described under the
+               `expand' setting of the <B>symlinks</B> shell variable.
+
+       <B>overwrite-mode</B> (unbound)
+               Toggles between input and overwrite modes.
+
+       <B>run-fg-editor</B> (M-^Z)
+               Saves the current  input  line  and  looks  for  a
+               stopped  job  with a name equal to the last compo­
+               nent of the file name part of the <B>EDITOR</B> or <B>VISUAL</B>
+               environment variables, or, if neither is set, `ed'
+               or `vi'.  If such a job is found, it is  restarted
+               as  if  `fg %<I>job</I>' had been typed.  This is used to
+               toggle back and forth between an  editor  and  the
+               shell  easily.   Some  people bind this command to
+               `^Z' so they can do this even more easily.
+
+       <B>run-help</B> (M-h, M-H)
+               Searches for documentation on the current command,
+               using  the same notion of `current command' as the
+               completion routines, and prints it.  There  is  no
+               way to use a pager; <I>run-help</I> is designed for short
+               help files.  If the special alias  <B>helpcommand</B>  is
+               lines, but the <B>inputmode</B> shell variable can be set
+               to  `insert'  or  `overwrite' to put the editor in
+               that mode at the beginning of each line.  See also
+               <I>overwrite-mode</I>.
+
+       <B>sequence-lead-in</B> (arrow prefix, meta prefix, ^X)
+               Indicates  that  the following characters are part
+               of a multi-key sequence.  Binding a command  to  a
+               multi-key  sequence  really  creates two bindings:
+               the first character to  <I>sequence-lead-in</I>  and  the
+               whole  sequence  to  the  command.   All sequences
+               beginning with a character bound to <I>sequence-lead-</I>
+               <I>in</I>  are  effectively bound to <I>undefined-key</I> unless
+               bound to another command.
+
+       <B>spell-line</B> (M-$)
+               Attempts to correct the spelling of each  word  in
+               the  input  buffer,  like  <I>spell-word</I>, but ignores
+               words whose first character is one  of  `-',  `!',
+               `^'  or  `%', or which contain `\', `*' or `?', to
+               avoid problems with  switches,  substitutions  and
+               the like.  See <B>Spelling</B> <B>correction</B>.
+
+       <B>spell-word</B> (M-s, M-S)
+               Attempts  to  correct  the spelling of the current
+               word  as  described  under  <B>Spelling</B>   <B>correction</B>.
+               Checks  each  component of a word which appears to
+               be a pathname.
+
+       <B>toggle-literal-history</B> (M-r, M-R)
+               Expands or `unexpands'  history  substitutions  in
+               the input buffer.  See also <I>expand-history</I> and the
+               <B>autoexpand</B> shell variable.
+
+       <B>undefined-key</B> (any unbound key)
+               Beeps.
+
+       <B>up-history</B> (up-arrow, ^P)
+               Copies the previous entry in the history list into
+               the  input  buffer.   If  <B>histlit</B> is set, uses the
+               literal form of the entry.   May  be  repeated  to
+               step  up through the history list, stopping at the
+               top.
+
+       <B>vi-search-back</B> (?)
+               Prompts with `?' for a search string (which may be
+               a  glob-pattern, as with <I>history-search-backward</I>),
+               searches for it  and  copies  it  into  the  input
+               buffer.   The  bell  rings  if  no match is found.
+               Hitting return ends the search and leaves the last
+               match  in  the  input buffer.  Hitting escape ends
+               the search and executes the match.  <I>vi</I> mode  only.
+
+       When the shell's input is not a  terminal,  the  character
+       `#' is taken to begin a comment.  Each `#' and the rest of
+       the input line on which it  appears  is  discarded  before
+       further parsing.
+
+       A special character (including a blank or tab) may be pre­
+       vented from having its special meaning, and possibly  made
+       part  of  another  word,  by preceding it with a backslash
+       (`\') or enclosing it in single  (`''),  double  (`"')  or
+       backward  (``')  quotes.  When not otherwise quoted a new­
+       line preceded by a `\'  is  equivalent  to  a  blank,  but
+       inside quotes this sequence results in a newline.
+
+       Furthermore,  all <B>Substitutions</B> (see below) except <B>History</B>
+       <B>substitution</B> can be prevented by enclosing the strings (or
+       parts  of strings) in which they appear with single quotes
+       or by quoting the crucial character(s) (e.g., `$'  or  ``'
+       for  <B>Variable</B> <B>substitution</B> or <B>Command</B> <B>substitution</B> respec­
+       tively) with `\'.  (<B>Alias</B> <B>substitution</B>  is  no  exception:
+       quoting  in  any  way any character of a word for which an
+       <I>alias</I> has been defined prevents substitution of the alias.
+       The  usual way of quoting an alias is to precede it with a
+       backslash.) <B>History</B> <B>substitution</B>  is  prevented  by  back­
+       slashes  but  not  by  single quotes.  Strings quoted with
+       double or backward quotes  undergo  <B>Variable</B>  <B>substitution</B>
+       and <B>Command</B> <B>substitution</B>, but other substitutions are pre­
+       vented.
+
+       Text inside single or double quotes becomes a single  word
+       (or  part  of  one).   Metacharacters  in  these  strings,
+       including blanks and tabs, do  not  form  separate  words.
+       Only  in one special case (see <B>Command</B> <B>substitution</B> below)
+       can a double-quoted string yield parts of  more  than  one
+       word; single-quoted strings never do.  Backward quotes are
+       special: they signal <B>Command</B>  <B>substitution</B>  (q.v.),  which
+       may result in more than one word.
+
+       Quoting  complex strings, particularly strings which them­
+       selves  contain  quoting  characters,  can  be  confusing.
+       Remember that quotes need not be used as they are in human
+       writing!  It may be easier to quote not an entire  string,
+       but  only  those  parts  of the string which need quoting,
+       using different types of quoting to do so if  appropriate.
+
+       The  <B>backslash_quote</B>  shell  variable (q.v.) can be set to
+       make backslashes always quote `\', `'', and `"'.  (+) This
+       may  make  complex  quoting tasks easier, but it can cause
+       syntax errors in <B>csh(1)</B> scripts.
+
+   <B>Substitutions</B>
+       We now describe the various transformations the shell per­
+       Saved  commands  are  numbered  sequentially  from  1  and
+       stamped with the time.  It is not usually necessary to use
+       event numbers, but the current event number  can  be  made
+       part  of  the prompt by placing an `!' in the <B>prompt</B> shell
+       variable.
+
+       The shell actually saves history in expanded  and  literal
+       (unexpanded) forms.  If the <B>histlit</B> shell variable is set,
+       commands that display and store history  use  the  literal
+       form.
+
+       The  <I>history</I>  builtin  command can print, store in a file,
+       restore and clear the history list at any  time,  and  the
+       <B>savehist</B> and <B>histfile</B> shell variables can be can be set to
+       store the history list automatically on logout and restore
+       it on login.
+
+       History  substitutions  introduce  words  from the history
+       list into the input stream, making it easy to repeat  com­
+       mands,  repeat arguments of a previous command in the cur­
+       rent command, or fix spelling  mistakes  in  the  previous
+       command  with  little  typing  and a high degree of confi­
+       dence.
+
+       History substitutions begin with the character `!'.   They
+       may  begin  anywhere  in the input stream, but they do not
+       nest.  The `!' may be preceded by a  `\'  to  prevent  its
+       special   meaning;   for  convenience,  a  `!'  is  passed
+       unchanged when it is followed by a  blank,  tab,  newline,
+       `='  or  `('.   History  substitutions  also occur when an
+       input line begins with  `^'.   This  special  abbreviation
+       will  be  described  later.  The characters used to signal
+       history substitution (`!' and `^') can be changed by  set­
+       ting  the  <B>histchars</B> shell variable.  Any input line which
+       contains a history substitution is printed  before  it  is
+       executed.
+
+       A  history  substitution  may  have  an ``event specifica­
+       tion'', which indicates the event from which words are  to
+       be  taken, a ``word designator'', which selects particular
+       words from the chosen event, and/or a ``modifier'',  which
+       manipulates the selected words.
+
+       An event specification can be
+
+           <I>n</I>       A number, referring to a particular event
+           -<I>n</I>      An offset, referring to the event <I>n</I> before the
+                   current event
+           #       The current event.  This should be used  care­
+                   fully  in  <B>csh(1)</B>, where there is no check for
+                   recursion.  <I>tcsh</I> allows 10  levels  of  recur­
+                   sion.  (+)
+
+       The commands are shown with their event numbers  and  time
+       stamps.  The current event, which we haven't typed in yet,
+       is event 13.  `!11' and `!-2' refer  to  event  11.   `!!'
+       refers to the previous event, 12.  `!!' can be abbreviated
+       `!' if it is followed by `:'  (`:'  is  described  below).
+       `!n'  refers  to event 9, which begins with `n'.  `!?old?'
+       also refers to event 12, which  contains  `old'.   Without
+       word  designators  or  modifiers history references simply
+       expand to the entire event, so we might type `!cp' to redo
+       the  copy  command  or  `!!|more'  if  the  `diff'  output
+       scrolled off the top of the screen.
+
+       History references may be insulated from  the  surrounding
+       text with braces if necessary.  For example, `!vdoc' would
+       look for a command beginning with  `vdoc',  and,  in  this
+       example,  not  find  one, but `!{v}doc' would expand unam­
+       biguously to `vi wumpus.mandoc'.  Even in braces,  history
+       substitutions do not nest.
+
+       (+)  While  <B>csh(1)</B>  expands, for example, `!3d' to event 3
+       with the letter `d' appended to it, <I>tcsh</I> expands it to the
+       last  event  beginning  with `3d'; only completely numeric
+       arguments are treated as event  numbers.   This  makes  it
+       possible  to  recall  events  beginning  with numbers.  To
+       expand `!3d' as in <B>csh(1)</B> say `!\3d'.
+
+       To select words from an event  we  can  follow  the  event
+       specification  by  a  `:' and a designator for the desired
+       words.  The words of an input line are  numbered  from  0,
+       the  first (usually command) word being 0, the second word
+       (first argument) being 1, etc.  The basic word designators
+       are:
+
+           0       The first (command) word
+           <I>n</I>       The <I>n</I>th argument
+           ^       The first argument, equivalent to `1'
+           $       The last argument
+           %       The word matched by an ?<I>s</I>? search
+           <I>x-y</I>     A range of words
+           <I>-y</I>      Equivalent to <I>`0-y'</I>
+           *       Equivalent  to  `^-$',  but returns nothing if
+                   the event contains only 1 word
+           <I>x*</I>      Equivalent to <I>`x-$'</I>
+           <I>x-</I>      Equivalent to <I>`x*'</I>, but omitting the last word
+                   (`$')
+
+       Selected  words  are  inserted into the command line sepa­
+       rated by single blanks.  For example, the  `diff'  command
+       in  the  previous  example  might have been typed as `diff
+       !!:1.old !!:1' (using `:1' to select  the  first  argument
+       from  the  previous event) or `diff !-2:2 !-2:1' to select
+       and swap the arguments  from  the  `cp'  command.   If  we
+
+       A history reference may have  a  word  designator  but  no
+       event specification.  It then references the previous com­
+       mand.  Continuing our `diff' example, we could  have  said
+       simply  `diff  !^.old  !^' or, to get the arguments in the
+       opposite order, just `diff !*'.
+
+       The word or words in a history reference can be edited, or
+       ``modified'',  by following it with one or more modifiers,
+       each preceded by a `:':
+
+           h       Remove a trailing pathname component,  leaving
+                   the head.
+           t       Remove  all leading pathname components, leav­
+                   ing the tail.
+           r       Remove a filename  extension  `.xxx',  leaving
+                   the root name.
+           e       Remove all but the extension.
+           u       Uppercase the first lowercase letter.
+           l       Lowercase the first uppercase letter.
+           s<I>/l/r/</I>  Substitute <I>l</I> for <I>r</I>.  <I>l</I> is simply a string like
+                   <I>r</I>, not a regular expression as in  the  epony­
+                   mous <B>ed(1)</B> command.  Any character may be used
+                   as the delimiter in place of `/'; a `\' can be
+                   used  to  quote  the delimiter inside <I>l</I> and <I>r</I>.
+                   The character `&amp;' in the <I>r</I> is replaced  by  <I>l</I>;
+                   `\'  also  quotes  `&amp;'.  If <I>l</I> is empty (``''),
+                   the <I>l</I> from a previous substitution  or  the  <I>s</I>
+                   from  a  previous `?<I>s</I>?' event specification is
+                   used.  The trailing delimiter may  be  omitted
+                   if it is immediately followed by a newline.
+           &amp;       Repeat the previous substitution.
+           g       Apply  the  following  modifier  once  to each
+                   word.
+           a (+)   Apply the following modifier as many times  as
+                   possible to a single word.  `a' and `g' can be
+                   used together to apply  a  modifier  globally.
+                   In  the  current implementation, using the `a'
+                   and `s' modifiers  together  can  lead  to  an
+                   infinite  loop.  For example, `:as/f/ff/' will
+                   never terminate.  This behavior  might  change
+                   in the future.
+           p       Print  the new command line but do not execute
+                   it.
+           q       Quote the substituted words,  preventing  fur­
+                   ther substitutions.
+           x       Like  q,  but break into words at blanks, tabs
+                   and newlines.
+
+       Modifiers are applied to only the  first  modifiable  word
+       (unless  `g'  is  used).  It is an error for no word to be
+       modifiable.
+       make  the  spelling  correction  in  the previous example.
+       This is the  only  history  substitution  which  does  not
+       explicitly begin with `!'.
+
+       (+)  In  <I>csh</I>  as such, only one modifier may be applied to
+       each history or variable expansion.  In  <I>tcsh</I>,  more  than
+       one may be used, for example
+
+           % mv wumpus.man /usr/man/man1/wumpus.1
+           % man !$:t:r
+           man wumpus
+
+       In  <I>csh</I>, the result would be `wumpus.1:r'.  A substitution
+       followed by a colon may need to be insulated from it  with
+       braces:
+
+           &gt; mv a.out /usr/games/wumpus
+           &gt; setenv PATH !$:h:$PATH
+           Bad ! modifier: $.
+           &gt; setenv PATH !{-2$:h}:$PATH
+           setenv PATH /usr/games:/bin:/usr/bin:.
+
+       The  first attempt would succeed in <I>csh</I> but fails in <I>tcsh</I>,
+       because <I>tcsh</I> expects another  modifier  after  the  second
+       colon rather than `$'.
+
+       Finally,  history  can  be  accessed through the editor as
+       well as through the substitutions just described.  The <I>up-</I>
+       and <I>down-history</I>, <I>history-search-backward</I> and <I>-forward</I>, <I>i-</I>
+       <I>search-back</I> and <I>-fwd</I>, <I>vi-search-back</I> and <I>-fwd</I>,  <I>copy-prev-</I>
+       <I>word</I>  and  <I>insert-last-word</I>  editor  commands  search  for
+       events in the history list and copy them  into  the  input
+       buffer.    The   <I>toggle-literal-history</I>   editor   command
+       switches between the expanded and literal forms of history
+       lines in the input buffer.  <I>expand-history</I> and <I>expand-line</I>
+       expand history substitutions in the current  word  and  in
+       the entire input buffer respectively.
+
+   <B>Alias</B> <B>substitution</B>
+       The  shell  maintains  a list of aliases which can be set,
+       unset and printed  by  the  <I>alias</I>  and  <I>unalias</I>  commands.
+       After  a  command line is parsed into simple commands (see
+       <B>Commands</B>) the first word of each  command,  left-to-right,
+       is  checked  to  see if it has an alias.  If so, the first
+       word is replaced by the alias.  If the  alias  contains  a
+       history   reference,  it  undergoes  <B>History</B>  <B>substitution</B>
+       (q.v.) as though the original command  were  the  previous
+       input  line.  If the alias does not contain a history ref­
+       erence, the argument list is left untouched.
+
+       Thus if the alias for `ls' were `ls -l'  the  command  `ls
+       /usr'  would  become  `ls -l /usr', the argument list here
+       <B>aliases</B>.
+
+   <B>Variable</B> <B>substitution</B>
+       The shell maintains a list of variables, each of which has
+       as  value  a  list  of  zero or more words.  The values of
+       shell variables can be displayed and changed with the  <I>set</I>
+       and  <I>unset</I> commands.  The system maintains its own list of
+       ``environment'' variables.  These  can  be  displayed  and
+       changed with <I>printenv</I>, <I>setenv</I> and <I>unsetenv</I>.
+
+       (+)  Variables  may be made read-only with `set -r' (q.v.)
+       Read-only variables may not be modified or unset; attempt­
+       ing  to do so will cause an error.  Once made read-only, a
+       variable cannot be made writable, so `set  -r'  should  be
+       used  with  caution.  Environment variables cannot be made
+       read-only.
+
+       Some variables are set by the shell or referred to by  it.
+       For instance, the <B>argv</B> variable is an image of the shell's
+       argument list, and words  of  this  variable's  value  are
+       referred  to  in  special  ways.   Some  of  the variables
+       referred to by the shell are toggles; the shell  does  not
+       care  what  their  value  is, only whether they are set or
+       not.  For instance, the <B>verbose</B> variable is a toggle which
+       causes  command  input  to be echoed.  The <B>-v</B> command line
+       option sets this variable.  <B>Special</B> <B>shell</B> <B>variables</B>  lists
+       all variables which are referred to by the shell.
+
+       Other  operations  treat  variables  numerically.  The `@'
+       command permits numeric calculations to be  performed  and
+       the  result  assigned to a variable.  Variable values are,
+       however, always represented as  (zero  or  more)  strings.
+       For the purposes of numeric operations, the null string is
+       considered to be zero, and the second and subsequent words
+       of multi-word values are ignored.
+
+       After  the  input  line  is aliased and parsed, and before
+       each command is executed, variable  substitution  is  per­
+       formed  keyed  by  `$'  characters.  This expansion can be
+       prevented by preceding the `$' with a  `\'  except  within
+       `"'s  where  it  <I>always</I>  occurs,  and within `''s where it
+       <I>never</I> occurs.  Strings quoted by ``' are interpreted later
+       (see  <B>Command</B> <B>substitution</B> below) so `$' substitution does
+       not occur there until later, if at all.  A `$'  is  passed
+       unchanged if followed by a blank, tab, or end-of-line.
+
+       Input/output  redirections  are recognized before variable
+       expansion, and are variable expanded  separately.   Other­
+       wise,  the  command  name  and  entire  argument  list are
+       expanded together.  It is  thus  possible  for  the  first
+       (command)  word  (to this point) to generate more than one
+       word, the first of which becomes the command name, and the
+       is an error to reference a variable which is not set.
+
+       $<I>name</I>
+       ${<I>name</I>} Substitutes  the  words  of  the value of variable
+               <I>name</I>, each separated by a blank.  Braces  insulate
+               <I>name</I>  from following characters which would other­
+               wise be part of it.  Shell  variables  have  names
+               consisting of up to 20 letters and digits starting
+               with a letter.  The underscore character  is  con­
+               sidered  a  letter.   If <I>name</I> is not a shell vari­
+               able, but is set in  the  environment,  then  that
+               value is returned (but `:' modifiers and the other
+               forms given below are not available in this case).
+       $<I>name</I>[<I>selector</I>]
+       ${<I>name</I>[<I>selector</I>]}
+               Substitutes only the selected words from the value
+               of <I>name</I>.  The <I>selector</I> is subjected to `$' substi­
+               tution  and  may consist of a single number or two
+               numbers separated by a `-'.  The first word  of  a
+               variable's  value  is  numbered `1'.  If the first
+               number of a range is omitted it defaults  to  `1'.
+               If  the  last  member  of  a  range  is omitted it
+               defaults to `$#<I>name</I>'.  The  <I>selector</I>  `*'  selects
+               all  words.   It is not an error for a range to be
+               empty if the second  argument  is  omitted  or  in
+               range.
+       $0      Substitutes  the  name of the file from which com­
+               mand input is being read.  An error occurs if  the
+               name is not known.
+       $<I>number</I>
+       ${<I>number</I>}
+               Equivalent to `$argv[<I>number</I>]'.
+       $*      Equivalent  to  `$argv',  which  is  equivalent to
+               `$argv[*]'.
+
+       The `:' modifiers described  under  <B>History</B>  <B>substitution</B>,
+       except  for  `:p',  can  be  applied  to the substitutions
+       above.  More than one may be  used.   (+)  Braces  may  be
+       needed  to insulate a variable substitution from a literal
+       colon just as with <B>History</B> <B>substitution</B> (q.v.); any  modi­
+       fiers must appear within the braces.
+
+       The  following  substitutions can not be modified with `:'
+       modifiers.
+
+       $?<I>name</I>
+       ${?<I>name</I>}
+               Substitutes the string `1' if <I>name</I> is set, `0'  if
+               it is not.
+       $?0     Substitutes  `1'  if the current input filename is
+               known, `0' if it is not.  Always `0'  in  interac­
+               tive shells.
+
+       $!      Substitutes the (decimal) process  number  of  the
+               last  background  process  started  by this shell.
+               (+)
+       $_      Substitutes the command line of the  last  command
+               executed.  (+)
+       $&lt;      Substitutes  a  line from the standard input, with
+               no further interpretation thereafter.  It  can  be
+               used  to read from the keyboard in a shell script.
+               (+) While <I>csh</I> always quotes  $&lt;,  as  if  it  were
+               equivalent to `$&lt;:q', <I>tcsh</I> does not.  Furthermore,
+               when <I>tcsh</I> is waiting for a line to  be  typed  the
+               user  may  type  an  interrupt  to  interrupt  the
+               sequence into which the line is to be substituted,
+               but <I>csh</I> does not allow this.
+
+       The  editor  command  <I>expand-variables</I>,  normally bound to
+       `^X-$', can be used  to  interactively  expand  individual
+       variables.
+
+   <B>Command,</B> <B>filename</B> <B>and</B> <B>directory</B> <B>stack</B> <B>substitution</B>
+       The remaining substitutions are applied selectively to the
+       arguments of builtin commands.  This means  that  portions
+       of  expressions  which are not evaluated are not subjected
+       to these expansions.  For commands which are not  internal
+       to  the  shell, the command name is substituted separately
+       from the argument list.   This  occurs  very  late,  after
+       input-output  redirection  is performed, and in a child of
+       the main shell.
+
+   <B>Command</B> <B>substitution</B>
+       Command substitution is indicated by a command enclosed in
+       ``'.   The output from such a command is broken into sepa­
+       rate words at blanks, tabs and newlines,  and  null  words
+       are discarded.  The output is variable and command substi­
+       tuted and put in place of the original string.
+
+       Command substitutions inside double  quotes  (`"')  retain
+       blanks  and tabs; only newlines force new words.  The sin­
+       gle final newline does not force a new word in  any  case.
+       It  is  thus  possible for a command substitution to yield
+       only part of a word, even if the command  outputs  a  com­
+       plete line.
+
+   <B>Filename</B> <B>substitution</B>
+       If  a word contains any of the characters `*', `?', `[' or
+       `{' or begins with the character `~' it is a candidate for
+       filename  substitution,  also known as ``globbing''.  This
+       word is then regarded as a pattern (``glob-pattern''), and
+       replaced  with an alphabetically sorted list of file names
+       which match the pattern.
+
+       In matching filenames, the character `.' at the  beginning
+
+           &gt; echo *
+           bang crash crunch ouch
+           &gt; echo ^cr*
+           bang ouch
+
+       Glob-patterns which do not use `?', `*', or `[]' or  which
+       use `{}' or `~' (below) are not negated correctly.
+
+       The  metanotation  `a{b,c,d}e' is a shorthand for `abe ace
+       ade'.      Left-to-right     order      is      preserved:
+       `/usr/source/s1/{oldls,ls}.c'          expands          to
+       `/usr/source/s1/oldls.c /usr/source/s1/ls.c'.  The results
+       of  matches  are  sorted separately at a low level to pre­
+       serve  this  order:  `../{memo,*box}'  might   expand   to
+       `../memo  ../box  ../mbox'.   (Note  that  `memo'  was not
+       sorted with the results of matching `*box'.)  It is not an
+       error  when  this  construct expands to files which do not
+       exist, but it is possible to get an error from  a  command
+       to  which the expanded list is passed.  This construct may
+       be nested.  As a special case the words `{', `}' and  `{}'
+       are passed undisturbed.
+
+       The character `~' at the beginning of a filename refers to
+       home directories.  Standing alone, i.e., `~',  it  expands
+       to  the invoker's home directory as reflected in the value
+       of the <B>home</B> shell variable.  When followed by a name  con­
+       sisting  of  letters,  digits and `-' characters the shell
+       searches for a user with that name and  substitutes  their
+       home directory; thus `~ken' might expand to `/usr/ken' and
+       `~ken/chmach' to `/usr/ken/chmach'.  If the character  `~'
+       is  followed  by a character other than a letter or `/' or
+       appears elsewhere than at the beginning of a word,  it  is
+       left   undisturbed.    A   command  like  `setenv  MANPATH
+       /usr/man:/usr/local/man:~/lib/man' does not, therefore, do
+       home directory substitution as one might hope.
+
+       It is an error for a glob-pattern containing `*', `?', `['
+       or `~', with or without `^', not to match any files.  How­
+       ever,  only  one  pattern  in a list of glob-patterns must
+       match a file (so that, e.g., `rm *.a *.c *.o'  would  fail
+       only  if there were no files in the current directory end­
+       ing in `.a', `.c', or `.o'), and if  the  <B>nonomatch</B>  shell
+       variable  is  set  a  pattern  (or list of patterns) which
+       matches nothing is left unchanged rather than  causing  an
+       error.
+
+       The  <B>noglob</B>  shell variable can be set to prevent filename
+       substitution, and the <I>expand-glob</I> editor command, normally
+       bound to `^X-*', can be used to interactively expand indi­
+       vidual filename substitutions.
+
+
+           &gt; dirs -v
+           0       /usr/bin
+           1       /usr/spool/uucp
+           2       /usr/accts/sys
+           &gt; echo =1
+           /usr/spool/uucp
+           &gt; echo =0/calendar
+           /usr/bin/calendar
+           &gt; echo =-
+           /usr/accts/sys
+
+       The <B>noglob</B> and <B>nonomatch</B> shell variables and  the  <I>expand-</I>
+       <I>glob</I>  editor  command  apply to directory stack as well as
+       filename substitutions.
+
+   <B>Other</B> <B>substitutions</B> <B>(+)</B>
+       There are several  more  transformations  involving  file­
+       names,  not  strictly  related  to the above but mentioned
+       here for completeness.  <I>Any</I> filename may be expanded to  a
+       full  path  when  the  <B>symlinks</B>  variable (q.v.) is set to
+       `expand'.  Quoting prevents this expansion, and  the  <I>nor­</I>
+       <I>malize-path</I> editor command does it on demand.  The <I>normal­</I>
+       <I>ize-command</I> editor command expands commands in  PATH  into
+       full paths on demand.  Finally, <I>cd</I> and <I>pushd</I> interpret `-'
+       as the old working  directory  (equivalent  to  the  shell
+       variable  <B>owd</B>).  This is not a substitution at all, but an
+       abbreviation recognized by only those commands.   Nonethe­
+       less, it too can be prevented by quoting.
+
+   <B>Commands</B>
+       The  next  three  sections describe how the shell executes
+       commands and deals with their input and output.
+
+   <B>Simple</B> <B>commands,</B> <B>pipelines</B> <B>and</B> <B>sequences</B>
+       A simple command is a sequence  of  words,  the  first  of
+       which  specifies  the command to be executed.  A series of
+       simple commands joined by `|' characters forms a pipeline.
+       The  output  of each command in a pipeline is connected to
+       the input of the next.
+
+       Simple commands and pipelines may be joined into sequences
+       with `;', and will be executed sequentially.  Commands and
+       pipelines can also be joined into sequences with  `||'  or
+       `&amp;&amp;', indicating, as in the C language, that the second is
+       to be executed only if the first fails or succeeds respec­
+       tively.
+
+       A  simple  command,  pipeline or sequence may be placed in
+       parentheses, `()', to form a simple command, which may  in
+       turn be a component of a pipeline or sequence.  A command,
+       pipeline or sequence can be executed without  waiting  for
+           cd; pwd
+
+       leaves  you in the <B>home</B> directory.  Parenthesized commands
+       are most often used to prevent <I>cd</I> from affecting the  cur­
+       rent shell.
+
+       When a command to be executed is found not to be a builtin
+       command the shell attempts  to  execute  the  command  via
+       <B>execve(2)</B>.   Each word in the variable <B>path</B> names a direc­
+       tory in which the shell will look for the command.  If  it
+       is  given  neither  a <B>-c</B> nor a <B>-t</B> option, the shell hashes
+       the names in these directories into an internal  table  so
+       that  it  will  try an <B>execve(2)</B> in only a directory where
+       there is a possibility that  the  command  resides  there.
+       This  greatly  speeds command location when a large number
+       of directories are present in the search  path.   If  this
+       mechanism  has  been turned off (via <I>unhash</I>), if the shell
+       was given a <B>-c</B> or <B>-t</B> argument or  in  any  case  for  each
+       directory  component  of  <B>path</B> which does not begin with a
+       `/', the shell concatenates the current working  directory
+       with  the given command name to form a path name of a file
+       which it then attempts to execute.
+
+       If the file has execute permissions but  is  not  an  exe­
+       cutable  to  the system (i.e., it is neither an executable
+       binary nor a script that specifies its interpreter),  then
+       it is assumed to be a file containing shell commands and a
+       new shell is spawned to read it.  The <I>shell</I> special  alias
+       may  be set to specify an interpreter other than the shell
+       itself.
+
+       On systems which do not understand the `#!' script  inter­
+       preter convention the shell may be compiled to emulate it;
+       see the <B>version</B> shell variable.  If so, the  shell  checks
+       the  first  line  of  the file to see if it is of the form
+       `#!<I>interpreter</I> <I>arg</I> ...'.   If  it  is,  the  shell  starts
+       <I>interpreter</I>  with  the given <I>arg</I>s and feeds the file to it
+       on standard input.
+
+   <B>Input/output</B>
+       The standard input and standard output of a command may be
+       redirected with the following syntax:
+
+       &lt; <I>name</I>  Open  file  <I>name</I> (which is first variable, command
+               and filename expanded) as the standard input.
+       &lt;&lt; <I>word</I> Read the shell input up to a line which is identi­
+               cal  to  <I>word</I>.  <I>word</I> is not subjected to variable,
+               filename or command substitution, and  each  input
+               line  is compared to <I>word</I> before any substitutions
+               are done on this input  line.   Unless  a  quoting
+               `\',  `"',  `' or ``' appears in <I>word</I> variable and
+               command substitution is performed on the interven­
+
+               If  the  shell variable <B>noclobber</B> is set, then the
+               file must not exist or be a character special file
+               (e.g.,  a  terminal  or  `/dev/null')  or an error
+               results.  This helps prevent  accidental  destruc­
+               tion  of files.  In this case the `!' forms can be
+               used to suppress this check.
+
+               The forms involving `&amp;' route the diagnostic  out­
+               put  into  the specified file as well as the stan­
+               dard output.  <I>name</I> is expanded in the same way  as
+               `&lt;' input filenames are.
+       &gt;&gt; <I>name</I>
+       <I>&gt;&gt;&amp;</I> <I>name</I>
+       <I>&gt;&gt;!</I> <I>name</I>
+       <I>&gt;&gt;&amp;!</I> <I>name</I>
+               Like  `&gt;',  but appends output to the end of <I>name</I>.
+               If the shell variable <B>noclobber</B> is set, then it is
+               an  error for the file <I>not</I> to exist, unless one of
+               the `!' forms is given.
+
+       A command receives the environment in which the shell  was
+       invoked as modified by the input-output parameters and the
+       presence of the command in a pipeline.  Thus, unlike  some
+       previous  shells,  commands  run from a file of shell com­
+       mands have no access  to  the  text  of  the  commands  by
+       default;  rather  they receive the original standard input
+       of the shell.  The `&lt;&lt;' mechanism should be used  to  pre­
+       sent  inline  data.  This permits shell command scripts to
+       function as components of pipelines and allows  the  shell
+       to  block  read its input.  Note that the default standard
+       input for a command run detached is  <I>not</I>  the  empty  file
+       <I>/dev/null</I>,  but  the original standard input of the shell.
+       If this is a terminal and if the process attempts to  read
+       from  the  terminal,  then  the process will block and the
+       user will be notified (see <B>Jobs</B>).
+
+       Diagnostic output may be directed through a pipe with  the
+       standard  output.   Simply  use  the form `|&amp;' rather than
+       just `|'.
+
+       The shell  cannot  presently  redirect  diagnostic  output
+       without  also redirecting standard output, but `(<I>command</I> &gt;
+       <I>output-file</I>)  &gt;&amp;  <I>error-file</I>'  is  often   an   acceptable
+       workaround.   Either  <I>output-file</I>  or  <I>error-file</I>  may  be
+       `/dev/tty' to send output to the terminal.
+
+   <B>Features</B>
+       Having described how the shell accepts,  parses  and  exe­
+       cutes  command lines, we now turn to a variety of its use­
+       ful features.
+
+       input  whenever a loop is being read and performs seeks in
+       this internal buffer to accomplish the  rereading  implied
+       by  the  loop.   (To the extent that this allows, backward
+       <I>goto</I>s will succeed on non-seekable inputs.)
+
+   <B>Expressions</B>
+       The <I>if</I>, <I>while</I> and <I>exit</I> builtin  commands  use  expressions
+       with  a common syntax.  The expressions can include any of
+       the operators described in the next three sections.   Note
+       that  the  <I>@</I>  builtin  command (q.v.) has its own separate
+       syntax.
+
+   <B>Logical,</B> <B>arithmetical</B> <B>and</B> <B>comparison</B> <B>operators</B>
+       These operators are similar to those of  C  and  have  the
+       same precedence.  They include
+
+           ||  &amp;&amp;  |  ^  &amp;  ==  !=  =~  !~  &lt;=  &gt;=
+           &lt;  &gt; &lt;&lt;  &gt;&gt;  +  -  *  /  %  !  ~  (  )
+
+       Here the precedence increases to the right, `==' `!=' `=~'
+       and `!~', `&lt;=' `&gt;=' `&lt;' and `&gt;', `&lt;&lt;' and  `&gt;&gt;',  `+'  and
+       `-',  `*' `/' and `%' being, in groups, at the same level.
+       The `==' `!=' `=~' and `!~' operators compare their  argu­
+       ments  as  strings;  all  others  operate on numbers.  The
+       operators `=~' and `!~' are like `!=' and `==' except that
+       the  right  hand side is a glob-pattern (see <B>Filename</B> <B>sub­</B>
+       <B>stitution</B>) against which the left hand operand is matched.
+       This  reduces  the need for use of the <I>switch</I> builtin com­
+       mand in shell scripts when all that is  really  needed  is
+       pattern matching.
+
+       Strings which begin with `0' are considered octal numbers.
+       Null or missing arguments are considered `0'.  The results
+       of  all  expressions  are strings, which represent decimal
+       numbers.  It is important to note that no  two  components
+       of  an expression can appear in the same word; except when
+       adjacent to components of expressions which are  syntacti­
+       cally  significant to the parser (`&amp;' `|' `&lt;' `&gt;' `(' `)')
+       they should be surrounded by spaces.
+
+   <B>Command</B> <B>exit</B> <B>status</B>
+       Commands can be executed in  expressions  and  their  exit
+       status  returned  by  enclosing  them  in  braces  (`{}').
+       Remember that the braces  should  be  separated  from  the
+       words  of  the command by spaces.  Command executions suc­
+       ceed, returning true, i.e., `1', if the command exits with
+       status 0, otherwise they fail, returning false, i.e., `0'.
+       If more detailed status information is required  then  the
+       command  should  be  executed outside of an expression and
+       the <B>status</B> shell variable examined.
+
+   <B>File</B> <B>inquiry</B> <B>operators</B>
+           <B>f</B>   Plain file
+           <B>d</B>   Directory
+           <B>l</B>   Symbolic link (+) *
+           <B>b</B>   Block special file (+)
+           <B>c</B>   Character special file (+)
+           <B>p</B>   Named pipe (fifo) (+) *
+           <B>S</B>   Socket special file (+) *
+           <B>u</B>   Set-user-ID bit is set (+)
+           <B>g</B>   Set-group-ID bit is set (+)
+           <B>k</B>   Sticky bit is set (+)
+           <B>t</B>   <I>file</I> (which must be  a  digit)  is  an  open  file
+               descriptor for a terminal device (+)
+           <B>R</B>   Has been migrated (convex only) (+)
+           <B>L</B>   Applies  subsequent operators in a multiple-opera­
+               tor test to a symbolic link  rather  than  to  the
+               file to which the link points (+) *
+
+       <I>file</I>  is  command and filename expanded and then tested to
+       see if it has the specified relationship to the real user.
+       If  <I>file</I>  does  not  exist  or is inaccessible or, for the
+       operators indicated by `*', if  the  specified  file  type
+       does  not  exist on the current system, then all enquiries
+       return false, i.e., `0'.
+
+       These operators may  be  combined  for  conciseness:  `-<I>xy</I>
+       <I>file</I>'  is  equivalent  to  `-<I>x</I>  <I>file</I> &amp;&amp; -<I>y</I> <I>file</I>'.  (+) For
+       example, `-fx' is true (returns `1') for plain  executable
+       files, but not for directories.
+
+       <B>L</B>  may be used in a multiple-operator test to apply subse­
+       quent operators to a symbolic link rather than to the file
+       to which the link points.  For example, `-lLo' is true for
+       links owned by the invoking  user.   <B>Lr</B>,  <B>Lw</B>  and  <B>Lx</B>  are
+       always  true  for  links and false for non-links.  <B>L</B> has a
+       different meaning when it is the last operator in a multi­
+       ple-operator test; see below.
+
+       It  is  possible but not useful, and sometimes misleading,
+       to combine operators which expect <I>file</I> to be a  file  with
+       operators which do not, (e.g., <B>X</B> and <B>t</B>).  Following <B>L</B> with
+       a non-file  operator  can  lead  to  particularly  strange
+       results.
+
+       Other  operators  return other information, i.e., not just
+       `0' or `1'.  (+) They have the same format as  before;  <I>op</I>
+       may be one of
+
+           <B>A</B>       Last  file  access time, as the number of sec­
+                   onds since the epoch
+           <B>A:</B>      Like <B>A</B>, but in timestamp  format,  e.g.,  `Fri
+                   May 14 16:36:10 1993'
+           <B>M</B>       Last file modification time
+                   group  and  other,  `20' if by group only, and
+                   `0' if by neither
+           <B>P</B><I>mode</I><B>:</B>  Like <B>P</B><I>mode</I><B>:</B>, with leading zero
+           <B>U</B>       Numeric userid
+           <B>U:</B>      Username, or the numeric userid if  the  user­
+                   name is unknown
+           <B>G</B>       Numeric groupid
+           <B>G:</B>      Groupname,  or  the  numeric  groupid  if  the
+                   groupname is unknown
+           <B>Z</B>       Size, in bytes
+
+       Only one of these operators may appear in a multiple-oper­
+       ator  test,  and  it  must be the last.  Note that <B>L</B> has a
+       different meaning at the end of and elsewhere in a  multi­
+       ple-operator  test.   Because  `0' is a valid return value
+       for many of these operators, they do not return  `0'  when
+       they fail: most return `-1', and <B>F</B> returns `:'.
+
+       If  the shell is compiled with POSIX defined (see the <B>ver­</B>
+       <B>sion</B> shell variable), the result  of  a  file  inquiry  is
+       based  on  the  permission bits of the file and not on the
+       result of the <B>access(2)</B> system call.  For example, if  one
+       tests  a  file  with <B>-w</B> whose permissions would ordinarily
+       allow writing but which is on a file system mounted  read-
+       only, the test will succeed in a POSIX shell but fail in a
+       non-POSIX shell.
+
+       File inquiry operators can  also  be  evaluated  with  the
+       <I>filetest</I> builtin command (q.v.) (+).
+
+   <B>Jobs</B>
+       The shell associates a <I>job</I> with each pipeline.  It keeps a
+       table of current jobs, printed by the  <I>jobs</I>  command,  and
+       assigns them small integer numbers.  When a job is started
+       asynchronously with `&amp;', the shell  prints  a  line  which
+       looks like
+
+           [1] 1234
+
+       indicating  that  the job which was started asynchronously
+       was job number 1 and had one  (top-level)  process,  whose
+       process id was 1234.
+
+       If you are running a job and wish to do something else you
+       may hit the suspend key (usually `^Z'), which sends a STOP
+       signal  to  the current job.  The shell will then normally
+       indicate that the  job  has  been  `Suspended'  and  print
+       another  prompt.   If  the <B>listjobs</B> shell variable is set,
+       all jobs will be listed like the <I>jobs</I> builtin command;  if
+       it  is  set  to `long' the listing will be in long format,
+       like `jobs -l'.  You can then manipulate the state of  the
+       suspended  job.  You can put it in the ``background'' with
+       editing command.  (+)
+
+       A job being run in the background stops  if  it  tries  to
+       read  from  the  terminal.   Background  jobs are normally
+       allowed to produce output, but this  can  be  disabled  by
+       giving  the  command  `stty  tostop'.  If you set this tty
+       option, then background jobs will stop when  they  try  to
+       produce output like they do when they try to read input.
+
+       There are several ways to refer to jobs in the shell.  The
+       character `%' introduces a job name.  If you wish to refer
+       to  job  number 1, you can name it as `%1'.  Just naming a
+       job brings it to the foreground; thus `%1'  is  a  synonym
+       for  `fg  %1',  bringing  job  1 back into the foreground.
+       Similarly, saying `%1 &amp;' resumes job 1 in the  background,
+       just  like  `bg  %1'.  A job can also be named by an unam­
+       biguous prefix of the string typed in to start  it:  `%ex'
+       would  normally  restart  a  suspended <B>ex(1)</B> job, if there
+       were only one suspended job  whose  name  began  with  the
+       string  `ex'.   It  is  also possible to say `%?<I>string</I>' to
+       specify a job whose text contains <I>string</I>, if there is only
+       one such job.
+
+       The  shell  maintains a notion of the current and previous
+       jobs.  In output pertaining to jobs, the  current  job  is
+       marked  with  a  `+' and the previous job with a `-'.  The
+       abbreviations `%+', `%', and (by analogy with  the  syntax
+       of  the  <I>history</I>  mechanism) `%%' all refer to the current
+       job, and `%-' refers to the previous job.
+
+       The job control mechanism requires that the <B>stty(1)</B> option
+       `new'  be  set  on some systems.  It is an artifact from a
+       `new' implementation of the tty driver which allows gener­
+       ation  of  interrupt  characters from the keyboard to tell
+       jobs to stop.  See <B>stty(1)</B> and the <I>setty</I>  builtin  command
+       for details on setting options in the new tty driver.
+
+   <B>Status</B> <B>reporting</B>
+       The  shell  learns  immediately whenever a process changes
+       state.  It normally informs you  whenever  a  job  becomes
+       blocked  so that no further progress is possible, but only
+       right before it prints a prompt.  This is done so that  it
+       does  not  otherwise  disturb your work.  If, however, you
+       set the shell variable <B>notify</B>, the shell will  notify  you
+       immediately  of  changes  of  status  in  background jobs.
+       There is also a shell command <I>notify</I> which marks a  single
+       process  so  that  its  status changes will be immediately
+       reported.  By default <I>notify</I> marks  the  current  process;
+       simply  say  `notify'  after  starting a background job to
+       mark it.
+
+       When you try to leave the shell while  jobs  are  stopped,
+       event list, to be executed by the shell at a given time.
+
+       The <I>beepcmd</I>, <I>cwdcmd</I>, <I>periodic</I>, <I>precmd</I>, <I>postcmd</I>, and <I>jobcmd</I>
+       <B>Special</B>  <B>aliases</B> can be set, respectively, to execute com­
+       mands when the shell wants to  ring  the  bell,  when  the
+       working  directory  changes, every <B>tperiod</B> minutes, before
+       each prompt, before each command gets executed, after each
+       command  gets  executed,  and  when a job is started or is
+       brought into the foreground.
+
+       The <B>autologout</B> shell variable can be set  to  log  out  or
+       lock the shell after a given number of minutes of inactiv­
+       ity.
+
+       The <B>mail</B> shell variable can be set to check for  new  mail
+       periodically.
+
+       The  <B>printexitvalue</B> shell variable can be set to print the
+       exit status of commands which exit  with  a  status  other
+       than zero.
+
+       The <B>rmstar</B> shell variable can be set to ask the user, when
+       `rm *' is typed, if that is really what was meant.
+
+       The <B>time</B> shell variable can be set  to  execute  the  <I>time</I>
+       builtin  command  after the completion of any process that
+       takes more than a given number of CPU seconds.
+
+       The <B>watch</B> and <B>who</B> shell variables can  be  set  to  report
+       when  selected  users  log  in or out, and the <I>log</I> builtin
+       command reports on those users at any time.
+
+   <B>Native</B> <B>Language</B> <B>System</B> <B>support</B> <B>(+)</B>
+       The shell is eight bit clean (if so compiled; see the <B>ver­</B>
+       <B>sion</B>  shell  variable)  and  thus  supports character sets
+       needing this capability.  NLS support differs depending on
+       whether  or not the shell was compiled to use the system's
+       NLS (again, see <B>version</B>).  In either case, 7-bit ASCII  is
+       the  default  for  character  classification  (e.g., which
+       characters are printable) and sorting,  and  changing  the
+       <B>LANG</B>  or <B>LC_CTYPE</B> environment variables causes a check for
+       possible changes in these respects.
+
+       When using the system's NLS, the <B>setlocale(3)</B> function  is
+       called  to  determine appropriate character classification
+       and sorting.  This function typically  examines  the  <B>LANG</B>
+       and  <B>LC_CTYPE</B>  environment  variables; refer to the system
+       documentation for further details.   When  not  using  the
+       system's  NLS, the shell simulates it by assuming that the
+       ISO 8859-1 character set is used whenever  either  of  the
+       <B>LANG</B>  and  <B>LC_CTYPE</B> variables are set, regardless of their
+       values.  Sorting is not affected for the simulated NLS.
+       nor  control  characters)  are printed in the format \nnn.
+       If the tty is not in 8 bit mode, other  8  bit  characters
+       are printed by converting them to ASCII and using standout
+       mode.  The shell never changes the 7/8 bit mode of the tty
+       and  tracks  user-initiated  changes of 7/8 bit mode.  NLS
+       users (or, for that matter, those who want to use  a  meta
+       key)  may  need  to  explicitly  set the tty in 8 bit mode
+       through the appropriate  <B>stty(1)</B>  command  in,  e.g.,  the
+       <I>~/.login</I> file.
+
+   <B>OS</B> <B>variant</B> <B>support</B> <B>(+)</B>
+       A  number  of new builtin commands are provided to support
+       features  in  particular  operating  systems.    All   are
+       described in detail in the <B>Builtin</B> <B>commands</B> section.
+
+       On   systems   that  support  TCF  (aix-ibm370,  aix-ps2),
+       <I>getspath</I> and <I>setspath</I> get and  set  the  system  execution
+       path,  <I>getxvers</I>  and <I>setxvers</I> get and set the experimental
+       version prefix  and  <I>migrate</I>  migrates  processes  between
+       sites.  The <I>jobs</I> builtin prints the site on which each job
+       is executing.
+
+       Under Domain/OS, <I>inlib</I> adds shared libraries to  the  cur­
+       rent  environment,  <I>rootnode</I>  changes the rootnode and <I>ver</I>
+       changes the systype.
+
+       Under Mach, <I>setpath</I> is equivalent to Mach's <B>setpath(1)</B>.
+
+       Under Masscomp/RTU and Harris  CX/UX,  <I>universe</I>  sets  the
+       universe.
+
+       Under  Harris  CX/UX,  <I>ucb</I> or <I>att</I> runs a command under the
+       specified universe.
+
+       Under Convex/OS, <I>warp</I> prints or sets the universe.
+
+       The <B>VENDOR</B>,  <B>OSTYPE</B>  and  <B>MACHTYPE</B>  environment  variables
+       indicate  respectively  the  vendor,  operating system and
+       machine type (microprocessor class or  machine  model)  of
+       the system on which the shell thinks it is running.  These
+       are particularly useful when sharing one's home  directory
+       between several types of machines; one can, for example,
+
+           set  path = (~/bin.$MACHTYPE /usr/ucb /bin /usr/bin .)
+
+       in one's <I>~/.login</I> and put executables  compiled  for  each
+       machine in the appropriate directory.
+
+       The  <B>version</B>  shell  variable  indicates what options were
+       chosen when the shell was compiled.
+
+       Note also the <I>newgrp</I> builtin, the <B>afsuser</B>  and  <B>echo_style</B>
+
+       The shell exits on a hangup (see  also  the  <B>logout</B>  shell
+       variable).   By  default, the shell's children do too, but
+       the shell does not send them a hangup when it exits.   <I>hup</I>
+       arranges for the shell to send a hangup to a child when it
+       exits, and <I>nohup</I> sets a child to ignore hangups.
+
+   <B>Terminal</B> <B>management</B> <B>(+)</B>
+       The shell uses three different sets of terminal  (``tty'')
+       modes: `edit', used when editing, `quote', used when quot­
+       ing literal characters, and `execute', used when executing
+       commands.  The shell holds some settings in each mode con­
+       stant, so commands which leave the tty in a confused state
+       do  not  interfere with the shell.  The shell also matches
+       changes in the speed and padding of the tty.  The list  of
+       tty modes that are kept constant can be examined and modi­
+       fied with the <I>setty</I> builtin.  Note that although the  edi­
+       tor  uses CBREAK mode (or its equivalent), it takes typed-
+       ahead characters anyway.
+
+       The <I>echotc</I>, <I>settc</I> and  <I>telltc</I>  commands  can  be  used  to
+       manipulate  and  debug terminal capabilities from the com­
+       mand line.
+
+       On systems that support SIGWINCH or SIGWINDOW,  the  shell
+       adapts  to  window  resizing automatically and adjusts the
+       environment variables <B>LINES</B> and <B>COLUMNS</B> if  set.   If  the
+       environment  variable <B>TERMCAP</B> contains li# and co# fields,
+       the shell adjusts them to reflect the new window size.
+
+
+</PRE>
+<H2>REFERENCE</H2><PRE>
+       The next sections of  this  manual  describe  all  of  the
+       available  <B>Builtin</B>  <B>commands</B>,  <B>Special</B> <B>aliases</B> and <B>Special</B>
+       <B>shell</B> <B>variables</B>.
+
+   <B>Builtin</B> <B>commands</B>
+       <B>%</B><I>job</I>    A synonym for the <I>fg</I> builtin command.
+
+       <B>%</B><I>job</I> <B>&amp;</B>  A synonym for the <I>bg</I> builtin command.
+
+       <B>:</B>       Does nothing, successfully.
+
+       <B>@</B>
+       <B>@</B> <I>name</I> <B>=</B> <I>expr</I>
+       <B>@</B> <I>name</I>[<I>index</I>] <B>=</B> <I>expr</I>
+       <B>@</B> <I>name</I><B>++</B>|<B>--</B>
+       <B>@</B> <I>name</I>[<I>index</I>]<B>++</B>|<B>--</B>
+               The first form prints  the  values  of  all  shell
+               variables.
+
+               The second form assigns the value of <I>expr</I> to <I>name</I>.
+               The third form assigns the value of  <I>expr</I>  to  the
+               <I>expr</I>  are  optional.   Components  of <I>expr</I> must be
+               separated by spaces.
+
+       <B>alias</B> [<I>name</I> [<I>wordlist</I>]]
+               Without arguments, prints all aliases.  With <I>name</I>,
+               prints   the   alias  for  name.   With  <I>name</I>  and
+               <I>wordlist</I>, assigns <I>wordlist</I> as the alias  of  <I>name</I>.
+               <I>wordlist</I>  is  command  and  filename  substituted.
+               <I>name</I> may not be `alias' or  `unalias'.   See  also
+               the <I>unalias</I> builtin command.
+
+       <B>alloc</B>   Shows  the amount of dynamic memory acquired, bro­
+               ken down into used and free memory.  With an argu­
+               ment  shows  the number of free and used blocks in
+               each size category.  The categories start at  size
+               8  and double at each step.  This command's output
+               may vary  across  system  types,  because  systems
+               other  than  the  VAX  may  use a different memory
+               allocator.
+
+       <B>bg</B> [<B>%</B><I>job</I> ...]
+               Puts the specified jobs  (or,  without  arguments,
+               the  current  job) into the background, continuing
+               each if it is stopped.  <I>job</I> may  be  a  number,  a
+               string,  `',  `%',  `+'  or `-' as described under
+               <B>Jobs</B>.
+
+       <B>bindkey</B> [<B>-l</B>|<B>-d</B>|<B>-e</B>|<B>-v</B>|<B>-u</B>] (+)
+       <B>bindkey</B> [<B>-a</B>] [<B>-b</B>] [<B>-k</B>] [<B>-r</B>] [<B>--</B>] <I>key</I> (+)
+       <B>bindkey</B> [<B>-a</B>] [<B>-b</B>] [<B>-k</B>] [<B>-c</B>|<B>-s</B>] [<B>--</B>] <I>key</I> <I>command</I> (+)
+               Without options, the first form  lists  all  bound
+               keys  and  the  editor  command  to  which each is
+               bound, the second form lists the editor command to
+               which  <I>key</I>  is  bound and the third form binds the
+               editor command <I>command</I> to <I>key</I>.  Options include:
+
+               <B>-l</B>  Lists all editor commands and a short descrip­
+                   tion of each.
+               <B>-d</B>  Binds  all  keys  to the standard bindings for
+                   the default editor.
+               <B>-e</B>  Binds all keys to the standard GNU  Emacs-like
+                   bindings.
+               <B>-v</B>  Binds  all  keys  to  the  standard <B>vi(1)</B>-like
+                   bindings.
+               <B>-a</B>  Lists or changes key-bindings in the  alterna­
+                   tive  key map.  This is the key map used in <I>vi</I>
+                   command mode.
+               <B>-b</B>  <I>key</I> is  interpreted  as  a  control  character
+                   written ^<I>character</I> (e.g., `^A') or C-<I>character</I>
+                   (e.g., `C-A'), a  meta  character  written  M-
+                   <I>character</I>  (e.g., `M-A'), a function key writ­
+                   ten  F-<I>string</I>  (e.g.,   `F-string'),   or   an
+                   interpretation.
+               <B>--</B>  Forces  a break from option processing, so the
+                   next word is taken as <I>key</I> even  if  it  begins
+                   with '-'.
+               <B>-u</B> (or any invalid option)
+                   Prints a usage message.
+
+               <I>key</I>  may  be a single character or a string.  If a
+               command is bound to a string, the first  character
+               of the string is bound to <I>sequence-lead-in</I> and the
+               entire string is bound to the command.
+
+               Control characters in <I>key</I> can be literal (they can
+               be typed by preceding them with the editor command
+               <I>quoted-insert</I>, normally bound to `^V') or  written
+               caret-character  style,  e.g.,  `^A'.   Delete  is
+               written `^?'  (caret-question mark).  <I>key</I> and <I>com­</I>
+               <I>mand</I>  can contain backslashed escape sequences (in
+               the style of System V <B>echo(1)</B>) as follows:
+
+                   <B>\a</B>      Bell
+                   <B>\b</B>      Backspace
+                   <B>\e</B>      Escape
+                   <B>\f</B>      Form feed
+                   <B>\n</B>      Newline
+                   <B>\r</B>      Carriage return
+                   <B>\t</B>      Horizontal tab
+                   <B>\v</B>      Vertical tab
+                   <B>\</B><I>nnn</I>    The ASCII character  corresponding  to
+                           the octal number <I>nnn</I>
+
+               `\' nullifies the special meaning of the following
+               character, if it has any, notably `\' and `^'.
+
+       <B>break</B>   Causes execution to resume after the  <I>end</I>  of  the
+               nearest enclosing <I>foreach</I> or <I>while</I>.  The remaining
+               commands on the current line are executed.  Multi-
+               level breaks are thus possible by writing them all
+               on one line.
+
+       <B>breaksw</B> Causes a break from a <I>switch</I>, resuming  after  the
+               <I>endsw</I>.
+
+       <B>builtins</B> (+)
+               Prints the names of all builtin commands.
+
+       <B>bye</B> (+) A  synonym for the <I>logout</I> builtin command.  Avail­
+               able only if the shell was so  compiled;  see  the
+               <B>version</B> shell variable.
+
+       <B>case</B> <I>label</I><B>:</B>
+               A  label in a <I>switch</I> statement as discussed below.
+               With <B>-p</B>, prints the final  directory  stack,  just
+               like  <I>dirs</I>.  The <B>-l</B>, <B>-n</B> and <B>-v</B> flags have the same
+               effect on <I>cd</I> as on <I>dirs</I>, and they imply <B>-p</B>.  (+)
+
+               See also the <B>implicitcd</B> shell variable.
+
+       <B>chdir</B>   A synonym for the <I>cd</I> builtin command.
+
+       <B>complete</B> [<I>command</I>  [<I>word</I><B>/</B><I>pattern</I><B>/</B><I>list</I>[<B>:</B><I>select</I>]<B>/</B>[[<I>suffix</I>]<B>/</B>]
+       ...]] (+)
+               Without arguments, lists  all  completions.   With
+               <I>command</I>, lists completions for <I>command</I>.  With <I>com­</I>
+               <I>mand</I> and <I>word</I> etc., defines completions.
+
+               <I>command</I> may be a full command name or a  glob-pat­
+               tern  (see  <B>Filename</B>  <B>substitution</B>).  It can begin
+               with `-' to indicate  that  completion  should  be
+               used only when <I>command</I> is ambiguous.
+
+               <I>word</I>  specifies which word relative to the current
+               word is to be completed, and may  be  one  of  the
+               following:
+
+                   <B>c</B>   Current-word  completion.   <I>pattern</I>  is  a
+                       glob-pattern which must match  the  begin­
+                       ning  of  the  current word on the command
+                       line.  <I>pattern</I> is ignored when  completing
+                       the current word.
+                   <B>C</B>   Like <B>c</B>, but includes <I>pattern</I> when complet­
+                       ing the current word.
+                   <B>n</B>   Next-word completion.  <I>pattern</I> is a  glob-
+                       pattern  which must match the beginning of
+                       the previous word on the command line.
+                   <B>N</B>   Like <B>n</B>, but must match  the  beginning  of
+                       the word two before the current word.
+                   <B>p</B>   Position-dependent completion.  <I>pattern</I> is
+                       a numeric range, with the same syntax used
+                       to   index  shell  variables,  which  must
+                       include the current word.
+
+               <I>list</I>, the list of possible completions, may be one
+               of the following:
+
+                   <B>a</B>       Aliases
+                   <B>b</B>       Bindings (editor commands)
+                   <B>c</B>       Commands  (builtin  or  external  com­
+                           mands)
+                   <B>C</B>       External commands which begin with the
+                           supplied path prefix
+                   <B>d</B>       Directories
+                   <B>D</B>       Directories  which begin with the sup­
+                           plied path prefix
+
+                   <B>u</B>       Usernames
+                   <B>x</B>       Like <B>n</B>, but prints <I>select</I>  when  <I>list-</I>
+                           <I>choices</I> is used.
+                   <B>X</B>       Completions
+                   $<I>var</I>    Words from the variable <I>var</I>
+                   (...)   Words from the given list
+                   `...`   Words from the output of command
+
+               <I>select</I>  is  an  optional  glob-pattern.  If given,
+               words from only <I>list</I> that match <I>select</I> are consid­
+               ered  and  the  <B>fignore</B> shell variable is ignored.
+               The last three types of completion may not have  a
+               <I>select</I>  pattern,  and <B>x</B> uses <I>select</I> as an explana­
+               tory message when the <I>list-choices</I> editor  command
+               is used.
+
+               <I>suffix</I>  is  a single character to be appended to a
+               successful completion.  If null, no  character  is
+               appended.   If  omitted  (in which case the fourth
+               delimiter  can  also  be  omitted),  a  slash   is
+               appended  to  directories  and  a  space  to other
+               words.
+
+               Now for some examples.  Some  commands  take  only
+               directories as arguments, so there's no point com­
+               pleting plain files.
+
+                   &gt; complete cd 'p/1/d/'
+
+               completes  only  the  first  word  following  `cd'
+               (`p/1')  with  a directory.  <B>p</B>-type completion can
+               also be used to narrow down command completion:
+
+                   &gt; co[^D]
+                   complete compress
+                   &gt; complete -co* 'p/0/(compress)/'
+                   &gt; co[^D]
+                   &gt; compress
+
+               This completion completes commands (words in posi­
+               tion  0, `p/0') which begin with `co' (thus match­
+               ing `co*') to `compress' (the  only  word  in  the
+               list).   The  leading `-' indicates that this com­
+               pletion is to be used  with  only  ambiguous  com­
+               mands.
+
+                   &gt; complete find 'n/-user/u/'
+
+               is an example of <B>n</B>-type completion.  Any word fol­
+               lowing `find' and immediately following `-user' is
+               completed from the list of users.
+
+
+               These  complete  words  following   `alias'   with
+               aliases, `man' with commands, and `set' with shell
+               variables.  `true' doesn't have any options, so  <B>x</B>
+               does  nothing  when  completion  is  attempted and
+               prints `Truth has  no  options.'  when  completion
+               choices are listed.
+
+               Note that the <I>man</I> example, and several other exam­
+               ples below, could just as well have used 'c/*'  or
+               'n/*' as 'p/*'.
+
+               Words  can  be completed from a variable evaluated
+               at completion time,
+
+                   &gt; complete ftp 'p/1/$hostnames/'
+                   &gt; set hostnames = (rtfm.mit.edu  tesla.ee.cor­
+                   nell.edu)
+                   &gt; ftp [^D]
+                   rtfm.mit.edu tesla.ee.cornell.edu
+                   &gt; ftp [^C]
+                   &gt;  set hostnames = (rtfm.mit.edu tesla.ee.cor­
+                   nell.edu uunet.uu.net)
+                   &gt; ftp [^D]
+                   rtfm.mit.edu tesla.ee.cornell.edu uunet.uu.net
+
+               or from a command run at completion time:
+
+                   &gt;   complete  kill  'p/*/`ps  |  awk  \{print\
+                   \$1\}`/'
+                   &gt; kill -9 [^D]
+                   23113 23377 23380 23406 23429 23529 23530 PID
+
+               Note that the <I>complete</I>  command  does  not  itself
+               quote  its arguments, so the braces, space and `$'
+               in `{print $1}' must be quoted explicitly.
+
+               One command can have multiple completions:
+
+                   &gt; complete dbx 'p/2/(core)/' 'p/*/c/'
+
+               completes the second argument to  `dbx'  with  the
+               word `core' and all other arguments with commands.
+               Note that the positional completion  is  specified
+               before  the next-word completion.  Because comple­
+               tions are evaluated from left  to  right,  if  the
+               next-word completion were specified first it would
+               always match and the positional  completion  would
+               never  be executed.  This is a common mistake when
+               defining a completion.
+
+               The <I>select</I> pattern is useful when a command  takes
+               to  exclude precious source code from `rm' comple­
+               tion.  Of course, one could  still  type  excluded
+               names  manually  or override the completion mecha­
+               nism using the <I>complete-word-raw</I> or  <I>list-choices-</I>
+               <I>raw</I> editor commands (q.v.).
+
+               The `C', `D', `F' and `T' <I>list</I>s are like `c', `d',
+               `f' and `t' respectively, but they use the  <I>select</I>
+               argument  in  a different way: to restrict comple­
+               tion to files beginning  with  a  particular  path
+               prefix.   For  example,  the Elm mail program uses
+               `=' as an abbreviation for one's  mail  directory.
+               One might use
+
+                   &gt; complete elm c@=@F:$HOME/Mail/@
+
+               to  complete  `elm  -f  ='  as  if it were `elm -f
+               ~/Mail/'.  Note that we used `@' instead of `/' to
+               avoid  confusion  with the <I>select</I> argument, and we
+               used `$HOME' instead of `~' because home directory
+               substitution  works  at  only  the  beginning of a
+               word.
+
+               <I>suffix</I> is used to add a  nonstandard  suffix  (not
+               space  or `/' for directories) to completed words.
+
+                   &gt; complete finger 'c/*@/$hostnames/' 'p/1/u/@'
+
+               completes  arguments  to `finger' from the list of
+               users, appends an `@', and  then  completes  after
+               the `@' from the `hostnames' variable.  Note again
+               the order in which the completions are  specified.
+
+               Finally, here's a complex example for inspiration:
+
+                   &gt; complete find \
+                   ´n/-name/f/' 'n/-newer/f/' 'n/-{,n}cpio/f/' \
+                   ´n/-exec/c/' 'n/-ok/c/' 'n/-user/u/' \
+                   ´n/-group/g/' 'n/-fstype/(nfs 4.2)/' \
+                   ´n/-type/(b c d f l p s)/' \
+                   ´c/-/(name newer cpio ncpio exec ok user \
+                   group fstype type atime ctime depth inum \
+                   ls mtime nogroup nouser perm print prune \
+                   size xdev)/' \
+                   ´p/*/d/'
+
+               This completes words following `-name',  `-newer',
+               `-cpio' or `ncpio' (note the pattern which matches
+               both) to files, words following `-exec'  or  `-ok'
+               to commands, words following `user' and `group' to
+               users and groups respectively and words  following
+               `-fstype'  or  `-type'  to  members  of  the given
+               Continues execution of the nearest enclosing <I>while</I>
+               or <I>foreach</I>.  The rest of the commands on the  cur­
+               rent line are executed.
+
+       <B>default:</B>
+               Labels the default case in a <I>switch</I> statement.  It
+               should come after all <I>case</I> labels.
+
+       <B>dirs</B> [<B>-l</B>] [<B>-n</B>|<B>-v</B>]
+       <B>dirs</B> <B>-S</B>|<B>-L</B> [<I>filename</I>] (+)
+       <B>dirs</B> <B>-c</B> (+)
+               The first form prints the  directory  stack.   The
+               top  of  the  stack  is  at the left and the first
+               directory in the stack is the  current  directory.
+               With  <B>-l</B>, `~' or `~<I>name</I>' in the output is expanded
+               explicitly to <B>home</B> or the  pathname  of  the  home
+               directory for user <I>name</I>.  (+) With <B>-n</B>, entries are
+               wrapped before they reach the edge of the  screen.
+               (+)  With  <B>-v</B>,  entries  are printed one per line,
+               preceded by their stack positions.   (+)  If  more
+               than  one  of  <B>-n</B>  or <B>-v</B> is given, <B>-v</B> takes prece­
+               dence.  <B>-p</B> is accepted but does nothing.
+
+               With <B>-S</B>, the second form saves the directory stack
+               to  <I>filename</I> as a series of <I>cd</I> and <I>pushd</I> commands.
+               With <B>-L</B>, the shell sources <I>filename</I>, which is pre­
+               sumably  a  directory  stack  file saved by the <B>-S</B>
+               option or the <B>savedirs</B> mechanism.  In either case,
+               <B>dirsfile</B>  is  used  if  <I>filename</I>  is not given and
+               <I>~/.cshdirs</I> is used if <B>dirsfile</B> is unset.
+
+               Note that login shells do the equivalent of  `dirs
+               -L'  on startup and, if <B>savedirs</B> is set, `dirs -S'
+               before exiting.  Because only  <I>~/.tcshrc</I>  is  nor­
+               mally  sourced  before <I>~/.cshdirs</I>, <B>dirsfile</B> should
+               be set in <I>~/.tcshrc</I> rather than <I>~/.login</I>.
+
+               The last form clears the directory stack.
+
+       <B>echo</B> [<B>-n</B>] <I>word</I> ...
+               Writes each <I>word</I> to the shell's  standard  output,
+               separated by spaces and terminated with a newline.
+               The <B>echo_style</B> shell variable may be set  to  emu­
+               late  (or  not)  the flags and escape sequences of
+               the BSD and/or System  V  versions  of  <I>echo</I>;  see
+               <B>echo(1)</B>.
+
+       <B>echotc</B> [<B>-sv</B>] <I>arg</I> ... (+)
+               Exercises  the  terminal  capabilities  (see <I>term­</I>
+               <B>cap(5)</B>) in <I>args</I>.  For example, 'echotc home' sends
+               the  cursor to the home position, 'echotc cm 3 10'
+               sends it to column 3 and row 10, and 'echotc ts 0;
+               Termcap strings may contain wildcards  which  will
+               not  echo correctly.  One should use double quotes
+               when setting a shell variable to a terminal  capa­
+               bility  string,  as  in the following example that
+               places the date in the status line:
+
+                   &gt; set tosl="`echotc ts 0`"
+                   &gt; set frsl="`echotc fs`"
+                   &gt; echo -n "$tosl";date; echo -n "$frsl"
+
+               With <B>-s</B>, nonexistent capabilities return the empty
+               string  rather  than  causing  an error.  With <B>-v</B>,
+               messages are verbose.
+
+       <B>else</B>
+       <B>end</B>
+       <B>endif</B>
+       <B>endsw</B>   See the description of the  <I>foreach</I>,  <I>if</I>,  <I>switch</I>,
+               and <I>while</I> statements below.
+
+       <B>eval</B> <I>arg</I> ...
+               Treats  the  arguments  as  input to the shell and
+               executes the resulting command(s) in  the  context
+               of  the  current  shell.   This is usually used to
+               execute commands generated as the result  of  com­
+               mand  or  variable  substitution,  because parsing
+               occurs before these  substitutions.   See  <B>tset(1)</B>
+               for a sample use of <I>eval</I>.
+
+       <B>exec</B> <I>command</I>
+               Executes  the  specified  command  in place of the
+               current shell.
+
+       <B>exit</B> [<I>expr</I>]
+               The shell exits either with the value of the spec­
+               ified  <I>expr</I>  (an  expression,  as  described under
+               <B>Expressions</B>) or, without <I>expr</I>, with the  value  of
+               the <B>status</B> variable.
+
+       <B>fg</B> [<B>%</B><I>job</I> ...]
+               Brings  the specified jobs (or, without arguments,
+               the current job) into the  foreground,  continuing
+               each  if  it  is  stopped.  <I>job</I> may be a number, a
+               string, `', `%', `+' or  `-'  as  described  under
+               <B>Jobs</B>.   See also the <I>run-fg-editor</I> editor command.
+
+       <B>filetest</B> <B>-</B><I>op</I> <I>file</I> ... (+)
+               Applies <I>op</I> (which is a file  inquiry  operator  as
+               described  under  <B>File</B>  <B>inquiry</B> <B>operators</B>) to each
+               <I>file</I> and returns the results as a  space-separated
+               list.
+
+
+       <B>getspath</B> (+)
+               Prints the system execution path.  (TCF only)
+
+       <B>getxvers</B> (+)
+               Prints  the  experimental  version  prefix.   (TCF
+               only)
+
+       <B>glob</B> <I>wordlist</I>
+               Like  <I>echo</I>,  but no `\' escapes are recognized and
+               words are delimited by null characters in the out­
+               put.   Useful  for  programs which wish to use the
+               shell to filename expand a list of words.
+
+       <B>goto</B> <I>word</I>
+               <I>word</I> is filename and command-substituted to  yield
+               a  string  of the form `label'.  The shell rewinds
+               its input as much as possible, searches for a line
+               of  the form `label:', possibly preceded by blanks
+               or tabs, and continues execution after that  line.
+
+       <B>hashstat</B>
+               Prints  a statistics line indicating how effective
+               the internal hash table has been at locating  com­
+               mands (and avoiding <I>exec</I>'s).  An <I>exec</I> is attempted
+               for each component of  the  <B>path</B>  where  the  hash
+               function  indicates  a  possible  hit, and in each
+               component which does not begin with a `/'.
+
+               On machines without <B>vfork(2)</B>, prints only the num­
+               ber and size of hash buckets.
+
+       <B>history</B> [<B>-hTr</B>] [<I>n</I>]
+       <B>history</B> <B>-S</B>|<B>-L|-M</B> [<I>filename</I>] (+)
+       <B>history</B> <B>-c</B> (+)
+               The  first form prints the history event list.  If
+               <I>n</I> is given only  the  <I>n</I>  most  recent  events  are
+               printed  or  saved.   With <B>-h</B>, the history list is
+               printed without leading numbers.  If <B>-T</B> is  speci­
+               fied, timestamps are printed also in comment form.
+               (This can be used to produce  files  suitable  for
+               loading  with  'history -L' or 'source -h'.)  With
+               <B>-r</B>, the order of printing  is  most  recent  first
+               rather than oldest first.
+
+               With <B>-S</B>, the second form saves the history list to
+               <I>filename</I>.  If the first word of the <B>savehist</B> shell
+               variable  is  set  to  a number, at most that many
+               lines are saved.  If the second word  of  <B>savehist</B>
+               is set to `merge', the history list is merged with
+               the existing history file instead of replacing  it
+               (if  there  is one) and sorted by time stamp.  (+)
+               filename.
+
+               Note that login shells do the equivalent of  `his­
+               tory -L' on startup and, if <B>savehist</B> is set, `his­
+               tory -S' before exiting.  Because  only  <I>~/.tcshrc</I>
+               is  normally  sourced  before <I>~/.history</I>, <B>histfile</B>
+               should be set in <I>~/.tcshrc</I> rather than <I>~/.login</I>.
+
+               If <B>histlit</B> is set,  the  first  and  second  forms
+               print  and  save  the literal (unexpanded) form of
+               the history list.
+
+               The last form clears the history list.
+
+       <B>hup</B> [<I>command</I>] (+)
+               With <I>command</I>, runs <I>command</I> such that it will  exit
+               on  a  hangup signal and arranges for the shell to
+               send it a hangup  signal  when  the  shell  exits.
+               Note  that  commands may set their own response to
+               hangups,  overriding  <I>hup</I>.   Without  an  argument
+               (allowed in only a shell script), causes the shell
+               to exit on a  hangup  for  the  remainder  of  the
+               script.   See  also  <B>Signal</B> <B>handling</B> and the <I>nohup</I>
+               builtin command.
+
+       <B>if</B> <B>(</B><I>expr</I><B>)</B> <I>command</I>
+               If <I>expr</I> (an expression, as described under <B>Expres­</B>
+               <B>sions</B>)  evaluates  true, then <I>command</I> is executed.
+               Variable substitution on <I>command</I> happens early, at
+               the  same time it does for the rest of the <I>if</I> com­
+               mand.  <I>command</I> must be a simple  command,  not  an
+               alias,  a  pipeline, a command list or a parenthe­
+               sized command list, but  it  may  have  arguments.
+               Input/output  redirection  occurs  even if <I>expr</I> is
+               false and <I>command</I> is thus <I>not</I> executed; this is  a
+               bug.
+
+       <B>if</B> <B>(</B><I>expr</I><B>)</B> <B>then</B>
+       ...
+       <B>else</B> <B>if</B> <B>(</B><I>expr2</I><B>)</B> <B>then</B>
+       ...
+       <B>else</B>
+       ...
+       <B>endif</B>   If the specified <I>expr</I> is true then the commands to
+               the first <I>else</I> are executed; otherwise if <I>expr2</I> is
+               true then the commands to the second <I>else</I> are exe­
+               cuted, etc.  Any number of <I>else-if</I> pairs are  pos­
+               sible; only one <I>endif</I> is needed.  The <I>else</I> part is
+               likewise optional.  (The words <I>else</I> and <I>endif</I> must
+               appear  at  the  beginning  of input lines; the <I>if</I>
+               must appear alone on its input line  or  after  an
+               <I>else</I>.)
+               <I>signal</I> (or, if none is given, the TERM (terminate)
+               signal) to the specified jobs or  processes.   <I>job</I>
+               may  be a number, a string, `', `%', `+' or `-' as
+               described under <B>Jobs</B>.  Signals are either given by
+               number  or  by name (as given in <I>/usr/include/sig­</I>
+               <I>nal.h</I>, stripped of the prefix `SIG').  There is no
+               default  <I>job</I>;  saying  just `kill' does not send a
+               signal to the current job.  If  the  signal  being
+               sent is TERM (terminate) or HUP (hangup), then the
+               job or process is sent a CONT (continue) signal as
+               well.  The third form lists the signal names.
+
+       <B>limit</B> [<B>-h</B>] [<I>resource</I> [<I>maximum-use</I>]]
+               Limits  the consumption by the current process and
+               each process it creates to not individually exceed
+               <I>maximum-use</I> on the specified <I>resource</I>.  If no <I>max­</I>
+               <I>imum-use</I> is  given,  then  the  current  limit  is
+               printed; if no <I>resource</I> is given, then all limita­
+               tions are given.  If the <B>-h</B>  flag  is  given,  the
+               hard  limits  are used instead of the current lim­
+               its.  The hard limits impose a ceiling on the val­
+               ues  of  the  current limits.  Only the super-user
+               may raise the hard limits, but a user may lower or
+               raise the current limits within the legal range.
+
+               Controllable  resources currently include (if sup­
+               ported by the OS):
+
+               <I>cputime</I>
+                      the maximum number  of  cpu-seconds  to  be
+                      used by each process
+
+               <I>filesize</I>
+                      the  largest  single file which can be cre­
+                      ated
+
+               <I>datasize</I>
+                      the maximum growth of the data+stack region
+                      via  <B>sbrk(2)</B>  beyond the end of the program
+                      text
+
+               <I>stacksize</I>
+                      the  maximum  size  of  the  automatically-
+                      extended stack region
+
+               <I>coredumpsize</I>
+                      the size of the largest core dump that will
+                      be created
+
+               <I>memoryuse</I>
+                      the maximum amount  of  physical  memory  a
+                      process may have allocated to it at a given
+
+               <I>maxproc</I>
+                      the  maximum  number  of  simultaneous pro­
+                      cesses for this user id
+
+               <I>sbsize</I> the maximum size of socket buffer usage for
+                      this user
+
+               <I>maximum-use</I>  may  be given as a (floating point or
+               integer) number followed by a scale  factor.   For
+               all limits other than <I>cputime</I> the default scale is
+               `k' or `kilobytes' (1024 bytes); a scale factor of
+               `m'  or `megabytes' may also be used.  For <I>cputime</I>
+               the default scaling is `seconds',  while  `m'  for
+               minutes  or  `h'  for hours, or a time of the form
+               `mm:ss' giving minutes and seconds may be used.
+
+               For both <I>resource</I> names and scale  factors,  unam­
+               biguous prefixes of the names suffice.
+
+       <B>log</B> (+) Prints  the  <B>watch</B>  shell  variable and reports on
+               each user indicated in <B>watch</B>  who  is  logged  in,
+               regardless  of when they last logged in.  See also
+               <I>watchlog</I>.
+
+       <B>login</B>   Terminates a login shell,  replacing  it  with  an
+               instance  of  <I>/bin/login.</I>  This  is one way to log
+               off, included for compatibility with <B>sh(1)</B>.
+
+       <B>logout</B>  Terminates a login shell.   Especially  useful  if
+               <B>ignoreeof</B> is set.
+
+       <B>ls-F</B> [-<I>switch</I> ...] [<I>file</I> ...] (+)
+               Lists  files  like  `ls  -F', but much faster.  It
+               identifies each type of special file in the  list­
+               ing with a special character:
+
+               /   Directory
+               *   Executable
+               #   Block device
+               %   Character device
+               |   Named pipe (systems with named pipes only)
+               =   Socket (systems with sockets only)
+               @   Symbolic  link  (systems  with  symbolic links
+                   only)
+               +   Hidden directory (AIX only) or context  depen­
+                   dent (HP/UX only)
+               :   Network special (HP/UX only)
+
+               If  the  <B>listlinks</B> shell variable is set, symbolic
+               links are identified in more detail (on only  sys­
+               tems that have them, of course):
+
+               <B>listflags</B>  contains  an `x', in which case it acts
+               like `ls -xF'.  <I>ls-F</I> passes its arguments to <B>ls(1)</B>
+               if  it  is  given any switches, so `alias ls ls-F'
+               generally does the right thing.
+
+               The <B>ls-F</B> builtin can list  files  using  different
+               colors  depending  on  the  filetype or extension.
+               See the <B>color</B>  <I>tcsh</I>  variable  and  the  <B>LS_COLORS</B>
+               environment variable.
+
+       <B>migrate</B> [<B>-</B><I>site</I>] <I>pid</I>|<B>%</B><I>jobid</I> ... (+)
+       <B>migrate</B> <B>-</B><I>site</I> (+)
+               The  first form migrates the process or job to the
+               site specified or the default site  determined  by
+               the system path.  The second form is equivalent to
+               `migrate -<I>site</I> $$': it migrates the  current  pro­
+               cess  to  the specified site.  Migrating the shell
+               itself can cause unexpected behavior, because  the
+               shell does not like to lose its tty.  (TCF only)
+
+       <B>newgrp</B> [<B>-</B>] <I>group</I> (+)
+               Equivalent   to   `exec  newgrp';  see  <B>newgrp(1)</B>.
+               Available only if the shell was so  compiled;  see
+               the <B>version</B> shell variable.
+
+       <B>nice</B> [<B>+</B><I>number</I>] [<I>command</I>]
+               Sets the scheduling priority for the shell to <I>num­</I>
+               <I>ber</I>, or, without <I>number</I>, to 4.  With <I>command</I>, runs
+               <I>command</I>  at the appropriate priority.  The greater
+               the <I>number</I>, the less cpu the  process  gets.   The
+               super-user  may specify negative priority by using
+               `nice -number ...'.  Command is always executed in
+               a  sub-shell,  and the restrictions placed on com­
+               mands in simple <I>if</I> statements apply.
+
+       <B>nohup</B> [<I>command</I>]
+               With <I>command</I>,  runs  <I>command</I>  such  that  it  will
+               ignore hangup signals.  Note that commands may set
+               their own response to hangups,  overriding  <I>nohup</I>.
+               Without  an  argument  (allowed  in  only  a shell
+               script), causes the shell to  ignore  hangups  for
+               the remainder of the script.  See also <B>Signal</B> <B>han­</B>
+               <B>dling</B> and the <I>hup</I> builtin command.
+
+       <B>notify</B> [<B>%</B><I>job</I> ...]
+               Causes the shell to notify the user asynchronously
+               when  the status of any of the specified jobs (or,
+               without %<I>job</I>, the current job) changes, instead of
+               waiting  until  the  next prompt as is usual.  <I>job</I>
+               may be a number, a string, `', `%', `+' or `-'  as
+               described  under  <B>Jobs</B>.  See also the <B>notify</B> shell
+               variable.
+               interrupts are disabled anyway.
+
+       <B>popd</B> [<B>-p</B>] [<B>-l</B>] [<B>-n</B>|<B>-v</B>] [<B>+</B><I>n</I>]
+               Without arguments, pops the  directory  stack  and
+               returns  to  the new top directory.  With a number
+               `+<I>n</I>', discards the <I>n</I>'th entry in the stack.
+
+               Finally, all forms of <I>popd</I> print the final  direc­
+               tory stack, just like <I>dirs</I>.  The <B>pushdsilent</B> shell
+               variable can be set to prevent  this  and  the  <B>-p</B>
+               flag  can  be  given to override <B>pushdsilent</B>.  The
+               <B>-l</B>, <B>-n</B> and <B>-v</B> flags have the same effect  on  <I>popd</I>
+               as on <I>dirs</I>.  (+)
+
+       <B>printenv</B> [<I>name</I>] (+)
+               Prints  the  names  and  values of all environment
+               variables or, with <I>name</I>, the value of the environ­
+               ment variable <I>name</I>.
+
+       <B>pushd</B> [<B>-p</B>] [<B>-l</B>] [<B>-n</B>|<B>-v</B>] [<I>name</I>|<B>+</B><I>n</I>]
+               Without  arguments, exchanges the top two elements
+               of the directory stack.  If  <B>pushdtohome</B>  is  set,
+               <I>pushd</I>  without  arguments does `pushd ~', like <I>cd</I>.
+               (+) With <I>name</I>, pushes the current  working  direc­
+               tory onto the directory stack and changes to <I>name</I>.
+               If <I>name</I> is `-' it is interpreted as  the  previous
+               working  directory  (see  <B>Filename</B>  <B>substitution</B>).
+               (+) If <B>dunique</B> is set, <I>pushd</I> removes any instances
+               of  <I>name</I> from the stack before pushing it onto the
+               stack.  (+) With a number `+<I>n</I>',  rotates  the  <I>n</I>th
+               element  of  the  directory stack around to be the
+               top element and changes to  it.   If  <B>dextract</B>  is
+               set,  however,  `pushd +<I>n</I>' extracts the <I>n</I>th direc­
+               tory, pushes it onto the  top  of  the  stack  and
+               changes to it.  (+)
+
+               Finally, all forms of <I>pushd</I> print the final direc­
+               tory stack, just like <I>dirs</I>.  The <B>pushdsilent</B> shell
+               variable  can  be  set  to prevent this and the <B>-p</B>
+               flag can be given to  override  <B>pushdsilent</B>.   The
+               <B>-l</B>,  <B>-n</B> and <B>-v</B> flags have the same effect on <I>pushd</I>
+               as on <I>dirs</I>.  (+)
+
+       <B>rehash</B>  Causes the internal hash table of the contents  of
+               the  directories in the <B>path</B> variable to be recom­
+               puted.  This is needed if new commands  are  added
+               to  directories  in  <B>path</B> while you are logged in.
+               This should be necessary only if you add  commands
+               to  one  of  your own directories, or if a systems
+               programmer changes the contents of one of the sys­
+               tem  directories.   Also flushes the cache of home
+               directories built by tilde expansion.
+
+       <B>sched</B> [<B>+</B>]<I>hh:mm</I> <I>command</I> (+)
+       <B>sched</B> <B>-</B><I>n</I> (+)
+               The first form prints  the  scheduled-event  list.
+               The  <B>sched</B> shell variable may be set to define the
+               format  in  which  the  scheduled-event  list   is
+               printed.   The  second  form  adds  <I>command</I> to the
+               scheduled-event list.  For example,
+
+                   &gt; sched 11:00 echo It\'s eleven o\'clock.
+
+               causes the shell to echo `It's eleven o'clock.' at
+               11 AM.  The time may be in 12-hour AM/PM format
+
+                   &gt; sched 5pm set prompt='[%h] It\'s after 5; go
+                   home: &gt;'
+
+               or may be relative to the current time:
+
+                   &gt; sched +2:15 /usr/lib/uucp/uucico -r1 -sother
+
+               A  relative  time  specification may not use AM/PM
+               format.  The third form removes item  <I>n</I>  from  the
+               event list:
+
+                   &gt; sched
+                        1  Wed Apr  4 15:42  /usr/lib/uucp/uucico
+                   -r1 -sother
+                        2  Wed Apr  4 17:00  set prompt=[%h] It's
+                   after 5; go home: &gt;
+                   &gt; sched -2
+                   &gt; sched
+                        1  Wed Apr  4 15:42  /usr/lib/uucp/uucico
+                   -r1 -sother
+
+               A command in the scheduled-event list is  executed
+               just  before the first prompt is printed after the
+               time when the command is scheduled.  It is  possi­
+               ble  to miss the exact time when the command is to
+               be run, but an overdue command will execute at the
+               next  prompt.  A command which comes due while the
+               shell is waiting for user input is executed  imme­
+               diately.  However, normal operation of an already-
+               running command will not be interrupted so that  a
+               scheduled-event list element may be run.
+
+               This mechanism is similar to, but not the same as,
+               the <B>at(1)</B> command on some Unix systems.  Its major
+               disadvantage  is  that it may not run a command at
+               exactly the specified time.  Its  major  advantage
+               is  that  because  <I>sched</I>  runs  directly  from the
+               shell, it has access to shell variables and  other
+               structures.   This provides a mechanism for chang­
+               list.  The second  form  sets  <I>name</I>  to  the  null
+               string.   The  third  form sets <I>name</I> to the single
+               <I>word</I>.  The fourth form sets <I>name</I> to  the  list  of
+               words in <I>wordlist</I>.  In all cases the value is com­
+               mand and filename expanded.  If -r  is  specified,
+               the value is set read-only.  If -f or -l are spec­
+               ified, set only unique words keeping their  order.
+               -f  prefers the first occurrence of a word, and -l
+               the last.  The fifth form sets the <I>index</I>'th compo­
+               nent  of name to <I>word</I>; this component must already
+               exist.  The sixth form lists only the names of all
+               shell  variables  that are read-only.  The seventh
+               form makes <I>name</I> read-only, whether or not it has a
+               value.   The  second  form  sets  <I>name</I> to the null
+               string.  The eighth form is the same as the  third
+               form, but make <I>name</I> read-only at the same time.
+
+               These arguments can be repeated to set and/or make
+               read-only multiple variables in a single set  com­
+               mand.  Note, however, that variable expansion hap­
+               pens for all arguments before any setting  occurs.
+               Note  also  that  `=' can be adjacent to both <I>name</I>
+               and <I>word</I> or separated from both by whitespace, but
+               cannot  be adjacent to only one or the other.  See
+               also the <I>unset</I> builtin command.
+
+       <B>setenv</B> [<I>name</I> [<I>value</I>]]
+               Without arguments, prints the names and values  of
+               all  environment  variables.  Given <I>name</I>, sets the
+               environment variable <I>name</I>  to  <I>value</I>  or,  without
+               <I>value</I>, to the null string.
+
+       <B>setpath</B> <I>path</I> (+)
+               Equivalent to <B>setpath(1)</B>.  (Mach only)
+
+       <B>setspath</B> LOCAL|<I>site</I>|<I>cpu</I> ... (+)
+               Sets the system execution path.  (TCF only)
+
+       <B>settc</B> <I>cap</I> <I>value</I> (+)
+               Tells the shell to believe that the terminal capa­
+               bility <I>cap</I> (as  defined  in  <B>termcap(5)</B>)  has  the
+               value <I>value</I>.  No sanity checking is done.  Concept
+               terminal users may have to `settc xn  no'  to  get
+               proper wrapping at the rightmost column.
+
+       <B>setty</B> [<B>-d</B>|<B>-q</B>|<B>-x</B>] [<B>-a</B>] [[<B>+</B>|<B>-</B>]<I>mode</I>] (+)
+               Controls which tty modes (see <B>Terminal</B> <B>management</B>)
+               the shell does not allow to change.  <B>-d</B>, <B>-q</B> or  <B>-x</B>
+               tells <I>setty</I> to act on the `edit', `quote' or `exe­
+               cute' set of tty modes respectively;  without  <B>-d</B>,
+               <B>-q</B> or <B>-x</B>, `execute' is used.
+
+               removes it if <I>string</I> is omitted.  (TCF only)
+
+       <B>shift</B> [<I>variable</I>]
+               Without arguments, discards <B>argv</B>[1] and shifts the
+               members  of  <B>argv</B> to the left.  It is an error for
+               <B>argv</B> not to be set or to have less than  one  word
+               as  value.  With <I>variable</I>, performs the same func­
+               tion on <I>variable</I>.
+
+       <B>source</B> [<B>-h</B>] <I>name</I> [<I>args</I> ...]
+               The shell reads and executes commands  from  <I>name</I>.
+               The  commands  are not placed on the history list.
+               If any <I>args</I> are given, they are  placed  in  <B>argv</B>.
+               (+)  <I>source</I>  commands  may  be nested; if they are
+               nested too deeply the shell may run  out  of  file
+               descriptors.   An  error  in a <I>source</I> at any level
+               terminates all nested <I>source</I> commands.   With  <B>-h</B>,
+               commands are placed on the history list instead of
+               being executed, much like `history -L'.
+
+       <B>stop</B> <B>%</B><I>job</I>|<I>pid</I> ...
+               Stops the specified jobs or  processes  which  are
+               executing in the background.  <I>job</I> may be a number,
+               a string, `', `%', `+' or `-' as  described  under
+               <B>Jobs</B>.  There is no default <I>job</I>; saying just `stop'
+               does not stop the current job.
+
+       <B>suspend</B> Causes the shell to stop in its tracks, much as if
+               it  had  been sent a stop signal with <B>^Z</B>.  This is
+               most often used to stop shells started by <B>su(1)</B>.
+
+       <B>switch</B> <B>(</B><I>string</I><B>)</B>
+       <B>case</B> <I>str1</I><B>:</B>
+           ...
+           <B>breaksw</B>
+       ...
+       <B>default:</B>
+           ...
+           <B>breaksw</B>
+       <B>endsw</B>   Each case label is successively  matched,  against
+               the  specified  <I>string</I>  which is first command and
+               filename expanded.  The file  metacharacters  `*',
+               `?'  and  `[...]'  may be used in the case labels,
+               which are  variable  expanded.   If  none  of  the
+               labels  match  before  a `default' label is found,
+               then the execution begins after the default label.
+               Each  case label and the default label must appear
+               at the beginning of a line.  The  command  <I>breaksw</I>
+               causes  execution  to  continue  after  the <I>endsw</I>.
+               Otherwise control may fall through case labels and
+               default  labels  as in C.  If no label matches and
+               there is no default, execution continues after the
+               shell and its children.
+
+       <B>umask</B> [<I>value</I>]
+               Sets  the  file  creation  mask to <I>value</I>, which is
+               given in octal.  Common values for  the  mask  are
+               002,  giving  all access to the group and read and
+               execute access to others, and 022, giving read and
+               execute  access  to the group and others.  Without
+               <I>value</I>, prints the current file creation mask.
+
+       <B>unalias</B> <I>pattern</I>
+               Removes all aliases  whose  names  match  <I>pattern</I>.
+               `unalias  *'  thus removes all aliases.  It is not
+               an error for nothing to be <I>unalias</I>ed.
+
+       <B>uncomplete</B> <I>pattern</I> (+)
+               Removes all completions whose names match <I>pattern</I>.
+               `uncomplete  *'  thus removes all completions.  It
+               is not an error for nothing to be <I>uncomplete</I>d.
+
+       <B>unhash</B>  Disables use of the internal hash table  to  speed
+               location of executed programs.
+
+       <B>universe</B> <I>universe</I> (+)
+               Sets  the  universe  to  <I>universe</I>.   (Masscomp/RTU
+               only)
+
+       <B>unlimit</B> [<B>-h</B>] [<I>resource</I>]
+               Removes the  limitation  on  <I>resource</I>  or,  if  no
+               <I>resource</I>  is  specified, all <I>resource</I> limitations.
+               With  <B>-h</B>,  the  corresponding  hard   limits   are
+               removed.  Only the super-user may do this.
+
+       <B>unset</B> <I>pattern</I>
+               Removes  all  variables whose names match <I>pattern</I>,
+               unless they are read-only.  `unset *' thus removes
+               all variables unless they are read-only; this is a
+               bad idea.  It is not an error for  nothing  to  be
+               <I>unset</I>.
+
+       <B>unsetenv</B> <I>pattern</I>
+               Removes  all  environment  variables  whose  names
+               match <I>pattern</I>.   `unsetenv  *'  thus  removes  all
+               environment  variables; this is a bad idea.  It is
+               not an error for nothing to be <I>unsetenv</I>ed.
+
+       <B>ver</B> [<I>systype</I> [<I>command</I>]] (+)
+               Without arguments, prints <B>SYSTYPE</B>.  With  <I>systype</I>,
+               sets  <B>SYSTYPE</B>  to  <I>systype</I>.  With <I>systype</I> and <I>com­</I>
+               <I>mand</I>, executes <I>command</I> under <I>systype</I>.  <I>systype</I> may
+               be `bsd4.3' or `sys5.3'.  (Domain/OS only)
+
+               Reports all known instances of <I>command</I>,  including
+               aliases, builtins and executables in <B>path</B>.
+
+       <B>which</B> <I>command</I> (+)
+               Displays  the command that will be executed by the
+               shell after substitutions,  <B>path</B>  searching,  etc.
+               The  builtin command is just like <B>which(1)</B>, but it
+               correctly reports <I>tcsh</I> aliases and builtins and is
+               10  to  100 times faster.  See also the <I>which-com­</I>
+               <I>mand</I> editor command.
+
+       <B>while</B> <B>(</B><I>expr</I><B>)</B>
+       ...
+       <B>end</B>     Executes the commands between the  <I>while</I>  and  the
+               matching   <I>end</I>   while  <I>expr</I>  (an  expression,  as
+               described under <B>Expressions</B>)  evaluates  non-zero.
+               <I>while</I>  and  <I>end</I>  must  appear alone on their input
+               lines.  <I>break</I> and <I>continue</I> may be used  to  termi­
+               nate  or  continue  the  loop prematurely.  If the
+               input is a terminal,  the  user  is  prompted  the
+               first time through the loop as with <I>foreach</I>.
+
+   <B>Special</B> <B>aliases</B> <B>(+)</B>
+       If  set,  each  of these aliases executes automatically at
+       the indicated time.  They are all initially undefined.
+
+       <B>beepcmd</B> Runs when the shell wants  to  ring  the  terminal
+               bell.
+
+       <B>cwdcmd</B>  Runs after every change of working directory.  For
+               example, if the user is working  on  an  X  window
+               system  using  <B>xterm(1)</B>  and a re-parenting window
+               manager that supports title bars  such  as  <B>twm(1)</B>
+               and does
+
+                   &gt;  alias  cwdcmd   'echo -n "^[]2;${HOST}:$cwd
+                   ^G"'
+
+               then the shell will change the title of  the  run­
+               ning <B>xterm(1)</B> to be the name of the host, a colon,
+               and the full current working directory.  A fancier
+               way to do that is
+
+                   &gt;       alias       cwdcmd       'echo      -n
+                   "^[]2;${HOST}:$cwd^G^[]1;${HOST}^G"'
+
+               This will put the hostname and  working  directory
+               on the title bar but only the hostname in the icon
+               manager menu.
+
+               Note that putting a <I>cd</I>, <I>pushd</I> or  <I>popd</I>  in  <I>cwdcmd</I>
+               may  cause  an  infinite loop.  It is the author's
+               mand  name  for  which help is sought is passed as
+               sole argument.  For example, if one does
+
+                   &gt; alias helpcommand '\!:1 --help'
+
+               then the help display of the command  itself  will
+               be invoked, using the GNU help calling convention.
+               Currently there is no easy way to account for var­
+               ious calling conventions (e.g., the customary Unix
+               `-h'), except by using a table of many commands.
+
+       <B>periodic</B>
+               Runs every <B>tperiod</B> minutes.  This provides a  con­
+               venient  means  for  checking on common but infre­
+               quent changes such as new mail.  For  example,  if
+               one does
+
+                   &gt; set tperiod = 30
+                   &gt; alias periodic checknews
+
+               then  the  <B>checknews(1)</B> program runs every 30 min­
+               utes.  If <I>periodic</I> is set but <B>tperiod</B> is unset  or
+               set to 0, <I>periodic</I> behaves like <I>precmd</I>.
+
+       <B>precmd</B>  Runs  just  before  each  prompt  is printed.  For
+               example, if one does
+
+                   &gt; alias precmd date
+
+               then <B>date(1)</B> runs just before  the  shell  prompts
+               for  each  command.   There  are no limits on what
+               <I>precmd</I> can be set to do, but discretion should  be
+               used.
+
+       <B>postcmd</B> Runs before each command gets executed.
+
+                   &gt; alias postcmd  'echo -n "^[]2\;\!#^G"'
+
+               then  executing  <I>vi</I>  <I>foo.c</I>  will  put  the command
+               string in the xterm title bar.
+
+       <B>shell</B>   Specifies the interpreter for  executable  scripts
+               which  do  not  themselves specify an interpreter.
+               The first word should be a full path name  to  the
+               desired    interpreter    (e.g.,   `/bin/csh'   or
+               `/usr/local/bin/tcsh').
+
+   <B>Special</B> <B>shell</B> <B>variables</B>
+       The variables described in this section have special mean­
+       ing to the shell.
+
+       The  shell  sets  <B>addsuffix</B>,  <B>argv</B>,  <B>autologout</B>,  <B>command</B>,
+       automatically interconverts the different formats of  <B>path</B>
+       and <B>PATH</B>.
+
+       <B>addsuffix</B> (+)
+               If set, filename completion adds `/' to the end of
+               directories and a space to the end of normal files
+               when they are matched exactly.  Set by default.
+
+       <B>afsuser</B> (+)
+               If  set,  <B>autologout</B>'s  autolock  feature uses its
+               value instead of the local username  for  kerberos
+               authentication.
+
+       <B>ampm</B> (+)
+               If  set, all times are shown in 12-hour AM/PM for­
+               mat.
+
+       <B>argv</B>    The arguments to the shell.  Positional parameters
+               are  taken  from  <B>argv</B>,  i.e., `$1' is replaced by
+               `$argv[1]', etc.   Set  by  default,  but  usually
+               empty in interactive shells.
+
+       <B>autocorrect</B> (+)
+               If  set,  the <I>spell-word</I> editor command is invoked
+               automatically before each completion attempt.
+
+       <B>autoexpand</B> (+)
+               If  set,  the  <I>expand-history</I>  editor  command  is
+               invoked   automatically   before  each  completion
+               attempt.
+
+       <B>autolist</B> (+)
+               If set, possibilities are listed after an  ambigu­
+               ous completion.  If set to `ambiguous', possibili­
+               ties are listed only when no  new  characters  are
+               added by completion.
+
+       <B>autologout</B> (+)
+               The  first  word is the number of minutes of inac­
+               tivity before automatic logout.  The optional sec­
+               ond  word  is  the number of minutes of inactivity
+               before automatic locking.  When the shell automat­
+               ically logs out, it prints `auto-logout', sets the
+               variable logout to `automatic'  and  exits.   When
+               the   shell   automatically  locks,  the  user  is
+               required to enter his password to  continue  work­
+               ing.   Five incorrect attempts result in automatic
+               logout.  Set to `60' (automatic  logout  after  60
+               minutes,  and  no locking) by default in login and
+               superuser shells, but not if the shell  thinks  it
+               is  running  under a window system (i.e., the <B>DIS­</B>
+               <B>PLAY</B> environment variable is set), the  tty  is  a
+
+       <B>cdpath</B>  A list of directories in which  <I>cd</I>  should  search
+               for  subdirectories  if  they  aren't found in the
+               current directory.
+
+       <B>color</B>   If set, it enables color display for  the  builtin
+               <B>ls-F</B>  and  it passes <B>--color=auto</B> to <B>ls</B>.  Alterna­
+               tively, it can be set to only <B>ls-F</B> or only  <B>ls</B>  to
+               enable  color  to only one command.  Setting it to
+               nothing is equivalent to setting it to <B>(ls-F</B>  <B>ls)</B>.
+
+       <B>colorcat</B>
+               If  set,  it enables color escape sequence for NLS
+               message files.  And display colorful NLS messages.
+
+       <B>command</B> (+)
+               If  set, the command which was passed to the shell
+               with the <B>-c</B> flag (q.v.).
+
+       <B>complete</B> (+)
+               If set to `enhance', completion  1)  ignores  case
+               and  2) considers periods, hyphens and underscores
+               (`.', `-' and  `_')  to  be  word  separators  and
+               hyphens and underscores to be equivalent.
+
+       <B>continue</B> (+)
+               If  set to a list of commands, the shell will con­
+               tinue the listed commands, instead of  starting  a
+               new one.
+
+       <B>continue_args</B> (+)
+               Same as continue, but the shell will execute:
+
+                   echo `pwd` $argv &gt; ~/.&lt;cmd&gt;_pause; %&lt;cmd&gt;
+
+       <B>correct</B> (+)
+               If   set  to  `cmd',  commands  are  automatically
+               spelling-corrected.  If set  to  `complete',  com­
+               mands  are  automatically  completed.   If  set to
+               `all', the entire command line is corrected.
+
+       <B>cwd</B>     The full pathname of the current  directory.   See
+               also the <B>dirstack</B> and <B>owd</B> shell variables.
+
+       <B>dextract</B> (+)
+               If set, `pushd +<I>n</I>' extracts the <I>n</I>th directory from
+               the directory stack rather than rotating it to the
+               top.
+
+       <B>dirsfile</B> (+)
+               The  default location in which `dirs -S' and `dirs
+               -L' look for a history file.  If unset, <I>~/.cshdirs</I>
+               is  used.   Because  only  <I>~/.tcshrc</I>  is  normally
+
+       <B>dspmbyte</B> (+)
+               If set to `euc', it enables  display  and  editing
+               EUC-kanji(Japanese)  code.   If  set to `sjis', it
+               enables display  and  editing  Shift-JIS(Japanese)
+               code.   If  set  to `big5', it enables display and
+               editing Big5(Chinese) code.  If set to `utf8',  it
+               enables  display  and  editing Utf8(Unicode) code.
+               If set to the following format, it enables display
+               and editing of original multi-byte code format:
+
+                   &gt; set dspmbyte = 0000....(256 bytes)....0000
+
+               The table requires <B>just</B> 256 bytes.  Each character
+               of 256 characters corresponds (from left to right)
+               to  the  ASCII  codes  0x00, 0x01, ... 0xff.  Each
+               character is set to number 0,1,2 and 3.  Each num­
+               ber has the following meaning:
+                 0 ... not used for multi-byte characters.
+                 1  ...  used  for the first byte of a multi-byte
+               character.
+                 2 ... used for the second byte of  a  multi-byte
+               character.
+                 3  ...  used  for both the first byte and second
+               byte of a multi-byte character.
+
+
+
+
+
+
+
+                 Example:
+               If set to `001322',  the  first  character  (means
+               0x00  of  the  ASCII  code)  and  second character
+               (means 0x01 of ASCII code) are set to `0'.   Then,
+               it is not used for multi-byte characters.  The 3rd
+               character (0x02) is set to '2', indicating that it
+               is used for the first byte of a multi-byte charac­
+               ter.  The 4th character(0x03) is set '3'.   It  is
+               used  for  both the first byte and the second byte
+               of a multi-byte character.  The 5th and 6th  char­
+               acters (0x04,0x05) are set to '2', indicating that
+               they are used for the second byte of a  multi-byte
+               character.
+
+               The  GNU  fileutils  version  of ls cannot display
+               multi-byte filenames without the -N ( --literal  )
+               option.    If  you are using this version, set the
+               second word of dspmbyte  to  "ls".   If  not,  for
+               example, "ls-F -l" cannot display multi-byte file­
+               names.
+               are  then done selectively.  Set by the <B>-x</B> command
+               line option.
+
+       <B>echo_style</B> (+)
+               The style of the <I>echo</I> builtin.  May be set to
+
+               bsd     Don't echo a newline if the first argument
+                       is `-n'.
+               sysv    Recognize  backslashed escape sequences in
+                       echo strings.
+               both    Recognize both the  `-n'  flag  and  back­
+                       slashed escape sequences; the default.
+               none    Recognize neither.
+
+               Set  by  default to the local system default.  The
+               BSD and System V  options  are  described  in  the
+               <B>echo(1)</B> man pages on the appropriate systems.
+
+       <B>edit</B> (+)
+               If  set,  the command-line editor is used.  Set by
+               default in interactive shells.
+
+       <B>ellipsis</B> (+)
+               If set, the `%c'/`%.' and  `%C'  prompt  sequences
+               (see  the  <B>prompt</B> shell variable) indicate skipped
+               directories with an ellipsis (`...')   instead  of
+               `/&lt;skipped&gt;'.
+
+       <B>fignore</B> (+)
+               Lists  file name suffixes to be ignored by comple­
+               tion.
+
+       <B>filec</B>   In <I>tcsh</I>, completion is always used and this  vari­
+               able is ignored by default. If <B>edit</B> is unset, then
+               the traditional <I>csh</I> completion is used.  If set in
+               <I>csh</I>, filename completion is used.
+
+       <B>gid</B> (+) The user's real group ID.
+
+       <B>group</B> (+)
+               The user's group name.
+
+       <B>histchars</B>
+               A  string value determining the characters used in
+               <B>History</B> <B>substitution</B> (q.v.).  The first  character
+               of  its  value is used as the history substitution
+               character, replacing the  default  character  `!'.
+               The  second  character  of  its value replaces the
+               character `^' in quick substitutions.
+
+       <B>histdup</B> (+)
+               Controls handling of duplicate entries in the his­
+               ing the  same  home  directory  between  different
+               machines,  or  when  saving  separate histories on
+               different terminals.  Because  only  <I>~/.tcshrc</I>  is
+               normally   sourced   before  <I>~/.history</I>,  <B>histfile</B>
+               should be set in <I>~/.tcshrc</I> rather than <I>~/.login</I>.
+
+       <B>histlit</B> (+)
+               If set, builtin and editor commands and the  <B>save­</B>
+               <B>hist</B>  mechanism  use the literal (unexpanded) form
+               of lines in the history list.  See also  the  <I>tog­</I>
+               <I>gle-literal-history</I> editor command.
+
+       <B>history</B> The  first  word  indicates  the number of history
+               events to save.   The  optional  second  word  (+)
+               indicates  the format in which history is printed;
+               if not given, `%h\t%T\t%R\n' is used.  The  format
+               sequences  are  described below under <B>prompt</B>; note
+               the variable meaning of `%R'.   Set  to  `100'  by
+               default.
+
+       <B>home</B>    Initialized  to the home directory of the invoker.
+               The filename expansion of `<I>~</I>' refers to this vari­
+               able.
+
+       <B>ignoreeof</B>
+               If  set  to  the empty string or `0' and the input
+               device is  a  terminal,  the  <I>end-of-file</I>  command
+               (usually  generated  by the user by typing `^D' on
+               an empty line) causes  the  shell  to  print  `Use
+               "exit"  to  leave tcsh.' instead of exiting.  This
+               prevents the shell from accidentally being killed.
+               If set to a number <I>n</I>, the shell ignores <I>n</I> - 1 con­
+               secutive <I>end-of-file</I>s and exits on the  <I>n</I>th.   (+)
+               If  unset, `1' is used, i.e., the shell exits on a
+               single `^D'.
+
+       <B>implicitcd</B> (+)
+               If set, the shell treats a directory name typed as
+               a command as though it were a request to change to
+               that directory.  If set to <I>verbose</I>, the change  of
+               directory  is echoed to the standard output.  This
+               behavior is  inhibited  in  non-interactive  shell
+               scripts, or for command strings with more than one
+               word.  Changing directory  takes  precedence  over
+               executing  a  like-named  command,  but it is done
+               after alias  substitutions.   Tilde  and  variable
+               expansions work as expected.
+
+       <B>inputmode</B> (+)
+               If set to `insert' or `overwrite', puts the editor
+               into that input mode  at  the  beginning  of  each
+               line.
+               to  less  than  `2',  the shell will only keep the
+               most recently killed string.
+
+       <B>listflags</B> (+)
+               If set to `x', `a'  or  `A',  or  any  combination
+               thereof  (e.g.,  `xA'),  they are used as flags to
+               <I>ls-F</I>, making it act like `ls -xF', `ls  -Fa',  `ls
+               -FA' or a combination (e.g., `ls -FxA'): `a' shows
+               all files (even if they start  with  a  `.'),  `A'
+               shows  all  files  but `.' and `..', and `x' sorts
+               across instead of down.  If  the  second  word  of
+               <B>listflags</B>  is  set,  it  is  used  as  the path to
+               `<B>ls(1)</B>'.
+
+       <B>listjobs</B> (+)
+               If set, all jobs are listed when  a  job  is  sus­
+               pended.   If set to `long', the listing is in long
+               format.
+
+       <B>listlinks</B> (+)
+               If set, the <I>ls-F</I> builtin command shows the type of
+               file to which each symbolic link points.
+
+       <B>listmax</B> (+)
+               The maximum number of items which the <I>list-choices</I>
+               editor command will list without asking first.
+
+       <B>listmaxrows</B> (+)
+               The maximum number of  rows  of  items  which  the
+               <I>list-choices</I> editor command will list without ask­
+               ing first.
+
+       <B>loginsh</B> (+)
+               Set by the shell if it is a login shell.   Setting
+               or unsetting it within a shell has no effect.  See
+               also <B>shlvl</B>.
+
+       <B>logout</B> (+)
+               Set by the  shell  to  `normal'  before  a  normal
+               logout,  `automatic'  before  an automatic logout,
+               and `hangup' if the shell was killed by  a  hangup
+               signal (see <B>Signal</B> <B>handling</B>).  See also the <B>autol­</B>
+               <B>ogout</B> shell variable.
+
+       <B>mail</B>    The names of the files or directories to check for
+               incoming   mail,   separated  by  whitespace,  and
+               optionally preceded by  a  numeric  word.   Before
+               each  prompt,  if 10 minutes have passed since the
+               last check, the shell checks each  file  and  says
+               `You  have new mail.' (or, if <B>mail</B> contains multi­
+               ple files, `You have new mail in  <I>name</I>.')  if  the
+               filesize  is  greater  than zero in size and has a
+               for those systems which store mail in this manner,
+               such as the Andrew Mail System.
+
+               If  the  first word of <B>mail</B> is numeric it is taken
+               as a different mail checking interval, in seconds.
+
+               Under  very  rare  circumstances,  the  shell  may
+               report `You have mail.' instead of `You  have  new
+               mail.'
+
+       <B>matchbeep</B> (+)
+               If set to `never', completion never beeps.  If set
+               to `nomatch', it  beeps  only  when  there  is  no
+               match.   If set to `ambiguous, it beeps when there
+               are multiple matches.  If set to  `notunique',  it
+               beeps  when  there  is  one exact and other longer
+               matches.  If unset, `ambiguous' is used.
+
+       <B>nobeep</B> (+)
+               If set, beeping is completely disabled.  See  also
+               <B>visiblebell</B>.
+
+       <B>noclobber</B>
+               If set, restrictions are placed on output redirec­
+               tion to insure that  files  are  not  accidentally
+               destroyed  and  that  `&gt;&gt;'  redirections  refer to
+               existing files, as described in  the  <B>Input/output</B>
+               section.
+
+       <B>noding</B>  If  set,  disable  the  printing of `DING!' in the
+               <B>prompt</B> time specifiers at the change of hour.
+
+       <B>noglob</B>  If set, <B>Filename</B> <B>substitution</B> and <B>Directory</B>  <B>stack</B>
+               <B>substitution</B>  (q.v.)  are inhibited.  This is most
+               useful in shell scripts which  do  not  deal  with
+               filenames,  or  after a list of filenames has been
+               obtained and further expansions are not desirable.
+
+       <B>nokanji</B> (+)
+               If  set and the shell supports Kanji (see the <B>ver­</B>
+               <B>sion</B> shell variable), it is disabled so  that  the
+               meta key can be used.
+
+       <B>nonomatch</B>
+               If set, a <B>Filename</B> <B>substitution</B> or <B>Directory</B> <B>stack</B>
+               <B>substitution</B>  (q.v.)  which  does  not  match  any
+               existing files is left untouched rather than caus­
+               ing an error.  It is still an error for  the  sub­
+               stitution  to  be  malformed, e.g., `echo [' still
+               gives an error.
+
+       <B>nostat</B> (+)
+               used  by  <I>cd</I>  and  <I>pushd</I>.   See  also  the <B>cwd</B> and
+               <B>dirstack</B> shell variables.
+
+       <B>path</B>    A list of directories in which to  look  for  exe­
+               cutable  commands.  A null word specifies the cur­
+               rent directory.  If there is no <B>path</B> variable then
+               only full path names will execute.  <B>path</B> is set by
+               the shell at startup  from  the  <B>PATH</B>  environment
+               variable  or, if <B>PATH</B> does not exist, to a system-
+               dependent default something like  `(/usr/local/bin
+               /usr/bsd /bin /usr/bin .)'.  The shell may put `.'
+               first or last in <B>path</B> or omit it entirely  depend­
+               ing  on how it was compiled; see the <B>version</B> shell
+               variable.  A shell which is given neither  the  <B>-c</B>
+               nor  the  <B>-t</B>  option  hashes  the  contents of the
+               directories in <B>path</B> after  reading  <I>~/.tcshrc</I>  and
+               each  time  <B>path</B> is reset.  If one adds a new com­
+               mand to a directory in <B>path</B>  while  the  shell  is
+               active,  one may need to do a <I>rehash</I> for the shell
+               to find it.
+
+       <B>printexitvalue</B> (+)
+               If set and an interactive  program  exits  with  a
+               non-zero status, the shell prints `Exit <B>status</B>'.
+
+       <B>prompt</B>  The  string  which  is printed before reading each
+               command from the terminal.  <B>prompt</B> may include any
+               of  the  following formatting sequences (+), which
+               are replaced by the given information:
+
+               %/  The current working directory.
+               %~  The current working directory, but with  one's
+                   home  directory  represented  by `~' and other
+                   users' home directories represented by `~user'
+                   as per <B>Filename</B> <B>substitution</B>.  `~user' substi­
+                   tution happens only if the shell  has  already
+                   used `~<I>user</I>' in a pathname in the current ses­
+                   sion.
+               %c[[0]<I>n</I>], %.[[0]<I>n</I>]
+                   The trailing component of the current  working
+                   directory, or <I>n</I> trailing components if a digit
+                   <I>n</I> is given.  If <I>n</I> begins with `0', the  number
+                   of  skipped  components  precede  the trailing
+                   component(s) in the  format  `/&lt;<I>skipped</I>&gt;trail­
+                   ing'.   If the <B>ellipsis</B> shell variable is set,
+                   skipped  components  are  represented  by   an
+                   ellipsis  so  the whole becomes `...trailing'.
+                   `~' substitution is done as in `%~' above, but
+                   the  `~'  component  is  ignored when counting
+                   trailing components.
+               %C  Like %c, but without `~' substitution.
+               %h, %!, !
+                   format, with seconds.
+               %P  Like `%p', but in 24-hour format (but see  the
+                   <B>ampm</B> shell variable).
+               \<I>c</I>  <I>c</I> is parsed as in <I>bindkey</I>.
+               ^<I>c</I>  <I>c</I> is parsed as in <I>bindkey</I>.
+               %%  A single `%'.
+               %n  The user name.
+               %j  The number of jobs.
+               %d  The weekday in `Day' format.
+               %D  The day in `dd' format.
+               %w  The month in `Mon' format.
+               %W  The month in `mm' format.
+               %y  The year in `yy' format.
+               %Y  The year in `yyyy' format.
+               %l  The shell's tty.
+               %L  Clears  from  the  end of the prompt to end of
+                   the display or the end of the line.
+               %$  Expands the shell or environment variable name
+                   immediately after the `$'.
+               %#  `&gt;' (or the first character of the <B>promptchars</B>
+                   shell variable) for normal users, `#' (or  the
+                   second character of <B>promptchars</B>) for the supe­
+                   ruser.
+               %{<I>string</I>%}
+                   Includes <I>string</I> as a literal escape  sequence.
+                   It  should  be  used  only  to change terminal
+                   attributes and  should  not  move  the  cursor
+                   location.  This cannot be the last sequence in
+                   <B>prompt</B>.
+               %?  The return code of the command  executed  just
+                   before the prompt.
+               %R  In  <B>prompt2</B>,  the  status  of  the parser.  In
+                   <B>prompt3</B>, the corrected  string.   In  <B>history</B>,
+                   the history string.
+
+               `%B', `%S', `%U' and `%{<I>string</I>%}' are available in
+               only eight-bit-clean shells; see the <B>version</B> shell
+               variable.
+
+               The  bold,  standout  and  underline sequences are
+               often used to distinguish a superuser shell.   For
+               example,
+
+                   &gt;  set  prompt  =  "%m  [%h] %B[%@]%b [%/] you
+                   rang? "
+                   tut [37] <B>[2:54pm]</B> [/usr/accts/sys] you rang? _
+
+               If  `%t',  `%@',  `%T', `%p', or `%P' is used, and
+               <B>noding</B> is not  set,  then  print  `DING!'  on  the
+               change of hour (i.e, `:00' minutes) instead of the
+               actual time.
+
+               `CORRECT&gt;%R (y|n|e|a)? ' in interactive shells.
+
+       <B>promptchars</B> (+)
+               If set (to a two-character string), the `%#'  for­
+               matting  sequence  in the <B>prompt</B> shell variable is
+               replaced with the first character for normal users
+               and the second character for the superuser.
+
+       <B>pushdtohome</B> (+)
+               If  set,  <I>pushd</I>  without arguments does `pushd ~',
+               like <I>cd</I>.
+
+       <B>pushdsilent</B> (+)
+               If set, <I>pushd</I> and <I>popd</I> do not print the  directory
+               stack.
+
+       <B>recexact</B> (+)
+               If  set,  completion  completes  on an exact match
+               even if a longer match is possible.
+
+       <B>recognize_only_executables</B> (+)
+               If set, command listing displays only files in the
+               path that are executable.  Slow.
+
+       <B>rmstar</B> (+)
+               If set, the user is prompted before `rm *' is exe­
+               cuted.
+
+       <B>rprompt</B> (+)
+               The string to print on the right-hand side of  the
+               screen  (after  the command input) when the prompt
+               is being displayed on the left.  It recognizes the
+               same  formatting  characters  as  <B>prompt</B>.  It will
+               automatically disappear and reappear as necessary,
+               to  ensure  that command input isn't obscured, and
+               will appear only if the prompt, command input, and
+               itself  will  fit  together on the first line.  If
+               <B>edit</B> isn't set, then <B>rprompt</B> will be printed after
+               the prompt and before the command input.
+
+       <B>savedirs</B> (+)
+               If  set,  the shell does `dirs -S' before exiting.
+               If the first word is set to a number, at most that
+               many directory stack entries are saved.
+
+       <B>savehist</B>
+               If  set,  the shell does `history -S' before exit­
+               ing.  If the first word is set  to  a  number,  at
+               most  that many lines are saved.  (The number must
+               be less than or equal to <B>history</B>.)  If the  second
+               word is set to `merge', the history list is merged
+               with the existing history file instead of  replac­
+               <B>non-builtin</B> <B>command</B>  <B>execution</B>.)   Initialized  to
+               the (system-dependent) home of the shell.
+
+       <B>shlvl</B> (+)
+               The  number of nested shells.  Reset to 1 in login
+               shells.  See also <B>loginsh</B>.
+
+       <B>status</B>  The status returned by the last  command.   If  it
+               terminated  abnormally,  then 0200 is added to the
+               status.  Builtin commands which fail  return  exit
+               status `1', all other builtin commands return sta­
+               tus `0'.
+
+       <B>symlinks</B> (+)
+               Can be set to several different values to  control
+               symbolic link (`symlink') resolution:
+
+               If  set to `chase', whenever the current directory
+               changes to a directory containing a symbolic link,
+               it  is  expanded to the real name of the directory
+               to which the link points.  This does not work  for
+               the user's home directory; this is a bug.
+
+               If set to `ignore', the shell tries to construct a
+               current directory relative to the  current  direc­
+               tory before the link was crossed.  This means that
+               <I>cd</I>ing through a symbolic link and then `cd  ..'ing
+               returns  one  to  the  original  directory.   This
+               affects only builtin commands and filename comple­
+               tion.
+
+               If  set  to  `expand', the shell tries to fix sym­
+               bolic links by actually expanding arguments  which
+               look  like  path names.  This affects any command,
+               not just builtins.  Unfortunately, this  does  not
+               work  for  hard-to-recognize  filenames,  such  as
+               those embedded in command options.  Expansion  may
+               be  prevented  by  quoting.  While this setting is
+               usually the most convenient, it is sometimes  mis­
+               leading  and  sometimes confusing when it fails to
+               recognize an argument which should be expanded.  A
+               compromise  is  to use `ignore' and use the editor
+               command <I>normalize-path</I> (bound by default to  ^X-n)
+               when necessary.
+
+               Some  examples  are in order.  First, let's set up
+               some play directories:
+
+                   &gt; cd /tmp
+                   &gt; mkdir from from/src to
+                   &gt; ln -s from/src to/dst
+
+               here's the behavior with <B>symlinks</B> set to `ignore',
+
+                   &gt; cd /tmp/to/dst; echo $cwd
+                   /tmp/to/dst
+                   &gt; cd ..; echo $cwd
+                   /tmp/to
+
+               and  here's  the  behavior  with  <B>symlinks</B>  set to
+               `expand'.
+
+                   &gt; cd /tmp/to/dst; echo $cwd
+                   /tmp/to/dst
+                   &gt; cd ..; echo $cwd
+                   /tmp/to
+                   &gt; cd /tmp/to/dst; echo $cwd
+                   /tmp/to/dst
+                   &gt; cd ".."; echo $cwd
+                   /tmp/from
+                   &gt; /bin/echo ..
+                   /tmp/to
+                   &gt; /bin/echo ".."
+                   ..
+
+               Note that `expand' expansion 1)  works  just  like
+               `ignore'  for builtins like <I>cd</I>, 2) is prevented by
+               quoting,  and  3)  happens  before  filenames  are
+               passed to non-builtin commands.
+
+       <B>tcsh</B> (+)
+               The  version  number  of  the  shell in the format
+               `R.VV.PP', where `R' is the major release  number,
+               `VV'  the current version and `PP' the patchlevel.
+
+       <B>term</B>    The terminal type.  Usually  set  in  <I>~/.login</I>  as
+               described under <B>Startup</B> <B>and</B> <B>shutdown</B>.
+
+       <B>time</B>    If  set  to a number, then the <I>time</I> builtin (q.v.)
+               executes automatically after  each  command  which
+               takes  more  than that many CPU seconds.  If there
+               is a second word, it is used as  a  format  string
+               for  the output of the <I>time</I> builtin.  (u) The fol­
+               lowing sequences may be used in the format string:
+
+               %U  The time the process spent in user mode in cpu
+                   seconds.
+               %S  The time the process spent in kernel  mode  in
+                   cpu seconds.
+               %E  The elapsed (wall clock) time in seconds.
+               %P  The CPU percentage computed as (%U + %S) / %E.
+               %W  Number of times the process was swapped.
+               %X  The average amount in (shared) text space used
+                   in Kbytes.
+                   (waits).
+               %c  The number of involuntary context switches.
+
+               Only  the  first  four  sequences are supported on
+               systems without BSD resource limit functions.  The
+               default  time  format  is  `%Uu  %Ss  %E %P %X+%Dk
+               %I+%Oio  %Fpf+%Ww'  for   systems   that   support
+               resource  usage  reporting and `%Uu %Ss %E %P' for
+               systems that do not.
+
+               Under Sequent's DYNIX/ptx, %X, %D, %K, %r  and  %s
+               are  not  available,  but the following additional
+               sequences are:
+
+               %Y  The number of system calls performed.
+               %Z  The number of pages which are  zero-filled  on
+                   demand.
+               %i  The  number  of times a process's resident set
+                   size was increased by the kernel.
+               %d  The number of times a process's  resident  set
+                   size was decreased by the kernel.
+               %l  The number of read system calls performed.
+               %m  The number of write system calls performed.
+               %p  The number of reads from raw disk devices.
+               %q  The number of writes to raw disk devices.
+
+               and  the  default  time  format  is `%Uu %Ss $E %P
+               %I+%Oio %Fpf+%Ww'.  Note that the  CPU  percentage
+               can be higher than 100% on multi-processors.
+
+       <B>tperiod</B> (+)
+               The  period, in minutes, between executions of the
+               <I>periodic</I> special alias.
+
+       <B>tty</B> (+) The name of the tty, or empty if not  attached  to
+               one.
+
+       <B>uid</B> (+) The user's real user ID.
+
+       <B>user</B>    The user's login name.
+
+       <B>verbose</B> If  set,  causes  the  words of each command to be
+               printed, after history substitution (if any).  Set
+               by the <B>-v</B> command line option.
+
+       <B>version</B> (+)
+               The  version  ID  stamp.   It contains the shell's
+               version number (see <B>tcsh</B>), origin,  release  date,
+               vendor,  operating system and machine (see <B>VENDOR</B>,
+               <B>OSTYPE</B> and <B>MACHTYPE</B>) and a comma-separated list of
+               options  which  were set at compile time.  Options
+               which are set by default in the  distribution  are
+               dtr Login shells drop DTR when exiting
+               bye <I>bye</I> is a synonym for  <I>logout</I>  and  <I>log</I>  is  an
+                   alternate name for <I>watchlog</I>
+               al  <B>autologout</B> is enabled; default
+               kan Kanji  is  used  if  appropriate  according to
+                   locale  settings,  unless  the  <B>nokanji</B>  shell
+                   variable is set
+               sm  The system's <B>malloc(3)</B> is used
+               hb  The  `#!&lt;program&gt;  &lt;args&gt;'  convention is emu­
+                   lated when executing shell scripts
+               ng  The <I>newgrp</I> builtin is available
+               rh  The shell attempts to set the <B>REMOTEHOST</B> envi­
+                   ronment variable
+               afs The shell verifies your password with the ker­
+                   beros server if  local  authentication  fails.
+                   The  <B>afsuser</B>  shell  variable  or  the <B>AFSUSER</B>
+                   environment variable override your local user­
+                   name if set.
+
+               An  administrator  may enter additional strings to
+               indicate differences in the local version.
+
+       <B>visiblebell</B> (+)
+               If set, a screen flash is  used  rather  than  the
+               audible bell.  See also <B>nobeep</B>.
+
+       <B>watch</B> (+)
+               A  list of user/terminal pairs to watch for logins
+               and logouts.  If either the user is `any' all ter­
+               minals  are  watched  for  the given user and vice
+               versa.  Setting <B>watch</B> to `(any any)'  watches  all
+               users and terminals.  For example,
+
+                   set  watch  =  (george ttyd1 any console $user
+                   any)
+
+               reports activity of the user  `george'  on  ttyd1,
+               any  user  on the console, and oneself (or a tres­
+               passer) on any terminal.
+
+               Logins and logouts are checked every 10 minutes by
+               default, but the first word of <B>watch</B> can be set to
+               a number to check  every  so  many  minutes.   For
+               example,
+
+                   set watch = (1 any any)
+
+               reports  any  login/logout once every minute.  For
+               the impatient, the <I>log</I> builtin command triggers  a
+               <B>watch</B>  report at any time.  All current logins are
+               reported (as with the <I>log</I> builtin) when  <B>watch</B>  is
+               first set.
+                   `local' if the login/logout was from the local
+                   host.
+               %m  The hostname of the  remote  host  up  to  the
+                   first  `.'.  The full name is printed if it is
+                   an IP address or an X Window System display.
+
+               %M and %m are available on only systems that store
+               the  remote  hostname in <I>/etc/utmp</I>.  If unset, `%n
+               has %a %l from %m.' is used, or `%n has %a %l.' on
+               systems which don't store the remote hostname.
+
+       <B>wordchars</B> (+)
+               A  list  of non-alphanumeric characters to be con­
+               sidered part of a word by the <I>forward-word</I>,  <I>back­</I>
+               <I>ward-word</I>   etc.,   editor  commands.   If  unset,
+               `*?_-.[]~=' is used.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>AFSUSER</B> (+)
+               Equivalent to the <B>afsuser</B> shell variable.
+
+       <B>COLUMNS</B> The number of columns in the terminal.  See <B>Termi­</B>
+               <B>nal</B> <B>management</B>.
+
+       <B>DISPLAY</B> Used  by  X Window System (see <B>X(1)</B>).  If set, the
+               shell does not set <B>autologout</B> (q.v.).
+
+       <B>EDITOR</B>  The pathname to a default editor.   See  also  the
+               <B>VISUAL</B>  environment variable and the <I>run-fg-editor</I>
+               editor command.
+
+       <B>GROUP</B> (+)
+               Equivalent to the <B>group</B> shell variable.
+
+       <B>HOME</B>    Equivalent to the <B>home</B> shell variable.
+
+       <B>HOST</B> (+)
+               Initialized to the name of the  machine  on  which
+               the  shell  is running, as determined by the <I>geth­</I>
+               <B>ostname(2)</B> system call.
+
+       <B>HOSTTYPE</B> (+)
+               Initialized to the type of machine  on  which  the
+               shell  is  running, as determined at compile time.
+               This variable is obsolete and will be removed in a
+               future version.
+
+       <B>HPATH</B> (+)
+               A colon-separated list of directories in which the
+               <I>run-help</I> editor command looks for command documen­
+               tation.
+
+               a two-character variable name.  The variables with
+               their associated defaults are:
+
+                   no   0      Normal (non-filename) text
+                   fi   0      Regular file
+                   di   01;34  Directory
+                   ln   01;36  Symbolic link
+                   pi   33     Named pipe (FIFO)
+                   so   01;35  Socket
+                   do   01;35  Door
+                   bd   01;33  Block device
+                   cd   01;32  Character device
+                   ex   01;32  Executable file
+                   mi   (none) Missing file (defaults to fi)
+                   or   (none) Orphaned symbolic  link  (defaults
+                               to ln)
+                   lc   ^[[    Left code
+                   rc   m      Right code
+                   ec   (none) End code (replaces lc+no+rc)
+
+               You need to include only the variables you want to
+               change from the default.
+
+               File names can also be colorized based on filename
+               extension.   This  is  specified  in the <B>LS_COLORS</B>
+               variable  using  the  syntax  <B>"*ext=string"</B>.   For
+               example, using ISO 6429 codes, to color all C-lan­
+               guage  source  files  blue   you   would   specify
+               <B>"*.c=34"</B>.  This would color all files ending in <B>.c</B>
+               in blue (34) color.
+
+               Control  characters  can  be  written  either   in
+               C-style-escaped  notation, or in stty-like ^-nota­
+               tion.  The C-style notation adds <B>^[</B> for Escape,  <B>_</B>
+               for  a  normal  space character, and <B>?</B> for Delete.
+               In addition, the <B>^[</B> escape character can  be  used
+               to override the default interpretation of <B>^[</B>, <B>^</B>, <B>:</B>
+               and <B>=</B>.
+
+               Each file will be  written  as  <B>&lt;lc&gt;</B>  <B>&lt;color-code&gt;</B>
+               <B>&lt;rc&gt;</B>  <B>&lt;filename&gt;</B>  <B>&lt;ec&gt;</B>.  If the <B>&lt;ec&gt;</B> code is unde­
+               fined, the sequence <B>&lt;lc&gt;</B> <B>&lt;no&gt;</B> <B>&lt;rc&gt;</B>  will  be  used
+               instead.   This  is  generally  more convenient to
+               use, but less general.  The left,  right  and  end
+               codes  are provided so you don't have to type com­
+               mon parts over and over again and to support weird
+               terminals;  you  will generally not need to change
+               them at all unless your terminal does not use  ISO
+               6429 color sequences but a different system.
+
+               If  your  terminal  does use ISO 6429 color codes,
+               you can compose the type codes (i.e.,  all  except
+                       36  for cyan foreground
+                       37  for white (or gray) foreground
+                       40  for black background
+                       41  for red background
+                       42  for green background
+                       43  for yellow (or brown) background
+                       44  for blue background
+                       45  for purple background
+                       46  for cyan background
+                       47  for white (or gray) background
+
+               Not  all commands will work on all systems or dis­
+               play devices.
+
+               A few  terminal  programs  do  not  recognize  the
+               default  end code properly.  If all text gets col­
+               orized after  you  do  a  directory  listing,  try
+               changing the <B>no</B> and <B>fi</B> codes from 0 to the numeri­
+               cal codes for your standard fore-  and  background
+               colors.
+
+       <B>MACHTYPE</B> (+)
+               The  machine type (microprocessor class or machine
+               model), as determined at compile time.
+
+       <B>NOREBIND</B> (+)
+               If set, printable characters are  not  rebound  to
+               <I>self-insert-command</I>.   See  <B>Native</B> <B>Language</B> <B>System</B>
+               <B>support</B>.
+
+       <B>OSTYPE</B> (+)
+               The operating system,  as  determined  at  compile
+               time.
+
+       <B>PATH</B>    A  colon-separated list of directories in which to
+               look for  executables.   Equivalent  to  the  <B>path</B>
+               shell variable, but in a different format.
+
+       <B>PWD</B> (+) Equivalent to the <B>cwd</B> shell variable, but not syn­
+               chronized to it;  updated  only  after  an  actual
+               directory change.
+
+       <B>REMOTEHOST</B> (+)
+               The  host  from  which  the  user  has  logged  in
+               remotely, if this is the case  and  the  shell  is
+               able  to  determine it.  Set only if the shell was
+               so compiled; see the <B>version</B> shell variable.
+
+       <B>SHLVL</B> (+)
+               Equivalent to the <B>shlvl</B> shell variable.
+
+       <B>SYSTYPE</B> (+)
+               <I>fg-editor</I> editor command.
+
+
+</PRE>
+<H2>FILES</H2><PRE>
+       <I>/etc/csh.cshrc</I>  Read  first  by  every  shell.   ConvexOS,
+                       Stellix and Intel use <I>/etc/cshrc</I> and NeXTs
+                       use  <I>/etc/cshrc.std</I>.  A/UX, AMIX, Cray and
+                       IRIX have no  equivalent  in  <B>csh(1)</B>,  but
+                       read  this  file  in <I>tcsh</I> anyway.  Solaris
+                       2.x does not  have  it  either,  but  <I>tcsh</I>
+                       reads <I>/etc/.cshrc</I>.  (+)
+       <I>/etc/csh.login</I>  Read by login shells after <I>/etc/csh.cshrc</I>.
+                       ConvexOS,   Stellix    and    Intel    use
+                       <I>/etc/login</I>,   NeXTs   use  <I>/etc/login.std</I>,
+                       Solaris 2.x  uses  <I>/etc/.login</I>  and  A/UX,
+                       AMIX, Cray and IRIX use <I>/etc/cshrc</I>.
+       <I>~/.tcshrc</I> (+)   Read  by  every shell after <I>/etc/csh.cshrc</I>
+                       or its equivalent.
+       <I>~/.cshrc</I>        Read by every shell, if <I>~/.tcshrc</I>  doesn't
+                       exist, after <I>/etc/csh.cshrc</I> or its equiva­
+                       lent.  This  manual  uses  `<I>~/.tcshrc</I>'  to
+                       mean  `<I>~/.tcshrc</I>  or,  if <I>~/.tcshrc</I> is not
+                       found, <I>~/.cshrc</I>'.
+       <I>~/.history</I>      Read by login shells  after  <I>~/.tcshrc</I>  if
+                       <B>savehist</B> is set, but see also <B>histfile</B>.
+       <I>~/.login</I>        Read  by  login  shells after <I>~/.tcshrc</I> or
+                       <I>~/.history</I>.  The shell may be compiled  to
+                       read  <I>~/.login</I>  before  instead  of  after
+                       <I>~/.tcshrc</I> and <I>~/.history</I>; see the  <B>version</B>
+                       shell variable.
+       <I>~/.cshdirs</I> (+)  Read  by  login  shells  after <I>~/.login</I> if
+                       <B>savedirs</B> is set, but see also <B>dirsfile</B>.
+       <I>/etc/csh.logout</I> Read by login shells at logout.  ConvexOS,
+                       Stellix  and  Intel  use  <I>/etc/logout</I>  and
+                       NeXTs use  <I>/etc/logout.std</I>.   A/UX,  AMIX,
+                       Cray   and  IRIX  have  no  equivalent  in
+                       <B>csh(1)</B>, but read this file in <I>tcsh</I> anyway.
+                       Solaris  2.x  does not have it either, but
+                       <I>tcsh</I> reads <I>/etc/.logout</I>.  (+)
+       <I>~/.logout</I>       Read  by  login  shells  at  logout  after
+                       <I>/etc/csh.logout</I> or its equivalent.
+       <I>/bin/sh</I>         Used to interpret shell scripts not start­
+                       ing with a `#'.
+       <I>/tmp/sh*</I>        Temporary file for `&lt;&lt;'.
+       <I>/etc/passwd</I>     Source of  home  directories  for  `~name'
+                       substitutions.
+
+       The  order  in  which startup files are read may differ if
+       the shell was so compiled; see <B>Startup</B>  <B>and</B>  <B>shutdown</B>  and
+       the <B>version</B> shell variable.
+
+
+</PRE>
+<H2>NEW FEATURES (+)</H2><PRE>
+       This manual describes <I>tcsh</I> as a single entity, but experi­
+       <B>Editor</B> <B>commands</B> (q.v.) which perform  other  useful  func­
+       tions  in the middle of typed commands, including documen­
+       tation lookup (<I>run-help</I>), quick editor restarting (<I>run-fg-</I>
+       <I>editor</I>) and command resolution (<I>which-command</I>).
+
+       An enhanced history mechanism.  Events in the history list
+       are time-stamped.  See also the <I>history</I>  command  and  its
+       associated  shell  variables,  the previously undocumented
+       `#' event specifier and new modifiers under  <B>History</B>  <B>sub­</B>
+       <B>stitution</B>,  the  <I>*-history</I>,  <I>history-search-*</I>, <I>i-search-*</I>,
+       <I>vi-search-*</I> and <I>toggle-literal-history</I> editor commands and
+       the <B>histlit</B> shell variable.
+
+       Enhanced  directory  parsing and directory stack handling.
+       See the <I>cd</I>, <I>pushd</I>, <I>popd</I> and <I>dirs</I> commands and their  asso­
+       ciated shell variables, the description of <B>Directory</B> <B>stack</B>
+       <B>substitution</B>, the <B>dirstack</B>, <B>owd</B> and <B>symlinks</B>  shell  vari­
+       ables  and the <I>normalize-command</I> and <I>normalize-path</I> editor
+       commands.
+
+       Negation in glob-patterns.  See <B>Filename</B> <B>substitution</B>.
+
+       New <B>File</B> <B>inquiry</B> <B>operators</B> (q.v.) and a  <I>filetest</I>  builtin
+       which uses them.
+
+       A  variety  of <B>Automatic,</B> <B>periodic</B> <B>and</B> <B>timed</B> <B>events</B> (q.v.)
+       including scheduled  events,  special  aliases,  automatic
+       logout  and  terminal locking, command timing and watching
+       for logins and logouts.
+
+       Support for the Native Language System  (see  <B>Native</B>  <B>Lan­</B>
+       <B>guage</B> <B>System</B> <B>support</B>), OS variant features (see <B>OS</B> <B>variant</B>
+       <B>support</B> and the <B>echo_style</B>  shell  variable)  and  system-
+       dependent file locations (see <B>FILES</B>).
+
+       Extensive  terminal-management capabilities.  See <B>Terminal</B>
+       <B>management</B>.
+
+       New builtin commands including <I>builtins</I>, <I>hup</I>,  <I>ls-F</I>,  <I>new­</I>
+       <I>grp</I>, <I>printenv</I>, <I>which</I> and <I>where</I> (q.v.).
+
+       New  variables  that make useful information easily avail­
+       able to the shell.  See  the  <B>gid</B>,  <B>loginsh</B>,  <B>oid</B>,  <B>shlvl</B>,
+       <B>tcsh</B>,  <B>tty</B>,  <B>uid</B> and <B>version</B> shell variables and the <B>HOST</B>,
+       <B>REMOTEHOST</B>, <B>VENDOR</B>, <B>OSTYPE</B> and <B>MACHTYPE</B> environment  vari­
+       ables.
+
+       A  new  syntax  for  including  useful  information in the
+       prompt string (see <B>prompt</B>).  and special prompts for loops
+       and spelling correction (see <B>prompt2</B> and <B>prompt3</B>).
+
+       Read-only variables.  See <B>Variable</B> <B>substitution</B>.
+       c )'.
+
+       Control  over  tty  output  after processes are started is
+       primitive; perhaps this will inspire someone to work on  a
+       good  virtual  terminal  interface.  In a virtual terminal
+       interface much more interesting things could be done  with
+       output control.
+
+       Alias substitution is most often used to clumsily simulate
+       shell procedures;  shell  procedures  should  be  provided
+       rather than aliases.
+
+       Commands  within loops are not placed in the history list.
+       Control structures should be parsed rather than being rec­
+       ognized  as  built-in  commands.  This would allow control
+       commands to be placed anywhere, to be combined  with  `|',
+       and to be used with `&amp;' and `;' metasyntax.
+
+       <I>foreach</I> doesn't ignore here documents when looking for its
+       <I>end</I>.
+
+       It should be possible to use the `:' modifiers on the out­
+       put of command substitutions.
+
+       The  screen  update for lines longer than the screen width
+       is very poor if the terminal cannot  move  the  cursor  up
+       (i.e., terminal type `dumb').
+
+       <B>HPATH</B> and <B>NOREBIND</B> don't need to be environment variables.
+
+       Glob-patterns which do not use `?', `*' or `[]'  or  which
+       use `{}' or `~' are not negated correctly.
+
+       The single-command form of <I>if</I> does output redirection even
+       if the expression is false and the  command  is  not  exe­
+       cuted.
+
+       <I>ls-F</I>  includes file identification characters when sorting
+       filenames and does not handle control characters in  file­
+       names well.  It cannot be interrupted.
+
+       Report bugs to tcsh-bugs@mx.gw.com, preferably with fixes.
+       If you want to help maintain and test tcsh, send  mail  to
+       listserv@mx.gw.com  with  the  text  `subscribe tcsh &lt;your
+       name&gt;' on a line by itself in  the  body.   You  can  also
+       `subscribe  tcsh-bugs &lt;your name&gt;' to get all bug reports,
+       or `subscribe tcsh-diffs &lt;your name&gt;' to get the  develop­
+       ment list plus diffs for each patchlevel.
+
+
+</PRE>
+<H2>THE T IN TCSH</H2><PRE>
+       In  1964,  DEC produced the PDP-6.  The PDP-10 was a later
+       re-implementation.  It was re-christened the  DECsystem-10
+       for  PDP-10') objected; thus DEC found themselves support­
+       ing two incompatible systems  on  the  same  hardware--but
+       then there were 6 on the PDP-11!
+
+       TENEX,  and  TOPS-20  to version 3, had command completion
+       via a user-code-level subroutine  library  called  ULTCMD.
+       With  version  3,  DEC  moved all that capability and more
+       into the monitor (`kernel' for you Unix  types),  accessed
+       by  the  COMND%  JSYS  (`Jump  to SYStem' instruction, the
+       supervisor call mechanism [are my  IBM  roots  also  show­
+       ing?]).
+
+       The creator of tcsh was impressed by this feature and sev­
+       eral others of TENEX and TOPS-20, and created a version of
+       csh which mimicked them.
+
+
+</PRE>
+<H2>LIMITATIONS</H2><PRE>
+       Words can be no longer than 1024 characters.
+
+       The system limits argument lists to 10240 characters.
+
+       The  number of arguments to a command which involves file­
+       name expansion is limited to 1/6th the number  of  charac­
+       ters allowed in an argument list.
+
+       Command  substitutions  may  substitute no more characters
+       than are allowed in an argument list.
+
+       To detect looping, the shell restricts the number of <I>alias</I>
+       substitutions on a single line to 20.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>csh(1)</B>,  <B>emacs(1)</B>,  <B>ls(1)</B>,  <B>newgrp(1)</B>,  <B>sh(1)</B>, <B>setpath(1)</B>,
+       <B>stty(1)</B>,   <B>su(1)</B>,   <B>tset(1)</B>,   <B>vi(1)</B>,   <B>x(1)</B>,   <B>access(2)</B>,
+       <B>execve(2)</B>,   <B>fork(2)</B>,  <B>killpg(2)</B>,  <B>pipe(2)</B>,  <B>setrlimit(2)</B>,
+       <B>sigvec(2)</B>,  <B>stat(2)</B>,  <B>umask(2)</B>,  <B>vfork(2)</B>,  <B>wait(2)</B>,  mal­
+       <B>loc(3)</B>,  <B>setlocale(3)</B>, <B>tty(4)</B>, <B>a.out(5)</B>, <B>termcap(5)</B>, envi­
+       <B>ron(7)</B>, <B>termio(7)</B>, Introduction to the C Shell
+
+
+</PRE>
+<H2>VERSION</H2><PRE>
+       This manual documents tcsh 6.12.00 (Astron) 2002-07-23.
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       William Joy
+         Original author of <B>csh(1)</B>
+       J.E. Kulp, IIASA, Laxenburg, Austria
+         Job control and directory stack features
+       Ken Greer, HP Labs, 1981
+         File name completion
+       Mike Ellis, Fairchild, 1983
+         Command name recognition/completion
+       Paul Placeway, Ohio State CIS Dept., 1983-1993
+         Ports to HPUX, SVR2 and SVR3, a SysV version of getwd.c,
+         SHORT_STRINGS support and a new version of sh.glob.c
+       James J Dempsey, BBN, and Paul Placeway, OSU, 1988
+         A/UX port
+       Daniel Long, NNSC, 1988
+         <B>wordchars</B>
+       Patrick Wolfe, Kuck and Associates, Inc., 1988
+         <I>vi</I> mode cleanup
+       David C Lawrence, Rensselaer Polytechnic Institute, 1989
+         <B>autolist</B> and ambiguous completion listing
+       Alec Wolman, DEC, 1989
+         Newlines in the prompt
+       Matt Landau, BBN, 1989
+         <I>~/.tcshrc</I>
+       Ray Moody, Purdue Physics, 1989
+         Magic space bar history expansion
+       Mordechai ????, Intel, 1989
+         printprompt() fixes and additions
+       Kazuhiro  Honda,  Dept.  of Computer Science, Keio Univer­
+       sity, 1989
+         Automatic spelling correction and <B>prompt3</B>
+       Per Hedeland, Ellemtel, Sweden, 1990-
+         Various bugfixes, improvements and manual updates
+       Hans J. Albertsson (Sun Sweden)
+         <B>ampm</B>, <I>settc</I> and <I>telltc</I>
+       Michael Bloom
+         Interrupt handling fixes
+       Michael Fine, Digital Equipment Corp
+         Extended key support
+       Eric Schnoebelen, Convex, 1990
+         Convex  support, lots of <I>csh</I> bug fixes, save and restore
+         of directory stack
+       Ron Flax, Apple, 1990
+         A/UX 2.0 (re)port
+       Dan Oscarsson, LTH Sweden, 1990
+         NLS support and simulated NLS support for non NLS sites,
+         fixes
+       Johan Widen, SICS Sweden, 1990
+         <B>shlvl</B>, Mach support, <I>correct-line</I>, 8-bit printing
+       Matt Day, Sanyo Icon, 1990
+         POSIX termio support, SysV limit fixes
+       Jaap Vermeulen, Sequent, 1990-91
+         Vi  mode fixes, expand-line, window change fixes, Symme­
+         try port
+       Martin Boyer, Institut de recherche d'Hydro-Quebec, 1991
+         <B>autolist</B> beeping options, modified the history search to
+         search  for  the  whole string from the beginning of the
+         line to the cursor.
+       Scott Krotz, Motorola, 1991
+         Minix port
+       David Dawes, Sydney U. Australia, Physics Dept., 1991
+         SVR4 job control fixes
+         VMS-POSIX port
+       Beto Appleton, IBM Corp., 1992
+         Walking  process  group fixes, <I>csh</I> bug fixes, POSIX file
+         tests, POSIX SIGHUP
+       Scott Bolte, Cray Computer Corp., 1992
+         CSOS port
+       Kaveh R. Ghazi, Rutgers University, 1992
+         Tek, m88k, Titan and Masscomp ports  and  fixes.   Added
+         autoconf support.
+       Mark Linderman, Cornell University, 1992
+         OS/2 port
+       Mika Liljeberg, liljeber@kruuna.Helsinki.FI, 1992
+         Linux port
+       Tim  P.  Starrin, NASA Langley Research Center Operations,
+       1993
+         Read-only variables
+       Dave Schweisguth, Yale University, 1993-4
+         New man page and tcsh.man2html
+       Larry Schwimmer, Stanford University, 1993
+         AFS and HESIOD patches
+       Luke Mewburn, RMIT University, 1994-6
+         Enhanced  directory  printing  in prompt, added <B>ellipsis</B>
+         and <B>rprompt</B>.
+       Edward Hutchins, Silicon Graphics Inc., 1996
+         Added implicit cd.
+       Martin Kraemer, 1997
+         Ported to Siemens Nixdorf EBCDIC machine
+       Amol Deshpande, Microsoft, 1997
+         Ported to WIN32 (Windows/95 and Windows/NT);  wrote  all
+         the  missing  library and message catalog code to inter­
+         face to Windows.
+       Taga Nayuta, 1998
+         Color ls additions.
+
+
+
+</PRE>
+<H2>THANKS TO</H2><PRE>
+       Bryan Dunlap, Clayton Elwell, Karl Kleinpaste, Bob Manson,
+       Steve Romig, Diana Smetters, Bob Sutterfield, Mark Verber,
+       Elizabeth Zwicky and all the other people  at  Ohio  State
+       for suggestions and encouragement
+
+       All  the people on the net, for putting up with, reporting
+       bugs in, and suggesting new additions to  each  and  every
+       version
+
+       Richard  M. Alderson III, for writing the `T in tcsh' sec­
+       tion
+
+
+
+Astron 6.12.00             23 July 2002                   <B>TCSH(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

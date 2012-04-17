@@ -1,0 +1,73 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>libmikmod-config</B>  <B>[--prefix</B><I>[=DIR]</I><B>]</B>   <B>[--exec-prefix</B><I>[=DIR]</I><B>]</B>
+       [--version] [--libs] [--cflags] [--ldadd]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <I>libmikmod-config</I>  is  a  tool that is used to configure to
+       determine the compiler and linker  flags  that  should  be
+       used  to  compile and link programs that use <I>libmikmod</I>. It
+       is also used internally to the .m4 macros for GNU autoconf
+       that are included with <I>libmikmod</I>.
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <I>libmikmod-config</I> accepts the following options:
+
+       <B>--version</B>
+               Print the currently installed version of <I>libmikmod</I>
+               on the standard output.
+
+       <B>--libs</B>  Print the linker flags that are necessary to  link
+               a <I>libmikmod</I> program.
+
+       <B>--ldadd</B> Print the extra linker flags that are necessary to
+               link a <I>libmikmod</I> program if it was  compiled  with
+               the GNU C compiler.
+
+       <B>--cflags</B>
+               Print  the  compiler  flags  that are necessary to
+               compile a <I>libmikmod</I> program.
+
+       <B>--prefix=PREFIX</B>
+               If specified, use PREFIX instead of the  installa­
+               tion  prefix  that  <I>libmikmod</I>  was built with when
+               computing the output for the --cflags  and  --libs
+               options.  This  option  is  also used for the exec
+               prefix if --exec-prefix was  not  specified.  This
+               option  must  be  specified  before  any --libs or
+               --cflags options.
+
+       <B>--exec-prefix=PREFIX</B>
+               If specified, use PREFIX instead of the  installa­
+               tion  exec  prefix  that  <I>libmikmod</I> was built with
+               when computing the output  for  the  --cflags  and
+               --libs  options.   This  option  must be specified
+               before any --libs or --cflags options.
+
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       <I>libmikmod</I> is the  result  of  the  work  of  many  people,
+                 Version 3.1.10, 3rd Januark 2000    <B>LIBMIKMOD(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

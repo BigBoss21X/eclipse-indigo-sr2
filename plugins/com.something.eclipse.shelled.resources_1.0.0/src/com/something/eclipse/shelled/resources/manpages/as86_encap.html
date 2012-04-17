@@ -1,0 +1,349 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>as86</B> [<B>-0123agjuw</B>] [<B>-lm</B>[<B>list</B>]] [<B>-n</B> <B>name</B>] [<B>-o</B> <B>obj</B>] [<B>-b</B>[<B>bin</B>]]
+       [<B>-s</B> <B>sym</B>] [<B>-t</B> <B>textseg</B>] <B>src</B>
+
+       <B>as86_encap</B> <B>prog.s</B> <B>prog.v</B> [<B>prefix_</B>] [<B>as86</B> <B>options</B>]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>as86</B> is an assembler for the 8086..80386 processors,  it's
+       syntax  is  closer to the intel/microsoft form rather than
+       the more normal generic form of the unix system assembler.
+
+       The <B>src</B> file can be '-' to assemble the standard input.
+
+       This assembler can be compiled to support the 6809 cpu and
+       may even work.
+
+       <B>as86_encap</B> is a shell script to call as86 and convert  the
+       created  binary  into a C file <B>prog.v</B> to be included in or
+       linked with programs  like  boot  block  installers.   The
+       <B>prefix_</B>  argument is a prefix to be added to all variables
+       defined by the source, it defaults  to  the  name  of  the
+       source  file.  The  variables defined include <B>prefix_start</B>
+       <B>prefix_size</B> and <B>prefix_data</B>  to  define  and  contain  the
+       code,  plus integers containing the values of all exported
+       labels.  Either or both the <B>prog.s</B>  and  <B>prog.v</B>  arguments
+       can be '-' for standard in/out.
+
+
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-0</B>     start  with  16-bit  code  segment,  warn  for  all
+              instructions &gt; 8086
+
+       <B>-1</B>     start  with  16-bit  code  segment,  warn  for  all
+              instructions &gt; 80186
+
+       <B>-2</B>     start  with  16-bit  code  segment,  warn  for  all
+              instructions &gt; 80286
+
+       <B>-3</B>     start with 32-bit code segment, don't warn for  any
+              instructions. (not even 486 or 586)
+
+       <B>-a</B>     enable  partial compatibility with Minix asld. This
+              swaps the  interpretation  of  round  brackets  and
+              square  brackets  as  well as making alterations to
+              the code generation and syntax for 16bit jumps  and
+              calls. ("jmp @(bx)" is then a valid instruction)
+
+       <B>-g</B>     only put global symbols in object or symbol file
+
+       <B>-j</B>     replace  all  short jumps with similar 16 or 32 bit
+              are used.
+
+       <B>-l</B>     produce list file, filename may follow
+
+       <B>-m</B>     print macro expansions in listing
+
+       <B>-n</B>     name of module follows (goes in object  instead  of
+              source name)
+
+       <B>-o</B>     produce object file, filename follows
+
+       <B>-b</B>     produce  a  raw  binary  file, filename may follow.
+              This is a 'raw' binary  file  with  no  header,  if
+              there's no <B>-s</B> option the file starts at location 0.
+
+       <B>-s</B>     produce an ASCII  symbol  file,  filename  follows.
+              The  format of this table is designed to be easy to
+              parse for encapsulation and related  activities  in
+              relation  to  binary  files  created  with  the  <B>-b</B>
+              option.  If a binary file doesn't start at location
+              zero the first two items in the table are the start
+              and end addresses of the binary file.
+
+       <B>-u</B>     assume   undefined   symbols   are   imported-with-
+              unspecified segment.
+
+       <B>-w-</B>    allow the assembler to print warning messages.
+
+       <B>-t</B> <B>n</B>   move all text segment data in segment n+3.
+
+
+
+</PRE>
+<H2>AS86 SOURCE</H2><PRE>
+       Special characters
+
+       <B>*</B>      Address of the start of the current line.
+
+       <B>;</B> <B>!</B>    Either  of  these  marks the start of a comment. In
+              addition any 'unexpected' character at the start of
+              a  line  is  assumed to be a comment (but it's also
+              displayed to the terminal).
+
+       <B>$</B>      Prefix for hexadecimal  numbers,  the  'C'  syntax,
+              eg 0x1234, is also accepted.
+
+       <B>%</B>      Prefix for binary numbers.
+
+       <B>#</B>      Prefix for immediate operands.
+
+       <B>[</B> <B>]</B>    Specifies an indirect operand.
+              Unlike  MASM  the assembler has no type information
+              on labels just a segment  and  offset.  This  means
+              that the way this operator and the immediate prefix
+                   mov ax,#1234
+              Immediate value, ax becomes 1234.
+
+                   mov ax,1234
+                   mov ax,_hello
+                   mov ax,[_hello]
+              Absolute  addressing,  ax  is  set  to  contents of
+              location  1234.  Note  the  third  option  is   not
+              strictly consistant but is in place mainly for asld
+              compatibility.
+
+
+                   mov ax,_table[bx]
+                   mov ax,_table[bx+si]
+                   mov eax,_table[ebx*4]
+
+                   mov ax,[bx+_table]
+                   mov ax,[bx+si+_table]
+                   mov eax,[ebx*4+_table]
+              Indexed addressing, both formats are  ok,  I  think
+              the  first  is  more correct but I tend to used the
+              second. :-)
+
+       Conditionals
+
+       <B>IF,</B> <B>ELSE,</B> <B>ELSEIF,</B> <B>ENDIF</B>
+              Numeric condition
+
+       <B>IFC,</B> <B>ELSEIFC</B>
+              String compare (str1,str2)
+
+       <B>FAIL</B> <B>.FAIL</B>
+              Generate user error.
+
+       Segment related
+
+       <B>.TEXT</B> <B>.ROM</B> <B>.DATA</B> <B>.BSS</B>
+              Set current segment. These can be preceded  by  the
+              keyword <B>.SECT</B>
+
+       <B>LOC</B>    Set numeric segment 0=TEXT, 3=DATA,ROM,BSS, 14=MAX.
+              The  segment  order  set  by  the  linker  is   now
+              0,4,5,6,7,8,9,A,B,C,D,E,1,2,3.   Segment  0 and all
+              segments above 3 are assumed to  be  text  segment.
+              Note  the 64k size restrictions are not imposed for
+              segments 3-14.
+
+       Label type definition
+
+       <B>EXPORT</B> <B>PUBLIC</B> <B>.DEFINE</B>
+              Export label defined in this object
+
+       Data definition
+
+       <B>DB</B> <B>.DATA1</B> <B>.BYTE</B> <B>FCB</B>
+              List of 1 byte objects.
+
+       <B>DW</B> <B>.DATA2</B> <B>.SHORT</B> <B>FDB</B> <B>.WORD</B>
+              List of 2 byte objects.
+
+       <B>DD</B> <B>.DATA4</B> <B>.LONG</B>
+              List of 4 byte objects.
+
+       <B>.ASCII</B> <B>FCC</B>
+              Ascii string copied to output.
+
+       <B>.ASCIZ</B> Ascii  string  copied  to  output with trailing <B>nul</B>
+              byte.
+
+       Space definition
+
+       <B>.BLKB</B> <B>RMB</B> <B>.SPACE</B>
+              Space is counted in bytes.
+
+       <B>.BLKW</B> <B>.ZEROW</B>
+              Space is counted in words. (2 bytes each)
+
+       <B>COMM</B> <B>.COMM</B> <B>LCOMM</B> <B>.LCOMM</B>
+              Common area data definition
+
+       Other useful pseudo operations.
+
+       <B>.ALIGN</B> <B>.EVEN</B>
+              Alignment
+
+       <B>EQU</B>    Define label
+
+       <B>SET</B>    Define re-definable label
+
+       <B>ORG</B> <B>.ORG</B>
+              Set assemble location
+
+       <B>BLOCK</B>  Set assemble location and stack old one
+
+       <B>ENDB</B>   Return to stacked assemble location
+
+       <B>GET</B> <B>INCLUDE</B>
+              Insert new file (no quotes on name)
+
+       <B>USE16</B> [<B>cpu</B>]
+              Define default operand size as 16 bit, argument  is
+              cpu  type  the code is expected to run on (86, 186,
+              286, 386, 486, 586)  instructions  for  cpus  later
+              than specified give a warning.
+
+       <B>.MACLIST</B>
+              Macro listings on/off (1,-1)
+
+       Macros, now working, the general form is like this.
+
+           MACRO sax
+              mov ax,#?1
+           MEND
+           <B>sax(1)</B>
+
+
+       Unimplemented/unused.
+
+       IDENT  Define object identity string.
+
+       SETDP  Set DP value on 6809
+
+       MAP    Set binary symbol table map number.
+
+       Registers
+              BP BX DI SI
+              EAX EBP EBX ECX EDI EDX ESI ESP
+              AX CX DX SP
+              AH AL BH BL CH CL DH DL
+              CS DS ES FS GS SS
+              CR0 CR2 CR3 DR0 DR1 DR2 DR3 DR6 DR7
+              TR3 TR4 TR5 TR6 TR7 ST
+
+       Operand type specifiers
+              BYTE  DWORD  FWORD  FAR  PTR PWORD QWORD TBYTE WORD
+              NEAR
+
+              The 'near and  'far'  do  not  allow  multi-segment
+              programming,  all  'far'  operations  are specified
+              explicitly through the  use  of  the  instructions:
+              jmpi,  jmpf,  callf, retf, etc. The 'Near' operator
+              can be  used  to  force  the  use  of  80386  16bit
+              conditional   branches.   The  'Dword'  and  'word'
+              operators can control the size of operands  on  far
+              jumps and calls.
+
+       General instructions.
+              These  are  in general the same as the instructions
+              found in any 8086 assembler,  the  main  exceptions
+              being a few 'Bcc' (BCC, BNE, BGE, etc) instructions
+              which are shorthands for a short branch plus a long
+              jump  and  'BR'  which is the longest unconditional
+              jump (16 or 32 bit).
+
+       Long branches
+              BCC BCS BEQ BGE BGT BHI BHIS BLE BLO BLOS  BLT  BMI
+              BNE BPC BPL BPS BVC BVS BR
+              BSWAP BT BTC BTR BTS CALL CBW CDQ CLC CLD CLI  CLTS
+              CMC  CMP  CMPS  CMPSB CMPSD CMPSW CMPW CMPXCHG CSEG
+              CWD CWDE DAA DAS DEC DIV DSEG ENTER HLT  IDIV  IMUL
+              IN  INC INS INSB INSD INSW INT INTO INVD INVLPG INW
+              IRET IRETD J JA JAE JB JBE JC JCXE  JCXZ  JE  JECXE
+              JECXZ  JG  JGE JL JLE JMP JNA JNAE JNB JNBE JNC JNE
+              JNG JNGE JNL JNLE JNO JNP JNS JNZ JO JP JPE JPO  JS
+              JZ  LAHF  LAR  LDS  LEA LEAVE LES LFS LGDT LGS LIDT
+              LLDT LMSW LOCK LODB LODS  LODSB  LODSD  LODSW  LODW
+              LOOP LOOPE LOOPNE LOOPNZ LOOPZ LSL LSS LTR MOV MOVS
+              MOVSB MOVSD MOVSW MOVSX MOVW MOVZX MUL NEG NOP  NOT
+              OR  OUT  OUTS OUTSB OUTSD OUTSW OUTW POP POPA POPAD
+              POPF POPFD PUSH PUSHA PUSHAD PUSHF PUSHFD  RCL  RCR
+              REP  REPE  REPNE  REPNZ  REPZ RET RETF RETI ROL ROR
+              SAHF SAL SAR SBB SCAB SCAS SCASB SCASD  SCASW  SCAW
+              SEG SETA SETAE SETB SETBE SETC SETE SETG SETGE SETL
+              SETLE SETNA SETNAE SETNB SETNBE SETNC  SETNE  SETNG
+              SETNGE  SETNL  SETNLE  SETNO SETNP SETNS SETNZ SETO
+              SETP SETPE SETPO SETS SETZ SGDT SHL SHLD  SHR  SHRD
+              SIDT  SLDT  SMSW  STC STD STI STOB STOS STOSB STOSD
+              STOSW STOW STR SUB TEST VERR VERW WAIT WBINVD  XADD
+              XCHG XLAT XLATB XOR
+
+       Floating point
+              F2XM1  FABS  FADD  FADDP FBLD FBSTP FCHS FCLEX FCOM
+              FCOMP FCOMPP FCOS FDECSTP FDISI  FDIV  FDIVP  FDIVR
+              FDIVRP  FENI  FFREE FIADD FICOM FICOMP FIDIV FIDIVR
+              FILD FIMUL FINCSTP FINIT FIST  FISTP  FISUB  FISUBR
+              FLD  FLD1  FLDL2E FLDL2T FLDCW FLDENV FLDLG2 FLDLN2
+              FLDPI FLDZ FMUL FMULP FNCLEX  FNDISI  FNENI  FNINIT
+              FNOP  FNSAVE  FNSTCW  FNSTENV  FNSTSW  FPATAN FPREM
+              FPREM1 FPTAN FRNDINT  FRSTOR  FSAVE  FSCALE  FSETPM
+              FSIN FSINCOS FSQRT FST FSTCW FSTENV FSTP FSTSW FSUB
+              FSUBP FSUBR FSUBRP FTST FUCOM FUCOMP FUCOMPP  FWAIT
+              FXAM FXCH FXTRACT FYL2X FYL2XP1
+
+
+
+</PRE>
+<H2>Using GASP</H2><PRE>
+       The  Gnu  assembler  preprocessor provides some reasonable
+       implementations of user biased pseudo opcodes.
+
+       It can be invoked in a form similar to:
+
+       <B>gasp</B>   [<B>-a...</B>]  <B>file.s</B> [<B>file2.s</B>] <B>|</B>
+              <B>as86</B> [<B>...</B>]  <B>-</B> [<B>-o</B> <B>obj</B>] [<B>-b</B> <B>bin</B>]
+
+       Be aware though that Gasp  generates  an  error  for  <B>.org</B>
+       commands, if you're not using alternate syntax you can use
+       <B>org</B> instead, otherwise use <B>block</B> and <B>endb</B>.  The  directive
+       <B>export</B> is translated into <B>.global</B>, which forces an import,
+       if you are making a file using <B>-b</B> use  <B>public</B>  or  <B>.define</B>
+       instead.
+       The checking for instructions that work on  specific  cpus
+       is  probably  not  complete, the distinction between 80186
+       and 80286 is especially problematic.
+
+       The <B>.text</B> and <B>.data</B> pseudo operators are  not  useful  for
+       raw binary files.
+
+       When  using  the  <B>org</B> directive the assembler can generate
+       object files that may break <B>ld86(1)</B>.
+
+
+
+
+                            Mar, 1999                     <B>as86(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       Command-line control program for EsounD
+
+
+</PRE>
+<H2>USAGE</H2><PRE>
+       esdctl [options] [command]
+
+       options: "-s", --server=host:port con­
+       tact esd server on host at port
+
+       commands:
+
+        lock                          foreign clients may not use the server
+        unlock                        foreign clients may use the server
+        standby, off                  suspend sound output for other programs
+        resume, on                    resume sound output
+        cache sample                  cache a sample in the server
+        getid name                    retrieve a sample id from its name
+        free name                     uncache a sample in the server
+        play name                     play a cached sample once
+        loop name                     make a cached sample loop
+        stop name                     stop the looping sample at end
+        serverinfo                    get server info from server
+        allinfo                       get player and sample info from server
+        panstream id left right set   panning for a stream
+        pansample id left right set   default panning for a sample
+                                      - left/right pan values scaled to 256.
+        standbymode                   see if server's on standby, etc.
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>esd(1)</B>, <B>esdcat(1)</B>, <B>esddsp(1)</B>, <B>esdloop(1)</B>, <B>esdplay(1)</B>, <I>esd­</I>
+       <B>sample(1)</B>, <B>esd-config(1)</B>, <B>esdfilt(1)</B>, <B>esdmon(1)</B>, <B>esdrec(1)</B>
+
+
+
+2002-06-04                EsounD 0.2.29                 <B>ESDCTL(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

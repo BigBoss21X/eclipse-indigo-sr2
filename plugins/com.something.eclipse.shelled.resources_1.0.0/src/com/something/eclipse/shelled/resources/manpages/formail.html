@@ -1,0 +1,341 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>formail</B> [<B>+</B><I>skip</I>] [<B>-</B><I>total</I>] [<B>-vbczfrktedqBY</B>] [<B>-p</B> <I>prefix</I>]
+            [<B>-D</B> <I>maxlen</I> <I>idcache</I>]
+            [<B>-x</B> <I>headerfield</I>] [<B>-X</B> <I>headerfield</I>]
+            [<B>-a</B> <I>headerfield</I>] [<B>-A</B> <I>headerfield</I>]
+            [<B>-i</B> <I>headerfield</I>] [<B>-I</B> <I>headerfield</I>]
+            [<B>-u</B> <I>headerfield</I>] [<B>-U</B> <I>headerfield</I>]
+            [<B>-R</B> <I>oldfield</I> <I>newfield</I>]
+            [<B>-n</B> [<I>maxprocs</I> ]] [<B>-m</B> <I>minfields</I>] [<B>-s</B> [<I>command</I> [<I>arg</I>
+       ...]]]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>formail</B> is a filter that can be used to  force  mail  into
+       mailbox  format,  perform `From ' escaping, generate auto-
+       replying headers, do simple header  munging/extracting  or
+       split  up  a mailbox/digest/articles file.  The mail/mail­
+       box/article contents will be expected on stdin.
+
+       If formail is supposed to  determine  the  sender  of  the
+       mail,  but  is  unable  to  find  any,  it will substitute
+       `foo@bar'.
+
+       If formail is started without any command line options, it
+       will  force any mail coming from stdin into mailbox format
+       and will escape <B>all</B> bogus `From ' lines with a `&gt;'.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>-v</B>   Formail will print its version number and exit.
+
+       <B>-b</B>   Don't escape any bogus mailbox  headers  (i.e.  lines
+            starting with `From ').
+
+       <B>-p</B> <I>prefix</I>
+            Define  a different quotation prefix.  If unspecified
+            it defaults to `&gt;'.
+
+       <B>-Y</B>   Assume traditional Berkeley mailbox format,  ignoring
+            any <B>Content-Length:</B> fields.
+
+       <B>-c</B>   Concatenate continued fields in the header.  Might be
+            convenient when  postprocessing  mail  with  standard
+            (line oriented) text utilities.
+
+       <B>-z</B>   Ensure  a  whitespace  exists  between field name and
+            content.  Zap fields  which  contain  only  a  single
+            whitespace   character.   Zap  leading  and  trailing
+            whitespace on fields extracted with <B>-x</B>.
+
+       <B>-f</B>   Force formail to simply pass  along  any  non-mailbox
+            format  (i.e.  don't  generate  a `From ' line as the
+            first line).
+
+
+       <B>-k</B>   When  generating  the  auto-reply  header   or   when
+            extracting fields, keep the body as well.
+
+       <B>-t</B>   Trust  the sender to have used a valid return address
+            in his header.  This causes  formail  to  select  the
+            <I>header</I>  <I>sender</I> instead of the <I>envelope</I> <I>sender</I> for the
+            reply.  This option should be  used  when  generating
+            auto-reply  headers  from  news  articles or when the
+            sender of the message is expecting a reply.
+
+       <B>-s</B>   The input will be split up into  separate  mail  mes­
+            sages,  and  piped  into  a program one by one (a new
+            program is started for every part).  <B>-s</B> has to be the
+            last  option  specified, the first argument following
+            it is expected to be the name of a program, any other
+            arguments  will  be  passed along to it.  If you omit
+            the program, then formail will simply concatenate the
+            splitted mails on stdout again.  See <B>FILENO</B>.
+
+       <B>-n</B> <I>[maxprocs]</I>
+            Tell  formail not to wait for every program to finish
+            before starting the next (causes splits  to  be  pro­
+            cessed  in  parallel).  <I>Maxprocs</I> optionally specifies
+            an upper limit on the number of concurrently  running
+            processes.
+
+       <B>-e</B>   Do not require empty lines to be preceding the header
+            of a new message (i.e.  the messages could  start  on
+            every line).
+
+       <B>-d</B>   Tell  formail  that  the  messages  it is supposed to
+            split need not be  in  strict  mailbox  format  (i.e.
+            allows  you to split digests/articles or non-standard
+            mailbox formats).  This disables recognition  of  the
+            <B>Content-Length:</B> field.
+
+       <B>-B</B>   Makes  formail assume that it is splitting up a BABYL
+            rmail file.
+
+       <B>-m</B> <I>minfields</I>
+            Allows you to specify the number of consecutive head­
+            erfields  formail  needs to find before it decides it
+            found the start of a new message, it defaults to 2.
+
+       <B>-q</B>   Tells formail to (still detect but)  be  quiet  about
+            write  errors, duplicate messages and mismatched <B>Con­</B>
+            <B>tent-Length:</B> fields.  This option is on  by  default,
+            to make it display the messages use <B>-q-</B>.
+
+       <B>-D</B> <I>maxlen</I> <I>idcache</I>
+            Formail  will detect if the Message-ID of the current
+
+       <B>-a</B> <I>headerfield</I>
+            Append a custom <I>headerfield</I> onto the header; but only
+            if a similar field does not exist yet.  If you  spec­
+            ify  either  one  of  the  field names <B>Message-ID:</B> or
+            <B>Resent-Message-ID:</B> with no field contents, then  for­
+            mail will generate a unique message-ID for you.
+
+       <B>-A</B> <I>headerfield</I>
+            Append  a  custom  <I>headerfield</I> onto the header in any
+            case.
+
+       <B>-i</B> <I>headerfield</I>
+            Same as <B>-A</B>, except that any existing  similar  fields
+            are  renamed  by  prepending  an ``Old-'' prefix.  If
+            <I>headerfield</I> consists only of a  field-name,  it  will
+            not be appended.
+
+       <B>-I</B> <I>headerfield</I>
+            Same  as  <B>-i</B>, except that any existing similar fields
+            are simply removed.  If <I>headerfield</I> consists only  of
+            a field-name, it effectively deletes the field.
+
+       <B>-u</B> <I>headerfield</I>
+            Make  the  first occurrence of this field unique, and
+            thus delete all subsequent occurrences of it.
+
+       <B>-U</B> <I>headerfield</I>
+            Make the last occurrence of this  field  unique,  and
+            thus delete all preceding occurrences of it.
+
+       <B>-R</B> <I>oldfield</I> <I>newfield</I>
+            Renames  all  occurrences  of  the fieldname <I>oldfield</I>
+            into <I>newfield</I>.
+
+       <B>+</B><I>skip</I>
+            Skip the first <I>skip</I> messages while splitting.
+
+       <B>-</B><I>total</I>
+            Output at most <I>total</I> messages while splitting.
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       When renaming, removing,  or  extracting  fields,  partial
+       fieldnames  may  be  used to specify all fields that start
+       with the specified value.
+
+       By default, when generating an auto-reply header  procmail
+       selects  the envelope sender from the input message.  This
+       is correct  for  vacation  messages  and  other  automatic
+       replies  regarding the routing or delivery of the original
+       message.  If the sender is expecting a reply or the  reply
+       is  being  generated  in  response  to the contents of the
+       to the -r and -t options.  This usage  is  deprecated  and
+       should not be used in new applications.
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>FILENO</B>
+            While  splitting,  formail assigns the message number
+            currently being output to this variable.  By  preset­
+            ting  FILENO, you can change the initial message num­
+            ber being used and the width of the zero-padded  out­
+            put.   If FILENO is unset it will default to 000.  If
+            FILENO is non-empty and does not  contain  a  number,
+            FILENO generation is disabled.
+
+
+</PRE>
+<H2>EXAMPLES</H2><PRE>
+       To split up a digest one usually uses:
+              formail +1 -ds &gt;&gt;the_mailbox_of_your_choice
+       or
+              formail +1 -ds procmail
+
+       To remove all Received: fields from the header:
+              formail -I Received:
+
+       To  remove  all  fields except From: and Subject: from the
+       header:
+              formail -k -X From: -X Subject:
+
+       To supersede the Reply-To: field in  a  header  you  could
+       use:
+              formail -i "Reply-To: foo@bar"
+
+       To  convert  a  non-standard  mailbox file into a standard
+       mailbox file you can use:
+              formail -ds &lt;old_mailbox &gt;&gt;new_mailbox
+
+       Or, if you have a very tolerant mailer:
+              formail -a Date: -ds &lt;old_mailbox &gt;&gt;new_mailbox
+
+       To extract the header from a message:
+              formail -X ""
+       or
+              sed -e '/^$/ q'
+
+       To extract the body from a message:
+              formail -I ""
+       or
+              sed -e '1,/^$/ d'
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>mail(1)</B>, <B>binmail(1)</B>, <B>sendmail(8)</B>, <B>procmail(1)</B>, <B>sed(1)</B>,
+       <B>sh(1)</B>, <B>RFC822</B>, <B>RFC1123</B>
+
+
+                              longer than the actual body.   This
+                              causes  this  message  to  absorb a
+                              number of subsequent messages  fol­
+                              lowing it in the same mailbox.
+
+       Couldn't write to stdout
+                              The program that formail was trying
+                              to pipe into didn't accept all  the
+                              data formail sent to it; this diag­
+                              nostic can be suppressed by the  <B>-q</B>
+                              option.
+
+       Duplicate key found: x The  Message-ID or sender x in this
+                              message was found in  the  idcache;
+                              this  diagnostic  can be suppressed
+                              by the <B>-q</B> option.
+
+       Failed to execute "x"  Program not in path,  or  not  exe­
+                              cutable.
+
+       File table full        Too  many  open  files  on this ma­
+                              chine.
+
+       Invalid field-name: "x"
+                              The specified field-name  "x"  con­
+                              tains control characters, or cannot
+                              be a partial  field-name  for  this
+                              option.
+
+
+</PRE>
+<H2>WARNINGS</H2><PRE>
+       You can save yourself and others a lot of grief if you try
+       to avoid using this  autoreply  feature  on  mails  coming
+       through  mailinglists.  Depending on the format of the in­
+       coming mail (which in turn depends on  both  the  original
+       sender's  mail  agent  and  the mailinglist setup) formail
+       could decide to generate an autoreply header that  replies
+       to the list.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       When  formail  has  to  generate a leading `From ' line it
+       normally will contain the current  date.   If  formail  is
+       given the option `-a Date:', it will use the date from the
+       `Date:' field in the header (if present).  However,  since
+       formail  copies  it  verbatim, the format will differ from
+       that expected by most mail readers.
+
+       If formail is instructed to delete or rename  the  leading
+       `From  '  line, it will not automatically regenerate it as
+       usual.  To force formail to regenerate it  in  this  case,
+       include <B>-a</B> <B>'From</B> <B>'</B>.
+
+       If  formail  is  not called as the first program in a pipe
+       ing excessive comments and whitespace).
+
+       The  regular  expression that is used to find `real' post­
+       marks is:
+              "\n\nFrom [\t ]*[^\t\n ]+[\t ]+[^\n\t ]"
+
+       If a <B>Content-Length:</B> field is found in a  header,  formail
+       will copy the number of specified bytes in the body verba­
+       tim before  resuming  the  regular  scanning  for  message
+       boundaries  (except  when  splitting  digests  or Berkeley
+       mailbox format is assumed).
+
+
+</PRE>
+<H2>NOTES</H2><PRE>
+       Calling up formail with the -h or -? options will cause it
+       to display a command-line help page.
+
+
+</PRE>
+<H2>SOURCE</H2><PRE>
+       This program is part of the <I>procmail</I> <I>mail-processing-pack­</I>
+       <I>age</I> (v3.15.1)  available  at  http://www.procmail.org/  or
+       ftp.procmail.org in <B>pub/procmail/</B>.
+
+
+</PRE>
+<H2>MAILINGLIST</H2><PRE>
+       There  exists  a mailinglist for questions relating to any
+       program in the procmail package:
+              &lt;procmail-users@procmail.org&gt;
+                     for submitting questions/answers.
+              &lt;procmail-users-request@procmail.org&gt;
+                     for subscription requests.
+
+       If you would like to stay informed about new versions  and
+       official patches send a subscription request to
+              procmail-announce-request@procmail.org
+       (this is a readonly list).
+
+
+</PRE>
+<H2>AUTHORS</H2><PRE>
+       Stephen R. van den Berg
+              &lt;srb@cuci.nl&gt;
+       Philip A. Guenther
+              &lt;guenther@sendmail.com&gt;
+
+
+
+BuGless                     1999/12/14                 <B>FORMAIL(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

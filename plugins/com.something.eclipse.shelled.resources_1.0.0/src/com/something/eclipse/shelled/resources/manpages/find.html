@@ -1,0 +1,458 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>find</B> [path...] [expression]
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       This  manual page documents the GNU version of <B>find</B>.  <B>find</B>
+       searches the directory tree rooted at each given file name
+       by  evaluating  the  given  expression from left to right,
+       according to the rules of precedence (see  section  OPERA­
+       TORS),  until  the outcome is known (the left hand side is
+       false for <I>and</I> operations, true for  <I>or</I>),  at  which  point
+       <B>find</B> moves on to the next file name.
+
+       The first argument that begins with `-', `(', `)', `,', or
+       `!' is taken to be the beginning of  the  expression;  any
+       arguments before it are paths to search, and any arguments
+       after it are the rest of the expression.  If no paths  are
+       given, the current directory is used.  If no expression is
+       given, the expression `-print' is used.
+
+       <B>find</B> exits with status 0 if all files are  processed  suc­
+       cessfully, greater than 0 if errors occur.
+
+
+</PRE>
+<H2>EXPRESSIONS</H2><PRE>
+       The expression is made up of options (which affect overall
+       operation rather than the processing of a  specific  file,
+       and  always  return  true),  tests (which return a true or
+       false value), and actions (which  have  side  effects  and
+       return a true or false value), all separated by operators.
+       -and is assumed where the operator  is  omitted.   If  the
+       expression  contains  no actions other than -prune, -print
+       is performed on all files  for  which  the  expression  is
+       true.
+
+   <B>OPTIONS</B>
+       All  options always return true.  They always take effect,
+       rather than being processed only when their place  in  the
+       expression is reached.  Therefore, for clarity, it is best
+       to place them at the beginning of the expression.
+
+       -daystart
+              Measure times (for -amin,  -atime,  -cmin,  -ctime,
+              -mmin,  and  -mtime)  from  the  beginning of today
+              rather than from 24 hours ago.
+
+       -depth Process each directory's contents before the direc­
+              tory itself.
+
+       -follow
+              Dereference symbolic links.  Implies -noleaf.
+
+       -help, --help
+              Print  a  summary of the command-line usage of <B>find</B>
+
+       -mount Don't descend directories on other filesystems.  An
+              alternate  name  for  -xdev, for compatibility with
+              some other versions of <B>find</B>.
+
+       -noleaf
+              Do not optimize by assuming that  directories  con­
+              tain  2  fewer  subdirectories than their hard link
+              count.   This  option  is  needed  when   searching
+              filesystems  that do not follow the Unix directory-
+              link convention, such as CD-ROM or MS-DOS  filesys­
+              tems or AFS volume mount points.  Each directory on
+              a normal Unix filesystem has at least 2 hard links:
+              its  name  and  its  `.'  entry.  Additionally, its
+              subdirectories (if any) each  have  a  `..'   entry
+              linked to that directory.  When <B>find</B> is examining a
+              directory, after it has statted 2 fewer subdirecto­
+              ries than the directory's link count, it knows that
+              the rest of the entries in the directory  are  non-
+              directories  (`leaf'  files in the directory tree).
+              If only the files' names need to be examined, there
+              is  no  need to stat them; this gives a significant
+              increase in search speed.
+
+       -version, --version
+              Print the <B>find</B> version number and exit.
+
+       -xdev  Don't descend directories on other filesystems.
+
+   <B>TESTS</B>
+       Numeric arguments can be specified as
+
+       <I>+n</I>     for greater than <I>n</I>,
+
+       <I>-n</I>     for less than <I>n</I>,
+
+       <I>n</I>      for exactly <I>n</I>.
+
+       -amin <I>n</I>
+              File was last accessed <I>n</I> minutes ago.
+
+       -anewer <I>file</I>
+              File was last accessed more recently than <I>file</I>  was
+              modified.   -anewer  is affected by -follow only if
+              -follow comes before -anewer on the command line.
+
+       -atime <I>n</I>
+              File was last accessed <I>n</I>*24 hours ago.
+
+       -cmin <I>n</I>
+              File's status was last changed <I>n</I> minutes ago.
+
+       -cnewer <I>file</I>
+              File is on a filesystem of type  <I>type</I>.   The  valid
+              filesystem  types  vary among different versions of
+              Unix; an incomplete list of filesystem  types  that
+              are accepted on some version of Unix or another is:
+              ufs, 4.2, 4.3, nfs, tmp, mfs, S51K, S52K.  You  can
+              use  -printf with the %F directive to see the types
+              of your filesystems.
+
+       -gid <I>n</I> File's numeric group ID is <I>n</I>.
+
+       -group <I>gname</I>
+              File belongs  to  group  <I>gname</I>  (numeric  group  ID
+              allowed).
+
+       -ilname <I>pattern</I>
+              Like -lname, but the match is case insensitive.
+
+       -iname <I>pattern</I>
+              Like -name, but the match is case insensitive.  For
+              example, the patterns `fo*'  and  `F??'  match  the
+              file names `Foo', `FOO', `foo', `fOo', etc.
+
+       -inum <I>n</I>
+              File has inode number <I>n</I>.
+
+       -ipath <I>pattern</I>
+              Like -path, but the match is case insensitive.
+
+       -iregex <I>pattern</I>
+              Like -regex, but the match is case insensitive.
+
+       -links <I>n</I>
+              File has <I>n</I> links.
+
+       -lname <I>pattern</I>
+              File  is a symbolic link whose contents match shell
+              pattern <I>pattern</I>.  The metacharacters do  not  treat
+              `/' or `.' specially.
+
+       -mmin <I>n</I>
+              File's data was last modified <I>n</I> minutes ago.
+
+       -mtime <I>n</I>
+              File's data was last modified <I>n</I>*24 hours ago.
+
+       -name <I>pattern</I>
+              Base of file name (the path with the leading direc­
+              tories removed) matches shell pattern <I>pattern</I>.  The
+              metacharacters  (`*', `?', and `[]') do not match a
+              `.' at the start of the base  name.   To  ignore  a
+              directory  and  the files under it, use -prune; see
+              an example in the description of -path.
+              metacharacters  do  not treat `/' or `.' specially;
+              so, for example,
+                        find . -path './sr*sc'
+              will  print  an  entry  for  a   directory   called
+              './src/misc'  (if  one  exists).  To ignore a whole
+              directory tree, use  -prune  rather  than  checking
+              every  file  in the tree.  For example, to skip the
+              directory `src/emacs' and all files and directories
+              under  it,  and  print the names of the other files
+              found, do something like this:
+                        find  .  -path  './src/emacs'  -prune  -o
+                        -print
+
+       -perm <I>mode</I>
+              File's  permission  bits are exactly <I>mode</I> (octal or
+              symbolic).  Symbolic modes use mode 0 as a point of
+              departure.
+
+       -perm -<I>mode</I>
+              All  of  the  permission  bits <I>mode</I> are set for the
+              file.
+
+       -perm +<I>mode</I>
+              Any of the permission bits <I>mode</I>  are  set  for  the
+              file.
+
+       -regex <I>pattern</I>
+              File name matches regular expression <I>pattern</I>.  This
+              is a match on the whole path, not  a  search.   For
+              example,  to match a file named `./fubar3', you can
+              use the regular expression  `.*bar.'  or  `.*b.*3',
+              but not `b.*r3'.
+
+       -size <I>n</I>[bckw]
+              File uses <I>n</I> units of space.  The units are 512-byte
+              blocks by default or if `b' follows <I>n</I>, bytes if `c'
+              follows  <I>n</I>,  kilobytes  if `k' follows <I>n</I>, or 2-byte
+              words if `w' follows <I>n</I>.  The size  does  not  count
+              indirect blocks, but it does count blocks in sparse
+              files that are not actually allocated.
+
+       -true  Always true.
+
+       -type <I>c</I>
+              File is of type <I>c</I>:
+
+              b      block (buffered) special
+
+              c      character (unbuffered) special
+
+              d      directory
+
+              last changed.
+
+       -user <I>uname</I>
+              File  is  owned  by  user  <I>uname</I>  (numeric  user ID
+              allowed).
+
+       -xtype <I>c</I>
+              The same as -type unless the  file  is  a  symbolic
+              link.   For symbolic links: if -follow has not been
+              given, true if the file is a link to a file of type
+              <I>c</I>; if -follow has been given, true if <I>c</I> is `l'.  In
+              other words, for symbolic links, -xtype checks  the
+              type of the file that -type does not check.
+
+   <B>ACTIONS</B>
+       -exec <I>command</I> ;
+              Execute <I>command</I>; true if 0 status is returned.  All
+              following arguments to <B>find</B> are taken to  be  argu­
+              ments  to  the command until an argument consisting
+              of `;' is encountered.  The string `{}' is replaced
+              by the current file name being processed everywhere
+              it occurs in the arguments to the command, not just
+              in arguments where it is alone, as in some versions
+              of <B>find</B>.  Both of these constructions might need to
+              be  escaped  (with a `\') or quoted to protect them
+              from expansion by the shell.  The command  is  exe­
+              cuted in the starting directory.
+
+       -fls <I>file</I>
+              True; like -ls but write to <I>file</I> like -fprint.
+
+       -fprint <I>file</I>
+              True;  print the full file name into file <I>file</I>.  If
+              <I>file</I> does not exist when <B>find</B> is run,  it  is  cre­
+              ated;  if it does exist, it is truncated.  The file
+              names ``/dev/stdout'' and ``/dev/stderr'' are  han­
+              dled  specially;  they refer to the standard output
+              and standard error output, respectively.
+
+       -fprint0 <I>file</I>
+              True; like -print0 but write to <I>file</I> like  -fprint.
+
+       -fprintf <I>file</I> <I>format</I>
+              True;  like -printf but write to <I>file</I> like -fprint.
+
+       -ok <I>command</I> ;
+              Like -exec but ask the user first (on the  standard
+              input);  if the response does not start with `y' or
+              `Y', do not run the command, and return false.
+
+       -print True; print the full file name on the standard out­
+              put, followed by a newline.
+              escapes and directives are:
+
+              \a     Alarm bell.
+
+              \b     Backspace.
+
+              \c     Stop printing from this  format  immediately
+                     and flush the output.
+
+              \f     Form feed.
+
+              \n     Newline.
+
+              \r     Carriage return.
+
+              \t     Horizontal tab.
+
+              \v     Vertical tab.
+
+              \\     A literal backslash (`\').
+
+              A  `\' character followed by any other character is
+              treated as an ordinary character, so they both  are
+              printed.
+
+              %%     A literal percent sign.
+
+              %a     File's   last  access  time  in  the  format
+                     returned by the C `ctime' function.
+
+              %A<I>k</I>    File's last access time in the format speci­
+                     fied  by  <I>k</I>, which is either `@' or a direc­
+                     tive for the  C  `strftime'  function.   The
+                     possible values for <I>k</I> are listed below; some
+                     of them might not be available on  all  sys­
+                     tems,   due  to  differences  in  `strftime'
+                     between systems.
+
+                      @      seconds since Jan.  1,  1970,  00:00
+                             GMT.
+
+                     Time fields:
+
+                      H      hour (00..23)
+
+                      I      hour (01..12)
+
+                      k      hour ( 0..23)
+
+                      l      hour ( 1..12)
+
+                      M      minute (00..59)
+
+                     Date fields:
+
+                      a      locale's  abbreviated  weekday  name
+                             (Sun..Sat)
+
+                      A      locale's full weekday name, variable
+                             length (Sunday..Saturday)
+
+                      b      locale's   abbreviated   month  name
+                             (Jan..Dec)
+
+                      B      locale's full month  name,  variable
+                             length (January..December)
+
+                      c      locale's  date  and time (Sat Nov 04
+                             12:02:33 EST 1989)
+
+                      d      day of month (01..31)
+
+                      D      date (mm/dd/yy)
+
+                      h      same as b
+
+                      j      day of year (001..366)
+
+                      m      month (01..12)
+
+                      U      week number of year with  Sunday  as
+                             first day of week (00..53)
+
+                      w      day of week (0..6)
+
+                      W      week  number  of year with Monday as
+                             first day of week (00..53)
+
+                      x      locale's     date     representation
+                             (mm/dd/yy)
+
+                      y      last two digits of year (00..99)
+
+                      Y      year (1970...)
+
+              %b     File's size in 512-byte blocks (rounded up).
+
+              %c     File's last status change time in the format
+                     returned by the C `ctime' function.
+
+              %C<I>k</I>    File's last status change time in the format
+                     specified by <I>k</I>, which is the same as for %A.
+
+              %d     File's  depth in the directory tree; 0 means
+                     the file is a command line argument.
+
+              %H     Command line argument under which  file  was
+                     found.
+
+              %i     File's inode number (in decimal).
+
+              %k     File's size in 1K blocks (rounded up).
+
+              %l     Object  of  symbolic  link  (empty string if
+                     file is not a symbolic link).
+
+              %m     File's permission bits (in octal).
+
+              %n     Number of hard links to file.
+
+              %p     File's name.
+
+              %P     File's name with the  name  of  the  command
+                     line  argument  under  which  it  was  found
+                     removed.
+
+              %s     File's size in bytes.
+
+              %t     File's last modification time in the  format
+                     returned by the C `ctime' function.
+
+              %T<I>k</I>    File's  last modification time in the format
+                     specified by <I>k</I>, which is the same as for %A.
+
+              %u     File's  user name, or numeric user ID if the
+                     user has no name.
+
+              %U     File's numeric user ID.
+
+              A `%' character followed by any other character  is
+              discarded (but the other character is printed).
+
+       -prune If  -depth  is  not given, true; do not descend the
+              current directory.
+              If -depth is given, false; no effect.
+
+       -ls    True; list current file in  `ls  -dils'  format  on
+              standard  output.   The  block  counts  are  of  1K
+              blocks,    unless    the    environment    variable
+              POSIXLY_CORRECT  is  set,  in  which  case 512-byte
+              blocks are used.
+
+   <B>OPERATORS</B>
+       Listed in order of decreasing precedence:
+
+       ( <I>expr</I> )
+              Force precedence.
+              Same as <I>expr1</I> <I>expr2</I>.
+
+       <I>expr1</I> -o <I>expr2</I>
+              Or; <I>expr2</I> is not evaluated if <I>expr1</I> is true.
+
+       <I>expr1</I> -or <I>expr2</I>
+              Same as <I>expr1</I> -o <I>expr2</I>.
+
+       <I>expr1</I> , <I>expr2</I>
+              List;  both  <I>expr1</I>  and <I>expr2</I> are always evaluated.
+              The value of <I>expr1</I> is discarded; the value  of  the
+              list is the value of <I>expr2</I>.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>locate(1L)</B>,  <B>locatedb(5L)</B>, <B>updatedb(1L)</B>, <B>xargs(1L)</B> <B>Finding</B>
+       <B>Files</B> (on-line in Info, or printed)
+
+
+
+                                                         <B>FIND(1L)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,237 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>groff</B> [ <B>-abeghilpstvzCEGNRSUVXZ</B> ] [ <B>-w</B><I>name</I> ] [ <B>-W</B><I>name</I> ]
+             [ <B>-m</B><I>name</I> ] [ <B>-F</B><I>dir</I> ] [ <B>-I</B><I>dir</I> ] [ <B>-T</B><I>dev</I> ] [ <B>-f</B><I>fam</I> ]
+             [ <B>-M</B><I>dir</I> ] [ <B>-d</B><I>cs</I> ] [ <B>-r</B><I>cn</I> ] [ <B>-n</B><I>num</I> ] [ <B>-o</B><I>list</I> ]
+             [ <B>-P</B><I>arg</I> ] [ <B>-L</B><I>arg</I> ] [ <I>files...</I> ]
+
+       It  is  possible to have whitespace between a command line
+       option and its parameter.
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>groff</B> is a front-end to the groff document formatting sys­
+       tem.  Normally it runs the <B>troff</B> program and a postproces­
+       sor  appropriate  for  the  selected  device.    Available
+       devices are:
+
+       <B>ps</B>     For PostScript printers and previewers
+
+       <B>dvi</B>    For TeX dvi format.
+
+       <B>X75</B>    For a 75dpi X11 previewer.
+
+       <B>X100</B>   For a 100dpi X11 previewer.
+
+       <B>ascii</B>  For typewriter-like devices.
+
+       <B>ascii8</B> For  typewriter-like  devices.   Unlike <B>ascii</B>, this
+              device is 8 bit clean.  This device is intended  to
+              be   used   for   codesets  other  than  ASCII  and
+              ISO-8859-1.
+
+       <B>latin1</B> For typewriter-like devices using the  ISO  Latin-1
+              (ISO 8859-1) character set.
+
+       <B>utf8</B>   For  typewriter-like devices using the Unicode (ISO
+              10646) character set with UTF-8 encoding.
+
+       <B>cp1047</B> For typewriter-like devices which  use  the  EBCDIC
+              code page IBM cp1047 (e.g. OS/390 Unix).
+
+       <B>nippon</B> For  typewriter-like devices using the Japanese-EUC
+              character set.
+
+       <B>lj4</B>    For an HP LaserJet4-compatible (or other  PCL5-com­
+              patible) printer.
+
+       <B>lbp</B>    For  Canon  CAPSL  printers (LBP-4 and LBP-8 series
+              laser printers).
+
+       <B>html</B>   To produce HTML output.
+
+       The postprocessor to be used for a device is specified  by
+       the  <B>postpro</B> command in the device description file.  This
+       <B>-e</B>     Preprocess with eqn.
+
+       <B>-t</B>     Preprocess with tbl.
+
+       <B>-g</B>     Preprocess with grn.
+
+       <B>-G</B>     Preprocess with grap.
+
+       <B>-p</B>     Preprocess with pic.
+
+       <B>-s</B>     Preprocess with soelim.
+
+       <B>-I</B><I>dir</I>  This  option  is  as  described in <B>soelim(1)</B>.  This
+              option implies the <B>-s</B> option.
+
+       <B>-R</B>     Preprocess with refer.  No  mechanism  is  provided
+              for  passing  arguments to <B>refer</B> because most refer
+              options  have  equivalent  commands  which  can  be
+              included  in  the  file.   See  <B>refer(1)</B>  for  more
+              details.
+
+       <B>-v</B>     Make programs run by <B>groff</B> print out their  version
+              number.
+
+       <B>-V</B>     Print  the  pipeline on stdout instead of executing
+              it.
+
+       <B>-z</B>     Suppress output from <B>troff</B>.   Only  error  messages
+              will be printed.
+
+       <B>-Z</B>     Do  not  postprocess the output of <B>troff</B>.  Normally
+              <B>groff</B> will automatically run the appropriate  post­
+              processor.
+
+       <B>-P</B><I>arg</I>  Pass  <I>arg</I>  to  the  postprocessor.   Each  argument
+              should be passed with a separate <B>-P</B>  option.   Note
+              that <B>groff</B> does not prepend <B>-</B> to <I>arg</I> before passing
+              it to the postprocessor.
+
+       <B>-l</B>     Send the output to a  spooler  for  printing.   The
+              command  used  for  this  is specified by the <B>print</B>
+              command in the device description file (if not pre­
+              sent, <B>-l</B> has no effect).
+
+       <B>-L</B><I>arg</I>  Pass  <I>arg</I>  to the spooler.  Each argument should be
+              passed with a separate <B>-L</B> option.  Note that  <B>groff</B>
+              does  not prepend <B>-</B> to <I>arg</I> before passing it to the
+              postprocessor.  If there is no <B>print</B> command in the
+              device description file, <B>-L</B> is ignored.
+
+       <B>-T</B><I>dev</I>  Prepare  output for device <I>dev</I>.  The default device
+              is <B>ps</B>.
+              enabled by default.
+
+       <B>-U</B>     Unsafe  mode.  Reverts to the old unsafe behaviour.
+
+       <B>-a</B>
+       <B>-b</B>
+       <B>-i</B>
+       <B>-C</B>
+       <B>-E</B>
+       <B>-w</B><I>name</I>
+       <B>-W</B><I>name</I>
+       <B>-m</B><I>name</I>
+       <B>-o</B><I>list</I>
+       <B>-d</B><I>cs</I>
+       <B>-r</B><I>cn</I>
+       <B>-F</B><I>dir</I>
+       <B>-M</B><I>dir</I>
+       <B>-f</B><I>fam</I>
+       <B>-n</B><I>num</I>  These are as described in <B>troff(1)</B><B>.</B>
+
+
+</PRE>
+<H2>ENVIRONMENT</H2><PRE>
+       <B>GROFF_COMMAND_PREFIX</B>
+              If this is  set  <I>X</I>,  then  <B>groff</B>  will  run  <I>X</I><B>troff</B>
+              instead  of  <B>troff</B>.  This also applies to <B>tbl</B>, <B>pic</B>,
+              <B>eqn</B>, <B>grn</B>, <B>refer</B>, and <B>soelim</B>.  It does not apply  to
+              <B>grap</B>,  <B>grops</B>,  <B>grodvi</B>, <B>grotty</B>, <B>grolj4</B>, <B>grohtml</B>, and
+              <B>gxditview</B>.
+
+       <B>GROFF_TMAC_PATH</B>
+              A colon separated list of directories in  which  to
+              search  for  macro files in addition to the default
+              directories.  See <B>troff(1)</B> for more details.
+
+       <B>GROFF_TYPESETTER</B>
+              Default device.
+
+       <B>GROFF_FONT_PATH</B>
+              A colon separated list of directories in  which  to
+              search for the <B>dev</B><I>name</I> directory in addition to the
+              default one.  See <B>troff(1)</B> for more details.
+
+       <B>GROFF_BIN_PATH</B>
+              This search path, followed by <B>PATH</B>,  will  be  used
+              for  commands  executed  by  <B>groff</B>.   If  not  set,
+              `/usr/bin' is prepended to <B>PATH</B>.
+
+       <B>GROFF_TMPDIR</B>
+              The directory in which temporary files will be cre­
+              ated.  If this is not set and <B>TMPDIR</B> is set, tempo­
+              rary files will be created in that directory.  Oth­
+              erwise  temporary  files  will  be created in <B>/tmp</B>.
+              The <B>grops(1)</B> and <B>refer(1)</B> commands can create  tem­
+
+       To  print  the man page <B>foo.1</B> to the standard output using
+       the latin-1 output device and <B>less</B> as the pager, the  fol­
+       lowing command can be used:
+
+              <B>groff</B> <B>-mandoc</B> <B>-Tlatin1</B> <B>foo.1</B> <B>|</B> <B>less</B>
+
+       Alternatively, you can say
+
+              <B>groff</B> <B>-m</B> <B>mandoc</B> <B>-Tlatin1</B> <B>foo.1</B> <B>|</B> <B>less</B>
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       James Clark &lt;jjc@jclark.com&gt;
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       Report  bugs  to  bug-groff@gnu.org.   Include a complete,
+       self-contained example that  will  allow  the  bug  to  be
+       reproduced,  and say which version of groff you are using.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright © 1989-2000 Free Software Foundation, Inc.
+
+       groff is free software; you  can  redistribute  it  and/or
+       modify  it  under  the  terms  of  the  GNU General Public
+       License as published  by  the  Free  Software  Foundation;
+       either version 2, or (at your option) any later version.
+
+       groff  is  distributed in the hope that it will be useful,
+       but WITHOUT ANY WARRANTY; without even  the  implied  war­
+       ranty  of MERCHANTABILITY or FITNESS FOR A PARTICULAR PUR­
+       POSE.   See  the  GNU  General  Public  License  for  more
+       details.
+
+       You  should have received a copy of the GNU General Public
+       License along with groff; see the file COPYING.   If  not,
+       write  to  the Free Software Foundation, 59 Temple Place -
+       Suite 330, Boston, MA 02111-1307, USA.
+
+
+</PRE>
+<H2>AVAILABILITY</H2><PRE>
+       The most recent released version of groff is always avail­
+       able  for  anonymous ftp from ftp.gnu.org in the directory
+       gnu/groff.
+
+       <B>groff</B> only supports the freely available <B>grap</B>  implementa­
+       tion  written  by  Ted  Faber  &lt;faber@lunabase.org&gt;.   The
+       actual version can be found at
+
+              http://www.lunabase.org/~faber/Vault/software/grap/
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>grog(1)</B>,   <B>troff(1)</B>,   <B>tbl(1)</B>,   <B>pic(1)</B>,  <B>eqn(1)</B>,  <B>grn(1)</B>,
+       <B>grap(1)</B>,   <B>soelim(1)</B>,   <B>refer(1)</B>,   <B>grops(1)</B>,   <B>grodvi(1)</B>,
+       <B>grotty(1)</B>, <B>grolj4(1)</B>, <B>grolbp(1)</B>, <B>grohtml(1)</B>, <B>gxditview(1)</B>,
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

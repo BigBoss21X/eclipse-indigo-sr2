@@ -1,0 +1,85 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>lpoptions</B>   [   -h   <I>server</I>  ]  -d  <I>dest[/instance]</I>  [  -o
+       <I>option=value</I> ] ... [ -o <I>option=value</I> ]
+       <B>lpoptions</B> [ -h <I>server</I> ] [ -E ] [ -p <I>dest[/instance]</I> ] -l
+       <B>lpoptions</B> [ -h <I>server</I> ] [ -E ] [ -o <I>option=value</I> ]  ...  [
+       -o <I>option=value</I> ] [ -p <I>dest[/instance]</I> ] -r <I>option</I>
+       <B>lpoptions</B> [ -h <I>server</I> ] [ -E ] -x <I>dest[/instance]</I>
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>lpoptions</B>  displays  or sets printer options and defaults.
+       <B>lpoptions</B> shows the default printer options when run  with
+       no arguments. Other options include:
+
+       -E
+            Enabled  encryption  when communicating with the CUPS
+            server.
+
+       -d <I>dest[/instance]</I>
+            Sets the default printer to <I>dest</I>. If <I>instance</I> is sup­
+            plied  then  that  particular  instance is used. This
+            option overrides the system default printer  for  the
+            current user.
+
+       -h <I>server</I>
+            Specifies the CUPS server to communicate with.
+
+       -l
+            Lists  the printer specific options and their current
+            settings.
+
+       -o <I>option=value</I>
+            Specifies a new option for the named destination.
+
+       -p <I>dest[/instance]</I>
+            Sets the destination and instance, if specified,  for
+            any  options that follow.  If the named instance does
+            not exist then it is created.
+
+       -r <I>option</I>
+            Removes the specified option for the  named  destina­
+            tion.
+
+       -x <I>dest[/instance]</I>
+            Removes  the  options  for  the named destination and
+            instance, if specified.  If the named  instance  does
+            not exist then this does nothing.
+
+       If  no  options are specified using the <I>-o</I> option then the
+       current options for the named printer are reported on  the
+       standard output.
+
+       Options  set  with  the  <B>lpoptions</B> command are used by the
+       created by the root user.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>cancel(1)</B>,   <B>lp(1)</B>,   CUPS    Software    Users    Manual,
+       http://localhost:631/documentation.html
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright  1993-2003 by Easy Software Products, All Rights
+       Reserved.
+
+
+
+21 October 2002    Common UNIX Printing System       <B>lpoptions(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

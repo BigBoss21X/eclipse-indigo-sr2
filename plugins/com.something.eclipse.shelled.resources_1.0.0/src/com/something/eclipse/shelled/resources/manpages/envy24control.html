@@ -1,0 +1,71 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>envy24control</B> [<I>-c</I> card-number] [<I>-D</I> control-name]
+
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>envy24control</B> allows control of the digital mixer, channel
+       gains and other hardware settings for sound cards based on
+       the ice1712 chipset (Midiman Delta  series,  Terratec  EWS
+       and  EWX  series). It also displays a level meter for each
+       input and output channel.
+
+
+
+</PRE>
+<H2>INVOKING</H2><PRE>
+       <B>envy24control</B> [<I>-c</I> card-number] [<I>-D</I> control-name]
+
+       If no control-name is given, then the first sound card  is
+       used.
+
+
+   <B>Options</B>
+       <I>-c</I> card-number
+              Use the card specified by card-number  rather  than
+              the  first  card.   This  is equivalent with <I>-Dhw:n</I>
+              option where <I>n</I> is the card number.
+
+       <I>-D</I> control-name
+              Use the card specified by control-name rather  than
+              the  first  card, normally this will be of the form
+              hw:<I>n</I> where <I>n</I> is the sound card number (zero-based).
+              This  is  only  needed  if  you  have more than one
+              Envy24-based card or if your  Envy24  card  is  not
+              configured  as  the  first card in your ALSA driver
+              setup.
+
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>alsamixer(1),</B> <B>amixer(1),</B> <B>gamix(1)</B>
+
+
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       <B>envy24control</B> is  by Jaroslav Kysela &lt;perex@suse.cz&gt;  This
+       document is by James Tappin &lt;james@xena.uklinux.net&gt;.
+
+
+
+                            6 Oct 2001           <B>envy24control(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

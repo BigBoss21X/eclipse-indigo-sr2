@@ -1,0 +1,129 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       nmbstatus [options]
+
+       Options: --workgroup --pdc --bdc --lmb --dmb --members
+       --quiet --allworkgroups --winsserver --print0 --debug
+       --help --man
+
+
+</PRE>
+<H2>GENERAL OPTIONS</H2><PRE>
+       <B>--help</B>  Print a brief help message and exits.Prints a help
+               message.
+
+       <B>--man</B>   Print the manual page and exit.
+
+       <B>--print0</B>
+               Use ' ' instead of a tab stop as seperator
+               between the output.
+
+       <B>--debug</B> Use an debuglevel. No debuglevel available yet.
+
+
+</PRE>
+<H2>GENERAL ARGUMENTS</H2><PRE>
+       <B>--workgroup</B>
+               Perform all actions on this workgroup name. If no
+               workgroup is set the information off all available
+               groups is shown.
+
+       <B>--pdc</B>   If not called in conjunction with <B>--quiet</B> print a
+               line starting with the acronym PDC followed by the
+               seperator and the netbios name of the PDC if one
+               is available. If not print nothing and return with
+               1.
+
+       <B>--bdc</B>   If not called in conjunction with <B>--quiet</B> print a
+               line starting with the acronym BDC followed by the
+               seperator and the netbios name of the BDC if one
+               is available. If not print nothing and return with
+               1.
+
+       <B>--dmb</B>   If not called in conjunction with <B>--quiet</B> print a
+               line starting with the acronym DMB followed by the
+               seperator and the netbios name of the DMB if one
+               is available. If not print nothing and return with
+               1.
+
+       <B>--lmb</B>   If not called in conjunction with <B>--quiet</B> print a
+               line starting with the acronym LMB followed by the
+               seperator and the netbios name of the LMB if one
+               is available. If not print nothing and return with
+               1.
+
+       <B>--members</B>
+               If not called in conjunction with <B>--quiet</B> print a
+               line starting with the word MEMBERS followed by
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>nmbstatus</B> will detect workgroups, PDCs, BDCs, DMBs, LMBs,
+       and Members of workgroups in your network.
+
+       If more than one type is specizied but only one result
+       found, <B>nmbstatus</B> nevertheless returns 0.
+
+
+</PRE>
+<H2>AUTHOR</H2><PRE>
+       Lars Mueller &lt;lmuelle@suse.de&gt;
+
+       If you find any errors in the code please let me know.
+
+
+</PRE>
+<H2>COPYRIGHT</H2><PRE>
+       Copyright (c) 2003 SuSE Linux AG. All rights reserved.
+
+       This program is free software; you can redistribute it
+       and/or modify it under the same terms as Perl itself.
+
+
+
+perl v5.8.0                 2003-07-01               <B>NMBSTATUS(1)</B>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>

@@ -1,0 +1,59 @@
+<HTML>
+<BODY>
+<PRE>
+<!-- Manpage converted by man2html 3.0.1 -->
+
+</PRE>
+<H2>SYNOPSIS</H2><PRE>
+       <B>ldd</B> [<B>-vdr</B>] program|library ...
+
+
+</PRE>
+<H2>DESCRIPTION</H2><PRE>
+       <B>ldd</B>  prints  the shared libraries required by each program
+       or shared library specified on the command line.
+
+
+</PRE>
+<H2>OPTIONS</H2><PRE>
+       <B>--version</B>
+              print version number of <B>ldd</B>.
+
+       <B>-v</B>,<B>--verbose</B>
+              print all information
+
+       <B>-d</B>,<B>--data-relocs</B>
+              Process data relocations  and  report  any  missing
+              objects.
+
+       <B>-r</B>,<B>--function-relocs</B>
+              Perform relocations for both data objects and func­
+              tions, and report any missing objects.
+
+
+</PRE>
+<H2>BUGS</H2><PRE>
+       <B>ldd</B> does not work on a.out shared libraries.
+
+       <B>ldd</B> does not work with some extremely old  a.out  programs
+       which  were built before <B>ldd</B> support was added to the com­
+       piler releases.  If you use <B>ldd</B> on one of these  programs,
+       the  program  will  attempt  to  run with argc = 0 and the
+       results will be unpredictable.
+
+
+</PRE>
+<H2>SEE ALSO</H2><PRE>
+       <B>ldconfig(8)</B>
+
+
+
+                         13 February 2001                  <B>LDD(1)</B>
+</PRE>
+<HR>
+<ADDRESS>
+Man(1) output converted with
+<a href="http://www.oac.uci.edu/indiv/ehood/man2html.html">man2html</a>
+</ADDRESS>
+</BODY>
+</HTML>
