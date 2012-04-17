@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<config transient="false" date="1334627233747" version="3.0">
+<config transient="false" date="1334627463358" version="3.0">
 	<site enabled="true" updateable="true" policy="USER-EXCLUDE" url="platform:/base/">
 		<feature id="org.eclipse.mylyn.bugzilla_feature" plugin-identifier="org.eclipse.mylyn.tasks.core" url="features/org.eclipse.mylyn.bugzilla_feature_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
@@ -35,9 +35,9 @@
 		</feature>
 		<feature id="org.eclipse.mylyn.discovery" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.discovery_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
-		<feature id="org.eclipse.wst.common_ui.feature" url="features/org.eclipse.wst.common_ui.feature_3.3.2.v201111030500-7C79FVsEdhO_sfog9oNekiJkS7Nz00OK/" version="3.3.2.v201111030500-7C79FVsEdhO_sfog9oNekiJkS7Nz00OK">
-		</feature>
 		<feature id="org.eclipse.epp.package.common.feature" url="features/org.eclipse.epp.package.common.feature_1.4.2.20120213-0814/" version="1.4.2.20120213-0814">
+		</feature>
+		<feature id="org.eclipse.wst.common_ui.feature" url="features/org.eclipse.wst.common_ui.feature_3.3.2.v201111030500-7C79FVsEdhO_sfog9oNekiJkS7Nz00OK/" version="3.3.2.v201111030500-7C79FVsEdhO_sfog9oNekiJkS7Nz00OK">
 		</feature>
 		<feature id="org.eclipse.mylyn.tasks.ide" plugin-identifier="org.eclipse.mylyn.tasks.core" url="features/org.eclipse.mylyn.tasks.ide_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
@@ -88,6 +88,8 @@
 		<feature id="org.tigris.subversion.subclipse.mylyn" url="features/org.tigris.subversion.subclipse.mylyn_3.0.0/" version="3.0.0">
 		</feature>
 		<feature id="org.tigris.subversion.subclipse" plugin-identifier="org.tigris.subversion.subclipse.core" url="features/org.tigris.subversion.subclipse_1.8.7/" version="1.8.7">
+		</feature>
+		<feature id="net.sourceforge.sqlexplorer" url="features/net.sourceforge.sqlexplorer_3.6.1.v20120412_SR5/" version="3.6.1.v20120412_SR5">
 		</feature>
 		<feature id="org.eclipse.mylyn.commons" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.commons_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
