@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: hudson
+Build-Jdk: 1.6.0_30
+Export-Package: org.hibernate.eclipse.help
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: help.jar
+Bundle-Name: %Bundle-Name.0
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.help,org.eclipse.help.ui
+Bundle-Vendor: %Bundle-Vendor.0
+Bundle-Version: 3.4.0.v20120307-2104-H60-Beta1
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.hibernate.eclipse.help.HelpPlugin
+Bundle-SymbolicName: org.hibernate.eclipse.help; singleton:=true
+
