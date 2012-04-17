@@ -4,6 +4,7 @@ repositories/file\:_Users_norton_dev_eclipse-indigo-sr2_.eclipseextension/enable
 repositories/file\:_Users_norton_dev_eclipse-indigo-sr2_.eclipseextension/isSystem=true
 repositories/file\:_Users_norton_dev_eclipse-indigo-sr2_.eclipseextension/name=/Users/norton/dev/eclipse-indigo-sr2/.eclipseextension
 repositories/file\:_Users_norton_dev_eclipse-indigo-sr2_.eclipseextension/provider=
+repositories/file\:_Users_norton_dev_eclipse-indigo-sr2_.eclipseextension/suffix=eclipse
 repositories/file\:_Users_norton_dev_eclipse-indigo-sr2_.eclipseextension/type=org.eclipse.equinox.p2.extensionlocation.metadataRepository
 repositories/file\:_Users_norton_dev_eclipse-indigo-sr2_.eclipseextension/uri=file\:/Users/norton/dev/eclipse-indigo-sr2/.eclipseextension
 repositories/file\:_Users_norton_dev_eclipse-indigo-sr2_.eclipseextension/version=1
