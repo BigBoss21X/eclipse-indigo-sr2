@@ -14,6 +14,7 @@ javax.servlet.jsp,2.0.0.v201101211617,plugins/javax.servlet.jsp_2.0.0.v201101211
 javax.xml,1.3.4.v201005080400,plugins/javax.xml_1.3.4.v201005080400.jar,4,false
 javax.xml.bind,2.2.0.v201105210648,plugins/javax.xml.bind_2.2.0.v201105210648.jar,4,false
 javax.xml.stream,1.0.1.v201004272200,plugins/javax.xml.stream_1.0.1.v201004272200.jar,4,false
+net.sf.mongrel.plugin,1.0.0.201101221622,plugins/net.sf.mongrel.plugin_1.0.0.201101221622/,4,false
 org.apache.ant,1.8.2.v20120109-1030,plugins/org.apache.ant_1.8.2.v20120109-1030/,4,false
 org.apache.commons.codec,1.3.0.v201101211617,plugins/org.apache.commons.codec_1.3.0.v201101211617.jar,4,false
 org.apache.commons.el,1.0.0.v201101211617,plugins/org.apache.commons.el_1.0.0.v201101211617.jar,4,false

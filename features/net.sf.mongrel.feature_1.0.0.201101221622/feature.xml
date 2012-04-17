@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="net.sf.mongrel.feature"
+      label="Mongrel Eclipse Plugins"
+      version="1.0.0.201101221622"
+      provider-name="net.sf.mongrel">
+
+   <description url="http://mongrel.sf.net/index.html">
+      Mongrel is an Eclipse plugin for running Tomcat (including the ability to debug
+      Tomcat applications, or Tomcat itself) from within Eclipse. This is basically
+      the former Sysdeo Tomcat Launchner Plugin, with added support for Tomcat 7. As
+      the Sysdeo plugin seems to be no longer supported (at least, I received no
+      response for several mails over the last years) and the original code was
+      available under the BSD license, I grabbed the existing stuff and created an
+      ASL 2.0 licensed project on SourceForge.net, which I intend to maintain, at
+      least for my own purposes.
+   </description>
+
+   <copyright url="http://mongrel.sf.net/copyright.html">
+      Copyright (C) 2011, SourceForge Mongrel project
+   </copyright>
+
+   <license url="http://www.apache.org/licenses/LICENSE-2.0.html">
+      Apache Software License, Version 2.0
+   </license>
+
+   <plugin
+         id="net.sf.mongrel.plugin"
+         download-size="134"
+         install-size="151"
+         version="1.0.0.201101221622"/>
+</feature>

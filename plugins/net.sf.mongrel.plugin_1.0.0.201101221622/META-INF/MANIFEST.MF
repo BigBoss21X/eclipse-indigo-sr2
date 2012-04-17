@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: jwi
+Build-Jdk: 1.6.0_23
+Export-Package: net.sf.mongrel,net.sf.mongrel.actions,net.sf.mongrel.e
+ ditors
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: tomcat.jar
+Bundle-Name: Tomcat Plugin
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.resources,org.eclipse.ui,org.eclipse.
+ ui.ide;resolution:=optional,org.eclipse.ui.views;resolution:=optional
+ ,org.eclipse.ui.editors;resolution:=optional,org.eclipse.jface.text;r
+ esolution:=optional,org.eclipse.ui.workbench.texteditor;resolution:=o
+ ptional,org.eclipse.debug.core,org.eclipse.swt,org.eclipse.jdt.core,o
+ rg.eclipse.jdt.launching,org.eclipse.jdt.debug,org.eclipse.jdt.ui,org
+ .eclipse.debug.ui,org.eclipse.jdt.debug.ui,org.eclipse.core.runtime.c
+ ompatibility;resolution:=optional,org.eclipse.ui.ide;resolution:=opti
+ onal,org.eclipse.ui.views;resolution:=optional,org.eclipse.core.runti
+ me;bundle-version="2.1"
+Bundle-Vendor: ASF
+Plugin-Class: net.sf.mongrel.TomcatLauncherPlugin
+Bundle-Version: 1.0.0.201101221622
+Bundle-ManifestVersion: 2
+Bundle-Activator: org.eclipse.core.internal.compatibility.PluginActiva
+ tor
+Bundle-SymbolicName: net.sf.mongrel.plugin;singleton:=true
+
