@@ -8,6 +8,7 @@ com.ibm.icu,4.4.2.v20110823,plugins/com.ibm.icu_4.4.2.v20110823.jar,4,false
 com.jcraft.jsch,0.1.44.v201101211721,plugins/com.jcraft.jsch_0.1.44.v201101211721.jar,4,false
 com.ning.async-http-client,1.6.3.201112281337,plugins/com.ning.async-http-client_1.6.3.201112281337.jar,4,false
 com.sun.syndication,0.9.0.v200803061811,plugins/com.sun.syndication_0.9.0.v200803061811.jar,4,false
+de.loskutov.anyedit.AnyEditTools,2.4.1.201204040004,plugins/de.loskutov.anyedit.AnyEditTools_2.4.1.201204040004.jar,4,false
 javax.activation,1.1.0.v201108011116,plugins/javax.activation_1.1.0.v201108011116.jar,4,false
 javax.mail,1.4.0.v201005080615,plugins/javax.mail_1.4.0.v201005080615.jar,4,false
 javax.servlet,2.5.0.v201103041518,plugins/javax.servlet_2.5.0.v201103041518.jar,4,false
