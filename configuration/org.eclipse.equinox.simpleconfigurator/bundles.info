@@ -1,4 +1,5 @@
 #version=1
+SaveDirtyEditors,1.0.2,dropins/SaveDirtyEditors_1.0.2.jar,4,false
 ch.qos.logback.classic,0.9.27.v20110224-1110,plugins/ch.qos.logback.classic_0.9.27.v20110224-1110.jar,4,false
 ch.qos.logback.core,0.9.27.v20110224-1110,plugins/ch.qos.logback.core_0.9.27.v20110224-1110.jar,4,false
 ch.qos.logback.slf4j,0.9.27.v20110224-1110,plugins/ch.qos.logback.slf4j_0.9.27.v20110224-1110.jar,4,false
@@ -21,6 +22,7 @@ javax.servlet.jsp,2.0.0.v201101211617,plugins/javax.servlet.jsp_2.0.0.v201101211
 javax.xml,1.3.4.v201005080400,plugins/javax.xml_1.3.4.v201005080400.jar,4,false
 javax.xml.bind,2.2.0.v201105210648,plugins/javax.xml.bind_2.2.0.v201105210648.jar,4,false
 javax.xml.stream,1.0.1.v201004272200,plugins/javax.xml.stream_1.0.1.v201004272200.jar,4,false
+net.sf.colorer,0.9.9,plugins/net.sf.colorer_0.9.9/,4,false
 net.sf.mongrel.plugin,1.0.0.201101221622,plugins/net.sf.mongrel.plugin_1.0.0.201101221622/,4,false
 net.sourceforge.sqlexplorer,3.6.1.v20120412_SR5,plugins/net.sourceforge.sqlexplorer_3.6.1.v20120412_SR5/,4,false
 net.sourceforge.sqlexplorer.db2,3.6.1.v20120412_SR5,plugins/net.sourceforge.sqlexplorer.db2_3.6.1.v20120412_SR5.jar,4,false

@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?metadataRepository version='1.1.0'?>
+<repository name='update site: http://colorer.sourceforge.net/eclipsecolorer/' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1'>
+  <properties size='2'>
+    <property name='p2.timestamp' value='1334869904190'/>
+    <property name='site.checksum' value='1590671142'/>
+  </properties>
+  <references size='2'>
+    <repository uri='http://colorer.sf.net/eclipsecolorer/' url='http://colorer.sf.net/eclipsecolorer/' type='1' options='0'/>
+    <repository uri='http://colorer.sf.net/eclipsecolorer/' url='http://colorer.sf.net/eclipsecolorer/' type='0' options='0'/>
+  </references>
+  <units size='4'>
+    <unit id='net.sf.colorer.feature.group' version='0.9.9' singleton='false'>
+      <update id='net.sf.colorer.feature.group' range='[0.0.0,0.9.9)' severity='0'/>
+      <properties size='5'>
+        <property name='org.eclipse.equinox.p2.name' value='Eclipse Colorer'/>
+        <property name='org.eclipse.equinox.p2.description' value='Eclipse Colorer is a syntax Highlighting plugin for the Eclipse IDE.&#xA;Based on a open source library &quot;Colorer-take5&quot;, supports more&#xA;than 200 different syntaxes and languages.&#xA;Shows outline for the majority of the languages, could be flexibly configured.'/>
+        <property name='org.eclipse.equinox.p2.description.url' value='http://colorer.sf.net/eclipsecolorer/'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Igor Russkih'/>
+        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='net.sf.colorer.feature.group' version='0.9.9'/>
+      </provides>
+      <requires size='4'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.core.resources' range='0.0.0'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.ui' range='0.0.0'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='net.sf.colorer' range='[0.9.9,0.9.9]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='net.sf.colorer.feature.jar' range='[0.9.9,0.9.9]'>
+          <filter>
+            (org.eclipse.update.install.features=true)
+          </filter>
+        </required>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+      <licenses size='1'>
+        <license uri='MPL-1.1.html' url='MPL-1.1.html'>
+          Version: MPL 1.1/GPL 2.0/LGPL 2.1&#xA;&#xA;The contents of this file are subject to the Mozilla Public License Version&#xA;1.1 (the &quot;License&quot;); you may not use this file except in compliance with&#xA;the License. You may obtain a copy of the License at&#xA;http://www.mozilla.org/MPL/&#xA;&#xA;Software distributed under the License is distributed on an &quot;AS IS&quot; basis,&#xA;WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License&#xA;for the specific language governing rights and limitations under the&#xA;License.&#xA;&#xA;The Original Code is the Colorer Library.&#xA;&#xA;The Initial Developer of the Original Code is&#xA;Cail Lomecb &lt;cail@nm.ru&gt;.&#xA;Portions created by the Initial Developer are Copyright (C) 1999-2005&#xA;the Initial Developer. All Rights Reserved.&#xA;&#xA;Contributor(s):&#xA;&#xA;Alternatively, the contents of this file may be used under the terms of&#xA;either the GNU General Public License Version 2 or later (the &quot;GPL&quot;), or&#xA;the GNU Lesser General Public License Version 2.1 or later (the &quot;LGPL&quot;),&#xA;in which case the provisions of the GPL or the LGPL are applicable instead&#xA;of those above. If you wish to allow use of your version of this file only&#xA;under the terms of either the GPL or the LGPL, and not to allow others to&#xA;use your version of this file under the terms of the MPL, indicate your&#xA;decision by deleting the provisions above and replace them with the notice&#xA;and other provisions required by the GPL or the LGPL. If you do not delete&#xA;the provisions above, a recipient may use your version of this file under&#xA;the terms of any one of the MPL, the GPL or the LGPL.
+        </license>
+      </licenses>
+      <copyright>
+        Copyright (c) 1998-2011, Igor Russkih
+      </copyright>
+    </unit>
+    <unit id='net.sf.colorer.feature.jar' version='0.9.9'>
+      <properties size='4'>
+        <property name='org.eclipse.equinox.p2.name' value='Eclipse Colorer'/>
+        <property name='org.eclipse.equinox.p2.description' value='Eclipse Colorer is a syntax Highlighting plugin for the Eclipse IDE.&#xA;Based on a open source library &quot;Colorer-take5&quot;, supports more&#xA;than 200 different syntaxes and languages.&#xA;Shows outline for the majority of the languages, could be flexibly configured.'/>
+        <property name='org.eclipse.equinox.p2.description.url' value='http://colorer.sf.net/eclipsecolorer/'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Igor Russkih'/>
+      </properties>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='net.sf.colorer.feature.jar' version='0.9.9'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
+        <provided namespace='org.eclipse.update.feature' name='net.sf.colorer' version='0.9.9'/>
+      </provides>
+      <filter>
+        (org.eclipse.update.install.features=true)
+      </filter>
+      <artifacts size='1'>
+        <artifact classifier='org.eclipse.update.feature' id='net.sf.colorer' version='0.9.9'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='zipped'>
+            true
+          </instruction>
+        </instructions>
+      </touchpointData>
+      <licenses size='1'>
+        <license uri='MPL-1.1.html' url='MPL-1.1.html'>
+          Version: MPL 1.1/GPL 2.0/LGPL 2.1&#xA;&#xA;The contents of this file are subject to the Mozilla Public License Version&#xA;1.1 (the &quot;License&quot;); you may not use this file except in compliance with&#xA;the License. You may obtain a copy of the License at&#xA;http://www.mozilla.org/MPL/&#xA;&#xA;Software distributed under the License is distributed on an &quot;AS IS&quot; basis,&#xA;WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License&#xA;for the specific language governing rights and limitations under the&#xA;License.&#xA;&#xA;The Original Code is the Colorer Library.&#xA;&#xA;The Initial Developer of the Original Code is&#xA;Cail Lomecb &lt;cail@nm.ru&gt;.&#xA;Portions created by the Initial Developer are Copyright (C) 1999-2005&#xA;the Initial Developer. All Rights Reserved.&#xA;&#xA;Contributor(s):&#xA;&#xA;Alternatively, the contents of this file may be used under the terms of&#xA;either the GNU General Public License Version 2 or later (the &quot;GPL&quot;), or&#xA;the GNU Lesser General Public License Version 2.1 or later (the &quot;LGPL&quot;),&#xA;in which case the provisions of the GPL or the LGPL are applicable instead&#xA;of those above. If you wish to allow use of your version of this file only&#xA;under the terms of either the GPL or the LGPL, and not to allow others to&#xA;use your version of this file under the terms of the MPL, indicate your&#xA;decision by deleting the provisions above and replace them with the notice&#xA;and other provisions required by the GPL or the LGPL. If you do not delete&#xA;the provisions above, a recipient may use your version of this file under&#xA;the terms of any one of the MPL, the GPL or the LGPL.
+        </license>
+      </licenses>
+      <copyright>
+        Copyright (c) 1998-2011, Igor Russkih
+      </copyright>
+    </unit>
+    <unit id='net.sf.colorer' version='0.9.9' singleton='false'>
+      <update id='net.sf.colorer' range='[0.0.0,0.9.9)' severity='0'/>
+      <properties size='1'>
+        <property name='org.eclipse.equinox.p2.partial.iu' value='true'/>
+      </properties>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='net.sf.colorer' version='0.9.9'/>
+        <provided namespace='osgi.bundle' name='net.sf.colorer' version='0.9.9'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='net.sf.colorer' version='0.9.9'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='2'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: net.sf.colorer&#xA;Bundle-Version: 0.9.9&#xA;
+          </instruction>
+          <instruction key='zipped'>
+            true
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='http://colorer.sourceforge.net/eclipsecolorer/site.xml.syntax' version='1.0.0.07G7GcJSqvE'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Syntax Highlighting'/>
+        <property name='org.eclipse.equinox.p2.description' value='Syntax Highlighting and coding helper'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='http://colorer.sourceforge.net/eclipsecolorer/site.xml.syntax' version='1.0.0.07G7GcJSqvE'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='net.sf.colorer.feature.group' range='[0.9.9,0.9.9]'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+  </units>
+</repository>

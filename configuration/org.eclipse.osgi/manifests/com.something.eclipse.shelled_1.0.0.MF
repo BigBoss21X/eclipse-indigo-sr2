@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Generated-from: 1136910246000;type=2
+Generated-from: 1334629807000;type=2
 Bundle-ManifestVersion: 2
 Bundle-Name: Shell Script Development Tools
 Bundle-SymbolicName: com.something.eclipse.shelled

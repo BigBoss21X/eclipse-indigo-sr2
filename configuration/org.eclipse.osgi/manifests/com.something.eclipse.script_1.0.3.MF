@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Generated-from: 1136910236000;type=2
+Generated-from: 1334629806000;type=2
 Bundle-ManifestVersion: 2
 Bundle-Name: Shared Plug-in Tools
 Bundle-SymbolicName: com.something.eclipse.script
