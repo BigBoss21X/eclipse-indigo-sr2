@@ -4,10 +4,12 @@
    <site url="http://github.bandlem.com/" selected="true" name="Bandlem Eclipse Repository (Fullscreen OSX)"/>
    <site url="http://marketplace.eclipse.org/repo/" selected="true" name="Composite Marketplace Repository"/>
    <site url="http://dl.google.com/eclipse/plugin/3.7/" selected="true" name="Eclipse 3.7 GPE Repo"/>
+   <site url="http://colorer.sourceforge.net/eclipsecolorer/" selected="true" name="Eclipse Colorer"/>
    <site url="http://download.eclipse.org/releases/indigo" selected="true" name="Indigo"/>
    <site url="http://download.jboss.org/jbosstools/updates/development/indigo" selected="true" name="JBoss Tools - Core - Development Milestone Update Site"/>
    <site url="http://download.eclipse.org/mylyn/releases/indigo" selected="true" name="Mylyn for Eclipse Indigo"/>
    <site url="http://mongrel.sf.net/updates" selected="true" name="net.sf.mongrel.update"/>
+   <site url="http://download.scala-ide.org/releases-29/stable/site" selected="true" name="Scala IDE 2.9"/>
    <site url="http://www.chasetechnology.co.uk/eclipse/updates" selected="true" name="ShellEditor"/>
    <site url="http://eclipsesql.sourceforge.net/" selected="true" name="SQL Explorer"/>
    <site url="http://subclipse.tigris.org/update_1.8.x" selected="true" name="Subclipse 1.8"/>

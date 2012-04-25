@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.scala-ide.sdt.feature"
+      label="Scala IDE for Eclipse"
+      version="2.0.0.v-2_09-201112200102-82421c5"
+      provider-name="scala-ide.org"
+      plugin="org.scala-ide.sdt.core">
+
+   <description url="http://scala-ide.org/">
+      The Scala IDE for Eclipse provides the tools needed to
+to build Scala programs on the Eclipse Platform.
+   </description>
+
+   <copyright url="http://scala-lang.org/downloads/">
+      Copyright (c) 2002-2010 EPFL, Lausanne.
+All rights reserved.
+   </copyright>
+
+   <license url="http://scala-lang.org/downloads/license.html">
+      SCALA LICENSE
+
+Copyright (c) 2002-2010 EPFL, Lausanne, unless otherwise specified.
+All rights reserved.
+
+This software was developed by the Programming Methods Laboratory of the
+Swiss Federal Institute of Technology (EPFL), Lausanne, Switzerland.
+
+Permission to use, copy, modify, and distribute this software in source
+or binary form for any purpose with or without fee is hereby granted,
+provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+   3. Neither the name of the EPFL nor the names of its contributors
+      may be used to endorse or promote products derived from this
+      software without specific prior written permission.
+
+
+THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS&apos;&apos; AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+   </license>
+
+   <url>
+      <update label="Scala IDE for Eclipse update site" url="http://download.scala-ide.org/update-current"/>
+   </url>
+
+   <includes
+         id="org.scala-ide.sdt.weaving.feature"
+         version="2.0.0.v-2_09-201112200102-82421c5"/>
+
+   <requires>
+      <import plugin="org.eclipse.equinox.weaving.aspectj"/>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.core.filesystem"/>
+      <import plugin="org.eclipse.jface.text"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.eclipse.ui.workbench.texteditor"/>
+      <import plugin="org.eclipse.ui.views"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.eclipse.search"/>
+      <import plugin="org.eclipse.text"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.jdt.ui"/>
+      <import plugin="org.eclipse.jdt.launching"/>
+      <import plugin="org.eclipse.debug.core"/>
+      <import plugin="org.eclipse.debug.ui"/>
+      <import plugin="org.eclipse.jdt.debug"/>
+      <import plugin="org.eclipse.jdt.debug.ui"/>
+      <import plugin="org.eclipse.ui.forms"/>
+      <import plugin="org.eclipse.ui.navigator"/>
+      <import plugin="org.eclipse.ui.navigator.resources"/>
+      <import plugin="org.apache.ant"/>
+   </requires>
+
+   <plugin
+         id="org.scala-ide.scala.library"
+         download-size="10160"
+         install-size="11130"
+         version="2.9.1.final"
+         unpack="false"/>
+
+   <plugin
+         id="org.scala-ide.scala.compiler"
+         download-size="11593"
+         install-size="12908"
+         version="2.9.2.rdev-2769-2011-12-13-g2dd83da"
+         unpack="false"/>
+
+   <plugin
+         id="org.scala-ide.sdt.core"
+         download-size="2681"
+         install-size="5033"
+         version="2.0.0.v-2_09-201112200102-82421c5"
+         unpack="false"/>
+
+   <plugin
+         id="org.scala-refactoring.library"
+         download-size="3193"
+         install-size="8903"
+         version="0.3.0.201112181742-a852509"
+         unpack="false"/>
+
+   <plugin
+         id="scalariform"
+         download-size="1834"
+         install-size="3969"
+         version="0.1.2.201112181741-fc5a1fd"
+         unpack="false"/>
+
+   <plugin
+         id="org.scala-ide.sbt.full.library"
+         download-size="5933"
+         install-size="6582"
+         version="0.11.4.2_09-20111219-0501"
+         unpack="false"/>
+
+</feature>

@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Build-Jdk: 1.6.0_29
+Built-By: mirco
+Created-By: Apache Maven
+Archiver-Version: Plexus Archiver
+
+Name: META-INF/maven/org.scala-ide/org.scala-ide.sdt.weaving.feature/p
+ om.properties
+SHA1-Digest: EIockAyVaJEcwz/xi8QdNfVT0co=
+
+Name: META-INF/maven/org.scala-ide/org.scala-ide.sdt.weaving.feature/p
+ om.xml
+SHA1-Digest: ILVNykQqQdu0hGuW9567Lr1+jTU=
+
+Name: feature.xml
+SHA1-Digest: fQ6VeF/Wv+KdREMrCg92iv33waI=
+
