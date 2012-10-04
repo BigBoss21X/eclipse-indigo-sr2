@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<config transient="false" date="1340992119704" version="3.0">
+<config transient="false" date="1348258369031" version="3.0">
 	<site enabled="true" updateable="true" policy="USER-EXCLUDE" url="platform:/base/">
 		<feature id="org.eclipse.mylyn.bugzilla_feature" plugin-identifier="org.eclipse.mylyn.tasks.core" url="features/org.eclipse.mylyn.bugzilla_feature_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
@@ -13,11 +13,11 @@
 		</feature>
 		<feature id="org.eclipse.mylyn.monitor" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.monitor_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
+		<feature id="org.scalaide.worksheet.feature" plugin-identifier="org.scalaide.worksheet" url="features/org.scalaide.worksheet.feature_0.1.1.v-2_09-201209171937-dc86a45/" version="0.1.1.v-2_09-201209171937-dc86a45">
+		</feature>
 		<feature id="org.eclipse.help" plugin-identifier="org.eclipse.help.base" url="features/org.eclipse.help_1.3.0.v20110530-0844-7i7uFFmFFl8nvqbDpEqTvx/" version="1.3.0.v20110530-0844-7i7uFFmFFl8nvqbDpEqTvx">
 		</feature>
 		<feature id="org.eclipse.jst.webpageeditor.feature" url="features/org.eclipse.jst.webpageeditor.feature_2.3.6.v201201181342-46AB9oB5885D6R5D86/" version="2.3.6.v201201181342-46AB9oB5885D6R5D86">
-		</feature>
-		<feature id="org.scala-ide.sdt.feature" plugin-identifier="org.scala-ide.sdt.core" url="features/org.scala-ide.sdt.feature_2.0.0.v-2_09-201112200102-82421c5/" version="2.0.0.v-2_09-201112200102-82421c5">
 		</feature>
 		<feature id="org.eclipse.wb.core.feature" plugin-identifier="org.eclipse.wb.core" url="features/org.eclipse.wb.core.feature_1.3.0.r37x201202052311/" version="1.3.0.r37x201202052311">
 		</feature>
@@ -39,9 +39,9 @@
 		</feature>
 		<feature id="org.eclipse.mylyn.discovery" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.discovery_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
-		<feature id="org.eclipse.wst.common_ui.feature" url="features/org.eclipse.wst.common_ui.feature_3.3.2.v201111030500-7C79FVsEdhO_sfog9oNekiJkS7Nz00OK/" version="3.3.2.v201111030500-7C79FVsEdhO_sfog9oNekiJkS7Nz00OK">
-		</feature>
 		<feature id="org.eclipse.epp.package.common.feature" url="features/org.eclipse.epp.package.common.feature_1.4.2.20120213-0814/" version="1.4.2.20120213-0814">
+		</feature>
+		<feature id="org.eclipse.wst.common_ui.feature" url="features/org.eclipse.wst.common_ui.feature_3.3.2.v201111030500-7C79FVsEdhO_sfog9oNekiJkS7Nz00OK/" version="3.3.2.v201111030500-7C79FVsEdhO_sfog9oNekiJkS7Nz00OK">
 		</feature>
 		<feature id="org.eclipse.mylyn.tasks.ide" plugin-identifier="org.eclipse.mylyn.tasks.core" url="features/org.eclipse.mylyn.tasks.ide_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
@@ -59,6 +59,8 @@
 		</feature>
 		<feature id="org.eclipse.wb.core.ui.feature" plugin-identifier="org.eclipse.wb.core.ui" url="features/org.eclipse.wb.core.ui.feature_1.3.0.r37x201202052340/" version="1.3.0.r37x201202052340">
 		</feature>
+		<feature id="org.scala-ide.sdt.feature" plugin-identifier="org.scala-ide.sdt.core" url="features/org.scala-ide.sdt.feature_2.1.0.m2-2_09-201209130821-0dd7542/" version="2.1.0.m2-2_09-201209130821-0dd7542">
+		</feature>
 		<feature id="AnyEditTools" plugin-identifier="de.loskutov.anyedit.AnyEditTools" url="features/AnyEditTools_2.4.1.201204040004/" version="2.4.1.201204040004">
 		</feature>
 		<feature id="org.eclipse.jgit" url="features/org.eclipse.jgit_1.3.0.201202151440-r/" version="1.3.0.201202151440-r">
@@ -74,6 +76,8 @@
 		<feature id="org.tigris.subversion.clientadapter.feature" plugin-identifier="org.tigris.subversion.clientadapter" url="features/org.tigris.subversion.clientadapter.feature_1.8.1/" version="1.8.1">
 		</feature>
 		<feature id="org.eclipse.egit.psf" url="features/org.eclipse.egit.psf_1.3.0.201202151440-r/" version="1.3.0.201202151440-r">
+		</feature>
+		<feature id="org.scala-ide.sdt.weaving.feature" url="features/org.scala-ide.sdt.weaving.feature_2.1.0.m2-2_09-201209130821-0dd7542/" version="2.1.0.m2-2_09-201209130821-0dd7542">
 		</feature>
 		<feature id="org.eclipse.mylyn.commons.identity" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.commons.identity_0.9.0.v20120319-0200/" version="0.9.0.v20120319-0200">
 		</feature>
@@ -97,17 +101,17 @@
 		</feature>
 		<feature id="net.sourceforge.sqlexplorer" url="features/net.sourceforge.sqlexplorer_3.6.1.v20120412_SR5/" version="3.6.1.v20120412_SR5">
 		</feature>
-		<feature id="org.eclipse.mylyn.commons" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.commons_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
-		</feature>
 		<feature id="org.eclipse.mylyn.java_feature" plugin-identifier="org.eclipse.mylyn.context.core" url="features/org.eclipse.mylyn.java_feature_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
+		</feature>
+		<feature id="org.eclipse.mylyn.commons" plugin-identifier="org.eclipse.mylyn.commons.core" url="features/org.eclipse.mylyn.commons_3.7.0.v20120319-0200/" version="3.7.0.v20120319-0200">
 		</feature>
 		<feature id="org.eclipse.m2e.logback.feature" plugin-identifier="org.eclipse.m2e.logback.configuration" url="features/org.eclipse.m2e.logback.feature_1.0.200.20111228-1245/" version="1.0.200.20111228-1245">
 		</feature>
 		<feature id="org.eclipse.epp.usagedata.feature" url="features/org.eclipse.epp.usagedata.feature_1.4.0.R201106061540/" version="1.4.0.R201106061540">
 		</feature>
-		<feature id="org.scala-ide.sdt.weaving.feature" url="features/org.scala-ide.sdt.weaving.feature_2.0.0.v-2_09-201112200102-82421c5/" version="2.0.0.v-2_09-201112200102-82421c5">
-		</feature>
 		<feature id="org.eclipse.equinox.p2.extras.feature" url="features/org.eclipse.equinox.p2.extras.feature_1.0.1.v20110906-1605-7A4FD4DiVOMap8cHSc6vPuny4gqO/" version="1.0.1.v20110906-1605-7A4FD4DiVOMap8cHSc6vPuny4gqO">
+		</feature>
+		<feature id="org.scala-ide.sdt.scalatest.feature" plugin-identifier="org.scala-ide.sdt.scalatest" url="features/org.scala-ide.sdt.scalatest.feature_0.9.3/" version="0.9.3">
 		</feature>
 		<feature id="org.tigris.subversion.clientadapter.javahl.feature" plugin-identifier="org.tigris.subversion.clientadapter.javahl" url="features/org.tigris.subversion.clientadapter.javahl.feature_1.7.4/" version="1.7.4">
 		</feature>

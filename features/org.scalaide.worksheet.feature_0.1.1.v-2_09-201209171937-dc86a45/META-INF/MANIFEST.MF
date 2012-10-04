@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Build-Jdk: 1.6.0_33
+Built-By: dragos
+Created-By: Apache Maven
+Archiver-Version: Plexus Archiver
+
+Name: META-INF/maven/org.scalaide/org.scalaide.worksheet.feature/pom.x
+ ml
+SHA1-Digest: NLvcW8f38zFItOe2tmZGibWPXEU=
+
+Name: META-INF/maven/org.scalaide/org.scalaide.worksheet.feature/pom.p
+ roperties
+SHA1-Digest: QsL8LK/ZOQ3XwZQnlcj6htxsiFQ=
+
+Name: feature.xml
+SHA1-Digest: 1SANrR9/bY/6dZ5VuNvh1PZm3pE=
+

@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Build-Jdk: 1.6.0_35
+Built-By: dragos
+Created-By: Apache Maven
+Archiver-Version: Plexus Archiver
+
+Name: META-INF/maven/org.scala-ide/org.scala-ide.sdt.feature/pom.xml
+SHA1-Digest: Z/G1uOIIod6dzWFSBrQSTMwxBRg=
+
+Name: META-INF/maven/org.scala-ide/org.scala-ide.sdt.feature/pom.prope
+ rties
+SHA1-Digest: XyOUgQpOs4waehQIPrCrWG8tuAE=
+
+Name: p2.inf
+SHA1-Digest: cj1Dq7HRxdh5xXYQ/QFiHHOvLAI=
+
+Name: feature.xml
+SHA1-Digest: dN5aI/Au93ECVrA84MTSy89EYBM=
+

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?artifactRepository version='1.1.0'?>
-<repository name='update site: http://www.chasetechnology.co.uk/eclipse/updates' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1'>
+<repository name='update site: http://www.chasetechnology.co.uk/eclipse/updates' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1.0.0'>
   <properties size='3'>
-    <property name='p2.timestamp' value='1340992040273'/>
+    <property name='p2.timestamp' value='1348257989647'/>
     <property name='eclipse.p2.force.threading' value='true'/>
-    <property name='site.checksum' value='1477787247'/>
+    <property name='site.checksum' value='2428238033'/>
   </properties>
   <mappings size='3'>
     <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
