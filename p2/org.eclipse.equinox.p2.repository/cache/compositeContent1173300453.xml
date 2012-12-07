@@ -10,7 +10,7 @@
     <child
       location='http://dl.google.com/eclipse/plugin/core/3.7' />
     <child
-      location='http://googleappengine.googlecode.com/svn/trunk/java/updatesite' />
+      location='http://dl.google.com/eclipse/appengine' />
     <child
       location='https://dl-ssl.google.com/android/eclipse' />
   </children>
