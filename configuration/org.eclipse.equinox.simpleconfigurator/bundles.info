@@ -1,5 +1,6 @@
 #version=1
 SaveDirtyEditors,1.0.2,dropins/SaveDirtyEditors_1.0.2.jar,4,false
+biz.junginger.ExploreFS,1.0.0,plugins/biz.junginger.ExploreFS_1.0.0.jar,4,false
 ch.qos.logback.classic,1.0.0.v20111214-2030,plugins/ch.qos.logback.classic_1.0.0.v20111214-2030.jar,4,false
 ch.qos.logback.core,1.0.0.v20111214-2030,plugins/ch.qos.logback.core_1.0.0.v20111214-2030.jar,4,false
 com.bandlem.eclipse.fullscreen.ui,1.0.4.201108061054,plugins/com.bandlem.eclipse.fullscreen.ui_1.0.4.201108061054.jar,4,false
