@@ -17,3 +17,4 @@ Installed Plugins
 * Eclipse Colorer (Syntax highlighting for everything but fairly buggy)
 * SaveDirtyEditors (Hacky but effective autosave in case Eclipse crashes)
 * Scala 2.9 IDE
+* ExploreFS
