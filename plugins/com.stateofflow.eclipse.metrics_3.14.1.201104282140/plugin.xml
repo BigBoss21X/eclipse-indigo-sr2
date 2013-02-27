@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.5"?>
+<plugin
+   id="com.stateofflow.eclipse.metrics"
+   name="Metrics plugin"
+   version="3.14.1.201104282140"
+   provider-name="State Of Flow"
+   class="com.stateofflow.eclipse.metrics.MetricsPlugin">
+
+   <runtime>
+      <library name="Metrics.jar"/>
+      <library name="lib/jfreechart-0.9.8.jar"/>
+      <library name="lib/jcommon-0.8.0.jar"/>
+      <library name="lib/j2h.jar">
+         <export
+               name="*">
+         </export>
+      </library>
+   </runtime>
+   <requires>
+      <import plugin="org.eclipse.ui.ide"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.jdt.core"/>
+      <import plugin="org.eclipse.core.runtime.compatibility"/>
+      <import plugin="org.eclipse.ui.editors"/>
+      <import plugin="org.apache.ant"/>
+      <import plugin="org.eclipse.ant.core"/>
+      <import plugin="org.eclipse.help" version="3.3.101"/>
+   </requires>
+
+
+   <extension
+         id="MetricsNature"
+         name="Metrics Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="com.stateofflow.eclipse.metrics.MetricsNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         id="MetricsBuilder"
+         name="Metrics Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="com.stateofflow.eclipse.metrics.MetricsBuilder">
+         </run>
+      </builder>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            class="com.stateofflow.eclipse.metrics.properties.MetricsPropertiesPage"
+            id="MetricsProperties"
+            name="Metrics"
+            nameFilter="*"
+            objectClass="org.eclipse.jdt.core.IJavaProject">
+      </page>
+      <page
+            class="com.stateofflow.eclipse.metrics.properties.MetricsPropertiesPage"
+            id="MetricsProperties"
+            name="Metrics"
+            nameFilter="*">
+         <filter
+               name="nature"
+               value="org.eclipse.jdt.core.javanature">
+         </filter>
+         <enabledWhen>
+            <instanceof
+                  value="org.eclipse.core.resources.IProject">
+            </instanceof>
+         </enabledWhen>
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="Metrics"
+            class="com.stateofflow.eclipse.metrics.preferences.MetricsPreferencePage"
+            id="MetricsPreferences">
+      </page>
+   </extension>
+   <extension
+         id="MetricsMarker"
+         name="Metrics Marker"
+         point="org.eclipse.core.resources.markers">
+      <persistent
+            value="true">
+      </persistent>
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+   </extension>
+   <extension
+         name="Metrics"
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            class="com.stateofflow.eclipse.metrics.export.wizard.MetricsExportWizard"
+            icon="/icons/cview16/metrics_tsk.gif"
+            id="MetricsWizard"
+            name="Metrics">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.markerImageProviders">
+      <imageprovider
+            id="com.stateofflow.eclipse.metrics.ImageProvider"
+            markertype="com.stateofflow.eclipse.metrics.MetricsMarker">
+      </imageprovider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors.annotationTypes">
+      <type
+            markerType="com.stateofflow.eclipse.metrics.MetricsMarker"
+            name="com.stateofflow.eclipse.metrics.MetricsAnnotation"
+            super="org.eclipse.ui.workbench.texteditor.info">
+      </type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationType="com.stateofflow.eclipse.metrics.MetricsAnnotation"
+            icon="icons/cview16/metrics_tsk.gif">
+      </specification>
+   </extension>
+   <extension
+         point="org.eclipse.ant.core.antTasks">
+      <antTask
+            class="com.stateofflow.eclipse.metrics.ant.ExportMetricsTask"
+            library="/lib/antTasks.jar"
+            name="eclipse-metrics.export">
+      </antTask>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/toc.xml"
+            primary="true">
+      </toc>
+   </extension>
+
+</plugin>

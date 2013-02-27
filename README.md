@@ -18,3 +18,4 @@ Installed Plugins
 * SaveDirtyEditors (Hacky but effective autosave in case Eclipse crashes)
 * Scala 2.9 IDE
 * ExploreFS
+* Metrics (State of Flow)

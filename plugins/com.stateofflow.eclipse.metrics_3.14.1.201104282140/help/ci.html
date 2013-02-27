@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <title>Eclipse Metrics - Continuous Integration Exports</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <link href="style.css" type="text/css" rel="STYLESHEET"/>
+    </head>
+    <body>
+        <h1>Exporting Metrics Using a Headless Build With Ant
+        	<span id="logo"><a href="http://eclipse-metrics.sourceforge.net"> <img src="images/logo.gif" border="0" alt="Metrics Logo"/></a></span>
+        </h1>
+    	<p>To export the metrics using a headless build, there are two steps, both of which can be contained in an
+    		<a href="http://ant.apache.org/" title="">Ant</a> build file:</p>
+    	<div class="code"><pre>
+&lt;project name="metrics" default="export"&gt;
+
+    &lt;!-- This target actually exports the metrics. It runs
+         inside Eclipse after the "launch" target launches
+         Eclipse in headless mode --&gt;
+    &lt;target name="export"&gt;
+        &lt;eclipse.refreshLocal
+                resource="ECLIPSE_PROJECT_NAME"
+                depth="infinite"/&gt;
+        
+        &lt;eclipse-metrics.export
+                eclipseProject="ECLIPSE_PROJECT_NAME"
+                dir="YOUR_EXPORT_DIRECTORY_HERE"
+                html="true"
+                htmlRowsPerPage="10"
+                htmlDashboard="true"
+                csv="true"
+                xml="true"/&gt;
+            &lt;compilationUnits dir="src"&gt;
+                &lt;exclude name="**/*Bean.java"/&gt;
+            &lt;/compilationUnits&gt;
+        &lt;/eclipse-metrics.export
+    &lt;/target&gt;
+    
+    &lt;!-- This target launches Eclipse in headless mode and runs
+         the default target ("export") of this build file --&gt;
+    &lt;target name="launch"&gt;
+        &lt;java fork="true"
+              jar="ECLIPSE_INSTALL_DIR/plugins/org.eclipse.equinox.launcher_VERSION.jar"&gt;
+            &lt;jvmarg value="-Djava.awt.headless=true"/&gt;    &lt;!-- Only for MacOS X --&gt;
+            &lt;arg value="-application"/&gt;
+            &lt;arg value="org.eclipse.ant.core.antRunner"/&gt;
+            &lt;arg value="-buildfile"/&gt;
+            &lt;arg value="THE_NAME_OF_THIS_BUILD_FILE"/&gt;
+            &lt;arg value="-data"/&gt;
+            &lt;arg value="PATH_TO_YOUR_WORKSPACE"/&gt;
+        &lt;/java&gt;
+    &lt;/target&gt;
+    
+&lt;/project&gt;
+        </pre></div>
+			
+    	<p>Change the parts in capitals to appropriate values for your setup.</p>
+		<p>Run ant specifying the "launch" target. This should launch Eclipse in headless mode
+		   and produce the metrics. You can put the two targets in different Ant build files if
+		   you like. The "export" target must be the default target wherever it is placed
+		   (you can of course call it anything you like as long as it is the default target).</p>
+		<p>The above procedure does not work on some versions of Eclipse
+		    <a href="http://www.eclipse.org/europa/" title="Eclipse Europa website">Europa</a>
+		    running under Windows. This problem appears to have been fixed in
+		    <a href="http://www.eclipse.org/ganymede/" title="Eclipse Ganymede website">Ganymede</a>.</p>
+		    
+		<p>The attributes of the <span class="code">eclipse-metrics.export</span> task are:</p>
+     	<table class="attributes">
+			<tr><th>Attribute Name</th><th>Type</th><th>Required</th><th>Default</th><th>Description</th></tr>
+			<tr><td>eclipseProject</td><td>String</td><td>Yes</td><td/><td>The name of the project in the Eclipse workspace</td></tr>
+			<tr><td>dir</td><td>String</td><td>Yes</td><td/><td>The directory to which the metrics will be written</td></tr>
+			<tr><td>html</td><td>Boolean</td><td>No</td><td>true</td><td>Whether to export the metrics as HTML</td></tr>
+			<tr><td>htmlRowsPerPage</td><td>Integer</td><td>No</td><td>Integer.MAX_VALUE</td><td>The number of rows per page when exporting metrics as HTML</td></tr>
+			<tr><td>htmlDashboard</td><td>Boolean</td><td>No</td><td>true</td><td>Whether to produce the 'dashboard' page when exporting metrics as HTML</td></tr>
+			<tr><td>htmlJava</td><td>Boolean</td><td>No</td><td>false</td><td>Whether to export the Java source and link to it from the HTML metrics tables</td></tr>
+			<tr><td>csv</td><td>Boolean</td><td>No</td><td>true</td><td>Whether to export the metrics as CSV</td></tr>
+			<tr><td>xml</td><td>Boolean</td><td>No</td><td>true</td><td>Whether to export the metrics as XML</td></tr>
+		</table>
+		
+		<p>The <span class="code">eclipse-metrics.export</span> task supports an optional <span class="code">compilationUnits</span>
+			child element. This is an ant <a href="http://ant.apache.org/manual/CoreTypes/fileset.html">FileSet</a>.
+			The <span class="code">dir</span> attribute for this element must refer to one of the Eclipse project's source folders.
+			The <span class="code">compilationUnits</span> child element may be repeated as often as necessary to include / exclude all
+			of the required source files. If this element is omitted, the configuration defined in the Metrics Properties page
+			(within Eclipse) for the project will be used.</p>
+		<hr/>
+        <div class="attribution">
+    		This plugin is provided by <a href="http://www.stateofflow.com" title="State Of Flow homepage">State Of Flow</a>
+    	</div>
+   </body>
+</html>

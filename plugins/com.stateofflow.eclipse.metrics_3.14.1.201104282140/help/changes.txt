@@ -1,0 +1,156 @@
+Version    Changes
+3.14.1     Corrected some typos in the help pages.
+3.14.0     Added XML export format.
+3.13.0     Fixed IndexOutOfBoundsException thrown during CSV generation
+           when instance initializers are encountered.
+           Allowed more than one resource to be selected when exporting
+           metrics. Takes the project of the first selected item.
+3.12.0     Removed Oro regex jar. Use one provided in JDK instead.
+           Fix bug when Feature Envy metric tries to resolve unresolvable
+           bindings for a SimpleName.
+           Fixed bug in Number of Locals In Scope metric that caused an
+           exception in static and instance initializers.
+3.11.0     Added Feature Envy metric.
+3.10.0     Moved most of the documentation from SourceForge to embedded
+           help.
+           Exported HTML now includes metrics descriptions and a stylesheet
+           rather than linking to pages on SourceForge.
+3.9.0      Switch to JDK 1.5.
+           Exported metrics can now have links to HTMLised renderings of the
+           source, either when exporting using the Eclipse Export Wizard or
+           using the Ant task with the htmlJava attribute.
+3.8.0      Extended the eclipse-metrics.export ant task with an optional
+           FileSet child element called compilationUnit, to allow control
+           over what is exported without configuring excludes through the
+           Eclipse UI.           
+3.7.0      Added an ant task for exporting metrics using a headless build.
+           Correct change introduced in 3.6.0 to avoid a NullPointerException
+           if bindings cannot be resolved.
+           Corrected a reference to the MetricsMarker markertype.
+           Added Pairwise Field Irrelation option for LCOM metric.
+           Added Number Of Locals In Scope metric.
+3.6.0      Allowed Number of Parameters calculator to exclude methods that are
+           declared on a supertype.
+3.5.1      Corrected a bug that prevents the number of rows per page in the HTML
+           export from being retrieved from the persisted preferences.
+3.5.0      Fixed bug 1873551. HTML Export with Histograms and Dashboard causes a 
+           ClassCastException.
+           Jochen corrected a minor bug in the ignoring of blank lines in the
+           LoC metric.
+           Jochen also added a new summary page in the HTML export that lists total
+           number of packages, classes and lines of code.
+3.4.0      Added Total Correlation Lack of Cohesion metric.
+           Use the line number of the type name for type metric locations instead
+           of the beginning of JavaDoc.
+           Jochen Wuttke supplied a patch to ignore blank and comment-only lines
+           for the LoC metric. Checking this option in the Metrics preferences
+           will not count lines meeting the following criteria:
+               1. lines containing only whitespace
+               2. lines containing only comments
+               3. lines containing only brackets and curly braces
+               4. lines containing only a single operator
+           According to Jochen, the first three are intentional, the last one
+           comes with the way Eclipse builds the AST. Many thanks, Jochen.
+3.3.1      Add support for JDK 1.5 / Java 5 / Tiger etc enums.
+           Histogram support on OS X appears to be broken again. This is a problem
+           with the Eclipse OS X implementation.
+           Use the metrics icon in the vertical ruler, rather than the default
+           warning triangle. I'm not sure how to get this icon to appear in the
+           Problems view, or in the various Java views (Projects, Packages, Types,
+           etc).
+           Added Eclipse Metrics properties page when the Properties dialog is
+           launched from non-Java views.
+3.3.0      Allowed discounting of JavaDoc comments in the Lines Of Code metric.
+           Fixed a bug when excluding resources using regexes.
+3.2.0      Refactored to allow creation of an Ant task.
+           Link metrics descriptions to pages on SourceForge to make it easier
+           to create the Ant task.
+           Histograms now supported on OS X
+3.1.0      Added handling of J2SE 5.0 enhanced FOR loop for relevant metrics.
+3.0.1      Fixed some incorrect/broken links in index.html
+3.0.0      Compatible with Eclipse version 3.1. Still uses some deprecated
+           APIs.
+           Repackaged as com.stateofflow.eclipse.metrics and placed on
+           SourceForge.
+           Refactored many things to improved the code.
+           Packaged up the metric descriptions with the release and place them
+           into the export folder when an HTML export is performed.
+2.7.0      Compatible with Eclipse version 3.0.
+2.6.1      Rebuilt in an attempt to fix some loading problems. I'm not sure that
+           this was necessary since I think Eclipse bug 48220 was actually causing
+           the problem. See https://bugs.eclipse.org/bugs/show_bug.cgi?id=48220
+2.6.0      Made compatible with Eclipse version 3.0M7.
+           Also fixed a problem that was causing incremental builds not to cause
+           metrics recalculation. This was due to the background compilation that
+           was introduced in an earlier 3.0M release.
+2.5.0      Made compatible with Eclipse version 3.0M5 and 3.0M6.
+           Fixed a bug reported by Jussi Helminen whereby the line numbers used
+           for the first line of types was calculated differently for the Lack of
+           Cohesion in Methods from the other metrics. This caused exports to
+           behave oddly when these metrics were included.
+2.4.0      Made compatible with Eclipse version 3.0.0.
+2.3.0      Added the CSV export facility.
+           Added histograms for each metric page using JFreeChart. Warning: For
+           reasons currently under investigation, the histogram production causes
+           Eclipse on MacOS X and Linux to crash after the export has completed.
+           This problem does not occur on Windows. If you experience it on other
+           platforms please submit a bug on SourceForge.
+           Added a dashboard visual summary using the histograms.
+2.2.1      Small refactoring to try to reduce the memory requirements when
+           exporting metrics.
+2.2.0      Internal reorganisation in the way metrics are identified. Results in a
+           slight speedup when metrics are disabled.
+           Added Lines of Code in Method metric.
+           Fixed a bug in Number of Statements that caused variable assignments
+           not to be counted.
+           Corrected an error in the Henderson-Sellers Lack of Cohesion in Methods
+           description. This was found by Andreas Schonknecht. Many thanks,
+           Andreas.
+2.1.0      Allow paging of output when exporting HTML (with user definable number
+           of rows)
+           Persist export information (directory and number of rows per page) in
+           the project and recall it next time.
+2.0.1      Fixed a bug that caused metrics to be produced for projects which a
+           metrics-enabled project is dependent on.
+           Fixed a bug in the Lack Of Cohesion In Methods Calculator that caused
+           exceptions when files were replaced with items from the local history
+           or from CVS.
+2.0.0      Refactored the calculators to use Eclipse's build in AST rather than
+           one generated by Antlr. This took a while and slightly impacts
+           performance but should make it much easier to add new metrics.
+           Added Efferent Couplings metric.
+1.4.0      Added HTML Export. Added Perl5 regexes (using the Jakarta-ORO packages)
+           as a mechanism for excluding resources from metric calculations.
+           Allowed editing of existing resource specifications in the Excluded
+           Resources list.
+           Changed FileDialog in Excluded Resources to a ResourceSelectionDialog.
+1.3.1      Fixed a bug in Lack of Cohesion in Methods that causes a
+           NullPointerException when a field is initialized at the same time as it
+           is declared.
+           Remove Metrics Properties item from Resource Perspective and add it to
+           all Java Perspectives i.e. you now enable and disable metrics gathering
+           from the Properties sheet in a Java perspective).
+1.3.0      Allow enabling and disabling of individual metrics in the Preference
+           page.
+           Allow enabling and disabling of counting of case, catch and ternary
+           operator in Cyclomatic Complexity and Weighted Methods Per Class.
+           Only show the package when measuring metrics rather than the Java file.
+1.2.0      Walk the AST generated by Antlr with hand crafted code rather than
+           using semantic actions in the grammar. I think this is easier. Might
+           still use transformations and semantics actions later though...
+           Added Chidamber and Kimerer Lack of Cohesion in Methods.
+           Added Henderson-Sellers Lack of Cohesion in Methods.
+           Added Number of Fields
+           Added Number of Statements
+           Fixed Excluded Resources (again)
+1.1.1      Bugfix for Excluded Resources - couldn't add just one resource at a
+           time (i.e. could add if more than one resource was selected). Now can
+           add one or more resources.
+           Removed parser logging - significant speedup.
+1.1.0      Bugfix for errors during build of projects with project directory as
+           source directory.
+           Bugfix for Preferences problem caused by removal of IntegerFieldEditor
+           constructor in Eclipse 2.0.2
+           Added Excluded Resources list in the project Properties.
+           Added Weighted Methods Per Class
+1.0.0      First release

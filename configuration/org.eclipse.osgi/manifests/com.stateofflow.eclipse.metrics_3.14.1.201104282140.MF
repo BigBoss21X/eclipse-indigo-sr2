@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Generated-from: 1304041252000;type=2
+Bundle-ManifestVersion: 2
+Bundle-Name: Metrics plugin
+Bundle-SymbolicName: com.stateofflow.eclipse.metrics; singleton:=true
+Bundle-Version: 3.14.1.201104282140
+Bundle-ClassPath: Metrics.jar,
+ lib/jfreechart-0.9.8.jar,
+ lib/jcommon-0.8.0.jar,
+ lib/j2h.jar
+Bundle-Activator: org.eclipse.core.internal.compatibility.PluginActivator
+Bundle-Vendor: State Of Flow
+Bundle-Localization: plugin
+Export-Package: .,
+ com.java2html,
+ com.java2html.firstparse,
+ com.java2html.secondparse
+Require-Bundle: org.eclipse.ui.ide,
+ org.eclipse.core.resources,
+ org.eclipse.ui,
+ org.eclipse.jdt.core,
+ org.eclipse.core.runtime.compatibility,
+ org.eclipse.ui.editors,
+ org.apache.ant,
+ org.eclipse.ant.core,
+ org.eclipse.help;bundle-version="[3.3.101,4.0.0)"
+Eclipse-LazyStart: true
+Plugin-Class: com.stateofflow.eclipse.metrics.MetricsPlugin

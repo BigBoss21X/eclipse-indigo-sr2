@@ -1,0 +1,34 @@
+<toc label="Eclipse Metrics" topic="help/introduction.html">
+	<topic label="Tasks">
+		<topic label="Enabling / Disabling" href="help/enablement.html"/>
+		<topic label="Preferences" href="help/preferences.html"/>
+		<topic label="Excluding Java Files" href="help/exclusions.html"/>
+		<topic label="Exporting" href="help/export.html"/>
+		<topic label="Continuous Integration Exports" href="help/ci.html"/>
+	</topic>
+	<topic label="Supported Metrics" href="help/supportedMetrics.html">
+		<topic label="Method">
+	        <topic label="Feature Envy" href="help/descriptions/FeatureEnvy.html"/>
+	        <topic label="Lines of Code in Method" href="help/descriptions/LinesOfCode.html"/>
+        	<topic label="McCabe's Cyclomatic Complexity" href="help/descriptions/CyclomaticComplexity.html"/>
+        	<topic label="Number Of Levels" href="help/descriptions/NumberOfLevels.html"/>
+        	<topic label="Number Of Locals in Scope" href="help/descriptions/NumberOfLocals.html"/>
+        	<topic label="Number Of Parameters" href="help/descriptions/NumberOfParameters.html"/>
+        	<topic label="Number Of Statements" href="help/descriptions/NumberOfStatements.html"/>
+        </topic>
+        <topic label="Class">
+	        <topic label="Efferent Couplings" href="help/descriptions/EfferentCouplings.html"/>
+	        <topic label="Lack of Cohesion in Methods" href="help/descriptions/cohesion/LackOfCohesionInMethods.html">
+	        	<topic label="Chidamber and Kemerer" href="help/descriptions/cohesion/ChidamberAndKemerer.html"/>
+	        	<topic label="Henderson-Sellers" href="help/descriptions/cohesion/HendersonSellers.html"/>
+	        	<topic label="Total Correlation" href="help/descriptions/cohesion/TotalCorrelation.html"/>
+	        	<topic label="Pairwise Field Irrelation" href="help/descriptions/cohesion/PairwiseFieldIrrelation.html"/>
+	        </topic>
+	        <topic label="Number Of Fields" href="help/descriptions/NumberOfFields.html"/>
+	        <topic label="Weighted Methods Per Class" href="help/descriptions/WeightedMethodsPerClass.html"/>
+	    </topic>
+	</topic>
+	<topic label="Useful Facts" href="help/usefulFacts.html"/>
+	<topic label="Changes" href="help/changes.txt"/>
+	<topic label="License" href="help/license.html"/>
+</toc>
