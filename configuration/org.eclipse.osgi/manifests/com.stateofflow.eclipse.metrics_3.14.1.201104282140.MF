@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Generated-from: 1304041252000;type=2
+Generated-from: 1362074306000;type=2
 Bundle-ManifestVersion: 2
 Bundle-Name: Metrics plugin
 Bundle-SymbolicName: com.stateofflow.eclipse.metrics; singleton:=true
