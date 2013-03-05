@@ -19,3 +19,5 @@ Installed Plugins
 * Scala 2.9 IDE
 * ExploreFS
 * Metrics (State of Flow)
+* Checkstyle
+* EclEmma

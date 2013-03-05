@@ -7,6 +7,11 @@ com.bandlem.eclipse.fullscreen.ui,1.0.4.201108061054,plugins/com.bandlem.eclipse
 com.collabnet.subversion.merge,3.0.7,plugins/com.collabnet.subversion.merge_3.0.7.jar,4,false
 com.ibm.icu,4.4.2.v20110823,plugins/com.ibm.icu_4.4.2.v20110823.jar,4,false
 com.jcraft.jsch,0.1.44.v201101211721,plugins/com.jcraft.jsch_0.1.44.v201101211721.jar,4,false
+com.mountainminds.eclemma.asm,2.2.0.201210261515,plugins/com.mountainminds.eclemma.asm_2.2.0.201210261515.jar,4,false
+com.mountainminds.eclemma.core,2.2.0.201210261515,plugins/com.mountainminds.eclemma.core_2.2.0.201210261515.jar,4,false
+com.mountainminds.eclemma.debug.ui.compatibility,2.2.0.201210261515,plugins/com.mountainminds.eclemma.debug.ui.compatibility_2.2.0.201210261515.jar,4,false
+com.mountainminds.eclemma.doc,2.2.0.201210261515,plugins/com.mountainminds.eclemma.doc_2.2.0.201210261515.jar,4,false
+com.mountainminds.eclemma.ui,2.2.0.201210261515,plugins/com.mountainminds.eclemma.ui_2.2.0.201210261515.jar,4,false
 com.ning.async-http-client,1.6.3.201112281337,plugins/com.ning.async-http-client_1.6.3.201112281337.jar,4,false
 com.something.eclipse.script,1.0.3,plugins/com.something.eclipse.script_1.0.3/,4,false
 com.something.eclipse.shelled,1.0.0,plugins/com.something.eclipse.shelled_1.0.0/,4,false
@@ -458,6 +463,9 @@ org.hibernate.eclipse.jdt.apt.ui,3.4.0.v20120307-2104-H60-Beta1,plugins/org.hibe
 org.hibernate.eclipse.jdt.ui,3.4.0.v20120307-2104-H60-Beta1,plugins/org.hibernate.eclipse.jdt.ui_3.4.0.v20120307-2104-H60-Beta1.jar,4,false
 org.hibernate.eclipse.libs,3.4.0.v20120307-2104-H60-Beta1,plugins/org.hibernate.eclipse.libs_3.4.0.v20120307-2104-H60-Beta1/,4,false
 org.hibernate.eclipse.mapper,3.4.0.v20120307-2104-H60-Beta1,plugins/org.hibernate.eclipse.mapper_3.4.0.v20120307-2104-H60-Beta1/,4,false
+org.jacoco.agent,0.6.0.201210061924,plugins/org.jacoco.agent_0.6.0.201210061924.jar,4,false
+org.jacoco.core,0.6.0.201210061924,plugins/org.jacoco.core_0.6.0.201210061924.jar,4,false
+org.jacoco.report,0.6.0.201210061924,plugins/org.jacoco.report_0.6.0.201210061924.jar,4,false
 org.jboss.netty,3.2.4.Final-201112281337,plugins/org.jboss.netty_3.2.4.Final-201112281337.jar,4,false
 org.jboss.tools.common,3.3.0.v20120302-0132-H47-Beta1,plugins/org.jboss.tools.common_3.3.0.v20120302-0132-H47-Beta1.jar,4,false
 org.jboss.tools.common.el.core,3.3.0.v20120302-0132-H47-Beta1,plugins/org.jboss.tools.common.el.core_3.3.0.v20120302-0132-H47-Beta1.jar,4,false
