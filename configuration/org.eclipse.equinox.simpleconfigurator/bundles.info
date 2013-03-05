@@ -15,10 +15,6 @@ com.something.eclipse.shelled.ui,1.0.0,plugins/com.something.eclipse.shelled.ui_
 com.stateofflow.eclipse.metrics,3.14.1.201104282140,plugins/com.stateofflow.eclipse.metrics_3.14.1.201104282140/,4,false
 com.sun.syndication,0.9.0.v200803061811,plugins/com.sun.syndication_0.9.0.v200803061811.jar,4,false
 de.loskutov.anyedit.AnyEditTools,2.4.1.201204040004,plugins/de.loskutov.anyedit.AnyEditTools_2.4.1.201204040004.jar,4,false
-ecobertura.cobertura,0.9.8.201007202152,plugins/ecobertura.cobertura_0.9.8.201007202152.jar,4,false
-ecobertura.core,0.9.8.201007202152,plugins/ecobertura.core_0.9.8.201007202152.jar,4,false
-ecobertura.scala,0.9.8.201007202152,plugins/ecobertura.scala_0.9.8.201007202152.jar,4,false
-ecobertura.ui,0.9.8.201007202152,plugins/ecobertura.ui_0.9.8.201007202152.jar,4,false
 edu.umd.cs.findbugs.plugin.eclipse,2.0.2.20121103,plugins/edu.umd.cs.findbugs.plugin.eclipse_2.0.2.20121103/,4,false
 javax.activation,1.1.0.v201108011116,plugins/javax.activation_1.1.0.v201108011116.jar,4,false
 javax.servlet,2.5.0.v201103041518,plugins/javax.servlet_2.5.0.v201103041518.jar,4,false
